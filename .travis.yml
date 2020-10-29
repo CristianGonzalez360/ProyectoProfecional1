@@ -1,0 +1,14 @@
+lenguage: java
+branches:
+  only:
+    - develop
+    
+notifications:
+  email:
+    recipients:  
+      - redvladimirogaston@gmail.com
+      
+script:
+  - mvn verify
+  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent install
+  - mvn sonar:sonar -Dsonar.organization=redvladimirogaston -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR

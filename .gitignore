@@ -1,0 +1,10 @@
+<<<<<<< HEAD
+/target/
+/.classpath
+/bin/
+/git-bug
+=======
+/bin/
+/.classpath
+/target/
+>>>>>>> branch 'master' of https://github.com/redvladimirogaston/test_repository.git
