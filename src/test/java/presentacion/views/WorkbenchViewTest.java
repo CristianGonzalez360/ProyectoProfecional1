@@ -1,13 +1,5 @@
 package presentacion.views;
 
-import javax.swing.JButton;
-import javax.swing.JTextField;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import presentacion.views.utils.ViewUtils;
-
 class WorkbenchViewTest {
 /*
 	TestView view = new TestView();

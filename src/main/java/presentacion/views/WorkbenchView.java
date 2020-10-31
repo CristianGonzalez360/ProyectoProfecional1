@@ -13,8 +13,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.BorderLayout;
 import javax.swing.JDesktopPane;
-import java.awt.Component;
-import javax.swing.Box;
 
 public class WorkbenchView {
 

@@ -1,17 +1,5 @@
 package presentacion;
 
-import java.awt.Color;
-
-import javax.swing.JButton;
-import javax.swing.JTextField;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import business_logic.PaisController;
-import presentacion.views.utils.ViewUtils;
-
 class WorkbenchPresenterTest {
 
 	/*
