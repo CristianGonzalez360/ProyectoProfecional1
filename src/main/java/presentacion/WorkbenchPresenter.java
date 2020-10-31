@@ -12,14 +12,14 @@ public class WorkbenchPresenter implements Presenter {
 	private WorkbenchView workbenchView = WorkbenchView.getInstance();
 
 	public WorkbenchPresenter() {
-		workbenchView.getMntmSeedDb().addActionListener((a)->onSeedDatabase(a));
+		workbenchView.getMntmSeedDb().addActionListener((a) -> onSeedDatabase(a));
 	}
-	
+
 	@Override
 	public void onInit() {
 		workbenchView.open();
 	}
-	
+
 	private void onSeedDatabase(ActionEvent a) {
 		new DatabaseSeederServiceImpl(DaosFactory.getFactory()).seedDatabase();
 	}

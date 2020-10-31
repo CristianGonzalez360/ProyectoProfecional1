@@ -13,26 +13,27 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.BorderLayout;
 import javax.swing.JDesktopPane;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class WorkbenchView {
-	
-	private JFrame frame;
-	
-	static WorkbenchView vista;
-	
-	private Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/agenda.png"));
 
-	private JMenuItem mntmNewMenuItemPaises;
+	private JFrame frame;
+
+	static WorkbenchView vista;
+
+	private Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/agenda.png"));
 
 	private JDesktopPane desktopPane;
 
 	private JMenuItem mntmSeedDb;
 
 	public static WorkbenchView getInstance() {
-		if(vista == null) vista = new WorkbenchView();
+		if (vista == null)
+			vista = new WorkbenchView();
 		return vista;
 	}
-	
+
 	WorkbenchView() {
 		super();
 		frame = new JFrame();
@@ -46,34 +47,36 @@ public class WorkbenchView {
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
-		
+
 		desktopPane = new JDesktopPane();
 		panel.add(desktopPane, BorderLayout.CENTER);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		
+
 		JMenu mnNewMenu = new JMenu("Opciones");
 		menuBar.add(mnNewMenu);
 		
-		mntmNewMenuItemPaises = new JMenuItem("Paises");
-		mnNewMenu.add(mntmNewMenuItemPaises);
+		JMenuItem mntmItemLogin = new JMenuItem("Login");
+		mnNewMenu.add(mntmItemLogin);
 		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
+		mnNewMenu.add(mntmNewMenuItem);
+		
+		JMenuItem mntmItemSalir = new JMenuItem("Salir");
+		mnNewMenu.add(mntmItemSalir);
+
 		mntmSeedDb = new JMenuItem("SeedDB");
 		mnNewMenu.add(mntmSeedDb);
-		
+
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		addFrames();
 	}
-	
-	public JMenuItem getMntmNewMenuItemPaises() {
-		return mntmNewMenuItemPaises;
-	}
-	
+
 	public JMenuItem getMntmSeedDb() {
 		return this.mntmSeedDb;
 	}
-		
+
 	public void open() {
 		this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.frame.addWindowListener(new WindowAdapter() {
@@ -87,8 +90,8 @@ public class WorkbenchView {
 			}
 		});
 		this.frame.setVisible(true);
-	}	
-	
+	}
+
 	private void addFrames() {
 		this.desktopPane.add(PaisView.getInstance());
 	}

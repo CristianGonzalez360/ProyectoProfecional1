@@ -1,7 +1,7 @@
 package business_logic.exceptions;
 
 public class ConflictException extends RuntimeException {
-	
+
 	/**
 	 * 
 	 */

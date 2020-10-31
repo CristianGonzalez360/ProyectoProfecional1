@@ -9,15 +9,15 @@ import org.apache.log4j.LogManager;
 public class SQLDataSource extends DataSource {
 
 	private String driver;
-	
+
 	private String host;
-	
+
 	private String port;
-	
+
 	private String user;
-	
+
 	private String password;
-	
+
 	private String database;
 
 	public SQLDataSource dbName(String db) {

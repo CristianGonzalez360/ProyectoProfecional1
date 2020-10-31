@@ -79,7 +79,7 @@ public class PaisView extends JInternalFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		tableModel = new DefaultTableModel(null, nombreColumnas);
 		table = new JTable(tableModel);
-		
+
 		scrollPane.setViewportView(table);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
@@ -113,9 +113,9 @@ public class PaisView extends JInternalFrame {
 	public void open() {
 		try {
 			this.setMaximum(true);
-        } catch(PropertyVetoException e) { 
-        	e.printStackTrace(); 
-        } 
+		} catch (PropertyVetoException e) {
+			e.printStackTrace();
+		}
 		setVisible(true);
 	}
 

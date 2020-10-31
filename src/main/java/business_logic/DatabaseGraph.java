@@ -6,12 +6,12 @@ import java.util.List;
 import dto.PaisDTO;
 
 public class DatabaseGraph {
-	
+
 	private List<PaisDTO> paisesList;
 
-    public DatabaseGraph() {
-    	setPaisesList(new LinkedList<>());
-    }
+	public DatabaseGraph() {
+		setPaisesList(new LinkedList<>());
+	}
 
 	public List<PaisDTO> getPaisesList() {
 		return paisesList;
@@ -19,6 +19,6 @@ public class DatabaseGraph {
 
 	public void setPaisesList(List<PaisDTO> paisesList) {
 		this.paisesList = paisesList;
-	} 
-    
+	}
+
 }

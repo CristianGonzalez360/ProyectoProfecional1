@@ -7,13 +7,13 @@ import java.sql.SQLException;
 public class H2DataSource extends DataSource {
 
 	private final String driver = "org.h2.Driver";
-	
+
 	private final String url = "jdbc:h2:~/test";
-	
+
 	private final String scriptdb = "INIT=RUNSCRIPT FROM 'classpath:script.sql'";
-	
+
 	private final String user = "sa";
-	
+
 	private final String password = "";
 
 	@Override
