@@ -42,12 +42,12 @@ public class Application {
 		ControllersFactory.setFactory(new ControllersFactoryImpl(DaosFactory.getFactory()));
 		ViewsFactory.setFactory(new ViewsFactoryImpl(ControllersFactory.getFactory()));
 		ViewsFactory.getFactory().makePresenter().onInit();
+		new DatabaseSeederServiceImpl(DaosFactory.getFactory()).seedDatabase();
 	}
 
 	public static void main(String[] args) {
 		DataSourceFactory.setFactory(new DataSourceFactoryImpl());
 		DataSource ds = DataSourceFactory.getFactory().makeDataSource(DataSourceType.IN_MEMORY);
-
 		new Application().setUpLookAndFeel().onInit(ds);
 	}
 }

@@ -67,19 +67,19 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 			
 			@Override
 			public DatosPersonalesDTO map(Object[] obj) {
-				return new DatosPersonalesDTO()
-						.setId((Integer) obj[0])
-						.setNombreCompleto((String) obj[1])
-						.setDni((Integer) obj[2])
-						.setTelefono((String) obj[3])
-						.setEmail((String) obj[4])
-						.setCalle((String) obj[5])
-						.setAltura((Integer) obj[6])
-						.setPiso((Integer) obj[7])
-						.setDpto((String) obj[8])
-						.setLocalidad((String) obj[9]);
-			}
-			
+				DatosPersonalesDTO dper = new DatosPersonalesDTO();
+						dper.setId((Integer) obj[0]);
+						dper.setNombreCompleto((String) obj[1]);
+						dper.setDni((Integer) obj[2]);
+						dper.setTelefono((String) obj[3]);
+						dper.setEmail((String) obj[4]);
+						dper.setCalle((String) obj[5]);
+						dper.setAltura((Integer) obj[6]);
+						dper.setPiso((Integer) obj[7]);
+						dper.setDpto((String) obj[8]);
+						dper.setLocalidad((String) obj[9]);
+				return dper;
+			}			
 		};
 	}
 }

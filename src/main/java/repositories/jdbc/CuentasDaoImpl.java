@@ -7,6 +7,7 @@ import java.util.List;
 import dto.CuentaDTO;
 import repositories.CuentasDao;
 import repositories.jdbc.utils.Mapper;
+import repositories.jdbc.utils.NullObject;
 
 public class CuentasDaoImpl extends GenericJdbcDao<CuentaDTO> implements CuentasDao {
 
@@ -25,7 +26,7 @@ public class CuentasDaoImpl extends GenericJdbcDao<CuentaDTO> implements Cuentas
 		return getTemplate()
 				.query(insert)
 				.param(entity.getFechaDeAlta())
-				.param(entity.getFechaDeBaja())
+				.param(entity.getFechaDeBaja()  == null ? new NullObject() : entity.getFechaDeBaja())
 				.param(entity.getNombreUsuario())
 				.param(entity.getPassword())
 				.param(entity.getRole())
@@ -67,13 +68,14 @@ public class CuentasDaoImpl extends GenericJdbcDao<CuentaDTO> implements Cuentas
 
 			@Override
 			public CuentaDTO map(Object[] obj) {
-				return new CuentaDTO()
-				.setIdCuenta((Integer) obj[0])
-				.setFechaDeAlta((Date) obj[1])
-				.setFechaDeBaja((Date) obj[2])
-				.setNombreUsuario((String) obj[3])
-				.setPassword((String) obj[4])
-				.setRole((String) obj[5]);
+				CuentaDTO ret = new CuentaDTO();
+				ret.setIdCuenta((Integer) obj[0]);
+				ret.setFechaDeAlta((Date) obj[1]);
+				ret.setFechaDeBaja((Date) obj[2]);
+				ret.setNombreUsuario((String) obj[3]);
+				ret.setPassword((String) obj[4]);
+				ret.setRole((String) obj[5]);
+				return ret;
 			}
 		};
 	}
