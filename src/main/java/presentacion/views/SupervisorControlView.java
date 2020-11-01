@@ -7,12 +7,16 @@ import javax.swing.JPanel;
 
 public class SupervisorControlView extends JInternalFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4306672868994985561L;
 
-	public SupervisorControlView() {
+	private static SupervisorControlView instance;
+	
+	public static SupervisorControlView getInstance() {
+		if(instance == null) instance = new SupervisorControlView();
+		return instance;
+	}
+	
+	private SupervisorControlView() {
 		setTitle("Supervisor control view");
 		setBounds(100, 100, 859, 647);
 
@@ -31,6 +35,10 @@ public class SupervisorControlView extends JInternalFrame {
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("OT para cerrar", null, panel, null);
 
+	}
+
+	public void display() {
+		setVisible(true);
 	}
 
 }

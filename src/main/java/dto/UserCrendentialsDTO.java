@@ -29,7 +29,7 @@ public class UserCrendentialsDTO {
 				.notSpaces("El password no debe poseer caracteres en blanco.")
 				.notInLowerCase("El password debe estar en minuscula")
 				.validate());
-		return null;
+		return errors;
 	}
 	
 	public void setEmail(String email) {
@@ -47,5 +47,9 @@ public class UserCrendentialsDTO {
 	public String getPassword() {
 		return password;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "UserCrendentialsDTO [email=" + email + ", password=" + password + "]";
+	}
 }

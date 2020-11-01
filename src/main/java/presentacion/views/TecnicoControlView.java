@@ -11,7 +11,14 @@ public class TecnicoControlView extends JInternalFrame {
 
 	private static final long serialVersionUID = 4704503289092275653L;
 
-	public TecnicoControlView() {
+	private static TecnicoControlView instance;
+	
+	public static TecnicoControlView getInstance() {
+		if(instance == null) instance = new TecnicoControlView();
+		return instance;
+	}
+	
+	private TecnicoControlView() {
 		setTitle("Tecnico control view");
 		setResizable(true);
 		try {
@@ -33,6 +40,10 @@ public class TecnicoControlView extends JInternalFrame {
 		JPanel otSinPresupuestar = new JPanel();
 		tabbedPane.addTab("OT sin presupuestar", null, otSinPresupuestar, null);
 
+	}
+
+	public void display() {
+		setVisible(true);		
 	}
 
 }

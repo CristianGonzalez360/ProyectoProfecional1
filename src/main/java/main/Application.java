@@ -14,6 +14,7 @@ import repositories.jdbc.DaosFactoryImpl;
 import repositories.jdbc.utils.DataSource;
 import repositories.jdbc.utils.DataSourceFactory;
 import repositories.jdbc.utils.DataSourceFactoryImpl;
+import services.DatabaseSeederServiceImpl;
 import repositories.jdbc.utils.DataSourceFactory.DataSourceType;
 
 public class Application {

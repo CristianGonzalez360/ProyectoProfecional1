@@ -19,4 +19,8 @@ public abstract class DaosFactory {
 	public abstract PaisDao makePaisDao();
 
 	public abstract UsuariosDao makeUsuariosDao();
+	
+	public abstract CuentasDao makeCuentasDao();
+	
+	public abstract DatosPersonalesDao makeDatosPersonalesDao();
 }

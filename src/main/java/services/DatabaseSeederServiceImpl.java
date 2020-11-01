@@ -5,6 +5,8 @@ import org.apache.log4j.LogManager;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
+import dto.CuentaDTO;
+import dto.DatosPersonalesDTO;
 import dto.PaisDTO;
 import repositories.DaosFactory;
 import javax.inject.Inject;
@@ -22,8 +24,16 @@ public class DatabaseSeederServiceImpl {
 
 	public void seedDatabase() {
 		DatabaseGraph graph = loadDatabaseGraph();
-		for (PaisDTO target : graph.getPaisesList()) {
+		for(PaisDTO target : graph.getPaisesList()) {
 			daos.makePaisDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for(CuentaDTO target : graph.getCuentasList()) {
+			daos.makeCuentasDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for(DatosPersonalesDTO target : graph.getDatosPersonalesList()) {
+			daos.makeDatosPersonalesDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 	}
