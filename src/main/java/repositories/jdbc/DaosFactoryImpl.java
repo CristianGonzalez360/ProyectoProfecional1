@@ -5,12 +5,16 @@ package repositories.jdbc;
 
 import repositories.DaosFactory;
 import repositories.PaisDao;
+import repositories.UsuariosDao;
 
 public class DaosFactoryImpl extends DaosFactory {
 
 	private DataSource ds;
+	
 	private PaisDao paisDao;
 
+	private UsuariosDao usuariosDao;
+	
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
 	}
@@ -20,5 +24,12 @@ public class DaosFactoryImpl extends DaosFactory {
 		if (paisDao == null)
 			paisDao = new PaisDaoImpl(ds.getConnection());
 		return paisDao;
+	}
+
+	@Override
+	public UsuariosDao makeUsuariosDao() {
+		if(usuariosDao == null)
+			usuariosDao = new UsuariosDaoImpl(ds.getConnection());
+		return null;
 	}
 }

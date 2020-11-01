@@ -16,4 +16,6 @@ public abstract class ControllersFactory {
 	}
 
 	public abstract PaisController makePaisController();
+
+	public abstract LoginController makeLoginController();
 }

@@ -8,14 +8,23 @@ public class ControllersFactoryImpl extends ControllersFactory {
 
 	private PaisController paisController;
 
+	private LoginController loginController;
+	
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
 	}
 
 	@Override
 	public PaisController makePaisController() {
-		if (paisController == null)
+		if(paisController == null)
 			paisController = new PaisControllerImpl(daos.makePaisDao());
 		return paisController;
+	}
+	
+	@Override 
+	public LoginController makeLoginController() {
+		if(loginController == null)
+			loginController = new LoginController(daos.makeUsuariosDao());
+		return loginController;
 	}
 }
