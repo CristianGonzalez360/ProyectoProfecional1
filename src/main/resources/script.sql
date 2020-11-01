@@ -3,10 +3,9 @@ CREATE TABLE Cuentas (
    idCuenta int NOT NULL AUTO_INCREMENT,
    fechaAltaCuenta DATE,
    fechaBajaCuenta DATE,
-   esActiva BOOLEAN,
-   nombreUsuCuenta VARCHAR(20),
-   passUsuCuenta VARCHAR(20),
-   rol VARCHAR(15),
+   nombreUsuCuenta VARCHAR(20) NOT NULL UNIQUE,
+   passUsuCuenta VARCHAR(20) NOT NULL UNIQUE,
+   rol VARCHAR(15) NOT NULL,
    PRIMARY KEY (idCuenta)
 );
 
@@ -14,11 +13,12 @@ DROP TABLE DatosPersonales IF EXISTS;
 CREATE TABLE DatosPersonales (
     idDatosPersonales int NOT NULL AUTO_INCREMENT,
     nombreCompleto VARCHAR(60) NOT NULL,
-    dni INT,
-    telefono VARCHAR(15),
-    email VARCHAR(25),
+    dni INT NOT NULL UNIQUE,
+    telefono VARCHAR(15) NOT NULL UNIQUE,
+    email VARCHAR(25) NOT NULL UNIQUE,
     calle VARCHAR(25),
     altura INT,
+    piso INT,
     dpto VARCHAR(4),
     localidad VARCHAR(25),
     PRIMARY KEY (idDatosPersonales)
@@ -27,8 +27,8 @@ CREATE TABLE DatosPersonales (
 DROP TABLE Usuarios IF EXISTS;
 CREATE TABLE Usuarios (
     idUsuario INT NOT NULL AUTO_INCREMENT,
-    idCuenta INT ,
-    idDatosPersonales INT,
+    idCuenta INT UNIQUE,
+    idDatosPersonales INT UNIQUE,
     PRIMARY KEY (idUsuario),
     FOREIGN KEY (idCuenta) REFERENCES Cuentas (idCuenta),
     FOREIGN KEY (idDatosPersonales) REFERENCES DatosPersonales(idDatosPersonales)

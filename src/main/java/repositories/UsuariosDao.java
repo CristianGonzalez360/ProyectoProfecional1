@@ -1,8 +1,8 @@
 package repositories;
 
-import dto.UserDTO;
+import dto.UsuarioDTO;
 
-public interface UsuariosDao extends GenericDao<UserDTO, Integer>{
+public interface UsuariosDao extends GenericDao<UsuarioDTO, Integer>{
 
-	UserDTO readByCredentials(String email, String password);
+	UsuarioDTO readByCredentials(String email, String password);
 }

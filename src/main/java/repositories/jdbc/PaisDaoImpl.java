@@ -5,6 +5,7 @@ import java.util.List;
 
 import dto.PaisDTO;
 import repositories.PaisDao;
+import repositories.jdbc.utils.Mapper;
 
 public class PaisDaoImpl extends GenericJdbcDao<PaisDTO> implements PaisDao {
 
