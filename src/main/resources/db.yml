@@ -7,3 +7,61 @@ paisesList:
   - nombre: Colombia
   - nombre: Paraguay
   - nombre: Brazil
+
+datosPersonalesList:
+  - fechaDeAlta: 1990-08-07
+    nombreUsuario: un001
+    password: pass001
+    role: tecnico
+  - fechaDeAlta: 1990-08-07
+    nombreUsuario: un002
+    password: pass002
+    role: supervisor
+  - fechaDeAlta: 1990-08-07
+    fechaDeBaja: 2020-05-07
+    nombreUsuario: un003
+    password: pass003
+    role: supervisor
+
+cuentasList:
+  - nombre: u001
+    dni: 111
+    telefono: 11-2222-2222
+    email: u001@mail.com
+    calle: calle01
+    altura: 1
+    piso: 1
+    dpto: 1
+    localidad: localidad001
+  - nombre: u002
+    dni: 112
+    telefono: 11-2222-2221
+    email: u002@mail.com
+    calle: calle02
+    altura: 1
+    piso: 1
+    dpto: 1
+    localidad: localidad002
+  - nombre: u003
+    dni: 113
+    telefono: 11-2222-2223
+    email: u003@mail.com
+    calle: calle03
+    altura: 1
+    piso: 1
+    dpto: 1
+    localidad: localidad003
+
+usuariosList:
+  - cuenta:  
+      idCuenta: 1
+    datos:
+      idDatos: 1
+  - cuenta:  
+      idCuenta: 2
+    datos:
+      idDatos: 2
+  - cuenta:  
+      idCuenta: 3
+    datos:
+      idDatos: 3

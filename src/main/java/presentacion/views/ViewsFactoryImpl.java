@@ -10,11 +10,13 @@ public class ViewsFactoryImpl extends ViewsFactory {
 
 	public ViewsFactoryImpl(ControllersFactory factory) {
 		controllers = factory;
+		WorkbenchView.getInstance().addFrames(TecnicoControlView.getInstance());
+		WorkbenchView.getInstance().addFrames(SupervisorControlView.getInstance());
 	}
 
 	@Override
 	public Presenter makePresenter() {
 		new PaisPresenter(controllers.makePaisController());
-		return new WorkbenchPresenter();
+		return new WorkbenchPresenter(controllers.makeLoginController());
 	}
 }

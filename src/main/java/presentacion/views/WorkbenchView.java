@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Image;
@@ -14,6 +15,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.BorderLayout;
 import javax.swing.JDesktopPane;
+import javax.swing.JTextField;
+import java.awt.Color;
+import java.awt.FlowLayout;
 
 public class WorkbenchView {
 
@@ -30,6 +34,8 @@ public class WorkbenchView {
 	private JMenuItem mntmItemLogin;
 
 	private JMenuItem mntmNewMenuItem;
+	
+	private JTextField textSession;
 
 	public static WorkbenchView getInstance() {
 		if (vista == null)
@@ -53,7 +59,21 @@ public class WorkbenchView {
 
 		desktopPane = new JDesktopPane();
 		panel.add(desktopPane, BorderLayout.CENTER);
+		
+		JPanel southPanel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) southPanel.getLayout();
+		flowLayout.setAlignment(FlowLayout.TRAILING);
+		southPanel.setBackground(Color.BLACK);
+		panel.add(southPanel, BorderLayout.SOUTH);
+		
+		textSession = new JTextField();
+		textSession.setEnabled(false);
+		textSession.setEditable(false);
+		southPanel.add(textSession);
+		textSession.setColumns(10);
 
+		
+		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
@@ -73,7 +93,6 @@ public class WorkbenchView {
 		mnNewMenu.add(mntmSeedDb);
 
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		addFrames();
 	}
 
 	public JMenuItem getMntmSeedDb() {
@@ -95,11 +114,19 @@ public class WorkbenchView {
 		this.frame.setVisible(true);
 	}
 
-	private void addFrames() {
-		this.desktopPane.add(PaisView.getInstance());
+	public void setData(String sessionInfo) {
+		this.textSession.setText(sessionInfo);
+	}
+	
+	public void addFrames(JInternalFrame frame) {
+		this.desktopPane.add(frame);
 	}
 
 	public void setActionOnLogin(ActionListener listener) {
 		this.mntmItemLogin.addActionListener(listener);
+	}
+
+	public void disableLoginButton() {
+		this.mntmItemLogin.setEnabled(false);
 	}
 }
