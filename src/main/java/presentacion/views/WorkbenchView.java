@@ -1,5 +1,6 @@
 package presentacion.views;
 
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -25,6 +26,10 @@ public class WorkbenchView {
 	private JDesktopPane desktopPane;
 
 	private JMenuItem mntmSeedDb;
+
+	private JMenuItem mntmItemLogin;
+
+	private JMenuItem mntmNewMenuItem;
 
 	public static WorkbenchView getInstance() {
 		if (vista == null)
@@ -55,10 +60,10 @@ public class WorkbenchView {
 		JMenu mnNewMenu = new JMenu("Opciones");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmItemLogin = new JMenuItem("Login");
+		mntmItemLogin = new JMenuItem("Login");
 		mnNewMenu.add(mntmItemLogin);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
+		mntmNewMenuItem = new JMenuItem("Logout");
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmItemSalir = new JMenuItem("Salir");
@@ -92,5 +97,9 @@ public class WorkbenchView {
 
 	private void addFrames() {
 		this.desktopPane.add(PaisView.getInstance());
+	}
+
+	public void setActionOnLogin(ActionListener listener) {
+		this.mntmItemLogin.addActionListener(listener);
 	}
 }

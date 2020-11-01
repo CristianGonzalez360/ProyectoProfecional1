@@ -43,6 +43,16 @@ public class StringValidator {
 		return this;
 	}
 
+	public StringValidator notInLowerCase(String message) {
+		validators.add(new NotInLowercaseValidator(message));
+		return this;
+	}
+	
+	public StringValidator notSpaces(String message) {
+		validators.add(new NotSpacesValidator(message));
+		return this;
+	}
+	
 	public List<String> validate() {
 		return new CompositeValidator<String>(validators).validate(value);
 	}

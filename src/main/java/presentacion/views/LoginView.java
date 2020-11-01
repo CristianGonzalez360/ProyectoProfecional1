@@ -8,15 +8,17 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import dto.UserCrendentialsDTO;
+
 public class LoginView extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8786589718227732342L;
+	
 	private final JPanel contentPanel = new JPanel();
 
-	public LoginView() {
+	private static LoginView instance;
+	
+	private LoginView() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
@@ -40,4 +42,21 @@ public class LoginView extends JDialog {
 		}
 	}
 
+	public static LoginView getInstance() {
+		if(instance == null) instance = new LoginView();
+		return instance;
+	}
+	
+	public void onDisplay() {
+		setVisible(true);
+	}
+
+	public void clearData() {
+		
+	}
+
+	public UserCrendentialsDTO getData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

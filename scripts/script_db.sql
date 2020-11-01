@@ -1,4 +1,6 @@
-DROP TABLE Cuentas IF EXISTS;
+CREATE DATABASE concesionaria;
+USE concesionaria;
+
 CREATE TABLE Cuentas (
    idCuenta int NOT NULL AUTO_INCREMENT,
    fechaAltaCuenta DATE,
@@ -10,7 +12,6 @@ CREATE TABLE Cuentas (
    PRIMARY KEY (idCuenta)
 );
 
-DROP TABLE DatosPersonales IF EXISTS;
 CREATE TABLE DatosPersonales (
     idDatosPersonales int NOT NULL AUTO_INCREMENT,
     nombreCompleto VARCHAR(60) NOT NULL,
@@ -24,7 +25,6 @@ CREATE TABLE DatosPersonales (
     PRIMARY KEY (idDatosPersonales)
 );
 
-DROP TABLE Usuarios IF EXISTS;
 CREATE TABLE Usuarios (
     idUsuario INT NOT NULL AUTO_INCREMENT,
     idCuenta INT ,
@@ -34,7 +34,6 @@ CREATE TABLE Usuarios (
     FOREIGN KEY (idDatosPersonales) REFERENCES DatosPersonales(idDatosPersonales)
 );
 
-DROP TABLE Clientes IF EXISTS;
 CREATE TABLE Clientes (
     idCliente INT NOT NULL AUTO_INCREMENT,
     fechaAltaCliente DATE ,
@@ -43,7 +42,6 @@ CREATE TABLE Clientes (
     FOREIGN KEY (idDatosPersonales) REFERENCES DatosPersonales(idDatosPersonales)
 );
 
-DROP TABLE Turnos IF EXISTS;
 CREATE TABLE Turnos (
    idTurno INT NOT NULL AUTO_INCREMENT,
    idCliente INT,
@@ -54,7 +52,6 @@ CREATE TABLE Turnos (
    PRIMARY KEY (idTurno)
 );
 
-DROP TABLE FichaTecnicaVehiculo IF EXISTS;
 CREATE TABLE FichaTecnicaVehiculo (
    idFichaTecnicaVehiculo INT NOT NULL AUTO_INCREMENT,
    nroChasis INT UNIQUE NOT NULL,
@@ -69,7 +66,6 @@ CREATE TABLE FichaTecnicaVehiculo (
    PRIMARY KEY (idFichaTecnicaVehiculo)
 );
 
-DROP TABLE VehiculoConOrdenesDeTrabajo IF EXISTS;
 CREATE TABLE VehiculoConOrdenesDeTrabajo (
    idVehiculoConOT INT NOT NULL AUTO_INCREMENT,
    idFichaTecnicaVehiculo INT NOT NULL,
@@ -83,14 +79,12 @@ CREATE TABLE VehiculoConOrdenesDeTrabajo (
    FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente)
 );
 
-DROP TABLE TipoTrabajo IF EXISTS;
 CREATE TABLE TipoTrabajo (
   idTipoTrabajo INT NOT NULL AUTO_INCREMENT,
   descripcionTrabajo VARCHAR(10) UNIQUE,
   PRIMARY KEY (idTipoTrabajo)
 );
 
-DROP TABLE OrdenesDeTrabajo IF EXISTS;
 CREATE TABLE OrdenesDeTrabajo (
   idOT INT NOT NULL AUTO_INCREMENT,
   idTipoOt INT NOT NULL,
@@ -106,14 +100,12 @@ CREATE TABLE OrdenesDeTrabajo (
   FOREIGN KEY (idVehiculoOt) REFERENCES FichaTecnicaVehiculo (idFichaTecnicaVehiculo)
 );
 
-DROP TABLE Emisores IF EXISTS;
 CREATE TABLE Emisores (
   idEmisor INT NOT NULL AUTO_INCREMENT,
   nombreEmisor VARCHAR (20),
   PRIMARY KEY (idEmisor)
 );
 
-DROP TABLE Tarjetas IF EXISTS;
 CREATE TABLE Tarjetas (
   idTarjeta INT NOT NULL AUTO_INCREMENT,
   idEmisor INT,
@@ -125,7 +117,6 @@ CREATE TABLE Tarjetas (
   FOREIGN KEY (idEmisor) REFERENCES Emisores (idEmisor)
 );
 
-DROP TABLE Financiamientos IF EXISTS;
 CREATE TABLE Financiamientos (
   idFinanciamiento INT NOT NULL AUTO_INCREMENT,
   idTarjeta INT,
@@ -135,7 +126,6 @@ CREATE TABLE Financiamientos (
   FOREIGN KEY (idTarjeta) REFERENCES Tarjetas (idTarjeta)
 );
 
-DROP TABLE Pagos IF EXISTS;
 CREATE TABLE Pagos (
   idPago INT NOT NULL AUTO_INCREMENT,
   idFinanciamiento INT,
@@ -145,7 +135,6 @@ CREATE TABLE Pagos (
   FOREIGN KEY ( idFinanciamiento) REFERENCES Financiamientos (idFinanciamiento)
 );
 
-DROP TABLE Presupuestos IF EXISTS;
 CREATE TABLE Presupuestos (
   idPresupuesto INT NOT NULL AUTO_INCREMENT,
   idOT INT NOT NULL,
@@ -167,7 +156,6 @@ CREATE TABLE Presupuestos (
   FOREIGN KEY (idPago) REFERENCES Pagos (idPago)
 );
 
-DROP TABLE TrabajosPresupuestados IF EXISTS;
 CREATE TABLE TrabajosPresupuestados (
   idTrabajoPresu INT NOT NULL AUTO_INCREMENT,
   idPresupuesto INT,
@@ -178,7 +166,6 @@ CREATE TABLE TrabajosPresupuestados (
   FOREIGN KEY (idPresupuesto) REFERENCES Presupuestos (idPresupuesto)
 );
 
-DROP TABLE Repuestos IF EXISTS;
 CREATE TABLE Repuestos (
   idRepuesto INT NOT NULL AUTO_INCREMENT,
   codigoRepuesto INT,
@@ -191,7 +178,6 @@ CREATE TABLE Repuestos (
   PRIMARY KEY (idRepuesto)
 );
 
-DROP TABLE RepuestosPlanificados IF EXISTS;
 CREATE TABLE RepuestosPlanificados (
   idPresu INT NOT NULL,
   idRepuesto INT NOT NULL,
