@@ -13,12 +13,12 @@ class CuentasDaoImplTest {
 	CuentasDaoImpl dao = new CuentasDaoImpl(new H2DataSource().getConnection());
 	
 	private CuentaDTO makeCuentaDto() {
-		CuentaDTO dto = new CuentaDTO()
-			.setFechaDeAlta(new Date())
-			.setFechaDeBaja(new Date())
-			.setRole("admin")
-			.setNombreUsuario("john")
-			.setPassword("doe");
+		CuentaDTO dto = new CuentaDTO();
+			dto.setFechaDeAlta(new Date());
+			dto.setFechaDeBaja(new Date());
+			dto.setRole("admin");
+			dto.setNombreUsuario("john");
+			dto.setPassword("doe");
 		return dto;
 	}
 	

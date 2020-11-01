@@ -11,16 +11,16 @@ class DatosPersonalesDaoImplTest {
 	DatosPersonalesDaoImpl dao = new DatosPersonalesDaoImpl(new H2DataSource().getConnection());
 	
 	private DatosPersonalesDTO makeTestDto() {
-		DatosPersonalesDTO datos = new DatosPersonalesDTO()
-				.setNombreCompleto("John Doe")
-				.setDni(333)
-				.setTelefono("1111")
-				.setEmail("johndoe@mail.com")
-				.setCalle("calle")
-				.setAltura(2)
-				.setPiso(1)
-				.setDpto("A")
-				.setLocalidad("loc");
+		DatosPersonalesDTO datos = new DatosPersonalesDTO();
+				datos.setNombreCompleto("John Doe");
+				datos.setDni(333);
+				datos.setTelefono("1111");
+				datos.setEmail("johndoe@mail.com");
+				datos.setCalle("calle");
+				datos.setAltura(2);
+				datos.setPiso(1);
+				datos.setDpto("A");
+				datos.setLocalidad("loc");
 		return datos;
 	}
 	

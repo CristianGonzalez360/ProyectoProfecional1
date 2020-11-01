@@ -68,26 +68,27 @@ public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements Usuar
 
 			@Override
 			public UsuarioDTO map(Object[] obj) {
+				CuentaDTO cuenta = new CuentaDTO();
+				cuenta.setIdCuenta((Integer) obj[1]);
+				cuenta.setFechaDeAlta((Date) obj[3]);
+				cuenta.setFechaDeBaja((Date) obj[4]);
+				cuenta.setNombreUsuario((String)obj[5]);
+				cuenta.setPassword((String)obj[6]);
+				cuenta.setRole((String)obj[7]);
+
+				DatosPersonalesDTO dper = new DatosPersonalesDTO();
+				dper.setId((Integer) obj[2]);
+				dper.setNombreCompleto((String)obj[8]);
+				dper.setDni((Integer)obj[9]);
+				dper.setTelefono((String)obj[10]);
+				dper.setEmail((String)obj[11]);
+				dper.setCalle((String)obj[12]);
+				dper.setAltura((Integer)obj[13]);
+				dper.setPiso((Integer)obj[14]);
+				dper.setDpto((String)obj[15]);
+				dper.setLocalidad((String)obj[16]);
 				return new UsuarioDTO((Integer) obj[0], 
-						new CuentaDTO()
-						.setIdCuenta((Integer) obj[1])
-						.setFechaDeAlta((Date) obj[3])
-						.setFechaDeBaja((Date) obj[4])
-						.setNombreUsuario((String)obj[5])
-						.setPassword((String)obj[6])
-						.setRole((String)obj[7]), 
-						new DatosPersonalesDTO()
-						.setId((Integer) obj[2])
-						.setNombreCompleto((String)obj[8])
-						.setDni((Integer)obj[9])
-						.setTelefono((String)obj[10])
-						.setEmail((String)obj[11])
-						.setCalle((String)obj[12])
-						.setAltura((Integer)obj[13])
-						.setPiso((Integer)obj[14])
-						.setDpto((String)obj[15])
-						.setLocalidad((String)obj[16])
-						);
+						cuenta,dper);
 			}			
 		};
 	}

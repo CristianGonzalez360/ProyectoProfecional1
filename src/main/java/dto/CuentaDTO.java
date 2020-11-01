@@ -23,54 +23,48 @@ public class CuentaDTO {
 		return fechaDeAlta;
 	}
 
-	public CuentaDTO setFechaDeAlta(Date fechaDeAlta) {
+	public void setFechaDeAlta(Date fechaDeAlta) {
 		this.fechaDeAlta = fechaDeAlta;
-		return this;
 	}
 
 	public Date getFechaDeBaja() {
 		return fechaDeBaja;
 	}
 
-	public CuentaDTO setFechaDeBaja(Date fechaDeBaja) {
+	public void setFechaDeBaja(Date fechaDeBaja) {
 		this.fechaDeBaja = fechaDeBaja;
-		return this;
 	}
 
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
 
-	public CuentaDTO setNombreUsuario(String nombreUsuario) {
+	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
-		return this;
 	}
 
 	public String getPassword() {
 		return this.password;
 	}
 
-	public CuentaDTO setPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
-		return this;
 	}
 
 	public Integer getIdCuenta() {
 		return idCuenta;
 	}
 
-	public CuentaDTO setIdCuenta(Integer idCuenta) {
+	public void setIdCuenta(Integer idCuenta) {
 		this.idCuenta = idCuenta;
-		return this;
 	}
 
 	public String getRole() {
 		return role;
 	}
 
-	public CuentaDTO setRole(String role) {
+	public void setRole(String role) {
 		this.role = role;
-		return this;
 	}
 	
 	@Override

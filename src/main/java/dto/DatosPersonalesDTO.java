@@ -30,90 +30,80 @@ public class DatosPersonalesDTO {
 		return id;
 	}
 
-	public DatosPersonalesDTO setId(Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
-		return this;
 	}
 
 	public String getNombreCompleto() {
 		return nombreCompleto;
 	}
 
-	public DatosPersonalesDTO setNombreCompleto(String nombreCompleto) {
+	public void setNombreCompleto(String nombreCompleto) {
 		this.nombreCompleto = nombreCompleto;
-		return this;
 	}
 
 	public Integer getDni() {
 		return this.dni;
 	}
 	
-	public DatosPersonalesDTO setDni(Integer dni) {
+	public void setDni(Integer dni) {
 		this.dni = dni;
-		return this;
 	}
 	
 	public String getTelefono() {
 		return telefono;
 	}
 
-	public DatosPersonalesDTO setTelefono(String telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-		return this;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public DatosPersonalesDTO setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
-		return this;
 	}
 
 	public String getCalle() {
 		return calle;
 	}
 
-	public DatosPersonalesDTO setCalle(String calle) {
+	public void setCalle(String calle) {
 		this.calle = calle;
-		return this;
 	}
 
 	public Integer getAltura() {
 		return altura;
 	}
 
-	public DatosPersonalesDTO setAltura(Integer altura) {
+	public void setAltura(Integer altura) {
 		this.altura = altura;
-		return this;
 	}	
 
 	public Integer getPiso() {
 		return piso;
 	}
 
-	public DatosPersonalesDTO setPiso(Integer piso) {
+	public void setPiso(Integer piso) {
 		this.piso = piso;
-		return this;
 	}
 
 	public String getDpto() {
 		return dpto;
 	}
 
-	public DatosPersonalesDTO setDpto(String dpto) {
+	public void setDpto(String dpto) {
 		this.dpto = dpto;
-		return this;
 	}
 
 	public String getLocalidad() {
 		return localidad;
 	}
 
-	public DatosPersonalesDTO setLocalidad(String localidad) {
+	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
-		return this;
 	}
 
 	@Override

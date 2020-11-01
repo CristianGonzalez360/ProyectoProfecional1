@@ -46,22 +46,22 @@ public class UsuarioDTO {
 	}
 
 	public UsuarioDTO makeTestDTO() {
-		DatosPersonalesDTO datos = new DatosPersonalesDTO()
-				.setNombreCompleto("u001")
-				.setDni(2233)
-				.setTelefono("1111")
-				.setEmail("u001@mail.com")
-				.setCalle("calle")
-				.setAltura(2)
-				.setPiso(1)
-				.setDpto("A")
-				.setLocalidad("loc");
-		CuentaDTO cuenta = new CuentaDTO()
-				.setFechaDeAlta(new Date())
-				.setFechaDeBaja(new Date())
-				.setNombreUsuario("u001")
-				.setPassword("p001")
-				.setRole("admin");
+		DatosPersonalesDTO datos = new DatosPersonalesDTO();
+				datos.setNombreCompleto("u001");
+				datos.setDni(2233);
+				datos.setTelefono("1111");
+				datos.setEmail("u001@mail.com");
+				datos.setCalle("calle");
+				datos.setAltura(2);
+				datos.setPiso(1);
+				datos.setDpto("A");
+				datos.setLocalidad("loc");
+		CuentaDTO cuenta = new CuentaDTO();
+				cuenta.setFechaDeAlta(new Date());
+				cuenta.setFechaDeBaja(new Date());
+				cuenta.setNombreUsuario("u001");
+				cuenta.setPassword("p001");
+				cuenta.setRole("admin");
 		UsuarioDTO usuario = new UsuarioDTO(null, cuenta, datos);
 		return usuario;
 	}
