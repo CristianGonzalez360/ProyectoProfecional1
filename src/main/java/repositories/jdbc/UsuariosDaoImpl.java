@@ -1,7 +1,10 @@
 package repositories.jdbc;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang.NotImplementedException;
 
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
@@ -14,6 +17,8 @@ public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements Usuar
 	private static final String readAll = "SELECT idUsuario, Usuarios.idCuenta, usuarios.idDatosPersonales, fechaAltaCuenta, fechaBajaCuenta, nombreUsuCuenta, passUsuCuenta, rol, nombreCompleto, dni, telefono, email, calle, altura, piso, dpto, localidad FROM usuarios INNER JOIN cuentas ON usuarios.idCuenta = cuentas.idCuenta INNER JOIN datospersonales on usuarios.idDatosPersonales = datosPersonales.idDatosPersonales";
 	
 	private static final String readByCredentials = readAll + " WHERE Cuentas.nombreUsuCuenta = ? AND Cuentas.passUsuCuenta = ?";
+	
+	private static final String readById = readAll + " " + "WHERE Usuarios.idUsuario = ?"; 
 	
 	private static final String insert = "INSERT INTO Usuarios (idCuenta, idDatosPersonales) VALUES (?, ?)";
 	
@@ -32,17 +37,18 @@ public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements Usuar
 
 	@Override
 	public boolean update(UsuarioDTO entity) {
-		return false;
+		throw new NotImplementedException();
 	}
 	
 	@Override
 	public boolean deleteById(Integer id) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public UsuarioDTO readByID(Integer id) {
-		return null;
+		List<UsuarioDTO> target = getTemplate().query(readById).param(id).excecute(getMapper());
+		return target.isEmpty() ? null : target.get(0);
 	}
 
 	@Override
@@ -62,7 +68,26 @@ public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements Usuar
 
 			@Override
 			public UsuarioDTO map(Object[] obj) {
-				return new UsuarioDTO((Integer) obj[0], new CuentaDTO().setIdCuenta((Integer) obj[1]), new DatosPersonalesDTO().setId((Integer) obj[2]));
+				return new UsuarioDTO((Integer) obj[0], 
+						new CuentaDTO()
+						.setIdCuenta((Integer) obj[1])
+						.setFechaDeAlta((Date) obj[3])
+						.setFechaDeBaja((Date) obj[4])
+						.setNombreUsuario((String)obj[5])
+						.setPassword((String)obj[6])
+						.setRole((String)obj[7]), 
+						new DatosPersonalesDTO()
+						.setId((Integer) obj[2])
+						.setNombreCompleto((String)obj[8])
+						.setDni((Integer)obj[9])
+						.setTelefono((String)obj[10])
+						.setEmail((String)obj[11])
+						.setCalle((String)obj[12])
+						.setAltura((Integer)obj[13])
+						.setPiso((Integer)obj[14])
+						.setDpto((String)obj[15])
+						.setLocalidad((String)obj[16])
+						);
 			}			
 		};
 	}

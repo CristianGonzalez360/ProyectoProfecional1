@@ -1,10 +1,15 @@
 package services;
 
-import java.util.Date;
+import business_logic.exceptions.ForbiddenException;
+import dto.SessionDTO;
+import dto.UsuarioDTO;
 
-public class SessionService {
+public interface SessionService {
 
-	private Date initSession;
-	
-	private Date closeSession;
-	}
+	void openSession(UsuarioDTO user) throws ForbiddenException;
+
+	void closeSession();
+
+	SessionDTO getActiveSession();
+
+}

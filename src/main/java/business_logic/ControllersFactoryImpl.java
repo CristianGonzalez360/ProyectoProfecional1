@@ -1,6 +1,7 @@
 package business_logic;
 
 import repositories.DaosFactory;
+import services.SessionServiceImpl;
 
 public class ControllersFactoryImpl extends ControllersFactory {
 
@@ -24,7 +25,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override 
 	public LoginController makeLoginController() {
 		if(loginController == null)
-			loginController = new LoginController(daos.makeUsuariosDao());
+			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance());
 		return loginController;
 	}
 }
