@@ -68,9 +68,7 @@ public class AgregarTrabajoFormView extends JDialog {
 		JScrollPane scroll = new JScrollPane(editorDescripcion);
 		panelDescripción.add(scroll, BorderLayout.CENTER);
 		
-		JPanel panelInferior = new JPanel();
-		FlowLayout fl_panelInferior = (FlowLayout) panelInferior.getLayout();
-		fl_panelInferior.setAlignment(FlowLayout.LEFT);
+		JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panelPrincipal.add(panelInferior, BorderLayout.SOUTH);
 		
 		JLabel lblEsfuerzo = new JLabel("Esfuerzo:");
