@@ -7,7 +7,7 @@ import org.yaml.snakeyaml.constructor.Constructor;
 
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
-import dto.PaisDTO;
+import dto.UsuarioDTO;
 import repositories.DaosFactory;
 import javax.inject.Inject;
 import java.io.InputStream;
@@ -24,16 +24,16 @@ public class DatabaseSeederServiceImpl {
 
 	public void seedDatabase() {
 		DatabaseGraph graph = loadDatabaseGraph();
-		for(PaisDTO target : graph.getPaisesList()) {
-			daos.makePaisDao().insert(target);
-			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
-		}
-		for(CuentaDTO target : graph.getCuentasList()) {
+		for(CuentaDTO target : graph.getCuentas()) {
 			daos.makeCuentasDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(DatosPersonalesDTO target : graph.getDatosPersonalesList()) {
+		for(DatosPersonalesDTO target : graph.getDatosPersonales()) {
 			daos.makeDatosPersonalesDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for(UsuarioDTO target: graph.getUsuarios()) {
+			daos.makeUsuariosDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 	}

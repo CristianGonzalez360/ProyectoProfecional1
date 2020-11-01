@@ -5,55 +5,44 @@ import java.util.List;
 
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
-import dto.PaisDTO;
 import dto.UsuarioDTO;
 
 public class DatabaseGraph {
 
-	private List<PaisDTO> paisesList;
+	private List<CuentaDTO> cuentas;
 	
-	private List<CuentaDTO> cuentasList;
+	private List<DatosPersonalesDTO> datosPersonales;
 	
-	private List<DatosPersonalesDTO> datosPersonalesList;
-	
-	private List<UsuarioDTO> usuariosList;
+	private List<UsuarioDTO> usuarios;
 	
 	public DatabaseGraph() {
-		setPaisesList(new LinkedList<>());
-		setCuentasList(new LinkedList<>());
-		setDatosPersonalesList(new LinkedList<>());
-		setUsuariosList(new LinkedList<>());
+		cuentas = new LinkedList<>();
+		datosPersonales = new LinkedList<>();
+		usuarios = new LinkedList<>();
 	}
 
-	public List<PaisDTO> getPaisesList() {
-		return paisesList;
+	public List<CuentaDTO> getCuentas() {
+		return cuentas;
 	}
 
-	public void setPaisesList(List<PaisDTO> paisesList) {
-		this.paisesList = paisesList;
+	public void setCuentas(List<CuentaDTO> cuentas) {
+		this.cuentas = cuentas;
 	}
 
-	public List<CuentaDTO> getCuentasList() {
-		return cuentasList;
+	public List<DatosPersonalesDTO> getDatosPersonales() {
+		return datosPersonales;
 	}
 
-	public void setCuentasList(List<CuentaDTO> cuentasList) {
-		this.cuentasList = cuentasList;
+	public void setDatosPersonales(List<DatosPersonalesDTO> datosPersonales) {
+		this.datosPersonales = datosPersonales;
 	}
 
-	public List<DatosPersonalesDTO> getDatosPersonalesList() {
-		return datosPersonalesList;
+	public List<UsuarioDTO> getUsuarios() {
+		return usuarios;
 	}
 
-	public void setDatosPersonalesList(List<DatosPersonalesDTO> datosPersonalesList) {
-		this.datosPersonalesList = datosPersonalesList;
+	public void setUsuarios(List<UsuarioDTO> usuarios) {
+		this.usuarios = usuarios;
 	}
-
-	public List<UsuarioDTO> getUsuariosList() {
-		return usuariosList;
-	}
-
-	public void setUsuariosList(List<UsuarioDTO> usuariosList) {
-		this.usuariosList = usuariosList;
-	}
+	
 }
