@@ -40,7 +40,7 @@ public class UserCrendentialsDTO {
 		this.password = password;
 	}
 
-	public String getEmail() {
+	public String getName() {
 		return email;
 	}
 
