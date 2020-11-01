@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import repositories.DaosFactory;
+import repositories.jdbc.utils.H2DataSource;
 
 class DaosFactoryImplTest {
 

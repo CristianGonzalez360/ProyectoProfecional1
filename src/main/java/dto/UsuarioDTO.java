@@ -1,6 +1,6 @@
 package dto;
 
-public class UserDTO {
+public class UsuarioDTO {
 
 	private Integer id;
 	
@@ -8,7 +8,7 @@ public class UserDTO {
 	
 	private DatosPersonalesDTO datos;
 	
-	public UserDTO(Integer id, CuentaDTO cuenta, DatosPersonalesDTO datos) {
+	public UsuarioDTO(Integer id, CuentaDTO cuenta, DatosPersonalesDTO datos) {
 		super();
 		this.id = id;
 		this.cuenta = cuenta;
@@ -38,4 +38,10 @@ public class UserDTO {
 	public void setDatos(DatosPersonalesDTO datos) {
 		this.datos = datos;
 	}
+
+	@Override
+	public String toString() {
+		return "UsuarioDTO [id=" + id + ", cuenta=" + cuenta + ", datos=" + datos + "]";
+	}
+	
 }

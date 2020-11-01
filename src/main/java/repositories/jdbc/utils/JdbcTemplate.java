@@ -1,10 +1,11 @@
-package repositories.jdbc;
+package repositories.jdbc.utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -83,15 +84,16 @@ public class JdbcTemplate {
 	private void injectParams(PreparedStatement statement) {
 		params.forEach((k, v) -> {
 			try {
-				// TODO ¿Codigo espagetti...?
-				if (v.type.equals(NullObject.class)) {
-					statement.setObject(k, null);
+				if (v.type.equals(NullObject.class)) {				
+					statement.setObject(k, null);				
 				} else if (v.type.equals(Integer.class)) {
 					statement.setInt(k, (Integer) v.value);
 				} else if (v.type.equals(String.class)) {
 					statement.setString(k, (String) v.value);
-				} else if (v.type.equals(java.sql.Date.class)) {
-					statement.setDate(k, (java.sql.Date) v.value);
+				} else if (v.type.equals(java.util.Date.class)) {
+					java.util.Date mydate = (java.util.Date) v.value;
+					java.sql.Date sqldate =  new java.sql.Date(mydate.getTime());
+					statement.setDate(k, sqldate);
 				}
 			} catch (SQLException t) {
 				t.printStackTrace();

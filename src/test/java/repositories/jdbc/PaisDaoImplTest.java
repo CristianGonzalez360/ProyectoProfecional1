@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dto.PaisDTO;
+import repositories.jdbc.utils.DataSource;
+import repositories.jdbc.utils.H2DataSource;
 
 class PaisDaoImplTest {
 

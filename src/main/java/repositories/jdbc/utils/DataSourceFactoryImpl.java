@@ -1,4 +1,4 @@
-package repositories.jdbc;
+package repositories.jdbc.utils;
 
 public class DataSourceFactoryImpl extends DataSourceFactory {
 

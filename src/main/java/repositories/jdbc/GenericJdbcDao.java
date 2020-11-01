@@ -3,6 +3,8 @@ package repositories.jdbc;
 import java.sql.Connection;
 
 import repositories.GenericDao;
+import repositories.jdbc.utils.JdbcTemplate;
+import repositories.jdbc.utils.Mapper;
 
 public abstract class GenericJdbcDao<T> implements GenericDao<T, Integer> {
 

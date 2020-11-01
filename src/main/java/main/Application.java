@@ -11,10 +11,10 @@ import business_logic.ControllersFactory;
 import business_logic.ControllersFactoryImpl;
 import repositories.DaosFactory;
 import repositories.jdbc.DaosFactoryImpl;
-import repositories.jdbc.DataSource;
-import repositories.jdbc.DataSourceFactory;
-import repositories.jdbc.DataSourceFactory.DataSourceType;
-import repositories.jdbc.DataSourceFactoryImpl;
+import repositories.jdbc.utils.DataSource;
+import repositories.jdbc.utils.DataSourceFactory;
+import repositories.jdbc.utils.DataSourceFactoryImpl;
+import repositories.jdbc.utils.DataSourceFactory.DataSourceType;
 
 public class Application {
 
