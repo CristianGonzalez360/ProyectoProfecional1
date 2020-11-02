@@ -19,14 +19,7 @@ public class TecnicoControlView extends JInternalFrame {
 	}
 	
 	private TecnicoControlView() {
-		setResizable(true);
-		try {
-			setMaximum(true);
-		} catch (PropertyVetoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		setClosable(true);
+		setClosable(false);
 		setTitle("Tecnico control view");
 		setMaximizable(true);
 		setIconifiable(true);
@@ -41,7 +34,12 @@ public class TecnicoControlView extends JInternalFrame {
 
 		JPanel otSinPresupuestar = new JPanel();
 		tabbedPane.addTab("OT sin presupuestar", null, otSinPresupuestar, null);
-
+		try {
+			setMaximum(true);
+		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void display() {
