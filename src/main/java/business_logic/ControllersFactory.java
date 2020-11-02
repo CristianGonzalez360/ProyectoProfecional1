@@ -20,4 +20,6 @@ public abstract class ControllersFactory {
 	public abstract LoginController makeLoginController();
 	
 	public abstract TurnosController makeTurnosController();
+	
+	public abstract ClientesController makeClientesController();
 }

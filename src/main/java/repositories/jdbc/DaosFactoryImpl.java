@@ -3,7 +3,9 @@
  */
 package repositories.jdbc;
 
+
 import dto.CuentaDTO;
+import repositories.ClientesDao;
 import repositories.CuentasDao;
 import repositories.DaosFactory;
 import repositories.DatosPersonalesDao;
@@ -26,9 +28,13 @@ public class DaosFactoryImpl extends DaosFactory {
 	
 	private DatosPersonalesDao datosPersonalesDao;
 	
+
 	private TurnosDao turnosDao;
 	
 	private FichaTecnicaVehiculoDao fichaTecnicaVehiculo;
+
+	private ClientesDao clientesDao;
+
 	
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
@@ -76,5 +82,12 @@ public class DaosFactoryImpl extends DaosFactory {
 			this.fichaTecnicaVehiculo = new FichaTecnicaVehiculoDaoImpl(ds.getConnection());
 		}
 		return fichaTecnicaVehiculo;
+	}
+
+	@Override
+	public ClientesDao makeClienteDao() {
+		if(clientesDao == null)
+			clientesDao = new ClientesDaoImpl(ds.getConnection());
+		return clientesDao;
 	}
 }
