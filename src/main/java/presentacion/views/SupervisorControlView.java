@@ -90,15 +90,15 @@ public class SupervisorControlView extends JInternalFrame {
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("OT para cerrar", null, panel, null);
 		
+	}
+
+	public void display() {
 		try {
 			setMaximum(true);
 		} catch (PropertyVetoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public void display() {
 		setVisible(true);
 	}
 

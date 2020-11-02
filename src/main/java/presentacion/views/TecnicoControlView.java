@@ -34,15 +34,15 @@ public class TecnicoControlView extends JInternalFrame {
 
 		JPanel otSinPresupuestar = new JPanel();
 		tabbedPane.addTab("OT sin presupuestar", null, otSinPresupuestar, null);
+	}
+
+	public void display() {
 		try {
 			setMaximum(true);
 		} catch (PropertyVetoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public void display() {
 		setVisible(true);		
 	}
 
