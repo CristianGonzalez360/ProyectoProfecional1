@@ -12,6 +12,7 @@ import repositories.OrdenesDeTrabajoDao;
 import repositories.PaisDao;
 import repositories.TurnosDao;
 import repositories.UsuariosDao;
+import repositories.VehiculosConOrdenDeTrabajoDao;
 import repositories.jdbc.utils.DataSource;
 
 public class DaosFactoryImpl extends DaosFactory {
@@ -33,6 +34,8 @@ public class DaosFactoryImpl extends DaosFactory {
 	private OrdenesDeTrabajoDao ordenesDeTrabajoDao;
 	
 	private ClientesDao clientesDao;
+	
+	private VehiculosConOrdenDeTrabajoDao vehiculosConOtDao;
 	
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
@@ -93,5 +96,12 @@ public class DaosFactoryImpl extends DaosFactory {
 		if(clientesDao == null)
 			clientesDao = new ClientesDaoImpl(ds.getConnection());
 		return clientesDao;
+	}
+
+	@Override
+	public VehiculosConOrdenDeTrabajoDao makeVehiculoConOrdeDeTrabajoDao() {
+		if(this.vehiculosConOtDao == null) 
+			this.vehiculosConOtDao = new VehiculosConOrdenDeTrabajoDaoImpl(ds.getConnection());
+		return vehiculosConOtDao;
 	}
 }

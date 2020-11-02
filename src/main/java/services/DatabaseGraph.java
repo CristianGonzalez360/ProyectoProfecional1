@@ -3,12 +3,14 @@ package services;
 import java.util.LinkedList;
 import java.util.List;
 
+import dto.ClienteDTO;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.TurnoDTO;
 import dto.UsuarioDTO;
+import dto.VehiculoConOrdenDeTrabajoDTO;
 
 public class DatabaseGraph {
 
@@ -24,12 +26,18 @@ public class DatabaseGraph {
 	
 	private List<OrdenDeTrabajoDTO> ordenesDeTrabajo;
 	
+	private List<VehiculoConOrdenDeTrabajoDTO> vehiculosConOrdenDeTrabajo;
+	
+	private List<ClienteDTO> clientes;
+	
 	public DatabaseGraph() {
 		cuentas = new LinkedList<>();
 		datosPersonales = new LinkedList<>();
 		usuarios = new LinkedList<>();
 		turnos = new LinkedList<>();
 		ordenesDeTrabajo = new LinkedList<>();
+		vehiculosConOrdenDeTrabajo = new LinkedList<>();
+		clientes = new LinkedList<>();
 	}
 
 	public List<CuentaDTO> getCuentas() {
@@ -78,5 +86,21 @@ public class DatabaseGraph {
 
 	public void setOrdenesDeTrabajo(List<OrdenDeTrabajoDTO> ordenesDeTrabajo) {
 		this.ordenesDeTrabajo = ordenesDeTrabajo;
-	}	
+	}
+
+	public List<VehiculoConOrdenDeTrabajoDTO> getVehiculosConOrdenDeTrabajo() {
+		return vehiculosConOrdenDeTrabajo;
+	}
+
+	public void setVehiculosConOrdenDeTrabajo(List<VehiculoConOrdenDeTrabajoDTO> vehiculosConOrdenDeTrabajo) {
+		this.vehiculosConOrdenDeTrabajo = vehiculosConOrdenDeTrabajo;
+	}
+
+	public List<ClienteDTO> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<ClienteDTO> clientes) {
+		this.clientes = clientes;
+	}
 }

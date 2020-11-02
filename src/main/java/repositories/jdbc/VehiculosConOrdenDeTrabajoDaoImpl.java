@@ -9,7 +9,7 @@ import repositories.jdbc.utils.Mapper;
 
 public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoConOrdenDeTrabajoDTO> implements VehiculosConOrdenDeTrabajoDao {
 
-	private static final String insert = "INSERT INTO VehiculoConOrdenesDeTrabajo (idFichaTecnicaVehiculo,idCliente,kilometrajeGarantia,aseguradora,nroPolizaSeguro,patente) VALUES (?,?,?,?,?,?)";
+	private static final String insert = "INSERT INTO VehiculoConOrdenesDeTrabajo (idFichaTecnicaVehiculo,idCliente,kilometrajeGarantia,aseguradora,nroPolizaSeguro,patenteVehiculo) VALUES (?,?,?,?,?,?)";
 	
 	private static final String readAll = "SELECT * FROM VehiculoConOrdenesDeTrabajo";
 		

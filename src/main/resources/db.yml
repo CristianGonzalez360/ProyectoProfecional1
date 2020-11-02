@@ -105,6 +105,40 @@ fichaTecnicaVehiculos:
     combustion: nafta
     descripcion: funciona ok
 
+clientes:
+  - idDatosPersonales: 1 
+    fechaAltaCliente: 2020-10-25
+  - idDatosPersonales: 2 
+    fechaAltaCliente: 2020-10-25
+  - idDatosPersonales: 3 
+    fechaAltaCliente: 2020-10-25
+
+vehiculosConOrdenDeTrabajo:
+  - idFichaTecnica: 1
+    idCliente: 1
+    kilometrajeGarantia: 123
+    aseguradora: la nueva
+    nroPolizaSeguro: 4234
+    patente: 6664
+  - idFichaTecnica: 1
+    idCliente: 2
+    kilometrajeGarantia: 123
+    aseguradora: la nueva
+    nroPolizaSeguro: 4234
+    patente: 6662
+  - idFichaTecnica: 2
+    idCliente: 2
+    kilometrajeGarantia: 123
+    aseguradora: la nueva
+    nroPolizaSeguro: 4234
+    patente: 6661
+  - idFichaTecnica: 2
+    idCliente: 3
+    kilometrajeGarantia: 123
+    aseguradora: la nueva
+    nroPolizaSeguro: 4234
+    patente: 66611
+
 ordenesDeTrabajo:
   - tipoOrdeTrabajo: service
     idUsuarioAlta: 1

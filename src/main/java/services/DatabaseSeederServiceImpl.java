@@ -5,12 +5,14 @@ import org.apache.log4j.LogManager;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
+import dto.ClienteDTO;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.TurnoDTO;
 import dto.UsuarioDTO;
+import dto.VehiculoConOrdenDeTrabajoDTO;
 import repositories.DaosFactory;
 import javax.inject.Inject;
 import java.io.InputStream;
@@ -49,6 +51,14 @@ public class DatabaseSeederServiceImpl {
 		}
 		for(OrdenDeTrabajoDTO target : graph.getOrdenesDeTrabajo()) {
 			daos.makeOrdenDeTrabajoDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for(ClienteDTO target : graph.getClientes()) {
+			daos.makeClienteDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for(VehiculoConOrdenDeTrabajoDTO target : graph.getVehiculosConOrdenDeTrabajo()) {
+			daos.makeVehiculoConOrdeDeTrabajoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 	}
