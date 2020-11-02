@@ -7,6 +7,7 @@ import org.yaml.snakeyaml.constructor.Constructor;
 
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
+import dto.TurnoDTO;
 import dto.UsuarioDTO;
 import repositories.DaosFactory;
 import javax.inject.Inject;
@@ -34,6 +35,10 @@ public class DatabaseSeederServiceImpl {
 		}
 		for(UsuarioDTO target: graph.getUsuarios()) {
 			daos.makeUsuariosDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for(TurnoDTO target: graph.getTurnos()) {
+			daos.makeTurnosDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 	}

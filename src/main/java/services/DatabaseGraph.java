@@ -5,6 +5,7 @@ import java.util.List;
 
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
+import dto.TurnoDTO;
 import dto.UsuarioDTO;
 
 public class DatabaseGraph {
@@ -15,10 +16,13 @@ public class DatabaseGraph {
 	
 	private List<UsuarioDTO> usuarios;
 	
+	private List<TurnoDTO> turnos;
+	
 	public DatabaseGraph() {
 		cuentas = new LinkedList<>();
 		datosPersonales = new LinkedList<>();
 		usuarios = new LinkedList<>();
+		turnos = new LinkedList<>();
 	}
 
 	public List<CuentaDTO> getCuentas() {
@@ -44,5 +48,12 @@ public class DatabaseGraph {
 	public void setUsuarios(List<UsuarioDTO> usuarios) {
 		this.usuarios = usuarios;
 	}
-	
+
+	public List<TurnoDTO> getTurnos() {
+		return turnos;
+	}
+
+	public void setTurnos(List<TurnoDTO> turnos) {
+		this.turnos = turnos;
+	}	
 }
