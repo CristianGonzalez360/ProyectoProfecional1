@@ -20,6 +20,7 @@ CREATE TABLE DatosPersonales (
     email VARCHAR(25),
     calle VARCHAR(25),
     altura INT,
+    piso INT,
     dpto VARCHAR(4),
     localidad VARCHAR(25),
     PRIMARY KEY (idDatosPersonales)
