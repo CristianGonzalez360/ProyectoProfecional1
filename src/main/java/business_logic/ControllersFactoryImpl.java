@@ -13,6 +13,8 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	
 	private TurnosController turnosController;
 	
+	private ClientesController clientesController;
+
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
 	}
@@ -36,5 +38,12 @@ public class ControllersFactoryImpl extends ControllersFactory {
 		if(turnosController == null)
 			turnosController = new TurnosController(daos.makeTurnosDao());
 		return turnosController;
+	}
+	
+	@Override
+	public ClientesController makeClientesController() {
+		if(clientesController == null)
+			clientesController = new ClientesControllerImp(daos.makeClienteDao());
+		return clientesController;
 	}
 }
