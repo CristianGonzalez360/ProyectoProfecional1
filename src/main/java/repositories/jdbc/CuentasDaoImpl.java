@@ -25,8 +25,8 @@ public class CuentasDaoImpl extends GenericJdbcDao<CuentaDTO> implements Cuentas
 	public boolean insert(CuentaDTO entity) {
 		return getTemplate()
 				.query(insert)
-				.param(entity.getFechaDeAlta())
-				.param(entity.getFechaDeBaja()  == null ? new NullObject() : entity.getFechaDeBaja())
+				.param(entity.getFechaDeAlta() == null ? new NullObject() : entity.getFechaDeAlta())
+				.param(entity.getFechaDeBaja() == null ? new NullObject() : entity.getFechaDeBaja())
 				.param(entity.getNombreUsuario())
 				.param(entity.getPassword())
 				.param(entity.getRole())
@@ -70,8 +70,8 @@ public class CuentasDaoImpl extends GenericJdbcDao<CuentaDTO> implements Cuentas
 			public CuentaDTO map(Object[] obj) {
 				CuentaDTO ret = new CuentaDTO();
 				ret.setIdCuenta((Integer) obj[0]);
-				ret.setFechaDeAlta((Date) obj[1]);
-				ret.setFechaDeBaja((Date) obj[2]);
+				ret.setFechaDeAlta(obj[1] == null ? null : (Date) obj[1]);
+				ret.setFechaDeBaja(obj[2] == null ? null : (Date) obj[2]);
 				ret.setNombreUsuario((String) obj[3]);
 				ret.setPassword((String) obj[4]);
 				ret.setRole((String) obj[5]);

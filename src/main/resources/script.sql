@@ -66,7 +66,6 @@ CREATE TABLE FichaTecnicaVehiculo (
    color VARCHAR (15),
    combustion VARCHAR (15),
    descripcion VARCHAR (60),
-   fechaVencimientoVTV DATE,
    PRIMARY KEY (idFichaTecnicaVehiculo)
 );
 
