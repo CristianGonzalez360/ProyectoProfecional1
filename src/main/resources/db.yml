@@ -79,7 +79,7 @@ turnos:
     fechaProgramada: 2020-10-25
     nombreCliente: u0010
     
-fichaTecnicaVehiculo:
+fichaTecnicaVehiculos:
   - nroChasis: 3123
     nroMotor: 22551
     kilometraje: 22222
@@ -88,33 +88,11 @@ fichaTecnicaVehiculo:
     color: rojo
     combustion: gas/nafta
     descripcion: calienta mucho
-    fechaVencimientoVTV: 2021-03-20
   - nroChasis: 3125
-    nroMotor: 22551
+    nroMotor: 22552
     kilometraje: 22122
     marca: ford
     modelo: 1999
     color: negro
     combustion: nafta
     descripcion: funciona ok
-    fechaVencimientoVTV: 2021-03-23
-    
-clientes:
-  - idDatosPersonales: 3
-    fechaDeAlta: 2021-03-23
-  - idDatosPersonales: 4
-    fechaDeAlta: 2021-03-21
-     
-vehiculosConOrdenDeTrabajo:
-  - idFichaTecnica: 
-    idCliente: 1
-    kilometrajeGarantia: 120
-    aseguradora: Seguros 001
-    nroPolizaSeguro: 20103003
-    patente: CBA - 1312
-  - idFichaTecnica: 2 
-    idCliente: 2
-    kilometrajeGarantia: 132
-    aseguradora: Seguros 002
-    nroPolizaSeguro: 20103022
-    patente: CAB-123
