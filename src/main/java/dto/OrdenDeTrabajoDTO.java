@@ -8,7 +8,7 @@ public class OrdenDeTrabajoDTO {
 	
 	private String tipoOrdeTrabajo;
 	
-	private UsuarioDTO idUsuarioAlta;
+	private Integer idUsuarioAlta;
 	
 	private	Date fechaDeAlta;
 	
@@ -16,7 +16,7 @@ public class OrdenDeTrabajoDTO {
 	
 	private String trabajoSujerido;
 	
-	private VehiculoConOrdenDeTrabajoDTO vehiculo;
+	private Integer idVehiculoOt;
 
 	private Date fechaEntregado;
 
@@ -40,11 +40,11 @@ public class OrdenDeTrabajoDTO {
 		this.tipoOrdeTrabajo = tipoOrdeTrabajo;
 	}
 
-	public UsuarioDTO getIdUsuarioAlta() {
+	public Integer getIdUsuarioAlta() {
 		return idUsuarioAlta;
 	}
 
-	public void setIdUsuarioAlta(UsuarioDTO idUsuarioAlta) {
+	public void setIdUsuarioAlta(Integer idUsuarioAlta) {
 		this.idUsuarioAlta = idUsuarioAlta;
 	}
 
@@ -72,10 +72,6 @@ public class OrdenDeTrabajoDTO {
 		this.trabajoSujerido = trabajoSujerido;
 	}
 
-	public VehiculoConOrdenDeTrabajoDTO getIdVehiculoConOrdenTrabajo() {
-		return vehiculo;
-	}
-
 	public void setFechaEntregado(Date fecha) {
 		this.fechaEntregado = fecha;
 	}	
@@ -84,15 +80,20 @@ public class OrdenDeTrabajoDTO {
 		return this.fechaEntregado;
 	}
 
-	public void setVehiculo(VehiculoConOrdenDeTrabajoDTO vehiculo) {
-		this.vehiculo = vehiculo;
+	public Integer getIdVehiculoOt() {
+		return idVehiculoOt;
 	}
-	
+
+	public void setIdVehiculoOt(Integer idVehiculoOt) {
+		this.idVehiculoOt = idVehiculoOt;
+	}
+
 	@Override
 	public String toString() {
 		return "OrdenDeTrabajoDTO [idOrdenTrabajo=" + idOrdenTrabajo + ", tipoOrdeTrabajo=" + tipoOrdeTrabajo
 				+ ", idUsuarioAlta=" + idUsuarioAlta + ", fechaDeAlta=" + fechaDeAlta + ", trabajoSolicitado="
-				+ trabajoSolicitado + ", trabajoSujerido=" + trabajoSujerido + ", idVehiculoConOrdenTrabajo="
-				+ vehiculo + "]";
+				+ trabajoSolicitado + ", trabajoSujerido=" + trabajoSujerido + ", idVehiculoOt=" + idVehiculoOt
+				+ ", fechaEntregado=" + fechaEntregado + "]";
 	}
+	
 }

@@ -83,17 +83,10 @@ CREATE TABLE VehiculoConOrdenesDeTrabajo (
    FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente)
 );
 
-DROP TABLE TipoTrabajo IF EXISTS;
-CREATE TABLE TipoTrabajo (
-  idTipoTrabajo INT NOT NULL AUTO_INCREMENT,
-  descripcionTrabajo VARCHAR(10) UNIQUE,
-  PRIMARY KEY (idTipoTrabajo)
-);
-
 DROP TABLE OrdenesDeTrabajo IF EXISTS;
 CREATE TABLE OrdenesDeTrabajo (
   idOT INT NOT NULL AUTO_INCREMENT,
-  idTipoOt INT NOT NULL,
+  tipoTrabajo VARCHAR(20) NOT NULL,
   idUsuAlta INT NOT NULL,
   idVehiculoOt INT NOT NULL,
   fechaAltaOt DATE,

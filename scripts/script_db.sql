@@ -88,7 +88,7 @@ CREATE TABLE TipoTrabajo (
 
 CREATE TABLE OrdenesDeTrabajo (
   idOT INT NOT NULL AUTO_INCREMENT,
-  idTipoOt INT NOT NULL,
+  tipoTrabajo VARCHAR(20) NOT NULL,
   idUsuAlta INT NOT NULL,
   idVehiculoOt INT NOT NULL,
   fechaAltaOt DATE,

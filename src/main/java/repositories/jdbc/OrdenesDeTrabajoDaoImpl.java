@@ -5,18 +5,15 @@ import java.util.Date;
 import java.util.List;
 
 import dto.OrdenDeTrabajoDTO;
-import dto.UsuarioDTO;
-import dto.VehiculoConOrdenDeTrabajoDTO;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.jdbc.utils.Mapper;
 
 public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> implements OrdenesDeTrabajoDao {
 
 	private static final String readAll = 
-			"SELECT idOT, TipoTrabajo.descripcionTrabajo, idUsuAlta, idVehiculoOt," + 
-			"fechaAltaOt, trabajoSolicitado, trabajoSujerido, fechaEntregadoVehiculo, idFichaTecnicaVehiculo, idCliente, kilometrajeGarantia, aseguradora, nroPolizaSeguro, patenteVehiculo," +
-			"FROM OrdenesDeTrabajo INNER JOIN TipoTrabajo ON OrdenesDeTrabajo.idTipoOt = TipoTrabajo.idTipoTrabajo\n" + 
-			"INNER JOIN VehiculoConOrdenesDeTrabajo ON OrdenesDeTrabajo.idVehiculoOt = VehiculoConOrdenesDeTrabajo.idVehiculoConOT";
+			"SELECT idOT, tipoTrabajo, idUsuAlta, idVehiculoOt," + 
+			"fechaAltaOt, trabajoSolicitado, trabajoSujerido, fechaEntregadoVehiculo " +
+			"FROM OrdenesDeTrabajo";
 	
 	private static final String insert = 
 			"INSERT INTO OrdenesDeTrabajo (idUsuAlta, idVehiculoOt, fechaAltaOt, trabajoSolicitado, trabajoSujerido, fechaEntregadoVehiculo) VALUES (?,?,?,?,?,?)";
@@ -34,8 +31,8 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 	public boolean insert(OrdenDeTrabajoDTO entity) {
 		return getTemplate()
 				.query(insert)
-				.param(entity.getIdUsuarioAlta().getId())
-				.param(entity.getIdVehiculoConOrdenTrabajo().getId())
+				.param(entity.getIdUsuarioAlta())
+				.param(entity.getIdVehiculoOt())
 				.param(entity.getFechaDeAlta())
 				.param(entity.getTrabajoSolicitado())
 				.param(entity.getTrabajoSujerido())
@@ -69,21 +66,12 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 				OrdenDeTrabajoDTO ot = new OrdenDeTrabajoDTO();
 				ot.setIdOrdenTrabajo((Integer)obj[0]);
 				ot.setTipoOrdeTrabajo((String)obj[1]);
-				UsuarioDTO usuarioAlta = new UsuarioDTO();
-				usuarioAlta.setId((Integer)obj[2]);
-				VehiculoConOrdenDeTrabajoDTO vehiculo = new VehiculoConOrdenDeTrabajoDTO();
-				vehiculo.setId((Integer)obj[3]);
+				ot.setIdUsuarioAlta((Integer)obj[2]);
+				ot.setIdVehiculoOt((Integer)obj[3]);
 				ot.setFechaDeAlta((Date)obj[4]);
 				ot.setTrabajoSolicitado((String)obj[5]);
 				ot.setTrabajoSujerido((String)obj[6]);
 				ot.setFechaEntregado(obj[7] == null ? null : (Date)obj[7]);
-				vehiculo.setIdFichaTecnica((Integer)obj[8]);
-				vehiculo.setIdCliente((Integer)obj[9]);
-				vehiculo.setKilometrajeGarantia((Integer)obj[10]);
-				vehiculo.setAseguradora((String)obj[11]);
-				vehiculo.setNroPolizaSeguro((Integer)obj[12]);
-				vehiculo.setPatente((String)obj[13]);
-				ot.setVehiculo(vehiculo);
 				return ot;
 			}
 		};
