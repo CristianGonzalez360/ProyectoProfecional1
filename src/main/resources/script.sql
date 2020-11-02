@@ -3,9 +3,10 @@ CREATE TABLE Cuentas (
    idCuenta int NOT NULL AUTO_INCREMENT,
    fechaAltaCuenta DATE,
    fechaBajaCuenta DATE,
-   nombreUsuCuenta VARCHAR(20) NOT NULL UNIQUE,
-   passUsuCuenta VARCHAR(20) NOT NULL UNIQUE,
-   rol VARCHAR(15) NOT NULL,
+   esActiva BOOLEAN,
+   nombreUsuCuenta VARCHAR(20),
+   passUsuCuenta VARCHAR(20),
+   rol VARCHAR(15),
    PRIMARY KEY (idCuenta)
 );
 
@@ -13,9 +14,9 @@ DROP TABLE DatosPersonales IF EXISTS;
 CREATE TABLE DatosPersonales (
     idDatosPersonales int NOT NULL AUTO_INCREMENT,
     nombreCompleto VARCHAR(60) NOT NULL,
-    dni INT NOT NULL UNIQUE,
-    telefono VARCHAR(15) NOT NULL UNIQUE,
-    email VARCHAR(25) NOT NULL UNIQUE,
+    dni INT,
+    telefono VARCHAR(15),
+    email VARCHAR(25),
     calle VARCHAR(25),
     altura INT,
     piso INT,
@@ -27,8 +28,8 @@ CREATE TABLE DatosPersonales (
 DROP TABLE Usuarios IF EXISTS;
 CREATE TABLE Usuarios (
     idUsuario INT NOT NULL AUTO_INCREMENT,
-    idCuenta INT UNIQUE,
-    idDatosPersonales INT UNIQUE,
+    idCuenta INT ,
+    idDatosPersonales INT,
     PRIMARY KEY (idUsuario),
     FOREIGN KEY (idCuenta) REFERENCES Cuentas (idCuenta),
     FOREIGN KEY (idDatosPersonales) REFERENCES DatosPersonales(idDatosPersonales)
@@ -83,6 +84,13 @@ CREATE TABLE VehiculoConOrdenesDeTrabajo (
    FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente)
 );
 
+DROP TABLE TipoTrabajo IF EXISTS;
+CREATE TABLE TipoTrabajo (
+  idTipoTrabajo INT NOT NULL AUTO_INCREMENT,
+  descripcionTrabajo VARCHAR(10) UNIQUE,
+  PRIMARY KEY (idTipoTrabajo)
+);
+
 DROP TABLE OrdenesDeTrabajo IF EXISTS;
 CREATE TABLE OrdenesDeTrabajo (
   idOT INT NOT NULL AUTO_INCREMENT,
@@ -94,7 +102,6 @@ CREATE TABLE OrdenesDeTrabajo (
   trabajoSujerido VARCHAR (60),
   fechaEntregadoVehiculo DATE,
   PRIMARY KEY (idOT),
-  FOREIGN KEY (idTipoOt) REFERENCES TipoTrabajo (idTipoTrabajo),
   FOREIGN KEY (idUsuAlta) REFERENCES Usuarios (idUsuario),
   FOREIGN KEY (idVehiculoOt) REFERENCES FichaTecnicaVehiculo (idFichaTecnicaVehiculo)
 );

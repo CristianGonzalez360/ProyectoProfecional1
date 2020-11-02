@@ -7,6 +7,7 @@ import java.util.List;
 import dto.OrdenDeTrabajoDTO;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.jdbc.utils.Mapper;
+import repositories.jdbc.utils.NullObject;
 
 public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> implements OrdenesDeTrabajoDao {
 
@@ -16,7 +17,7 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 			"FROM OrdenesDeTrabajo";
 	
 	private static final String insert = 
-			"INSERT INTO OrdenesDeTrabajo (idUsuAlta, idVehiculoOt, fechaAltaOt, trabajoSolicitado, trabajoSujerido, fechaEntregadoVehiculo) VALUES (?,?,?,?,?,?)";
+			"INSERT INTO OrdenesDeTrabajo (tipoTrabajo, idUsuAlta, idVehiculoOt, fechaAltaOt, trabajoSolicitado, trabajoSujerido, fechaEntregadoVehiculo) VALUES (?,?,?,?,?,?,?)";
 	
 	public OrdenesDeTrabajoDaoImpl(Connection connection) {
 		super(connection);
@@ -31,12 +32,13 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 	public boolean insert(OrdenDeTrabajoDTO entity) {
 		return getTemplate()
 				.query(insert)
+				.param(entity.getTipoOrdeTrabajo())
 				.param(entity.getIdUsuarioAlta())
 				.param(entity.getIdVehiculoOt())
 				.param(entity.getFechaDeAlta())
 				.param(entity.getTrabajoSolicitado())
 				.param(entity.getTrabajoSujerido())
-				.param(entity.getFechaEntregado())
+				.param(entity.getFechaEntregado() == null ? new NullObject() : entity.getFechaEntregado())
 				.excecute();
 	}
 

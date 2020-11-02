@@ -29,6 +29,7 @@ public class DatabaseGraph {
 		datosPersonales = new LinkedList<>();
 		usuarios = new LinkedList<>();
 		turnos = new LinkedList<>();
+		ordenesDeTrabajo = new LinkedList<>();
 	}
 
 	public List<CuentaDTO> getCuentas() {

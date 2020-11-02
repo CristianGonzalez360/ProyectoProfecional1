@@ -95,4 +95,32 @@ fichaTecnicaVehiculos:
     modelo: 1999
     color: negro
     combustion: nafta
-    descripcion: funciona ok    
+    descripcion: funciona ok
+  - nroChasis: 31258
+    nroMotor: 225528
+    kilometraje: 221
+    marca: ford
+    modelo: 1979
+    color: negro
+    combustion: nafta
+    descripcion: funciona ok
+
+ordenesDeTrabajo:
+  - tipoOrdeTrabajo: service
+    idUsuarioAlta: 1
+    fechaDeAlta: 2020-10-10
+    trabajoSolicitado: tren delantero y chapa
+    trabajoSujerido: cambio de neumaticos delanteros
+    idVehiculoOt: 1
+  - tipoOrdeTrabajo: taller
+    idUsuarioAlta: 1
+    fechaDeAlta: 2020-10-11
+    trabajoSolicitado: electricidad
+    trabajoSujerido: cambio de caja de transmision
+    idVehiculoOt: 2
+  - tipoOrdeTrabajo: taller
+    idUsuarioAlta: 1
+    fechaDeAlta: 2020-02-10
+    trabajoSolicitado: cambio de cremallera
+    trabajoSujerido: cambio el auto
+    idVehiculoOt: 3

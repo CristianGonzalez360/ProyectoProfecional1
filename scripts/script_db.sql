@@ -96,7 +96,6 @@ CREATE TABLE OrdenesDeTrabajo (
   trabajoSujerido VARCHAR (60),
   fechaEntregadoVehiculo DATE,
   PRIMARY KEY (idOT),
-  FOREIGN KEY (idTipoOt) REFERENCES TipoTrabajo (idTipoTrabajo),
   FOREIGN KEY (idUsuAlta) REFERENCES Usuarios (idUsuario),
   FOREIGN KEY (idVehiculoOt) REFERENCES FichaTecnicaVehiculo (idFichaTecnicaVehiculo)
 );
