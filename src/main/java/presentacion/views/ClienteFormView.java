@@ -1,14 +1,20 @@
 package presentacion.views;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import dto.ClienteDTO;
+import dto.DatosPersonalesDTO;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
 
 public class ClienteFormView extends JDialog {
 
@@ -23,8 +29,11 @@ public class ClienteFormView extends JDialog {
 	private JTextField textEmail;
 	private JTextField textAltura;
 	private JTextField textLocalidad;
+	
+	private static ClienteFormView instance;
+	private JButton btnSalvar;
 
-	public ClienteFormView() {
+	private ClienteFormView() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -112,11 +121,11 @@ public class ClienteFormView extends JDialog {
 		contentPanel.add(textLocalidad);
 		textLocalidad.setColumns(10);
 		
-		JButton btnRegistrar = new JButton("Registrar");
+		JButton btnRegistrar = new JButton("Registrar vehículo");
 		btnRegistrar.setBounds(41, 194, 89, 23);
 		contentPanel.add(btnRegistrar);
 		
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
 		btnSalvar.setBounds(171, 194, 89, 23);
 		contentPanel.add(btnSalvar);
 		
@@ -139,5 +148,37 @@ public class ClienteFormView extends JDialog {
 //				buttonPane.add(cancelButton);
 //			}
 //		}
+	}
+	
+	public static ClienteFormView getInstance() {
+		if(instance == null) {
+			instance = new ClienteFormView();
+		}
+		return instance;
+	}
+	
+	public ClienteDTO getData() {
+		ClienteDTO ret = new ClienteDTO();
+		ret.setFechaAltaCliente(new Date());
+		DatosPersonalesDTO datosPersonales = new DatosPersonalesDTO();
+		datosPersonales.setNombreCompleto(textNombre.getText());
+		datosPersonales.setDni(Integer.parseInt(textDni.getText()));
+		datosPersonales.setEmail(textEmail.getText());
+		datosPersonales.setTelefono(textTelefono.getText());
+		datosPersonales.setCalle(textCalle.getText());
+		datosPersonales.setAltura(Integer.parseInt(textAltura.getText()));
+		datosPersonales.setPiso(Integer.parseInt(textPiso.getText()));
+		datosPersonales.setDpto(textDepto.getText());
+		datosPersonales.setLocalidad(textLocalidad.getText());
+		ret.setDatosPersonalesDTO(datosPersonales);
+		return ret;
+	}
+	
+	public void setData(ClienteDTO cliente) {
+		
+	}
+	
+	public void setActionOnSave(ActionListener listener) {
+		this.btnSalvar.addActionListener(listener);
 	}
 }

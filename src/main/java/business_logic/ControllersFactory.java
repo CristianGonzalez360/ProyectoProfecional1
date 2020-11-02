@@ -18,6 +18,9 @@ public abstract class ControllersFactory {
 	public abstract PaisController makePaisController();
 
 	public abstract LoginController makeLoginController();
-	
+
 	public abstract TurnosController makeTurnosController();
+
+	public abstract ClientesController makeClientesController();
+
 }

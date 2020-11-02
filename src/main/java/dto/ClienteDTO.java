@@ -3,38 +3,32 @@ package dto;
 import java.util.Date;
 
 public class ClienteDTO {
-	
-	private Integer idCliente;
-	
-	private Date fechaDeAlta;
-	
-	private DatosPersonalesDTO datosPersonales;
 
+	private int idCliente;
+	private DatosPersonalesDTO datosPersonalesDTO;
+	private Date fechaAltaCliente;
+	
 	public ClienteDTO() {
-		
+
 	}
 	
-	public Integer getIdCliente() {
+	public int getIdCliente() {
 		return idCliente;
 	}
-
-	public void setIdCliente(Integer idCliente) {
+	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
-
-	public Date getFechaDeAlta() {
-		return fechaDeAlta;
+	public DatosPersonalesDTO getDatosPersonalesDTO() {
+		return datosPersonalesDTO;
 	}
-
-	public void setFechaDeAlta(Date fechaDeAlta) {
-		this.fechaDeAlta = fechaDeAlta;
+	public void setDatosPersonalesDTO(DatosPersonalesDTO datosPersonalesDTO) {
+		this.datosPersonalesDTO = datosPersonalesDTO;
 	}
-
-	public DatosPersonalesDTO getDatosPersonales() {
-		return datosPersonales;
+	public Date getFechaAltaCliente() {
+		return fechaAltaCliente;
 	}
-
-	public void setDatosPersonales(DatosPersonalesDTO datosPersonales) {
-		this.datosPersonales = datosPersonales;
+	public void setFechaAltaCliente(Date fechaAltaCliente) {
+		this.fechaAltaCliente = fechaAltaCliente;
 	}
+	
 }
