@@ -28,6 +28,24 @@ datosPersonales:
     piso: 1
     dpto: A1
     localidad: localidad1
+  - nombreCompleto: c001
+    dni: 111122
+    telefono: 321111
+    email: c001@mail.com
+    calle: calle1
+    altura: 11
+    piso: 12
+    dpto: A3
+    localidad: localidad3
+  - nombreCompleto: c002
+    dni: 11166
+    telefono: 611611
+    email: c002@mail.com
+    calle: calle111
+    altura: 166
+    piso: 11
+    dpto: B1
+    localidad: localidad1
     
 usuarios:
   - cuenta:
@@ -60,3 +78,43 @@ turnos:
     fechaAlta: 2020-10-10
     fechaProgramada: 2020-10-25
     nombreCliente: u0010
+    
+fichaTecnicaVehiculo:
+  - nroChasis: 3123
+    nroMotor: 22551
+    kilometraje: 22222
+    marca: suzuki
+    modelo: 1993
+    color: rojo
+    combustion: gas/nafta
+    descripcion: calienta mucho
+    fechaVencimientoVTV: 2021-03-20
+  - nroChasis: 3125
+    nroMotor: 22551
+    kilometraje: 22122
+    marca: ford
+    modelo: 1999
+    color: negro
+    combustion: nafta
+    descripcion: funciona ok
+    fechaVencimientoVTV: 2021-03-23
+    
+clientes:
+  - idDatosPersonales: 3
+    fechaDeAlta: 2021-03-23
+  - idDatosPersonales: 4
+    fechaDeAlta: 2021-03-21
+     
+vehiculosConOrdenDeTrabajo:
+  - idFichaTecnica: 
+    idCliente: 1
+    kilometrajeGarantia: 120
+    aseguradora: Seguros 001
+    nroPolizaSeguro: 20103003
+    patente: CBA - 1312
+  - idFichaTecnica: 2 
+    idCliente: 2
+    kilometrajeGarantia: 132
+    aseguradora: Seguros 002
+    nroPolizaSeguro: 20103022
+    patente: CAB-123
