@@ -46,9 +46,10 @@ CREATE TABLE Turnos (
    idTurno INT NOT NULL AUTO_INCREMENT,
    idCliente INT,
    fechaCanceladoTurno DATE,
-   fechaAltaTurno DATE,
-   fechProgramadaTurno DATE,
-   nombreCliente VARCHAR (40),
+   fechaAltaTurno DATE NOT NULL,
+   fechProgramadaTurno DATE NOT NULL,
+   nombreCliente VARCHAR (40) NOT NULL,
+   dniCliente INT NOT NULL,
    PRIMARY KEY (idTurno)
 );
 

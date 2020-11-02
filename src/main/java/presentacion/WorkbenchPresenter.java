@@ -49,7 +49,7 @@ public class WorkbenchPresenter implements Presenter {
 					TecnicoControlView.getInstance().display();
 				}
 				if(session.getRole().equals("supervisor")) {
-					SupervisorControlView.getInstance().clearData();
+					SupervisorControlView.getInstance().clearTurnos();
 					SupervisorControlView.getInstance().display();				
 				}
 				workbenchView.disableLoginButton();
@@ -73,7 +73,7 @@ public class WorkbenchPresenter implements Presenter {
 		loginController.logout();
 		TecnicoControlView.getInstance().clearData();
 		TecnicoControlView.getInstance().close();
-		SupervisorControlView.getInstance().clearData();
+		SupervisorControlView.getInstance().clearTurnos();
 		SupervisorControlView.getInstance().close();
 		workbenchView.enableLoginButton();
 	}
