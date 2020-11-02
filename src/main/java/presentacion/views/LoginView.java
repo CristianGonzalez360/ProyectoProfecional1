@@ -70,6 +70,7 @@ public class LoginView extends JDialog {
 		cancelButton = new JButton("Cancel");
 		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
+		setModal(true);
 	}
 
 	public static LoginView getInstance() {

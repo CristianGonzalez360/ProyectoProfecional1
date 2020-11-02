@@ -29,8 +29,6 @@ public class WorkbenchView {
 
 	private JDesktopPane desktopPane;
 
-	private JMenuItem mntmSeedDb;
-
 	private JMenuItem mntmItemLogin;
 
 	private JMenuItem mntmNewMenuItem;
@@ -89,14 +87,7 @@ public class WorkbenchView {
 		mntmItemSalir = new JMenuItem("Salir");
 		mnNewMenu.add(mntmItemSalir);
 
-		mntmSeedDb = new JMenuItem("SeedDB");
-		mnNewMenu.add(mntmSeedDb);
-
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	}
-
-	public JMenuItem getMntmSeedDb() {
-		return this.mntmSeedDb;
 	}
 
 	public void open() {

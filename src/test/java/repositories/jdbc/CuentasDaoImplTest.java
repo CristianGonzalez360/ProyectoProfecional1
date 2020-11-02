@@ -30,6 +30,9 @@ class CuentasDaoImplTest {
 	@Test
 	void testInsert() {
 		CuentaDTO target = makeCuentaDto();
+		target.setIdCuenta(null);
+		target.setNombreUsuario("u005");
+		target.setPassword("pu005");
 		Assertions.assertTrue(dao.insert(target));
 	}
 	
