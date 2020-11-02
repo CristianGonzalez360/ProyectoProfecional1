@@ -112,7 +112,7 @@ public class ClienteFormView extends JDialog {
 		contentPanel.add(textLocalidad);
 		textLocalidad.setColumns(10);
 		
-		JButton btnRegistrar = new JButton("Registrar");
+		JButton btnRegistrar = new JButton("Registrar vehículo");
 		btnRegistrar.setBounds(41, 194, 89, 23);
 		contentPanel.add(btnRegistrar);
 		
