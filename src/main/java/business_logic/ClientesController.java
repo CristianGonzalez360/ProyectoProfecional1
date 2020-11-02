@@ -1,5 +1,7 @@
 package business_logic;
 
-public class ClientesController {
+import dto.ClienteDTO;
+
+public interface ClientesController extends Controller<ClienteDTO, Integer>{
 
 }
