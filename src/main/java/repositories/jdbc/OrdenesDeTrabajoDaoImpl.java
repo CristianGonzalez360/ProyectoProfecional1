@@ -18,6 +18,9 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 			"FROM OrdenesDeTrabajo INNER JOIN TipoTrabajo ON OrdenesDeTrabajo.idTipoOt = TipoTrabajo.idTipoTrabajo\n" + 
 			"INNER JOIN VehiculoConOrdenesDeTrabajo ON OrdenesDeTrabajo.idVehiculoOt = VehiculoConOrdenesDeTrabajo.idVehiculoConOT";
 	
+	private static final String insert = 
+			"INSERT INTO OrdenesDeTrabajo (idUsuAlta, idVehiculoOt, fechaAltaOt, trabajoSolicitado, trabajoSujerido, fechaEntregadoVehiculo) VALUES (?,?,?,?,?,?)";
+	
 	public OrdenesDeTrabajoDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -29,8 +32,15 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 
 	@Override
 	public boolean insert(OrdenDeTrabajoDTO entity) {
-		// TODO Auto-generated method stub
-		return false;
+		return getTemplate()
+				.query(insert)
+				.param(entity.getIdUsuarioAlta().getId())
+				.param(entity.getIdVehiculoConOrdenTrabajo().getId())
+				.param(entity.getFechaDeAlta())
+				.param(entity.getTrabajoSolicitado())
+				.param(entity.getTrabajoSujerido())
+				.param(entity.getFechaEntregado())
+				.excecute();
 	}
 
 	@Override

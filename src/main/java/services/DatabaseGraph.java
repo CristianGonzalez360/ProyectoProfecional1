@@ -6,6 +6,7 @@ import java.util.List;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
 import dto.FichaTecnicaVehiculoDTO;
+import dto.OrdenDeTrabajoDTO;
 import dto.TurnoDTO;
 import dto.UsuarioDTO;
 
@@ -20,6 +21,8 @@ public class DatabaseGraph {
 	private List<TurnoDTO> turnos;
 	
 	private List<FichaTecnicaVehiculoDTO> fichaTecnicaVehiculos;
+	
+	private List<OrdenDeTrabajoDTO> ordenesDeTrabajo;
 	
 	public DatabaseGraph() {
 		cuentas = new LinkedList<>();
@@ -66,7 +69,13 @@ public class DatabaseGraph {
 
 	public void setFichaTecnicaVehiculos(List<FichaTecnicaVehiculoDTO> fichaTecnicaVehiculos) {
 		this.fichaTecnicaVehiculos = fichaTecnicaVehiculos;
+	}
+
+	public List<OrdenDeTrabajoDTO> getOrdenesDeTrabajo() {
+		return ordenesDeTrabajo;
+	}
+
+	public void setOrdenesDeTrabajo(List<OrdenDeTrabajoDTO> ordenesDeTrabajo) {
+		this.ordenesDeTrabajo = ordenesDeTrabajo;
 	}	
-	
-	
 }

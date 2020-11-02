@@ -8,6 +8,7 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
 import dto.FichaTecnicaVehiculoDTO;
+import dto.OrdenDeTrabajoDTO;
 import dto.TurnoDTO;
 import dto.UsuarioDTO;
 import repositories.DaosFactory;
@@ -44,6 +45,10 @@ public class DatabaseSeederServiceImpl {
 		}
 		for(FichaTecnicaVehiculoDTO target: graph.getFichaTecnicaVehiculos()) {
 			daos.makeFichaTecnicaVehiculoDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for(OrdenDeTrabajoDTO target : graph.getOrdenesDeTrabajo()) {
+			daos.makeOrdenDeTrabajoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 	}

@@ -3,12 +3,11 @@
  */
 package repositories.jdbc;
 
-import dto.CuentaDTO;
 import repositories.CuentasDao;
 import repositories.DaosFactory;
 import repositories.DatosPersonalesDao;
 import repositories.FichaTecnicaVehiculoDao;
-import repositories.GenericDao;
+import repositories.OrdenesDeTrabajoDao;
 import repositories.PaisDao;
 import repositories.TurnosDao;
 import repositories.UsuariosDao;
@@ -29,6 +28,8 @@ public class DaosFactoryImpl extends DaosFactory {
 	private TurnosDao turnosDao;
 	
 	private FichaTecnicaVehiculoDao fichaTecnicaVehiculo;
+	
+	private OrdenesDeTrabajoDao ordenesDeTrabajoDao;
 	
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
@@ -76,5 +77,12 @@ public class DaosFactoryImpl extends DaosFactory {
 			this.fichaTecnicaVehiculo = new FichaTecnicaVehiculoDaoImpl(ds.getConnection());
 		}
 		return fichaTecnicaVehiculo;
+	}
+
+	@Override
+	public OrdenesDeTrabajoDao makeOrdenDeTrabajoDao() {
+		if(ordenesDeTrabajoDao == null) 
+			ordenesDeTrabajoDao = new OrdenesDeTrabajoDaoImpl(ds.getConnection());
+		return ordenesDeTrabajoDao;
 	}
 }
