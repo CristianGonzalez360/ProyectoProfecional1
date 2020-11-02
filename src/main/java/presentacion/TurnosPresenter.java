@@ -7,6 +7,8 @@ import java.util.List;
 import business_logic.TurnosController;
 import dto.TurnoDTO;
 import presentacion.views.SupervisorControlView;
+import presentacion.views.TurnoFormView;
+import presentacion.views.utils.ConfirmationDialog;
 
 public class TurnosPresenter {
 
@@ -17,6 +19,17 @@ public class TurnosPresenter {
 	public TurnosPresenter(TurnosController controller) {
 		this.controller = controller;
 		supervisorView.setActionBuscar((a)->onBuscarTurnos(a));
+		supervisorView.setActionRegistrarTurno((a)->onDisplayTurnosFormView(a));
+		supervisorView.setActionCancelarTurno((a)->onCancelarTurno(a));
+	}
+	
+	private void onCancelarTurno(ActionEvent e) {
+		new ConfirmationDialog("¿Está seguro que desea cancelar el turno?").open();
+	}
+	
+	private void onDisplayTurnosFormView(ActionEvent e) {
+		TurnoFormView.getInstance().clearData();
+		TurnoFormView.getInstance().display();
 	}
 	
 	private void onBuscarTurnos(ActionEvent e) {

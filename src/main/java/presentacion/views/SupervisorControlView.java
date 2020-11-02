@@ -126,9 +126,8 @@ public class SupervisorControlView extends JInternalFrame {
 	}
 
 	public void setTurnos(List<TurnoDTO> turnos) {
-		clearTurnos();
 		for (TurnoDTO turno : turnos) {
-			Object[] row = { turno.getIdTurno().toString(), turno.getNombreCliente(), turno.getFechaAlta().toString(), turno.getFechaProgramada().toString() };
+			Object[] row = { turno.getIdTurno().toString(), turno.getNombreCliente(), turno.getDniCliente(), turno.getFechaAlta().toString(), turno.getFechaProgramada().toString() };
 			tableModelTurnos.addRow(row);
 		}
 	}
@@ -172,7 +171,7 @@ public class SupervisorControlView extends JInternalFrame {
 	}
 	
 	public void setActionCancelarTurno(ActionListener listener) {
-		this.btnRegistrarTurno.addActionListener(listener);
+		this.btnCancelarTurno.addActionListener(listener);
 	}
 
 	public String getDniClienteBusquedaTurno() {

@@ -15,7 +15,7 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 	
 	private static final String readByDni = "SELECT * FROM Turnos WHERE Turnos.dniCliente = ?";
 
-	private static final String insert = "INSERT INTO Turnos (idCliente, fechaCanceladoTurno,fechaAltaTurno,fechaProgramadaTurno,nombreCliente,dniCliente) VALUES (?,?,?,?,?,?)";
+	private static final String insert = "INSERT INTO Turnos (idCliente, fechaCanceladoTurno,fechaAltaTurno,fechProgramadaTurno,nombreCliente,dniCliente) VALUES (?,?,?,?,?,?)";
 	
 	public TurnosDaoImpl(Connection connection) {
 		super(connection);
@@ -47,9 +47,9 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 	}
 
 	@Override
-	public TurnoDTO readByID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public TurnoDTO readByID(Integer dni) {
+		List<TurnoDTO> turnos = getTemplate().query(readByDni).param(dni).excecute(getMapper());
+		return turnos.isEmpty() ? null : turnos.get(0);
 	}
 
 	@Override
@@ -71,11 +71,12 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 			public TurnoDTO map(Object[] obj) {
 				TurnoDTO turno = new TurnoDTO();
 				turno.setIdTurno((Integer)obj[0]);
-				turno.setFechaCancelado((Date)obj[1]);
-				turno.setFechaAlta((Date)obj[2]);
-				turno.setFechaProgramada((Date)obj[3]);
-				turno.setNombreCliente((String)obj[4]);
-				turno.setDniCliente((Integer)obj[5]);
+				turno.setIdCliente((obj[1] != null ? (Integer) obj[1] : null));
+				turno.setFechaCancelado(obj[2] == null ? null : (Date) obj[2]);
+				turno.setFechaAlta((Date)obj[3]);
+				turno.setFechaProgramada((Date)obj[4]);
+				turno.setNombreCliente((String)obj[5]);
+				turno.setDniCliente((Integer)obj[6]);
 				return turno;
 			}			
 		};
