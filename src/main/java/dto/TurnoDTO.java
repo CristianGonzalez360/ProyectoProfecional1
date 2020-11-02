@@ -22,6 +22,16 @@ public class TurnoDTO {
 		
 	}
 	
+	public TurnoDTO makeTestDTO() {
+		TurnoDTO ret = new TurnoDTO();
+		ret.setIdCliente(2345333);
+		ret.setDniCliente(13231);
+		ret.setFechaAlta(new Date());
+		ret.setFechaProgramada(new Date());
+		ret.setNombreCliente("Susan Doe");
+		return ret;
+	}
+	
 	public Integer getIdTurno() {
 		return idTurno;
 	}

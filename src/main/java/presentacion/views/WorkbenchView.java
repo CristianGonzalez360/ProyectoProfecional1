@@ -133,4 +133,8 @@ public class WorkbenchView {
 	public void enableLoginButton() {
 		this.mntmItemLogin.setEnabled(true);
 	}
+
+	public void clearData() {
+		this.textSession.setText("");
+	}
 }
