@@ -4,6 +4,10 @@ import javax.swing.JInternalFrame;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
 import java.beans.PropertyVetoException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JFrame;
@@ -12,8 +16,13 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
+
+import dto.TurnoDTO;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,11 +31,21 @@ public class SupervisorControlView extends JInternalFrame {
 
 	private static final long serialVersionUID = 4306672868994985561L;
 
+	private static final String  [] COLUMNAS_TURNOS = new String [] {"NRO. TURNO", "NOMBRE CLIENTE", "DNI CLIENTE", "FECHA DE ALTA", "FECHA PROGRAMADA"};
+	
 	private static SupervisorControlView instance;
-	private JTextField textField;
+	
+	private JTextField textFieldTurno;
+	
 	private JTable table;
 	
 	private DefaultTableModel tableModelTurnos;
+
+	private JButton btnBuscar;
+
+	private JButton btnRegistrarTurno;
+
+	private JButton btnCancelarTurno;
 	
 	public static SupervisorControlView getInstance() {
 		if(instance == null) instance = new SupervisorControlView();
@@ -60,27 +79,27 @@ public class SupervisorControlView extends JInternalFrame {
 		JLabel lblNewLabel = new JLabel("DNI CLIENTE");
 		panel_1.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_1.add(textField);
-		textField.setColumns(20);
+		textFieldTurno = new JTextField("");
+		textFieldTurno.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(textFieldTurno);
+		textFieldTurno.setColumns(20);
 		
-		JButton btnNewButton = new JButton("buscar turnos");
-		panel_1.add(btnNewButton);
+		btnBuscar = new JButton("buscar turnos");
+		panel_1.add(btnBuscar);
 		
 		JPanel panel_2 = new JPanel();
 		turnosPanel.add(panel_2, BorderLayout.SOUTH);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		panel_2.add(btnNewButton_1);
+		btnRegistrarTurno = new JButton("Registrar turno");
+		panel_2.add(btnRegistrarTurno);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		panel_2.add(btnNewButton_2);
+		btnCancelarTurno = new JButton("Cancelar turno");
+		panel_2.add(btnCancelarTurno);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		turnosPanel.add(scrollPane, BorderLayout.CENTER);
 		
-		tableModelTurnos = new DefaultTableModel(null, new String [] {"NRO. TURNO", "NOMBRE CLIENTE", "DNI CLIENTE", "FECHA DE ALTA", "FECHA PROGRAMADA"});
+		tableModelTurnos = new DefaultTableModel(null, COLUMNAS_TURNOS);
 		table = new JTable(tableModelTurnos);
 		scrollPane.setViewportView(table);
 
@@ -106,8 +125,56 @@ public class SupervisorControlView extends JInternalFrame {
 		setVisible(false);
 	}
 
-	public void clearData() {
-		// TODO Auto-generated method stub
-		
+	public void setTurnos(List<TurnoDTO> turnos) {
+		for (TurnoDTO turno : turnos) {
+			Object[] row = { turno.getIdTurno().toString(), turno.getNombreCliente(), turno.getDniCliente(), turno.getFechaAlta().toString(), turno.getFechaProgramada().toString() };
+			tableModelTurnos.addRow(row);
+		}
+	}
+	
+	public TurnoDTO getSelectedTurno() {
+		int row = table.getSelectedRow();
+		if(table.getSelectedRowCount() == 1) {
+			TurnoDTO ret = new TurnoDTO();
+			ret.setIdTurno(Integer.parseInt(tableModelTurnos.getValueAt(row, 0).toString()));
+			ret.setNombreCliente(tableModelTurnos.getValueAt(row, 1).toString());
+			ret.setDniCliente(Integer.parseInt(tableModelTurnos.getValueAt(row, 2).toString()));
+			ret.setFechaAlta(parse(tableModelTurnos.getValueAt(row, 3).toString()));
+			ret.setFechaProgramada(parse(tableModelTurnos.getValueAt(row, 4).toString()));
+			return ret;
+		}
+		return null;
+	}
+	
+	private Date parse(String str) {
+		try {
+			return new SimpleDateFormat("yyyy-mm-dd").parse(str);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void clearTurnos() {
+		tableModelTurnos.setRowCount(0);
+		tableModelTurnos.setColumnCount(0);
+		tableModelTurnos.setColumnIdentifiers(COLUMNAS_TURNOS);
+	}
+	
+	public void setActionBuscar(ActionListener listener) {
+		this.btnBuscar.addActionListener(listener);
+	}
+	
+	public void setActionRegistrarTurno(ActionListener listener) {
+		this.btnRegistrarTurno.addActionListener(listener);
+	}
+	
+	public void setActionCancelarTurno(ActionListener listener) {
+		this.btnCancelarTurno.addActionListener(listener);
+	}
+
+	public String getDniClienteBusquedaTurno() {
+		return textFieldTurno.getText();
 	}
 }

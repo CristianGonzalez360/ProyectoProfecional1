@@ -11,6 +11,8 @@ public class ControllersFactoryImpl extends ControllersFactory {
 
 	private LoginController loginController;
 	
+	private TurnosController turnosController;
+	
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
 	}
@@ -27,5 +29,12 @@ public class ControllersFactoryImpl extends ControllersFactory {
 		if(loginController == null)
 			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance());
 		return loginController;
+	}
+
+	@Override
+	public TurnosController makeTurnosController() {
+		if(turnosController == null)
+			turnosController = new TurnosController(daos.makeTurnosDao());
+		return turnosController;
 	}
 }

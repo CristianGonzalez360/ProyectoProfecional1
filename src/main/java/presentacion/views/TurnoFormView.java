@@ -2,18 +2,28 @@ package presentacion.views;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import dto.TurnoDTO;
+
 @SuppressWarnings("serial")
 public class TurnoFormView extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
-	public TurnoFormView() {
+	private static TurnoFormView instance;
+	
+	public static TurnoFormView getInstance() {
+		if(instance == null) instance = new TurnoFormView();
+		return instance;
+	}
+	
+	private TurnoFormView() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
@@ -35,6 +45,26 @@ public class TurnoFormView extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		setModal(true);
 	}
 
+	public void display() {
+		this.setVisible(true);
+	}
+	
+	public TurnoDTO getData() {
+		return null;
+	}
+	
+	public void clearData() {
+		
+	}
+	
+	public void setActionSave(ActionListener listener) {
+		
+	}
+	
+	public void setActionCancel(ActionListener listener) {
+		
+	}
 }

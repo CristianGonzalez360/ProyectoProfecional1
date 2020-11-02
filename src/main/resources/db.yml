@@ -38,3 +38,25 @@ usuarios:
       idCuenta: 2
     datos:
       id: 2
+      
+turnos:
+  - idCliente: 1
+    dniCliente: 12333
+    fechaAlta: 2020-10-10
+    fechaProgramada: 2020-10-25
+    nombreCliente: u007
+  - idCliente: 12
+    dniCliente: 12333
+    fechaAlta: 2020-10-10
+    fechaProgramada: 2020-10-25
+    nombreCliente: u008
+  - idCliente: 3
+    dniCliente: 12333
+    fechaAlta: 2020-10-10
+    fechaProgramada: 2020-10-25
+    nombreCliente: u009
+  - idCliente: 5
+    dniCliente: 12333
+    fechaAlta: 2020-10-10
+    fechaProgramada: 2020-10-25
+    nombreCliente: u0010

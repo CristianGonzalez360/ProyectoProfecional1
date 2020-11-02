@@ -3,6 +3,7 @@ package presentacion.views;
 import presentacion.WorkbenchPresenter;
 import business_logic.ControllersFactory;
 import presentacion.PaisPresenter;
+import presentacion.TurnosPresenter;
 
 public class ViewsFactoryImpl extends ViewsFactory {
 
@@ -17,6 +18,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 	@Override
 	public Presenter makePresenter() {
 		new PaisPresenter(controllers.makePaisController());
+		new TurnosPresenter(controllers.makeTurnosController());
 		return new WorkbenchPresenter(controllers.makeLoginController());
 	}
 }
