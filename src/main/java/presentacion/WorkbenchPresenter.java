@@ -1,9 +1,8 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Date;
-import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import business_logic.LoginController;
 import business_logic.exceptions.ForbiddenException;
@@ -23,13 +22,10 @@ public class WorkbenchPresenter implements Presenter {
 	private LoginController loginController;
 	
 	public WorkbenchPresenter(LoginController loginController) {
-		WorkbenchView.getInstance().setActionOnLogin(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				LoginView.getInstance().onDisplay();
-			}
-		});
+		WorkbenchView.getInstance().setActionOnLogin((a)->onDisplayLoginView(a));
+		WorkbenchView.getInstance().setActionOnLogout((a)->onLogout(a));
 		LoginView.getInstance().setActionAceptar((a)->onLogin(a));
+		workbenchView.setActionOnSalir((a)->onSalir(a));
 		this.loginController = loginController;
 	}
 
@@ -38,17 +34,24 @@ public class WorkbenchPresenter implements Presenter {
 		workbenchView.open();
 	}
 	
+	private void onDisplayLoginView(ActionEvent e) {
+		LoginView.getInstance().display();
+	}
+	
 	private void onLogin(ActionEvent e) {
 		UserCrendentialsDTO credentials = LoginView.getInstance().getData();
 		if(credentials != null) {
 			try {
-				//SessionDTO session = loginController.logUser(credentials);
-				SessionDTO session = new SessionDTO().setInitSession(new Date()).setIdUsuario(1).setNombreUsuario("johndoe").setRole("tecnico");
+				SessionDTO session = loginController.logUser(credentials);
 				workbenchView.setData(session.getInitSession().toString() + " " + session.getNombreUsuario());
-				
-				if(session.getRole().equals("tecnico")) TecnicoControlView.getInstance().display();
-				if(session.getRole().equals("supervisor")) SupervisorControlView.getInstance().display();
-				
+				if(session.getRole().equals("tecnico")) {
+					TecnicoControlView.getInstance().clearData();
+					TecnicoControlView.getInstance().display();
+				}
+				if(session.getRole().equals("supervisor")) {
+					SupervisorControlView.getInstance().clearData();
+					SupervisorControlView.getInstance().display();				
+				}
 				workbenchView.disableLoginButton();
 				LoginView.getInstance().clearData();
 				LoginView.getInstance().close();
@@ -56,5 +59,22 @@ public class WorkbenchPresenter implements Presenter {
 				new ErrorDialog().showMessages(e1.getMessage());
 			}	
 		}
+	}
+	
+	private void onSalir(ActionEvent e) {
+		int confirm = JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres salir de la Agenda?",
+				"Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (confirm == 0) {
+			System.exit(0);
+		}
+	}
+	
+	private void onLogout(ActionEvent e) {
+		loginController.logout();
+		TecnicoControlView.getInstance().clearData();
+		TecnicoControlView.getInstance().close();
+		SupervisorControlView.getInstance().clearData();
+		SupervisorControlView.getInstance().close();
+		workbenchView.enableLoginButton();
 	}
 }

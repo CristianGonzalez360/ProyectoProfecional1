@@ -37,6 +37,8 @@ public class WorkbenchView {
 	
 	private JTextField textSession;
 
+	private JMenuItem mntmItemSalir;
+
 	public static WorkbenchView getInstance() {
 		if (vista == null)
 			vista = new WorkbenchView();
@@ -70,10 +72,8 @@ public class WorkbenchView {
 		textSession.setEnabled(false);
 		textSession.setEditable(false);
 		southPanel.add(textSession);
-		textSession.setColumns(10);
+		textSession.setColumns(30);
 
-		
-		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
@@ -86,7 +86,7 @@ public class WorkbenchView {
 		mntmNewMenuItem = new JMenuItem("Logout");
 		mnNewMenu.add(mntmNewMenuItem);
 		
-		JMenuItem mntmItemSalir = new JMenuItem("Salir");
+		mntmItemSalir = new JMenuItem("Salir");
 		mnNewMenu.add(mntmItemSalir);
 
 		mntmSeedDb = new JMenuItem("SeedDB");
@@ -112,6 +112,7 @@ public class WorkbenchView {
 			}
 		});
 		this.frame.setVisible(true);
+		this.frame.setResizable(false);
 	}
 
 	public void setData(String sessionInfo) {
@@ -126,7 +127,19 @@ public class WorkbenchView {
 		this.mntmItemLogin.addActionListener(listener);
 	}
 
+	public void setActionOnSalir(ActionListener listener) {
+		this.mntmItemSalir.addActionListener(listener);
+	}
+	
 	public void disableLoginButton() {
 		this.mntmItemLogin.setEnabled(false);
+	}
+
+	public void setActionOnLogout(ActionListener actionListener) {
+		this.mntmNewMenuItem.addActionListener(actionListener);
+	}
+
+	public void enableLoginButton() {
+		this.mntmItemLogin.setEnabled(true);
 	}
 }
