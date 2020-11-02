@@ -29,4 +29,8 @@ public class LoginController {
 		service.openSession(usuario);
 		return service.getActiveSession();
 	}
+
+	public void logout() {
+		service.closeSession();
+	}
 }

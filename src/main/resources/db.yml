@@ -3,11 +3,11 @@ cuentas:
   - fechaDeAlta: 1990-08-07
     nombreUsuario: u001
     password: pu001
-    role: supervisor
+    role: tecnico
   - fechaDeAlta: 2020-10-10
     nombreUsuario: u002
     password: pu002
-    role: tecnico
+    role: supervisor
 
 datosPersonales:
   - nombreCompleto: u001

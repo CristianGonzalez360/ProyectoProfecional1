@@ -3,7 +3,10 @@ package presentacion.views;
 import javax.swing.JInternalFrame;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
+import java.beans.PropertyVetoException;
+
 import javax.swing.JPanel;
+import javax.swing.JFrame;
 
 public class SupervisorControlView extends JInternalFrame {
 
@@ -17,6 +20,16 @@ public class SupervisorControlView extends JInternalFrame {
 	}
 	
 	private SupervisorControlView() {
+		try {
+			setMaximum(true);
+		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		setMaximizable(true);
+		setIconifiable(true);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setClosable(true);
 		setTitle("Supervisor control view");
 		setBounds(100, 100, 859, 647);
 
@@ -41,4 +54,12 @@ public class SupervisorControlView extends JInternalFrame {
 		setVisible(true);
 	}
 
+	public void close() {
+		setVisible(false);
+	}
+
+	public void clearData() {
+		// TODO Auto-generated method stub
+		
+	}
 }

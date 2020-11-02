@@ -47,6 +47,7 @@ public class UsuarioDTO {
 
 	public UsuarioDTO makeTestDTO() {
 		DatosPersonalesDTO datos = new DatosPersonalesDTO();
+				datos.setId(2);
 				datos.setNombreCompleto("u001");
 				datos.setDni(2233);
 				datos.setTelefono("1111");
@@ -57,6 +58,7 @@ public class UsuarioDTO {
 				datos.setDpto("A");
 				datos.setLocalidad("loc");
 		CuentaDTO cuenta = new CuentaDTO();
+				cuenta.setIdCuenta(1);
 				cuenta.setFechaDeAlta(new Date());
 				cuenta.setFechaDeBaja(new Date());
 				cuenta.setNombreUsuario("u001");

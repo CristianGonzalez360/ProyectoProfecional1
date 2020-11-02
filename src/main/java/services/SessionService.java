@@ -11,5 +11,4 @@ public interface SessionService {
 	void closeSession();
 
 	SessionDTO getActiveSession();
-
 }

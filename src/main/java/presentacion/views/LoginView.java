@@ -78,7 +78,7 @@ public class LoginView extends JDialog {
 		return instance;
 	}
 
-	public void onDisplay() {
+	public void display() {
 		setVisible(true);
 	}
 

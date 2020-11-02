@@ -6,13 +6,7 @@ public class SessionDTO {
 	
 	private Date initSession;
 
-	private Date closeSession;
-
-	private Integer idUsuario;
-	
-	private String nombreUsuario;
-
-	private String role;
+	private UsuarioDTO user;
 	
 	public SessionDTO() {}
 
@@ -20,45 +14,27 @@ public class SessionDTO {
 		return initSession;
 	}
 
-	public SessionDTO setInitSession(Date initSession) {
+	public UsuarioDTO getUser() {
+		return user;
+	}
+
+	public void setInitSession(Date initSession) {
 		this.initSession = initSession;
-		return this;
-	}
-
-	public Date getCloseSession() {
-		return closeSession;
-	}
-
-	public SessionDTO setCloseSession(Date closeSession) {
-		this.closeSession = closeSession;
-		return this;
-	}
-
-	public Integer getIdUsuario() {
-		return idUsuario;
-	}
-
-
-	public SessionDTO setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
-		return this;
-	}
-
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-
-	public SessionDTO setNombreUsuario(String nombreUsuari) {
-		this.nombreUsuario = nombreUsuari;
-		return this;
 	}
 
 	public String getRole() {
-		return role;
+		return user.getCuenta().getRole();
 	}
 
-	public SessionDTO setRole(String role) {
-		this.role = role;
-		return this;
+	public String getNombreUsuario() {
+		return user.getDatos().getNombreCompleto();
+	}
+	
+	public Integer getIdUsuario() {
+		return this.user.getId();
+	}
+
+	public void setUser(UsuarioDTO user) {
+		this.user = user;
 	}
 }

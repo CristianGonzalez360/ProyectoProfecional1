@@ -19,13 +19,15 @@ public class TecnicoControlView extends JInternalFrame {
 	}
 	
 	private TecnicoControlView() {
-		setTitle("Tecnico control view");
 		setResizable(true);
 		try {
-			setIcon(true);
+			setMaximum(true);
 		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		setClosable(true);
+		setTitle("Tecnico control view");
 		setMaximizable(true);
 		setIconifiable(true);
 		setBounds(100, 100, 634, 519);
@@ -44,6 +46,15 @@ public class TecnicoControlView extends JInternalFrame {
 
 	public void display() {
 		setVisible(true);		
+	}
+
+	public void close() {
+		setVisible(false);
+	}
+
+	public void clearData() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
