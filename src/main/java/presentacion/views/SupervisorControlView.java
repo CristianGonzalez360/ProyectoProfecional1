@@ -60,9 +60,6 @@ public class SupervisorControlView extends JInternalFrame {
 	private String[] columnasOrdenTrabajo = {"Nro OT","Fecha alta","Usuario de alta","Dni cliente","patente"};//aca se modifican las columnas de la tabla orden de trabajo
 	private String[] columnasPresupuesto = {"Fecha alta"};//aca se modifican las columnas de la tabla presupuesto
 	
-	
-	
-	
 	public static SupervisorControlView getInstance() {
 		if(instance == null) instance = new SupervisorControlView();
 		return instance;
@@ -79,8 +76,9 @@ public class SupervisorControlView extends JInternalFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
-		JPanel clientesPanel = new JPanel();
+		JPanel clientesPanel = new PanelClientesView();
 		tabbedPane.addTab("Clientes", null, clientesPanel, null);
+		clientesPanel.setLayout(new BorderLayout(0, 0));
 
 		JPanel turnosPanel = new JPanel();
 		tabbedPane.addTab("Turnos", null, turnosPanel, null);

@@ -4,8 +4,7 @@ import java.util.Date;
 
 public class ClienteDTO {
 
-	private Integer idCliente;
-	private Integer idDatosPersonales;
+	private int idCliente;
 	private DatosPersonalesDTO datosPersonalesDTO;
 	private Date fechaAltaCliente;
 	
@@ -13,10 +12,10 @@ public class ClienteDTO {
 
 	}
 	
-	public Integer getIdCliente() {
+	public int getIdCliente() {
 		return idCliente;
 	}
-	public void setIdCliente(Integer idCliente) {
+	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
 	public DatosPersonalesDTO getDatosPersonalesDTO() {
@@ -31,13 +30,6 @@ public class ClienteDTO {
 	public void setFechaAltaCliente(Date fechaAltaCliente) {
 		this.fechaAltaCliente = fechaAltaCliente;
 	}
-
-	public Integer getIdDatosPersonales() {
-		return idDatosPersonales;
-	}
-
-	public void setIdDatosPersonales(Integer idDatosPersonales) {
-		this.idDatosPersonales = idDatosPersonales;
-	}
 	
 }
+
