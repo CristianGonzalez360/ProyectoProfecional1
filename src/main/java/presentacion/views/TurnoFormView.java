@@ -25,10 +25,10 @@ public class TurnoFormView extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 
 	private static TurnoFormView instance;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textNombre;
+	private JTextField textDNI;
+	private JTextField textTelefono;
+	private JTextField textEmail;
 	private JDateChooser fechaTurno;
 
 	public static TurnoFormView getInstance() {
@@ -62,30 +62,30 @@ public class TurnoFormView extends JDialog {
 		JLabel lblNombreApellido = new JLabel("Nombre y Apellido");
 		panelForm.add(lblNombreApellido, "4, 4");
 
-		textField = new JTextField();
-		panelForm.add(textField, "10, 4, fill, default");
-		textField.setColumns(10);
+		textNombre = new JTextField();
+		panelForm.add(textNombre, "10, 4, fill, default");
+		textNombre.setColumns(10);
 
 		JLabel lblDNI = new JLabel("DNI");
 		panelForm.add(lblDNI, "4, 6");
 
-		textField_1 = new JTextField();
-		panelForm.add(textField_1, "10, 6, fill, default");
-		textField_1.setColumns(10);
+		textDNI = new JTextField();
+		panelForm.add(textDNI, "10, 6, fill, default");
+		textDNI.setColumns(10);
 
 		JLabel lblTelefono = new JLabel("Teléfono");
 		panelForm.add(lblTelefono, "4, 8");
 
-		textField_2 = new JTextField();
-		panelForm.add(textField_2, "10, 8, fill, default");
-		textField_2.setColumns(10);
+		textTelefono = new JTextField();
+		panelForm.add(textTelefono, "10, 8, fill, default");
+		textTelefono.setColumns(10);
 
 		JLabel lblEmail = new JLabel("Email");
 		panelForm.add(lblEmail, "4, 10");
 
-		textField_3 = new JTextField();
-		panelForm.add(textField_3, "10, 10, fill, default");
-		textField_3.setColumns(10);
+		textEmail = new JTextField();
+		panelForm.add(textEmail, "10, 10, fill, default");
+		textEmail.setColumns(10);
 
 		JLabel lblFecha = new JLabel("Fecha del turno");
 		panelForm.add(lblFecha, "4, 12");
