@@ -15,4 +15,9 @@ public class ClientesController {
 		assert dni != null;
 		return clientesDao.readByDNI(dni);
 	}
+	
+	public void update(ClienteDTO cliente) {
+		assert cliente != null;
+		clientesDao.update(cliente);
+	}
 }

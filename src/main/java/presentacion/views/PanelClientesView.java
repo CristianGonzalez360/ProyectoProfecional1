@@ -67,6 +67,7 @@ public class PanelClientesView extends JPanel {
 	private JTextField textPatente;
 	
 	private List<VehiculoConOrdenDeTrabajoDTO> vehiculos;
+	private JButton btnEditar;
 	
 	public PanelClientesView() {
 		setLayout(new BorderLayout(0, 0));
@@ -84,6 +85,9 @@ public class PanelClientesView extends JPanel {
 		
 		btnBuscar = new JButton("Buscar");
 		panel_4.add(btnBuscar);
+		
+		btnEditar = new JButton("Editar");
+		panel_4.add(btnEditar);
 		
 		splitPane = new JSplitPane();
 		add(splitPane, BorderLayout.CENTER);
@@ -362,5 +366,9 @@ public class PanelClientesView extends JPanel {
 
 	public String getDniCliente() {
 		return txtDNI.getText();
+	}
+	
+	public void setActionEditar(ActionListener listener) {
+		this.btnEditar.addActionListener(listener);
 	}
 }

@@ -13,10 +13,13 @@ import dto.FichaTecnicaVehiculoDTO;
 import dto.Patterns;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
+import presentacion.views.ClienteFormView;
 import presentacion.views.PanelClientesView;
 import presentacion.views.utils.ErrorDialog;
 
 public class ClientePresenter {
+	
+	private static String CLIENTE_NO_SELECCIONADO = "Debe seleccionar un cliente.";
 	
 	private PanelClientesView view;
 	
@@ -24,10 +27,15 @@ public class ClientePresenter {
 
 	private VehiculosController vehiculosController;
 	
+	private ClienteDTO cliente;
+	
+	private ClienteFormView clienteFormview;
+	
 	public ClientePresenter(PanelClientesView view, ClientesController controller, VehiculosController vehiculoController) {
 		this.view = view;
 		this.clienteController = controller;
 		this.vehiculosController = vehiculoController;
+		this.clienteFormview = ClienteFormView.getInstance();
 		
 		this.view.setActionBuscar((a)->onBuscar(a));
 		this.view.setActionSelectVehiculoCliente(new ListSelectionListener() {
@@ -36,6 +44,9 @@ public class ClientePresenter {
 				onSelectVehiculoDeCliente();
 			}
 		});
+		
+		this.view.setActionEditar(a -> onDisplayFormForUpdate(a));
+		this.clienteFormview.setActionOnUpdate(a -> onUpdate(a));
 	}
 	
 	private void onBuscar(ActionEvent a) {
@@ -44,12 +55,7 @@ public class ClientePresenter {
 		if(errors.isEmpty()) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if(cliente != null) {
-				view.clearDataCliente();
-				view.setData(cliente);
-				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController.readByIdCliente(cliente.getIdCliente());
-				view.clearDataListadoVehiculosCliente();
-				view.setData(vehiculos);
-				view.clearDataFichaTecnicaVehiculo();
+				refreshData(cliente);
 			}
 		} else {
 			new ErrorDialog().showMessages(errors);
@@ -65,5 +71,34 @@ public class ClientePresenter {
 				view.setData(fichaVehiculo);
 			}
 		}
+	}
+	
+	private void onDisplayFormForUpdate(ActionEvent a) {
+		if(this.cliente != null) {
+			this.clienteFormview.clearData();
+			this.clienteFormview.setData(cliente);
+			this.clienteFormview.display();
+		} else {
+			new ErrorDialog().showMessages(CLIENTE_NO_SELECCIONADO);
+		}
+	}
+	
+	private void onUpdate(ActionEvent a) {
+		ClienteDTO cliente = clienteFormview.getData();
+		cliente.setIdCliente(this.cliente.getIdCliente());
+		cliente.getDatosPersonalesDTO().setId(this.cliente.getIdDatosPersonales());
+		this.clienteController.update(cliente);
+		refreshData(cliente);
+		this.clienteFormview.close();
+	}
+	
+	private void refreshData(ClienteDTO cliente) {
+		view.clearDataCliente();
+		view.setData(cliente);
+		List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController.readByIdCliente(cliente.getIdCliente());
+		view.clearDataListadoVehiculosCliente();
+		view.setData(vehiculos);
+		view.clearDataFichaTecnicaVehiculo();
+		this.cliente = cliente;
 	}
 }

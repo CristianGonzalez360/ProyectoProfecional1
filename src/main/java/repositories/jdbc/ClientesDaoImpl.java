@@ -20,6 +20,8 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 
 	static final String delete = "DELETE FROM Clientes WHERE idCliente = ?";
 	
+	static final String update = "UPDATE DatosPersonales SET nombreCompleto = ?, dni = ?, telefono = ?, email = ?, calle = ?, altura = ?,piso = ?, dpto = ?, localidad = ? WHERE idDatosPersonales = ?";
+	
 	public ClientesDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -35,7 +37,20 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 
 	@Override
 	public boolean update(ClienteDTO entity) {
-		return false;
+		DatosPersonalesDTO datos = entity.getDatosPersonalesDTO();
+		return getTemplate()
+				.query(update)
+				.param(datos.getNombreCompleto())
+				.param(datos.getDni())
+				.param(datos.getTelefono())
+				.param(datos.getEmail())
+				.param(datos.getCalle())
+				.param(datos.getAltura())
+				.param(datos.getPiso())
+				.param(datos.getDpto())
+				.param(datos.getLocalidad())
+				.param(datos.getId())
+				.excecute();
 	}
 	
 	@Override

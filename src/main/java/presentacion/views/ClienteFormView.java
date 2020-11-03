@@ -189,7 +189,7 @@ public class ClienteFormView extends JDialog {
 		textEmail.setText(datos.getEmail());
 		textTelefono.setText(datos.getTelefono());
 		textCalle.setText(datos.getCalle());
-		textAltura.setText(datos.getCalle());
+		textAltura.setText(datos.getAltura() + "");
 		textPiso.setText(datos.getPiso() + "");
 		textDepto.setText(datos.getDpto());
 		textLocalidad.setText(datos.getLocalidad());
@@ -223,5 +223,9 @@ public class ClienteFormView extends JDialog {
 
 	public void display() {
 		setVisible(true);
+	}
+	
+	public void close() {
+		setVisible(false);
 	}
 }
