@@ -9,7 +9,7 @@ import repositories.jdbc.utils.H2DataSource;
 class TurnosDaoImplTest {
 
 	private TurnosDaoImpl dao = new TurnosDaoImpl(new H2DataSource().getConnection());
-	
+		
 	@Test
 	void testTurnosDaoImpl() {
 		Assertions.assertNotNull(dao);
