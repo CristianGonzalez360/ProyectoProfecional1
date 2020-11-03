@@ -3,21 +3,23 @@ package presentacion.views;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
-import dto.TurnoDTO;
-import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import com.toedter.calendar.JDateChooser;
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
+
+import dto.TurnoDTO;
 
 @SuppressWarnings("serial")
 public class TurnoFormView extends JDialog {
@@ -30,6 +32,9 @@ public class TurnoFormView extends JDialog {
 	private JTextField textTelefono;
 	private JTextField textEmail;
 	private JDateChooser fechaTurno;
+
+	private JButton btnConfirmar;
+	private JButton btnCancelar;
 
 	public static TurnoFormView getInstance() {
 		if (instance == null)
@@ -98,15 +103,15 @@ public class TurnoFormView extends JDialog {
 			panelButton.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(panelButton, BorderLayout.SOUTH);
 			{
-				JButton btnConfirm = new JButton("OK");
-				btnConfirm.setActionCommand("OK");
-				panelButton.add(btnConfirm);
-				getRootPane().setDefaultButton(btnConfirm);
+				btnConfirmar = new JButton("OK");
+				btnConfirmar.setActionCommand("OK");
+				panelButton.add(btnConfirmar);
+				getRootPane().setDefaultButton(btnConfirmar);
 			}
 			{
-				JButton btnCancel = new JButton("Cancelar");
-				btnCancel.setActionCommand("Cancelar");
-				panelButton.add(btnCancel);
+				btnCancelar = new JButton("Cancelar");
+				btnCancelar.setActionCommand("Cancelar");
+				panelButton.add(btnCancelar);
 			}
 		}
 		setModal(true);
@@ -117,18 +122,31 @@ public class TurnoFormView extends JDialog {
 	}
 
 	public TurnoDTO getData() {
-		return null;
+		TurnoDTO nuevoTurno = new TurnoDTO();
+		nuevoTurno.setNombreCliente(textNombre.getText());
+		nuevoTurno.setDniCliente(Integer.parseInt(textDNI.getText()));
+		nuevoTurno.setFechaProgramada(fechaTurno.getDate());
+		nuevoTurno.setFechaAlta(new Date());
+		return nuevoTurno;
 	}
 
 	public void clearData() {
+		textNombre.setText(null);
+		textDNI.setText(null);
+		textTelefono.setText(null);
+		textEmail.setText(null);
 
+		fechaTurno.setDate(null);
+
+		this.btnConfirmar.setVisible(true);
+		this.btnCancelar.setVisible(false);
 	}
 
 	public void setActionSave(ActionListener listener) {
-
+		this.btnConfirmar.addActionListener(listener);
 	}
 
 	public void setActionCancel(ActionListener listener) {
-
+		this.btnCancelar.addActionListener(listener);
 	}
 }
