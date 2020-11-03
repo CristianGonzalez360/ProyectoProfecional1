@@ -30,12 +30,10 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 
 	@Override
 	public boolean insert(ClienteDTO entity) {
-		boolean insetDatosPersonales = datosPersonalesDaoImpl.insert(entity.getDatosPersonalesDTO());
-		boolean insertCliente = getTemplate().query(insert)
+		return getTemplate().query(insert)
 				.param(entity.getFechaAltaCliente())
-				.param(datosPersonalesDaoImpl.readByDni(entity.getDatosPersonalesDTO().getDni()))
+				.param(entity.getIdDatosPersonales())
 				.excecute();
-		return (insertCliente && insetDatosPersonales);
 	}
 
 	@Override
