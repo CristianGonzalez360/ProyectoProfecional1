@@ -150,12 +150,8 @@ public class TurnoFormView extends JDialog {
 	public void setActionCancel(ActionListener listener) {
 		this.btnCancelar.addActionListener(listener);
 	}
-	
-	public void open() {
-		setVisible(true);
-	}
-	
-	public void close() {
+
+	public void cerrar() {
 		setVisible(false);
 	}
 }

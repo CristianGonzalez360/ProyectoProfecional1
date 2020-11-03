@@ -22,8 +22,9 @@ public class TurnosPresenter {
 		supervisorView.setActionBuscar((a) -> onBuscarTurnos(a));
 		supervisorView.setActionRegistrarTurno((a) -> onDisplayTurnosFormView(a));
 		supervisorView.setActionCancelarTurno((a) -> onCancelarTurno(a));
-		
+
 		turnoForm.setActionSave(a -> onSave(a));
+		turnoForm.setActionCancel(a -> onCancel(a));
 	}
 
 	private void onCancelarTurno(ActionEvent e) {
@@ -49,9 +50,16 @@ public class TurnosPresenter {
 			}
 		}
 	}
-	
+
 	private void onSave(ActionEvent a) {
 		TurnoDTO turno = turnoForm.getData();
 		this.controller.save(turno);
+		
+		turnoForm.dispose();
 	}
+	
+	private void onCancel(ActionEvent a) {
+		turnoForm.dispose();
+	}
+
 }
