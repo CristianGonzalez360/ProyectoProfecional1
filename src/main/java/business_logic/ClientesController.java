@@ -4,10 +4,15 @@ import java.util.Date;
 
 import business_logic.exceptions.ConflictException;
 import dto.ClienteDTO;
+import dto.DatosPersonalesDTO;
 import repositories.ClientesDao;
 import repositories.DatosPersonalesDao;
 
 public class ClientesController {
+
+	private static final String CONFLICT_EMAIL = "El email está en uso por otro contacto.";
+
+	private static final String CONFLICT_TELEFONO = "El telefono está en uso por otro contacto.";
 
 	private static final String CONFLICT_DNI = "El dni está en uso por otro cliente";
 	
@@ -30,10 +35,12 @@ public class ClientesController {
 	public void save(ClienteDTO cliente) {
 		assert cliente != null;
 		if(clientesDao.readByDNI(cliente.getDatosPersonalesDTO().getDni()) != null) throw new ConflictException(CONFLICT_DNI);
-		if(clientesDao.readByTelefono(cliente.getDatosPersonalesDTO().getTelefono()) != null) throw new ConflictException("El telefono está en uso por otro contacto.");
-		if(clientesDao.readByEmail(cliente.getDatosPersonalesDTO().getEmail()) != null)	throw new ConflictException("El email está en uso por otro contacto.");
+		if(clientesDao.readByTelefono(cliente.getDatosPersonalesDTO().getTelefono()) != null) throw new ConflictException(CONFLICT_TELEFONO);
+		if(clientesDao.readByEmail(cliente.getDatosPersonalesDTO().getEmail()) != null)	throw new ConflictException(CONFLICT_EMAIL);
 		datosPersonalesDao.insert(cliente.getDatosPersonalesDTO());
 		cliente.setFechaAltaCliente(new Date());
-		cliente.setIdDatosPersonales(datosPersonalesDao.readByDni(cliente.getDatosPersonalesDTO().getDni()).getId());
+		DatosPersonalesDTO datosDto = datosPersonalesDao.readByDni(cliente.getDatosPersonalesDTO().getDni());
+		cliente.setIdDatosPersonales(datosDto.getId());
+		clientesDao.insert(cliente);
 	}
 }

@@ -13,6 +13,8 @@ public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoCo
 	
 	private static final String readAll = "SELECT * FROM VehiculoConOrdenesDeTrabajo";
 
+	private static final String readByPatente = readAll + " " + "WHERE patenteVehiculo = ?";
+
 	private static String readByClienteId = readAll + " " + "WHERE idCliente = ?";
 		
 	public VehiculosConOrdenDeTrabajoDaoImpl(Connection connection) {
@@ -52,6 +54,12 @@ public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoCo
 		return getTemplate().query(readAll).excecute(getMapper());
 	}
 
+	@Override
+	public VehiculoConOrdenDeTrabajoDTO readByPatente(String patente) {
+		List<VehiculoConOrdenDeTrabajoDTO> dtos = getTemplate().query(readByPatente).param(patente).excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
+	}
+	
 	@Override
 	public List<VehiculoConOrdenDeTrabajoDTO> readByClienteId(Integer idCliente) {
 		return getTemplate().query(readByClienteId ).param(idCliente).excecute(getMapper());

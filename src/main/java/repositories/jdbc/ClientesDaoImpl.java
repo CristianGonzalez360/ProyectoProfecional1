@@ -9,15 +9,15 @@ import repositories.jdbc.utils.Mapper;
 
 public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements ClientesDao{
 
-	static final String readall = "SELECT idCliente, Clientes.idDatosPersonales, nombreCompleto, dni, telefono, email, calle, altura, piso, dpto, localidad FROM Clientes INNER JOIN DatosPersonales on Clientes.idDatosPersonales = DatosPersonales.idDatosPersonales";
+	private static final String readall = "SELECT idCliente, Clientes.idDatosPersonales, nombreCompleto, dni, telefono, email, calle, altura, piso, dpto, localidad FROM Clientes INNER JOIN DatosPersonales on Clientes.idDatosPersonales = DatosPersonales.idDatosPersonales";
+		
+	private static final String readByDni = readall + " " + "WHERE DatosPersonales.dni = ?";
 	
-	static final String readbyid = "SELECT * FROM Clientes WHERE idCliente = ?";
-	
-	static final String readByDni = readall + " " + "WHERE DatosPersonales.dni = ?";
-	
-	static final String insert = "INSERT INTO Clientes (fechaAltaCliente, idDatosPersonales ) VALUES (?,?)";
+	private static final String insert = "INSERT INTO Clientes (fechaAltaCliente, idDatosPersonales ) VALUES (?,?)";
 
-	static final String delete = "DELETE FROM Clientes WHERE idCliente = ?";
+	private static final String readByEmail = readall + " " + "WHERE DatosPersonales.email = ?";
+
+	private static final String readByTelefono = readall + " " + "WHERE DatosPersonales.telefono = ?";
 	
 	public ClientesDaoImpl(Connection connection) {
 		super(connection);
@@ -63,6 +63,24 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
+	@Override
+	public ClienteDTO readByTelefono(String telefono) {
+		List<ClienteDTO> dtos = getTemplate()
+				.query(readByTelefono)
+				.param(telefono)
+				.excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
+	}
+
+	@Override
+	public ClienteDTO readByEmail(String email) {
+		List<ClienteDTO> dtos = getTemplate()
+				.query(readByEmail)
+				.param(email)
+				.excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
+	}
+	
 	@Override
 	protected Mapper<ClienteDTO> getMapper() {
 		return new Mapper<ClienteDTO>() {

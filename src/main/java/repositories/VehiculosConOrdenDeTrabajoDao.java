@@ -8,4 +8,6 @@ public interface VehiculosConOrdenDeTrabajoDao extends GenericDao<VehiculoConOrd
 
 	List<VehiculoConOrdenDeTrabajoDTO> readByClienteId(Integer idCliente);
 
+	VehiculoConOrdenDeTrabajoDTO readByPatente(String patente);
+
 }

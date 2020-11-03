@@ -18,6 +18,13 @@ public class VehiculoConOrdenDeTrabajoDTO {
 
 	public VehiculoConOrdenDeTrabajoDTO() {}
 	
+	public VehiculoConOrdenDeTrabajoDTO(AltaDeVehiculoDTO vehiculoDeAlta) {
+		this.kilometrajeGarantia = Integer.parseInt(vehiculoDeAlta.getKilometrajeGarantia());
+		this.aseguradora = vehiculoDeAlta.getAsegurador();
+		this.nroPolizaSeguro = Integer.parseInt(vehiculoDeAlta.getNroPolizaSeguro());
+		this.patente = vehiculoDeAlta.getPatente();
+	}
+
 	public Integer getId() {
 		return id;
 	}

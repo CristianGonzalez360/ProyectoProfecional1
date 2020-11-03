@@ -7,6 +7,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import business_logic.ClientesController;
+import business_logic.OrdenesTrabajoController;
 import business_logic.VehiculosController;
 import business_logic.exceptions.ConflictException;
 import dto.AltaDeVehiculoDTO;
@@ -30,10 +31,13 @@ public class ClientePresenter {
 
 	private VehiculosController vehiculosController;
 	
-	public ClientePresenter(PanelClientesView view, ClientesController controller, VehiculosController vehiculoController) {
+	private OrdenesTrabajoController ordenDeTrabajoController;
+	
+	public ClientePresenter(PanelClientesView view, ClientesController controller, VehiculosController vehiculoController, OrdenesTrabajoController otController) {
 		this.view = view;
 		this.clienteController = controller;
 		this.vehiculosController = vehiculoController;
+		this.ordenDeTrabajoController = otController;
 		
 		this.view.setActionBuscar((a)->onBuscar(a));
 		this.view.setActionSelectVehiculoCliente(new ListSelectionListener() {
@@ -46,6 +50,7 @@ public class ClientePresenter {
 		this.view.setActionRegistrarCliente((a)->onDisplayClienteFormView(a));
 		this.view.setActionRegistrarVehiculo((a)->onDisplayVehiculoFormView(a));
 		this.view.setActionRegistrarOrdenDeTrabajo((a)->onDisplayOrdenDeTrabajoForm(a));
+		
 		ClienteFormView.getInstance().setActionOnSave((a)->onRegistrarCliente(a));
 		VehiculoFormView.getInstance().setActionSave((a)->onRegistrarVehiculo(a));
 		AltaOrdenTrabajoFormView.getInstance().setActionGuardar((a)->onRegistrarOrdenDeTrabajo(a));
@@ -104,7 +109,7 @@ public class ClientePresenter {
 				ClienteFormView.getInstance().clearData();
 				ClienteFormView.getInstance().close();
 			}catch(ConflictException e1) {
-				
+				new ErrorDialog().showMessages(e1.getMessage());
 			}
 		}else {
 			new ErrorDialog().showMessages(errors);
@@ -112,26 +117,32 @@ public class ClientePresenter {
 	}
 	
 	private void onRegistrarVehiculo(ActionEvent e) {
-		AltaDeVehiculoDTO vehiculo = VehiculoFormView.getInstance().getData();
-		List<String> errors = vehiculo.validate();
-		if(errors.isEmpty()) {
-			
-			ClienteFormView.getInstance().clearData();
-			ClienteFormView.getInstance().close();
-		}else {
-			new ErrorDialog().showMessages(errors);
+		Integer idCliente = view.getIdCliente();
+		if(idCliente != null) {
+			AltaDeVehiculoDTO vehiculoDeAlta = VehiculoFormView.getInstance().getData();
+			List<String> errors = vehiculoDeAlta.validate();
+			if(errors.isEmpty()) {
+				vehiculosController.save(idCliente, vehiculoDeAlta);
+				ClienteFormView.getInstance().clearData();
+				ClienteFormView.getInstance().close();
+			}else {
+				new ErrorDialog().showMessages(errors);
+			}	
 		}
 	}
 	
 	private void onRegistrarOrdenDeTrabajo(ActionEvent e) {
-		AltaOrdenDeTrabajoDTO ordenDeTrabajo = AltaOrdenTrabajoFormView.getInstance().getData();
-		List<String> errors = ordenDeTrabajo.validate();
-		if(errors.isEmpty()) {
-			
-			ClienteFormView.getInstance().clearData();
-			ClienteFormView.getInstance().close();
-		}else {
-			new ErrorDialog().showMessages(errors);
+		Integer idVehiculo = view.getidVehiculoSeleccionado();
+		if(idVehiculo != null) {
+			AltaOrdenDeTrabajoDTO ordenDeTrabajo = AltaOrdenTrabajoFormView.getInstance().getData();
+			List<String> errors = ordenDeTrabajo.validate();
+			if(errors.isEmpty()) {
+				this.ordenDeTrabajoController.save(idVehiculo, ordenDeTrabajo);
+				ClienteFormView.getInstance().clearData();
+				ClienteFormView.getInstance().close();
+			}else {
+				new ErrorDialog().showMessages(errors);
+			}
 		}
 	}
 }

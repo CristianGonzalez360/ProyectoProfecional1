@@ -1,7 +1,5 @@
 package dto;
 
-import java.util.Date;
-
 public class FichaTecnicaVehiculoDTO {
 
 	private Integer id;
@@ -22,10 +20,20 @@ public class FichaTecnicaVehiculoDTO {
 	
 	private String descripcion;
 	
-	public FichaTecnicaVehiculoDTO() {
-		
+	public FichaTecnicaVehiculoDTO() {	
 	}
 	
+	public FichaTecnicaVehiculoDTO(AltaDeVehiculoDTO vehiculoDeAlta) {
+		this.nroChasis = Integer.parseInt(vehiculoDeAlta.getNroChasis());
+		this.nroMotor = Integer.parseInt(vehiculoDeAlta.getNroMotor());
+		this.kilometraje = Integer.parseInt(vehiculoDeAlta.getKilometraje());
+		this.marca = vehiculoDeAlta.getMarca();
+		this.modelo = Integer.parseInt(vehiculoDeAlta.getModelo());
+		this.color = vehiculoDeAlta.getColor();
+		this.combustion =  vehiculoDeAlta.getCombustion();
+		this.descripcion = vehiculoDeAlta.getDescripcion();
+	}
+
 	public FichaTecnicaVehiculoDTO makeTestDTO() {
 		FichaTecnicaVehiculoDTO ret = new FichaTecnicaVehiculoDTO();
 		ret.setNroChasis(4576);

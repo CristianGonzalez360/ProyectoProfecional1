@@ -26,6 +26,12 @@ public class OrdenDeTrabajoDTO {
 		
 	}
 	
+	public OrdenDeTrabajoDTO(AltaOrdenDeTrabajoDTO ordenDeTrabajo) {
+		trabajoSolicitado = ordenDeTrabajo.getTrabajoSolicitado();
+		trabajoSujerido = ordenDeTrabajo.getTrabajoSugerido();
+		tipoOrdeTrabajo = ordenDeTrabajo.getTipoDeTrabajo();
+	}
+
 	public Integer getIdOrdenTrabajo() {
 		return idOrdenTrabajo;
 	}

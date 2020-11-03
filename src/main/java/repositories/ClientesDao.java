@@ -9,5 +9,5 @@ public interface ClientesDao extends GenericDao<ClienteDTO, Integer>{
 
 	ClienteDTO readByTelefono(String telefono);
 
-	Object readByEmail(String email);
+	ClienteDTO readByEmail(String email);
 }

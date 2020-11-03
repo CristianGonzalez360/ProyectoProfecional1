@@ -50,6 +50,7 @@ public class PanelClientesView extends JPanel {
 	private JPanel panel_3;
 	private JTable table;
 	
+	private Integer idCliente;
 	private JTextField textDni;
 	private JTextField textNombre;
 	private JTextField textTelefono;
@@ -332,6 +333,7 @@ public class PanelClientesView extends JPanel {
 	}
 	
 	public void clearDataCliente() {
+		this.idCliente = null;
 		this.textNombre.setText("");
 		this.textDni.setText("");
 		this.textTelefono.setText("");
@@ -361,7 +363,7 @@ public class PanelClientesView extends JPanel {
 	}
 	
 	public void setData(ClienteDTO cliente) {
-		cliente.getIdCliente();
+		this.idCliente = cliente.getIdCliente();
 		this.textNombre.setText(cliente.getDatosPersonalesDTO().getNombreCompleto());
 		this.textDni.setText(cliente.getDatosPersonalesDTO().getDni().toString());
 		this.textTelefono.setText(cliente.getDatosPersonalesDTO().getTelefono());
@@ -424,5 +426,9 @@ public class PanelClientesView extends JPanel {
 	
 	public void setActionRegistrarOrdenDeTrabajo(ActionListener listener) {
 		this.btnRegistrarOrdeDeTrabajo.addActionListener(listener);
+	}
+
+	public Integer getIdCliente() {
+		return this.idCliente;
 	}
 }

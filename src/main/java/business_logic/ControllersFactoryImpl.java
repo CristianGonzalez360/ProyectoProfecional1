@@ -14,6 +14,8 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	private ClientesController clientesController;
 
 	private VehiculosController vehiculosController;
+
+	private OrdenesTrabajoController ordenesDeTrabajoController;
 	
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
@@ -36,7 +38,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public ClientesController makeClientesController() {
 		if(clientesController == null)
-			clientesController = new ClientesController(daos.makeClienteDao());
+			clientesController = new ClientesController(daos.makeClienteDao(), daos.makeDatosPersonalesDao());
 		return clientesController;
 	}
 
@@ -46,5 +48,11 @@ public class ControllersFactoryImpl extends ControllersFactory {
 			this.vehiculosController = new VehiculosController(daos.makeVehiculoConOrdeDeTrabajoDao(), daos.makeFichaTecnicaVehiculoDao());
 		}
 		return this.vehiculosController;
+	}
+
+	@Override
+	public OrdenesTrabajoController makeOrdenesDeTrabajoController() {
+		if(ordenesDeTrabajoController == null) ordenesDeTrabajoController = new OrdenesTrabajoController(daos.makeOrdenDeTrabajoDao(), SessionServiceImpl.getInstance());
+		return ordenesDeTrabajoController;
 	}
 }
