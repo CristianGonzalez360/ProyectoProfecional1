@@ -7,14 +7,14 @@ import dto.ClienteDTO;
 import repositories.ClientesDao;
 import repositories.jdbc.utils.Mapper;
 
-public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements ClientesDao {
+public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements ClientesDao{
 	
 	static final int FIRST = 0;
-	static final String insert = "INSERT INTO clientes (fechaAltaCliente, idDatosPersonales) VALUES (?,?)";
+	static final String insert = "INSERT INTO clientes (fechaAltaCliente, idDatosPersonales ) VALUES (?,?)";
 	static final String delete = "DELETE FROM clientes WHERE idCliente = ?";
 	static final String readall = "SELECT * FROM clientes";
 	static final String readbyid = "SELECT * FROM clientes WHERE idCliente = ?";
-	static final String readByDni = "SELECT * FROM clientes  INNER JOIN datosPersonales ON clientes.idDatosPersonales = datosPersonales.idDatosPerso WHERE dniPer = ?";
+	static final String readByDni = "SELECT * FROM clientes  INNER JOIN datosPersonales ON clientes.idDatosPersonales = datosPersonales.idDatosPersonales WHERE dniPer = ?";
 	
 	private DatosPersonalesDaoImpl datosPersonalesDaoImpl;
 
@@ -30,10 +30,12 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 
 	@Override
 	public boolean insert(ClienteDTO entity) {
-		return getTemplate().query(insert)
+		boolean insetDatosPersonales = datosPersonalesDaoImpl.insert(entity.getDatosPersonalesDTO());
+		boolean insertCliente = getTemplate().query(insert)
 				.param(entity.getFechaAltaCliente())
-				.param(entity.getIdDatosPersonales())
+				.param(datosPersonalesDaoImpl.readByDni(entity.getDatosPersonalesDTO().getDni()))
 				.excecute();
+		return (insertCliente && insetDatosPersonales);
 	}
 
 	@Override
@@ -69,4 +71,5 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 			}
 		};
 	}
+
 }

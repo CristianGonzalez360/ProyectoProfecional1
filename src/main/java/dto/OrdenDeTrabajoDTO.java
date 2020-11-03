@@ -95,5 +95,4 @@ public class OrdenDeTrabajoDTO {
 				+ trabajoSolicitado + ", trabajoSujerido=" + trabajoSujerido + ", idVehiculoOt=" + idVehiculoOt
 				+ ", fechaEntregado=" + fechaEntregado + "]";
 	}
-	
 }

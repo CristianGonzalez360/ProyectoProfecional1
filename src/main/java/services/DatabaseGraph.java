@@ -102,5 +102,7 @@ public class DatabaseGraph {
 
 	public void setClientes(List<ClienteDTO> clientes) {
 		this.clientes = clientes;
-	}
+
+	}	
+	
 }
