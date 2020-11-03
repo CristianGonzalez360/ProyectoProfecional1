@@ -31,7 +31,7 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 	public boolean insert(TurnoDTO entity) {
 		return getTemplate()
 				.query(insert)
-				.param(entity.getIdCliente())
+				.param(entity.getIdCliente() == null ? new NullObject() : entity.getIdCliente())
 				.param(entity.getFechaCancelado() == null ? new NullObject() : entity.getFechaCancelado())
 				.param(entity.getFechaAlta())
 				.param(entity.getFechaProgramada())
