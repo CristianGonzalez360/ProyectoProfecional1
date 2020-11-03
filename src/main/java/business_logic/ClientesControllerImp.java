@@ -51,4 +51,13 @@ public class ClientesControllerImp implements ClientesController {
 		return dao.readAll();
 	}
 
+	@Override
+	public ClienteDTO readByDni(int dni) {
+		ClienteDTO ret = dao.readByDNI(dni);
+		if(ret == null) {
+			throw new NotFoundException(NOT_FOUND_EXCEPTION);
+		}
+		return ret;
+	}
+
 }

@@ -14,7 +14,6 @@ import dto.DatosPersonalesDTO;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import java.awt.event.ActionEvent;
 
 public class ClienteFormView extends JDialog {
 
@@ -32,6 +31,7 @@ public class ClienteFormView extends JDialog {
 	
 	private static ClienteFormView instance;
 	private JButton btnSalvar;
+	private JButton btnUpdate;
 
 	private ClienteFormView() {
 		setBounds(100, 100, 450, 300);
@@ -132,6 +132,13 @@ public class ClienteFormView extends JDialog {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(301, 194, 89, 23);
 		contentPanel.add(btnCancelar);
+		
+		btnUpdate = new JButton("Salvar");
+		btnUpdate.setVisible(false);
+		btnUpdate.setBounds(171, 194, 89, 23);
+		contentPanel.add(btnUpdate);
+		
+		setVisible(false);
 //		{//duda si va o no
 //			JPanel buttonPane = new JPanel();
 //			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -175,10 +182,45 @@ public class ClienteFormView extends JDialog {
 	}
 	
 	public void setData(ClienteDTO cliente) {
+		DatosPersonalesDTO datos = cliente.getDatosPersonalesDTO();
+		textNombre.setText(datos.getNombreCompleto());
+		textDni.setText(datos.getDni() + "");
+		textEmail.setText(datos.getEmail());
+		textTelefono.setText(datos.getTelefono());
+		textCalle.setText(datos.getCalle());
+		textAltura.setText(datos.getCalle());
+		textPiso.setText(datos.getPiso() + "");
+		textDepto.setText(datos.getDpto());
+		textLocalidad.setText(datos.getLocalidad());
 		
+		this.btnSalvar.setVisible(false);
+		this.btnUpdate.setVisible(true);
 	}
 	
 	public void setActionOnSave(ActionListener listener) {
 		this.btnSalvar.addActionListener(listener);
+	}
+
+	public void setActionOnUpdate(ActionListener listener) {
+		this.btnUpdate.addActionListener(listener);
+	}
+	
+	public void clearData() {
+		textNombre.setText(null);
+		textDni.setText(null);
+		textEmail.setText(null);
+		textTelefono.setText(null);
+		textCalle.setText(null);
+		textAltura.setText(null);
+		textPiso.setText(null);
+		textDepto.setText(null);
+		textLocalidad.setText(null);
+		
+		this.btnSalvar.setVisible(true);
+		this.btnUpdate.setVisible(false);
+	}
+
+	public void display() {
+		setVisible(true);
 	}
 }

@@ -26,6 +26,7 @@ import dto.TurnoDTO;
 import javax.swing.border.BevelBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JSplitPane;
 
 public class SupervisorControlView extends JInternalFrame {
 
@@ -63,8 +64,9 @@ public class SupervisorControlView extends JInternalFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
-		JPanel clientesPanel = new JPanel();
+		JPanel clientesPanel = new PanelClientesView();
 		tabbedPane.addTab("Clientes", null, clientesPanel, null);
+		clientesPanel.setLayout(new BorderLayout(0, 0));
 
 		JPanel turnosPanel = new JPanel();
 		tabbedPane.addTab("Turnos", null, turnosPanel, null);
