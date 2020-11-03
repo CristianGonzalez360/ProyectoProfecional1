@@ -9,18 +9,20 @@ import repositories.VehiculosConOrdenDeTrabajoDao;
 
 public class VehiculosController {
 
-	public VehiculosConOrdenDeTrabajoDao dao;
+	public VehiculosConOrdenDeTrabajoDao vehiculosDao;
 	
 	public FichaTecnicaVehiculoDao fichasDao;
 	
-	public VehiculosController(VehiculosConOrdenDeTrabajoDao vehiculosConOrdenDeTrabajoDao) {
-		super();
-		this.dao = vehiculosConOrdenDeTrabajoDao;
+	public VehiculosController(VehiculosConOrdenDeTrabajoDao vehiculosDao, FichaTecnicaVehiculoDao fichasDao) {
+		assert vehiculosDao != null;
+		assert fichasDao != null;
+		this.vehiculosDao = vehiculosDao;
+		this.fichasDao = fichasDao;
 	}
 
-	public List<VehiculoConOrdenDeTrabajoDTO> readByClienteId(Integer idCliente) {
+	public List<VehiculoConOrdenDeTrabajoDTO> readByIdCliente(Integer idCliente) {
 		assert idCliente != null;
-		return dao.readByClienteId(idCliente);
+		return vehiculosDao.readByClienteId(idCliente);
 	}
 	
 	public FichaTecnicaVehiculoDTO readFichaTecnicaById(Integer idFichaTecnica) {

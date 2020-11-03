@@ -15,7 +15,7 @@ class ClientesDaoImplTest {
 
 	H2DataSource ds = new H2DataSource();
 	private DatosPersonalesDao datosDao = new DatosPersonalesDaoImpl(ds.getConnection());
-	private ClientesDao dao = new ClientesDaoImpl(ds.getConnection());;
+	private ClientesDao dao = new ClientesDaoImpl(ds.getConnection());
 				
 	@Test
 	void testInsertCliente() {
@@ -31,6 +31,7 @@ class ClientesDaoImplTest {
 	void testClientesDaoImpl() {
 		Assertions.assertFalse(dao.readAll().isEmpty());
 		Assertions.assertEquals(dao.readAll().size(), 1);
+		System.out.println(dao.readAll().toString());
 	}
 	
 	@Test

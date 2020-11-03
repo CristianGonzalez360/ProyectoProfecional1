@@ -11,7 +11,7 @@ cuentas:
 
 datosPersonales:
   - nombreCompleto: u001
-    dni: 111
+    dni: 33390341
     telefono: 1111
     email: u001@mail.com
     calle: calle1
@@ -20,7 +20,7 @@ datosPersonales:
     dpto: A1
     localidad: localidad1
   - nombreCompleto: u002
-    dni: 1112
+    dni: 33390342
     telefono: 1112
     email: u002@mail.com
     calle: calle1
@@ -29,7 +29,7 @@ datosPersonales:
     dpto: A1
     localidad: localidad1
   - nombreCompleto: c001
-    dni: 111122
+    dni: 33390343
     telefono: 321111
     email: c001@mail.com
     calle: calle1
@@ -38,7 +38,7 @@ datosPersonales:
     dpto: A3
     localidad: localidad3
   - nombreCompleto: c002
-    dni: 11166
+    dni: 33390344
     telefono: 611611
     email: c002@mail.com
     calle: calle111

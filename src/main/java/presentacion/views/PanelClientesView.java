@@ -24,6 +24,7 @@ import dto.VehiculoConOrdenDeTrabajoDTO;
 
 import javax.swing.BoxLayout;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
@@ -47,7 +48,6 @@ public class PanelClientesView extends JPanel {
 	private JPanel panel_3;
 	private JTable table;
 	
-	private Integer idCliente;
 	private JTextField textDni;
 	private JTextField textNombre;
 	private JTextField textTelefono;
@@ -58,7 +58,6 @@ public class PanelClientesView extends JPanel {
 	private JTextField textDpto;
 	private JTextField textLocalidad;
 	
-	private Integer idFichaTecnicaVehiculo;
 	private JTextField textNroMotor;
 	private JTextField textNroDeChasis;
 	private JTextField textMarca;
@@ -66,6 +65,8 @@ public class PanelClientesView extends JPanel {
 	private JTextField textColor;
 	private JTextField textCombustion;
 	private JTextField textPatente;
+	
+	private List<VehiculoConOrdenDeTrabajoDTO> vehiculos;
 	
 	public PanelClientesView() {
 		setLayout(new BorderLayout(0, 0));
@@ -77,7 +78,7 @@ public class PanelClientesView extends JPanel {
 		JLabel lblClienteDNI = new JLabel("Cliente DNI");
 		panel_4.add(lblClienteDNI);
 		
-		txtDNI = new JTextField();
+		txtDNI = new JTextField("");
 		panel_4.add(txtDNI);
 		txtDNI.setColumns(10);
 		
@@ -281,7 +282,6 @@ public class PanelClientesView extends JPanel {
 	}
 	
 	public void clearDataCliente() {
-		this.idCliente = null;
 		this.textNombre.setText("");
 		this.textDni.setText("");
 		this.textTelefono.setText("");
@@ -294,7 +294,6 @@ public class PanelClientesView extends JPanel {
 	}
 	
 	public void clearDataFichaTecnicaVehiculo() {
-		this.idFichaTecnicaVehiculo = null;
 		this.textNroDeChasis.setText("");
 		this.textNroMotor.setText("");
 		this.textMarca.setText("");
@@ -305,13 +304,14 @@ public class PanelClientesView extends JPanel {
 	}
 	
 	public void clearDataListadoVehiculosCliente() {
+		this.vehiculos = null;
 		this.tableModelVehiculos.setRowCount(0);
 		tableModelVehiculos.setColumnCount(0);
 		tableModelVehiculos.setColumnIdentifiers(columnasTablaVehiculos);
 	}
 	
 	public void setData(ClienteDTO cliente) {
-		this.idCliente = cliente.getIdCliente();
+		cliente.getIdCliente();
 		this.textNombre.setText(cliente.getDatosPersonalesDTO().getNombreCompleto());
 		this.textDni.setText(cliente.getDatosPersonalesDTO().getDni().toString());
 		this.textTelefono.setText(cliente.getDatosPersonalesDTO().getTelefono());
@@ -324,7 +324,7 @@ public class PanelClientesView extends JPanel {
 	}
 
 	public void setData(FichaTecnicaVehiculoDTO fichaVehiculo) {
-		this.idFichaTecnicaVehiculo = fichaVehiculo.getId();
+		fichaVehiculo.getId();
 		this.textNroDeChasis.setText(fichaVehiculo.getNroChasis().toString());
 		this.textNroMotor.setText(fichaVehiculo.getNroMotor().toString());
 		this.textMarca.setText(fichaVehiculo.getMarca());
@@ -335,6 +335,7 @@ public class PanelClientesView extends JPanel {
 	}
 
 	public void setData(List<VehiculoConOrdenDeTrabajoDTO> vehiculos) {
+		this.vehiculos = vehiculos;
 		for(VehiculoConOrdenDeTrabajoDTO dto : vehiculos) {
 			Object[] row = { dto.getId().toString(), dto.getKilometrajeGarantia().toString(), dto.getAseguradora(), dto.getNroPolizaSeguro().toString(), dto.getPatente() };
 			this.tableModelVehiculos.addRow(row);
@@ -343,5 +344,23 @@ public class PanelClientesView extends JPanel {
 	
 	public void setActionBuscar(ActionListener listener) {
 		this.btnBuscar.addActionListener(listener);
+	}
+
+	public Integer getidVehiculoSeleccionado() {
+		int rows = this.table.getSelectedRowCount();
+		if(rows == 1) {
+			int row = this.table.getSelectedRow();
+			VehiculoConOrdenDeTrabajoDTO dto = this.vehiculos.get(row);
+			return dto.getIdFichaTecnica();
+		}
+		return null;
+	}
+
+	public void setActionSelectVehiculoCliente(ListSelectionListener listener) {
+		this.table.getSelectionModel().addListSelectionListener(listener);
+	}
+
+	public String getDniCliente() {
+		return txtDNI.getText();
 	}
 }

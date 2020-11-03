@@ -28,7 +28,7 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 	public boolean insert(ClienteDTO entity) {
 		return getTemplate()
 				.query(insert)
-				.param(entity.getFechaAltaCliente() == null ? new NullObject() : entity.getFechaAltaCliente())
+				.param(entity.getFechaAltaCliente())
 				.param(entity.getIdDatosPersonales())
 				.excecute();
 	}
@@ -73,6 +73,7 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 				ret.setIdCliente((Integer)obj[0]);
 				ret.setIdDatosPersonales((Integer)obj[1]);
 				DatosPersonalesDTO datos = new DatosPersonalesDTO();
+				datos.setId((Integer)obj[1]);
 				datos.setNombreCompleto((String)obj[2]);
 				datos.setDni((Integer)obj[3]);
 				datos.setTelefono((String)obj[4]);
@@ -82,6 +83,7 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 				datos.setPiso((Integer)obj[8]);
 				datos.setDpto((String)obj[9]);
 				datos.setLocalidad((String)obj[10]);
+				ret.setDatosPersonalesDTO(datos);
 				return ret;
 			}
 		};

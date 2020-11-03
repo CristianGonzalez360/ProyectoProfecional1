@@ -7,8 +7,6 @@ public class ControllersFactoryImpl extends ControllersFactory {
 
 	protected DaosFactory daos;
 
-	private PaisController paisController;
-
 	private LoginController loginController;
 	
 	private TurnosController turnosController;
@@ -21,13 +19,6 @@ public class ControllersFactoryImpl extends ControllersFactory {
 		this.daos = daos;
 	}
 
-	@Override
-	public PaisController makePaisController() {
-		if(paisController == null)
-			paisController = new PaisControllerImpl(daos.makePaisDao());
-		return paisController;
-	}
-	
 	@Override 
 	public LoginController makeLoginController() {
 		if(loginController == null)
@@ -45,14 +36,14 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public ClientesController makeClientesController() {
 		if(clientesController == null)
-			clientesController = new ClientesControllerImp(daos.makeClienteDao());
+			clientesController = new ClientesController(daos.makeClienteDao());
 		return clientesController;
 	}
 
 	@Override
 	public VehiculosController makeVehiculosController() {
 		if(vehiculosController == null) {
-			this.vehiculosController = new VehiculosController(daos.makeVehiculoConOrdeDeTrabajoDao());
+			this.vehiculosController = new VehiculosController(daos.makeVehiculoConOrdeDeTrabajoDao(), daos.makeFichaTecnicaVehiculoDao());
 		}
 		return this.vehiculosController;
 	}
