@@ -124,11 +124,17 @@ public class TurnoFormView extends JDialog {
 
 	public TurnoDTO getData() {
 		TurnoDTO nuevoTurno = new TurnoDTO();
-		nuevoTurno.setNombreCliente(textNombre.getText());
-		nuevoTurno.setDniCliente(Integer.parseInt(textDNI.getText()));
-		nuevoTurno.setFechaProgramada(fechaTurno.getDate());
-		nuevoTurno.setFechaAlta(new Date());
+		
+		nuevoTurno.setNombreCliente(getTextNombre());
+		nuevoTurno.setDniCliente(getDNI());
+		nuevoTurno.setFechaProgramada(getFechaTurno());
+		nuevoTurno.setFechaAlta(fechaDeHoy());
+
 		return nuevoTurno;
+	}
+
+	public Date fechaDeHoy() {
+		return new Date();
 	}
 
 	public void clearData() {
@@ -154,4 +160,32 @@ public class TurnoFormView extends JDialog {
 	public void cerrar() {
 		setVisible(false);
 	}
+
+	public String getTextNombre() {
+		return textNombre.getText();
+	}
+
+	public Integer getDNI() {
+		Integer dniCliente;
+		try {
+			dniCliente = Integer.parseInt(textDNI.getText());
+		} catch (NumberFormatException e) {
+			dniCliente = -2;
+		}
+
+		return dniCliente;
+	}
+
+	public String getTextTelefono() {
+		return textTelefono.getText();
+	}
+
+	public String getTextEmail() {
+		return textEmail.getText();
+	}
+
+	public Date getFechaTurno() {
+		return fechaTurno.getDate();
+	}
+
 }

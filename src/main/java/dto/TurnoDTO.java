@@ -1,6 +1,12 @@
 package dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
+import dto.validators.StringValidator;
+import presentacion.views.utils.ErrorDialog;
 
 public class TurnoDTO {
 
@@ -30,6 +36,15 @@ public class TurnoDTO {
 		ret.setFechaProgramada(new Date());
 		ret.setNombreCliente("Susan Doe");
 		return ret;
+	}
+
+	public List<String> validate() {
+		List<String> errors = new LinkedList<>();
+		errors.addAll(new StringValidator(nombreCliente).notBlank("El Nombre es obligatorio.")
+				.max(40, "Max 40 caracteres para el Nombre.").validate());
+		errors.addAll(new StringValidator(String.valueOf(dniCliente)).notBlank("El DNI es obligatorio.")
+				.regex("Debe ser un DNI correcto", Patterns.DNI).validate());
+		return errors;
 	}
 
 	public Integer getIdTurno() {
