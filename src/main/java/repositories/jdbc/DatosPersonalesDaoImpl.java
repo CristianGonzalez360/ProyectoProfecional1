@@ -74,8 +74,8 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 						dper.setTelefono((String) obj[3]);
 						dper.setEmail((String) obj[4]);
 						dper.setCalle((String) obj[5]);
-						dper.setAltura((Integer) obj[6]);
-						dper.setPiso((Integer) obj[7]);
+						dper.setAltura((String) obj[6]);
+						dper.setPiso((String) obj[7]);
 						dper.setDpto((String) obj[8]);
 						dper.setLocalidad((String) obj[9]);
 				return dper;

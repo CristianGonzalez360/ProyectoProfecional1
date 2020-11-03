@@ -83,8 +83,8 @@ public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements Usuar
 				dper.setTelefono((String)obj[10]);
 				dper.setEmail((String)obj[11]);
 				dper.setCalle((String)obj[12]);
-				dper.setAltura((Integer)obj[13]);
-				dper.setPiso((Integer)obj[14]);
+				dper.setAltura((String)obj[13]);
+				dper.setPiso((String)obj[14]);
 				dper.setDpto((String)obj[15]);
 				dper.setLocalidad((String)obj[16]);
 				return new UsuarioDTO((Integer) obj[0], 

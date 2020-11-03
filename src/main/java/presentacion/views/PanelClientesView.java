@@ -27,6 +27,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import java.awt.FlowLayout;
+import javax.swing.JToolBar;
 
 public class PanelClientesView extends JPanel {
 
@@ -67,11 +69,17 @@ public class PanelClientesView extends JPanel {
 	private JTextField textPatente;
 	
 	private List<VehiculoConOrdenDeTrabajoDTO> vehiculos;
+	private JPanel panel_7;
+	private JToolBar toolBar;
+	private JButton btnRegistrarNuevoVehiculo;
+	private JButton btnRegistrarNuevoCliente;
+	private JButton btnRegistrarOrdeDeTrabajo;
 	
 	public PanelClientesView() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_4 = new JPanel();
+		panel_4.getLayout();
 		panel_4.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		add(panel_4, BorderLayout.NORTH);
 		
@@ -195,6 +203,24 @@ public class PanelClientesView extends JPanel {
 		table = new JTable(tableModelVehiculos);
 		scrollPane.setViewportView(table);
 		
+		panel_7 = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) panel_7.getLayout();
+		flowLayout_1.setAlignment(FlowLayout.LEFT);
+		panel_3.add(panel_7, BorderLayout.SOUTH);
+		
+		toolBar = new JToolBar();
+		toolBar.setFloatable(false);
+		panel_7.add(toolBar);
+		
+		btnRegistrarNuevoCliente = new JButton("Registrar nuevo cliente");
+		toolBar.add(btnRegistrarNuevoCliente);
+		
+		btnRegistrarNuevoVehiculo = new JButton("Registrar nuevo vehiculo");
+		toolBar.add(btnRegistrarNuevoVehiculo);
+		
+		btnRegistrarOrdeDeTrabajo = new JButton("Registrar orden de trabajo");
+		toolBar.add(btnRegistrarOrdeDeTrabajo);
+		
 		panel_1 = new JPanel();
 		splitPane.setRightComponent(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
@@ -272,6 +298,30 @@ public class PanelClientesView extends JPanel {
 		panel_5.add(textPatente, "4, 14, fill, default");
 		textPatente.setColumns(10);
 		
+		disableAllClienteInputs();
+		disableAllFichaTecnicaInputs();
+	}
+	
+	private void disableAllClienteInputs() {
+		this.textNombre.setEditable(false);
+		this.textDni.setEditable(false);
+		this.textTelefono.setEditable(false);
+		this.textEmail.setEditable(false);
+		this.textCalle.setEditable(false);
+		this.textAltura.setEditable(false);
+		this.textPiso.setEditable(false);
+		this.textDpto.setEditable(false);
+		this.textLocalidad.setEditable(false);
+	}
+	
+	private void disableAllFichaTecnicaInputs() {
+		this.textNroDeChasis.setEditable(false);
+		this.textNroMotor.setEditable(false);
+		this.textMarca.setEditable(false);
+		this.textColor.setEditable(false);
+		this.textCombustion.setEditable(false);
+		this.textModelo.setEditable(false);
+		this.textPatente.setEditable(false);
 	}
 	
 	public static PanelClientesView getInstance() {
@@ -362,5 +412,17 @@ public class PanelClientesView extends JPanel {
 
 	public String getDniCliente() {
 		return txtDNI.getText();
+	}
+	
+	public void setActionRegistrarCliente(ActionListener listener) {
+		this.btnRegistrarNuevoCliente.addActionListener(listener);
+	}
+	
+	public void setActionRegistrarVehiculo(ActionListener listener) {
+		this.btnRegistrarNuevoVehiculo.addActionListener(listener);
+	}
+	
+	public void setActionRegistrarOrdenDeTrabajo(ActionListener listener) {
+		this.btnRegistrarOrdeDeTrabajo.addActionListener(listener);
 	}
 }

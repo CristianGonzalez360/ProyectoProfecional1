@@ -6,4 +6,8 @@ public interface ClientesDao extends GenericDao<ClienteDTO, Integer>{
 	
 
 	ClienteDTO readByDNI(Integer dni);
+
+	ClienteDTO readByTelefono(String telefono);
+
+	Object readByEmail(String email);
 }

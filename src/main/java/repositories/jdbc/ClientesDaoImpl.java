@@ -6,7 +6,6 @@ import dto.ClienteDTO;
 import dto.DatosPersonalesDTO;
 import repositories.ClientesDao;
 import repositories.jdbc.utils.Mapper;
-import repositories.jdbc.utils.NullObject;
 
 public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements ClientesDao{
 
@@ -79,8 +78,8 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 				datos.setTelefono((String)obj[4]);
 				datos.setEmail(((String)obj[5]));
 				datos.setCalle(((String)obj[6]));
-				datos.setAltura((Integer)obj[7]);
-				datos.setPiso((Integer)obj[8]);
+				datos.setAltura((String)obj[7]);
+				datos.setPiso((String)obj[8]);
 				datos.setDpto((String)obj[9]);
 				datos.setLocalidad((String)obj[10]);
 				ret.setDatosPersonalesDTO(datos);

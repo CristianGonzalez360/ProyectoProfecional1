@@ -14,7 +14,6 @@ import dto.DatosPersonalesDTO;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import java.awt.event.ActionEvent;
 
 public class ClienteFormView extends JDialog {
 
@@ -174,8 +173,8 @@ public class ClienteFormView extends JDialog {
 		datosPersonales.setEmail(textEmail.getText());
 		datosPersonales.setTelefono(textTelefono.getText());
 		datosPersonales.setCalle(textCalle.getText());
-		datosPersonales.setAltura(Integer.parseInt(textAltura.getText()));
-		datosPersonales.setPiso(Integer.parseInt(textPiso.getText()));
+		datosPersonales.setAltura(textAltura.getText());
+		datosPersonales.setPiso(textPiso.getText());
 		datosPersonales.setDpto(textDepto.getText());
 		datosPersonales.setLocalidad(textLocalidad.getText());
 		ret.setDatosPersonalesDTO(datosPersonales);
@@ -223,5 +222,9 @@ public class ClienteFormView extends JDialog {
 
 	public void display() {
 		setVisible(true);
+	}
+
+	public void close() {
+		setVisible(false);
 	}
 }

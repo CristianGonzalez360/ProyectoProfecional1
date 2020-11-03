@@ -1,6 +1,7 @@
 package dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class ClienteDTO {
 
@@ -57,6 +58,10 @@ public class ClienteDTO {
 	public String toString() {
 		return "ClienteDTO [idCliente=" + idCliente + ", idDatosPersonales=" + idDatosPersonales
 				+ ", datosPersonalesDTO=" + datosPersonalesDTO + ", fechaAltaCliente=" + fechaAltaCliente + "]";
+	}
+
+	public List<String> validate() {
+		return this.datosPersonalesDTO.validate();
 	}	
 }
 

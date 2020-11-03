@@ -1,5 +1,10 @@
 package dto;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import dto.validators.StringValidator;
+
 public class DatosPersonalesDTO {
 	
 	private Integer id;
@@ -14,9 +19,9 @@ public class DatosPersonalesDTO {
 	
 	private String calle;
 	
-	private Integer altura;
+	private String altura;
 	
-	private Integer piso;
+	private String piso;
 	
 	private String dpto;
 	
@@ -24,6 +29,32 @@ public class DatosPersonalesDTO {
 
 	public DatosPersonalesDTO() {
 		
+	}
+	
+	public DatosPersonalesDTO makeTestDTO() {
+		DatosPersonalesDTO datos = new DatosPersonalesDTO();
+		datos.setId(2);
+		datos.setNombreCompleto("u001");
+		datos.setDni(33390111);
+		datos.setTelefono("111134");
+		datos.setEmail("u001@mail.com");
+		datos.setCalle("calle");
+		datos.setAltura("2");
+		datos.setPiso("1");
+		datos.setDpto("A");
+		datos.setLocalidad("loc");
+		return datos;
+	}	
+	
+	public List<String> validate() {
+		List<String> errors = new LinkedList<>();
+		errors.addAll(new StringValidator(nombreCompleto)
+				.notBlank("El nombre es obligatorio")
+				.max(20, "Maximo una longitud de 20 caracteres para el nombre")
+				.validate());
+		if(!altura.trim().isEmpty()) errors.addAll(new StringValidator(altura).regex("La altura debe ser un número", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
+		if(!piso.trim().isEmpty()) errors.addAll(new StringValidator(piso).regex("El piso debe ser un número", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
+		return errors;	
 	}
 	
 	public Integer getId() {
@@ -43,13 +74,13 @@ public class DatosPersonalesDTO {
 	}
 
 	public Integer getDni() {
-		return this.dni;
+		return dni;
 	}
-	
+
 	public void setDni(Integer dni) {
 		this.dni = dni;
 	}
-	
+
 	public String getTelefono() {
 		return telefono;
 	}
@@ -74,19 +105,19 @@ public class DatosPersonalesDTO {
 		this.calle = calle;
 	}
 
-	public Integer getAltura() {
+	public String getAltura() {
 		return altura;
 	}
 
-	public void setAltura(Integer altura) {
+	public void setAltura(String altura) {
 		this.altura = altura;
-	}	
+	}
 
-	public Integer getPiso() {
+	public String getPiso() {
 		return piso;
 	}
 
-	public void setPiso(Integer piso) {
+	public void setPiso(String piso) {
 		this.piso = piso;
 	}
 
@@ -112,20 +143,4 @@ public class DatosPersonalesDTO {
 				+ telefono + ", email=" + email + ", calle=" + calle + ", altura=" + altura + ", piso=" + piso
 				+ ", dpto=" + dpto + ", localidad=" + localidad + "]";
 	}
-
-	public DatosPersonalesDTO makeTestDTO() {
-		DatosPersonalesDTO datos = new DatosPersonalesDTO();
-		datos.setId(2);
-		datos.setNombreCompleto("u001");
-		datos.setDni(2233);
-		datos.setTelefono("1111");
-		datos.setEmail("u001@mail.com");
-		datos.setCalle("calle");
-		datos.setAltura(2);
-		datos.setPiso(1);
-		datos.setDpto("A");
-		datos.setLocalidad("loc");
-		return datos;
-	}	
-	
 }

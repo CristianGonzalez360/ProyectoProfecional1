@@ -1,5 +1,7 @@
 package dto;
 
+import java.util.List;
+
 public class AltaOrdenDeTrabajoDTO {
 
 	private String trabajoSugerido;
@@ -35,5 +37,9 @@ public class AltaOrdenDeTrabajoDTO {
 	public void setTipoDeTrabajo(String tipoDeTrabajo) {
 		this.tipoDeTrabajo = tipoDeTrabajo;
 	}
-	
+
+	public List<String> validate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

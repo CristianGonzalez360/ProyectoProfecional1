@@ -17,8 +17,8 @@ class DatosPersonalesDaoImplTest {
 				datos.setTelefono("1111");
 				datos.setEmail("johndoe@mail.com");
 				datos.setCalle("calle");
-				datos.setAltura(2);
-				datos.setPiso(1);
+				datos.setAltura("2");
+				datos.setPiso("2");
 				datos.setDpto("A");
 				datos.setLocalidad("loc");
 		return datos;

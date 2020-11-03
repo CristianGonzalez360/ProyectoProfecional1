@@ -53,8 +53,8 @@ public class UsuarioDTO {
 				datos.setTelefono("1111");
 				datos.setEmail("u001@mail.com");
 				datos.setCalle("calle");
-				datos.setAltura(2);
-				datos.setPiso(1);
+				datos.setAltura("2");
+				datos.setPiso("1");
 				datos.setDpto("A");
 				datos.setLocalidad("loc");
 		CuentaDTO cuenta = new CuentaDTO();

@@ -20,7 +20,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
-public class AltaOrdenTtrabajoFormView extends JDialog {
+public class AltaOrdenTrabajoFormView extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JEditorPane editorTrabajoSolicitado;
@@ -29,14 +29,14 @@ public class AltaOrdenTtrabajoFormView extends JDialog {
 	private JButton botonGuardar;
 	private JButton botonCancelar;
 
-	private static AltaOrdenTtrabajoFormView instance;
+	private static AltaOrdenTrabajoFormView instance;
 	
-	public static AltaOrdenTtrabajoFormView getInstance() {
-		if(instance == null) instance = new AltaOrdenTtrabajoFormView();
+	public static AltaOrdenTrabajoFormView getInstance() {
+		if(instance == null) instance = new AltaOrdenTrabajoFormView();
 		return instance;
 	}
 	
-	private AltaOrdenTtrabajoFormView() {
+	private AltaOrdenTrabajoFormView() {
 		setResizable(false);
 		setModal(true);
 		setBounds(100, 100, 450, 300);
