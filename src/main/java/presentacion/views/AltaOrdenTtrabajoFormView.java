@@ -2,16 +2,18 @@ package presentacion.views;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import dto.AltaOrdenDeTrabajoDTO;
+
 import javax.swing.JSplitPane;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 import javax.swing.JEditorPane;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
@@ -21,8 +23,22 @@ import javax.swing.JScrollPane;
 public class AltaOrdenTtrabajoFormView extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private JEditorPane editorTrabajoSolicitado;
+	private JEditorPane editorTrabajoSugerido;
+	private ButtonGroup grupo;
+	private JButton botonGuardar;
+	private JButton botonCancelar;
 
-	public AltaOrdenTtrabajoFormView() {
+	private static AltaOrdenTtrabajoFormView instance;
+	
+	public static AltaOrdenTtrabajoFormView getInstance() {
+		if(instance == null) instance = new AltaOrdenTtrabajoFormView();
+		return instance;
+	}
+	
+	private AltaOrdenTtrabajoFormView() {
+		setResizable(false);
+		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -43,7 +59,7 @@ public class AltaOrdenTtrabajoFormView extends JDialog {
 		lblTrabajoSolicitado.setHorizontalAlignment(SwingConstants.CENTER);
 		panelSuperior.add(lblTrabajoSolicitado, BorderLayout.NORTH);
 		
-		JEditorPane editorTrabajoSolicitado = new JEditorPane();
+		editorTrabajoSolicitado = new JEditorPane();
 		
 		JScrollPane scrollTS = new JScrollPane(editorTrabajoSolicitado);
 		panelSuperior.add(scrollTS, BorderLayout.CENTER);
@@ -56,7 +72,7 @@ public class AltaOrdenTtrabajoFormView extends JDialog {
 		lblTrabajoSugerido.setHorizontalAlignment(SwingConstants.CENTER);
 		panelInferior.add(lblTrabajoSugerido, BorderLayout.NORTH);
 		
-		JEditorPane editorTrabajoSugerido = new JEditorPane();
+		editorTrabajoSugerido = new JEditorPane();
 		
 		JScrollPane scrollTraSug = new JScrollPane(editorTrabajoSugerido);
 		panelInferior.add(scrollTraSug, BorderLayout.CENTER);
@@ -70,7 +86,7 @@ public class AltaOrdenTtrabajoFormView extends JDialog {
 		JRadioButton rdbtnTaller = new JRadioButton("Taller");
 		panelRadios.add(rdbtnTaller);
 		
-		ButtonGroup grupo = new ButtonGroup();
+		grupo = new ButtonGroup();
 		grupo.add(rdbtnTaller);
 		grupo.add(rdbtnService);
 		
@@ -78,16 +94,44 @@ public class AltaOrdenTtrabajoFormView extends JDialog {
 		panelBotones.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(panelBotones, BorderLayout.SOUTH);
 		
-		JButton botonGuardar = new JButton("Guardar");
+		botonGuardar = new JButton("Guardar");
 		botonGuardar.setActionCommand("OK");
 		panelBotones.add(botonGuardar);
 		getRootPane().setDefaultButton(botonGuardar);
-	
-	
-		JButton botonCancelar = new JButton("Cancelar");
+		
+		botonCancelar = new JButton("Cancelar");
 		botonCancelar.setActionCommand("Cancel");
 		panelBotones.add(botonCancelar);
 		
+		setModal(true);
 	}
 
+	public void clearData() {
+		this.editorTrabajoSolicitado.setText("");
+		this.editorTrabajoSugerido.setText("");
+	}
+	
+	public AltaOrdenDeTrabajoDTO getData() {
+		AltaOrdenDeTrabajoDTO dto = new AltaOrdenDeTrabajoDTO();
+		dto.setTrabajoSugerido(this.editorTrabajoSugerido.getText());
+		dto.setTrabajoSolicitado(this.editorTrabajoSolicitado.getText());
+		dto.setTipoDeTrabajo(this.grupo.getSelection().toString());
+		return dto;
+	}
+	
+	public void display() {
+		setVisible(true);
+	}
+	
+	public void close() {
+		setVisible(false);
+	}
+	
+	public void setActionGuardar(ActionListener listener) {
+		this.botonGuardar.addActionListener(listener);
+	}
+	
+	public void setActionCancelar(ActionListener listener) {
+		this.botonCancelar.addActionListener(listener);
+	}
 }

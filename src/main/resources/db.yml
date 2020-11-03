@@ -95,7 +95,6 @@ fichaTecnicaVehiculos:
     modelo: 1999
     color: negro
     combustion: nafta
-<<<<<<< HEAD
     descripcion: funciona ok
   - nroChasis: 31258
     nroMotor: 225528
@@ -159,6 +158,5 @@ ordenesDeTrabajo:
     trabajoSolicitado: cambio de cremallera
     trabajoSujerido: cambio el auto
     idVehiculoOt: 3
-=======
     descripcion: funciona ok
->>>>>>> refs/heads/issue#7
+
