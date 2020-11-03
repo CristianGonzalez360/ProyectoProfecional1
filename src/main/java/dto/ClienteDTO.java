@@ -1,6 +1,10 @@
 package dto;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
+import dto.validators.CompositeValidator;
 
 public class ClienteDTO {
 
@@ -58,5 +62,9 @@ public class ClienteDTO {
 		return "ClienteDTO [idCliente=" + idCliente + ", idDatosPersonales=" + idDatosPersonales
 				+ ", datosPersonalesDTO=" + datosPersonalesDTO + ", fechaAltaCliente=" + fechaAltaCliente + "]";
 	}	
+	
+	public List<String> validate(){
+		return getDatosPersonalesDTO().validate();
+	}
 }
 
