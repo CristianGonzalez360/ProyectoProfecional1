@@ -10,8 +10,8 @@ import business_logic.ClientesController;
 import business_logic.VehiculosController;
 import dto.ClienteDTO;
 import dto.FichaTecnicaVehiculoDTO;
+import dto.Patterns;
 import dto.VehiculoConOrdenDeTrabajoDTO;
-import dto.validators.Patterns;
 import dto.validators.StringValidator;
 import presentacion.views.PanelClientesView;
 import presentacion.views.utils.ErrorDialog;
@@ -40,7 +40,7 @@ public class ClientePresenter {
 	
 	private void onBuscar(ActionEvent a) {
 		String inputDni = view.getDniCliente();
-		List<String> errors = new StringValidator(inputDni).regex("El dni debe ser un numero de dni", Patterns.POSITIVE_INTEGER).validate();
+		List<String> errors = new StringValidator(inputDni).regex("El dni debe ser un numero de dni", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate();
 		if(errors.isEmpty()) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if(cliente != null) {
