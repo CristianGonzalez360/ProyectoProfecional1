@@ -111,6 +111,21 @@ public class DatosPersonalesDTO {
 		return "DatosPersonalesDTO [id=" + id + ", nombreCompleto=" + nombreCompleto + ", dni=" + dni + ", telefono="
 				+ telefono + ", email=" + email + ", calle=" + calle + ", altura=" + altura + ", piso=" + piso
 				+ ", dpto=" + dpto + ", localidad=" + localidad + "]";
+	}
+
+	public DatosPersonalesDTO makeTestDTO() {
+		DatosPersonalesDTO datos = new DatosPersonalesDTO();
+		datos.setId(2);
+		datos.setNombreCompleto("u001");
+		datos.setDni(2233);
+		datos.setTelefono("1111");
+		datos.setEmail("u001@mail.com");
+		datos.setCalle("calle");
+		datos.setAltura(2);
+		datos.setPiso(1);
+		datos.setDpto("A");
+		datos.setLocalidad("loc");
+		return datos;
 	}	
 	
 }

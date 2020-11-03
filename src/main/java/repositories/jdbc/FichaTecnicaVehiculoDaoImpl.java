@@ -15,6 +15,8 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 	private static final String readAll = "SELECT * FROM FichaTecnicaVehiculo";
 
 	private static final String readByNroMotor = readAll + " " + "WHERE nroMotor = ?";
+
+	private static final String readById = readAll + " " + "WHERE idFichaTecnicaVehiculo = ?";
 	
 	public FichaTecnicaVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -49,8 +51,8 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 
 	@Override
 	public FichaTecnicaVehiculoDTO readByID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<FichaTecnicaVehiculoDTO> dtos = getTemplate().query(readById ).param(id).excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
 	@Override

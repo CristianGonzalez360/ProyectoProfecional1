@@ -20,7 +20,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 	public Presenter makePresenter() {
 		new PaisPresenter(controllers.makePaisController());
 		new TurnosPresenter(controllers.makeTurnosController());
-		new ClientePresenter(controllers.makeClientesController());
+		new ClientePresenter(SupervisorControlView.getInstance().getPanelClientesView(), controllers.makeClientesController(), controllers.makeVehiculosController());
 		return new WorkbenchPresenter(controllers.makeLoginController());
 	}
 }
