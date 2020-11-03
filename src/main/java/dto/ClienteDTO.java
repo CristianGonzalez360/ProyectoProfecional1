@@ -47,5 +47,16 @@ public class ClienteDTO {
 	public void setFechaAltaCliente(Date fechaAltaCliente) {
 		this.fechaAltaCliente = fechaAltaCliente;
 	}
+
+	public ClienteDTO makeTestDTO() {
+		// TODO Auto-generated method stub
+		return new ClienteDTO();
+	}
+
+	@Override
+	public String toString() {
+		return "ClienteDTO [idCliente=" + idCliente + ", idDatosPersonales=" + idDatosPersonales
+				+ ", datosPersonalesDTO=" + datosPersonalesDTO + ", fechaAltaCliente=" + fechaAltaCliente + "]";
+	}	
 }
 

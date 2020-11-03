@@ -1,7 +1,7 @@
 package presentacion.views;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -9,155 +9,176 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
+
+import dto.AltaDeVehiculoDTO;
 
 public class VehiculoFormView extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2246189166156653659L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textNroChasis;
-	private JTextField textPatente;
-	private JTextField textMarca;
-	private JTextField textColor;
-	private JTextField textAseguradora;
-	private JTextField Garantia;
-	private JTextField textNroMotor;
-	private JTextField textKilometraje;
-	private JTextField textModelo;
-	private JTextField textCombustion;
-	private JTextField textNroPoliza;
 
-	public VehiculoFormView() {
-		setBounds(100, 100, 750, 400);
+	private JTextField textNroChasis;
+	private final JLabel lblNewLabel_1 = new JLabel("Nro. de motor");
+	private final JTextField textNroDeMotor = new JTextField();
+	private final JLabel lblNewLabel_2 = new JLabel("Patente");
+	private final JTextField textPatente = new JTextField();
+	private final JLabel lblNewLabel_3 = new JLabel("Kilometraje");
+	private final JTextField textKilometraje = new JTextField();
+	private final JLabel lblNewLabel_4 = new JLabel("Marca");
+	private final JTextField textMarca = new JTextField();
+	private final JLabel lblNewLabel_5 = new JLabel("Modelo");
+	private final JTextField textModelo = new JTextField();
+	private final JLabel lblNewLabel_6 = new JLabel("Color");
+	private final JTextField textColor = new JTextField();
+	private final JLabel lblNewLabel_7 = new JLabel("Combustion");
+	private final JTextField textCombustion = new JTextField();
+	private final JLabel lblNewLabel_8 = new JLabel("Asegurador");
+	private final JTextField textAsegurador = new JTextField();
+	private final JLabel lblNewLabel_9 = new JLabel("Nro. poliza");
+	private final JTextField textNroPoliza = new JTextField();
+	private final JLabel lblNewLabel_10 = new JLabel("Garantia");
+	private final JTextField textGarantia = new JTextField();
+	private final JPanel panel = new JPanel();
+	private final JButton btnSalvar = new JButton("Salvar");
+	private final JButton btnCancelar = new JButton("Cancelar");
+
+	private static VehiculoFormView instance;
+
+	public static VehiculoFormView getInstance() {
+		if (instance == null)
+			instance = new VehiculoFormView();
+		return instance;
+	}
+
+	private VehiculoFormView() {
+		setTitle("Form alta de vehículo");
+		setResizable(false);
+		setModal(true);
+		textGarantia.setColumns(10);
+		textNroPoliza.setColumns(10);
+		textAsegurador.setColumns(10);
+		textCombustion.setColumns(10);
+		textColor.setColumns(10);
+		textModelo.setColumns(10);
+		textMarca.setColumns(10);
+		textKilometraje.setColumns(10);
+		textPatente.setColumns(10);
+		textNroDeMotor.setColumns(10);
+		setBounds(100, 100, 607, 355);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
-		{
-			JLabel lblChasis = new JLabel("Numero de chasis");
-			lblChasis.setBounds(41, 37, 189, 14);
-			contentPanel.add(lblChasis);
-		}
-		
+		contentPanel.setLayout(new FormLayout(
+				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"),
+						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), FormSpecs.RELATED_GAP_COLSPEC,
+						FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), },
+				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("default:grow"), }));
+
+		JLabel lblNewLabel = new JLabel("Nro. de chasis");
+		contentPanel.add(lblNewLabel, "2, 2");
+
 		textNroChasis = new JTextField();
-		textNroChasis.setBounds(153, 34, 142, 20);
-		contentPanel.add(textNroChasis);
+		contentPanel.add(textNroChasis, "4, 2");
 		textNroChasis.setColumns(10);
-		
-		JLabel lblPatente = new JLabel("Patente");
-		lblPatente.setBounds(41, 85, 189, 14);
-		contentPanel.add(lblPatente);
-		
-		textPatente = new JTextField();
-		textPatente.setBounds(153, 82, 142, 20);
-		contentPanel.add(textPatente);
-		textPatente.setColumns(10);
-		
-		JLabel lblMarca = new JLabel("Marca");
-		lblMarca.setBounds(41, 133, 184, 14);
-		contentPanel.add(lblMarca);
-		
-		textMarca = new JTextField();
-		textMarca.setBounds(153, 130, 142, 20);
-		contentPanel.add(textMarca);
-		textMarca.setColumns(10);
-		
-		JLabel lblColor = new JLabel("Color");
-		lblColor.setBounds(41, 181, 189, 14);
-		contentPanel.add(lblColor);
-		
-		textColor = new JTextField();
-		textColor.setBounds(153, 178, 142, 20);
-		contentPanel.add(textColor);
-		textColor.setColumns(10);
-		
-		textAseguradora = new JTextField();
-		textAseguradora.setBounds(153, 226, 142, 20);
-		contentPanel.add(textAseguradora);
-		textAseguradora.setColumns(10);
-		
-		JLabel lblAseguradora = new JLabel("Aseguradora");
-		lblAseguradora.setBounds(41, 229, 189, 14);
-		contentPanel.add(lblAseguradora);
-		
-		JLabel lblGarantia = new JLabel("Garantía");
-		lblGarantia.setBounds(41, 277, 184, 14);
-		contentPanel.add(lblGarantia);
-		
-		Garantia = new JTextField();
-		Garantia.setBounds(153, 274, 142, 20);
-		contentPanel.add(Garantia);
-		Garantia.setColumns(10);
-		
-		JLabel lblNewLabel_1 = new JLabel("Numero de motor");
-		lblNewLabel_1.setBounds(414, 37, 121, 14);
-		contentPanel.add(lblNewLabel_1);
-		
-		textNroMotor = new JTextField();
-		textNroMotor.setBounds(546, 34, 142, 20);
-		contentPanel.add(textNroMotor);
-		textNroMotor.setColumns(10);
-		
-		JLabel lblKilometraje = new JLabel("Kilometraje");
-		lblKilometraje.setBounds(414, 85, 121, 14);
-		contentPanel.add(lblKilometraje);
-		
-		textKilometraje = new JTextField();
-		textKilometraje.setBounds(546, 82, 142, 20);
-		contentPanel.add(textKilometraje);
-		textKilometraje.setColumns(10);
-		
-		JLabel lblModelo = new JLabel("Modelo");
-		lblModelo.setBounds(414, 133, 121, 14);
-		contentPanel.add(lblModelo);
-		
-		textModelo = new JTextField();
-		textModelo.setBounds(546, 130, 142, 20);
-		contentPanel.add(textModelo);
-		textModelo.setColumns(10);
-		
-		JLabel lblCombustin = new JLabel("Combustión");
-		lblCombustin.setBounds(414, 181, 121, 14);
-		contentPanel.add(lblCombustin);
-		
-		textCombustion = new JTextField();
-		textCombustion.setBounds(546, 178, 142, 20);
-		contentPanel.add(textCombustion);
-		textCombustion.setColumns(10);
-		
-		JLabel lblNmeroDePolisa = new JLabel("Número de poliza");
-		lblNmeroDePolisa.setBounds(414, 229, 121, 14);
-		contentPanel.add(lblNmeroDePolisa);
-		
-		textNroPoliza = new JTextField();
-		textNroPoliza.setBounds(546, 226, 142, 20);
-		contentPanel.add(textNroPoliza);
-		textNroPoliza.setColumns(10);
-		
-		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(206, 302, 89, 23);
-		contentPanel.add(btnSalvar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(396, 302, 89, 23);
-		contentPanel.add(btnCancelar);
-//		{//duda si va o no
-//			JPanel buttonPane = new JPanel();
-//			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-//			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-//			{
-//				JButton okButton = new JButton("Guardar");
-//				okButton.setActionCommand("OK");
-//				buttonPane.add(okButton);
-//				getRootPane().setDefaultButton(okButton);
-//			}
-//			{
-//				JButton cancelButton = new JButton("Cancelar");
-//				cancelButton.setActionCommand("Cancel");
-//				buttonPane.add(cancelButton);
-//			}
-//		}
+
+		contentPanel.add(lblNewLabel_1, "6, 2, right, default");
+
+		contentPanel.add(textNroDeMotor, "8, 2, fill, default");
+
+		contentPanel.add(lblNewLabel_2, "2, 4, left, default");
+
+		contentPanel.add(textPatente, "4, 4, fill, default");
+
+		contentPanel.add(lblNewLabel_3, "6, 4");
+
+		contentPanel.add(textKilometraje, "8, 4, fill, default");
+
+		contentPanel.add(lblNewLabel_4, "2, 6");
+
+		contentPanel.add(textMarca, "4, 6, fill, default");
+
+		contentPanel.add(lblNewLabel_5, "6, 6");
+
+		contentPanel.add(textModelo, "8, 6, fill, default");
+
+		contentPanel.add(lblNewLabel_6, "2, 8");
+
+		contentPanel.add(textColor, "4, 8, fill, default");
+
+		contentPanel.add(lblNewLabel_7, "6, 8");
+
+		contentPanel.add(textCombustion, "8, 8, fill, default");
+
+		contentPanel.add(lblNewLabel_8, "2, 10");
+
+		contentPanel.add(textAsegurador, "4, 10, fill, default");
+
+		contentPanel.add(lblNewLabel_9, "6, 10");
+
+		contentPanel.add(textNroPoliza, "8, 10, fill, default");
+
+		contentPanel.add(lblNewLabel_10, "2, 12");
+
+		contentPanel.add(textGarantia, "4, 12, fill, default");
+
+		contentPanel.add(panel, "2, 14, 7, 1, fill, bottom");
+
+		panel.add(btnSalvar);
+
+		panel.add(btnCancelar);
+	}
+
+	public void clearData() {
+		this.textNroChasis.setText("");
+		this.textNroDeMotor.setText("");
+		this.textPatente.setText("");
+		this.textKilometraje.setText("");
+		this.textMarca.setText("");
+		this.textModelo.setText("");
+		this.textColor.setText("");
+		this.textCombustion.setText("");
+		this.textAsegurador.setText("");
+		this.textNroPoliza.setText("");
+		this.textGarantia.setText("");
+	}
+
+	public AltaDeVehiculoDTO getData() {
+		AltaDeVehiculoDTO dto = new AltaDeVehiculoDTO();
+		dto.setNroChasis(this.textNroChasis.getText());
+		dto.setNroMotor(this.textNroDeMotor.getText());
+		dto.setPatente(this.textPatente.getText());
+		dto.setKilometraje(this.textKilometraje.getText());
+		dto.setMarca(this.textMarca.getText());
+		dto.setModelo(this.textModelo.getText());
+		dto.setColor(this.textColor.getText());
+		dto.setCombustion(this.textCombustion.getText());
+		dto.setAsegurador(this.textAsegurador.getText());
+		dto.setNroPolizaSeguro(this.textNroPoliza.getText());
+		dto.setKilometraje(this.textGarantia.getText());
+		return dto;
+	}
+
+	public void display() {
+		this.setVisible(true);
+	}
+
+	public void close() {
+		this.setVisible(false);
+	}
+
+	public void setActionSave(ActionListener listener) {
+		this.btnSalvar.addActionListener(listener);
+	}
+
+	public void setActionCancel(ActionListener listener) {
+		this.btnCancelar.addActionListener(listener);
 	}
 }

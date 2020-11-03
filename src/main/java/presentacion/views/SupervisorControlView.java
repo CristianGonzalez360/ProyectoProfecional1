@@ -339,4 +339,8 @@ public class SupervisorControlView extends JInternalFrame {
 	public String getDniClienteBusquedaTurno() {
 		return textFieldTurno.getText();
 	}
+	
+	public PanelClientesView getPanelClientesView() {
+		return this.panelClientesView;
+	}
 }

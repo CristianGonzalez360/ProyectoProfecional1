@@ -1,62 +1,69 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.List;
+
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import business_logic.ClientesController;
+import business_logic.VehiculosController;
 import dto.ClienteDTO;
-import presentacion.views.ClienteFormView;
+import dto.FichaTecnicaVehiculoDTO;
+import dto.Patterns;
+import dto.VehiculoConOrdenDeTrabajoDTO;
+import dto.validators.StringValidator;
 import presentacion.views.PanelClientesView;
 import presentacion.views.utils.ErrorDialog;
 
 public class ClientePresenter {
 	
-	private static String CLIENTE_NO_SELECCIONADO = "Debe seleccionar un cliente.";
+	private PanelClientesView view;
 	
-	private ClienteFormView clienteFormview;
-	private PanelClientesView panelClientesView;
+	private ClientesController clienteController;
+
+	private VehiculosController vehiculosController;
 	
-	private ClienteDTO cliente;
-	
-	private ClientesController clientesController;
-	
-	public ClientePresenter(ClientesController clientesController) {
-		this.clienteFormview = ClienteFormView.getInstance();
-		this.panelClientesView = PanelClientesView.getInstance();
-		this.clienteFormview.setActionOnSave(a -> onSave(a));
-		this.clienteFormview.setActionOnUpdate(a-> onUpdate(a));
-		this.panelClientesView.setOnSearchAction(a -> onSearch(a));
-		this.panelClientesView.setOnCreateAction(a -> onDisplayFormforSave(a));
-		this.panelClientesView.setOnUpdateAction(a -> onDisplayFormForUpdate(a));
-		this.clientesController = clientesController;
+	public ClientePresenter(PanelClientesView view, ClientesController controller, VehiculosController vehiculoController) {
+		this.view = view;
+		this.clienteController = controller;
+		this.vehiculosController = vehiculoController;
+		
+		this.view.setActionBuscar((a)->onBuscar(a));
+		this.view.setActionSelectVehiculoCliente(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				onSelectVehiculoDeCliente();
+			}
+		});
 	}
 	
-	private void onDisplayFormforSave(ActionEvent a) {
-		this.clienteFormview.clearData();
-		this.clienteFormview.display();
-	}
-	
-	private void onDisplayFormForUpdate(ActionEvent a) {
-		this.clienteFormview.clearData();
-		if(this.cliente != null) {
-			this.clienteFormview.setData(cliente);
-			this.clienteFormview.display();
+	private void onBuscar(ActionEvent a) {
+		String inputDni = view.getDniCliente();
+		List<String> errors = new StringValidator(inputDni).regex("El dni debe ser un numero de dni", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate();
+		if(errors.isEmpty()) {
+			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
+			if(cliente != null) {
+				view.clearDataCliente();
+				view.setData(cliente);
+				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController.readByIdCliente(cliente.getIdCliente());
+				view.clearDataListadoVehiculosCliente();
+				view.setData(vehiculos);
+				view.clearDataFichaTecnicaVehiculo();
+			}
 		} else {
-			new ErrorDialog().showMessages(CLIENTE_NO_SELECCIONADO);
+			new ErrorDialog().showMessages(errors);
 		}
 	}
 	
-	private void onSearch(ActionEvent a) {
-		this.cliente = this.clientesController.readByDni(panelClientesView.getDniCliente());
-		panelClientesView.setData(cliente);
-	}
-
-	private void onUpdate(ActionEvent a) {
-		ClienteDTO cliente = clienteFormview.getData();
-		cliente.setIdCliente(this.cliente.getIdCliente());
-		this.clientesController.update(cliente);
-	}
-
-	private void onSave(ActionEvent a) {
-		ClienteDTO cliente = clienteFormview.getData();
-		this.clientesController.save(cliente);
+	private void onSelectVehiculoDeCliente() {
+		Integer idVehiculo = view.getidVehiculoSeleccionado();
+		if(idVehiculo != null) {
+			FichaTecnicaVehiculoDTO fichaVehiculo =  vehiculosController.readFichaTecnicaById(idVehiculo);
+			if(fichaVehiculo != null) {
+				view.clearDataFichaTecnicaVehiculo();
+				view.setData(fichaVehiculo);
+			}
+		}
 	}
 }

@@ -12,6 +12,8 @@ public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoCo
 	private static final String insert = "INSERT INTO VehiculoConOrdenesDeTrabajo (idFichaTecnicaVehiculo,idCliente,kilometrajeGarantia,aseguradora,nroPolizaSeguro,patenteVehiculo) VALUES (?,?,?,?,?,?)";
 	
 	private static final String readAll = "SELECT * FROM VehiculoConOrdenesDeTrabajo";
+
+	private static String readByClienteId = readAll + " " + "WHERE idCliente = ?";
 		
 	public VehiculosConOrdenDeTrabajoDaoImpl(Connection connection) {
 		super(connection);
@@ -50,6 +52,11 @@ public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoCo
 		return getTemplate().query(readAll).excecute(getMapper());
 	}
 
+	@Override
+	public List<VehiculoConOrdenDeTrabajoDTO> readByClienteId(Integer idCliente) {
+		return getTemplate().query(readByClienteId ).param(idCliente).excecute(getMapper());
+	}
+	
 	@Override
 	protected Mapper<VehiculoConOrdenDeTrabajoDTO> getMapper() {
 
