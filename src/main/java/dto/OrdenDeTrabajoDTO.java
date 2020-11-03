@@ -19,6 +19,8 @@ public class OrdenDeTrabajoDTO {
 	private Integer idVehiculoOt;
 
 	private Date fechaEntregado;
+	
+	private String descripcion;
 
 	public OrdenDeTrabajoDTO() {
 		
@@ -95,5 +97,12 @@ public class OrdenDeTrabajoDTO {
 				+ trabajoSolicitado + ", trabajoSujerido=" + trabajoSujerido + ", idVehiculoOt=" + idVehiculoOt
 				+ ", fechaEntregado=" + fechaEntregado + "]";
 	}
-	
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 }

@@ -60,8 +60,7 @@ public class SupervisorControlView extends JInternalFrame {
 	private String[] columnasOrdenTrabajo = {"Nro OT","Fecha alta","Usuario de alta","Dni cliente","patente"};//aca se modifican las columnas de la tabla orden de trabajo
 	private String[] columnasPresupuesto = {"Fecha alta"};//aca se modifican las columnas de la tabla presupuesto
 	
-	
-	
+	private PanelClientesView panelClientesView;
 	
 	public static SupervisorControlView getInstance() {
 		if(instance == null) instance = new SupervisorControlView();
@@ -79,8 +78,12 @@ public class SupervisorControlView extends JInternalFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
-		JPanel clientesPanel = new JPanel();
+		JPanel clientesPanel = new PanelClientesView();
 		tabbedPane.addTab("Clientes", null, clientesPanel, null);
+		clientesPanel.setLayout(new BorderLayout(0, 0));
+		
+		panelClientesView = new PanelClientesView();
+		clientesPanel.add(panelClientesView);
 
 		JPanel turnosPanel = new JPanel();
 		tabbedPane.addTab("Turnos", null, turnosPanel, null);
@@ -222,18 +225,10 @@ public class SupervisorControlView extends JInternalFrame {
 		scrollPane_1.setBounds(10, 16, 382, 241);
 		panel_5.add(scrollPane_1);
 		
-		
-		
-		
-		
 		DefaultTableModel modelOrdenesDeTrabajo = (new DefaultTableModel(null,columnasOrdenTrabajo));
 		tablaOrdenesDeTrabajo = new JTable(modelOrdenesDeTrabajo);
 		scrollPane_1.setViewportView(tablaOrdenesDeTrabajo);
-		
-		
-		
-		
-		
+
 		JPanel panel_7 = new JPanel();
 		panel_7.setBounds(435, 245, 393, 310);
 		otPresupuestadasPanel.add(panel_7);
@@ -273,8 +268,6 @@ public class SupervisorControlView extends JInternalFrame {
 		tablaPresupuesto = new JTable(modelPresupuestos);
 		scrollPane_2.setViewportView(tablaPresupuesto);
 		
-		
-
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("OT para cerrar", null, panel, null);
 		

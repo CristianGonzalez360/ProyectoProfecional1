@@ -3,12 +3,14 @@
  */
 package repositories.jdbc;
 
+import dto.CuentaDTO;
 import repositories.ClientesDao;
 import repositories.CuentasDao;
 import repositories.DaosFactory;
 import repositories.DatosPersonalesDao;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
+import repositories.GenericDao;
 import repositories.PaisDao;
 import repositories.TurnosDao;
 import repositories.UsuariosDao;

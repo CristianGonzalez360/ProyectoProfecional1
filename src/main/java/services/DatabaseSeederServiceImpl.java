@@ -49,6 +49,7 @@ public class DatabaseSeederServiceImpl {
 			daos.makeFichaTecnicaVehiculoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
+
 		for(OrdenDeTrabajoDTO target : graph.getOrdenesDeTrabajo()) {
 			daos.makeOrdenDeTrabajoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
@@ -61,6 +62,7 @@ public class DatabaseSeederServiceImpl {
 			daos.makeVehiculoConOrdeDeTrabajoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
+
 	}
 
 	private DatabaseGraph loadDatabaseGraph() {
