@@ -5,10 +5,9 @@ import business_logic.ClientesController;
 import dto.ClienteDTO;
 import presentacion.views.ClienteFormView;
 import presentacion.views.PanelClientesView;
-import presentacion.views.Presenter;
 import presentacion.views.utils.ErrorDialog;
 
-public class ClientePresenter implements Presenter {
+public class ClientePresenter {
 	
 	private static String CLIENTE_NO_SELECCIONADO = "Debe seleccionar un cliente.";
 	
@@ -59,10 +58,5 @@ public class ClientePresenter implements Presenter {
 	private void onSave(ActionEvent a) {
 		ClienteDTO cliente = clienteFormview.getData();
 		this.clientesController.save(cliente);
-	}
-
-	@Override
-	public void onInit() {
-		//ClienteFormView.getInstance().setVisible(true);
 	}
 }
