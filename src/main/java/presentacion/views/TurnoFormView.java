@@ -115,6 +115,7 @@ public class TurnoFormView extends JDialog {
 			}
 		}
 		setModal(true);
+		setVisible(false);
 	}
 
 	public void display() {
@@ -139,7 +140,7 @@ public class TurnoFormView extends JDialog {
 		fechaTurno.setDate(null);
 
 		this.btnConfirmar.setVisible(true);
-		this.btnCancelar.setVisible(false);
+		this.btnCancelar.setVisible(true);
 	}
 
 	public void setActionSave(ActionListener listener) {
@@ -148,5 +149,13 @@ public class TurnoFormView extends JDialog {
 
 	public void setActionCancel(ActionListener listener) {
 		this.btnCancelar.addActionListener(listener);
+	}
+	
+	public void open() {
+		setVisible(true);
+	}
+	
+	public void close() {
+		setVisible(false);
 	}
 }
