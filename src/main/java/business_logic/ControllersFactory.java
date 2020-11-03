@@ -15,12 +15,12 @@ public abstract class ControllersFactory {
 		return concreteFactory;
 	}
 
-	public abstract PaisController makePaisController();
-
 	public abstract LoginController makeLoginController();
 
 	public abstract TurnosController makeTurnosController();
 
 	public abstract ClientesController makeClientesController();
+
+	public abstract VehiculosController makeVehiculosController();
 
 }

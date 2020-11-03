@@ -119,4 +119,9 @@ public class FichaTecnicaVehiculoDTO {
 				+ ", kilometraje=" + kilometraje + ", marca=" + marca + ", modelo=" + modelo + ", color=" + color
 				+ ", combustion=" + combustion + ", descripcion=" + descripcion + "]";
 	}
+
+	public String getPatente() {
+		// TODO Auto-generated method stub
+		return "";
+	}
 }
