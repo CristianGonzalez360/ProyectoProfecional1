@@ -6,49 +6,30 @@ import java.util.List;
 
 import dto.validators.StringValidator;
 
-public class TurnoDTO {
+public class AltaDeTurnoDTO {
 
 	private Integer idTurno;
-
 	private Integer idCliente;
-
-	private Integer dniCliente;
-
+	private String dniCliente;
 	private Date fechaAlta;
-
 	private Date fechaCancelado;
-
 	private Date fechaProgramada;
-
 	private String nombreCliente;
 	private String telefonoCliente;
 	private String emailCliente;
 
-	public TurnoDTO() {
-
-	}
-	
-	public TurnoDTO(Integer dniCliente, Date fechaAlta, Date fechaCancelado, Date fechaProgramada, String nombreCliente,
-			String telefonoCliente, String emailCliente) {
-		super();
-		this.idCliente = 0;
-		this.idTurno = 0;
-		this.dniCliente = dniCliente;
-		this.fechaAlta = fechaAlta;
-		this.fechaCancelado = fechaCancelado;
-		this.fechaProgramada = fechaProgramada;
-		this.nombreCliente = nombreCliente;
-		this.telefonoCliente = telefonoCliente;
-		this.emailCliente = emailCliente;
+	public AltaDeTurnoDTO() {
 	}
 
-	public TurnoDTO makeTestDTO() {
-		TurnoDTO ret = new TurnoDTO();
+	public AltaDeTurnoDTO makeTestDTO() {
+		AltaDeTurnoDTO ret = new AltaDeTurnoDTO();
 		ret.setIdCliente(2345333);
-		ret.setDniCliente(13231);
+		ret.setDniCliente("12345678");
 		ret.setFechaAlta(new Date());
 		ret.setFechaProgramada(new Date());
 		ret.setNombreCliente("Susan Doe");
+		ret.setTelefonoCliente("96385274");
+		ret.setEmailCliente("ejemplo@dominio.com");
 		return ret;
 	}
 
@@ -56,17 +37,13 @@ public class TurnoDTO {
 		List<String> errors = new LinkedList<>();
 		errors.addAll(new StringValidator(nombreCliente).notBlank("El Nombre es obligatorio.")
 				.max(40, "Max 40 caracteres para el Nombre.").validate());
-		errors.addAll(new StringValidator(String.valueOf(dniCliente)).notBlank("El DNI es obligatorio.")
+		errors.addAll(new StringValidator(dniCliente).notBlank("El DNI es obligatorio.")
+				.max(8, "Max 8 caracteres para el DNI")
 				.regex("Debe ser un DNI correcto", Patterns.DNI).validate());
+		errors.addAll(
+				new StringValidator(telefonoCliente).notSpaces("El Teléfono no puede contener espacios.").validate());
+		//errors.addAll(new StringValidator(emailCliente).email("El Email debe ser valido.").validate());
 		return errors;
-	}
-
-	public Integer getIdTurno() {
-		return idTurno;
-	}
-
-	public void setIdTurno(Integer idTurno) {
-		this.idTurno = idTurno;
 	}
 
 	public Integer getIdCliente() {
@@ -75,6 +52,14 @@ public class TurnoDTO {
 
 	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
+	}
+
+	public String getDniCliente() {
+		return dniCliente;
+	}
+
+	public void setDniCliente(String dniCliente) {
+		this.dniCliente = dniCliente;
 	}
 
 	public Date getFechaAlta() {
@@ -109,22 +94,6 @@ public class TurnoDTO {
 		this.nombreCliente = nombreCliente;
 	}
 
-	@Override
-	public String toString() {
-		return "TurnoDTO [idTurno=" + idTurno + ", idCliente=" + idCliente + ", dniCliente=" + dniCliente
-				+ ", fechaAlta=" + fechaAlta + ", fechaCancelado=" + fechaCancelado + ", fechaProgramada="
-				+ fechaProgramada + ", nombreCliente=" + nombreCliente + ", telefonoCliente=" + telefonoCliente
-				+ ", emailCliente=" + emailCliente + "]";
-	}
-
-	public void setDniCliente(Integer dni) {
-		this.dniCliente = dni;
-	}
-
-	public Integer getDniCliente() {
-		return this.dniCliente;
-	}
-
 	public String getTelefonoCliente() {
 		return telefonoCliente;
 	}
@@ -139,6 +108,14 @@ public class TurnoDTO {
 
 	public void setEmailCliente(String emailCliente) {
 		this.emailCliente = emailCliente;
+	}
+
+	@Override
+	public String toString() {
+		return "AltaDeTurnoDTO [idTurno=" + idTurno + ", idCliente=" + idCliente + ", dniCliente=" + dniCliente
+				+ ", fechaAlta=" + fechaAlta + ", fechaCancelado=" + fechaCancelado + ", fechaProgramada="
+				+ fechaProgramada + ", nombreCliente=" + nombreCliente + ", telefonoCliente=" + telefonoCliente
+				+ ", emailCliente=" + emailCliente + "]";
 	}
 
 }

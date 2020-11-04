@@ -19,7 +19,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import com.toedter.calendar.JDateChooser;
 
-import dto.TurnoDTO;
+import dto.AltaDeTurnoDTO;
 
 @SuppressWarnings("serial")
 public class TurnoFormView extends JDialog {
@@ -122,18 +122,18 @@ public class TurnoFormView extends JDialog {
 		this.setVisible(true);
 	}
 
-	public TurnoDTO getData() {
-		TurnoDTO nuevoTurno = new TurnoDTO();
-		
-		nuevoTurno.setNombreCliente(getTextNombre());
+	public AltaDeTurnoDTO getData() {
+		AltaDeTurnoDTO nuevoTurno = new AltaDeTurnoDTO();
+		nuevoTurno.setNombreCliente(getNombre());
 		nuevoTurno.setDniCliente(getDNI());
+		nuevoTurno.setTelefonoCliente(getTelefono());
+		nuevoTurno.setEmailCliente(getEmail());
 		nuevoTurno.setFechaProgramada(getFechaTurno());
-		nuevoTurno.setFechaAlta(fechaDeHoy());
-
+		nuevoTurno.setFechaAlta(getFechaHoy());
 		return nuevoTurno;
 	}
 
-	public Date fechaDeHoy() {
+	public Date getFechaHoy() {
 		return new Date();
 	}
 
@@ -142,7 +142,6 @@ public class TurnoFormView extends JDialog {
 		textDNI.setText(null);
 		textTelefono.setText(null);
 		textEmail.setText(null);
-
 		fechaTurno.setDate(null);
 
 		this.btnConfirmar.setVisible(true);
@@ -161,26 +160,19 @@ public class TurnoFormView extends JDialog {
 		setVisible(false);
 	}
 
-	public String getTextNombre() {
+	public String getNombre() {
 		return textNombre.getText();
 	}
-	
-	public Integer getDNI() {
-		Integer dniCliente;
-		try {
-			dniCliente = Integer.parseInt(textDNI.getText());
-		} catch (NumberFormatException e) {
-			dniCliente = -2;
-		}
 
-		return dniCliente;
+	public String getDNI() {
+		return textDNI.getText();
 	}
 
-	public String getTextTelefono() {
+	public String getTelefono() {
 		return textTelefono.getText();
 	}
 
-	public String getTextEmail() {
+	public String getEmail() {
 		return textEmail.getText();
 	}
 
