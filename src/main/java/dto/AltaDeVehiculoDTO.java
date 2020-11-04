@@ -33,28 +33,31 @@ public class AltaDeVehiculoDTO {
 
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
-		errors.addAll(new StringValidator(nroMotor)
-				.regex("El nro de motor debe ser un número", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
-		errors.addAll(numberValidtion(nroChasis, "El nro de chasis debe ser un número"));
-		errors.addAll(numberValidtion(kilometraje, "El kilometraje debe ser un número"));
+		errors.addAll(new StringValidator(this.nroMotor).regex("El nro de motor debe ser un número", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
+		errors.addAll(new StringValidator(nroChasis).regex("El nro de chasis debe ser un número", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
+		errors.addAll(new StringValidator(kilometrajeGarantia).regex("El kilometraje garantia debe ser un numero", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
 		errors.addAll(new StringValidator(marca).notBlank("La marca del vehículo no debe ser vacía").validate());
 		errors.addAll(new StringValidator(patente).notBlank("La patente no debe ser vacía").validate());
 		errors.addAll(new StringValidator(asegurador).notBlank("El asegurador no puede ser vacio").validate());
-		errors.addAll(numberValidtion(nroPolizaSeguro, "El nro. de la poliza del seguro debe ser un nummero"));
-		errors.addAll(numberValidtion(modelo, "El modelo del vehiculo debe ser un nummero"));
-		if (!kilometrajeGarantia.isEmpty())
-			errors.addAll(new StringValidator(kilometrajeGarantia)
-					.regex("El kilometraje en garantía debe ser un numero", Patterns.NON_NEGATIVE_INTEGER_FIELD)
-					.validate());
+		errors.addAll(new StringValidator(nroPolizaSeguro).regex("El nro. de la poliza del seguro debe ser un nummero", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
+		errors.addAll(new StringValidator(modelo).regex( "El modelo del vehiculo debe ser un numero", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
 		return errors;
 	}
-
-	public List<String> numberValidtion(String field, String message) {
-		return new StringValidator(field).regex(message, Patterns.NON_NEGATIVE_INTEGER_FIELD).validate();
-	}
-
+	
 	public AltaDeVehiculoDTO() {
 		super();
+		nroChasis = "";
+		nroMotor = "";
+		kilometraje ="";
+		marca= "";
+		modelo= "";
+		patente="";
+		color="";
+		combustion="";
+		descripcion="";
+		asegurador="";
+		nroPolizaSeguro="";
+		kilometrajeGarantia="";
 	}
 
 	public String getNroChasis() {
