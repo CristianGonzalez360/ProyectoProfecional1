@@ -80,22 +80,19 @@ public class ClientePresenter {
 	
 	private void onBuscar(ActionEvent a) {
 		String inputDni = view.getDniCliente();
-		boolean errors = new StringValidator(inputDni).number("").validate().isEmpty();
-		if(!inputDni.trim().isEmpty() && !errors) {
-			if (errors) {
-				ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
-				if (cliente != null) {
-					view.clearDataCliente();
-					view.setData(cliente);
-					List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
-							.readByIdCliente(cliente.getIdCliente());
-					view.clearDataListadoVehiculosCliente();
-					view.setData(vehiculos);
-					view.clearDataFichaTecnicaVehiculo();
-					view.clearDataOrdenDeTrabajo();
-				} else {
-					view.clearAll();
-				}
+		if(new StringValidator(inputDni).number("").validate().isEmpty()) {
+			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
+			if (cliente != null) {
+				view.clearDataCliente();
+				view.setData(cliente);
+				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
+						.readByIdCliente(cliente.getIdCliente());
+				view.clearDataListadoVehiculosCliente();
+				view.setData(vehiculos);
+				view.clearDataFichaTecnicaVehiculo();
+				view.clearDataOrdenDeTrabajo();
+			} else {
+				view.clearAll();
 			}
 		}
 	}
