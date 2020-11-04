@@ -9,14 +9,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import dto.RepuestoPlanificadoDTO;
+import dto.TrabajoPlanificadoDTO;
+
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
-import javax.swing.border.TitledBorder;
+import javax.swing.JTabbedPane;
 
 public class AltaPresupuestoFormView extends JDialog {
 
 	private static final long serialVersionUID = 2771968410097489023L;
-	private final JPanel contentPanel = new JPanel();
 
 	private static final String[] nombreColumnasRepuestos = { "Codigo", "Descripcion", "Marca", "Fabricante",
 			"Cantidad" };
@@ -33,98 +37,110 @@ public class AltaPresupuestoFormView extends JDialog {
 	private DefaultTableModel modelTablaTrabajos;
 	private JTable tablaTrabajos;
 	private JButton btnPlanificarTrabajos;
+	private JPanel panel;
+	private JPanel panel_1;
+	private JTabbedPane tabbedPane;
+	
+	private static AltaPresupuestoFormView instance;
+	private JButton btnGuardar;
 
 	@SuppressWarnings("serial")
-	public AltaPresupuestoFormView() {
+	private AltaPresupuestoFormView() {
 		setBounds(100, 100, 700, 350);
 		setTitle("Formulario de Alta de Presupuesto");
 		getContentPane().setLayout(new BorderLayout());
-		setResizable(false);
 
-		contentPanel.setLayout(null);
-
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		{
-			panelIzquierdo = new JPanel();
-			panelIzquierdo
-					.setBorder(new TitledBorder(null, "Repuestos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panelIzquierdo.setBounds(10, 11, 330, 266);
-			panelIzquierdo.setLayout(null);
-			contentPanel.add(panelIzquierdo);
-			{
-				scrollPaneRepuestos = new JScrollPane();
-				scrollPaneRepuestos.setBounds(10, 22, 310, 199);
-				panelIzquierdo.add(scrollPaneRepuestos);
-
-				modelTablaRepuestos = new DefaultTableModel(null, nombreColumnasRepuestos) {
-					@Override
-					public boolean isCellEditable(int row, int column) {
-						return false;
-					}
-				};
-
-				tablaRepuestos = new JTable(modelTablaRepuestos);
-
-				scrollPaneRepuestos.setViewportView(tablaRepuestos);
+		modelTablaRepuestos = new DefaultTableModel(null, nombreColumnasRepuestos) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
 			}
-			{
-				btnPlanificarRepuestos = new JButton("Planificar");
-				btnPlanificarRepuestos.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-					}
-				});
-				btnPlanificarRepuestos.setBounds(210, 232, 110, 23);
-				panelIzquierdo.add(btnPlanificarRepuestos);
-			}
-		}
-		{
-			panelDerecho = new JPanel();
-			panelDerecho
-					.setBorder(new TitledBorder(null, "Trabajos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panelDerecho.setBounds(350, 11, 334, 266);
-			panelDerecho.setLayout(null);
-			contentPanel.add(panelDerecho);
-			{
-				scrollPanelTrabajos = new JScrollPane();
-				scrollPanelTrabajos.setBounds(10, 22, 314, 198);
-				panelDerecho.add(scrollPanelTrabajos);
+		};
 
-				modelTablaTrabajos = new DefaultTableModel(null, nombreColumnasTrabajos) {
-					@Override
-					public boolean isCellEditable(int row, int column) {
-						return false;
-					}
-				};
+		modelTablaTrabajos = new DefaultTableModel(null, nombreColumnasTrabajos) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 
-				tablaTrabajos = new JTable(modelTablaTrabajos);
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-				scrollPanelTrabajos.setViewportView(tablaTrabajos);
-			}
-			{
-				btnPlanificarTrabajos = new JButton("Planificar");
-				btnPlanificarTrabajos.setBounds(207, 232, 110, 23);
-				panelDerecho.add(btnPlanificarTrabajos);
-			}
-		}
-		{
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.setActionCommand("OK");
+		buttonPane.add(btnGuardar);
+		getRootPane().setDefaultButton(btnGuardar);
 
-		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton btnGuardar = new JButton("Guardar");
-				btnGuardar.setActionCommand("OK");
-				buttonPane.add(btnGuardar);
-				getRootPane().setDefaultButton(btnGuardar);
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setActionCommand("Cancel");
+		buttonPane.add(btnCancelar);
+
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		panelDerecho = new JPanel();
+		tabbedPane.addTab("Trabajos", null, panelDerecho, null);
+		panelDerecho.setLayout(new BorderLayout(0, 0));
+		scrollPanelTrabajos = new JScrollPane();
+		panelDerecho.add(scrollPanelTrabajos);
+
+		tablaTrabajos = new JTable(modelTablaTrabajos);
+
+		scrollPanelTrabajos.setViewportView(tablaTrabajos);
+
+		panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		panelDerecho.add(panel_1, BorderLayout.SOUTH);
+
+		btnPlanificarTrabajos = new JButton("Planificar");
+		panel_1.add(btnPlanificarTrabajos);
+
+		panelIzquierdo = new JPanel();
+		tabbedPane.addTab("Repuestos", null, panelIzquierdo, null);
+		panelIzquierdo.setLayout(new BorderLayout(0, 0));
+		scrollPaneRepuestos = new JScrollPane();
+		panelIzquierdo.add(scrollPaneRepuestos, BorderLayout.CENTER);
+
+		tablaRepuestos = new JTable(modelTablaRepuestos);
+
+		scrollPaneRepuestos.setViewportView(tablaRepuestos);
+
+		panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		panelIzquierdo.add(panel, BorderLayout.SOUTH);
+
+		btnPlanificarRepuestos = new JButton("Planificar");
+		panel.add(btnPlanificarRepuestos);
+		btnPlanificarRepuestos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 			}
-			{
-				JButton btnCancelar = new JButton("Cancelar");
-				btnCancelar.setActionCommand("Cancel");
-				buttonPane.add(btnCancelar);
-			}
-		}
+		});
+	}
+	
+	public static AltaPresupuestoFormView getInstance() {
+		if(instance == null) instance = new AltaPresupuestoFormView();
+		return instance;
 	}
 
+	public void setActionOnPlanificarRepuestos(ActionListener listener) {
+		this.btnPlanificarRepuestos.addActionListener(listener);
+	}
+	
+	public void setActionOnPlanificarTrabajos(ActionListener listener) {
+		this.btnPlanificarTrabajos.addActionListener(listener);
+	}
+	
+	public void setActionOnGuardar(ActionListener listener) {
+		this.btnGuardar.addActionListener(listener);
+	}
+	
+	public void setDataRepuestos(List<RepuestoPlanificadoDTO> repuestos) {
+		//TODO llenar tabla repuestos
+	}
+	
+	public void setDataTrabajos(List<TrabajoPlanificadoDTO> trabajos) {
+		for(TrabajoPlanificadoDTO t : trabajos) {
+			//TODO llenar tabla trabajos
+		}
+	}
+	
 }
