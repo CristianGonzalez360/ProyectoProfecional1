@@ -15,23 +15,21 @@ import repositories.jdbc.utils.Mapper;
 public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements UsuariosDao {
 
 	private static final String readAll = "SELECT idUsuario, Usuarios.idCuenta, usuarios.idDatosPersonales, fechaAltaCuenta, fechaBajaCuenta, nombreUsuCuenta, passUsuCuenta, rol, nombreCompleto, dni, telefono, email, calle, altura, piso, dpto, localidad FROM usuarios INNER JOIN cuentas ON usuarios.idCuenta = cuentas.idCuenta INNER JOIN datospersonales on usuarios.idDatosPersonales = datosPersonales.idDatosPersonales";
-	
-	private static final String readByCredentials = readAll + " WHERE Cuentas.nombreUsuCuenta = ? AND Cuentas.passUsuCuenta = ?";
-	
-	private static final String readById = readAll + " " + "WHERE Usuarios.idUsuario = ?"; 
-	
+
+	private static final String readByCredentials = readAll
+			+ " WHERE Cuentas.nombreUsuCuenta = ? AND Cuentas.passUsuCuenta = ?";
+
+	private static final String readById = readAll + " " + "WHERE Usuarios.idUsuario = ?";
+
 	private static final String insert = "INSERT INTO Usuarios (idCuenta, idDatosPersonales) VALUES (?, ?)";
-	
+
 	public UsuariosDaoImpl(Connection connection) {
 		super(connection);
 	}
 
 	@Override
 	public boolean insert(UsuarioDTO entity) {
-		return getTemplate()
-				.query(insert)
-				.param(entity.getCuenta().getIdCuenta())
-				.param(entity.getDatos().getId())
+		return getTemplate().query(insert).param(entity.getCuenta().getIdCuenta()).param(entity.getDatos().getId())
 				.excecute();
 	}
 
@@ -39,7 +37,7 @@ public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements Usuar
 	public boolean update(UsuarioDTO entity) {
 		throw new NotImplementedException();
 	}
-	
+
 	@Override
 	public boolean deleteById(Integer id) {
 		throw new NotImplementedException();
@@ -58,10 +56,11 @@ public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements Usuar
 
 	@Override
 	public UsuarioDTO readByCredentials(String email, String password) {
-		List<UsuarioDTO> dtos = getTemplate().query(readByCredentials).param(email).param(password).excecute(getMapper());
+		List<UsuarioDTO> dtos = getTemplate().query(readByCredentials).param(email).param(password)
+				.excecute(getMapper());
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}
-	
+
 	@Override
 	protected Mapper<UsuarioDTO> getMapper() {
 		return new Mapper<UsuarioDTO>() {
@@ -72,24 +71,23 @@ public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements Usuar
 				cuenta.setIdCuenta((Integer) obj[1]);
 				cuenta.setFechaDeAlta((Date) obj[3]);
 				cuenta.setFechaDeBaja((Date) obj[4]);
-				cuenta.setNombreUsuario((String)obj[5]);
-				cuenta.setPassword((String)obj[6]);
-				cuenta.setRole((String)obj[7]);
+				cuenta.setNombreUsuario((String) obj[5]);
+				cuenta.setPassword((String) obj[6]);
+				cuenta.setRole((String) obj[7]);
 
 				DatosPersonalesDTO dper = new DatosPersonalesDTO();
 				dper.setId((Integer) obj[2]);
-				dper.setNombreCompleto((String)obj[8]);
-				dper.setDni((Integer)obj[9]);
-				dper.setTelefono((String)obj[10]);
-				dper.setEmail((String)obj[11]);
-				dper.setCalle((String)obj[12]);
-				dper.setAltura((String)obj[13]);
-				dper.setPiso((String)obj[14]);
-				dper.setDpto((String)obj[15]);
-				dper.setLocalidad((String)obj[16]);
-				return new UsuarioDTO((Integer) obj[0], 
-						cuenta,dper);
-			}			
+				dper.setNombreCompleto((String) obj[8]);
+				dper.setDni((Integer) obj[9]);
+				dper.setTelefono((String) obj[10]);
+				dper.setEmail((String) obj[11]);
+				dper.setCalle((String) obj[12]);
+				dper.setAltura((String) obj[13]);
+				dper.setPiso((String) obj[14]);
+				dper.setDpto((String) obj[15]);
+				dper.setLocalidad((String) obj[16]);
+				return new UsuarioDTO((Integer) obj[0], cuenta, dper);
+			}
 		};
 	}
 }

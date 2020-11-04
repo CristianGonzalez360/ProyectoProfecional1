@@ -15,27 +15,22 @@ public class UserCrendentialsDTO {
 		setEmail(email);
 		setPassword(password);
 	}
-			
+
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
-		errors.addAll(new StringValidator(email)
-				.max(50, "Max 50 caracteres para el email.")
-				.email("El email debe ser un email.")
-				.validate());
-		errors.addAll(new StringValidator(password)
-				.notBlank("El password es requerido")
-				.max(8, "Max 8 caracteres para el password")
-				.min(6, "Min 6 caraceteres para el password")
+		errors.addAll(new StringValidator(email).max(50, "Max 50 caracteres para el email.")
+				.email("El email debe ser un email.").validate());
+		errors.addAll(new StringValidator(password).notBlank("El password es requerido")
+				.max(8, "Max 8 caracteres para el password").min(6, "Min 6 caraceteres para el password")
 				.notSpaces("El password no debe poseer caracteres en blanco.")
-				.notInLowerCase("El password debe estar en minuscula")
-				.validate());
+				.notInLowerCase("El password debe estar en minuscula").validate());
 		return errors;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}

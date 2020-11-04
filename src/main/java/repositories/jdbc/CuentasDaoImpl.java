@@ -14,23 +14,20 @@ public class CuentasDaoImpl extends GenericJdbcDao<CuentaDTO> implements Cuentas
 	private static final String insert = "INSERT INTO Cuentas (fechaAltaCuenta, fechaBajaCuenta, nombreUsuCuenta, passUsuCuenta, rol) VALUES (?, ?, ?, ?, ?)";
 
 	private static final String readAll = "SELECT * FROM Cuentas";
-	
-	private static final String readByCredentials = readAll + " WHERE Cuentas.nombreUsuCuenta = ? AND Cuentas.passUsuCuenta = ?";
-	
+
+	private static final String readByCredentials = readAll
+			+ " WHERE Cuentas.nombreUsuCuenta = ? AND Cuentas.passUsuCuenta = ?";
+
 	public CuentasDaoImpl(Connection connection) {
 		super(connection);
 	}
 
 	@Override
 	public boolean insert(CuentaDTO entity) {
-		return getTemplate()
-				.query(insert)
+		return getTemplate().query(insert)
 				.param(entity.getFechaDeAlta() == null ? new NullObject() : entity.getFechaDeAlta())
 				.param(entity.getFechaDeBaja() == null ? new NullObject() : entity.getFechaDeBaja())
-				.param(entity.getNombreUsuario())
-				.param(entity.getPassword())
-				.param(entity.getRole())
-				.excecute();
+				.param(entity.getNombreUsuario()).param(entity.getPassword()).param(entity.getRole()).excecute();
 	}
 
 	@Override
@@ -38,7 +35,7 @@ public class CuentasDaoImpl extends GenericJdbcDao<CuentaDTO> implements Cuentas
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	@Override
 	public boolean deleteById(Integer id) {
 		// TODO Auto-generated method stub
@@ -61,7 +58,7 @@ public class CuentasDaoImpl extends GenericJdbcDao<CuentaDTO> implements Cuentas
 		List<CuentaDTO> dto = getTemplate().query(readByCredentials).param(email).param(pass).excecute(getMapper());
 		return dto.isEmpty() ? null : dto.get(0);
 	}
-	
+
 	@Override
 	protected Mapper<CuentaDTO> getMapper() {
 		return new Mapper<CuentaDTO>() {

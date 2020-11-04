@@ -6,13 +6,13 @@ import java.util.List;
 public class ClienteDTO {
 
 	private Integer idCliente;
-	
+
 	private Integer idDatosPersonales;
-	
+
 	private DatosPersonalesDTO datosPersonalesDTO;
-	
+
 	private Date fechaAltaCliente;
-	
+
 	public ClienteDTO() {
 
 	}
@@ -62,6 +62,5 @@ public class ClienteDTO {
 
 	public List<String> validate() {
 		return this.datosPersonalesDTO.validate();
-	}	
+	}
 }
-

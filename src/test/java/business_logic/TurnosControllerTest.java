@@ -14,7 +14,7 @@ class TurnosControllerTest {
 
 	private TurnosDao dao = Mockito.mock(TurnosDao.class);
 	private TurnosController controller = new TurnosController(dao);
-	
+
 	@Test
 	void testTurnosController() {
 		assertNotNull(controller);
@@ -23,7 +23,8 @@ class TurnosControllerTest {
 	@Test
 	void testReadAll() {
 		LinkedList<TurnoDTO> turnos = new LinkedList<>();
-		for(int i = 0; i < 10; i++) turnos.add(new TurnoDTO().makeTestDTO());
+		for (int i = 0; i < 10; i++)
+			turnos.add(new TurnoDTO().makeTestDTO());
 		Mockito.when(dao.readAll()).thenReturn(turnos);
 		Assertions.assertEquals(controller.readAll().size(), turnos.size());
 	}
@@ -34,11 +35,11 @@ class TurnosControllerTest {
 		Mockito.when(dao.readByDni(Mockito.any(Integer.class))).thenReturn(target);
 		Assertions.assertNotNull(controller.readByDniCliente(Integer.toString(target.getDniCliente())));
 	}
-	
+
 	@Test
 	void testReadByDniReturnsNull() {
 		final String target = "123213";
 		Mockito.when(dao.readByDni(Mockito.any(Integer.class))).thenReturn(null);
-		Assertions.assertNull(controller.readByDniCliente(target));		
+		Assertions.assertNull(controller.readByDniCliente(target));
 	}
 }

@@ -12,9 +12,9 @@ import repositories.VehiculosConOrdenDeTrabajoDao;
 public class VehiculosController {
 
 	public VehiculosConOrdenDeTrabajoDao vehiculosDao;
-	
+
 	public FichaTecnicaVehiculoDao fichasDao;
-	
+
 	public VehiculosController(VehiculosConOrdenDeTrabajoDao vehiculosDao, FichaTecnicaVehiculoDao fichasDao) {
 		assert vehiculosDao != null;
 		assert fichasDao != null;
@@ -26,17 +26,19 @@ public class VehiculosController {
 		assert idCliente != null;
 		return vehiculosDao.readByClienteId(idCliente);
 	}
-	
+
 	public FichaTecnicaVehiculoDTO readFichaTecnicaById(Integer idFichaTecnica) {
 		assert idFichaTecnica != null;
 		return fichasDao.readByID(idFichaTecnica);
 	}
 
 	public void save(Integer idCliente, AltaDeVehiculoDTO vehiculoDeAlta) {
-		FichaTecnicaVehiculoDTO ficha =  new FichaTecnicaVehiculoDTO(vehiculoDeAlta);
-		if(fichasDao.readByNroMotor(Integer.parseInt(vehiculoDeAlta.getNroMotor())) != null) throw new ConflictException("El nro. de motor está en uso.");
-		if(vehiculosDao.readByPatente(vehiculoDeAlta.getPatente()) != null) throw new ConflictException("La patente ya está registrada");
-		if(fichasDao.insert(ficha)) {
+		FichaTecnicaVehiculoDTO ficha = new FichaTecnicaVehiculoDTO(vehiculoDeAlta);
+		if (fichasDao.readByNroMotor(Integer.parseInt(vehiculoDeAlta.getNroMotor())) != null)
+			throw new ConflictException("El nro. de motor está en uso.");
+		if (vehiculosDao.readByPatente(vehiculoDeAlta.getPatente()) != null)
+			throw new ConflictException("La patente ya está registrada");
+		if (fichasDao.insert(ficha)) {
 			VehiculoConOrdenDeTrabajoDTO target = new VehiculoConOrdenDeTrabajoDTO(vehiculoDeAlta);
 			target.setIdCliente(idCliente);
 			target.setIdFichaTecnica(fichasDao.readByNroMotor(Integer.parseInt(vehiculoDeAlta.getNroMotor())).getId());

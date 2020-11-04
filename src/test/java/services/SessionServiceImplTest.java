@@ -8,12 +8,12 @@ import dto.SessionDTO;
 import dto.UsuarioDTO;
 
 class SessionServiceImplTest {
-	
+
 	@Test
 	void testGetInstance() {
 		Assertions.assertNotNull(SessionServiceImpl.getInstance());
 	}
-	
+
 	@Test
 	void testGetActiveSessionIsNull() {
 		SessionDTO session = SessionServiceImpl.getInstance().getActiveSession();
@@ -22,13 +22,13 @@ class SessionServiceImplTest {
 		Assertions.assertNotNull(SessionServiceImpl.getInstance().getActiveSession());
 		SessionServiceImpl.getInstance().closeSession();
 	}
-	
+
 	@Test
 	void testOpenSession() {
 		UsuarioDTO dto = new UsuarioDTO().makeTestDTO();
 		Assertions.assertNotNull(dto);
 		SessionServiceImpl.getInstance().openSession(dto);
-		Assertions.assertThrows(ForbiddenException.class, ()-> {
+		Assertions.assertThrows(ForbiddenException.class, () -> {
 			SessionServiceImpl.getInstance().openSession(dto);
 		});
 		SessionServiceImpl.getInstance().closeSession();

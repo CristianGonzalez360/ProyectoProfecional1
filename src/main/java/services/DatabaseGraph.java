@@ -15,21 +15,21 @@ import dto.VehiculoConOrdenDeTrabajoDTO;
 public class DatabaseGraph {
 
 	private List<CuentaDTO> cuentas;
-	
+
 	private List<DatosPersonalesDTO> datosPersonales;
-	
+
 	private List<UsuarioDTO> usuarios;
-	
+
 	private List<TurnoDTO> turnos;
-	
+
 	private List<FichaTecnicaVehiculoDTO> fichaTecnicaVehiculos;
-	
+
 	private List<OrdenDeTrabajoDTO> ordenesDeTrabajo;
-	
+
 	private List<VehiculoConOrdenDeTrabajoDTO> vehiculosConOrdenDeTrabajo;
-	
+
 	private List<ClienteDTO> clientes;
-	
+
 	public DatabaseGraph() {
 		cuentas = new LinkedList<>();
 		datosPersonales = new LinkedList<>();
@@ -103,6 +103,6 @@ public class DatabaseGraph {
 	public void setClientes(List<ClienteDTO> clientes) {
 		this.clientes = clientes;
 
-	}	
-	
+	}
+
 }

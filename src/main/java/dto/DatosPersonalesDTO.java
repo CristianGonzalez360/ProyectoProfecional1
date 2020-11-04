@@ -6,31 +6,31 @@ import java.util.List;
 import dto.validators.StringValidator;
 
 public class DatosPersonalesDTO {
-	
+
 	private Integer id;
-	
+
 	private String nombreCompleto;
-	
+
 	private Integer dni;
-	
+
 	private String telefono;
-	
+
 	private String email;
-	
+
 	private String calle;
-	
+
 	private String altura;
-	
+
 	private String piso;
-	
+
 	private String dpto;
-	
+
 	private String localidad;
 
 	public DatosPersonalesDTO() {
-		
+
 	}
-	
+
 	public DatosPersonalesDTO makeTestDTO() {
 		DatosPersonalesDTO datos = new DatosPersonalesDTO();
 		datos.setId(2);
@@ -44,19 +44,21 @@ public class DatosPersonalesDTO {
 		datos.setDpto("A");
 		datos.setLocalidad("loc");
 		return datos;
-	}	
-	
+	}
+
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
-		errors.addAll(new StringValidator(nombreCompleto)
-				.notBlank("El nombre es obligatorio")
-				.max(20, "Maximo una longitud de 20 caracteres para el nombre")
-				.validate());
-		if(!altura.trim().isEmpty()) errors.addAll(new StringValidator(altura).regex("La altura debe ser un número", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
-		if(!piso.trim().isEmpty()) errors.addAll(new StringValidator(piso).regex("El piso debe ser un número", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
-		return errors;	
+		errors.addAll(new StringValidator(nombreCompleto).notBlank("El nombre es obligatorio")
+				.max(20, "Maximo una longitud de 20 caracteres para el nombre").validate());
+		if (!altura.trim().isEmpty())
+			errors.addAll(new StringValidator(altura)
+					.regex("La altura debe ser un número", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
+		if (!piso.trim().isEmpty())
+			errors.addAll(new StringValidator(piso)
+					.regex("El piso debe ser un número", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
+		return errors;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
