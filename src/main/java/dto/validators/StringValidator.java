@@ -12,6 +12,11 @@ public class StringValidator {
 		validators = new LinkedList<>();
 		this.value = value;
 	}
+	
+	public StringValidator number(String message) {
+		validators.add(new Number(message));
+		return this;
+	}
 
 	public StringValidator min(int min, String message) {
 		validators.add(new MinSizeValidator(min, message));

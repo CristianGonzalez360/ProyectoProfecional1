@@ -239,6 +239,7 @@ public class PanelClientesView extends JPanel {
 		
 		btnEditarCliente = new JButton("Editar cliente");
 		toolBar.add(btnEditarCliente);
+		btnEditarCliente.setVisible(false);
 
 		btnRegistrarNuevoVehiculo = new JButton("Registrar nuevo vehiculo");
 		toolBar.add(btnRegistrarNuevoVehiculo);
@@ -547,5 +548,12 @@ public class PanelClientesView extends JPanel {
 
 	public void setActionOnEditarCliente(ActionListener listener) {
 		this.btnEditarCliente.addActionListener(listener);
+	}
+
+	public void clearAll() {
+		this.clearDataCliente();
+		this.clearDataFichaTecnicaVehiculo();
+		this.clearDataListadoVehiculosCliente();
+		this.clearDataOrdenDeTrabajo();
 	}
 }

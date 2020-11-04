@@ -16,19 +16,15 @@ import dto.AltaOrdenDeTrabajoDTO;
 import dto.ClienteDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
-import dto.Patterns;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.AltaOrdenTrabajoFormView;
 import presentacion.views.ClienteFormView;
 import presentacion.views.PanelClientesView;
 import presentacion.views.VehiculoFormView;
-import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.ErrorDialog;
 
 public class ClientePresenter {
-
-	private static final String CONFIRMATION_OT_CREATION = "Ud. está por crear una orden de trabajo ¿Desea confirmar la operación?";
 
 	private PanelClientesView view;
 
@@ -55,7 +51,6 @@ public class ClientePresenter {
 		view.setActionRegistrarCliente((a) -> onDisplayClienteFormView(a));
 		view.setActionRegistrarVehiculo((a) -> onDisplayVehiculoFormView(a));
 		view.setActionRegistrarOrdenDeTrabajo((a) -> onDisplayOrdenDeTrabajoForm(a));
-		view.setActionOnEditarCliente((a)->onDisplayFormForUpdate(a));
 		
 		ClienteFormView.getInstance().setActionOnSave((a) -> onRegistrarCliente(a));
 		VehiculoFormView.getInstance().setActionSave((a) -> onRegistrarVehiculo(a));
@@ -70,6 +65,7 @@ public class ClientePresenter {
 	}
 
 	private void onDisplayClienteFormView(ActionEvent e) {
+		view.clearAll();
 		ClienteFormView.getInstance().clearData();
 		ClienteFormView.getInstance().display();
 	}
@@ -80,40 +76,29 @@ public class ClientePresenter {
 			VehiculoFormView.getInstance().display();	
 		}
 	}
-
-	private void onDisplayFormForUpdate(ActionEvent a) {
-		if (view.getIdCliente() != null) {
-			ClienteFormView.getInstance().clearData();
-			ClienteFormView.getInstance().setData(clienteController.readByDni(Integer.parseInt(view.getDniCliente())));
-			ClienteFormView.getInstance().display();
-		}
-	}
 	
 	private void onBuscar(ActionEvent a) {
 		String inputDni = view.getDniCliente();
-		List<String> errors = new StringValidator(inputDni).regex("El dni debe ser un numero de dni", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate();
-		if (errors.isEmpty()) {
-			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
-			if (cliente != null) {
-				view.clearDataCliente();
-				view.setData(cliente);
-				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
-						.readByIdCliente(cliente.getIdCliente());
-				view.clearDataListadoVehiculosCliente();
-				view.setData(vehiculos);
-				view.clearDataFichaTecnicaVehiculo();
-				view.clearDataOrdenDeTrabajo();
-			} else {
-				view.clearDataCliente();
-				view.clearDataListadoVehiculosCliente();
-				view.clearDataFichaTecnicaVehiculo();
-				view.clearDataOrdenDeTrabajo();
+		boolean errors = new StringValidator(inputDni).number("").validate().isEmpty();
+		if(!inputDni.trim().isEmpty() && !errors) {
+			if (errors) {
+				ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
+				if (cliente != null) {
+					view.clearDataCliente();
+					view.setData(cliente);
+					List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
+							.readByIdCliente(cliente.getIdCliente());
+					view.clearDataListadoVehiculosCliente();
+					view.setData(vehiculos);
+					view.clearDataFichaTecnicaVehiculo();
+					view.clearDataOrdenDeTrabajo();
+				} else {
+					view.clearAll();
+				}
 			}
-		} else {
-			new ErrorDialog().showMessages(errors);
 		}
 	}
-
+	
 	private void onSelectVehiculoDeCliente() {
 		Integer idVehiculo = view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
@@ -125,6 +110,8 @@ public class ClientePresenter {
 				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo);
 				if(ordenDeTrabajo != null) {
 					view.setData(ordenDeTrabajo);
+				} else {
+					view.clearDataOrdenDeTrabajo();
 				}
 			}
 		}
@@ -135,11 +122,7 @@ public class ClientePresenter {
 		List<String> errors = cliente.validate();
 		if (errors.isEmpty()) {
 			try {
-				if(view.getIdCliente() == null)	{
-					clienteController.save(cliente);
-				} else {
-					clienteController.update(cliente);
-				}
+				clienteController.save(cliente);
 				ClienteFormView.getInstance().clearData();
 				ClienteFormView.getInstance().close();
 			} catch (ConflictException e1) {

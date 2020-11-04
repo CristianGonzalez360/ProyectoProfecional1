@@ -38,8 +38,7 @@ public class ClientesController {
 			throw new ConflictException(CONFLICT_DNI);
 		if (clientesDao.readByTelefono(cliente.getDatosPersonalesDTO().getTelefono()) != null)
 			throw new ConflictException(CONFLICT_TELEFONO);
-		if (clientesDao.readByEmail(cliente.getDatosPersonalesDTO().getEmail()) != null)
-			throw new ConflictException(CONFLICT_EMAIL);
+		if (clientesDao.readByEmail(cliente.getDatosPersonalesDTO().getEmail()) != null)throw new ConflictException(CONFLICT_EMAIL);
 		datosPersonalesDao.insert(cliente.getDatosPersonalesDTO());
 		cliente.setFechaAltaCliente(new Date());
 		DatosPersonalesDTO datosDto = datosPersonalesDao.readByDni(cliente.getDatosPersonalesDTO().getDni());
@@ -49,6 +48,6 @@ public class ClientesController {
 
 	public void update(ClienteDTO cliente) {
 		assert cliente != null;
-		clientesDao.update(cliente);
+		this.datosPersonalesDao.update(cliente.getDatosPersonalesDTO());
 	}
 }
