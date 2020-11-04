@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 import business_logic.TurnosController;
 import dto.AltaDeTurnoDTO;
 import dto.TurnoDTO;
@@ -32,7 +35,15 @@ public class TurnosPresenter {
 	}
 
 	private void onCancelarTurno(ActionEvent e) {
-		new ConfirmationDialog("¿Está seguro que desea cancelar el turno?").open();
+		int cancelado = new ConfirmationDialog("¿Está seguro que desea cancelar el turno?").open();
+
+		if (cancelado == 0) {
+			TurnoDTO turnoSeleccionado = supervisorView.getSelectedTurno();
+			turnoSeleccionado.setFechaCancelado(new Date());
+			supervisorView.clearTurnos();
+
+			JOptionPane.showMessageDialog(supervisorView, "Turno Cancelado.");
+		}
 	}
 
 	private void onDisplayTurnosFormView(ActionEvent e) {
