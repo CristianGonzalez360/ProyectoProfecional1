@@ -50,6 +50,9 @@ public class DatosPersonalesDTO {
 		List<String> errors = new LinkedList<>();
 		errors.addAll(new StringValidator(nombreCompleto).notBlank("El nombre es obligatorio")
 				.max(20, "Maximo una longitud de 20 caracteres para el nombre").validate());
+		if(this.dni == null) {
+			errors.add("El dni es obligatorio");
+		}
 		if (!altura.trim().isEmpty())
 			errors.addAll(new StringValidator(altura)
 					.regex("La altura debe ser un número", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());

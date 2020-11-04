@@ -20,6 +20,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import dto.ClienteDTO;
 import dto.FichaTecnicaVehiculoDTO;
+import dto.OrdenDeTrabajoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 
 import javax.swing.BoxLayout;
@@ -29,8 +30,6 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.FlowLayout;
 import javax.swing.JToolBar;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
 
 public class PanelClientesView extends JPanel {
 
@@ -74,19 +73,25 @@ public class PanelClientesView extends JPanel {
 	private JTextField textPatente;
 
 	private List<VehiculoConOrdenDeTrabajoDTO> vehiculos;
-
-	private JButton btnEditar;
-
 	private JPanel panel_7;
 	private JToolBar toolBar;
 	private JButton btnRegistrarNuevoVehiculo;
 	private JButton btnRegistrarNuevoCliente;
-	private JButton btnRegistrarOrdeDeTrabajo;
 	private JPanel panel_6;
 	private JPanel panel_8;
+	
+	private Integer idOrdenDeTrabajo;
+	private JLabel lblNewLabel_15;
+	private JTextField textFechaAltaOt;
+	private JLabel lblNewLabel_16;
+	private JTextField textFechaCierreOt;
+	private JLabel lblNewLabel_17;
+	private JTextField textTrabajoSolicitadoOt;
+	private JLabel lblNewLabel_18;
+	private JTextField textTrabajoSugeridoOt;
 	private JToolBar toolBar_1;
-	private JSeparator separator;
-	private JSeparator separator_1;
+	private JButton btnRegistrarOrdenDeTrabajo;
+	private JButton btnEditarCliente;
 
 	public PanelClientesView() {
 		setLayout(new BorderLayout(0, 0));
@@ -113,23 +118,21 @@ public class PanelClientesView extends JPanel {
 		splitPane.setLeftComponent(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-		panel_6 = new JPanel();
-		panel.add(panel_6);
-		panel_6.setLayout(new BorderLayout(0, 0));
-
 		panel_2 = new JPanel();
-		panel_6.add(panel_2, BorderLayout.CENTER);
 		panel_2.setBorder(
 				new TitledBorder(null, "Datos del cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.add(panel_2);
 		panel_2.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("14px"),
-				ColumnSpec.decode("right:max(0dlu;default)"),
+				ColumnSpec.decode("max(0dlu;default)"),
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("max(80dlu;default):grow"),
 				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("right:73px"),
+				ColumnSpec.decode("73px:grow"),
 				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(93dlu;default):grow"),},
+				ColumnSpec.decode("max(93dlu;default):grow"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,},
 			new RowSpec[] {
 				FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
@@ -209,25 +212,6 @@ public class PanelClientesView extends JPanel {
 		panel_2.add(textLocalidad, "4, 12, fill, default");
 		textLocalidad.setColumns(10);
 
-		panel_8 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_8.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
-		panel_6.add(panel_8, BorderLayout.SOUTH);
-
-		toolBar_1 = new JToolBar();
-		toolBar_1.setFloatable(false);
-		panel_8.add(toolBar_1);
-
-		btnRegistrarNuevoCliente = new JButton("Registrar nuevo cliente");
-		toolBar_1.add(btnRegistrarNuevoCliente);
-
-		separator_1 = new JSeparator();
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		toolBar_1.add(separator_1);
-
-		btnEditar = new JButton("Editar Cliente");
-		toolBar_1.add(btnEditar);
-
 		panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "Listado de vehiculos del cliente", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
@@ -250,19 +234,19 @@ public class PanelClientesView extends JPanel {
 		toolBar.setFloatable(false);
 		panel_7.add(toolBar);
 
+		btnRegistrarNuevoCliente = new JButton("Registrar nuevo cliente");
+		toolBar.add(btnRegistrarNuevoCliente);
+		
+		btnEditarCliente = new JButton("Editar cliente");
+		toolBar.add(btnEditarCliente);
+		btnEditarCliente.setVisible(false);
+
 		btnRegistrarNuevoVehiculo = new JButton("Registrar nuevo vehiculo");
 		toolBar.add(btnRegistrarNuevoVehiculo);
 
-		separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		toolBar.add(separator);
-
-		btnRegistrarOrdeDeTrabajo = new JButton("Registrar orden de trabajo");
-		toolBar.add(btnRegistrarOrdeDeTrabajo);
-
 		panel_1 = new JPanel();
 		splitPane.setRightComponent(panel_1);
-		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
+		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new TitledBorder(null, "Ficha tecnica del vehiculo", TitledBorder.LEADING, TitledBorder.TOP,
@@ -270,9 +254,11 @@ public class PanelClientesView extends JPanel {
 		panel_1.add(panel_5);
 		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("right:max(49dlu;default)"),
+				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
+				ColumnSpec.decode("default:grow"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,},
 			new RowSpec[] {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
@@ -337,6 +323,72 @@ public class PanelClientesView extends JPanel {
 		textPatente = new JTextField();
 		panel_5.add(textPatente, "4, 14, fill, default");
 		textPatente.setColumns(10);
+		
+		panel_6 = new JPanel();
+		panel_6.setBorder(new TitledBorder(null, "Orden de trabajo actual", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.add(panel_6);
+		panel_6.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		lblNewLabel_15 = new JLabel("Fecha de alta");
+		panel_6.add(lblNewLabel_15, "2, 2");
+		
+		textFechaAltaOt = new JTextField();
+		textFechaAltaOt.setEditable(false);
+		panel_6.add(textFechaAltaOt, "4, 2, fill, default");
+		textFechaAltaOt.setColumns(10);
+		
+		lblNewLabel_16 = new JLabel("Fecha de cierre");
+		panel_6.add(lblNewLabel_16, "2, 4");
+		
+		textFechaCierreOt = new JTextField();
+		textFechaCierreOt.setEditable(false);
+		panel_6.add(textFechaCierreOt, "4, 4, fill, default");
+		textFechaCierreOt.setColumns(10);
+		
+		lblNewLabel_17 = new JLabel("Trabajo solicitado");
+		panel_6.add(lblNewLabel_17, "2, 6, right, default");
+		
+		textTrabajoSolicitadoOt = new JTextField();
+		textTrabajoSolicitadoOt.setEditable(false);
+		panel_6.add(textTrabajoSolicitadoOt, "4, 6, fill, default");
+		textTrabajoSolicitadoOt.setColumns(10);
+		
+		lblNewLabel_18 = new JLabel("Trabajo sugerido");
+		panel_6.add(lblNewLabel_18, "2, 8");
+		
+		textTrabajoSugeridoOt = new JTextField();
+		textTrabajoSugeridoOt.setEditable(false);
+		panel_6.add(textTrabajoSugeridoOt, "4, 8, fill, default");
+		textTrabajoSugeridoOt.setColumns(10);
+				
+				panel_8 = new JPanel();
+				FlowLayout flowLayout = (FlowLayout) panel_8.getLayout();
+				flowLayout.setVgap(8);
+				panel_1.add(panel_8);
+				
+				toolBar_1 = new JToolBar();
+				toolBar_1.setFloatable(false);
+				panel_8.add(toolBar_1);
+				
+				btnRegistrarOrdenDeTrabajo = new JButton("Registrar orden de trabajo");
+				toolBar_1.add(btnRegistrarOrdenDeTrabajo);
 
 		disableAllClienteInputs();
 		disableAllFichaTecnicaInputs();
@@ -402,6 +454,14 @@ public class PanelClientesView extends JPanel {
 		tableModelVehiculos.setColumnIdentifiers(columnasTablaVehiculos);
 	}
 
+	public void clearDataOrdenDeTrabajo() {
+		this.idOrdenDeTrabajo = null;
+		this.textFechaAltaOt.setText("");
+		this.textFechaCierreOt.setText("");
+		this.textTrabajoSugeridoOt.setText("");
+		this.textTrabajoSolicitadoOt.setText("");
+	}
+	
 	public void setData(ClienteDTO cliente) {
 		this.idDatosPersonalesDelCliente = cliente.getDatosPersonalesDTO().getId();
 		this.idCliente = cliente.getIdCliente();
@@ -427,6 +487,14 @@ public class PanelClientesView extends JPanel {
 		this.textPatente.setText(fichaVehiculo.getPatente());
 	}
 
+	public void setData(OrdenDeTrabajoDTO ordenDeTrabajo) {
+		this.idOrdenDeTrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
+		this.textFechaAltaOt.setText(ordenDeTrabajo.getFechaDeAlta().toString());
+		this.textFechaCierreOt.setText(ordenDeTrabajo.getFechaEntregado() != null ? ordenDeTrabajo.getFechaEntregado().toString() : "");
+		this.textTrabajoSugeridoOt.setText(ordenDeTrabajo.getTrabajoSujerido());
+		this.textTrabajoSolicitadoOt.setText(ordenDeTrabajo.getTrabajoSolicitado());
+	}
+	
 	public void setData(List<VehiculoConOrdenDeTrabajoDTO> vehiculos) {
 		this.vehiculos = vehiculos;
 		for (VehiculoConOrdenDeTrabajoDTO dto : vehiculos) {
@@ -457,7 +525,7 @@ public class PanelClientesView extends JPanel {
 	public Integer getIdDatosPersonalesCliente() {
 		return this.idDatosPersonalesDelCliente;
 	}
-
+	
 	public void setActionSelectVehiculoCliente(ListSelectionListener listener) {
 		this.table.getSelectionModel().addListSelectionListener(listener);
 	}
@@ -475,10 +543,17 @@ public class PanelClientesView extends JPanel {
 	}
 
 	public void setActionRegistrarOrdenDeTrabajo(ActionListener listener) {
-		this.btnRegistrarOrdeDeTrabajo.addActionListener(listener);
+		this.btnRegistrarOrdenDeTrabajo.addActionListener(listener);
 	}
 
 	public void setActionOnEditarCliente(ActionListener listener) {
-		this.btnEditar.addActionListener(listener);
+		this.btnEditarCliente.addActionListener(listener);
+	}
+
+	public void clearAll() {
+		this.clearDataCliente();
+		this.clearDataFichaTecnicaVehiculo();
+		this.clearDataListadoVehiculosCliente();
+		this.clearDataOrdenDeTrabajo();
 	}
 }
