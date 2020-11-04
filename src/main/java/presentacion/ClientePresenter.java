@@ -12,6 +12,7 @@ import business_logic.VehiculosController;
 import business_logic.exceptions.ConflictException;
 import dto.AltaDeVehiculoDTO;
 import dto.AltaOrdenDeTrabajoDTO;
+
 import dto.ClienteDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.Patterns;
@@ -26,6 +27,8 @@ import presentacion.views.utils.ErrorDialog;
 
 public class ClientePresenter {
 
+	private static String CLIENTE_NO_SELECCIONADO = "Debe seleccionar un cliente.";
+	
 	private static final String CONFIRMATION_OT_CREATION = "Ud. está por crear una orden de trabajo ¿Desea confirmar la operación?";
 
 	private PanelClientesView view;
@@ -38,9 +41,11 @@ public class ClientePresenter {
 
 	public ClientePresenter(PanelClientesView view, ClientesController controller,
 			VehiculosController vehiculoController, OrdenesTrabajoController otController) {
+
 		this.view = view;
 		clienteController = controller;
 		this.vehiculosController = vehiculoController;
+
 		ordenDeTrabajoController = otController;
 		
 		view.setActionBuscar((a) -> onBuscar(a));
@@ -50,10 +55,13 @@ public class ClientePresenter {
 				onSelectVehiculoDeCliente();
 			}
 		});
+
+		ClienteFormView.getInstance().setActionOnUpdate(a -> onUpdate(a));
+
 		view.setActionRegistrarCliente((a) -> onDisplayClienteFormView(a));
 		view.setActionRegistrarVehiculo((a) -> onDisplayVehiculoFormView(a));
 		view.setActionRegistrarOrdenDeTrabajo((a) -> onDisplayOrdenDeTrabajoForm(a));
-		view.setActionOnEditarCliente((a)->onUpdate(a));
+		view.setActionOnEditarCliente((a)->onDisplayFormForUpdate(a));
 		
 		ClienteFormView.getInstance().setActionOnSave((a) -> onRegistrarCliente(a));
 		VehiculoFormView.getInstance().setActionSave((a) -> onRegistrarVehiculo(a));
@@ -85,21 +93,18 @@ public class ClientePresenter {
 			ClienteFormView.getInstance().setData(clienteController.readByDni(Integer.parseInt(view.getDniCliente())));
 			ClienteFormView.getInstance().display();
 		}
+		else {
+			new ErrorDialog().showMessages(CLIENTE_NO_SELECCIONADO);
+		}
 	}
-	
+
 	private void onBuscar(ActionEvent a) {
 		String inputDni = view.getDniCliente();
 		List<String> errors = new StringValidator(inputDni).regex("El dni debe ser un numero de dni", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate();
 		if (errors.isEmpty()) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
-				view.clearDataCliente();
-				view.setData(cliente);
-				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
-						.readByIdCliente(cliente.getIdCliente());
-				view.clearDataListadoVehiculosCliente();
-				view.setData(vehiculos);
-				view.clearDataFichaTecnicaVehiculo();
+				refreshData(cliente);
 			}
 		} else {
 			new ErrorDialog().showMessages(errors);
@@ -115,6 +120,16 @@ public class ClientePresenter {
 				view.setData(fichaVehiculo);
 			}
 		}
+	}
+
+
+	private void refreshData(ClienteDTO cliente) {
+		view.clearDataCliente();
+		view.setData(cliente);
+		List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController.readByIdCliente(cliente.getIdCliente());
+		view.clearDataListadoVehiculosCliente();
+		view.setData(vehiculos);
+		view.clearDataFichaTecnicaVehiculo();
 	}
 
 	private void onRegistrarCliente(ActionEvent e) {
@@ -184,3 +199,4 @@ public class ClientePresenter {
 		}
 	}
 }
+

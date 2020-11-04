@@ -1,7 +1,14 @@
 package dto;
 
 import java.util.Date;
+
+import java.util.LinkedList;
 import java.util.List;
+
+import dto.validators.CompositeValidator;
+
+import java.util.List;
+
 
 public class ClienteDTO {
 
@@ -15,6 +22,19 @@ public class ClienteDTO {
 
 	public ClienteDTO() {
 
+	}
+
+	public ClienteDTO(AltaClienteDTO altaCliente) {
+		this.datosPersonalesDTO = new DatosPersonalesDTO();
+		datosPersonalesDTO.setNombreCompleto(altaCliente.getNombreCompleto());
+		datosPersonalesDTO.setDni(Integer.parseInt(altaCliente.getDni()));
+		datosPersonalesDTO.setEmail(altaCliente.getEmail());
+		datosPersonalesDTO.setTelefono(altaCliente.getTelefono());
+		datosPersonalesDTO.setCalle(altaCliente.getCalle());
+		datosPersonalesDTO.setAltura(altaCliente.getAltura());
+		datosPersonalesDTO.setPiso(altaCliente.getPiso());
+		datosPersonalesDTO.setDpto(altaCliente.getDpto());
+		datosPersonalesDTO.setLocalidad(altaCliente.getLocalidad());
 	}
 
 	public Integer getIdCliente() {

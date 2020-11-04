@@ -145,4 +145,5 @@ public class DatosPersonalesDTO {
 				+ telefono + ", email=" + email + ", calle=" + calle + ", altura=" + altura + ", piso=" + piso
 				+ ", dpto=" + dpto + ", localidad=" + localidad + "]";
 	}
+
 }
