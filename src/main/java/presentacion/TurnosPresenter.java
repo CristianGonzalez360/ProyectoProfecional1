@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import business_logic.TurnosController;
+import dto.AltaDeTurnoDTO;
 import dto.TurnoDTO;
 import presentacion.views.SupervisorControlView;
 import presentacion.views.TurnoFormView;
@@ -55,20 +56,20 @@ public class TurnosPresenter {
 	}
 
 	private void onSave(ActionEvent a) {
-		TurnoDTO turno = turnoForm.getData();
+		AltaDeTurnoDTO turno = turnoForm.getData();
 
-		if (datosValidos(turno)) {
-			this.controller.save(turno);
+		if (validarDatosPersonales(turno) && validarFechaTurno(turno)) {
+			Integer dniCliente = Integer.parseInt(turno.getDniCliente());
+			TurnoDTO nuevoTurno = new TurnoDTO(dniCliente, turno.getFechaAlta(), turno.getFechaCancelado(),
+					turno.getFechaProgramada(), turno.getNombreCliente(), turno.getTelefonoCliente(),
+					turno.getEmailCliente());
+			this.controller.save(nuevoTurno);
 			turnoForm.dispose();
 		}
 
 	}
 
-	private boolean datosValidos(TurnoDTO turno) {
-		return validarDatosPersonales(turno) && validarFechaTurno(turno);
-	}
-
-	private boolean validarDatosPersonales(TurnoDTO turno) {
+	private boolean validarDatosPersonales(AltaDeTurnoDTO turno) {
 		if (!turno.validate().isEmpty()) {
 			new ErrorDialog().showMessages(turno.validate());
 			return false;
@@ -77,7 +78,7 @@ public class TurnosPresenter {
 
 	}
 
-	private boolean validarFechaTurno(TurnoDTO turno) {
+	private boolean validarFechaTurno(AltaDeTurnoDTO turno) {
 		if (turno.getFechaProgramada() == null) {
 			new ErrorDialog().showMessages("Debe indicar una fecha para el turno");
 			return false;

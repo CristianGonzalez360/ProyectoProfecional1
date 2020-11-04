@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
+import dto.AltaDeTurnoDTO;
 import dto.TurnoDTO;
 import repositories.TurnosDao;
 import repositories.jdbc.utils.Mapper;
@@ -15,7 +16,7 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 
 	private static final String readByDni = "SELECT * FROM Turnos WHERE Turnos.dniCliente = ?";
 
-	private static final String insert = "INSERT INTO Turnos (idCliente, fechaCanceladoTurno,fechaAltaTurno,fechProgramadaTurno,nombreCliente,dniCliente) VALUES (?,?,?,?,?,?)";
+	private static final String insert = "INSERT INTO Turnos (idCliente, fechaCanceladoTurno, fechaAltaTurno, fechProgramadaTurno, nombreCliente, dniCliente, telefonoCliente, emailCliente) VALUES (?,?,?,?,?,?,?,?)";
 
 	public TurnosDaoImpl(Connection connection) {
 		super(connection);
@@ -29,10 +30,16 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 
 	@Override
 	public boolean insert(TurnoDTO entity) {
-		return getTemplate().query(insert).param(entity.getIdCliente())
+		return getTemplate().query(insert)
+				.param(entity.getIdCliente())
 				.param(entity.getFechaCancelado() == null ? new NullObject() : entity.getFechaCancelado())
-				.param(entity.getFechaAlta()).param(entity.getFechaProgramada()).param(entity.getNombreCliente())
-				.param(entity.getDniCliente()).excecute();
+				.param(entity.getFechaAlta())
+				.param(entity.getFechaProgramada())
+				.param(entity.getNombreCliente())
+				.param(entity.getDniCliente())
+				.param(entity.getTelefonoCliente() == null ? new NullObject() : entity.getTelefonoCliente())
+				.param(entity.getEmailCliente() == null ? new NullObject() : entity.getEmailCliente())
+				.excecute();
 	}
 
 	@Override

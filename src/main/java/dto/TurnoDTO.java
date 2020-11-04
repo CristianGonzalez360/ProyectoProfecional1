@@ -21,9 +21,25 @@ public class TurnoDTO {
 	private Date fechaProgramada;
 
 	private String nombreCliente;
+	private String telefonoCliente;
+	private String emailCliente;
 
 	public TurnoDTO() {
 
+	}
+	
+	public TurnoDTO(Integer dniCliente, Date fechaAlta, Date fechaCancelado, Date fechaProgramada, String nombreCliente,
+			String telefonoCliente, String emailCliente) {
+		super();
+		this.idCliente = 0;
+		this.idTurno = 0;
+		this.dniCliente = dniCliente;
+		this.fechaAlta = fechaAlta;
+		this.fechaCancelado = fechaCancelado;
+		this.fechaProgramada = fechaProgramada;
+		this.nombreCliente = nombreCliente;
+		this.telefonoCliente = telefonoCliente;
+		this.emailCliente = emailCliente;
 	}
 
 	public TurnoDTO makeTestDTO() {
@@ -97,7 +113,8 @@ public class TurnoDTO {
 	public String toString() {
 		return "TurnoDTO [idTurno=" + idTurno + ", idCliente=" + idCliente + ", dniCliente=" + dniCliente
 				+ ", fechaAlta=" + fechaAlta + ", fechaCancelado=" + fechaCancelado + ", fechaProgramada="
-				+ fechaProgramada + ", nombreCliente=" + nombreCliente + "]";
+				+ fechaProgramada + ", nombreCliente=" + nombreCliente + ", telefonoCliente=" + telefonoCliente
+				+ ", emailCliente=" + emailCliente + "]";
 	}
 
 	public void setDniCliente(Integer dni) {
@@ -107,4 +124,21 @@ public class TurnoDTO {
 	public Integer getDniCliente() {
 		return this.dniCliente;
 	}
+
+	public String getTelefonoCliente() {
+		return telefonoCliente;
+	}
+
+	public void setTelefonoCliente(String telefonoCliente) {
+		this.telefonoCliente = telefonoCliente;
+	}
+
+	public String getEmailCliente() {
+		return emailCliente;
+	}
+
+	public void setEmailCliente(String emailCliente) {
+		this.emailCliente = emailCliente;
+	}
+
 }
