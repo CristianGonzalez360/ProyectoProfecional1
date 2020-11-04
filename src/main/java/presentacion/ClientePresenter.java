@@ -37,7 +37,6 @@ public class ClientePresenter {
 
 	private VehiculosController vehiculosController;
 
-
 	private OrdenesTrabajoController ordenDeTrabajoController;
 
 	public ClientePresenter(PanelClientesView view, ClientesController controller,
