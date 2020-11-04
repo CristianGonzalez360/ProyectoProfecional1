@@ -6,11 +6,14 @@ import java.util.List;
 import dto.DatosPersonalesDTO;
 import repositories.DatosPersonalesDao;
 import repositories.jdbc.utils.Mapper;
+import repositories.jdbc.utils.NullObject;
 
 public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> implements DatosPersonalesDao {
 
 	private static final String insertDatosPersonales = "INSERT INTO DatosPersonales (nombreCompleto, dni, telefono, email, calle, altura,piso, dpto, localidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+	private static final String update = "UPDATE DatosPersonales SET nombreCompleto = ?, dni = ?, telefono = ?, email = ?, calle = ?, altura = ?,piso = ?, dpto = ?, localidad = ? WHERE idDatosPersonales = ?";
+	
 	private static final String readAll = "SELECT * FROM DatosPersonales";
 
 	private static final String readByDni = readAll + " wHERE DatosPersonales.dni = ?";
@@ -28,7 +31,19 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 
 	@Override
 	public boolean update(DatosPersonalesDTO entity) {
-		return false;
+		return getTemplate()
+				.query(update)
+				.param(entity.getNombreCompleto())
+				.param(entity.getDni() == null ? new NullObject() : entity.getDni())
+				.param(entity.getTelefono())
+				.param(entity.getEmail())
+				.param(entity.getCalle())
+				.param(entity.getAltura() == null ? new NullObject() : entity.getAltura())
+				.param(entity.getPiso() == null ? new NullObject() : entity.getPiso())
+				.param(entity.getDpto())
+				.param(entity.getLocalidad())
+				.param(entity.getId())
+				.excecute();
 	}
 
 	@Override

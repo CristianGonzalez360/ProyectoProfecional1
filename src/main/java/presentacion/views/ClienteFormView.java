@@ -1,6 +1,7 @@
 package presentacion.views;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
@@ -8,6 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 import dto.ClienteDTO;
 import dto.DatosPersonalesDTO;
@@ -150,22 +156,7 @@ public class ClienteFormView extends JDialog {
 		panel_1.add(btnCancelar);
 
 		setVisible(false);
-//		{//duda si va o no
-//			JPanel buttonPane = new JPanel();
-//			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-//			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-//			{
-//				JButton okButton = new JButton("OK");
-//				okButton.setActionCommand("OK");
-//				buttonPane.add(okButton);
-//				getRootPane().setDefaultButton(okButton);
-//			}
-//			{
-//				JButton cancelButton = new JButton("Cancel");
-//				cancelButton.setActionCommand("Cancel");
-//				buttonPane.add(cancelButton);
-//			}
-//		}
+		clearData();
 	}
 
 	public static ClienteFormView getInstance() {
@@ -219,15 +210,15 @@ public class ClienteFormView extends JDialog {
 	}
 
 	public void clearData() {
-		textNombre.setText(null);
-		textDni.setText(null);
-		textEmail.setText(null);
-		textTelefono.setText(null);
-		textCalle.setText(null);
-		textAltura.setText(null);
-		textPiso.setText(null);
-		textDepto.setText(null);
-		textLocalidad.setText(null);
+		textNombre.setText("");
+		textDni.setText("");
+		textEmail.setText("");
+		textTelefono.setText("");
+		textCalle.setText("");
+		textAltura.setText("");
+		textPiso.setText("");
+		textDepto.setText("");
+		textLocalidad.setText("");
 
 		this.btnSalvar.setVisible(true);
 		this.btnUpdate.setVisible(false);

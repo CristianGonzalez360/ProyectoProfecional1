@@ -33,32 +33,39 @@ public class AltaDeVehiculoDTO {
 
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
-		errors.addAll(new StringValidator(nroMotor)
-				.regex("El nro de motor debe ser un número", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
-		errors.addAll(numberValidtion(nroChasis, "El nro de chasis debe ser un número"));
-		errors.addAll(numberValidtion(kilometraje, "El kilometraje debe ser un número"));
-		errors.addAll(new StringValidator(marca).notBlank("La marca del vehículo no debe ser vacía").validate());
-		errors.addAll(new StringValidator(patente).notBlank("La patente no debe ser vacía").validate());
-		errors.addAll(new StringValidator(asegurador).notBlank("El asegurador no puede ser vacio").validate());
-		errors.addAll(numberValidtion(nroPolizaSeguro, "El nro. de la poliza del seguro debe ser un nummero"));
-		errors.addAll(numberValidtion(modelo, "El modelo del vehiculo debe ser un nummero"));
-		if (!kilometrajeGarantia.isEmpty())
-			errors.addAll(new StringValidator(kilometrajeGarantia)
-					.regex("El kilometraje en garantía debe ser un numero", Patterns.NON_NEGATIVE_INTEGER_FIELD)
-					.validate());
+		errors.addAll(valNum(this.kilometrajeGarantia, "El kilometraje en garantía debe ser un número"));
+		errors.addAll(valNum(this.kilometraje, "El kilometraje debe ser un número"));
+		errors.addAll(valNum(this.nroPolizaSeguro, "El nro. de la poliza debe ser un número"));
+		errors.addAll(valNum(this.nroChasis, "El número de chasis debe ser un número"));
+		errors.addAll(valNum(this.nroMotor, "El número de motor debe ser un número"));
+		errors.addAll(new StringValidator(this.marca).notBlank("La marca es obligatoria.").validate());
+		errors.addAll(new StringValidator(this.asegurador).notBlank("El asegurador es obligatorio").validate());
+		errors.addAll(new StringValidator(this.patente).notBlank("La patente es obligatoria").validate());
 		return errors;
 	}
-
-	public List<String> numberValidtion(String field, String message) {
-		return new StringValidator(field).regex(message, Patterns.NON_NEGATIVE_INTEGER_FIELD).validate();
+		
+	public List<String> valNum(String atr, String mess) {
+		return new StringValidator(atr).regex(mess, Patterns.NON_NEGATIVE_INTEGER_FIELD).validate();
 	}
-
+	
 	public AltaDeVehiculoDTO() {
 		super();
+		nroChasis = "";
+		nroMotor = "";
+		kilometraje ="";
+		marca= "";
+		modelo= "";
+		patente="";
+		color="";
+		combustion="";
+		descripcion="";
+		asegurador="";
+		nroPolizaSeguro="";
+		kilometrajeGarantia="";
 	}
 
 	public String getNroChasis() {
-		return nroChasis;
+		return this.nroChasis;
 	}
 
 	public void setNroChasis(String nroChasis) {
@@ -95,6 +102,14 @@ public class AltaDeVehiculoDTO {
 
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
+	}
+
+	public String getPatente() {
+		return patente;
+	}
+
+	public void setPatente(String patente) {
+		this.patente = patente;
 	}
 
 	public String getColor() {
@@ -143,13 +158,5 @@ public class AltaDeVehiculoDTO {
 
 	public void setKilometrajeGarantia(String kilometrajeGarantia) {
 		this.kilometrajeGarantia = kilometrajeGarantia;
-	}
-
-	public String getPatente() {
-		return patente;
-	}
-
-	public void setPatente(String patente) {
-		this.patente = patente;
 	}
 }
