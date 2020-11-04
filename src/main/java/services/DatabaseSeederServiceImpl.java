@@ -42,7 +42,6 @@ public class DatabaseSeederServiceImpl {
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 		for (TurnoDTO target : graph.getTurnos()) {
-			System.out.println(target.toString());
 			daos.makeTurnosDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
