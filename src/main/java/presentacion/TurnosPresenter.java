@@ -38,10 +38,14 @@ public class TurnosPresenter {
 
 		if (cancelado == 0) {
 			TurnoDTO turnoSeleccionado = supervisorView.getSelectedTurno();
+			
+			if(turnoSeleccionado == null)
+				return;
+			
 			turnoSeleccionado.setFechaCancelado(new Date());
 			supervisorView.clearTurnos();
 
-			JOptionPane.showMessageDialog(supervisorView, "Turno Cancelado.");
+			JOptionPane.showMessageDialog(supervisorView, String.format("Turno con Nro. Turno: %s fué cancelado.", turnoSeleccionado.getIdTurno()));
 		}
 	}
 
