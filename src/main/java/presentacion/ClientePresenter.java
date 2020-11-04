@@ -57,14 +57,12 @@ public class ClientePresenter {
 			}
 		});
 
-
-		this.view.setActionOnEditarCliente(a -> onDisplayFormForUpdate(a));
 		ClienteFormView.getInstance().setActionOnUpdate(a -> onUpdate(a));
 
 		view.setActionRegistrarCliente((a) -> onDisplayClienteFormView(a));
 		view.setActionRegistrarVehiculo((a) -> onDisplayVehiculoFormView(a));
 		view.setActionRegistrarOrdenDeTrabajo((a) -> onDisplayOrdenDeTrabajoForm(a));
-		view.setActionOnEditarCliente((a)->onUpdate(a));
+		view.setActionOnEditarCliente((a)->onDisplayFormForUpdate(a));
 		
 		ClienteFormView.getInstance().setActionOnSave((a) -> onRegistrarCliente(a));
 		VehiculoFormView.getInstance().setActionSave((a) -> onRegistrarVehiculo(a));
@@ -95,6 +93,9 @@ public class ClientePresenter {
 			ClienteFormView.getInstance().clearData();
 			ClienteFormView.getInstance().setData(clienteController.readByDni(Integer.parseInt(view.getDniCliente())));
 			ClienteFormView.getInstance().display();
+		}
+		else {
+			new ErrorDialog().showMessages(CLIENTE_NO_SELECCIONADO);
 		}
 	}
 
