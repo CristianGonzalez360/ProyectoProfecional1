@@ -3,21 +3,29 @@ package dto;
 public class VehiculoConOrdenDeTrabajoDTO {
 
 	private Integer id;
-	
+
 	private Integer idFichaTecnica;
-	
+
 	private Integer idCliente;
-	
+
 	private Integer kilometrajeGarantia;
-	
+
 	private String aseguradora;
-	
+
 	private Integer nroPolizaSeguro;
-	
+
 	private String patente;
 
-	public VehiculoConOrdenDeTrabajoDTO() {}
-	
+	public VehiculoConOrdenDeTrabajoDTO() {
+	}
+
+	public VehiculoConOrdenDeTrabajoDTO(AltaDeVehiculoDTO vehiculoDeAlta) {
+		this.kilometrajeGarantia = Integer.parseInt(vehiculoDeAlta.getKilometrajeGarantia());
+		this.aseguradora = vehiculoDeAlta.getAsegurador();
+		this.nroPolizaSeguro = Integer.parseInt(vehiculoDeAlta.getNroPolizaSeguro());
+		this.patente = vehiculoDeAlta.getPatente();
+	}
+
 	public Integer getId() {
 		return id;
 	}

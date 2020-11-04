@@ -18,8 +18,8 @@ CREATE TABLE DatosPersonales (
     telefono VARCHAR(15),
     email VARCHAR(25),
     calle VARCHAR(25),
-    altura INT,
-    piso INT,
+    altura VARCHAR(5),
+    piso VARCHAR(2),
     dpto VARCHAR(4),
     localidad VARCHAR(25),
     PRIMARY KEY (idDatosPersonales)

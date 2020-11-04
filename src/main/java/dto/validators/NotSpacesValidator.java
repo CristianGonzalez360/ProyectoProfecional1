@@ -16,7 +16,8 @@ public class NotSpacesValidator implements Validator<String> {
 		int size = target.length();
 		int withoutSpaces = target.trim().length();
 		LinkedList<String> lst = new LinkedList<>();
-		if(size > withoutSpaces) lst.add(message);
+		if (size > withoutSpaces)
+			lst.add(message);
 		return lst;
 	}
 }

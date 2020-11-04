@@ -23,4 +23,6 @@ public abstract class ControllersFactory {
 
 	public abstract VehiculosController makeVehiculosController();
 
+	public abstract OrdenesTrabajoController makeOrdenesDeTrabajoController();
+
 }

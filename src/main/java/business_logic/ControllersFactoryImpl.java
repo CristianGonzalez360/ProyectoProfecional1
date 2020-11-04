@@ -8,43 +8,54 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	protected DaosFactory daos;
 
 	private LoginController loginController;
-	
+
 	private TurnosController turnosController;
 
 	private ClientesController clientesController;
 
 	private VehiculosController vehiculosController;
-	
+
+	private OrdenesTrabajoController ordenesDeTrabajoController;
+
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
 	}
 
-	@Override 
+	@Override
 	public LoginController makeLoginController() {
-		if(loginController == null)
+		if (loginController == null)
 			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance());
 		return loginController;
 	}
 
 	@Override
 	public TurnosController makeTurnosController() {
-		if(turnosController == null)
+		if (turnosController == null)
 			turnosController = new TurnosController(daos.makeTurnosDao());
 		return turnosController;
 	}
-	
+
 	@Override
 	public ClientesController makeClientesController() {
-		if(clientesController == null)
-			clientesController = new ClientesController(daos.makeClienteDao());
+		if (clientesController == null)
+			clientesController = new ClientesController(daos.makeClienteDao(), daos.makeDatosPersonalesDao());
 		return clientesController;
 	}
 
 	@Override
 	public VehiculosController makeVehiculosController() {
-		if(vehiculosController == null) {
-			this.vehiculosController = new VehiculosController(daos.makeVehiculoConOrdeDeTrabajoDao(), daos.makeFichaTecnicaVehiculoDao());
+		if (vehiculosController == null) {
+			this.vehiculosController = new VehiculosController(daos.makeVehiculoConOrdeDeTrabajoDao(),
+					daos.makeFichaTecnicaVehiculoDao());
 		}
 		return this.vehiculosController;
+	}
+
+	@Override
+	public OrdenesTrabajoController makeOrdenesDeTrabajoController() {
+		if (ordenesDeTrabajoController == null)
+			ordenesDeTrabajoController = new OrdenesTrabajoController(daos.makeOrdenDeTrabajoDao(),
+					SessionServiceImpl.getInstance());
+		return ordenesDeTrabajoController;
 	}
 }

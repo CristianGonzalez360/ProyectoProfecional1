@@ -16,11 +16,11 @@ class LoginControllerTest {
 	private SessionService service = Mockito.mock(SessionService.class);
 	private UsuariosDao dao = Mockito.mock(UsuariosDao.class);
 	private LoginController controller = new LoginController(dao, service);
-	
+
 	UsuarioDTO target = new UsuarioDTO().makeTestDTO();
 	String nombreDeUsuario = target.getCuenta().getNombreUsuario();
 	String password = target.getCuenta().getPassword();
-	
+
 	@Test
 	void testLoginController() {
 		Assertions.assertNotNull(dao);
@@ -30,24 +30,24 @@ class LoginControllerTest {
 	@Test
 	void testLogUserThrowsNotFoundException() {
 		Mockito.when(dao.readByCredentials(nombreDeUsuario, password)).thenReturn(null);
-		Assertions.assertThrows(ForbiddenException.class, ()->{
+		Assertions.assertThrows(ForbiddenException.class, () -> {
 			controller.logUser(new UserCrendentialsDTO(nombreDeUsuario, password));
 		});
 	}
-	
+
 	@Test
 	void testLogUserThrowsForbiddenException() {
 		Mockito.when(dao.readByCredentials(nombreDeUsuario, password)).thenReturn(target);
-		Assertions.assertThrows(ForbiddenException.class, ()-> {
+		Assertions.assertThrows(ForbiddenException.class, () -> {
 			controller.logUser(new UserCrendentialsDTO(nombreDeUsuario, password));
 		});
 	}
-	
-	@Test 
+
+	@Test
 	void testLogUserThrowsForbiddenExceptionBySessionActive() {
 		Mockito.when(dao.readByCredentials(nombreDeUsuario, password)).thenReturn(target);
 		Mockito.when(service.getActiveSession()).thenReturn(new SessionDTO());
-		Assertions.assertThrows(ForbiddenException.class, ()-> {
+		Assertions.assertThrows(ForbiddenException.class, () -> {
 			controller.logUser(new UserCrendentialsDTO(nombreDeUsuario, password));
 		});
 	}

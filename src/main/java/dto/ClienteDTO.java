@@ -1,21 +1,25 @@
 package dto;
 
 import java.util.Date;
+
 import java.util.LinkedList;
 import java.util.List;
 
 import dto.validators.CompositeValidator;
 
+import java.util.List;
+
+
 public class ClienteDTO {
 
 	private Integer idCliente;
-	
+
 	private Integer idDatosPersonales;
-	
+
 	private DatosPersonalesDTO datosPersonalesDTO;
-	
+
 	private Date fechaAltaCliente;
-	
+
 	public ClienteDTO() {
 
 	}
@@ -27,8 +31,8 @@ public class ClienteDTO {
 		datosPersonalesDTO.setEmail(altaCliente.getEmail());
 		datosPersonalesDTO.setTelefono(altaCliente.getTelefono());
 		datosPersonalesDTO.setCalle(altaCliente.getCalle());
-		datosPersonalesDTO.setAltura(Integer.parseInt(altaCliente.getAltura()));
-		datosPersonalesDTO.setPiso(Integer.parseInt(altaCliente.getPiso()));
+		datosPersonalesDTO.setAltura(altaCliente.getAltura());
+		datosPersonalesDTO.setPiso(altaCliente.getPiso());
 		datosPersonalesDTO.setDpto(altaCliente.getDpto());
 		datosPersonalesDTO.setLocalidad(altaCliente.getLocalidad());
 	}
@@ -74,6 +78,9 @@ public class ClienteDTO {
 	public String toString() {
 		return "ClienteDTO [idCliente=" + idCliente + ", idDatosPersonales=" + idDatosPersonales
 				+ ", datosPersonalesDTO=" + datosPersonalesDTO + ", fechaAltaCliente=" + fechaAltaCliente + "]";
-	}	
-}
+	}
 
+	public List<String> validate() {
+		return this.datosPersonalesDTO.validate();
+	}
+}

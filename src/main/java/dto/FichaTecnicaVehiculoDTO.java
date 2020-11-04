@@ -1,31 +1,41 @@
 package dto;
 
-import java.util.Date;
-
 public class FichaTecnicaVehiculoDTO {
 
 	private Integer id;
-	
+
 	private Integer nroChasis;
-	
+
 	private Integer nroMotor;
-	
+
 	private Integer kilometraje;
-	
+
 	private String marca;
-	
+
 	private Integer modelo;
-	
+
 	private String color;
-	
+
 	private String combustion;
-	
+
 	private String descripcion;
+
+	private String patente;
 	
 	public FichaTecnicaVehiculoDTO() {
-		
 	}
-	
+
+	public FichaTecnicaVehiculoDTO(AltaDeVehiculoDTO vehiculoDeAlta) {
+		this.nroChasis = Integer.parseInt(vehiculoDeAlta.getNroChasis());
+		this.nroMotor = Integer.parseInt(vehiculoDeAlta.getNroMotor());
+		this.kilometraje = Integer.parseInt(vehiculoDeAlta.getKilometraje());
+		this.marca = vehiculoDeAlta.getMarca();
+		this.modelo = Integer.parseInt(vehiculoDeAlta.getModelo());
+		this.color = vehiculoDeAlta.getColor();
+		this.combustion = vehiculoDeAlta.getCombustion();
+		this.descripcion = vehiculoDeAlta.getDescripcion();
+	}
+
 	public FichaTecnicaVehiculoDTO makeTestDTO() {
 		FichaTecnicaVehiculoDTO ret = new FichaTecnicaVehiculoDTO();
 		ret.setNroChasis(4576);
@@ -35,10 +45,10 @@ public class FichaTecnicaVehiculoDTO {
 		ret.setModelo(1977);
 		ret.setColor("rojo");
 		ret.setCombustion("nafta");
-		ret.setDescripcion("");
+		ret.setDescripcion("Funciona correctamente");
 		return ret;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -46,8 +56,6 @@ public class FichaTecnicaVehiculoDTO {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
 
 	public Integer getNroChasis() {
 		return nroChasis;
@@ -113,15 +121,19 @@ public class FichaTecnicaVehiculoDTO {
 		this.descripcion = descripcion;
 	}
 
+	public String getPatente() {
+		return patente;
+	}
+
+	public void setPatente(String patente) {
+		this.patente = patente;
+	}
+
 	@Override
 	public String toString() {
 		return "FichaTecnicaVehiculoDTO [id=" + id + ", nroChasis=" + nroChasis + ", nroMotor=" + nroMotor
 				+ ", kilometraje=" + kilometraje + ", marca=" + marca + ", modelo=" + modelo + ", color=" + color
-				+ ", combustion=" + combustion + ", descripcion=" + descripcion + "]";
+				+ ", combustion=" + combustion + ", descripcion=" + descripcion + ", patente=" + patente + "]";
 	}
 
-	public String getPatente() {
-		// TODO Auto-generated method stub
-		return "";
-	}
 }

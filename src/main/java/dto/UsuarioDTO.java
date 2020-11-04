@@ -5,15 +5,15 @@ import java.util.Date;
 public class UsuarioDTO {
 
 	private Integer id;
-	
+
 	private CuentaDTO cuenta;
-	
+
 	private DatosPersonalesDTO datos;
-	
+
 	public UsuarioDTO() {
-		
+
 	}
-	
+
 	public UsuarioDTO(Integer id, CuentaDTO cuenta, DatosPersonalesDTO datos) {
 		super();
 		this.id = id;
@@ -47,30 +47,30 @@ public class UsuarioDTO {
 
 	public UsuarioDTO makeTestDTO() {
 		DatosPersonalesDTO datos = new DatosPersonalesDTO();
-				datos.setId(2);
-				datos.setNombreCompleto("u001");
-				datos.setDni(2233);
-				datos.setTelefono("1111");
-				datos.setEmail("u001@mail.com");
-				datos.setCalle("calle");
-				datos.setAltura(2);
-				datos.setPiso(1);
-				datos.setDpto("A");
-				datos.setLocalidad("loc");
+		datos.setId(2);
+		datos.setNombreCompleto("u001");
+		datos.setDni(2233);
+		datos.setTelefono("1111");
+		datos.setEmail("u001@mail.com");
+		datos.setCalle("calle");
+		datos.setAltura("2");
+		datos.setPiso("1");
+		datos.setDpto("A");
+		datos.setLocalidad("loc");
 		CuentaDTO cuenta = new CuentaDTO();
-				cuenta.setIdCuenta(1);
-				cuenta.setFechaDeAlta(new Date());
-				cuenta.setFechaDeBaja(new Date());
-				cuenta.setNombreUsuario("u001");
-				cuenta.setPassword("p001");
-				cuenta.setRole("admin");
+		cuenta.setIdCuenta(1);
+		cuenta.setFechaDeAlta(new Date());
+		cuenta.setFechaDeBaja(new Date());
+		cuenta.setNombreUsuario("u001");
+		cuenta.setPassword("p001");
+		cuenta.setRole("admin");
 		UsuarioDTO usuario = new UsuarioDTO(null, cuenta, datos);
 		return usuario;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "UsuarioDTO [id=" + id + ", cuenta=" + cuenta + ", datos=" + datos + "]";
 	}
-	
+
 }

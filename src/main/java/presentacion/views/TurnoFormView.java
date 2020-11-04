@@ -164,7 +164,7 @@ public class TurnoFormView extends JDialog {
 	public String getTextNombre() {
 		return textNombre.getText();
 	}
-
+	
 	public Integer getDNI() {
 		Integer dniCliente;
 		try {
