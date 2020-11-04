@@ -32,7 +32,7 @@ public class ClientesController {
 		return clientesDao.readByDNI(dni);
 	}
 
-	public void save(ClienteDTO cliente) {
+	public void save(ClienteDTO cliente) throws ConflictException{
 		assert cliente != null;
 		if (clientesDao.readByDNI(cliente.getDatosPersonalesDTO().getDni()) != null)
 			throw new ConflictException(CONFLICT_DNI);
