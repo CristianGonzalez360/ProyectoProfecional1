@@ -14,6 +14,8 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 	private static final String readAll = "SELECT idOT, tipoTrabajo, idUsuAlta, idVehiculoOt,"
 			+ "fechaAltaOt, trabajoSolicitado, trabajoSujerido, fechaEntregadoVehiculo " + "FROM OrdenesDeTrabajo";
 
+	private static final String readByIdVehiculo = readAll + " " + "WHERE idVehiculoOt = ? AND fechaEntregadoVehiculo IS NULL";
+	
 	private static final String insert = "INSERT INTO OrdenesDeTrabajo (tipoTrabajo, idUsuAlta, idVehiculoOt, fechaAltaOt, trabajoSolicitado, trabajoSujerido, fechaEntregadoVehiculo) VALUES (?,?,?,?,?,?,?)";
 
 	public OrdenesDeTrabajoDaoImpl(Connection connection) {
@@ -49,6 +51,12 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 	public List<OrdenDeTrabajoDTO> readAll() {
 		return getTemplate().query(readAll).excecute(getMapper());
 	}
+	
+	@Override
+	public OrdenDeTrabajoDTO readByIdVehiculo(Integer id) {
+		List<OrdenDeTrabajoDTO> dtos = getTemplate().query(readByIdVehiculo).param(id).excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);		
+	}
 
 	@Override
 	protected Mapper<OrdenDeTrabajoDTO> getMapper() {
@@ -59,7 +67,7 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 				OrdenDeTrabajoDTO ot = new OrdenDeTrabajoDTO();
 				ot.setIdOrdenTrabajo((Integer) obj[0]);
 				ot.setTipoOrdeTrabajo((String) obj[1]);
-				ot.setIdUsuarioAlta((Integer) obj[2]);
+				ot.setIdUsuarioAlta(obj[2] == null ? null : (Integer) obj[2]);
 				ot.setIdVehiculoOt((Integer) obj[3]);
 				ot.setFechaDeAlta((Date) obj[4]);
 				ot.setTrabajoSolicitado((String) obj[5]);

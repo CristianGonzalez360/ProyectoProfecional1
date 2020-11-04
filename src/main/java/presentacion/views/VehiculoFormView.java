@@ -88,52 +88,31 @@ public class VehiculoFormView extends JDialog {
 		textNroChasis = new JTextField();
 		contentPanel.add(textNroChasis, "4, 2");
 		textNroChasis.setColumns(10);
-
 		contentPanel.add(lblNewLabel_1, "6, 2, right, default");
-
 		contentPanel.add(textNroDeMotor, "8, 2, fill, default");
-
 		contentPanel.add(lblNewLabel_2, "2, 4, left, default");
-
 		contentPanel.add(textPatente, "4, 4, fill, default");
-
 		contentPanel.add(lblNewLabel_3, "6, 4");
-
 		contentPanel.add(textKilometraje, "8, 4, fill, default");
-
 		contentPanel.add(lblNewLabel_4, "2, 6");
-
 		contentPanel.add(textMarca, "4, 6, fill, default");
-
 		contentPanel.add(lblNewLabel_5, "6, 6");
-
 		contentPanel.add(textModelo, "8, 6, fill, default");
-
 		contentPanel.add(lblNewLabel_6, "2, 8");
-
 		contentPanel.add(textColor, "4, 8, fill, default");
-
 		contentPanel.add(lblNewLabel_7, "6, 8");
-
 		contentPanel.add(textCombustion, "8, 8, fill, default");
-
 		contentPanel.add(lblNewLabel_8, "2, 10");
-
 		contentPanel.add(textAsegurador, "4, 10, fill, default");
-
 		contentPanel.add(lblNewLabel_9, "6, 10");
-
 		contentPanel.add(textNroPoliza, "8, 10, fill, default");
-
 		contentPanel.add(lblNewLabel_10, "2, 12");
-
 		contentPanel.add(textGarantia, "4, 12, fill, default");
-
 		contentPanel.add(panel, "2, 14, 7, 1, fill, bottom");
-
 		panel.add(btnSalvar);
-
 		panel.add(btnCancelar);
+		setModal(true);
+		clearData();
 	}
 
 	public void clearData() {
@@ -161,8 +140,8 @@ public class VehiculoFormView extends JDialog {
 		dto.setColor(this.textColor.getText());
 		dto.setCombustion(this.textCombustion.getText());
 		dto.setAsegurador(this.textAsegurador.getText());
-		dto.setNroPolizaSeguro(this.textNroPoliza.getText());
-		dto.setKilometraje(this.textGarantia.getText());
+		dto.setNroPolizaSeguro(this.textNroPoliza.getText());		
+		dto.setKilometrajeGarantia(this.textGarantia.getText());
 		return dto;
 	}
 
