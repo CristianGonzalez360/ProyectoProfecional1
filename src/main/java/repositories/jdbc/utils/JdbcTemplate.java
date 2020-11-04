@@ -84,15 +84,15 @@ public class JdbcTemplate {
 	private void injectParams(PreparedStatement statement) {
 		params.forEach((k, v) -> {
 			try {
-				if (v.type.equals(NullObject.class)) {				
-					statement.setObject(k, null);				
+				if (v.type.equals(NullObject.class)) {
+					statement.setObject(k, null);
 				} else if (v.type.equals(Integer.class)) {
 					statement.setInt(k, (Integer) v.value);
 				} else if (v.type.equals(String.class)) {
 					statement.setString(k, (String) v.value);
 				} else if (v.type.equals(java.util.Date.class)) {
 					java.util.Date mydate = (java.util.Date) v.value;
-					java.sql.Date sqldate =  new java.sql.Date(mydate.getTime());
+					java.sql.Date sqldate = new java.sql.Date(mydate.getTime());
 					statement.setDate(k, sqldate);
 				}
 			} catch (SQLException t) {

@@ -29,36 +29,36 @@ public class DatabaseSeederServiceImpl {
 
 	public void seedDatabase() {
 		DatabaseGraph graph = loadDatabaseGraph();
-		for(CuentaDTO target : graph.getCuentas()) {
+		for (CuentaDTO target : graph.getCuentas()) {
 			daos.makeCuentasDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(DatosPersonalesDTO target : graph.getDatosPersonales()) {
+		for (DatosPersonalesDTO target : graph.getDatosPersonales()) {
 			daos.makeDatosPersonalesDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(UsuarioDTO target: graph.getUsuarios()) {
+		for (UsuarioDTO target : graph.getUsuarios()) {
 			daos.makeUsuariosDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(TurnoDTO target: graph.getTurnos()) {
+		for (TurnoDTO target : graph.getTurnos()) {
 			daos.makeTurnosDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(FichaTecnicaVehiculoDTO target: graph.getFichaTecnicaVehiculos()) {
+		for (FichaTecnicaVehiculoDTO target : graph.getFichaTecnicaVehiculos()) {
 			daos.makeFichaTecnicaVehiculoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 
-		for(OrdenDeTrabajoDTO target : graph.getOrdenesDeTrabajo()) {
+		for (OrdenDeTrabajoDTO target : graph.getOrdenesDeTrabajo()) {
 			daos.makeOrdenDeTrabajoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(ClienteDTO target : graph.getClientes()) {
+		for (ClienteDTO target : graph.getClientes()) {
 			daos.makeClienteDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(VehiculoConOrdenDeTrabajoDTO target : graph.getVehiculosConOrdenDeTrabajo()) {
+		for (VehiculoConOrdenDeTrabajoDTO target : graph.getVehiculosConOrdenDeTrabajo()) {
 			daos.makeVehiculoConOrdeDeTrabajoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}

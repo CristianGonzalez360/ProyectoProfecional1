@@ -6,12 +6,14 @@ import org.mockito.Mockito;
 
 import dto.ClienteDTO;
 import repositories.ClientesDao;
+import repositories.DatosPersonalesDao;
 
 class ClientesControllerTest {
 
 	ClientesDao dao = Mockito.mock(ClientesDao.class);
-	ClientesController controller = new ClientesController(dao);
-	
+	DatosPersonalesDao datosdao = Mockito.mock(DatosPersonalesDao.class);
+	ClientesController controller = new ClientesController(dao, datosdao);
+
 	@Test
 	void testClientesController() {
 		Assertions.assertNotNull(dao);

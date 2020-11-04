@@ -1,12 +1,10 @@
 package dto;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 import dto.validators.StringValidator;
-import presentacion.views.utils.ErrorDialog;
 
 public class TurnoDTO {
 

@@ -3,19 +3,19 @@ package dto;
 import java.util.Date;
 
 public class CuentaDTO {
-	
+
 	private Integer idCuenta;
-	
+
 	private Date fechaDeAlta;
-	
+
 	private Date fechaDeBaja;
-	
+
 	private String nombreUsuario;
-	
+
 	private String password;
-	
+
 	private String role;
-		
+
 	public CuentaDTO() {
 	}
 
@@ -66,7 +66,7 @@ public class CuentaDTO {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "CuentaDTO [idCuenta=" + idCuenta + ", fechaDeAlta=" + fechaDeAlta + ", fechaDeBaja=" + fechaDeBaja

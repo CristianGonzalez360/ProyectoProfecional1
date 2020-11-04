@@ -24,17 +24,16 @@ public abstract class ReporteViewImpl {
 	private JasperPrint reporteLleno;
 	private Logger log = Logger.getLogger(ReporteViewImpl.class);
 	private String file;
-	
+
 	public ReporteViewImpl(String file) {
 		this.file = file;
 	}
-	
+
 	public <T> void setData(List<T> dto) {
 		Map<String, Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 		try {
-			this.reporte = (JasperReport) JRLoader
-					.loadObjectFromFile("reportes" + File.separator + file);
+			this.reporte = (JasperReport) JRLoader.loadObjectFromFile("reportes" + File.separator + file);
 			this.reporteLleno = JasperFillManager.fillReport(this.reporte, parametersMap,
 					new JRBeanCollectionDataSource(dto));
 			log.info("Se cargó correctamente el reporte");

@@ -47,12 +47,12 @@ public class StringValidator {
 		validators.add(new NotInLowercaseValidator(message));
 		return this;
 	}
-	
+
 	public StringValidator notSpaces(String message) {
 		validators.add(new NotSpacesValidator(message));
 		return this;
 	}
-	
+
 	public List<String> validate() {
 		return new CompositeValidator<String>(validators).validate(value);
 	}

@@ -1,31 +1,58 @@
 package dto;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import dto.validators.StringValidator;
+
 public class AltaDeVehiculoDTO {
-	
+
 	private String nroChasis;
-	
+
 	private String nroMotor;
-	
+
 	private String kilometraje;
-	
+
 	private String marca;
-	
+
 	private String modelo;
-	
+
 	private String patente;
-	
+
 	private String color;
-	
+
 	private String combustion;
-	
+
 	private String descripcion;
-	
+
 	private String asegurador;
-	
+
 	private String nroPolizaSeguro;
-	
+
 	private String kilometrajeGarantia;
-	
+
+	public List<String> validate() {
+		List<String> errors = new LinkedList<>();
+		errors.addAll(new StringValidator(nroMotor)
+				.regex("El nro de motor debe ser un número", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate());
+		errors.addAll(numberValidtion(nroChasis, "El nro de chasis debe ser un número"));
+		errors.addAll(numberValidtion(kilometraje, "El kilometraje debe ser un número"));
+		errors.addAll(new StringValidator(marca).notBlank("La marca del vehículo no debe ser vacía").validate());
+		errors.addAll(new StringValidator(patente).notBlank("La patente no debe ser vacía").validate());
+		errors.addAll(new StringValidator(asegurador).notBlank("El asegurador no puede ser vacio").validate());
+		errors.addAll(numberValidtion(nroPolizaSeguro, "El nro. de la poliza del seguro debe ser un nummero"));
+		errors.addAll(numberValidtion(modelo, "El modelo del vehiculo debe ser un nummero"));
+		if (!kilometrajeGarantia.isEmpty())
+			errors.addAll(new StringValidator(kilometrajeGarantia)
+					.regex("El kilometraje en garantía debe ser un numero", Patterns.NON_NEGATIVE_INTEGER_FIELD)
+					.validate());
+		return errors;
+	}
+
+	public List<String> numberValidtion(String field, String message) {
+		return new StringValidator(field).regex(message, Patterns.NON_NEGATIVE_INTEGER_FIELD).validate();
+	}
+
 	public AltaDeVehiculoDTO() {
 		super();
 	}
@@ -125,6 +152,4 @@ public class AltaDeVehiculoDTO {
 	public void setPatente(String patente) {
 		this.patente = patente;
 	}
-	
-	
 }

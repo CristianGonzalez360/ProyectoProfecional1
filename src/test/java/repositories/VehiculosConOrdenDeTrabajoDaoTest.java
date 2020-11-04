@@ -11,16 +11,15 @@ import repositories.jdbc.utils.H2DataSource;
 
 class VehiculosConOrdenDeTrabajoDaoTest {
 
-	
 	H2DataSource ds = new H2DataSource();
 	FichaTecnicaVehiculoDaoImpl fichasDao = new FichaTecnicaVehiculoDaoImpl(ds.getConnection());
 	VehiculosConOrdenDeTrabajoDaoImpl dao = new VehiculosConOrdenDeTrabajoDaoImpl(ds.getConnection());
-	
+
 	@Test
 	void testNotNull() {
 		Assertions.assertNotNull(dao);
 	}
-	
+
 	@Test
 	void testInsert() {
 		fail("Not yet implemented");

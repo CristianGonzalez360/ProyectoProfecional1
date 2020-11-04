@@ -32,7 +32,7 @@ public class WorkbenchView {
 	private JMenuItem mntmItemLogin;
 
 	private JMenuItem mntmNewMenuItem;
-	
+
 	private JTextField textSession;
 
 	private JMenuItem mntmItemSalir;
@@ -59,13 +59,13 @@ public class WorkbenchView {
 
 		desktopPane = new JDesktopPane();
 		panel.add(desktopPane, BorderLayout.CENTER);
-		
+
 		JPanel southPanel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) southPanel.getLayout();
 		flowLayout.setAlignment(FlowLayout.TRAILING);
 		southPanel.setBackground(Color.BLACK);
 		panel.add(southPanel, BorderLayout.SOUTH);
-		
+
 		textSession = new JTextField();
 		textSession.setEnabled(false);
 		textSession.setEditable(false);
@@ -77,13 +77,13 @@ public class WorkbenchView {
 
 		JMenu mnNewMenu = new JMenu("Opciones");
 		menuBar.add(mnNewMenu);
-		
+
 		mntmItemLogin = new JMenuItem("Login");
 		mnNewMenu.add(mntmItemLogin);
-		
+
 		mntmNewMenuItem = new JMenuItem("Logout");
 		mnNewMenu.add(mntmNewMenuItem);
-		
+
 		mntmItemSalir = new JMenuItem("Salir");
 		mnNewMenu.add(mntmItemSalir);
 
@@ -109,7 +109,7 @@ public class WorkbenchView {
 	public void setData(String sessionInfo) {
 		this.textSession.setText(sessionInfo);
 	}
-	
+
 	public void addFrames(JInternalFrame frame) {
 		this.desktopPane.add(frame);
 	}
@@ -121,7 +121,7 @@ public class WorkbenchView {
 	public void setActionOnSalir(ActionListener listener) {
 		this.mntmItemSalir.addActionListener(listener);
 	}
-	
+
 	public void disableLoginButton() {
 		this.mntmItemLogin.setEnabled(false);
 	}

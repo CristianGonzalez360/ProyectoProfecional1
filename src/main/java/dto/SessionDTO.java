@@ -3,12 +3,13 @@ package dto;
 import java.util.Date;
 
 public class SessionDTO {
-	
+
 	private Date initSession;
 
 	private UsuarioDTO user;
-	
-	public SessionDTO() {}
+
+	public SessionDTO() {
+	}
 
 	public Date getInitSession() {
 		return initSession;
@@ -29,7 +30,7 @@ public class SessionDTO {
 	public String getNombreUsuario() {
 		return user.getDatos().getNombreCompleto();
 	}
-	
+
 	public Integer getIdUsuario() {
 		return this.user.getId();
 	}

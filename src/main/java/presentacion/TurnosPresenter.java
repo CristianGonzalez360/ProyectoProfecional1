@@ -15,6 +15,7 @@ import presentacion.views.utils.ErrorDialog;
 public class TurnosPresenter {
 
 	private SupervisorControlView supervisorView = SupervisorControlView.getInstance();
+
 	private TurnoFormView turnoForm = TurnoFormView.getInstance();
 
 	private TurnosController controller;

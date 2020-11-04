@@ -6,18 +6,21 @@ import java.util.List;
 import dto.FichaTecnicaVehiculoDTO;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.jdbc.utils.Mapper;
+import repositories.jdbc.utils.NullObject;
 
-public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehiculoDTO> implements FichaTecnicaVehiculoDao {
+public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehiculoDTO>
+		implements FichaTecnicaVehiculoDao {
 
-	private static final String insert = "INSERT INTO FichaTecnicaVehiculo "
-			+ "(nroChasis, nroMotor, kilometraje, marca, modelo, color, combustion, descripcion) VALUES (?,?,?,?,?,?,?,?)";
-	
+	private static final String insert = 
+			"INSERT INTO FichaTecnicaVehiculo (nroChasis, nroMotor, kilometraje, marca, modelo, color, combustion, descripcion) "
+			+ "VALUES (?,?,?,?,?,?,?,?)";
+
 	private static final String readAll = "SELECT * FROM FichaTecnicaVehiculo";
 
 	private static final String readByNroMotor = readAll + " " + "WHERE nroMotor = ?";
 
 	private static final String readById = readAll + " " + "WHERE idFichaTecnicaVehiculo = ?";
-	
+
 	public FichaTecnicaVehiculoDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -30,17 +33,10 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 
 	@Override
 	public boolean insert(FichaTecnicaVehiculoDTO entity) {
-		return getTemplate()
-				.query(insert)
-				.param(entity.getNroChasis())
-				.param(entity.getNroMotor())
-				.param(entity.getKilometraje())
-				.param(entity.getMarca())
-				.param(entity.getModelo())
-				.param(entity.getColor())
-				.param(entity.getCombustion())
-				.param(entity.getDescripcion())
-				.excecute();
+		return getTemplate().query(insert).param(entity.getNroChasis()).param(entity.getNroMotor())
+				.param(entity.getKilometraje()).param(entity.getMarca()).param(entity.getModelo())
+				.param(entity.getColor()).param(entity.getCombustion())
+				.param(entity.getDescripcion() == null ? new NullObject() : entity.getDescripcion()).excecute();
 	}
 
 	@Override
@@ -51,7 +47,7 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 
 	@Override
 	public FichaTecnicaVehiculoDTO readByID(Integer id) {
-		List<FichaTecnicaVehiculoDTO> dtos = getTemplate().query(readById ).param(id).excecute(getMapper());
+		List<FichaTecnicaVehiculoDTO> dtos = getTemplate().query(readById).param(id).excecute(getMapper());
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
@@ -59,7 +55,7 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 	public List<FichaTecnicaVehiculoDTO> readAll() {
 		return getTemplate().query(readAll).excecute(getMapper());
 	}
-	
+
 	@Override
 	public FichaTecnicaVehiculoDTO readByNroMotor(Integer nroMotor) {
 		List<FichaTecnicaVehiculoDTO> dtos = getTemplate().query(readByNroMotor).param(nroMotor).excecute(getMapper());
@@ -81,7 +77,8 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 				dto.setMarca((String) obj[4]);
 				dto.setModelo((Integer) obj[5]);
 				dto.setColor((String) obj[6]);
-				dto.setDescripcion((String) obj[7]);
+				dto.setCombustion((String)obj[7]);
+				dto.setDescripcion((String) obj[8]);
 				return dto;
 			}
 		};

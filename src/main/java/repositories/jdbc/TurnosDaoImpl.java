@@ -12,14 +12,14 @@ import repositories.jdbc.utils.NullObject;
 public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao {
 
 	private static final String readAll = "SELECT * FROM Turnos";
-	
+
 	private static final String readByDni = "SELECT * FROM Turnos WHERE Turnos.dniCliente = ?";
 
 	private static final String insert = "INSERT INTO Turnos (idCliente, fechaCanceladoTurno,fechaAltaTurno,fechProgramadaTurno,nombreCliente,dniCliente) VALUES (?,?,?,?,?,?)";
-	
+
 	public TurnosDaoImpl(Connection connection) {
 		super(connection);
-	}	
+	}
 
 	@Override
 	public boolean update(TurnoDTO entity) {
@@ -29,15 +29,10 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 
 	@Override
 	public boolean insert(TurnoDTO entity) {
-		return getTemplate()
-				.query(insert)
-				.param(entity.getIdCliente() == null ? new NullObject() : entity.getIdCliente())
+		return getTemplate().query(insert).param(entity.getIdCliente())
 				.param(entity.getFechaCancelado() == null ? new NullObject() : entity.getFechaCancelado())
-				.param(entity.getFechaAlta())
-				.param(entity.getFechaProgramada())
-				.param(entity.getNombreCliente())
-				.param(entity.getDniCliente())
-				.excecute();
+				.param(entity.getFechaAlta()).param(entity.getFechaProgramada()).param(entity.getNombreCliente())
+				.param(entity.getDniCliente()).excecute();
 	}
 
 	@Override
@@ -66,19 +61,19 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 	@Override
 	protected Mapper<TurnoDTO> getMapper() {
 		return new Mapper<TurnoDTO>() {
-			
+
 			@Override
 			public TurnoDTO map(Object[] obj) {
 				TurnoDTO turno = new TurnoDTO();
-				turno.setIdTurno((Integer)obj[0]);
+				turno.setIdTurno((Integer) obj[0]);
 				turno.setIdCliente((obj[1] != null ? (Integer) obj[1] : null));
 				turno.setFechaCancelado(obj[2] == null ? null : (Date) obj[2]);
-				turno.setFechaAlta((Date)obj[3]);
-				turno.setFechaProgramada((Date)obj[4]);
-				turno.setNombreCliente((String)obj[5]);
-				turno.setDniCliente((Integer)obj[6]);
+				turno.setFechaAlta((Date) obj[3]);
+				turno.setFechaProgramada((Date) obj[4]);
+				turno.setNombreCliente((String) obj[5]);
+				turno.setDniCliente((Integer) obj[6]);
 				return turno;
-			}			
+			}
 		};
 	}
 }
