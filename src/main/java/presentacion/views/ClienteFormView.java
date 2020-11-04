@@ -9,6 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import dto.AltaClienteDTO;
 import dto.ClienteDTO;
 import dto.DatosPersonalesDTO;
 
@@ -165,21 +166,18 @@ public class ClienteFormView extends JDialog {
 		return instance;
 	}
 	
-	public ClienteDTO getData() {
-		ClienteDTO ret = new ClienteDTO();
-		ret.setFechaAltaCliente(new Date());
-		DatosPersonalesDTO datosPersonales = new DatosPersonalesDTO();
-		datosPersonales.setNombreCompleto(textNombre.getText());
-		datosPersonales.setDni(Integer.parseInt(textDni.getText()));
-		datosPersonales.setEmail(textEmail.getText());
-		datosPersonales.setTelefono(textTelefono.getText());
-		datosPersonales.setCalle(textCalle.getText());
-		datosPersonales.setAltura(Integer.parseInt(textAltura.getText()));
-		datosPersonales.setPiso(Integer.parseInt(textPiso.getText()));
-		datosPersonales.setDpto(textDepto.getText());
-		datosPersonales.setLocalidad(textLocalidad.getText());
-		ret.setDatosPersonalesDTO(datosPersonales);
-		return ret;
+	public AltaClienteDTO getData() {
+		AltaClienteDTO cliente = new AltaClienteDTO();
+		cliente.setNombreCompleto(textNombre.getText());
+		cliente.setDni(textDni.getText());
+		cliente.setEmail(textEmail.getText());
+		cliente.setTelefono(textTelefono.getText());
+		cliente.setCalle(textCalle.getText());
+		cliente.setAltura(textAltura.getText());
+		cliente.setPiso(textPiso.getText());
+		cliente.setDpto(textDepto.getText());
+		cliente.setLocalidad(textLocalidad.getText());
+		return cliente;
 	}
 	
 	public void setData(ClienteDTO cliente) {

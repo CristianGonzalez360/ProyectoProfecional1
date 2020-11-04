@@ -8,6 +8,7 @@ import javax.swing.event.ListSelectionListener;
 
 import business_logic.ClientesController;
 import business_logic.VehiculosController;
+import dto.AltaClienteDTO;
 import dto.ClienteDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.Patterns;
@@ -86,9 +87,10 @@ public class ClientePresenter {
 	}
 
 	private void onUpdate(ActionEvent a) {
-		ClienteDTO cliente = clienteFormview.getData();
-		List<String> errores = cliente.validate();
+		AltaClienteDTO altaCliente = clienteFormview.getData();
+		List<String> errores = altaCliente.validate();
 		if (errores.isEmpty()) {
+			ClienteDTO cliente = new ClienteDTO(altaCliente);
 			cliente.setIdCliente(this.cliente.getIdCliente());
 			cliente.getDatosPersonalesDTO().setId(this.cliente.getIdDatosPersonales());
 			this.clienteController.update(cliente);

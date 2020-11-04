@@ -20,6 +20,19 @@ public class ClienteDTO {
 
 	}
 
+	public ClienteDTO(AltaClienteDTO altaCliente) {
+		this.datosPersonalesDTO = new DatosPersonalesDTO();
+		datosPersonalesDTO.setNombreCompleto(altaCliente.getNombreCompleto());
+		datosPersonalesDTO.setDni(Integer.parseInt(altaCliente.getDni()));
+		datosPersonalesDTO.setEmail(altaCliente.getEmail());
+		datosPersonalesDTO.setTelefono(altaCliente.getTelefono());
+		datosPersonalesDTO.setCalle(altaCliente.getCalle());
+		datosPersonalesDTO.setAltura(Integer.parseInt(altaCliente.getAltura()));
+		datosPersonalesDTO.setPiso(Integer.parseInt(altaCliente.getPiso()));
+		datosPersonalesDTO.setDpto(altaCliente.getDpto());
+		datosPersonalesDTO.setLocalidad(altaCliente.getLocalidad());
+	}
+
 	public Integer getIdCliente() {
 		return idCliente;
 	}
@@ -62,9 +75,5 @@ public class ClienteDTO {
 		return "ClienteDTO [idCliente=" + idCliente + ", idDatosPersonales=" + idDatosPersonales
 				+ ", datosPersonalesDTO=" + datosPersonalesDTO + ", fechaAltaCliente=" + fechaAltaCliente + "]";
 	}	
-	
-	public List<String> validate(){
-		return getDatosPersonalesDTO().validate();
-	}
 }
 
