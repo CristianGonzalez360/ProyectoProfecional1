@@ -102,6 +102,12 @@ public class ClientePresenter {
 				view.clearDataListadoVehiculosCliente();
 				view.setData(vehiculos);
 				view.clearDataFichaTecnicaVehiculo();
+				view.clearDataOrdenDeTrabajo();
+			} else {
+				view.clearDataCliente();
+				view.clearDataListadoVehiculosCliente();
+				view.clearDataFichaTecnicaVehiculo();
+				view.clearDataOrdenDeTrabajo();
 			}
 		} else {
 			new ErrorDialog().showMessages(errors);
@@ -114,6 +120,7 @@ public class ClientePresenter {
 			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController.readFichaTecnicaById(idVehiculo);
 			if (fichaVehiculo != null) {
 				view.clearDataFichaTecnicaVehiculo();
+				view.clearDataOrdenDeTrabajo();
 				view.setData(fichaVehiculo);
 				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo);
 				if(ordenDeTrabajo != null) {
@@ -146,7 +153,6 @@ public class ClientePresenter {
 	private void onRegistrarVehiculo(ActionEvent e) {
 		AltaDeVehiculoDTO vehiculoDeAlta = VehiculoFormView.getInstance().getData();
 		List<String> errors = vehiculoDeAlta.validate();
-		
 		if (errors.isEmpty()) {
 			try {
 				vehiculosController.save(view.getIdCliente(), vehiculoDeAlta);
@@ -167,15 +173,13 @@ public class ClientePresenter {
 			AltaOrdenDeTrabajoDTO ordenDeTrabajo = AltaOrdenTrabajoFormView.getInstance().getData();
 			List<String> errors = ordenDeTrabajo.validate();
 			if (errors.isEmpty()) {
-				if (new ConfirmationDialog(CONFIRMATION_OT_CREATION).open() == 0) {
-					try {
-						ordenDeTrabajoController.save(idVehiculo, ordenDeTrabajo);
-						OrdenDeTrabajoDTO dto = ordenDeTrabajoController.readByIdVehiculo(idVehiculo);
-						view.setData(dto);
-						AltaOrdenTrabajoFormView.getInstance().close();
-					} catch (ForbiddenException e1) {
-						new ErrorDialog().showMessages(e1.getMessage());
-					}				
+				try {
+					ordenDeTrabajoController.save(idVehiculo, ordenDeTrabajo);
+					OrdenDeTrabajoDTO dto = ordenDeTrabajoController.readByIdVehiculo(idVehiculo);
+					view.setData(dto);
+					AltaOrdenTrabajoFormView.getInstance().close();
+				} catch (ForbiddenException e1) {
+					new ErrorDialog().showMessages(e1.getMessage());
 				}
 			} else {
 				new ErrorDialog().showMessages(errors);

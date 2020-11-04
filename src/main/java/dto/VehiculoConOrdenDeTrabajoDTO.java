@@ -20,7 +20,8 @@ public class VehiculoConOrdenDeTrabajoDTO {
 	}
 
 	public VehiculoConOrdenDeTrabajoDTO(AltaDeVehiculoDTO vehiculoDeAlta) {
-		this.kilometrajeGarantia = Integer.parseInt(vehiculoDeAlta.getKilometrajeGarantia());
+		if(vehiculoDeAlta.getKilometrajeGarantia() != null)	this.kilometrajeGarantia = Integer.parseInt(vehiculoDeAlta.getKilometrajeGarantia());
+		else this.kilometrajeGarantia = null;
 		this.aseguradora = vehiculoDeAlta.getAsegurador();
 		this.nroPolizaSeguro = Integer.parseInt(vehiculoDeAlta.getNroPolizaSeguro());
 		this.patente = vehiculoDeAlta.getPatente();

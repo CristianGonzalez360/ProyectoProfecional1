@@ -169,7 +169,14 @@ public class ClienteFormView extends JDialog {
 		ret.setFechaAltaCliente(new Date());
 		DatosPersonalesDTO datosPersonales = new DatosPersonalesDTO();
 		datosPersonales.setNombreCompleto(textNombre.getText());
-		datosPersonales.setDni(Integer.parseInt(textDni.getText()));
+		if(textDni.getText() == null) datosPersonales.setDni(null);
+		else {
+			try {
+				datosPersonales.setDni(Integer.parseInt(textDni.getText()));
+			}catch(NumberFormatException e) {
+				datosPersonales.setDni(null);
+			}
+		}
 		datosPersonales.setEmail(textEmail.getText());
 		datosPersonales.setTelefono(textTelefono.getText());
 		datosPersonales.setCalle(textCalle.getText());
