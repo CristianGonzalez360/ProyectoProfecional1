@@ -18,8 +18,8 @@ public class OrdenesTrabajoController {
 		this.dao = dao;
 		this.service = service;
 	}
-	
-	public List<OrdenDeTrabajoDTO> readAll(){
+
+	public List<OrdenDeTrabajoDTO> readAll() {
 		return dao.readAll();
 	}
 
