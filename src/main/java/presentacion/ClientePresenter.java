@@ -57,8 +57,10 @@ public class ClientePresenter {
 	}
 	
 	private void onDisplayOrdenDeTrabajoForm(ActionEvent a) {
-		AltaOrdenTrabajoFormView.getInstance().clearData();
-		AltaOrdenTrabajoFormView.getInstance().display();
+		if(view.getidVehiculoSeleccionado() != null) {
+			AltaOrdenTrabajoFormView.getInstance().clearData();
+			AltaOrdenTrabajoFormView.getInstance().display();	
+		}
 	}
 
 	private void onDisplayClienteFormView(ActionEvent e) {
@@ -67,8 +69,10 @@ public class ClientePresenter {
 	}
 	
 	private void onDisplayVehiculoFormView(ActionEvent e) {
-		VehiculoFormView.getInstance().clearData();
-		VehiculoFormView.getInstance().display();
+		if(view.getIdCliente() != null) {
+			VehiculoFormView.getInstance().clearData();
+			VehiculoFormView.getInstance().display();	
+		}
 	}
 	
 	private void onBuscar(ActionEvent a) {
