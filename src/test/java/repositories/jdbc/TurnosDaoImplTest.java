@@ -9,7 +9,7 @@ import repositories.jdbc.utils.H2DataSource;
 class TurnosDaoImplTest {
 
 	private TurnosDaoImpl dao = new TurnosDaoImpl(new H2DataSource().getConnection());
-		
+
 	@Test
 	void testTurnosDaoImpl() {
 		Assertions.assertNotNull(dao);
@@ -27,10 +27,10 @@ class TurnosDaoImplTest {
 		dao.insert(target);
 		Assertions.assertNotNull(dao.readByDni(target.getDniCliente()));
 	}
-	
+
 	@Test
 	void testReadAll() {
-		for(int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) {
 			dao.insert(new TurnoDTO().makeTestDTO());
 		}
 		Assertions.assertEquals(dao.readAll().size(), 11);

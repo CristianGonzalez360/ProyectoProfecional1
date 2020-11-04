@@ -13,7 +13,7 @@ class ClientesControllerTest {
 	ClientesDao dao = Mockito.mock(ClientesDao.class);
 	DatosPersonalesDao datosdao = Mockito.mock(DatosPersonalesDao.class);
 	ClientesController controller = new ClientesController(dao, datosdao);
-	
+
 	@Test
 	void testClientesController() {
 		Assertions.assertNotNull(dao);

@@ -3,29 +3,29 @@ package dto;
 import java.util.Date;
 
 public class OrdenDeTrabajoDTO {
-	
+
 	private Integer idOrdenTrabajo;
-	
+
 	private String tipoOrdeTrabajo;
-	
+
 	private Integer idUsuarioAlta;
-	
-	private	Date fechaDeAlta;
-	
+
+	private Date fechaDeAlta;
+
 	private String trabajoSolicitado;
-	
+
 	private String trabajoSujerido;
-	
+
 	private Integer idVehiculoOt;
 
 	private Date fechaEntregado;
-	
+
 	private String descripcion;
 
 	public OrdenDeTrabajoDTO() {
-		
+
 	}
-	
+
 	public OrdenDeTrabajoDTO(AltaOrdenDeTrabajoDTO ordenDeTrabajo) {
 		trabajoSolicitado = ordenDeTrabajo.getTrabajoSolicitado();
 		trabajoSujerido = ordenDeTrabajo.getTrabajoSugerido();
@@ -82,8 +82,8 @@ public class OrdenDeTrabajoDTO {
 
 	public void setFechaEntregado(Date fecha) {
 		this.fechaEntregado = fecha;
-	}	
-	
+	}
+
 	public Date getFechaEntregado() {
 		return this.fechaEntregado;
 	}

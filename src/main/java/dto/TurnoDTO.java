@@ -5,23 +5,23 @@ import java.util.Date;
 public class TurnoDTO {
 
 	private Integer idTurno;
-	
+
 	private Integer idCliente;
 
 	private Integer dniCliente;
-	
+
 	private Date fechaAlta;
-	
+
 	private Date fechaCancelado;
-	
+
 	private Date fechaProgramada;
-	
+
 	private String nombreCliente;
 
 	public TurnoDTO() {
-		
+
 	}
-	
+
 	public TurnoDTO makeTestDTO() {
 		TurnoDTO ret = new TurnoDTO();
 		ret.setIdCliente(2345333);
@@ -31,7 +31,7 @@ public class TurnoDTO {
 		ret.setNombreCliente("Susan Doe");
 		return ret;
 	}
-	
+
 	public Integer getIdTurno() {
 		return idTurno;
 	}
@@ -89,8 +89,8 @@ public class TurnoDTO {
 
 	public void setDniCliente(Integer dni) {
 		this.dniCliente = dni;
-	}	
-	
+	}
+
 	public Integer getDniCliente() {
 		return this.dniCliente;
 	}

@@ -12,12 +12,13 @@ public class TecnicoControlView extends JInternalFrame {
 	private static final long serialVersionUID = 4704503289092275653L;
 
 	private static TecnicoControlView instance;
-	
+
 	public static TecnicoControlView getInstance() {
-		if(instance == null) instance = new TecnicoControlView();
+		if (instance == null)
+			instance = new TecnicoControlView();
 		return instance;
 	}
-	
+
 	private TecnicoControlView() {
 		setClosable(false);
 		setTitle("Tecnico control view");
@@ -43,7 +44,7 @@ public class TecnicoControlView extends JInternalFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		setVisible(true);		
+		setVisible(true);
 	}
 
 	public void close() {
@@ -52,7 +53,7 @@ public class TecnicoControlView extends JInternalFrame {
 
 	public void clearData() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

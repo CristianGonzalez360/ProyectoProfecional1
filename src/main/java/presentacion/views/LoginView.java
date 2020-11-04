@@ -24,9 +24,9 @@ public class LoginView extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 
 	private static LoginView instance;
-	
+
 	private JTextField textFieldUsuario;
-	
+
 	private JTextField textFieldPassword;
 
 	private JButton okButton;

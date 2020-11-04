@@ -17,12 +17,13 @@ public class TurnoFormView extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 
 	private static TurnoFormView instance;
-	
+
 	public static TurnoFormView getInstance() {
-		if(instance == null) instance = new TurnoFormView();
+		if (instance == null)
+			instance = new TurnoFormView();
 		return instance;
 	}
-	
+
 	private TurnoFormView() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -51,20 +52,20 @@ public class TurnoFormView extends JDialog {
 	public void display() {
 		this.setVisible(true);
 	}
-	
+
 	public TurnoDTO getData() {
 		return null;
 	}
-	
+
 	public void clearData() {
-		
+
 	}
-	
+
 	public void setActionSave(ActionListener listener) {
-		
+
 	}
-	
+
 	public void setActionCancel(ActionListener listener) {
-		
+
 	}
 }
