@@ -46,4 +46,9 @@ public class ClientesController {
 		cliente.setIdDatosPersonales(datosDto.getId());
 		clientesDao.insert(cliente);
 	}
+
+	public void update(ClienteDTO cliente) {
+		assert cliente != null;
+		clientesDao.update(cliente);
+	}
 }

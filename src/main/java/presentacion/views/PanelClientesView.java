@@ -52,6 +52,7 @@ public class PanelClientesView extends JPanel {
 	private JTable table;
 
 	private Integer idCliente;
+	private Integer idDatosPersonalesDelCliente;
 	private JTextField textDni;
 	private JTextField textNombre;
 	private JTextField textTelefono;
@@ -312,6 +313,7 @@ public class PanelClientesView extends JPanel {
 
 	public void clearDataCliente() {
 		this.idCliente = null;
+		this.idDatosPersonalesDelCliente = null;
 		this.textNombre.setText("");
 		this.textDni.setText("");
 		this.textTelefono.setText("");
@@ -341,6 +343,7 @@ public class PanelClientesView extends JPanel {
 	}
 
 	public void setData(ClienteDTO cliente) {
+		this.idDatosPersonalesDelCliente = cliente.getDatosPersonalesDTO().getId();
 		this.idCliente = cliente.getIdCliente();
 		this.textNombre.setText(cliente.getDatosPersonalesDTO().getNombreCompleto());
 		this.textDni.setText(cliente.getDatosPersonalesDTO().getDni().toString());
@@ -387,6 +390,14 @@ public class PanelClientesView extends JPanel {
 		return null;
 	}
 
+	public Integer getIdCliente() {
+		return this.idCliente;
+	}
+
+	public Integer getIdDatosPersonalesCliente() {
+		return this.idDatosPersonalesDelCliente;
+	}
+	
 	public void setActionSelectVehiculoCliente(ListSelectionListener listener) {
 		this.table.getSelectionModel().addListSelectionListener(listener);
 	}
@@ -407,7 +418,7 @@ public class PanelClientesView extends JPanel {
 		this.btnRegistrarOrdeDeTrabajo.addActionListener(listener);
 	}
 
-	public Integer getIdCliente() {
-		return this.idCliente;
+	public void setActionOnEditarCliente(ActionListener listener) {
+		
 	}
 }

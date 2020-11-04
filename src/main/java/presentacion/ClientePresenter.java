@@ -14,8 +14,8 @@ import dto.AltaDeVehiculoDTO;
 import dto.AltaOrdenDeTrabajoDTO;
 import dto.ClienteDTO;
 import dto.FichaTecnicaVehiculoDTO;
+import dto.Patterns;
 import dto.VehiculoConOrdenDeTrabajoDTO;
-import dto.validators.Patterns;
 import dto.validators.StringValidator;
 import presentacion.views.AltaOrdenTrabajoFormView;
 import presentacion.views.ClienteFormView;
@@ -39,22 +39,22 @@ public class ClientePresenter {
 	public ClientePresenter(PanelClientesView view, ClientesController controller,
 			VehiculosController vehiculoController, OrdenesTrabajoController otController) {
 		this.view = view;
-		this.clienteController = controller;
+		clienteController = controller;
 		this.vehiculosController = vehiculoController;
-		this.ordenDeTrabajoController = otController;
-
-		this.view.setActionBuscar((a) -> onBuscar(a));
-		this.view.setActionSelectVehiculoCliente(new ListSelectionListener() {
+		ordenDeTrabajoController = otController;
+		
+		view.setActionBuscar((a) -> onBuscar(a));
+		view.setActionSelectVehiculoCliente(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				onSelectVehiculoDeCliente();
 			}
 		});
-
-		this.view.setActionRegistrarCliente((a) -> onDisplayClienteFormView(a));
-		this.view.setActionRegistrarVehiculo((a) -> onDisplayVehiculoFormView(a));
-		this.view.setActionRegistrarOrdenDeTrabajo((a) -> onDisplayOrdenDeTrabajoForm(a));
-
+		view.setActionRegistrarCliente((a) -> onDisplayClienteFormView(a));
+		view.setActionRegistrarVehiculo((a) -> onDisplayVehiculoFormView(a));
+		view.setActionRegistrarOrdenDeTrabajo((a) -> onDisplayOrdenDeTrabajoForm(a));
+		view.setActionOnEditarCliente((a)->onUpdate(a));
+		
 		ClienteFormView.getInstance().setActionOnSave((a) -> onRegistrarCliente(a));
 		VehiculoFormView.getInstance().setActionSave((a) -> onRegistrarVehiculo(a));
 		AltaOrdenTrabajoFormView.getInstance().setActionGuardar((a) -> onRegistrarOrdenDeTrabajo(a));
@@ -79,10 +79,17 @@ public class ClientePresenter {
 		}
 	}
 
+	private void onDisplayFormForUpdate(ActionEvent a) {
+		if (view.getIdCliente() != null) {
+			ClienteFormView.getInstance().clearData();
+			ClienteFormView.getInstance().setData(clienteController.readByDni(Integer.parseInt(view.getDniCliente())));
+			ClienteFormView.getInstance().display();
+		}
+	}
+	
 	private void onBuscar(ActionEvent a) {
 		String inputDni = view.getDniCliente();
-		List<String> errors = new StringValidator(inputDni)
-				.regex("El dni debe ser un numero de dni", Patterns.POSITIVE_INTEGER).validate();
+		List<String> errors = new StringValidator(inputDni).regex("El dni debe ser un numero de dni", Patterns.NON_NEGATIVE_INTEGER_FIELD).validate();
 		if (errors.isEmpty()) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
@@ -159,6 +166,21 @@ public class ClientePresenter {
 			} else {
 				new ErrorDialog().showMessages(errors);
 			}
+		}
+	}
+	
+	private void onUpdate(ActionEvent a) {
+		ClienteDTO cliente = ClienteFormView.getInstance().getData();
+		List<String> errores = cliente.validate();
+		if (errores.isEmpty()) {
+			cliente.setIdCliente(view.getIdCliente());
+			cliente.getDatosPersonalesDTO().setId(view.getIdDatosPersonalesCliente());
+			clienteController.update(cliente);
+			view.clearDataCliente();
+			view.setData(cliente);
+			ClienteFormView.getInstance().close();
+		} else {
+			new ErrorDialog().showMessages(errores);
 		}
 	}
 }
