@@ -9,7 +9,6 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import dto.AltaClienteDTO;
 import dto.ClienteDTO;
 import dto.DatosPersonalesDTO;
 
