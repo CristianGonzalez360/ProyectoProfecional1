@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 
+import dto.OrdenDeTrabajoDTO;
 import dto.TurnoDTO;
 
 import javax.swing.border.BevelBorder;
@@ -34,6 +35,9 @@ public class SupervisorControlView extends JInternalFrame {
 
 	private static final String[] COLUMNAS_TURNOS = new String[] { "NRO. TURNO", "NOMBRE CLIENTE", "DNI CLIENTE",
 			"FECHA DE ALTA", "FECHA PROGRAMADA" };
+	
+	private static final String[] COLUMNAS_ORDENES = {"TIPO DE TRABAJO", "ID. USUARIO DE ALTA", "ID. VEHICULO OT", "FECHA ALTA", "TRABAJO SOLICITADO", "TRABAJO SUGERIDO", "FEHCA ENTRGA VEHICULO" };
+	
 
 	private static SupervisorControlView instance;
 
@@ -44,6 +48,7 @@ public class SupervisorControlView extends JInternalFrame {
 	private DefaultTableModel tableModelTurnos;
 
 	private JButton btnBuscar;
+	private JButton btnBuscarOT;
 
 	private JButton btnRegistrarTurno;
 
@@ -56,19 +61,11 @@ public class SupervisorControlView extends JInternalFrame {
 	private JTextField textTrabajosEnCurso;
 	private JTextField textTrabajosTerminados;
 	private JTextField textTotalPresupuestado;
+	
+	private DefaultTableModel modelOrdenesDeTrabajo;
 	private JTable tablaOrdenesDeTrabajo;
 	private JTable tablaPresupuesto;
-	private String[] columnasOrdenTrabajo = { "Nro OT", "Fecha alta", "Usuario de alta", "Dni cliente", "patente" };// aca
-																													// se
-																													// modifican
-																													// las
-																													// columnas
-																													// de
-																													// la
-																													// tabla
-																													// orden
-																													// de
-																													// trabajo
+	
 	private String[] columnasPresupuesto = { "Fecha alta" };// aca se modifican las columnas de la tabla presupuesto
 
 	private PanelClientesView panelClientesView;
@@ -151,9 +148,9 @@ public class SupervisorControlView extends JInternalFrame {
 		lblPatenteVehculo.setBounds(249, 26, 103, 14);
 		panel_3.add(lblPatenteVehculo);
 
-		JButton btnBuscar_1 = new JButton("Buscar");
-		btnBuscar_1.setBounds(603, 22, 89, 23);
-		panel_3.add(btnBuscar_1);
+		btnBuscarOT = new JButton("Buscar");
+		btnBuscarOT.setBounds(603, 22, 89, 23);
+		panel_3.add(btnBuscarOT);
 
 		textDni = new JTextField();
 		textDni.setBounds(66, 23, 139, 20);
@@ -236,8 +233,8 @@ public class SupervisorControlView extends JInternalFrame {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(10, 16, 382, 241);
 		panel_5.add(scrollPane_1);
-
-		DefaultTableModel modelOrdenesDeTrabajo = (new DefaultTableModel(null, columnasOrdenTrabajo));
+		
+		modelOrdenesDeTrabajo = (new DefaultTableModel(null, COLUMNAS_ORDENES));
 		tablaOrdenesDeTrabajo = new JTable(modelOrdenesDeTrabajo);
 		scrollPane_1.setViewportView(tablaOrdenesDeTrabajo);
 
@@ -305,7 +302,17 @@ public class SupervisorControlView extends JInternalFrame {
 			tableModelTurnos.addRow(row);
 		}
 	}
-
+	
+	//{ "NRO. OT", "TIPO DE TRABAJO", "USUARIO DE ALTA", "ID VEHICULO OT", "FECHA ALTA", "TRABAJO SOLICITADO", "TRABAJO SUGERIDO", "FEHCA ENTRGA VEHICULO" };
+	
+	public void setOrdenesDeTrabajo(List<OrdenDeTrabajoDTO> ordenes) {
+		for(OrdenDeTrabajoDTO orden : ordenes) {
+			Object[] row = {orden.getTipoOrdeTrabajo(), orden.getIdUsuarioAlta(), orden.getIdVehiculoOt(), orden.getFechaDeAlta(), orden.getTrabajoSolicitado(),
+					orden.getTrabajoSujerido(), orden.getFechaEntregado()};
+			modelOrdenesDeTrabajo.addRow(row);
+		}
+	}
+	
 	public TurnoDTO getSelectedTurno() {
 		int row = table.getSelectedRow();
 		if (table.getSelectedRowCount() == 1) {
@@ -335,9 +342,19 @@ public class SupervisorControlView extends JInternalFrame {
 		tableModelTurnos.setColumnCount(0);
 		tableModelTurnos.setColumnIdentifiers(COLUMNAS_TURNOS);
 	}
+	
+	public void clearOrdenesDeTrabajo() {
+		modelOrdenesDeTrabajo.setRowCount(0);
+		modelOrdenesDeTrabajo.setColumnCount(0);
+		modelOrdenesDeTrabajo.setColumnIdentifiers(COLUMNAS_ORDENES);
+	}
 
 	public void setActionBuscar(ActionListener listener) {
 		this.btnBuscar.addActionListener(listener);
+	}
+	
+	public void setActionBuscarOT(ActionListener listener) {
+		this.btnBuscarOT.addActionListener(listener);
 	}
 
 	public void setActionRegistrarTurno(ActionListener listener) {
@@ -350,6 +367,10 @@ public class SupervisorControlView extends JInternalFrame {
 
 	public String getDniClienteBusquedaTurno() {
 		return textFieldTurno.getText();
+	}
+	
+	public String getDniClienteBusquedaOT() {
+		return textDni.getText();
 	}
 
 	public PanelClientesView getPanelClientesView() {

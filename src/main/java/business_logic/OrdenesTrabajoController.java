@@ -1,6 +1,7 @@
 package business_logic;
 
 import java.util.Date;
+import java.util.List;
 
 import dto.AltaOrdenDeTrabajoDTO;
 import dto.OrdenDeTrabajoDTO;
@@ -17,6 +18,10 @@ public class OrdenesTrabajoController {
 		this.dao = dao;
 		this.service = service;
 	}
+	
+	public List<OrdenDeTrabajoDTO> readAll(){
+		return dao.readAll();
+	}
 
 	public void save(Integer idVehiculo, AltaOrdenDeTrabajoDTO ordenDeTrabajo) {
 		OrdenDeTrabajoDTO dto = new OrdenDeTrabajoDTO(ordenDeTrabajo);
@@ -24,5 +29,9 @@ public class OrdenesTrabajoController {
 		dto.setIdVehiculoOt(idVehiculo);
 		dto.setIdUsuarioAlta(service.getActiveSession().getIdUsuario());
 		dao.insert(dto);
+	}
+
+	public OrdenDeTrabajoDTO readByDniCliente(String dni) {
+		return dao.readByID(Integer.parseInt(dni));
 	}
 }
