@@ -15,6 +15,8 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 
 	private static final String insert = "INSERT INTO Clientes (fechaAltaCliente, idDatosPersonales ) VALUES (?,?)";
 
+	private static final String update = "UPDATE DatosPersonales SET nombreCompleto = ?, dni = ?, telefono = ?, email = ?, calle = ?, altura = ?,piso = ?, dpto = ?, localidad = ? WHERE idDatosPersonales = ?";
+	
 	private static final String readByEmail = readall + " " + "WHERE DatosPersonales.email = ?";
 
 	private static final String readByTelefono = readall + " " + "WHERE DatosPersonales.telefono = ?";
@@ -31,7 +33,20 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 
 	@Override
 	public boolean update(ClienteDTO entity) {
-		return false;
+		DatosPersonalesDTO datos = entity.getDatosPersonalesDTO();
+		return getTemplate()
+				.query(update)
+				.param(datos.getNombreCompleto())
+				.param(datos.getDni())
+				.param(datos.getTelefono())
+				.param(datos.getEmail())
+				.param(datos.getCalle())
+				.param(datos.getAltura())
+				.param(datos.getPiso())
+				.param(datos.getDpto())
+				.param(datos.getLocalidad())
+				.param(datos.getId())
+				.excecute();
 	}
 
 	@Override
