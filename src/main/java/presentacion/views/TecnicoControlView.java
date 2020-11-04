@@ -163,7 +163,7 @@ public class TecnicoControlView extends JInternalFrame {
 		btnPresupuestar = new JButton("Presupuestar");
 		btnPresupuestar.setBounds(597, 320, 152, 23);
 		panel_2.add(btnPresupuestar);
-		
+
 	}
 
 	public void display() {
@@ -185,7 +185,7 @@ public class TecnicoControlView extends JInternalFrame {
 
 	}
 	
-	public void setActionRegistrarTurno(ActionListener listener) {
+	public void setActionPresupuestar(ActionListener listener) {
 		this.btnPresupuestar.addActionListener(listener);
 	}
 	

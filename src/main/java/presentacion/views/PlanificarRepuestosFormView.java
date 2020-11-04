@@ -51,6 +51,7 @@ public class PlanificarRepuestosFormView extends JDialog {
 	private JTable tablaRepuestosInferior;
 
 	static PlanificarRepuestosFormView vista;
+
 	private JButton btnLimpiar;
 	private JButton btnQuitar;
 	private JButton btnEditar;
@@ -68,7 +69,7 @@ public class PlanificarRepuestosFormView extends JDialog {
 	}
 
 	@SuppressWarnings("serial")
-	public PlanificarRepuestosFormView() {
+	private PlanificarRepuestosFormView() {
 		setBounds(100, 100, 500, 600);
 		setTitle("Planificacion de repuestos");
 		getContentPane().setLayout(new BorderLayout());
@@ -119,9 +120,10 @@ public class PlanificarRepuestosFormView extends JDialog {
 		panelInterior.setBackground(SystemColor.menu);
 		panelSuperior.add(panelInterior, BorderLayout.CENTER);
 		panelInterior.setLayout(new BorderLayout(0, 0));
-		scrollPaneRepuestos = new JScrollPane();
-		panelInterior.add(scrollPaneRepuestos, BorderLayout.CENTER);
 		tablaRepuestos = new JTable(modelRepuestos);
+		scrollPaneRepuestos = new JScrollPane(tablaRepuestos);
+		panelInterior.add(scrollPaneRepuestos, BorderLayout.CENTER);
+		
 
 		panel_2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		panelSuperior.add(panel_2, BorderLayout.SOUTH);
@@ -183,6 +185,16 @@ public class PlanificarRepuestosFormView extends JDialog {
 		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
 
+		setVisible(false);
+	}
+
+	public void clearData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void display() {
+		setVisible(true);
 	}
 
 }
