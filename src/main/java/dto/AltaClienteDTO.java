@@ -129,10 +129,12 @@ public class AltaClienteDTO {
 		
 		ret.addAll(new StringValidator(piso)
 				.regex("El piso solo debe tener números", Patterns.NON_NEGATIVE_INTEGER_FIELD)
+				.max(2, "Maximo 2 digitos para el piso.")
 				.validate());
 		
 		ret.addAll(new StringValidator(dpto)
 				.regex("El piso solo debe tener números", Patterns.NON_NEGATIVE_INTEGER_FIELD)
+				.max(3, "Maximo 3 chars para el dpto.")
 				.validate());
 		
 		ret.addAll(new StringValidator(localidad)
