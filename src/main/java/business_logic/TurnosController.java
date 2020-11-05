@@ -26,4 +26,13 @@ public class TurnosController {
 		dao.insert(turnoDTO);
 	}
 
+	public void update(TurnoDTO turnoDTO) {
+		assert turnoDTO != null;
+		dao.update(turnoDTO);
+	}
+
+	public TurnoDTO readByIdTurno(Integer id) {
+		return dao.readByIdTurno(id);
+	}
+
 }

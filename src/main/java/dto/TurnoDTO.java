@@ -54,6 +54,19 @@ public class TurnoDTO {
 		return ret;
 	}
 
+	public TurnoDTO makeTestDTOUpdate() {
+		TurnoDTO ret = new TurnoDTO();
+		ret.setIdTurno(1);
+		ret.setIdCliente(2345333);
+		ret.setDniCliente(13231);
+		ret.setFechaAlta(new Date());
+		ret.setFechaProgramada(new Date());
+		ret.setNombreCliente("Susan Doe");
+		ret.setTelefonoCliente("1155556666");
+		ret.setEmailCliente("ejemplo.a1@gmail.com");
+		return ret;
+	}
+	
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
 		errors.addAll(new StringValidator(nombreCliente).notBlank("El Nombre es obligatorio.")
