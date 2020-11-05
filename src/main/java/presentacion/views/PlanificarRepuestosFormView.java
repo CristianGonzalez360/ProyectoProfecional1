@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,6 +25,10 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
+import dto.RepuestoDTO;
+import dto.RepuestoPlanificadoDTO;
+
 import javax.swing.BoxLayout;
 
 public class PlanificarRepuestosFormView extends JDialog {
@@ -61,6 +68,7 @@ public class PlanificarRepuestosFormView extends JDialog {
 	private JPanel panel;
 	private JPanel panel_1;
 	private JPanel panel_2;
+	private List<Integer> idRepuestos;
 
 	public static PlanificarRepuestosFormView getInstance() {
 		if (vista == null)
@@ -74,6 +82,7 @@ public class PlanificarRepuestosFormView extends JDialog {
 		setTitle("Planificacion de repuestos");
 		getContentPane().setLayout(new BorderLayout());
 
+		idRepuestos = new ArrayList<>();
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
@@ -176,10 +185,10 @@ public class PlanificarRepuestosFormView extends JDialog {
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-		JButton okButton = new JButton("OK");
-		okButton.setActionCommand("OK");
-		buttonPane.add(okButton);
-		getRootPane().setDefaultButton(okButton);
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setActionCommand("OK");
+		buttonPane.add(btnAceptar);
+		getRootPane().setDefaultButton(btnAceptar);
 
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.setActionCommand("Cancel");
@@ -190,11 +199,35 @@ public class PlanificarRepuestosFormView extends JDialog {
 
 	public void clearData() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void display() {
 		setVisible(true);
 	}
 
+	public void setDataRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestos) {
+		//TODO
+	}
+	
+	public void setDataRepuestos(List<RepuestoDTO> repuestos) {
+		modelRepuestos.setRowCount(0);
+		for(RepuestoDTO r : repuestos) {
+			idRepuestos.add(r.getIdRepuesto());
+			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(),
+					r.getFabricante(), r.getStockRepuesto(), r.getPrecioRepuesto() };
+			modelRepuestos.addRow(row);
+		}
+	}
+	
+	public int getIdRepuesto() {
+		return idRepuestos.get(tablaRepuestos.getSelectedRow());
+	}
+	
+	public int getCantidad() {
+		return Integer.parseInt(this.textCantidad.getText());
+	}
+	
+	public void setActionOnAgregar(ActionListener listener) {
+		this.btnAgregar.addActionListener(listener);
+	}
 }

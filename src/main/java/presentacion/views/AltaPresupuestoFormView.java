@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dto.PresupuestoDTO;
 import dto.RepuestoPlanificadoDTO;
 import dto.TrabajoPlanificadoDTO;
 
