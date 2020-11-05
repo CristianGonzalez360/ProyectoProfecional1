@@ -12,6 +12,7 @@ import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.GenericDao;
 import repositories.PaisDao;
+import repositories.RepuestosDao;
 import repositories.TurnosDao;
 import repositories.UsuariosDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
@@ -38,6 +39,8 @@ public class DaosFactoryImpl extends DaosFactory {
 	private ClientesDao clientesDao;
 
 	private VehiculosConOrdenDeTrabajoDao vehiculosConOtDao;
+	
+	private RepuestosDao repuestosDao;
 
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
@@ -105,5 +108,12 @@ public class DaosFactoryImpl extends DaosFactory {
 		if (this.vehiculosConOtDao == null)
 			this.vehiculosConOtDao = new VehiculosConOrdenDeTrabajoDaoImpl(ds.getConnection());
 		return vehiculosConOtDao;
+	}
+
+	@Override
+	public RepuestosDao makeRepuestosDao() {
+		if (this.repuestosDao == null)
+			this.repuestosDao = new RepuestosDaoImpl(ds.getConnection());
+		return repuestosDao;
 	}
 }
