@@ -2,12 +2,16 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
+
+import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.RepuestosController;
 import dto.validators.Patterns;
+import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
+import dto.TurnoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.AgregarTrabajoFormView;
 import presentacion.views.PanelGestionPresupuestoView;
@@ -25,10 +29,12 @@ public class PresupuestosPresenter {
 	
 	private PresupuestosController presupuestosController;
 	private RepuestosController repuestosController;
+	private OrdenesTrabajoController ordenDetrabajoController;
 	
-	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController) {
+	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController, OrdenesTrabajoController ordenDetranajoController) {
 		this.presupuestosController = presupuestosController;
 		this.repuestosController = repuestosController;
+		this.ordenDetrabajoController = ordenDetranajoController;
 		this.gestionPresupuestosView = PanelGestionPresupuestoView.getInstance();
 		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
 		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
@@ -40,7 +46,9 @@ public class PresupuestosPresenter {
 		this.planTrabajosView.setActionOnAgregarTrabajo(a -> onDisplayForAgregarTrabajo(a));
 		this.agregarTrabajoFormView.setActionOnGuardar(a -> onAgregarTrabajos(a));
 		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
+		this.gestionPresupuestosView.setActionOnBuscar(a -> onBuscar(a));
 	}
+
 
 	private void onRegistrar(ActionEvent a) {
 		System.out.println("Registrar");
@@ -92,5 +100,12 @@ public class PresupuestosPresenter {
 		this.planTrabajosView.display();
 	}	
 	
+	private void onBuscar(ActionEvent a) {
+		System.out.println("hola");
+		List<OrdenDeTrabajoDTO> ordenes = ordenDetrabajoController.readAll();
+		for (OrdenDeTrabajoDTO orden : ordenes) {
+			System.out.println(orden.getTipoOrdeTrabajo());
+		}
+	}
 	
 }

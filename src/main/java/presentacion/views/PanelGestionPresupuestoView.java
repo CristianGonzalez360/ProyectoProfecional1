@@ -346,5 +346,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.btnRegistrarPresupuesto.addActionListener(listener);
 	}
 	
+	public void setActionOnBuscar(ActionListener listener) {
+		this.btnBuscar.addActionListener(listener);
+	}
 	
 }
