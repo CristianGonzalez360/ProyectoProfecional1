@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -94,6 +93,8 @@ public class JdbcTemplate {
 					java.util.Date mydate = (java.util.Date) v.value;
 					java.sql.Date sqldate = new java.sql.Date(mydate.getTime());
 					statement.setDate(k, sqldate);
+				} else if (v.type.equals(Double.class)) {
+					statement.setDouble(k, (Double) v.value);	
 				}
 			} catch (SQLException t) {
 				t.printStackTrace();

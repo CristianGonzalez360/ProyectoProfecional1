@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import dto.PresupuestoDTO;
 import dto.RepuestoPlanificadoDTO;
-import dto.TrabajoPlanificadoDTO;
+import dto.TrabajoPresupuestadoDTO;
 
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -140,8 +140,8 @@ public class AltaPresupuestoFormView extends JDialog {
 		//TODO llenar tabla repuestos
 	}
 	
-	public void setDataTrabajos(List<TrabajoPlanificadoDTO> trabajos) {
-		for(TrabajoPlanificadoDTO t : trabajos) {
+	public void setDataTrabajos(List<TrabajoPresupuestadoDTO> trabajos) {
+		for(TrabajoPresupuestadoDTO t : trabajos) {
 			//TODO llenar tabla trabajos
 		}
 	}

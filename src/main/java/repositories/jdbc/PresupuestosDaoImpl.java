@@ -19,7 +19,7 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 	
 	private static final String insert = "INSERT INTO Presupuestos (idOT, idUsuAltaPresu, idUsuCierrePresu, idUsuRegPago"
 			+ ",idPago,fechaAltaPresu,comentarioAltaPresu,fechaCierrePresu,comentarioCierrePresu,fechaAprobacion,fechaRechazo) "
-			+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
+			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
 	public PresupuestosDaoImpl(Connection connection) {
 		super(connection);
@@ -30,24 +30,22 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 		return false;
 	}
 
-	/*
-	  idPresupuesto INT NOT NULL AUTO_INCREMENT,
-	  idOT INT NOT NULL,
-	  idUsuAltaPresu INT NOT NULL,
-	  idUsuCierrePresu INT,
-	  idUsuRegPago INT,
-	  idPago INT,
-	  fechaAltaPresu DATE,
-	  comentarioAltaPresu VARCHAR (60),
-	  fechaCierrePresu DATE,
-	  comentarioCierrePresu VARCHAR (60),
-	  fechaAprobacion DATE,
-	  fechaRechazo DATE,*/
-	
-	
 	@Override
 	public boolean insert(PresupuestoDTO entity) {
-		return false;
+		return getTemplate()
+				.query(insert)
+				.param(entity.getIdOT())
+				.param(entity.getIdUsuAltaPresu() == null ? new NullObject() : entity.getIdUsuAltaPresu())
+				.param(entity.getIdUsuCierrePresu() == null ? new NullObject() : entity.getIdUsuCierrePresu())
+				.param(entity.getIdUsuRegPago() == null ? new NullObject() : entity.getIdUsuRegPago())
+				.param(entity.getIdPago() == null ? new NullObject() : entity.getIdPago())
+				.param(entity.getFechaAltaPresu() == null ? new NullObject() : entity.getFechaAltaPresu())
+				.param(entity.getComentarioAltaPresu() == null ? new NullObject() : entity.getComentarioAltaPresu())
+				.param(entity.getFechaCierrePresu() == null ? new NullObject() : entity.getFechaCierrePresu())
+				.param(entity.getComentarioCierrePresu() == null ? new NullObject() : entity.getComentarioCierrePresu())
+				.param(entity.getFechaAprobacion() == null ? new NullObject() : entity.getFechaAprobacion())
+				.param(entity.getFechaRechazo() == null ? new NullObject() : entity.getFechaRechazo())
+				.excecute();
 	}
 
 	@Override
