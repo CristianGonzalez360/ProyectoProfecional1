@@ -176,6 +176,16 @@ public class SupervisorControlView extends JInternalFrame {
 		}
 		return null;
 	}
+	
+	public Integer getIdSelectedTurno() {
+		int row = table.getSelectedRow();
+		int id;
+		if (table.getSelectedRowCount() == 1) {
+			id = Integer.parseInt(tableModelTurnos.getValueAt(row, 0).toString());
+			return id;
+		}
+		return null;
+	}
 
 	private Date parse(String str) {
 		try {
