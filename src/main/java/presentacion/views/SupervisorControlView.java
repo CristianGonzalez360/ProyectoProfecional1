@@ -58,6 +58,8 @@ public class SupervisorControlView extends JInternalFrame {
 	
 	
 	private PanelConsultaDePresupuestosView panelConsultaOTPresupuestadasView;
+
+	private PanelEntregaVehiculosView panelEntregaVehiculosView;
 	
 	
 	public static SupervisorControlView getInstance() {
@@ -73,7 +75,7 @@ public class SupervisorControlView extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setTitle("Supervisor control view");
 		setBounds(100, 100, 859, 647);
-
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
@@ -90,6 +92,9 @@ public class SupervisorControlView extends JInternalFrame {
 
 		panelConsultaOTPresupuestadasView = new PanelConsultaDePresupuestosView();
 		tabbedPane.addTab("Consulta OT Presupuestadas", panelConsultaOTPresupuestadasView);
+		
+		panelEntregaVehiculosView = new PanelEntregaVehiculosView();
+		tabbedPane.addTab("Consulta vehiculos para entregar", panelEntregaVehiculosView);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -125,9 +130,6 @@ public class SupervisorControlView extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		
 		modelOrdenesDeTrabajo = (new DefaultTableModel(null, COLUMNAS_ORDENES));
-
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("OT para cerrar", null, panel, null);
 
 	}
 
