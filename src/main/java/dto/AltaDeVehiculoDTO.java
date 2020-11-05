@@ -3,6 +3,7 @@ package dto;
 import java.util.LinkedList;
 import java.util.List;
 
+import dto.validators.Patterns;
 import dto.validators.StringValidator;
 
 public class AltaDeVehiculoDTO {
