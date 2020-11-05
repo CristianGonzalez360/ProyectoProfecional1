@@ -106,12 +106,12 @@ public class AltaClienteDTO {
 				.validate());
 		
 		ret.addAll(new StringValidator(dni)
-				.regex("El DNI solo de tener números.", Patterns.NON_NEGATIVE_INTEGER_FIELD)
+				.number("El DNI solo de tener números.")
 				.validate());
 		
 		ret.addAll(new StringValidator(telefono)
 				.notBlank("Debe ingresar un teléfono.")
-				.regex("El teléfono solo puede tener números, espacios y signos + y -)", "[0-9\\-\\+ ]+")
+				.number("El teléfono solo puede tener números")
 				.validate());
 		
 		ret.addAll(new StringValidator(email)
@@ -124,16 +124,16 @@ public class AltaClienteDTO {
 				.validate());
 		
 		ret.addAll(new StringValidator(altura)
-				.regex("La altura solo debe tener números", Patterns.NON_NEGATIVE_INTEGER_FIELD)
+				.number("La altura solo debe tener números")
 				.validate());
 		
 		ret.addAll(new StringValidator(piso)
-				.regex("El piso solo debe tener números", Patterns.NON_NEGATIVE_INTEGER_FIELD)
+				.number("El piso solo debe tener números")
 				.max(2, "Maximo 2 digitos para el piso.")
 				.validate());
 		
 		ret.addAll(new StringValidator(dpto)
-				.regex("El piso solo debe tener números", Patterns.NON_NEGATIVE_INTEGER_FIELD)
+				.number("El piso solo debe tener números")
 				.max(3, "Maximo 3 chars para el dpto.")
 				.validate());
 		
