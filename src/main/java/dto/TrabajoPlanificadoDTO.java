@@ -1,10 +1,15 @@
 package dto;
 
 public class TrabajoPlanificadoDTO {
+	
 	private Integer idTrabajoPresu;
+	
 	private Integer idPresupuesto;
+	
 	private String descripcionTrabajo;
+	
 	private Double precioTrabajo;
+	
 	private Integer tiempoEstTrabajo;
 	
 	public TrabajoPlanificadoDTO () {
