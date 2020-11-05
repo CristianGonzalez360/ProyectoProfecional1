@@ -30,7 +30,7 @@ public class PresupuestoDTO {
 	  
 	  private Date fechaRechazo;
 	  
-	  private List<TrabajoPlanificadoDTO> trabajos;
+	  private List<TrabajoPresupuestadoDTO> trabajos;
 	  
 	  private List<RepuestoPlanificadoDTO> repuestos;
 	  
@@ -121,7 +121,7 @@ public class PresupuestoDTO {
 				+ "]";
 	}
 
-	public void agregarTrabajo(TrabajoPlanificadoDTO trabajo) {
+	public void agregarTrabajo(TrabajoPresupuestadoDTO trabajo) {
 		this.trabajos.add(trabajo);
 	}
 	
@@ -129,11 +129,11 @@ public class PresupuestoDTO {
 		this.repuestos.add(repuesto);
 	}
 
-	public List<TrabajoPlanificadoDTO> getTrabajos() {
+	public List<TrabajoPresupuestadoDTO> getTrabajos() {
 		return trabajos;
 	}
 
-	public void setTrabajos(List<TrabajoPlanificadoDTO> trabajos) {
+	public void setTrabajos(List<TrabajoPresupuestadoDTO> trabajos) {
 		this.trabajos = trabajos;
 	}
 

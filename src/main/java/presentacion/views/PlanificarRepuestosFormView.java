@@ -18,9 +18,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
@@ -28,7 +28,6 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
-
 import javax.swing.BoxLayout;
 
 public class PlanificarRepuestosFormView extends JDialog {
@@ -197,7 +196,11 @@ public class PlanificarRepuestosFormView extends JDialog {
 		setVisible(false);
 	}
 
-	public void clearData() {
+	public void clearDataRepuestos() {
+		// TODO Auto-generated method stub
+	}
+	
+	public void clearDataRepuestosPlanificados() {
 		// TODO Auto-generated method stub
 	}
 
@@ -219,12 +222,16 @@ public class PlanificarRepuestosFormView extends JDialog {
 		}
 	}
 	
-	public int getIdRepuesto() {
-		return idRepuestos.get(tablaRepuestos.getSelectedRow());
+	public String getIdRepuesto() {
+		String ret = -1 + "";
+		if(tablaRepuestos.getSelectedRow() >= 0) {
+			ret = "" + idRepuestos.get(tablaRepuestos.getSelectedRow());
+		} 
+		return ret;
 	}
 	
-	public int getCantidad() {
-		return Integer.parseInt(this.textCantidad.getText());
+	public String getCantidad() {
+		return textCantidad.getText();
 	}
 	
 	public void setActionOnAgregar(ActionListener listener) {
