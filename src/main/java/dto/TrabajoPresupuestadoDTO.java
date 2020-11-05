@@ -1,6 +1,6 @@
 package dto;
 
-public class TrabajoPlanificadoDTO {
+public class TrabajoPresupuestadoDTO {
 	
 	private Integer idTrabajoPresu;
 	
@@ -12,7 +12,7 @@ public class TrabajoPlanificadoDTO {
 	
 	private Integer tiempoEstTrabajo;
 	
-	public TrabajoPlanificadoDTO () {
+	public TrabajoPresupuestadoDTO () {
 		
 	}
 	

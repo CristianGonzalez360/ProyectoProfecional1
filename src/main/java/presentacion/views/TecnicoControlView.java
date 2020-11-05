@@ -31,7 +31,7 @@ public class TecnicoControlView extends JInternalFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		this.gestionPresupuestoPanel = new PanelGestionPresupuestoView();
+		this.gestionPresupuestoPanel = PanelGestionPresupuestoView.getInstance();
 		tabbedPane.add("Gestión de presupuestos", this.gestionPresupuestoPanel);
 	}
 

@@ -16,6 +16,10 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 	private static final String insert = 
 			"INSERT INTO Repuestos (codigoRepuesto, precioRepuesto, marcaRepuesto, descripcionRepuesto, stockRepuesto, fabricante, stockMinimo)"
 			+ " " + "VALUES (?,?,?,?,?,?,?)";
+
+	private static final String readByDescripcion = readAll + " " + "WHERE marcaRepuesto = ?";
+
+	private static final String readByMarca = readAll + " " + "WHERE marcaRepuesto = ?";
 	
 	public RepuestosDaoImpl(Connection connection) {
 		super(connection);
@@ -27,10 +31,12 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
 	public boolean insert(RepuestoDTO entity) {
-		return getTemplate().query(insert)
+				
+		return getTemplate()
+				.query(insert)
 				.param(entity.getCodigoRepuesto())
 				.param(entity.getPrecioRepuesto())
 				.param(entity.getMarcaRepuesto())
@@ -56,6 +62,16 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 	@Override
 	public List<RepuestoDTO> readAll() {
 		return getTemplate().query(readAll).excecute(getMapper());
+	}
+	
+	@Override
+	public List<RepuestoDTO> readByMarca(String marca) {
+		return getTemplate().query(readByMarca).param(marca).excecute(getMapper());
+	}
+	
+	@Override
+	public List<RepuestoDTO> readByDescripcion(String descripcion) {
+		return getTemplate().query(readByDescripcion).param(descripcion).excecute(getMapper());
 	}
 	
 	@Override

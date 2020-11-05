@@ -18,6 +18,8 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	private OrdenesTrabajoController ordenesDeTrabajoController;
 	
 	private PresupuestosController presupuestosController;
+	
+	private RepuestosController repuestosController;
 
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
@@ -64,7 +66,14 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public PresupuestosController makePresupuestosController() {
 		if (presupuestosController == null)
-			presupuestosController = new PresupuestosController();
+			presupuestosController = new PresupuestosController();//TODO faltan los daos
 		return presupuestosController;
+	}
+
+	@Override
+	public RepuestosController makeRepuestosController() {
+		if (repuestosController == null)
+			repuestosController = new RepuestosController(daos.makeRepuestoDao());
+		return repuestosController;
 	}
 }

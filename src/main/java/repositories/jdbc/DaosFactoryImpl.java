@@ -3,15 +3,17 @@
  */
 package repositories.jdbc;
 
-import dto.CuentaDTO;
 import repositories.ClientesDao;
 import repositories.CuentasDao;
 import repositories.DaosFactory;
 import repositories.DatosPersonalesDao;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
-import repositories.GenericDao;
 import repositories.PaisDao;
+import repositories.PresupuestosDao;
+import repositories.RepuestosDao;
+import repositories.RepuestosPlanificadosDao;
+import repositories.TrabajosPresupuestadosDao;
 import repositories.TurnosDao;
 import repositories.UsuariosDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
@@ -38,7 +40,15 @@ public class DaosFactoryImpl extends DaosFactory {
 	private ClientesDao clientesDao;
 
 	private VehiculosConOrdenDeTrabajoDao vehiculosConOtDao;
+	
+	private RepuestosDao repuestosDao;
 
+	private PresupuestosDao presupuestosDao;
+	
+	private TrabajosPresupuestadosDao trabajosPlanificadosDao;
+
+	private RepuestosPlanificadosDao repuestosPlanificadosDao;
+	
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
 	}
@@ -106,4 +116,37 @@ public class DaosFactoryImpl extends DaosFactory {
 			this.vehiculosConOtDao = new VehiculosConOrdenDeTrabajoDaoImpl(ds.getConnection());
 		return vehiculosConOtDao;
 	}
+
+	@Override
+	public RepuestosDao makeRepuestoDao() {
+		if(this.repuestosDao == null) {
+			this.repuestosDao = new RepuestosDaoImpl(ds.getConnection());
+		}
+		return repuestosDao;
+	}
+	
+	@Override
+	public PresupuestosDao makePresupuestoDao() {
+		if(presupuestosDao == null)
+			presupuestosDao = new PresupuestosDaoImpl(ds.getConnection());
+		return presupuestosDao;
+	}
+
+	@Override
+	public TrabajosPresupuestadosDao makeTrabajosPlanificadosDao() {
+		if(trabajosPlanificadosDao == null) {
+			trabajosPlanificadosDao = new TrabajosPresupuestadosDaoImpl(ds.getConnection());
+		}
+		return trabajosPlanificadosDao;
+	}
+
+	@Override
+	public RepuestosPlanificadosDao makeRepuestosPlanificadosDao() {
+		if(repuestosPlanificadosDao == null) {
+			repuestosPlanificadosDao = new RepuestosPlanificadosDaoImpl(ds.getConnection());
+		}
+		return repuestosPlanificadosDao;
+	}
+
 }
+

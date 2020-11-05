@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
-import dto.TrabajoPlanificadoDTO;
+import dto.TrabajoPresupuestadoDTO;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -115,9 +115,9 @@ public class PlanificarTrabajosFormView extends JDialog {
 		setVisible(true);
 	}
 
-	public void setData(List<TrabajoPlanificadoDTO> trabajos) {
+	public void setData(List<TrabajoPresupuestadoDTO> trabajos) {
 		modelo.setRowCount(0);
-		for (TrabajoPlanificadoDTO t : trabajos) {
+		for (TrabajoPresupuestadoDTO t : trabajos) {
 			Object[] row = { t.getDescripcionTrabajo(), t.getTiempoEstTrabajo(), t.getPrecioTrabajo()};
 			modelo.addRow(row);
 		}
