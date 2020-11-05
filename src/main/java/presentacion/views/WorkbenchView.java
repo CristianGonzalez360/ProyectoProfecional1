@@ -103,7 +103,7 @@ public class WorkbenchView {
 			}
 		});
 		this.frame.setVisible(true);
-		this.frame.setResizable(false);
+		this.frame.setResizable(true);
 	}
 
 	public void setData(String sessionInfo) {

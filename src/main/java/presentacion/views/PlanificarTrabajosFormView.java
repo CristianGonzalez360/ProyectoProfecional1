@@ -2,6 +2,7 @@ package presentacion.views;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -18,8 +19,10 @@ public class PlanificarTrabajosFormView extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = -8919580357142104418L;
+	private static PlanificarTrabajosFormView instance;
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
+	private JButton btnAgregar;
 
 	public PlanificarTrabajosFormView() {
 		setBounds(100, 100, 450, 300);
@@ -53,7 +56,7 @@ public class PlanificarTrabajosFormView extends JDialog {
 		JButton btnEditar = new JButton("Editar");
 		panelBotones.add(btnEditar);
 
-		JButton btnAgregar = new JButton("Agregar");
+		btnAgregar = new JButton("Agregar");
 		panelBotones.add(btnAgregar);
 
 		JPanel buttonPane = new JPanel();
@@ -69,6 +72,25 @@ public class PlanificarTrabajosFormView extends JDialog {
 		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
 
+		setVisible(false);
 	}
+	
+	public static PlanificarTrabajosFormView getInstance() {
+		if(instance == null) instance = new PlanificarTrabajosFormView();
+		return instance;
+	}
+	
+	public void setActionOnAgregarTrabajo(ActionListener a) {
+		this.btnAgregar.addActionListener(a);
+	}
+	
+	public void clearData() {
+		// TODO Auto-generated method stub
+	}
+
+	public void display() {
+		setVisible(true);
+	}
+
 
 }

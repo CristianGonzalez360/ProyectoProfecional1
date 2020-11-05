@@ -1,10 +1,11 @@
 package presentacion.views;
 
-import presentacion.WorkbenchPresenter;
 import business_logic.ControllersFactory;
 import presentacion.ClientePresenter;
 import presentacion.OrdenDeTrabajoPresenter;
+import presentacion.PresupuestosPresenter;
 import presentacion.TurnosPresenter;
+import presentacion.WorkbenchPresenter;
 
 public class ViewsFactoryImpl extends ViewsFactory {
 
@@ -23,6 +24,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 				controllers.makeClientesController(), controllers.makeVehiculosController(),
 				controllers.makeOrdenesDeTrabajoController());
 		new OrdenDeTrabajoPresenter(controllers.makeOrdenesDeTrabajoController());
+		new PresupuestosPresenter(controllers.makePresupuestosController());
 		return new WorkbenchPresenter(controllers.makeLoginController());
 	}
 }

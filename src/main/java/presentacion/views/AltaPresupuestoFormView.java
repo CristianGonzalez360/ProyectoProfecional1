@@ -114,6 +114,8 @@ public class AltaPresupuestoFormView extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+		
+		setVisible(false);
 	}
 	
 	public static AltaPresupuestoFormView getInstance() {
@@ -141,6 +143,15 @@ public class AltaPresupuestoFormView extends JDialog {
 		for(TrabajoPlanificadoDTO t : trabajos) {
 			//TODO llenar tabla trabajos
 		}
+	}
+
+	public void clearData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void display() {
+		setVisible(true);
 	}
 	
 }
