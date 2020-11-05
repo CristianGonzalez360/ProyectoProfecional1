@@ -5,19 +5,33 @@ import java.util.Date;
 import java.util.List;
 
 public class PresupuestoDTO {
+	
 	  private Integer idPresupuesto;
+	
 	  private Integer idOT;
+	  
 	  private Integer idUsuAltaPresu;
+	  
 	  private Integer idUsuCierrePresu;
+	  
 	  private Integer idUsuRegPago;
+	  
 	  private Integer idPago;
+	  
 	  private Date fechaAltaPresu;
+	  
 	  private String comentarioAltaPresu;
+	  
 	  private Date fechaCierrePresu;
+	  
 	  private String comentarioCierrePresu;
+	  
 	  private Date fechaAprobacion;
+	  
 	  private Date fechaRechazo;
+	  
 	  private List<TrabajoPlanificadoDTO> trabajos;
+	  
 	  private List<RepuestoPlanificadoDTO> repuestos;
 	  
 	  public PresupuestoDTO () {
