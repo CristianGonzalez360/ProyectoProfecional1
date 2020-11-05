@@ -83,7 +83,7 @@ public class PresupuestosPresenter {
 
 	private void onDisplayForPlanRepuesto(ActionEvent a) {
 		this.planRepuestosView.clearDataRepuestos();
-		this.planRepuestosView.setDataRepuestos(repuestosController.getAll());//TODO no esta implementado el controller
+		this.planRepuestosView.setDataRepuestos(repuestosController.readAll());//TODO no esta implementado el controller
 		this.planRepuestosView.display();
 	}
 	

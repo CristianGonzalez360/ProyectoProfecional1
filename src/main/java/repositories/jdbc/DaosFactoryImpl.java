@@ -147,4 +147,6 @@ public class DaosFactoryImpl extends DaosFactory {
 		}
 		return repuestosPlanificadosDao;
 	}
+
 }
+
