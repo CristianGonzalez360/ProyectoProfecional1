@@ -21,12 +21,12 @@ import java.awt.event.ActionListener;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 
+import dto.OrdenDeTrabajoDTO;
 import dto.TurnoDTO;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JCheckBox;
 
 public class SupervisorControlView extends JInternalFrame {
 
@@ -34,6 +34,9 @@ public class SupervisorControlView extends JInternalFrame {
 
 	private static final String[] COLUMNAS_TURNOS = new String[] { "NRO. TURNO", "NOMBRE CLIENTE", "DNI CLIENTE",
 			"FECHA DE ALTA", "FECHA PROGRAMADA" };
+	
+	private static final String[] COLUMNAS_ORDENES = {"TIPO DE TRABAJO", "ID. USUARIO DE ALTA", "ID. VEHICULO OT", "FECHA ALTA", "TRABAJO SOLICITADO", "TRABAJO SUGERIDO", "FEHCA ENTRGA VEHICULO" };
+	
 
 	private static SupervisorControlView instance;
 
@@ -48,31 +51,17 @@ public class SupervisorControlView extends JInternalFrame {
 	private JButton btnRegistrarTurno;
 
 	private JButton btnCancelarTurno;
-	private JTextField textDni;
-	private JTextField textPatente;
-	private JTextField textTrabajoSugerido;
-	private JTextField textTrabajoSolicitado;
-	private JTextField textTrabajosPorPresupuestar;
-	private JTextField textTrabajosEnCurso;
-	private JTextField textTrabajosTerminados;
-	private JTextField textTotalPresupuestado;
-	private JTable tablaOrdenesDeTrabajo;
-	private JTable tablaPresupuesto;
-	private String[] columnasOrdenTrabajo = { "Nro OT", "Fecha alta", "Usuario de alta", "Dni cliente", "patente" };// aca
-																													// se
-																													// modifican
-																													// las
-																													// columnas
-																													// de
-																													// la
-																													// tabla
-																													// orden
-																													// de
-																													// trabajo
-	private String[] columnasPresupuesto = { "Fecha alta" };// aca se modifican las columnas de la tabla presupuesto
-
+	
+	private DefaultTableModel modelOrdenesDeTrabajo;
+	
 	private PanelClientesView panelClientesView;
+	
+	
+	private PanelConsultaDePresupuestosView panelConsultaOTPresupuestadasView;
 
+	private PanelEntregaVehiculosView panelEntregaVehiculosView;
+	
+	
 	public static SupervisorControlView getInstance() {
 		if (instance == null)
 			instance = new SupervisorControlView();
@@ -86,7 +75,7 @@ public class SupervisorControlView extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setTitle("Supervisor control view");
 		setBounds(100, 100, 859, 647);
-
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
@@ -101,6 +90,12 @@ public class SupervisorControlView extends JInternalFrame {
 		tabbedPane.addTab("Turnos", null, turnosPanel, null);
 		turnosPanel.setLayout(new BorderLayout(0, 0));
 
+		panelConsultaOTPresupuestadasView = new PanelConsultaDePresupuestosView();
+		tabbedPane.addTab("Consulta OT Presupuestadas", panelConsultaOTPresupuestadasView);
+		
+		panelEntregaVehiculosView = new PanelEntregaVehiculosView();
+		tabbedPane.addTab("Consulta vehiculos para entregar", panelEntregaVehiculosView);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
@@ -133,154 +128,8 @@ public class SupervisorControlView extends JInternalFrame {
 		tableModelTurnos = new DefaultTableModel(null, COLUMNAS_TURNOS);
 		table = new JTable(tableModelTurnos);
 		scrollPane.setViewportView(table);
-
-		JPanel otPresupuestadasPanel = new JPanel();
-		tabbedPane.addTab("OT presupuestadas", null, otPresupuestadasPanel, null);
-		otPresupuestadasPanel.setLayout(null);
-
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(10, 11, 818, 66);
-		otPresupuestadasPanel.add(panel_3);
-		panel_3.setLayout(null);
-
-		JLabel lblDni = new JLabel("Dni");
-		lblDni.setBounds(41, 26, 46, 14);
-		panel_3.add(lblDni);
-
-		JLabel lblPatenteVehculo = new JLabel("Patente vehículo");
-		lblPatenteVehculo.setBounds(249, 26, 103, 14);
-		panel_3.add(lblPatenteVehculo);
-
-		JButton btnBuscar_1 = new JButton("Buscar");
-		btnBuscar_1.setBounds(603, 22, 89, 23);
-		panel_3.add(btnBuscar_1);
-
-		textDni = new JTextField();
-		textDni.setBounds(66, 23, 139, 20);
-		panel_3.add(textDni);
-		textDni.setColumns(10);
-
-		textPatente = new JTextField();
-		textPatente.setBounds(341, 23, 113, 20);
-		panel_3.add(textPatente);
-		textPatente.setColumns(10);
-
-		JCheckBox chckbxTodos = new JCheckBox("Todos");
-		chckbxTodos.setBounds(478, 22, 97, 23);
-		panel_3.add(chckbxTodos);
-
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(435, 107, 393, 100);
-		otPresupuestadasPanel.add(panel_4);
-		panel_4.setLayout(null);
-
-		JLabel lblTrabajoSugerido = new JLabel("Trabajo sugerido");
-		lblTrabajoSugerido.setBounds(27, 25, 102, 14);
-		panel_4.add(lblTrabajoSugerido);
-
-		JLabel lblTrabajoSolicitado = new JLabel("Trabajo solicitado");
-		lblTrabajoSolicitado.setBounds(27, 64, 102, 14);
-		panel_4.add(lblTrabajoSolicitado);
-
-		textTrabajoSugerido = new JTextField();
-		textTrabajoSugerido.setBounds(139, 22, 207, 20);
-		panel_4.add(textTrabajoSugerido);
-		textTrabajoSugerido.setColumns(10);
-
-		textTrabajoSolicitado = new JTextField();
-		textTrabajoSolicitado.setBounds(139, 61, 207, 20);
-		panel_4.add(textTrabajoSolicitado);
-		textTrabajoSolicitado.setColumns(10);
-
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(10, 88, 402, 468);
-		otPresupuestadasPanel.add(panel_5);
-		panel_5.setLayout(null);
-
-		JButton buttonRegistrarEntrega = new JButton("Registrar entrega de vehículo");
-		buttonRegistrarEntrega.setBounds(108, 434, 187, 23);
-		panel_5.add(buttonRegistrarEntrega);
-
-		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(21, 268, 371, 145);
-		panel_5.add(panel_6);
-		panel_6.setLayout(null);
-
-		JLabel lblTrabajosPorPresupuestar = new JLabel("Trabajos por presupuestar");
-		lblTrabajosPorPresupuestar.setBounds(10, 26, 151, 14);
-		panel_6.add(lblTrabajosPorPresupuestar);
-
-		JLabel lblTrabajosEnCurso = new JLabel("Trabajos en curso");
-		lblTrabajosEnCurso.setBounds(10, 72, 151, 14);
-		panel_6.add(lblTrabajosEnCurso);
-
-		JLabel lblTrabajosTerminados = new JLabel("Trabajos terminados");
-		lblTrabajosTerminados.setBounds(10, 107, 151, 14);
-		panel_6.add(lblTrabajosTerminados);
-
-		textTrabajosPorPresupuestar = new JTextField();
-		textTrabajosPorPresupuestar.setBounds(171, 23, 86, 20);
-		panel_6.add(textTrabajosPorPresupuestar);
-		textTrabajosPorPresupuestar.setColumns(10);
-
-		textTrabajosEnCurso = new JTextField();
-		textTrabajosEnCurso.setBounds(171, 69, 86, 20);
-		panel_6.add(textTrabajosEnCurso);
-		textTrabajosEnCurso.setColumns(10);
-
-		textTrabajosTerminados = new JTextField();
-		textTrabajosTerminados.setBounds(171, 104, 86, 20);
-		panel_6.add(textTrabajosTerminados);
-		textTrabajosTerminados.setColumns(10);
-
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 16, 382, 241);
-		panel_5.add(scrollPane_1);
-
-		DefaultTableModel modelOrdenesDeTrabajo = (new DefaultTableModel(null, columnasOrdenTrabajo));
-		tablaOrdenesDeTrabajo = new JTable(modelOrdenesDeTrabajo);
-		scrollPane_1.setViewportView(tablaOrdenesDeTrabajo);
-
-		JPanel panel_7 = new JPanel();
-		panel_7.setBounds(435, 245, 393, 310);
-		otPresupuestadasPanel.add(panel_7);
-		panel_7.setLayout(null);
-
-		JLabel lblPresupuestos = new JLabel("Presupuestos");
-		lblPresupuestos.setBounds(10, 11, 102, 14);
-		panel_7.add(lblPresupuestos);
-
-		JButton btnEnviarFactura = new JButton("Enviar factura al cliente");
-		btnEnviarFactura.setBounds(10, 262, 147, 23);
-		panel_7.add(btnEnviarFactura);
-
-		JButton btnRegistrarPago = new JButton("Registrar pago");
-		btnRegistrarPago.setBounds(167, 262, 106, 23);
-		panel_7.add(btnRegistrarPago);
-
-		JButton btnConsultarDetalle = new JButton("Consultar detalle");
-		btnConsultarDetalle.setBounds(283, 262, 100, 23);
-		panel_7.add(btnConsultarDetalle);
-
-		JLabel lblTotalPresupuestado = new JLabel("Total presupuestado");
-		lblTotalPresupuestado.setBounds(39, 227, 118, 14);
-		panel_7.add(lblTotalPresupuestado);
-
-		textTotalPresupuestado = new JTextField();
-		textTotalPresupuestado.setBounds(187, 224, 118, 20);
-		panel_7.add(textTotalPresupuestado);
-		textTotalPresupuestado.setColumns(10);
-
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(10, 36, 373, 170);
-		panel_7.add(scrollPane_2);
-
-		DefaultTableModel modelPresupuestos = (new DefaultTableModel(null, columnasPresupuesto));
-		tablaPresupuesto = new JTable(modelPresupuestos);
-		scrollPane_2.setViewportView(tablaPresupuesto);
-
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("OT para cerrar", null, panel, null);
+		
+		modelOrdenesDeTrabajo = (new DefaultTableModel(null, COLUMNAS_ORDENES));
 
 	}
 
@@ -305,7 +154,15 @@ public class SupervisorControlView extends JInternalFrame {
 			tableModelTurnos.addRow(row);
 		}
 	}
-
+		
+	public void setOrdenesDeTrabajo(List<OrdenDeTrabajoDTO> ordenes) {
+		for(OrdenDeTrabajoDTO orden : ordenes) {
+			Object[] row = {orden.getTipoOrdeTrabajo(), orden.getIdUsuarioAlta(), orden.getIdVehiculoOt(), orden.getFechaDeAlta(), orden.getTrabajoSolicitado(),
+					orden.getTrabajoSujerido(), orden.getFechaEntregado()};
+			modelOrdenesDeTrabajo.addRow(row);
+		}
+	}
+	
 	public TurnoDTO getSelectedTurno() {
 		int row = table.getSelectedRow();
 		if (table.getSelectedRowCount() == 1) {
@@ -335,11 +192,17 @@ public class SupervisorControlView extends JInternalFrame {
 		tableModelTurnos.setColumnCount(0);
 		tableModelTurnos.setColumnIdentifiers(COLUMNAS_TURNOS);
 	}
+	
+	public void clearOrdenesDeTrabajo() {
+		modelOrdenesDeTrabajo.setRowCount(0);
+		modelOrdenesDeTrabajo.setColumnCount(0);
+		modelOrdenesDeTrabajo.setColumnIdentifiers(COLUMNAS_ORDENES);
+	}
 
 	public void setActionBuscar(ActionListener listener) {
 		this.btnBuscar.addActionListener(listener);
 	}
-
+	
 	public void setActionRegistrarTurno(ActionListener listener) {
 		this.btnRegistrarTurno.addActionListener(listener);
 	}
@@ -350,9 +213,19 @@ public class SupervisorControlView extends JInternalFrame {
 
 	public String getDniClienteBusquedaTurno() {
 		return textFieldTurno.getText();
-	}
+	}	
 
 	public PanelClientesView getPanelClientesView() {
 		return this.panelClientesView;
+	}
+
+	public void setActionBuscarOT(ActionListener listener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getDniClienteBusquedaOT() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

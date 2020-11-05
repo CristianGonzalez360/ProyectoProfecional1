@@ -1,6 +1,7 @@
 package business_logic;
 
 import java.util.Date;
+import java.util.List;
 
 import business_logic.exceptions.ForbiddenException;
 import dto.AltaOrdenDeTrabajoDTO;
@@ -21,6 +22,10 @@ public class OrdenesTrabajoController {
 		this.service = service;
 	}
 
+	public List<OrdenDeTrabajoDTO> readAll() {
+		return dao.readAll();
+	}
+
 	public void save(Integer idVehiculo, AltaOrdenDeTrabajoDTO ordenDeTrabajo) throws ForbiddenException {
 		assert idVehiculo != null;
 		assert ordenDeTrabajo != null;
@@ -35,6 +40,10 @@ public class OrdenesTrabajoController {
 			}
 		}		
 		dao.insert(dto);
+	}
+
+	public OrdenDeTrabajoDTO readByDniCliente(String dni) {
+		return dao.readByID(Integer.parseInt(dni));
 	}
 
 	public OrdenDeTrabajoDTO readByIdVehiculo(Integer idVehiculo) {

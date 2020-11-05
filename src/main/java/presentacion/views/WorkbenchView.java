@@ -46,7 +46,7 @@ public class WorkbenchView {
 	WorkbenchView() {
 		super();
 		frame = new JFrame();
-		frame.setResizable(false);
+		//frame.setResizable(false);
 		frame.setBounds(100, 100, 1132, 391);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Agenda");

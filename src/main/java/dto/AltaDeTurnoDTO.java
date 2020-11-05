@@ -46,6 +46,14 @@ public class AltaDeTurnoDTO {
 		return errors;
 	}
 
+	public Integer getIdTurno() {
+		return idTurno;
+	}
+
+	public void setIdTurno(Integer idTurno) {
+		this.idTurno = idTurno;
+	}
+
 	public Integer getIdCliente() {
 		return idCliente;
 	}
