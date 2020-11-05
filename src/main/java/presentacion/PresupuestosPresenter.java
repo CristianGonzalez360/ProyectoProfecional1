@@ -32,7 +32,6 @@ public class PresupuestosPresenter {
 		this.agregarTrabajoFormView.setActionOnGuardar(a -> onAgregarTrabajos(a));
 		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
 		
-		TecnicoControlView.getInstance().setActionPresupuestar(a -> onPresupuestar());//Provisorio, para test.
 	}
 
 	private void onGuardar(ActionEvent a) {
@@ -75,7 +74,5 @@ public class PresupuestosPresenter {
 	private void onDisplayForPlanTrabajos(ActionEvent a) {
 		this.planTrabajosView.clearData();
 		this.planTrabajosView.display();
-	}
-	
-	
+	}	
 }
