@@ -77,8 +77,14 @@ public class TurnosPresenter {
 			TurnoDTO nuevoTurno = new TurnoDTO(dniCliente, turno.getFechaAlta(), turno.getFechaCancelado(),
 					turno.getFechaProgramada(), turno.getNombreCliente(), turno.getTelefonoCliente(),
 					turno.getEmailCliente());
+			
+			System.out.println("Nuevo " +nuevoTurno.toString());
 			this.controller.save(nuevoTurno);
 			turnoForm.dispose();
+		}
+		
+		for(TurnoDTO elemento : controller.readAll()) {
+			System.out.println(elemento.toString());
 		}
 
 	}
