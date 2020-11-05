@@ -24,6 +24,7 @@ public class TurnosPresenter {
 
 	private static final String MENSAGE_DNI_INCORRECTO = "No se encontraron turnos para DNI: %s";
 	private static final String MENSAGE_NO_TURNOS = "No se encontraron turnos para DNI: %s";
+	private static final String MENSAGE_NUEVO_TURNO = "Se registró Turno.";
 
 	public TurnosPresenter(TurnosController controller) {
 		this.controller = controller;
@@ -110,7 +111,10 @@ public class TurnosPresenter {
 					turno.getEmailCliente());
 
 			this.controller.save(nuevoTurno);
-			turnoForm.dispose();
+			
+			JOptionPane.showMessageDialog(supervisorView, MENSAGE_NUEVO_TURNO);
+			
+			turnoForm.dispose();			
 		}
 	}
 
