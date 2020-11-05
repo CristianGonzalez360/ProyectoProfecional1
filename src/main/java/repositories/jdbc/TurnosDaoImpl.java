@@ -4,15 +4,18 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
-import dto.AltaDeTurnoDTO;
 import dto.TurnoDTO;
 import repositories.TurnosDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
 
 public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao {
+	
+	private static final String update = "UPDATE Turnos SET fechaCanceladoTurno = ? WHERE idTurno = ?";
 
 	private static final String readAll = "SELECT * FROM Turnos";
+	
+	private static final String readByID = "SELECT * FROM Turnos WHERE Turnos.idTurno = ?";
 
 	private static final String readByDni = "SELECT * FROM Turnos WHERE Turnos.dniCliente = ?";
 
@@ -24,8 +27,13 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 
 	@Override
 	public boolean update(TurnoDTO entity) {
-		// TODO Auto-generated method stub
-		return false;
+		/*
+		 * Update Cancellation Date
+		 */
+		return getTemplate().query(update)
+				.param(entity.getFechaCancelado())
+				.param(entity.getIdTurno())
+				.excecute();
 	}
 
 	@Override
@@ -65,6 +73,11 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
+	public TurnoDTO readByIdTurno(Integer id) {
+		List<TurnoDTO> dtos = getTemplate().query(readByID).param(id).excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
+	}
+	
 	@Override
 	protected Mapper<TurnoDTO> getMapper() {
 		return new Mapper<TurnoDTO>() {
