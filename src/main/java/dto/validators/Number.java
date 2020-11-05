@@ -14,8 +14,12 @@ public class Number implements Validator<String> {
 	@Override
 	public List<String> validate(String target) {
 		LinkedList<String> ret = new LinkedList<String>();
+		int valor = 0;
 		try {
-			Integer.parseInt(target);
+			valor = Integer.parseInt(target);
+			if(valor<0) {
+				ret.add(message);
+			}
 		} catch(NumberFormatException e) {
 			ret.add(message);
 		}

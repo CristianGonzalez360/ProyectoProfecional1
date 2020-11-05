@@ -97,7 +97,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		return instance;
 	}
 	
-	public PanelGestionPresupuestoView() {
+	private PanelGestionPresupuestoView() {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_4 = new JPanel();
@@ -345,4 +345,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 	public void setActionOnRegistrarPresupuesto(ActionListener listener) {
 		this.btnRegistrarPresupuesto.addActionListener(listener);
 	}
+	
+	
 }

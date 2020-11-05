@@ -1,15 +1,19 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.List;
 import business_logic.PresupuestosController;
+import business_logic.RepuestosController;
+import dto.validators.Patterns;
 import dto.PresupuestoDTO;
+import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
+import dto.validators.StringValidator;
 import presentacion.views.AgregarTrabajoFormView;
-import presentacion.views.AltaPresupuestoFormView;
 import presentacion.views.PanelGestionPresupuestoView;
 import presentacion.views.PlanificarRepuestosFormView;
 import presentacion.views.PlanificarTrabajosFormView;
-import presentacion.views.TecnicoControlView;
+import presentacion.views.utils.ErrorDialog;
 
 public class PresupuestosPresenter {
 	
@@ -17,10 +21,14 @@ public class PresupuestosPresenter {
 	private PlanificarRepuestosFormView planRepuestosView;
 	private PlanificarTrabajosFormView planTrabajosView;
 	private AgregarTrabajoFormView agregarTrabajoFormView;
-	
 	private PresupuestoDTO nuevoPresupuesto;
 	
-	public PresupuestosPresenter(PresupuestosController controller) {
+	private PresupuestosController presupuestosController;
+	private RepuestosController repuestosController;
+	
+	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController) {
+		this.presupuestosController = presupuestosController;
+		this.repuestosController = repuestosController;
 		this.gestionPresupuestosView = PanelGestionPresupuestoView.getInstance();
 		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
 		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
@@ -36,20 +44,32 @@ public class PresupuestosPresenter {
 
 	private void onRegistrar(ActionEvent a) {
 		System.out.println("Registrar");
-		// TODO Controller.save(nuevoPresupuesto)
+		presupuestosController.save(nuevoPresupuesto);//TODO no esta implementado el controller
 	}
 
-	private void onAgregarRepuesto(ActionEvent a) {
-		System.out.println("Agregar Repuesto");
-		RepuestoPlanificadoDTO repuesto = new RepuestoPlanificadoDTO();
-		repuesto.setCantRequerida(planRepuestosView.getCantidad());
-		int idRepuesto = planRepuestosView.getIdRepuesto();
-		//TODO pedir al controlador el repuesto por id y repuesto.setRepuesto(consulta);
-		nuevoPresupuesto.agregarRepuestos(repuesto);
+	private void onAgregarRepuesto(ActionEvent a) {		
+		String cantidad = planRepuestosView.getCantidad();
+		String idRepuesto = planRepuestosView.getIdRepuesto();
+		List<String>  errors = new StringValidator(idRepuesto)
+				.number("Debe seleccionar un repuesto.").validate();
+		errors.addAll(new StringValidator(cantidad)
+				.notBlank("Debe ingresar una cantidad")
+				.number("La cantidad debe ser un número").validate());
+		
+		if(errors.isEmpty()) {
+			RepuestoPlanificadoDTO repuestoPlanificado = new RepuestoPlanificadoDTO();
+			repuestoPlanificado.setCantRequerida(Integer.parseInt(cantidad));		
+			RepuestoDTO repuesto = repuestosController.readById(Integer.parseInt(idRepuesto));//TODO no esta implementdo el controller
+			repuestoPlanificado.setRepuesto(repuesto);
+			nuevoPresupuesto.agregarRepuestos(repuestoPlanificado);
+			planRepuestosView.clearDataRepuestosPlanificados();
+			planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
+		} else {
+			new ErrorDialog().showMessages(errors);;
+		}
 	}
 
 	private void onAgregarTrabajos(ActionEvent a) {
-		System.out.println("Agregar Trabajo");
 		nuevoPresupuesto.agregarTrabajo(this.agregarTrabajoFormView.getData());
 		this.planTrabajosView.clearData();
 		this.planTrabajosView.setData(nuevoPresupuesto.getTrabajos());
@@ -62,8 +82,8 @@ public class PresupuestosPresenter {
 	}
 
 	private void onDisplayForPlanRepuesto(ActionEvent a) {
-		System.out.println("Planrepuestos");
-		this.planRepuestosView.clearData();
+		this.planRepuestosView.clearDataRepuestos();
+		this.planRepuestosView.setDataRepuestos(repuestosController.getAll());//TODO no esta implementado el controller
 		this.planRepuestosView.display();
 	}
 	
@@ -71,4 +91,6 @@ public class PresupuestosPresenter {
 		this.planTrabajosView.clearData();
 		this.planTrabajosView.display();
 	}	
+	
+	
 }
