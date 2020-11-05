@@ -6,13 +6,14 @@ import dto.PresupuestoDTO;
 import dto.RepuestoPlanificadoDTO;
 import presentacion.views.AgregarTrabajoFormView;
 import presentacion.views.AltaPresupuestoFormView;
+import presentacion.views.PanelGestionPresupuestoView;
 import presentacion.views.PlanificarRepuestosFormView;
 import presentacion.views.PlanificarTrabajosFormView;
 import presentacion.views.TecnicoControlView;
 
 public class PresupuestosPresenter {
 	
-	private AltaPresupuestoFormView altaPresupuestoView;
+	private PanelGestionPresupuestoView gestionPresupuestosView;
 	private PlanificarRepuestosFormView planRepuestosView;
 	private PlanificarTrabajosFormView planTrabajosView;
 	private AgregarTrabajoFormView agregarTrabajoFormView;
@@ -20,21 +21,21 @@ public class PresupuestosPresenter {
 	private PresupuestoDTO nuevoPresupuesto;
 	
 	public PresupuestosPresenter(PresupuestosController controller) {
-		this.altaPresupuestoView = AltaPresupuestoFormView.getInstance();
+		this.gestionPresupuestosView = PanelGestionPresupuestoView.getInstance();
 		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
 		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
 		this.agregarTrabajoFormView = AgregarTrabajoFormView.getInstance();
 		
-		this.altaPresupuestoView.setActionOnPlanificarRepuestos(a -> onDisplayForPlanRepuesto(a));
-		this.altaPresupuestoView.setActionOnPlanificarTrabajos(a -> onDisplayForPlanTrabajos(a));
-		this.altaPresupuestoView.setActionOnGuardar(a -> onGuardar(a));
+		this.gestionPresupuestosView.setActionOnPlanificarRepuestos(a -> onDisplayForPlanRepuesto(a));
+		this.gestionPresupuestosView.setActionOnPlanificarTrabajos(a -> onDisplayForPlanTrabajos(a));
+		this.gestionPresupuestosView.setActionOnRegistrarPresupuesto(a -> onRegistrar(a));
 		this.planTrabajosView.setActionOnAgregarTrabajo(a -> onDisplayForAgregarTrabajo(a));
 		this.agregarTrabajoFormView.setActionOnGuardar(a -> onAgregarTrabajos(a));
 		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
-		
 	}
 
-	private void onGuardar(ActionEvent a) {
+	private void onRegistrar(ActionEvent a) {
+		System.out.println("Registrar");
 		// TODO Controller.save(nuevoPresupuesto)
 	}
 
@@ -55,18 +56,13 @@ public class PresupuestosPresenter {
 		this.agregarTrabajoFormView.close();
 	}
 
-	private void onPresupuestar() {
-		this.nuevoPresupuesto = new PresupuestoDTO();
-		this.altaPresupuestoView.clearData();
-		this.altaPresupuestoView.display();
-	}
-
 	private void onDisplayForAgregarTrabajo(ActionEvent a) {
 		this.agregarTrabajoFormView.clearData();
 		this.agregarTrabajoFormView.display();
 	}
 
 	private void onDisplayForPlanRepuesto(ActionEvent a) {
+		System.out.println("Planrepuestos");
 		this.planRepuestosView.clearData();
 		this.planRepuestosView.display();
 	}
