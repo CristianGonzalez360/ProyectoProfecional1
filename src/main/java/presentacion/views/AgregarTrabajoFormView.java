@@ -14,11 +14,12 @@ import javax.swing.JEditorPane;
 
 public class AgregarTrabajoFormView extends JDialog {
 
+	private static AgregarTrabajoFormView instance;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfEsfuerzo;
 	private JTextField tfMonto;
 
-	public AgregarTrabajoFormView() {
+	private AgregarTrabajoFormView() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -77,6 +78,22 @@ public class AgregarTrabajoFormView extends JDialog {
 		tfEsfuerzo = new JTextField();
 		panelInferior.add(tfEsfuerzo);
 		tfEsfuerzo.setColumns(10);
+		
+		setVisible(false);
+	}
+
+	public static AgregarTrabajoFormView getInstance() {
+		if(instance == null) instance = new AgregarTrabajoFormView();
+		return instance;
+	}
+
+	public void clearData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void display() {
+		setVisible(true);
 	}
 
 }

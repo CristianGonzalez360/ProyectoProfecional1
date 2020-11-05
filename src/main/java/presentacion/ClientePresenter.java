@@ -11,6 +11,7 @@ import business_logic.OrdenesTrabajoController;
 import business_logic.VehiculosController;
 import business_logic.exceptions.ConflictException;
 import business_logic.exceptions.ForbiddenException;
+import dto.AltaClienteDTO;
 import dto.AltaDeVehiculoDTO;
 import dto.AltaOrdenDeTrabajoDTO;
 
@@ -94,6 +95,8 @@ public class ClientePresenter {
 			} else {
 				view.clearAll();
 			}
+		} else {
+			view.clearAll();
 		}
 	}
 	
@@ -116,11 +119,11 @@ public class ClientePresenter {
 	}
 
 	private void onRegistrarCliente(ActionEvent e) {
-		ClienteDTO cliente = ClienteFormView.getInstance().getData();
+		AltaClienteDTO cliente = ClienteFormView.getInstance().getData();
 		List<String> errors = cliente.validate();
 		if (errors.isEmpty()) {
 			try {
-				clienteController.save(cliente);
+				clienteController.save(new ClienteDTO(cliente));
 				ClienteFormView.getInstance().clearData();
 				ClienteFormView.getInstance().close();
 			} catch (ConflictException e1) {
