@@ -3,6 +3,7 @@ package presentacion.views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -23,6 +24,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+import java.awt.event.ActionEvent;
 
 public class PanelGestionPresupuestoView extends JPanel {
 
@@ -67,11 +69,11 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JTable tableRepuestos;
 	private JTable tableTrabajos;
 	private JPanel panel_2;
-	private JButton btnNewButton;
+	private JButton btnPlanificarRepuestos;
 	private JPanel panel_6;
-	private JButton btnNewButton_1;
+	private JButton btnPlanificarTrabajos;
 	private JPanel panel_7;
-	private JButton btnNewButton_2;
+	private JButton btnRegistrarPresupuesto;
 	private JToolBar toolBar;
 	private JLabel lblNewLabel;
 	private JPanel panel;
@@ -95,7 +97,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		return instance;
 	}
 	
-	public PanelGestionPresupuestoView() {
+	private PanelGestionPresupuestoView() {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_4 = new JPanel();
@@ -290,8 +292,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 		flowLayout_3.setAlignment(FlowLayout.TRAILING);
 		panel_3.add(panel_2, BorderLayout.SOUTH);
 		
-		btnNewButton = new JButton("Planificar repuesto");
-		panel_2.add(btnNewButton);
+		btnPlanificarRepuestos = new JButton("Planificar repuesto");
+		panel_2.add(btnPlanificarRepuestos);
 		
 		panel_5 = new JPanel();
 		tabbedPane.addTab("Trabajos planificados", null, panel_5, null);
@@ -309,8 +311,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 		flowLayout_2.setAlignment(FlowLayout.TRAILING);
 		panel_5.add(panel_6, BorderLayout.SOUTH);
 		
-		btnNewButton_1 = new JButton("Planificar trabajo");
-		panel_6.add(btnNewButton_1);
+		btnPlanificarTrabajos = new JButton("Planificar trabajo");
+		panel_6.add(btnPlanificarTrabajos);
 		
 		panel_7 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_7.getLayout();
@@ -321,8 +323,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 		toolBar.setFloatable(false);
 		panel_7.add(toolBar);
 		
-		btnNewButton_2 = new JButton("Registrar presupuesto");
-		toolBar.add(btnNewButton_2);
+		btnRegistrarPresupuesto = new JButton("Registrar presupuesto");
+		toolBar.add(btnRegistrarPresupuesto);
 	}
 	
 	void addCheckBox(int column, JTable table) {
@@ -331,4 +333,18 @@ public class PanelGestionPresupuestoView extends JPanel {
 	public boolean iPersupuestoAprobado(int row, int column, JTable table) {
 		return table.getValueAt(row, column) != null;
 	}
+	
+	public void setActionOnPlanificarTrabajos(ActionListener listener) {
+		this.btnPlanificarTrabajos.addActionListener(listener);
+	}
+
+	public void setActionOnPlanificarRepuestos(ActionListener listener) {
+		btnPlanificarRepuestos.addActionListener(listener);
+	}
+
+	public void setActionOnRegistrarPresupuesto(ActionListener listener) {
+		this.btnRegistrarPresupuesto.addActionListener(listener);
+	}
+	
+	
 }
