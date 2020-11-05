@@ -378,17 +378,17 @@ public class PanelClientesView extends JPanel {
 		panel_6.add(textTrabajoSugeridoOt, "4, 8, fill, default");
 		textTrabajoSugeridoOt.setColumns(10);
 				
-				panel_8 = new JPanel();
-				FlowLayout flowLayout = (FlowLayout) panel_8.getLayout();
-				flowLayout.setVgap(8);
-				panel_1.add(panel_8);
-				
-				toolBar_1 = new JToolBar();
-				toolBar_1.setFloatable(false);
-				panel_8.add(toolBar_1);
-				
-				btnRegistrarOrdenDeTrabajo = new JButton("Registrar orden de trabajo");
-				toolBar_1.add(btnRegistrarOrdenDeTrabajo);
+		panel_8 = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel_8.getLayout();
+		flowLayout.setVgap(8);
+		panel_1.add(panel_8);
+		
+		toolBar_1 = new JToolBar();
+		toolBar_1.setFloatable(false);
+		panel_8.add(toolBar_1);
+		
+		btnRegistrarOrdenDeTrabajo = new JButton("Registrar orden de trabajo");
+		toolBar_1.add(btnRegistrarOrdenDeTrabajo);
 
 		disableAllClienteInputs();
 		disableAllFichaTecnicaInputs();
