@@ -60,29 +60,29 @@ usuarios:
 turnos:
   - idCliente: 1
     dniCliente: 12333
-    fechaAlta: 2020-10-10
-    fechaProgramada: 2020-10-25
+    fechaAlta: 2020-11-05
+    fechaProgramada: 2020-11-08
     nombreCliente: u007
     telefonoCliente: "1133335555"
     emailCliente: "ejemplo@dominio.com"
   - idCliente: 12
     dniCliente: 12333
-    fechaAlta: 2020-10-10
-    fechaProgramada: 2020-10-25
+    fechaAlta: 2020-11-05
+    fechaProgramada: 2020-11-08
     nombreCliente: u008
     telefonoCliente: "1133335555"
     emailCliente: "ejemplo@dominio.com"
   - idCliente: 3
     dniCliente: 12333
-    fechaAlta: 2020-10-10
-    fechaProgramada: 2020-10-25
+    fechaAlta: 2020-11-05
+    fechaProgramada: 2020-11-08
     nombreCliente: u009
     telefonoCliente: "1133335555"
     emailCliente: "ejemplo@dominio.com"
   - idCliente: 5
     dniCliente: 12333
-    fechaAlta: 2020-10-10
-    fechaProgramada: 2020-10-25
+    fechaAlta: 2020-11-05
+    fechaProgramada: 2020-11-08
     nombreCliente: u0010
     telefonoCliente: "1133335555"
     emailCliente: "ejemplo@dominio.com"

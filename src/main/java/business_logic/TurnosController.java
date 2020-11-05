@@ -35,4 +35,8 @@ public class TurnosController {
 		return dao.readByIdTurno(id);
 	}
 
+	public List<TurnoDTO> readAllDisponibles() {
+		return dao.readAllTurnosDisponibles();
+	}
+
 }

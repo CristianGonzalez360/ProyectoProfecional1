@@ -64,8 +64,9 @@ public class TurnosPresenter {
 
 	private void onBuscarTurnos(ActionEvent e) {
 		String dni = supervisorView.getDniClienteBusquedaTurno();
+		
 		if (dni.trim().isEmpty()) {
-			List<TurnoDTO> turnos = controller.readAll();
+			List<TurnoDTO> turnos = controller.readAllDisponibles();
 			supervisorView.clearTurnos();
 			supervisorView.setTurnos(turnos);
 		} else {
