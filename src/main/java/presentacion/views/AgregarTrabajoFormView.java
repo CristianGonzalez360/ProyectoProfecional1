@@ -6,8 +6,13 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import dto.TrabajoPlanificadoDTO;
+
 import javax.swing.JButton;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
@@ -18,6 +23,8 @@ public class AgregarTrabajoFormView extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfEsfuerzo;
 	private JTextField tfMonto;
+	private JEditorPane editorDescripcion;
+	private JButton btnGuardar;
 
 	private AgregarTrabajoFormView() {
 		setBounds(100, 100, 450, 300);
@@ -31,7 +38,7 @@ public class AgregarTrabajoFormView extends JDialog {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		contentPanel.add(panelBotones, BorderLayout.SOUTH);
 
-		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar = new JButton("Guardar");
 		panelBotones.add(btnGuardar);
 
 		JButton btnCancelar = new JButton("Cancelar");
@@ -64,7 +71,7 @@ public class AgregarTrabajoFormView extends JDialog {
 		JLabel lblDescripcin = new JLabel("Descripción");
 		panelDescripción.add(lblDescripcin, BorderLayout.NORTH);
 
-		JEditorPane editorDescripcion = new JEditorPane();
+		editorDescripcion = new JEditorPane();
 
 		JScrollPane scroll = new JScrollPane(editorDescripcion);
 		panelDescripción.add(scroll, BorderLayout.CENTER);
@@ -96,4 +103,19 @@ public class AgregarTrabajoFormView extends JDialog {
 		setVisible(true);
 	}
 
+	public TrabajoPlanificadoDTO getData() {
+		TrabajoPlanificadoDTO ret = new TrabajoPlanificadoDTO();
+		ret.setDescripcionTrabajo(editorDescripcion.getText());
+		ret.setPrecioTrabajo(Double.parseDouble(tfMonto.getText()));
+		ret.setTiempoEstTrabajo(Integer.parseInt(tfEsfuerzo.getText()));
+		return ret;
+	}
+	
+	public void setActionOnGuardar(ActionListener listener) {
+		this.btnGuardar.addActionListener(listener);
+	}
+
+	public void close() {
+		setVisible(false);
+	}
 }

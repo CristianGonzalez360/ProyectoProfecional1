@@ -1,6 +1,8 @@
 package dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class PresupuestoDTO {
 	  private Integer idPresupuesto;
@@ -15,10 +17,11 @@ public class PresupuestoDTO {
 	  private String comentarioCierrePresu;
 	  private Date fechaAprobacion;
 	  private Date fechaRechazo;
-	  
+	  private List<TrabajoPlanificadoDTO> trabajos;
+	  private List<RepuestoPlanificadoDTO> repuestos;
 	  
 	  public PresupuestoDTO () {
-		  
+		  this.trabajos = new ArrayList<>();
 	  }
 
 	public Integer getIdPresupuesto() {
@@ -103,5 +106,28 @@ public class PresupuestoDTO {
 				+ comentarioCierrePresu + ", fechaAprobacion=" + fechaAprobacion + ", fechaRechazo=" + fechaRechazo
 				+ "]";
 	}
+
+	public void agregarTrabajo(TrabajoPlanificadoDTO trabajo) {
+		this.trabajos.add(trabajo);
+	}
 	
+	public void agregarRepuestos(RepuestoPlanificadoDTO repuesto) {
+		this.repuestos.add(repuesto);
+	}
+
+	public List<TrabajoPlanificadoDTO> getTrabajos() {
+		return trabajos;
+	}
+
+	public void setTrabajos(List<TrabajoPlanificadoDTO> trabajos) {
+		this.trabajos = trabajos;
+	}
+
+	public List<RepuestoPlanificadoDTO> getRepuestos() {
+		return repuestos;
+	}
+
+	public void setRepuestos(List<RepuestoPlanificadoDTO> repuestos) {
+		this.repuestos = repuestos;
+	}
 }
