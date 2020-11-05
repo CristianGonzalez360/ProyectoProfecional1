@@ -11,7 +11,7 @@ import repositories.jdbc.utils.NullObject;
 
 public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao {
 	
-	private static final String update = "UPDATE Turnos SET idCliente = ?, fechaCanceladoTurno = ?, fechaAltaTurno = ?, fechProgramadaTurno = ?, nombreCliente = ?, dniCliente = ?, telefonoCliente = ?, emailCliente = ? WHERE idTurno = ?";
+	private static final String update = "UPDATE Turnos SET fechaCanceladoTurno = ? WHERE idTurno = ?";
 
 	private static final String readAll = "SELECT * FROM Turnos";
 	
@@ -27,15 +27,11 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 
 	@Override
 	public boolean update(TurnoDTO entity) {
+		/*
+		 * Update Cancellation Date
+		 */
 		return getTemplate().query(update)
-				.param(entity.getIdCliente())
-				.param(entity.getFechaCancelado() == null ? new NullObject() : entity.getFechaCancelado())
-				.param(entity.getFechaAlta())
-				.param(entity.getFechaProgramada())
-				.param(entity.getNombreCliente())
-				.param(entity.getDniCliente())
-				.param(entity.getTelefonoCliente() == null ? new NullObject() : entity.getTelefonoCliente())
-				.param(entity.getEmailCliente() == null ? new NullObject() : entity.getEmailCliente())
+				.param(entity.getFechaCancelado())
 				.param(entity.getIdTurno())
 				.excecute();
 	}

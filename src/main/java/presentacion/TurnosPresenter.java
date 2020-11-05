@@ -38,21 +38,22 @@ public class TurnosPresenter {
 
 		if (cancelado == 0) {
 			Integer idTurnoSeleccionado = supervisorView.getIdSelectedTurno();
-			
-			TurnoDTO turnoSeleccionado = controller.readByIdTurno(idTurnoSeleccionado);
-			
-			if(turnoSeleccionado == null)
+
+			if (idTurnoSeleccionado == null) {
+				JOptionPane.showMessageDialog(supervisorView, "Para CANCELAR, debe seleccionar un solo turno.");
 				return;
-			
+			}
+			TurnoDTO turnoSeleccionado = controller.readByIdTurno(idTurnoSeleccionado);
+
+			if (turnoSeleccionado == null)
+				return;
+
 			turnoSeleccionado.setFechaCancelado(new Date());
 			controller.update(turnoSeleccionado);
 			supervisorView.clearTurnos();
 
-			JOptionPane.showMessageDialog(supervisorView, String.format("Turno con Nro. Turno: %s fué cancelado.", turnoSeleccionado.getIdTurno()));
-		}
-		
-		for(TurnoDTO turnos : controller.readAll()) {
-			System.out.println(turnos.toString());
+			JOptionPane.showMessageDialog(supervisorView,
+					String.format("Turno con Nro. Turno: %s fué cancelado.", turnoSeleccionado.getIdTurno()));
 		}
 	}
 
