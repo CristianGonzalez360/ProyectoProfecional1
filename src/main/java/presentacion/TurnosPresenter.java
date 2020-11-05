@@ -77,10 +77,10 @@ public class TurnosPresenter {
 			TurnoDTO nuevoTurno = new TurnoDTO(dniCliente, turno.getFechaAlta(), turno.getFechaCancelado(),
 					turno.getFechaProgramada(), turno.getNombreCliente(), turno.getTelefonoCliente(),
 					turno.getEmailCliente());
+
 			this.controller.save(nuevoTurno);
 			turnoForm.dispose();
 		}
-
 	}
 
 	private boolean validarDatosPersonales(AltaDeTurnoDTO turno) {

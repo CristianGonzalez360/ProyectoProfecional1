@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import dto.validators.Patterns;
 import dto.validators.StringValidator;
 
 public class AltaDeTurnoDTO {
@@ -44,6 +45,14 @@ public class AltaDeTurnoDTO {
 				new StringValidator(telefonoCliente).notSpaces("El Teléfono no puede contener espacios.").validate());
 		//errors.addAll(new StringValidator(emailCliente).email("El Email debe ser valido.").validate());
 		return errors;
+	}
+
+	public Integer getIdTurno() {
+		return idTurno;
+	}
+
+	public void setIdTurno(Integer idTurno) {
+		this.idTurno = idTurno;
 	}
 
 	public Integer getIdCliente() {

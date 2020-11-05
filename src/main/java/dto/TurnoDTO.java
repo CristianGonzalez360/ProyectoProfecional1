@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import dto.validators.Patterns;
 import dto.validators.StringValidator;
 
 public class TurnoDTO {
@@ -49,6 +50,8 @@ public class TurnoDTO {
 		ret.setFechaAlta(new Date());
 		ret.setFechaProgramada(new Date());
 		ret.setNombreCliente("Susan Doe");
+		ret.setTelefonoCliente("1155556666");
+		ret.setEmailCliente("ejemplo.a1@gmail.com");
 		return ret;
 	}
 
