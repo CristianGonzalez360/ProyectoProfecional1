@@ -18,22 +18,16 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-
-import dto.validators.StringValidator;
 
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import dto.Patterns;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
-import presentacion.views.utils.ErrorDialog;
-
 import javax.swing.BoxLayout;
 
 public class PlanificarRepuestosFormView extends JDialog {
