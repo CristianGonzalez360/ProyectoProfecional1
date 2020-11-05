@@ -18,9 +18,14 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 	private static final String readByID = "SELECT * FROM Turnos WHERE Turnos.idTurno = ?";
 
 	private static final String readByDni = "SELECT * FROM Turnos WHERE Turnos.dniCliente = ?";
+	
+	private static final String readAllDisponibles = "SELECT * FROM Turnos t WHERE (t.fechProgramadaTurno >= CURRENT_DATE()) AND (t.fechaCanceladoTurno IS NULL)";
+	
+	private static final String readAllByDNI = "SELECT * FROM Turnos t WHERE ((t.fechProgramadaTurno >= CURRENT_DATE()) AND (t.fechaCanceladoTurno IS NULL)) AND t.dniCliente = ?";
 
 	private static final String insert = "INSERT INTO Turnos (idCliente, fechaCanceladoTurno, fechaAltaTurno, fechProgramadaTurno, nombreCliente, dniCliente, telefonoCliente, emailCliente) VALUES (?,?,?,?,?,?,?,?)";
 
+	
 	public TurnosDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -97,5 +102,15 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 				return turno;
 			}
 		};
+	}
+
+	@Override
+	public List<TurnoDTO> readAllTurnosDisponibles() {
+		return getTemplate().query(readAllDisponibles).excecute(getMapper());
+	}
+
+	@Override
+	public List<TurnoDTO> readAllByDNI(Integer dni) {
+		return getTemplate().query(readAllByDNI).param(dni).excecute(getMapper());
 	}
 }
