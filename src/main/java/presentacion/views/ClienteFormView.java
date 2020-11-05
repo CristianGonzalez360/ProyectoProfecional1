@@ -15,6 +15,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import dto.AltaClienteDTO;
 import dto.ClienteDTO;
 import dto.DatosPersonalesDTO;
 
@@ -167,12 +168,10 @@ public class ClienteFormView extends JDialog {
 	}
 
 
-	public ClienteDTO getData() {
-		ClienteDTO ret = new ClienteDTO();
-		ret.setFechaAltaCliente(new Date());
-		DatosPersonalesDTO datosPersonales = new DatosPersonalesDTO();
+	public AltaClienteDTO getData() {
+		AltaClienteDTO datosPersonales = new AltaClienteDTO();
 		datosPersonales.setNombreCompleto(textNombre.getText());
-		datosPersonales.setDni(Integer.parseInt(textDni.getText()));
+		datosPersonales.setDni(this.textDni.getText());
 		datosPersonales.setEmail(textEmail.getText());
 		datosPersonales.setTelefono(textTelefono.getText());
 		datosPersonales.setCalle(textCalle.getText());
@@ -180,8 +179,7 @@ public class ClienteFormView extends JDialog {
 		datosPersonales.setPiso(textPiso.getText());
 		datosPersonales.setDpto(textDepto.getText());
 		datosPersonales.setLocalidad(textLocalidad.getText());
-		ret.setDatosPersonalesDTO(datosPersonales);
-		return ret;
+		return datosPersonales;
 
 	}
 

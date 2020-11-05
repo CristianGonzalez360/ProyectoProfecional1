@@ -116,7 +116,7 @@ public class AltaClienteDTO {
 		
 		ret.addAll(new StringValidator(email)
 				.notBlank("Debe ingresar una dirección de email.")
-				.regex("Introduzca una dirección de email válida.", Patterns.EMAIL)
+				.email("El email debe ser un email.")
 				.validate());
 		
 		ret.addAll(new StringValidator(calle)

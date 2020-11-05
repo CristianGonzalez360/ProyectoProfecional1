@@ -38,6 +38,7 @@ public class AltaDeVehiculoDTO {
 		errors.addAll(valNum(this.nroPolizaSeguro, "El nro. de la poliza debe ser un número"));
 		errors.addAll(valNum(this.nroChasis, "El número de chasis debe ser un número"));
 		errors.addAll(valNum(this.nroMotor, "El número de motor debe ser un número"));
+		errors.addAll(new StringValidator(this.modelo).number("El modelo debe ser un número").validate());
 		errors.addAll(new StringValidator(this.marca).notBlank("La marca es obligatoria.").validate());
 		errors.addAll(new StringValidator(this.asegurador).notBlank("El asegurador es obligatorio").validate());
 		errors.addAll(new StringValidator(this.patente).notBlank("La patente es obligatoria").validate());
