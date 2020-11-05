@@ -9,45 +9,59 @@ import repositories.jdbc.utils.Mapper;
 
 public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanificadoDTO> implements RepuestosPlanificadosDao {
 
+	public static final String readAll = "";
+	
+	public static final String readByPresupuestoId = "";
+	
+	public static final String insert = "INSERT INTO RepuestosPlanificados (idPresu, idRepuesto, cantRequerida) VALUES (?,?,?)";
+	
 	public RepuestosPlanificadosDaoImpl(Connection connection) {
 		super(connection);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean update(RepuestoPlanificadoDTO entity) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean insert(RepuestoPlanificadoDTO entity) {
-		// TODO Auto-generated method stub
-		return false;
+		return getTemplate().query(insert).param(entity.getIdPresu()).param(entity.getIdRepuesto())
+				.param(entity.getCantRequerida()).excecute();
 	}
 
 	@Override
 	public boolean deleteById(Integer id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public RepuestoPlanificadoDTO readByID(Integer id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public List<RepuestoPlanificadoDTO> readAll() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected Mapper<RepuestoPlanificadoDTO> getMapper() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RepuestoPlanificadoDTO> readByIdPresupuesto(Integer id) {
+		return getTemplate().query(readByPresupuestoId).param(id).excecute(getMapper());
 	}
+	
+	@Override
+	protected Mapper<RepuestoPlanificadoDTO> getMapper() {
+		return new Mapper<RepuestoPlanificadoDTO>() {
 
+			@Override
+			public RepuestoPlanificadoDTO map(Object[] obj) {
+				RepuestoPlanificadoDTO dto = new RepuestoPlanificadoDTO();
+				dto.setIdPresu((Integer)obj[0]);
+				dto.setIdRepuesto((Integer)obj[1]);
+				dto.setCantRequerida((Integer)obj[2]);
+				return dto;
+			}			
+		};
+	}
 }

@@ -33,6 +33,13 @@ public abstract class DaosFactory {
 	public abstract ClientesDao makeClienteDao();
 
 	public abstract VehiculosConOrdenDeTrabajoDao makeVehiculoConOrdeDeTrabajoDao();
-	
-	public abstract RepuestosDao makeRepuestosDao();
+
+	public abstract RepuestosDao makeRepuestoDao();
+
+	public abstract PresupuestosDao makePresupuestoDao();
+
+	public abstract TrabajosPresupuestadosDao makeTrabajosPlanificadosDao();
+
+	public abstract RepuestosPlanificadosDao makeRepuestosPlanificadosDao();
+
 }

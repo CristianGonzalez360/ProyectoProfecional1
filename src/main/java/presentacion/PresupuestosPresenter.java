@@ -60,7 +60,7 @@ public class PresupuestosPresenter {
 			RepuestoPlanificadoDTO repuestoPlanificado = new RepuestoPlanificadoDTO();
 			repuestoPlanificado.setCantRequerida(Integer.parseInt(cantidad));		
 			RepuestoDTO repuesto = repuestosController.readById(Integer.parseInt(idRepuesto));//TODO no esta implementdo el controller
-			repuestoPlanificado.setRepuesto(repuesto);
+			//repuestoPlanificado.setRepuesto(repuesto);
 			nuevoPresupuesto.agregarRepuestos(repuestoPlanificado);
 			planRepuestosView.clearDataRepuestosPlanificados();
 			planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());

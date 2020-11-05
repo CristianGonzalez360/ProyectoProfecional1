@@ -73,7 +73,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public RepuestosController makeRepuestosController() {
 		if (repuestosController == null)
-			repuestosController = new RepuestosController(daos.makeRepuestosDao());
+			repuestosController = new RepuestosController(daos.makeRepuestoDao());
 		return repuestosController;
 	}
 }

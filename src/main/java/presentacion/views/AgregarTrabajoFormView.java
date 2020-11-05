@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import dto.TrabajoPlanificadoDTO;
+import dto.TrabajoPresupuestadoDTO;
 
 import javax.swing.JButton;
 import java.awt.FlowLayout;
@@ -103,8 +103,8 @@ public class AgregarTrabajoFormView extends JDialog {
 		setVisible(true);
 	}
 
-	public TrabajoPlanificadoDTO getData() {
-		TrabajoPlanificadoDTO ret = new TrabajoPlanificadoDTO();
+	public TrabajoPresupuestadoDTO getData() {
+		TrabajoPresupuestadoDTO ret = new TrabajoPresupuestadoDTO();
 		ret.setDescripcionTrabajo(editorDescripcion.getText());
 		ret.setPrecioTrabajo(Double.parseDouble(tfMonto.getText()));
 		ret.setTiempoEstTrabajo(Integer.parseInt(tfEsfuerzo.getText()));

@@ -8,6 +8,10 @@ import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
+import dto.PresupuestoDTO;
+import dto.RepuestoDTO;
+import dto.RepuestoPlanificadoDTO;
+import dto.TrabajoPresupuestadoDTO;
 import dto.TurnoDTO;
 import dto.UsuarioDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
@@ -30,6 +34,14 @@ public class DatabaseGraph {
 
 	private List<ClienteDTO> clientes;
 
+	private List<RepuestoDTO> repuestos;
+	
+	private List<PresupuestoDTO> presupuestos;
+	
+	private List<TrabajoPresupuestadoDTO> trabajos;
+	
+	private List<RepuestoPlanificadoDTO> repuestosPlanificados;
+	
 	public DatabaseGraph() {
 		cuentas = new LinkedList<>();
 		datosPersonales = new LinkedList<>();
@@ -38,6 +50,10 @@ public class DatabaseGraph {
 		ordenesDeTrabajo = new LinkedList<>();
 		vehiculosConOrdenDeTrabajo = new LinkedList<>();
 		clientes = new LinkedList<>();
+		repuestos = new LinkedList<>();
+		presupuestos = new LinkedList<>();
+		trabajos = new LinkedList<>();
+		repuestosPlanificados = new LinkedList<>();
 	}
 
 	public List<CuentaDTO> getCuentas() {
@@ -102,7 +118,37 @@ public class DatabaseGraph {
 
 	public void setClientes(List<ClienteDTO> clientes) {
 		this.clientes = clientes;
-
 	}
 
+	public List<RepuestoDTO> getRepuestos() {
+		return repuestos;
+	}
+
+	public void setRepuestos(List<RepuestoDTO> repuestos) {
+		this.repuestos = repuestos;
+	}
+
+	public List<PresupuestoDTO> getPresupuestos() {
+		return presupuestos;
+	}
+
+	public void setPresupuestos(List<PresupuestoDTO> presupuestos) {
+		this.presupuestos = presupuestos;
+	}
+
+	public List<TrabajoPresupuestadoDTO> getTrabajos() {
+		return trabajos;
+	}
+
+	public void setTrabajos(List<TrabajoPresupuestadoDTO> trabajos) {
+		this.trabajos = trabajos;
+	}
+
+	public List<RepuestoPlanificadoDTO> getRepuestosPlanificados() {
+		return repuestosPlanificados;
+	}
+
+	public void setRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestosPlanificados) {
+		this.repuestosPlanificados = repuestosPlanificados;
+	}
 }
