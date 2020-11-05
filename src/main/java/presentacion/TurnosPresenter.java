@@ -1,7 +1,6 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +21,9 @@ public class TurnosPresenter {
 	private TurnoFormView turnoForm = TurnoFormView.getInstance();
 
 	private TurnosController controller;
+
+	private static final String MENSAGE_DNI_INCORRECTO = "No se encontraron turnos para DNI: %s";
+	private static final String MENSAGE_NO_TURNOS = "No se encontraron turnos para DNI: %s";
 
 	public TurnosPresenter(TurnosController controller) {
 		this.controller = controller;
@@ -63,19 +65,39 @@ public class TurnosPresenter {
 	}
 
 	private void onBuscarTurnos(ActionEvent e) {
-		String dni = supervisorView.getDniClienteBusquedaTurno();
-		
-		if (dni.trim().isEmpty()) {
-			List<TurnoDTO> turnos = controller.readAllDisponibles();
-			supervisorView.clearTurnos();
-			supervisorView.setTurnos(turnos);
-		} else {
-			TurnoDTO turno = controller.readByDniCliente(dni);
-			if (turno != null) {
+		String dniBuscado = supervisorView.getDniClienteBusquedaTurno();
+
+		if (dniValido(dniBuscado)) {
+			if (dniBuscado.trim().isEmpty()) {
+				List<TurnoDTO> turnos = controller.readAllDisponibles();
+
 				supervisorView.clearTurnos();
-				supervisorView.setTurnos(Arrays.asList(new TurnoDTO[] { turno }));
+				supervisorView.setTurnos(turnos);
+			} else {
+				Integer dniCliente = Integer.parseInt(dniBuscado);
+				List<TurnoDTO> turnos = controller.readAllByDNI(dniCliente);
+
+				if (turnos == null || turnos.isEmpty()) {
+					JOptionPane.showMessageDialog(supervisorView, String.format(MENSAGE_NO_TURNOS, dniBuscado));
+				} else {
+					supervisorView.clearTurnos();
+					supervisorView.setTurnos(turnos);
+				}
 			}
 		}
+	}
+
+	private boolean dniValido(String dni) {
+		if (dni.trim().isEmpty())
+			return true;
+
+		try {
+			Integer.parseInt(dni);
+		} catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(supervisorView, String.format(MENSAGE_NO_TURNOS, dni));
+			return false;
+		}
+		return true;
 	}
 
 	private void onSave(ActionEvent a) {

@@ -39,4 +39,8 @@ public class TurnosController {
 		return dao.readAllTurnosDisponibles();
 	}
 
+	public List<TurnoDTO> readAllByDNI(Integer dni) {
+		return dao.readAllByDNI(dni);
+	}
+
 }

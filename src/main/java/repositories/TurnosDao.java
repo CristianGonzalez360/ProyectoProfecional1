@@ -11,4 +11,6 @@ public interface TurnosDao extends GenericDao<TurnoDTO, Integer> {
 	TurnoDTO readByIdTurno(Integer id);
 
 	List<TurnoDTO> readAllTurnosDisponibles();
+
+	List<TurnoDTO> readAllByDNI(Integer dni);
 }
