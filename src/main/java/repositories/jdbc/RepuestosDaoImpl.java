@@ -27,10 +27,12 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
 	public boolean insert(RepuestoDTO entity) {
-		return getTemplate().query(insert)
+				
+		return getTemplate()
+				.query(insert)
 				.param(entity.getCodigoRepuesto())
 				.param(entity.getPrecioRepuesto())
 				.param(entity.getMarcaRepuesto())

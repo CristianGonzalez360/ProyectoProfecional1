@@ -10,6 +10,10 @@ import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
+import dto.PresupuestoDTO;
+import dto.RepuestoDTO;
+import dto.RepuestoPlanificadoDTO;
+import dto.TrabajoPresupuestadoDTO;
 import dto.TurnoDTO;
 import dto.UsuarioDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
@@ -62,7 +66,22 @@ public class DatabaseSeederServiceImpl {
 			daos.makeVehiculoConOrdeDeTrabajoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-
+		for(RepuestoDTO target : graph.getRepuestos()) {
+			daos.makeRepuestoDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());		
+		}
+		for(PresupuestoDTO target : graph.getPresupuestos()) {
+			daos.makePresupuestoDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());	
+		}
+		for(TrabajoPresupuestadoDTO target : graph.getTrabajos()) {
+			daos.makeTrabajosPlanificadosDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());	
+		}
+		for(RepuestoPlanificadoDTO target : graph.getRepuestosPlanificados()) {
+			daos.makeRepuestosPlanificadosDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());	
+		}
 	}
 
 	private DatabaseGraph loadDatabaseGraph() {

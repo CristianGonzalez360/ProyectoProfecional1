@@ -34,4 +34,12 @@ public abstract class DaosFactory {
 
 	public abstract VehiculosConOrdenDeTrabajoDao makeVehiculoConOrdeDeTrabajoDao();
 
+	public abstract RepuestosDao makeRepuestoDao();
+
+	public abstract PresupuestosDao makePresupuestoDao();
+
+	public abstract TrabajosPresupuestadosDao makeTrabajosPlanificadosDao();
+
+	public abstract RepuestosPlanificadosDao makeRepuestosPlanificadosDao();
+
 }

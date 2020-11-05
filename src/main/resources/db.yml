@@ -168,3 +168,88 @@ ordenesDeTrabajo:
     idVehiculoOt: 3
     descripcion: funciona ok
 
+repuestos:
+  - codigoRepuesto: 22230
+    precioRepuesto: 126
+    marcaRepuesto: xx1
+    descripcionRepuesto: ruleman
+    stockRepuesto: 337
+    fabricante: fx
+    stockMinimo: 13
+  - codigoRepuesto: 111430
+    precioRepuesto: 876
+    marcaRepuesto: dfv
+    descripcionRepuesto: csdc
+    stockRepuesto: 78
+    fabricante: sdfg
+    stockMinimo: 99
+  - codigoRepuesto: 109986
+    precioRepuesto: 1523
+    marcaRepuesto: ghj
+    descripcionRepuesto: ruleman
+    stockRepuesto: 310
+    fabricante: ghj
+    stockMinimo: 8
+  - codigoRepuesto: 14230
+    precioRepuesto: 102
+    marcaRepuesto: gdfg
+    descripcionRepuesto: rulemanxx
+    stockRepuesto: 355
+    fabricante: sgf
+    stockMinimo: 7
+  - codigoRepuesto: 510230
+    precioRepuesto: 1300
+    marcaRepuesto: skf11
+    descripcionRepuesto: dgruleman
+    stockRepuesto: 303
+    fabricante: sgdfg
+    stockMinimo: 2123
+
+presupuestos:
+  - idOT: 1
+    idUsuAltaPresu:  1
+    idUsuCierrePresu:
+    idUsuRegPago: 
+    idPago:
+    fechaAltaPresu: 2020-10-10
+    comentarioAltaPresu: que onda bigote?
+    fechaCierrePresu:
+    comentarioCierrePresu:
+    fechaAprobacion:
+    fechaRechazo:
+  - idOT: 1
+    idUsuAltaPresu: 1
+    idUsuCierrePresu:
+    idUsuRegPago:
+    idPago:
+    fechaAltaPresu: 2020-10-11
+    comentarioAltaPresu: alto presupuesto
+    fechaCierrePresu:
+    comentarioCierrePresu:
+    fechaAprobacion:
+    fechaRechazo: 
+
+trabajos: 
+  - idPresupuesto: 1
+    descripcionTrabajo: reparacion de la electricidad
+    precioTrabajo: 2033
+    tiempoEstTrabajo: 5
+  - idPresupuesto: 1
+    descripcionTrabajo: reparar rotula izquierda
+    precioTrabajo: 800
+    tiempoEstTrabajo: 7
+  - idPresupuesto: 1
+    descripcionTrabajo: prender fuego el asiento trasero
+    precioTrabajo: 900
+    tiempoEstTrabajo: 3
+    
+repuestosPlanificados:
+  - idRepuesto: 1
+    idPresu: 1
+    cantRequerida: 24
+  - idRepuesto: 3
+    idPresu: 1
+    cantRequerida: 14
+  - idRepuesto: 2
+    idPresu: 2
+    cantRequerida: 5
