@@ -16,6 +16,8 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	private VehiculosController vehiculosController;
 
 	private OrdenesTrabajoController ordenesDeTrabajoController;
+	
+	private PresupuestosController presupuestosController;
 
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
@@ -57,5 +59,12 @@ public class ControllersFactoryImpl extends ControllersFactory {
 			ordenesDeTrabajoController = new OrdenesTrabajoController(daos.makeOrdenDeTrabajoDao(),
 					SessionServiceImpl.getInstance());
 		return ordenesDeTrabajoController;
+	}
+
+	@Override
+	public PresupuestosController makePresupuestosController() {
+		if (presupuestosController == null)
+			presupuestosController = new PresupuestosController();
+		return presupuestosController;
 	}
 }

@@ -1,6 +1,8 @@
 package dto;
 
 public class RepuestoPlanificadoDTO {
+	
+	private Integer idRepuestoPlanificado;
 	private Integer idPresu;
 	private Integer idRepuesto;
 	private Integer cantRequerida;
@@ -31,6 +33,14 @@ public class RepuestoPlanificadoDTO {
 	public String toString() {
 		return "RepuestoPlanificadoDTO [idPresu=" + idPresu + ", idRepuesto=" + idRepuesto + ", cantRequerida="
 				+ cantRequerida + "]";
+	}
+
+	public Integer getIdRepuestoPlanificado() {
+		return idRepuestoPlanificado;
+	}
+
+	public void setIdRepuestoPlanificado(Integer idRepuestoPlanificado) {
+		this.idRepuestoPlanificado = idRepuestoPlanificado;
 	}
 	
 }
