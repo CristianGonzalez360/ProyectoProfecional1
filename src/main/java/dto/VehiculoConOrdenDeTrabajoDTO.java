@@ -83,4 +83,11 @@ public class VehiculoConOrdenDeTrabajoDTO {
 		this.patente = patente;
 	}
 
+	@Override
+	public String toString() {
+		return "VehiculoConOrdenDeTrabajoDTO [id=" + id + ", idFichaTecnica=" + idFichaTecnica + ", idCliente="
+				+ idCliente + ", kilometrajeGarantia=" + kilometrajeGarantia + ", aseguradora=" + aseguradora
+				+ ", nroPolizaSeguro=" + nroPolizaSeguro + ", patente=" + patente + "]";
+	}
+	
 }
