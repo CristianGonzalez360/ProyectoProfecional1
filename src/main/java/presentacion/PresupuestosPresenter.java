@@ -50,7 +50,7 @@ public class PresupuestosPresenter {
 		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
 		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
 		this.agregarTrabajoFormView = AgregarTrabajoFormView.getInstance();
-		
+
 		this.gestionPresupuestosView.setActionOnPlanificarRepuestos(a -> onDisplayForPlanRepuesto(a));
 		this.gestionPresupuestosView.setActionOnPlanificarTrabajos(a -> onDisplayForPlanTrabajos(a));
 		this.gestionPresupuestosView.setActionOnRegistrarPresupuesto(a -> onRegistrar(a));
@@ -60,7 +60,7 @@ public class PresupuestosPresenter {
 		this.planRepuestosView.setActionOnCancelar(a -> onCancelarRepuestosPlanificados(a));
 		this.planRepuestosView.setActionOnAceptar(a -> onAceptarRepuestosPlanificados(a));
 		this.planTrabajosView.setActionOnAceptar(a -> onAceptarTrabajosPlanificados(a));
-		
+		this.planRepuestosView.setActionOnBuscar(a -> onBuscarRepuesto(a));
 		this.gestionPresupuestosView.setActionOnBuscar(a -> onBuscar(a));
 		this.gestionPresupuestosView.setActionSelectVehiculoCliente(new ListSelectionListener() {
 			@Override
@@ -70,6 +70,26 @@ public class PresupuestosPresenter {
 		});
 		
 		this.nuevoPresupuesto = new PresupuestoDTO();
+	}
+
+	private void onBuscarRepuesto(ActionEvent a) {
+		String marca = planRepuestosView.getMarca();
+		String descripcion = planRepuestosView.getDescripcion();
+		List<RepuestoDTO> repuestos;
+		if(descripcion.isEmpty()) {
+			if(marca == "todas") {
+				repuestos = repuestosController.readAll();
+			} else {
+				repuestos = repuestosController.readByMarca(marca);
+			}
+		} else {
+			if(marca == "todas") {
+				repuestos = repuestosController.readByDescripcion(descripcion);
+			} else {
+				repuestos = repuestosController.readbyMarcaYDescripcion(marca, descripcion);
+			}
+		}
+		planRepuestosView.setDataRepuestos(repuestos);
 	}
 
 	private void onAceptarTrabajosPlanificados(ActionEvent a) {
@@ -136,7 +156,9 @@ public class PresupuestosPresenter {
 	}
 
 	private void onDisplayForPlanRepuesto(ActionEvent a) {
-		this.planRepuestosView.clearDataRepuestos();
+		List<String> marcas = repuestosController.readMarcas();
+		marcas.add("todas");
+		this.planRepuestosView.setDataMarcas(marcas);
 		this.planRepuestosView.setDataRepuestos(repuestosController.readAll());
 		this.planRepuestosView.display();
 	}

@@ -17,9 +17,13 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 			"INSERT INTO Repuestos (codigoRepuesto, precioRepuesto, marcaRepuesto, descripcionRepuesto, stockRepuesto, fabricante, stockMinimo)"
 			+ " " + "VALUES (?,?,?,?,?,?,?)";
 
-	private static final String readByDescripcion = readAll + " " + "WHERE marcaRepuesto = ?";
+	private static final String readByDescripcion = readAll + " " + "WHERE descripcionRepuesto = ?";
 
 	private static final String readByMarca = readAll + " " + "WHERE marcaRepuesto = ?";
+	
+	private static final String readByMarcaYDescripcion = readAll + " " + "WHERE marcaRepuesto = ? AND descripcionRepuesto = ?";
+	
+	private static final String readMarcas = "SELECT DISTINCT marcaRepuesto FROM Repuestos";
 	
 	public RepuestosDaoImpl(Connection connection) {
 		super(connection);
@@ -94,4 +98,23 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 			}	
 		};
 	}
+
+	@Override
+	public List<RepuestoDTO> readByMarcaYDescripcion(String marca, String descripcion) {
+		return getTemplate().query(readByMarcaYDescripcion).param(marca).param(descripcion).excecute(getMapper());
+	}
+
+	@Override
+	public List<String> readMarcas() {
+		Mapper<String> mapper = new Mapper<String>() {
+			
+			@Override
+			public String map(Object[] obj) {
+				return (String) obj[0];
+			}
+		};
+		return getTemplate().query(readMarcas).excecute(mapper);
+	}
+	
+	
 }

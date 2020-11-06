@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -31,11 +30,7 @@ import dto.TrabajoPresupuestadoDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
-import dto.TurnoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
-
-
-import java.awt.event.ActionEvent;
 
 public class PanelGestionPresupuestoView extends JPanel {
 
@@ -494,5 +489,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 		deshabilitarBotonRegistrar();
 		btnPlanificarRepuestos.setEnabled(false);
 		btnPlanificarTrabajos.setEnabled(false);
+		txtFechaTest.setText("");
 	}
 }

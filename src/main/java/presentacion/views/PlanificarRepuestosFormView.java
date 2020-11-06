@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.jgoodies.forms.layout.FormLayout;
@@ -29,6 +30,8 @@ import com.jgoodies.forms.layout.RowSpec;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
 import javax.swing.BoxLayout;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 
 public class PlanificarRepuestosFormView extends JDialog {
 
@@ -220,6 +223,7 @@ public class PlanificarRepuestosFormView extends JDialog {
 	}
 	
 	public void setDataRepuestos(List<RepuestoDTO> repuestos) {
+		modelRepuestos.setRowCount(0);
 		for(RepuestoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
 			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(),
@@ -254,5 +258,25 @@ public class PlanificarRepuestosFormView extends JDialog {
 
 	public void close() {
 		setVisible(false);		
+	}
+
+	public void setActionOnBuscar(ActionListener listener) {
+		this.btnBuscar.addActionListener(listener);
+	}
+
+	public String getMarca() {
+		return (String) comboMarcas.getSelectedItem();
+	}
+
+	public String getDescripcion() {
+		return textDescipcion.getText();
+	}
+
+	public void setDataMarcas(List<String> marcas) {
+		DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+		for (String marca : marcas) {
+			modelo.addElement(marca);
+		}
+		comboMarcas.setModel(modelo);
 	}
 }

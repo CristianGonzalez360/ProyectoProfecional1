@@ -19,5 +19,17 @@ public class RepuestosController {
 	public List<RepuestoDTO> readAll() {
 		return dao.readAll();
 	}
+	public List<RepuestoDTO> readByMarca(String marca) {
+		return dao.readByMarca(marca);
+	}
+	public List<RepuestoDTO> readByDescripcion(String descripción) {
+		return dao.readByDescripcion(descripción);
+	}
+	public List<RepuestoDTO> readbyMarcaYDescripcion(String marca, String descripcion) {
+		return dao.readByMarcaYDescripcion(marca, descripcion);
+	}
+	public List<String> readMarcas() {
+		return dao.readMarcas();
+	}
 
 }

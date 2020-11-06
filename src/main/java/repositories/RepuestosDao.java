@@ -9,4 +9,8 @@ public interface RepuestosDao extends GenericDao<RepuestoDTO, Integer> {
 	List<RepuestoDTO> readByMarca(String marca);
 	
 	List<RepuestoDTO> readByDescripcion(String descripcion);
+
+	List<RepuestoDTO> readByMarcaYDescripcion(String marca, String descripcion);
+
+	List<String> readMarcas();
 }
