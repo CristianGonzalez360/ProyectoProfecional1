@@ -32,6 +32,8 @@ public class PlanificarTrabajosFormView extends JDialog {
 	private JTable table;
 	private DefaultTableModel modelo;
 	private JButton btnAgregar;
+	private JButton botonAceptar;
+	private JButton cancelButton;
 
 	public PlanificarTrabajosFormView() {
 		setBounds(100, 100, 450, 300);
@@ -71,7 +73,7 @@ public class PlanificarTrabajosFormView extends JDialog {
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-		JButton botonAceptar = new JButton("Aceptar");
+		botonAceptar = new JButton("Aceptar");
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				close();
@@ -81,7 +83,7 @@ public class PlanificarTrabajosFormView extends JDialog {
 		buttonPane.add(botonAceptar);
 		getRootPane().setDefaultButton(botonAceptar);
 
-		JButton cancelButton = new JButton("Cancelar");
+		cancelButton = new JButton("Cancelar");
 		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
 
@@ -115,6 +117,10 @@ public class PlanificarTrabajosFormView extends JDialog {
 			Object[] row = { t.getDescripcionTrabajo(), t.getTiempoEstTrabajo(), t.getPrecioTrabajo()};
 			modelo.addRow(row);
 		}
+	}
+
+	public void setActionOnAceptar(ActionListener listener) {
+		this.botonAceptar.addActionListener(listener);		
 	}
 
 

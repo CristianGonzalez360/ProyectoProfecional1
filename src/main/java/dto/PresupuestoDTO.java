@@ -145,4 +145,8 @@ public class PresupuestoDTO {
 	public void setRepuestos(List<RepuestoPlanificadoDTO> repuestos) {
 		this.repuestos = repuestos;
 	}
+
+	public void borrarRepuestosPlanificados() {
+		this.repuestos.clear();
+	}
 }

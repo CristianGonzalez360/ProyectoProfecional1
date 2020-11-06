@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -24,6 +26,10 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
+import dto.RepuestoPlanificadoDTO;
+import dto.TrabajoPresupuestadoDTO;
+
 import java.awt.event.ActionEvent;
 
 public class PanelGestionPresupuestoView extends JPanel {
@@ -345,6 +351,21 @@ public class PanelGestionPresupuestoView extends JPanel {
 	public void setActionOnRegistrarPresupuesto(ActionListener listener) {
 		this.btnRegistrarPresupuesto.addActionListener(listener);
 	}
-	
-	
+
+	public void setDataRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestos) {		
+		this.listadoDeRepuestosModel.setRowCount(0);
+		for (RepuestoPlanificadoDTO r : repuestos) {
+			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getMarcaRepuesto(),
+					r.getRepuesto().getDescripcionRepuesto(), r.getRepuesto().getPrecioRepuesto(), r.getCantRequerida()};
+			this.listadoDeRepuestosModel.addRow(row);
+		}
+	}
+
+	public void setDataTrabajosPlanificados(List<TrabajoPresupuestadoDTO> trabajos) {		
+		this.listadoDeTrabajosModel.setRowCount(0);
+		for (TrabajoPresupuestadoDTO t : trabajos) {
+			Object[] row = {t.getIdTrabajoPresu(), t.getFechaAlta() ,t.getDescripcionTrabajo(),t.getPrecioTrabajo(), t.getTiempoEstTrabajo(), t.getFechaCierre()};
+			this.listadoDeTrabajosModel.addRow(row);
+		}
+	}	
 }

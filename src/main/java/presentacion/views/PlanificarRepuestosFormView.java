@@ -67,6 +67,8 @@ public class PlanificarRepuestosFormView extends JDialog {
 	private JPanel panel_1;
 	private JPanel panel_2;
 	private List<Integer> idRepuestos;
+	private JButton btnAceptar;
+	private JButton btnCancelar;
 
 	public static PlanificarRepuestosFormView getInstance() {
 		if (vista == null)
@@ -183,14 +185,14 @@ public class PlanificarRepuestosFormView extends JDialog {
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setActionCommand("OK");
 		buttonPane.add(btnAceptar);
 		getRootPane().setDefaultButton(btnAceptar);
 
-		JButton cancelButton = new JButton("Cancel");
-		cancelButton.setActionCommand("Cancel");
-		buttonPane.add(cancelButton);
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setActionCommand("Cancel");
+		buttonPane.add(btnCancelar);
 
 		setVisible(false);
 	}
@@ -208,6 +210,7 @@ public class PlanificarRepuestosFormView extends JDialog {
 	}
 
 	public void setDataRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestos) {
+		modelRepuestosInferior.setRowCount(0);
 		for(RepuestoPlanificadoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
 			Object[] row = {r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(),
@@ -239,5 +242,17 @@ public class PlanificarRepuestosFormView extends JDialog {
 	
 	public void setActionOnAgregar(ActionListener listener) {
 		this.btnAgregar.addActionListener(listener);
+	}
+	
+	public void setActionOnCancelar(ActionListener listener) {
+		this.btnCancelar.addActionListener(listener);
+	}
+	
+	public void setActionOnAceptar(ActionListener listener) {
+		this.btnAceptar.addActionListener(listener);
+	}
+
+	public void close() {
+		setVisible(false);		
 	}
 }

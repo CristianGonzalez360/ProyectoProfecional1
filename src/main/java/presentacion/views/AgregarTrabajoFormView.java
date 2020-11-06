@@ -95,8 +95,9 @@ public class AgregarTrabajoFormView extends JDialog {
 	}
 
 	public void clearData() {
-		// TODO Auto-generated method stub
-		
+		editorDescripcion.setText("");
+		tfMonto.setText("");
+		tfEsfuerzo.setText("");
 	}
 
 	public void display() {

@@ -1,13 +1,14 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.Date;
 import java.util.List;
 import business_logic.PresupuestosController;
 import business_logic.RepuestosController;
-import dto.validators.Patterns;
 import dto.PresupuestoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
+import dto.TrabajoPresupuestadoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.AgregarTrabajoFormView;
 import presentacion.views.PanelGestionPresupuestoView;
@@ -40,12 +41,30 @@ public class PresupuestosPresenter {
 		this.planTrabajosView.setActionOnAgregarTrabajo(a -> onDisplayForAgregarTrabajo(a));
 		this.agregarTrabajoFormView.setActionOnGuardar(a -> onAgregarTrabajos(a));
 		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
+		this.planRepuestosView.setActionOnCancelar(a -> onCancelarRepuestosPlanificados(a));
+		this.planRepuestosView.setActionOnAceptar(a -> onAceptarRepuestosPlanificados(a));
+		this.planTrabajosView.setActionOnAceptar(a -> onAceptarTrabajosPlanificados(a));
 		
 		this.nuevoPresupuesto = new PresupuestoDTO();
 	}
 
+	
+	private void onAceptarTrabajosPlanificados(ActionEvent a) {
+		this.gestionPresupuestosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
+		this.planTrabajosView.close();
+	}
+	
+	private void onAceptarRepuestosPlanificados(ActionEvent a) {
+		this.gestionPresupuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
+		this.planRepuestosView.close();
+	}
+
+	private void onCancelarRepuestosPlanificados(ActionEvent a) {
+		this.nuevoPresupuesto.borrarRepuestosPlanificados();
+	}
+
 	private void onRegistrar(ActionEvent a) {
-		presupuestosController.save(nuevoPresupuesto);//TODO no esta implementado el controller
+		presupuestosController.save(nuevoPresupuesto);//TODO no esta implementado en el controller
 	}
 
 	private void onAgregarRepuesto(ActionEvent a) {		
@@ -70,7 +89,9 @@ public class PresupuestosPresenter {
 	}
 
 	private void onAgregarTrabajos(ActionEvent a) {
-		nuevoPresupuesto.agregarTrabajo(this.agregarTrabajoFormView.getData());
+		TrabajoPresupuestadoDTO trabajo = this.agregarTrabajoFormView.getData();
+		trabajo.setFechaAlta(new Date());
+		nuevoPresupuesto.agregarTrabajo(trabajo);
 		this.planTrabajosView.setData(nuevoPresupuesto.getTrabajos());
 		this.agregarTrabajoFormView.close();
 	}
@@ -90,6 +111,4 @@ public class PresupuestosPresenter {
 		this.planTrabajosView.clearData();
 		this.planTrabajosView.display();
 	}	
-	
-	
 }

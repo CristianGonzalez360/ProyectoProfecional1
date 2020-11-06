@@ -1,5 +1,7 @@
 package dto;
 
+import java.util.Date;
+
 public class TrabajoPresupuestadoDTO {
 	
 	private Integer idTrabajoPresu;
@@ -9,6 +11,10 @@ public class TrabajoPresupuestadoDTO {
 	private String descripcionTrabajo;
 	
 	private Double precioTrabajo;
+	
+	private Date fechaAlta;
+	
+	private Date fechaCierre;
 	
 	private Integer tiempoEstTrabajo;
 	
@@ -45,6 +51,22 @@ public class TrabajoPresupuestadoDTO {
 	}
 	public void setTiempoEstTrabajo(Integer tiempoEstTrabajo) {
 		this.tiempoEstTrabajo = tiempoEstTrabajo;
+	}
+
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+
+	public void setFechaAlta(Date fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
+
+	public Date getFechaCierre() {
+		return fechaCierre;
+	}
+
+	public void setFechaCierre(Date fechaCierre) {
+		this.fechaCierre = fechaCierre;
 	}
 
 	@Override
