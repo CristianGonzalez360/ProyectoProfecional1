@@ -12,7 +12,7 @@ public class StringValidator {
 		validators = new LinkedList<>();
 		this.value = value;
 	}
-	
+
 	public StringValidator number(String message) {
 		validators.add(new Number(message));
 		return this;

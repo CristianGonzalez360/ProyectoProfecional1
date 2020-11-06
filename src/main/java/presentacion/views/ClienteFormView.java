@@ -51,103 +51,92 @@ public class ClienteFormView extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel = new JPanel();
 		contentPanel.add(panel);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("14px"),
-				ColumnSpec.decode("right:max(37dlu;default)"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(80dlu;default):grow"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("right:51px"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(93dlu;default):grow"),},
-			new RowSpec[] {
-				FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("26px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
-		
+		panel.setLayout(new FormLayout(
+				new ColumnSpec[] { ColumnSpec.decode("14px"), ColumnSpec.decode("right:max(37dlu;default)"),
+						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(80dlu;default):grow"),
+						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("right:51px"), FormSpecs.RELATED_GAP_COLSPEC,
+						ColumnSpec.decode("max(93dlu;default):grow"), },
+				new RowSpec[] { FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("26px"), FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+
 		JLabel label = new JLabel("Nombre");
 		panel.add(label, "2, 2, right, default");
-		
+
 		textNombre = new JTextField();
 		textNombre.setColumns(10);
 		panel.add(textNombre, "4, 2, fill, default");
-		
+
 		JLabel label_2 = new JLabel("Dni");
 		panel.add(label_2, "6, 2, right, default");
-		
+
 		textDni = new JTextField();
 		textDni.setColumns(10);
 		panel.add(textDni, "8, 2, fill, default");
-		
+
 		JLabel label_1 = new JLabel("Teléfono");
 		panel.add(label_1, "2, 4, right, default");
-		
+
 		textTelefono = new JTextField();
 		textTelefono.setColumns(10);
 		panel.add(textTelefono, "4, 4, fill, default");
-		
+
 		JLabel label_3 = new JLabel("Email");
 		panel.add(label_3, "6, 4, right, default");
-		
+
 		textEmail = new JTextField();
 		textEmail.setColumns(10);
 		panel.add(textEmail, "8, 4, fill, default");
-		
+
 		JLabel lblCalle = new JLabel("Calle");
 		panel.add(lblCalle, "2, 6, right, default");
-		
+
 		textCalle = new JTextField();
 		textCalle.setColumns(10);
 		panel.add(textCalle, "4, 6, fill, default");
-		
+
 		JLabel label_4 = new JLabel("Altura");
 		panel.add(label_4, "6, 6, right, default");
-		
+
 		textAltura = new JTextField();
 		textAltura.setColumns(10);
 		panel.add(textAltura, "8, 6, fill, default");
-		
+
 		JLabel label_5 = new JLabel("Piso");
 		panel.add(label_5, "2, 8, right, default");
-		
+
 		textPiso = new JTextField();
 		textPiso.setColumns(10);
 		panel.add(textPiso, "4, 8, fill, default");
-		
+
 		JLabel label_6 = new JLabel("Depto.");
 		panel.add(label_6, "6, 8, right, default");
-		
+
 		textDepto = new JTextField();
 		textDepto.setColumns(10);
 		panel.add(textDepto, "8, 8, fill, default");
-		
+
 		JLabel label_7 = new JLabel("Localidad");
 		panel.add(label_7, "2, 10, right, default");
-		
+
 		textLocalidad = new JTextField();
 		textLocalidad.setColumns(10);
 		panel.add(textLocalidad, "4, 10, fill, default");
-		
+
 		JPanel panel_1 = new JPanel();
 		contentPanel.add(panel_1, BorderLayout.SOUTH);
-				
+
 		btnSalvar = new JButton("Salvar");
 		panel_1.add(btnSalvar);
-								
+
 		btnUpdate = new JButton("Salvar");
 		panel_1.add(btnUpdate);
 		btnUpdate.setVisible(false);
-						
+
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -166,7 +155,6 @@ public class ClienteFormView extends JDialog {
 		}
 		return instance;
 	}
-
 
 	public AltaClienteDTO getData() {
 		AltaClienteDTO datosPersonales = new AltaClienteDTO();

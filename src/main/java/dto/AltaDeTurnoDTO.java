@@ -46,6 +46,10 @@ public class AltaDeTurnoDTO {
 				.notSpaces("El Teléfono no puede contener espacios.").number("El Teléfono solo puede tener números.")
 				.validate());
 		errors.addAll(new StringValidator(emailCliente).email("El Email debe ser valido.").validate());
+		errors.addAll(
+				new StringValidator(telefonoCliente).notSpaces("El Teléfono no puede contener espacios.").validate());
+		// errors.addAll(new StringValidator(emailCliente).email("El Email debe ser
+		// valido.").validate());
 		return errors;
 	}
 

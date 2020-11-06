@@ -9,7 +9,6 @@ import dto.validators.CompositeValidator;
 
 import java.util.List;
 
-
 public class ClienteDTO {
 
 	private Integer idCliente;

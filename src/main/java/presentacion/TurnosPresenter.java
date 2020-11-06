@@ -111,10 +111,10 @@ public class TurnosPresenter {
 					turno.getEmailCliente());
 
 			this.controller.save(nuevoTurno);
-			
+
 			JOptionPane.showMessageDialog(supervisorView, MENSAGE_NUEVO_TURNO);
-			
-			turnoForm.dispose();			
+
+			turnoForm.dispose();
 		}
 	}
 

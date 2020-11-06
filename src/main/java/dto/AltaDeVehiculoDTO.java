@@ -34,9 +34,11 @@ public class AltaDeVehiculoDTO {
 
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
-		errors.addAll(new StringValidator(this.kilometrajeGarantia).number("El kilometraje en garantía debe ser un número").validate());
+		errors.addAll(new StringValidator(this.kilometrajeGarantia)
+				.number("El kilometraje en garantía debe ser un número").validate());
 		errors.addAll(new StringValidator(this.kilometraje).number("El kilometraje debe ser un número").validate());
-		errors.addAll(new StringValidator(this.nroPolizaSeguro).number("El nro. de la poliza debe ser un número").validate());
+		errors.addAll(
+				new StringValidator(this.nroPolizaSeguro).number("El nro. de la poliza debe ser un número").validate());
 		errors.addAll(new StringValidator(this.nroChasis).number("El número de chasis debe ser un número").validate());
 		errors.addAll(new StringValidator(this.nroMotor).number("El número de motor debe ser un número").validate());
 		errors.addAll(new StringValidator(this.modelo).number("El modelo debe ser un número").validate());
@@ -45,25 +47,25 @@ public class AltaDeVehiculoDTO {
 		errors.addAll(new StringValidator(this.patente).notBlank("La patente es obligatoria").validate());
 		return errors;
 	}
-		
+
 	public List<String> valNum(String atr, String mess) {
 		return new StringValidator(atr).regex(mess, Patterns.NON_NEGATIVE_INTEGER_FIELD).validate();
 	}
-	
+
 	public AltaDeVehiculoDTO() {
 		super();
 		nroChasis = "";
 		nroMotor = "";
-		kilometraje ="";
-		marca= "";
-		modelo= "";
-		patente="";
-		color="";
-		combustion="";
-		descripcion="";
-		asegurador="";
-		nroPolizaSeguro="";
-		kilometrajeGarantia="";
+		kilometraje = "";
+		marca = "";
+		modelo = "";
+		patente = "";
+		color = "";
+		combustion = "";
+		descripcion = "";
+		asegurador = "";
+		nroPolizaSeguro = "";
+		kilometrajeGarantia = "";
 	}
 
 	public String getNroChasis() {

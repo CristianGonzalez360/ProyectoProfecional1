@@ -105,7 +105,7 @@ CREATE TABLE OrdenesDeTrabajo (
   fechaEntregadoVehiculo DATE,
   PRIMARY KEY (idOT),
   FOREIGN KEY (idUsuAlta) REFERENCES Usuarios (idUsuario),
-  FOREIGN KEY (idVehiculoOt) REFERENCES FichaTecnicaVehiculo (idFichaTecnicaVehiculo)
+  FOREIGN KEY (idVehiculoOt) REFERENCES VehiculoConOrdenesDeTrabajo (idVehiculoConOT)
 );
 
 DROP TABLE Emisores IF EXISTS;

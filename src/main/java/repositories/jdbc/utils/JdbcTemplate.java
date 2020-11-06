@@ -94,7 +94,7 @@ public class JdbcTemplate {
 					java.sql.Date sqldate = new java.sql.Date(mydate.getTime());
 					statement.setDate(k, sqldate);
 				} else if (v.type.equals(Double.class)) {
-					statement.setDouble(k, (Double) v.value);	
+					statement.setDouble(k, (Double) v.value);
 				}
 			} catch (SQLException t) {
 				t.printStackTrace();

@@ -20,8 +20,10 @@ public class VehiculoConOrdenDeTrabajoDTO {
 	}
 
 	public VehiculoConOrdenDeTrabajoDTO(AltaDeVehiculoDTO vehiculoDeAlta) {
-		if(vehiculoDeAlta.getKilometrajeGarantia() != null)	this.kilometrajeGarantia = Integer.parseInt(vehiculoDeAlta.getKilometrajeGarantia());
-		else this.kilometrajeGarantia = null;
+		if (vehiculoDeAlta.getKilometrajeGarantia() != null)
+			this.kilometrajeGarantia = Integer.parseInt(vehiculoDeAlta.getKilometrajeGarantia());
+		else
+			this.kilometrajeGarantia = null;
 		this.aseguradora = vehiculoDeAlta.getAsegurador();
 		this.nroPolizaSeguro = Integer.parseInt(vehiculoDeAlta.getNroPolizaSeguro());
 		this.patente = vehiculoDeAlta.getPatente();
@@ -89,5 +91,5 @@ public class VehiculoConOrdenDeTrabajoDTO {
 				+ idCliente + ", kilometrajeGarantia=" + kilometrajeGarantia + ", aseguradora=" + aseguradora
 				+ ", nroPolizaSeguro=" + nroPolizaSeguro + ", patente=" + patente + "]";
 	}
-	
+
 }

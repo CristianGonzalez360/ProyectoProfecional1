@@ -3,11 +3,11 @@ package dto;
 public class RepuestoPlanificadoDTO {
 
 	private Integer idRepuesto;
-	
+
 	private Integer idPresu;
 
 	private Integer cantRequerida;
-	
+
 	private RepuestoDTO repuesto;
 
 	public RepuestoPlanificadoDTO() {
@@ -33,7 +33,7 @@ public class RepuestoPlanificadoDTO {
 	public void setCantRequerida(Integer cantRequerida) {
 		this.cantRequerida = cantRequerida;
 	}
-	
+
 	public void setIdRepuesto(Integer idRepuesto) {
 		this.idRepuesto = idRepuesto;
 	}

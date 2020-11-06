@@ -51,7 +51,7 @@ public class WorkbenchView {
 	WorkbenchView() {
 		super();
 		frame = new JFrame();
-		//frame.setResizable(false);
+		// frame.setResizable(false);
 		frame.setBounds(100, 100, 1132, 391);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Concesionario");
@@ -108,8 +108,8 @@ public class WorkbenchView {
 		this.frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int confirm = JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres salir?",
-						"Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+				int confirm = JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres salir?", "Confirmación",
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if (confirm == 0) {
 					System.exit(0);
 				}

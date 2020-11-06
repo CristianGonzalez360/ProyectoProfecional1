@@ -19,7 +19,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.jgoodies.forms.layout.FormLayout;
@@ -30,7 +29,6 @@ import com.jgoodies.forms.layout.RowSpec;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
 import javax.swing.BoxLayout;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 
 public class PlanificarRepuestosFormView extends JDialog {
@@ -41,7 +39,8 @@ public class PlanificarRepuestosFormView extends JDialog {
 
 	private static final String[] nombreColumnasSuperior = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock",
 			"Precio" };
-	private static final String[] nombreColumnasInferior = { "Codigo", "Descripcion", "Marca", "Fabricante", "Cantidad" };
+	private static final String[] nombreColumnasInferior = { "Codigo", "Descripcion", "Marca", "Fabricante",
+			"Cantidad" };
 
 	private JPanel panelSuperior = new JPanel();
 	private JPanel panelInterior = new JPanel();
@@ -135,7 +134,6 @@ public class PlanificarRepuestosFormView extends JDialog {
 		tablaRepuestos = new JTable(modelRepuestos);
 		scrollPaneRepuestos = new JScrollPane(tablaRepuestos);
 		panelInterior.add(scrollPaneRepuestos, BorderLayout.CENTER);
-		
 
 		panel_2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		panelSuperior.add(panel_2, BorderLayout.SOUTH);
@@ -203,7 +201,7 @@ public class PlanificarRepuestosFormView extends JDialog {
 	public void clearDataRepuestos() {
 		modelRepuestos.setRowCount(0);
 	}
-	
+
 	public void clearDataRepuestosPlanificados() {
 		modelRepuestosInferior.setRowCount(0);
 	}
@@ -214,50 +212,50 @@ public class PlanificarRepuestosFormView extends JDialog {
 
 	public void setDataRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestos) {
 		modelRepuestosInferior.setRowCount(0);
-		for(RepuestoPlanificadoDTO r : repuestos) {
+		for (RepuestoPlanificadoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
-			Object[] row = {r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(),
-					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantRequerida()};
+			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(),
+					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantRequerida() };
 			modelRepuestosInferior.addRow(row);
 		}
 	}
-	
+
 	public void setDataRepuestos(List<RepuestoDTO> repuestos) {
 		modelRepuestos.setRowCount(0);
-		for(RepuestoDTO r : repuestos) {
+		for (RepuestoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
-			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(),
-					r.getFabricante(), r.getStockRepuesto(), r.getPrecioRepuesto() };
+			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(), r.getFabricante(),
+					r.getStockRepuesto(), r.getPrecioRepuesto() };
 			modelRepuestos.addRow(row);
 		}
 	}
-	
+
 	public String getIdRepuesto() {
 		String ret = -1 + "";
-		if(tablaRepuestos.getSelectedRow() >= 0) {
+		if (tablaRepuestos.getSelectedRow() >= 0) {
 			ret = "" + idRepuestos.get(tablaRepuestos.getSelectedRow());
-		} 
+		}
 		return ret;
 	}
-	
+
 	public String getCantidad() {
 		return textCantidad.getText();
 	}
-	
+
 	public void setActionOnAgregar(ActionListener listener) {
 		this.btnAgregar.addActionListener(listener);
 	}
-	
+
 	public void setActionOnCancelar(ActionListener listener) {
 		this.btnCancelar.addActionListener(listener);
 	}
-	
+
 	public void setActionOnAceptar(ActionListener listener) {
 		this.btnAceptar.addActionListener(listener);
 	}
 
 	public void close() {
-		setVisible(false);		
+		setVisible(false);
 	}
 
 	public void setActionOnBuscar(ActionListener listener) {

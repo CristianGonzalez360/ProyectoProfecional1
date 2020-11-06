@@ -140,7 +140,7 @@ public class VehiculoFormView extends JDialog {
 		dto.setColor(this.textColor.getText());
 		dto.setCombustion(this.textCombustion.getText());
 		dto.setAsegurador(this.textAsegurador.getText());
-		dto.setNroPolizaSeguro(this.textNroPoliza.getText());		
+		dto.setNroPolizaSeguro(this.textNroPoliza.getText());
 		dto.setKilometrajeGarantia(this.textGarantia.getText());
 		return dto;
 	}

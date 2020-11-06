@@ -53,11 +53,6 @@ public class DatabaseSeederServiceImpl {
 			daos.makeFichaTecnicaVehiculoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-
-		for (OrdenDeTrabajoDTO target : graph.getOrdenesDeTrabajo()) {
-			daos.makeOrdenDeTrabajoDao().insert(target);
-			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
-		}
 		for (ClienteDTO target : graph.getClientes()) {
 			daos.makeClienteDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
@@ -66,21 +61,25 @@ public class DatabaseSeederServiceImpl {
 			daos.makeVehiculoConOrdeDeTrabajoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(RepuestoDTO target : graph.getRepuestos()) {
+		for (OrdenDeTrabajoDTO target : graph.getOrdenesDeTrabajo()) {
+			daos.makeOrdenDeTrabajoDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for (RepuestoDTO target : graph.getRepuestos()) {
 			daos.makeRepuestoDao().insert(target);
-			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());		
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(PresupuestoDTO target : graph.getPresupuestos()) {
+		for (PresupuestoDTO target : graph.getPresupuestos()) {
 			daos.makePresupuestoDao().insert(target);
-			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());	
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(TrabajoPresupuestadoDTO target : graph.getTrabajos()) {
+		for (TrabajoPresupuestadoDTO target : graph.getTrabajos()) {
 			daos.makeTrabajosPlanificadosDao().insert(target);
-			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());	
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(RepuestoPlanificadoDTO target : graph.getRepuestosPlanificados()) {
+		for (RepuestoPlanificadoDTO target : graph.getRepuestosPlanificados()) {
 			daos.makeRepuestosPlanificadosDao().insert(target);
-			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());	
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 	}
 
