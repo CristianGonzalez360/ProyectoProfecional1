@@ -18,6 +18,11 @@ import javax.swing.JDesktopPane;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.EmptyBorder;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class WorkbenchView {
 
@@ -61,12 +66,20 @@ public class WorkbenchView {
 		panel.add(desktopPane, BorderLayout.CENTER);
 
 		JPanel southPanel = new JPanel();
+		southPanel.setEnabled(false);
+		southPanel.setForeground(Color.BLACK);
+		southPanel.setBorder(new EmptyBorder(1, 0, 0, 0));
 		FlowLayout flowLayout = (FlowLayout) southPanel.getLayout();
+		flowLayout.setVgap(2);
 		flowLayout.setAlignment(FlowLayout.TRAILING);
-		southPanel.setBackground(Color.BLACK);
+		southPanel.setBackground(UIManager.getColor("MenuBar.background"));
 		panel.add(southPanel, BorderLayout.SOUTH);
 
 		textSession = new JTextField();
+		textSession.setDisabledTextColor(Color.DARK_GRAY);
+		textSession.setHorizontalAlignment(SwingConstants.CENTER);
+		textSession.setForeground(Color.BLACK);
+		textSession.setBackground(SystemColor.activeCaptionBorder);
 		textSession.setEnabled(false);
 		textSession.setEditable(false);
 		southPanel.add(textSession);
