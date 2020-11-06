@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 
 import javax.swing.border.SoftBevelBorder;
@@ -37,6 +38,8 @@ public class SupervisorControlView extends JInternalFrame {
 
 	private static final String[] COLUMNAS_ORDENES = { "TIPO DE TRABAJO", "ID. USUARIO DE ALTA", "ID. VEHICULO OT",
 			"FECHA ALTA", "TRABAJO SOLICITADO", "TRABAJO SUGERIDO", "FEHCA ENTRGA VEHICULO" };
+	
+	private static final String[] COLUMNAS_ENTREGAS = {};
 
 	private static SupervisorControlView instance;
 
@@ -59,7 +62,23 @@ public class SupervisorControlView extends JInternalFrame {
 	private PanelConsultaDePresupuestosView panelConsultaOTPresupuestadasView;
 
 	private PanelEntregaVehiculosView panelEntregaVehiculosView;
-
+	
+	/*
+	 * --- Vehicle Delivery
+	 */
+	private JPanel panelSuperiorEntrega;
+	private FlowLayout flowLayoutSuperiorEntrega;
+	private JTextField textDniDeEntrega;
+	private JLabel lblDniDeEntrega;
+	private JButton btnBuscarEntregas;
+	
+	private JScrollPane scrollPanelTablaEntregas;
+	private DefaultTableModel modelEntregas;
+	private JTable tablaEntregas;
+	
+	private JPanel panelInferiorEntrega;
+	private JButton btnRegistrarEntrega;
+	
 	public static SupervisorControlView getInstance() {
 		if (instance == null)
 			instance = new SupervisorControlView();
@@ -92,7 +111,7 @@ public class SupervisorControlView extends JInternalFrame {
 		tabbedPane.addTab("Consulta OT Presupuestadas", panelConsultaOTPresupuestadasView);
 
 		panelEntregaVehiculosView = new PanelEntregaVehiculosView();
-		tabbedPane.addTab("Gestionar Entrega de Vehiculo", panelEntregaVehiculosView);
+		tabbedPane.addTab("Gestionar Entrega de Vehículo", panelEntregaVehiculosView);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -128,6 +147,40 @@ public class SupervisorControlView extends JInternalFrame {
 		scrollPane.setViewportView(table);
 
 		modelOrdenesDeTrabajo = (new DefaultTableModel(null, COLUMNAS_ORDENES));
+		
+		//vehicle delivery
+		panelSuperiorEntrega = new JPanel();
+		panelSuperiorEntrega.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		flowLayoutSuperiorEntrega = (FlowLayout) panelSuperiorEntrega.getLayout();
+		flowLayoutSuperiorEntrega.setHgap(20);
+		
+		panelEntregaVehiculosView.add(panelSuperiorEntrega, BorderLayout.NORTH);
+		
+		lblDniDeEntrega = new JLabel("Cliente DNI");
+		panelSuperiorEntrega.add(lblDniDeEntrega);
+
+		textDniDeEntrega = new JTextField("");
+		textDniDeEntrega.setHorizontalAlignment(SwingConstants.CENTER);
+		panelSuperiorEntrega.add(textDniDeEntrega);
+		textDniDeEntrega.setColumns(20);
+
+		btnBuscarEntregas = new JButton("Buscar");
+		panelSuperiorEntrega.add(btnBuscarEntregas);
+		
+		scrollPanelTablaEntregas = new JScrollPane();
+		
+		panelEntregaVehiculosView.add(scrollPanelTablaEntregas, BorderLayout.CENTER);
+		
+		modelEntregas = new DefaultTableModel(null, COLUMNAS_ENTREGAS);
+		tablaEntregas = new JTable(modelEntregas);
+		scrollPanelTablaEntregas.setViewportView(tablaEntregas);
+		
+		panelInferiorEntrega = new JPanel();
+		
+		panelEntregaVehiculosView.add(panelInferiorEntrega, BorderLayout.SOUTH);
+
+		btnRegistrarEntrega  = new JButton("Registrar Entrega");
+		panelInferiorEntrega.add(btnRegistrarEntrega);
 
 	}
 
