@@ -28,7 +28,7 @@ public class TurnoDTO {
 	public TurnoDTO() {
 
 	}
-	
+
 	public TurnoDTO(Integer dniCliente, Date fechaAlta, Date fechaCancelado, Date fechaProgramada, String nombreCliente,
 			String telefonoCliente, String emailCliente) {
 		super();
@@ -67,7 +67,7 @@ public class TurnoDTO {
 		ret.setEmailCliente("ejemplo.a1@gmail.com");
 		return ret;
 	}
-	
+
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
 		errors.addAll(new StringValidator(nombreCliente).notBlank("El Nombre es obligatorio.")

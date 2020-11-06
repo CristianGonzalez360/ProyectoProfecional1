@@ -13,7 +13,7 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 	private static final String insertDatosPersonales = "INSERT INTO DatosPersonales (nombreCompleto, dni, telefono, email, calle, altura,piso, dpto, localidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	private static final String update = "UPDATE DatosPersonales SET nombreCompleto = ?, dni = ?, telefono = ?, email = ?, calle = ?, altura = ?,piso = ?, dpto = ?, localidad = ? WHERE idDatosPersonales = ?";
-	
+
 	private static final String readAll = "SELECT * FROM DatosPersonales";
 
 	private static final String readByDni = readAll + " wHERE DatosPersonales.dni = ?";
@@ -31,19 +31,12 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 
 	@Override
 	public boolean update(DatosPersonalesDTO entity) {
-		return getTemplate()
-				.query(update)
-				.param(entity.getNombreCompleto())
-				.param(entity.getDni() == null ? new NullObject() : entity.getDni())
-				.param(entity.getTelefono())
-				.param(entity.getEmail())
-				.param(entity.getCalle())
+		return getTemplate().query(update).param(entity.getNombreCompleto())
+				.param(entity.getDni() == null ? new NullObject() : entity.getDni()).param(entity.getTelefono())
+				.param(entity.getEmail()).param(entity.getCalle())
 				.param(entity.getAltura() == null ? new NullObject() : entity.getAltura())
-				.param(entity.getPiso() == null ? new NullObject() : entity.getPiso())
-				.param(entity.getDpto())
-				.param(entity.getLocalidad())
-				.param(entity.getId())
-				.excecute();
+				.param(entity.getPiso() == null ? new NullObject() : entity.getPiso()).param(entity.getDpto())
+				.param(entity.getLocalidad()).param(entity.getId()).excecute();
 	}
 
 	@Override

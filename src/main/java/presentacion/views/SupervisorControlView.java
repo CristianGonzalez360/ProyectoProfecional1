@@ -34,9 +34,9 @@ public class SupervisorControlView extends JInternalFrame {
 
 	private static final String[] COLUMNAS_TURNOS = new String[] { "NRO. TURNO", "NOMBRE DE CLIENTE", "DNI",
 			"FECHA DE ALTA", "FECHA PROGRAMADA", "TELEFONO", "EMAIL" };
-	
-	private static final String[] COLUMNAS_ORDENES = {"TIPO DE TRABAJO", "ID. USUARIO DE ALTA", "ID. VEHICULO OT", "FECHA ALTA", "TRABAJO SOLICITADO", "TRABAJO SUGERIDO", "FEHCA ENTRGA VEHICULO" };
-	
+
+	private static final String[] COLUMNAS_ORDENES = { "TIPO DE TRABAJO", "ID. USUARIO DE ALTA", "ID. VEHICULO OT",
+			"FECHA ALTA", "TRABAJO SOLICITADO", "TRABAJO SUGERIDO", "FEHCA ENTRGA VEHICULO" };
 
 	private static SupervisorControlView instance;
 
@@ -51,17 +51,15 @@ public class SupervisorControlView extends JInternalFrame {
 	private JButton btnRegistrarTurno;
 
 	private JButton btnCancelarTurno;
-	
+
 	private DefaultTableModel modelOrdenesDeTrabajo;
-	
+
 	private PanelClientesView panelClientesView;
-	
-	
+
 	private PanelConsultaDePresupuestosView panelConsultaOTPresupuestadasView;
 
 	private PanelEntregaVehiculosView panelEntregaVehiculosView;
-	
-	
+
 	public static SupervisorControlView getInstance() {
 		if (instance == null)
 			instance = new SupervisorControlView();
@@ -75,7 +73,7 @@ public class SupervisorControlView extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setTitle("Supervisor Control View");
 		setBounds(100, 100, 859, 647);
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
@@ -90,12 +88,12 @@ public class SupervisorControlView extends JInternalFrame {
 		tabbedPane.addTab("Gestión de Turnos", null, turnosPanel, null);
 		turnosPanel.setLayout(new BorderLayout(0, 0));
 
-		panelConsultaOTPresupuestadasView = new PanelConsultaDePresupuestosView();
+		panelConsultaOTPresupuestadasView = PanelConsultaDePresupuestosView.getInstance();
 		tabbedPane.addTab("Consulta OT Presupuestadas", panelConsultaOTPresupuestadasView);
-		
+
 		panelEntregaVehiculosView = new PanelEntregaVehiculosView();
 		tabbedPane.addTab("Gestionar Entrega de Vehiculo", panelEntregaVehiculosView);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
@@ -128,7 +126,7 @@ public class SupervisorControlView extends JInternalFrame {
 		tableModelTurnos = new DefaultTableModel(null, COLUMNAS_TURNOS);
 		table = new JTable(tableModelTurnos);
 		scrollPane.setViewportView(table);
-		
+
 		modelOrdenesDeTrabajo = (new DefaultTableModel(null, COLUMNAS_ORDENES));
 
 	}
@@ -150,19 +148,21 @@ public class SupervisorControlView extends JInternalFrame {
 	public void setTurnos(List<TurnoDTO> turnos) {
 		for (TurnoDTO turno : turnos) {
 			Object[] row = { turno.getIdTurno().toString(), turno.getNombreCliente(), turno.getDniCliente(),
-					turno.getFechaAlta().toString(), turno.getFechaProgramada().toString(), turno.getTelefonoCliente(), turno.getEmailCliente() };
+					turno.getFechaAlta().toString(), turno.getFechaProgramada().toString(), turno.getTelefonoCliente(),
+					turno.getEmailCliente() };
 			tableModelTurnos.addRow(row);
 		}
 	}
-		
+
 	public void setOrdenesDeTrabajo(List<OrdenDeTrabajoDTO> ordenes) {
-		for(OrdenDeTrabajoDTO orden : ordenes) {
-			Object[] row = {orden.getTipoOrdeTrabajo(), orden.getIdUsuarioAlta(), orden.getIdVehiculoOt(), orden.getFechaDeAlta(), orden.getTrabajoSolicitado(),
-					orden.getTrabajoSujerido(), orden.getFechaEntregado()};
+		for (OrdenDeTrabajoDTO orden : ordenes) {
+			Object[] row = { orden.getTipoOrdeTrabajo(), orden.getIdUsuarioAlta(), orden.getIdVehiculoOt(),
+					orden.getFechaDeAlta(), orden.getTrabajoSolicitado(), orden.getTrabajoSujerido(),
+					orden.getFechaEntregado() };
 			modelOrdenesDeTrabajo.addRow(row);
 		}
 	}
-	
+
 	public TurnoDTO getSelectedTurno() {
 		int row = table.getSelectedRow();
 		if (table.getSelectedRowCount() == 1) {
@@ -176,7 +176,7 @@ public class SupervisorControlView extends JInternalFrame {
 		}
 		return null;
 	}
-	
+
 	public Integer getIdSelectedTurno() {
 		int row = table.getSelectedRow();
 		int id;
@@ -202,7 +202,7 @@ public class SupervisorControlView extends JInternalFrame {
 		tableModelTurnos.setColumnCount(0);
 		tableModelTurnos.setColumnIdentifiers(COLUMNAS_TURNOS);
 	}
-	
+
 	public void clearOrdenesDeTrabajo() {
 		modelOrdenesDeTrabajo.setRowCount(0);
 		modelOrdenesDeTrabajo.setColumnCount(0);
@@ -212,7 +212,7 @@ public class SupervisorControlView extends JInternalFrame {
 	public void setActionBuscar(ActionListener listener) {
 		this.btnBuscar.addActionListener(listener);
 	}
-	
+
 	public void setActionRegistrarTurno(ActionListener listener) {
 		this.btnRegistrarTurno.addActionListener(listener);
 	}
@@ -223,7 +223,7 @@ public class SupervisorControlView extends JInternalFrame {
 
 	public String getDniClienteBusquedaTurno() {
 		return textFieldTurno.getText();
-	}	
+	}
 
 	public PanelClientesView getPanelClientesView() {
 		return this.panelClientesView;
@@ -231,7 +231,7 @@ public class SupervisorControlView extends JInternalFrame {
 
 	public void setActionBuscarOT(ActionListener listener) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public String getDniClienteBusquedaOT() {

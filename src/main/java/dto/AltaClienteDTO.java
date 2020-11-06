@@ -7,23 +7,23 @@ import dto.validators.Patterns;
 import dto.validators.StringValidator;
 
 public class AltaClienteDTO {
-	
+
 	private String nombreCompleto;
-	
+
 	private String dni;
-	
+
 	private String telefono;
-	
+
 	private String email;
-	
+
 	private String calle;
-	
+
 	private String altura;
-	
+
 	private String piso;
-	
+
 	private String dpto;
-	
+
 	private String localidad;
 
 	public String getLocalidad() {
@@ -97,54 +97,35 @@ public class AltaClienteDTO {
 	public void setDpto(String dpto) {
 		this.dpto = dpto;
 	}
-	
+
 	public List<String> validate() {
 		LinkedList<String> ret = new LinkedList<>();
-		
-		ret.addAll(new StringValidator(nombreCompleto)
-				.notBlank("Debe ingresar un nombre.")
-				.regex("El nombre debe tener solo letras.", "[a-zA-Záéíóú ]+")
+
+		ret.addAll(new StringValidator(nombreCompleto).notBlank("Debe ingresar un nombre.")
+				.regex("El nombre debe tener solo letras.", "[a-zA-Záéíóú ]+").validate());
+
+		ret.addAll(new StringValidator(dni).number("El DNI solo de tener números.").validate());
+
+		ret.addAll(new StringValidator(telefono).notBlank("Debe ingresar un teléfono.")
+				.number("El teléfono solo puede tener números").validate());
+
+		ret.addAll(new StringValidator(email).notBlank("Debe ingresar una dirección de email.")
+				.email("El email debe ser un email.").validate());
+
+		ret.addAll(new StringValidator(calle).regex("La calle solo puede tener letras y números", Patterns.TEXT_FIELD)
 				.validate());
-		
-		ret.addAll(new StringValidator(dni)
-				.number("El DNI solo de tener números.")
+
+		ret.addAll(new StringValidator(altura).number("La altura solo debe tener números").validate());
+
+		ret.addAll(new StringValidator(piso).number("El piso solo debe tener números")
+				.max(2, "Maximo 2 digitos para el piso.").validate());
+
+		ret.addAll(new StringValidator(dpto).number("El piso solo debe tener números")
+				.max(3, "Maximo 3 chars para el dpto.").validate());
+
+		ret.addAll(new StringValidator(localidad).regex("La localidad solo debe letras y números", Patterns.TEXT_FIELD)
 				.validate());
-		
-		ret.addAll(new StringValidator(telefono)
-				.notBlank("Debe ingresar un teléfono.")
-				.number("El teléfono solo puede tener números")
-				.validate());
-		
-		ret.addAll(new StringValidator(email)
-				.notBlank("Debe ingresar una dirección de email.")
-				.email("El email debe ser un email.")
-				.validate());
-		
-		ret.addAll(new StringValidator(calle)
-				.regex("La calle solo puede tener letras y números", Patterns.TEXT_FIELD)
-				.validate());
-		
-		ret.addAll(new StringValidator(altura)
-				.number("La altura solo debe tener números")
-				.validate());
-		
-		ret.addAll(new StringValidator(piso)
-				.number("El piso solo debe tener números")
-				.max(2, "Maximo 2 digitos para el piso.")
-				.validate());
-		
-		ret.addAll(new StringValidator(dpto)
-				.number("El piso solo debe tener números")
-				.max(3, "Maximo 3 chars para el dpto.")
-				.validate());
-		
-		ret.addAll(new StringValidator(localidad)
-				.regex("La localidad solo debe letras y números", Patterns.TEXT_FIELD)
-				.validate());
-		
+
 		return ret;
 	}
 }
-
-
-	

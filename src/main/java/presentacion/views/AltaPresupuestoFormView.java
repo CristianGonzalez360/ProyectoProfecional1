@@ -41,7 +41,7 @@ public class AltaPresupuestoFormView extends JDialog {
 	private JPanel panel;
 	private JPanel panel_1;
 	private JTabbedPane tabbedPane;
-	
+
 	private static AltaPresupuestoFormView instance;
 	private JButton btnGuardar;
 
@@ -115,44 +115,45 @@ public class AltaPresupuestoFormView extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		
+
 		setVisible(false);
 	}
-	
+
 	public static AltaPresupuestoFormView getInstance() {
-		if(instance == null) instance = new AltaPresupuestoFormView();
+		if (instance == null)
+			instance = new AltaPresupuestoFormView();
 		return instance;
 	}
 
 	public void setActionOnPlanificarRepuestos(ActionListener listener) {
 		this.btnPlanificarRepuestos.addActionListener(listener);
 	}
-	
+
 	public void setActionOnPlanificarTrabajos(ActionListener listener) {
 		this.btnPlanificarTrabajos.addActionListener(listener);
 	}
-	
+
 	public void setActionOnGuardar(ActionListener listener) {
 		this.btnGuardar.addActionListener(listener);
 	}
-	
+
 	public void setDataRepuestos(List<RepuestoPlanificadoDTO> repuestos) {
-		//TODO llenar tabla repuestos
+		// TODO llenar tabla repuestos
 	}
-	
+
 	public void setDataTrabajos(List<TrabajoPresupuestadoDTO> trabajos) {
-		for(TrabajoPresupuestadoDTO t : trabajos) {
-			//TODO llenar tabla trabajos
+		for (TrabajoPresupuestadoDTO t : trabajos) {
+			// TODO llenar tabla trabajos
 		}
 	}
 
 	public void clearData() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void display() {
 		setVisible(true);
 	}
-	
+
 }

@@ -35,13 +35,13 @@ public class DatabaseGraph {
 	private List<ClienteDTO> clientes;
 
 	private List<RepuestoDTO> repuestos;
-	
+
 	private List<PresupuestoDTO> presupuestos;
-	
+
 	private List<TrabajoPresupuestadoDTO> trabajos;
-	
+
 	private List<RepuestoPlanificadoDTO> repuestosPlanificados;
-	
+
 	public DatabaseGraph() {
 		cuentas = new LinkedList<>();
 		datosPersonales = new LinkedList<>();

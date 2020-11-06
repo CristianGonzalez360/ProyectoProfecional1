@@ -11,9 +11,9 @@ public class TecnicoControlView extends JInternalFrame {
 	private static final long serialVersionUID = 4704503289092275653L;
 
 	private static TecnicoControlView instance;
-	
+
 	private PanelGestionPresupuestoView gestionPresupuestoPanel;
-	
+
 	public static TecnicoControlView getInstance() {
 		if (instance == null)
 			instance = new TecnicoControlView();
@@ -30,7 +30,7 @@ public class TecnicoControlView extends JInternalFrame {
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
-		
+
 		this.gestionPresupuestoPanel = PanelGestionPresupuestoView.getInstance();
 		tabbedPane.add("Gestión de presupuestos", this.gestionPresupuestoPanel);
 	}
@@ -49,6 +49,6 @@ public class TecnicoControlView extends JInternalFrame {
 	}
 
 	public void clearData() {
-	
+
 	}
 }

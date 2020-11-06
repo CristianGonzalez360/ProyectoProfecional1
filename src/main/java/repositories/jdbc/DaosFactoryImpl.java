@@ -40,15 +40,15 @@ public class DaosFactoryImpl extends DaosFactory {
 	private ClientesDao clientesDao;
 
 	private VehiculosConOrdenDeTrabajoDao vehiculosConOtDao;
-	
+
 	private RepuestosDao repuestosDao;
 
 	private PresupuestosDao presupuestosDao;
-	
+
 	private TrabajosPresupuestadosDao trabajosPlanificadosDao;
 
 	private RepuestosPlanificadosDao repuestosPlanificadosDao;
-	
+
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
 	}
@@ -119,22 +119,22 @@ public class DaosFactoryImpl extends DaosFactory {
 
 	@Override
 	public RepuestosDao makeRepuestoDao() {
-		if(this.repuestosDao == null) {
+		if (this.repuestosDao == null) {
 			this.repuestosDao = new RepuestosDaoImpl(ds.getConnection());
 		}
 		return repuestosDao;
 	}
-	
+
 	@Override
 	public PresupuestosDao makePresupuestoDao() {
-		if(presupuestosDao == null)
+		if (presupuestosDao == null)
 			presupuestosDao = new PresupuestosDaoImpl(ds.getConnection());
 		return presupuestosDao;
 	}
 
 	@Override
 	public TrabajosPresupuestadosDao makeTrabajosPlanificadosDao() {
-		if(trabajosPlanificadosDao == null) {
+		if (trabajosPlanificadosDao == null) {
 			trabajosPlanificadosDao = new TrabajosPresupuestadosDaoImpl(ds.getConnection());
 		}
 		return trabajosPlanificadosDao;
@@ -142,11 +142,10 @@ public class DaosFactoryImpl extends DaosFactory {
 
 	@Override
 	public RepuestosPlanificadosDao makeRepuestosPlanificadosDao() {
-		if(repuestosPlanificadosDao == null) {
+		if (repuestosPlanificadosDao == null) {
 			repuestosPlanificadosDao = new RepuestosPlanificadosDaoImpl(ds.getConnection());
 		}
 		return repuestosPlanificadosDao;
 	}
 
 }
-

@@ -1,25 +1,32 @@
 package business_logic;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import business_logic.exceptions.ConflictException;
 import dto.AltaDeVehiculoDTO;
 import dto.FichaTecnicaVehiculoDTO;
+import dto.OrdenDeTrabajoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import repositories.FichaTecnicaVehiculoDao;
+import repositories.OrdenesDeTrabajoDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
 
 public class VehiculosController {
 
-	public VehiculosConOrdenDeTrabajoDao vehiculosDao;
+	private VehiculosConOrdenDeTrabajoDao vehiculosDao;
 
-	public FichaTecnicaVehiculoDao fichasDao;
+	private FichaTecnicaVehiculoDao fichasDao;
 
-	public VehiculosController(VehiculosConOrdenDeTrabajoDao vehiculosDao, FichaTecnicaVehiculoDao fichasDao) {
+	private OrdenesDeTrabajoDao otDao;
+
+	public VehiculosController(VehiculosConOrdenDeTrabajoDao vehiculosDao, OrdenesDeTrabajoDao otDao,
+			FichaTecnicaVehiculoDao fichasDao) {
 		assert vehiculosDao != null;
 		assert fichasDao != null;
 		this.vehiculosDao = vehiculosDao;
 		this.fichasDao = fichasDao;
+		this.otDao = otDao;
 	}
 
 	public List<VehiculoConOrdenDeTrabajoDTO> readByIdCliente(Integer idCliente) {
@@ -46,5 +53,20 @@ public class VehiculosController {
 		} else {
 			throw new ConflictException("Error al persistir el vehiculo del cliente");
 		}
+	}
+
+	public List<VehiculoConOrdenDeTrabajoDTO> readVehicleWithClientIdWhereOtIsOpen(Integer idCliente) {
+		List<VehiculoConOrdenDeTrabajoDTO> vCliente = vehiculosDao.readByClienteId(idCliente);
+		List<VehiculoConOrdenDeTrabajoDTO> vClienteRet = new LinkedList<>();
+		for (VehiculoConOrdenDeTrabajoDTO aux : vCliente) {
+			for (OrdenDeTrabajoDTO temp : otDao.readByVehiculoId(aux.getId())) {
+				if (temp != null) {
+					if (temp.getFechaEntregado() == null) {
+						vClienteRet.add(aux);
+					}
+				}
+			}
+		}
+		return vClienteRet;
 	}
 }

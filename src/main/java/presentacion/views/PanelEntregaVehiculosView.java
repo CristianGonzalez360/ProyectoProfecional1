@@ -1,6 +1,5 @@
 package presentacion.views;
 
-
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
@@ -16,21 +15,21 @@ public class PanelEntregaVehiculosView extends JPanel {
 
 	public PanelEntregaVehiculosView() {
 		setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		add(panel, BorderLayout.NORTH);
-		
+
 		JLabel lblNewLabel = new JLabel("DNI");
 		panel.add(lblNewLabel);
-		
+
 		textField = new JTextField();
 		panel.add(textField);
 		textField.setColumns(10);
-		
+
 		JButton btnNewButton = new JButton("Buscar");
 		panel.add(btnNewButton);
-		
+
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
 

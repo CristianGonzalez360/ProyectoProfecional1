@@ -48,25 +48,17 @@ public class DatosPersonalesDTO {
 
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
-		errors.addAll(new StringValidator(nombreCompleto)
-				.notBlank("El nombre es obligatorio")
-				.max(20, "Maximo una longitud de 20 caracteres para el nombre")
-				.validate());
-		
-		if(this.dni == null) {
+		errors.addAll(new StringValidator(nombreCompleto).notBlank("El nombre es obligatorio")
+				.max(20, "Maximo una longitud de 20 caracteres para el nombre").validate());
+
+		if (this.dni == null) {
 			errors.add("El dni es obligatorio");
 		}
-		errors.addAll(new StringValidator(altura)
-					.number("El telefono debe ser un número")
-					.validate());
+		errors.addAll(new StringValidator(altura).number("El telefono debe ser un número").validate());
 		if (!altura.trim().isEmpty())
-			errors.addAll(new StringValidator(altura)
-					.number("La altura debe ser un número")
-					.validate());
-		if (!piso.trim().isEmpty()) 
-			errors.addAll(new StringValidator(piso)
-					.number("El piso debe ser un número")
-					.validate());
+			errors.addAll(new StringValidator(altura).number("La altura debe ser un número").validate());
+		if (!piso.trim().isEmpty())
+			errors.addAll(new StringValidator(piso).number("El piso debe ser un número").validate());
 		return errors;
 	}
 
