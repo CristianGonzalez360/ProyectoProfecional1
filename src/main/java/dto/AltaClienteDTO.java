@@ -112,7 +112,7 @@ public class AltaClienteDTO {
 		ret.addAll(new StringValidator(email).notBlank("Debe ingresar una dirección de email.")
 				.email("El email debe ser un email.").validate());
 
-		ret.addAll(new StringValidator(calle).regex("La calle solo puede tener letras y números", Patterns.TEXT_FIELD)
+		ret.addAll(new StringValidator(calle).regex("La calle solo puede tener letras y números", Patterns.ALPHANUMERIC)
 				.validate());
 
 		ret.addAll(new StringValidator(altura).number("La altura solo debe tener números").validate());
@@ -120,10 +120,10 @@ public class AltaClienteDTO {
 		ret.addAll(new StringValidator(piso).number("El piso solo debe tener números")
 				.max(2, "Maximo 2 digitos para el piso.").validate());
 
-		ret.addAll(new StringValidator(dpto).number("El piso solo debe tener números")
+		ret.addAll(new StringValidator(dpto).regex("El departamento solo puede tener letras y números", Patterns.ALPHANUMERIC)
 				.max(3, "Maximo 3 chars para el dpto.").validate());
 
-		ret.addAll(new StringValidator(localidad).regex("La localidad solo debe letras y números", Patterns.TEXT_FIELD)
+		ret.addAll(new StringValidator(localidad).regex("La localidad solo debe letras y números", Patterns.ALPHANUMERIC)
 				.validate());
 
 		return ret;

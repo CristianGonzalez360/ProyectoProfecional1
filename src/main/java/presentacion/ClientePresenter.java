@@ -28,6 +28,8 @@ import presentacion.views.utils.ErrorDialog;
 
 public class ClientePresenter {
 
+	private static final String CLIENTE_NO_SELECCIONADO = "Debe seleccionar un cliente";
+
 	private PanelClientesView view;
 
 	private ClientesController clienteController;
@@ -57,6 +59,8 @@ public class ClientePresenter {
 		ClienteFormView.getInstance().setActionOnSave((a) -> onRegistrarCliente(a));
 		VehiculoFormView.getInstance().setActionSave((a) -> onRegistrarVehiculo(a));
 		AltaOrdenTrabajoFormView.getInstance().setActionGuardar((a) -> onRegistrarOrdenDeTrabajo(a));
+		view.setActionOnEditarCliente(a -> onDisplayFormForUpdate(a));
+		ClienteFormView.getInstance().setActionOnUpdate(a -> onUpdate(a));
 	}
 
 	private void onDisplayOrdenDeTrabajoForm(ActionEvent a) {
@@ -169,6 +173,33 @@ public class ClientePresenter {
 			} else {
 				new ErrorDialog().showMessages(errors);
 			}
+		}
+	}
+	
+	private void onDisplayFormForUpdate(ActionEvent a) {
+		if (view.getIdCliente() != null) {
+			ClienteFormView.getInstance().clearData();
+			ClienteFormView.getInstance().setData(clienteController.readByDni(Integer.parseInt(view.getDniCliente())));
+			ClienteFormView.getInstance().display();
+		}
+		else {
+			new ErrorDialog().showMessages(CLIENTE_NO_SELECCIONADO);
+		}
+	}
+	
+	private void onUpdate(ActionEvent a) {
+		AltaClienteDTO clienteAux = ClienteFormView.getInstance().getData();
+		List<String> errores = clienteAux.validate();
+		if (errores.isEmpty()) {
+			ClienteDTO cliente = new ClienteDTO(clienteAux);
+			cliente.setIdCliente(view.getIdCliente());
+			cliente.getDatosPersonalesDTO().setId(view.getIdDatosPersonalesCliente());
+			clienteController.update(cliente);
+			view.clearDataCliente();
+			view.setData(cliente);
+			ClienteFormView.getInstance().close();
+		} else {
+			new ErrorDialog().showMessages(errores);
 		}
 	}
 }
