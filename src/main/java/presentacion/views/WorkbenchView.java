@@ -25,7 +25,7 @@ public class WorkbenchView {
 
 	static WorkbenchView vista;
 
-	private Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/agenda.png"));
+	private Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/iconox512.png"));
 
 	private JDesktopPane desktopPane;
 
