@@ -31,8 +31,11 @@ public class TrabajosPresupuestadosDaoImpl extends GenericJdbcDao<TrabajoPresupu
 
 	@Override
 	public boolean insert(TrabajoPresupuestadoDTO entity) {
-		return getTemplate().query(insert).param(entity.getIdPresupuesto()).param(entity.getDescripcionTrabajo())
-				.param(entity.getPrecioTrabajo()).param(entity.getTiempoEstTrabajo()).excecute();
+		return getTemplate().query(insert)
+				.param(entity.getIdPresupuesto())
+				.param(entity.getDescripcionTrabajo())
+				.param(entity.getPrecioTrabajo())
+				.param(entity.getTiempoEstTrabajo()).excecute();
 	}
 
 	@Override

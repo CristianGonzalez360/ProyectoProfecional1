@@ -102,6 +102,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JTextField textNroDeChasis;
 	private Integer idOrdenDetrabajo;
 	private JTextField txtFechaTest;//SOLO TEST
+	private Integer idOrdenDeTrabajo;
 
 	public static PanelGestionPresupuestoView getInstance() {
 		if (instance == null) {
@@ -429,7 +430,12 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.textModelo.setText(fichaVehiculo.getModelo().toString());
 	}
 
+	public Integer getIdOrdenDeTrabajo() {
+		return this.idOrdenDetrabajo;
+	}
+	
 	public void setData(OrdenDeTrabajoDTO ordenDeTrabajo) {
+		this.idOrdenDeTrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
 		this.textTipoTrabajo.setText(ordenDeTrabajo.getTipoOrdeTrabajo());
 		this.textFechaAltaOt.setText(ordenDeTrabajo.getFechaDeAlta().toString());
 		this.textFechaCierreOt.setText(

@@ -27,7 +27,7 @@ import presentacion.views.utils.ErrorDialog;
 
 public class PresupuestosPresenter {
 
-	private PanelGestionPresupuestoView gestionPresupuestosView;
+	private PanelGestionPresupuestoView view;
 	private PlanificarRepuestosFormView planRepuestosView;
 	private PlanificarTrabajosFormView planTrabajosView;
 	private AgregarTrabajoFormView agregarTrabajoFormView;
@@ -47,14 +47,14 @@ public class PresupuestosPresenter {
 		this.presupuestosController = presupuestosController;
 		this.repuestosController = repuestosController;
 		this.ordenDeTrabajoController = ordenDetranajoController;
-		this.gestionPresupuestosView = PanelGestionPresupuestoView.getInstance();
+		this.view = PanelGestionPresupuestoView.getInstance();
 		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
 		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
 		this.agregarTrabajoFormView = AgregarTrabajoFormView.getInstance();
 
-		this.gestionPresupuestosView.setActionOnPlanificarRepuestos(a -> onDisplayForPlanRepuesto(a));
-		this.gestionPresupuestosView.setActionOnPlanificarTrabajos(a -> onDisplayForPlanTrabajos(a));
-		this.gestionPresupuestosView.setActionOnRegistrarPresupuesto(a -> onRegistrar(a));
+		this.view.setActionOnPlanificarRepuestos(a -> onDisplayForPlanRepuesto(a));
+		this.view.setActionOnPlanificarTrabajos(a -> onDisplayForPlanTrabajos(a));
+		this.view.setActionOnRegistrarPresupuesto(a -> onRegistrar(a));
 		this.planTrabajosView.setActionOnAgregarTrabajo(a -> onDisplayForAgregarTrabajo(a));
 		this.agregarTrabajoFormView.setActionOnGuardar(a -> onAgregarTrabajos(a));
 		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
@@ -63,8 +63,8 @@ public class PresupuestosPresenter {
 		this.planTrabajosView.setActionOnAceptar(a -> onAceptarTrabajosPlanificados(a));
 		this.planRepuestosView.setActionOnBuscar(a -> onBuscarRepuesto(a));
 
-		this.gestionPresupuestosView.setActionOnBuscar(a -> onBuscar(a));
-		this.gestionPresupuestosView.setActionSelectVehiculoCliente(new ListSelectionListener() {
+		this.view.setActionOnBuscar(a -> onBuscar(a));
+		this.view.setActionSelectVehiculoCliente(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				onSelectVehiculoDeCliente();
@@ -95,21 +95,21 @@ public class PresupuestosPresenter {
 	}
 
 	private void onAceptarTrabajosPlanificados(ActionEvent a) {
-		this.gestionPresupuestosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
+		this.view.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
 		if (!nuevoPresupuesto.getTrabajos().isEmpty()) {
-			this.gestionPresupuestosView.habilitarBotonRegistrar();
+			this.view.habilitarBotonRegistrar();
 		} else {
-			this.gestionPresupuestosView.deshabilitarBotonRegistrar();
+			this.view.deshabilitarBotonRegistrar();
 		}
 		this.planTrabajosView.close();
 	}
 
 	private void onAceptarRepuestosPlanificados(ActionEvent a) {
-		this.gestionPresupuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
+		this.view.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
 		if (!nuevoPresupuesto.getRepuestos().isEmpty()) {
-			this.gestionPresupuestosView.habilitarBotonRegistrar();
+			this.view.habilitarBotonRegistrar();
 		} else {
-			this.gestionPresupuestosView.deshabilitarBotonRegistrar();
+			this.view.deshabilitarBotonRegistrar();
 		}
 		this.planRepuestosView.close();
 	}
@@ -119,7 +119,7 @@ public class PresupuestosPresenter {
 	}
 
 	private void onRegistrar(ActionEvent a) {
-		nuevoPresupuesto.setIdOT(gestionPresupuestosView.getIdOrdenDetrabajo());
+		nuevoPresupuesto.setIdOT(view.getIdOrdenDetrabajo());
 		presupuestosController.save(nuevoPresupuesto);
 	}
 
@@ -170,43 +170,34 @@ public class PresupuestosPresenter {
 	}
 
 	private void onBuscar(ActionEvent a) {
-		String inputDni = gestionPresupuestosView.getTxtDni();
+		view.clearAll();
+		String inputDni = view.getTxtDni();
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
-				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
-						.readByIdCliente(cliente.getIdCliente());
-				gestionPresupuestosView.clearDataListadoVehiculosCliente();
-				gestionPresupuestosView.setData(vehiculos);
-				gestionPresupuestosView.clearDataFichaTecnicaVehiculo();
-				gestionPresupuestosView.clearDataOrdenDeTrabajo();
-			} else {
-				gestionPresupuestosView.clearAll();
+				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController.readVehicleWithClientIdWhereOtIsOpen(cliente.getIdCliente());
+				view.setData(vehiculos);
 			}
-		} else {
-			gestionPresupuestosView.clearAll();
 		}
 	}
 
 	private void onSelectVehiculoDeCliente() {
-		Integer idVehiculo = gestionPresupuestosView.getidVehiculoSeleccionado();
+		Integer idVehiculo = view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
 			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController.readFichaTecnicaById(idVehiculo);
 			if (fichaVehiculo != null) {
-				gestionPresupuestosView.clearDataFichaTecnicaVehiculo();
-				gestionPresupuestosView.clearDataOrdenDeTrabajo();
-				gestionPresupuestosView.setData(fichaVehiculo);
-				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo);
+				view.clearDataFichaTecnicaVehiculo();
+				view.clearDataOrdenDeTrabajo();
+				view.setData(fichaVehiculo);
+				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo);				
 				if (ordenDeTrabajo != null) {
-					gestionPresupuestosView.setData(ordenDeTrabajo);
-					//SOLO TEST//
+					view.setData(ordenDeTrabajo);
 					PresupuestoDTO p = presupuestosController.readByOrdenDeTrabajoId(ordenDeTrabajo.getIdOrdenTrabajo());
 					if(p != null) {
-						gestionPresupuestosView.setDataPresupuesto(p);
+						view.setDataPresupuesto(p);
 					}
-					//*****************//
 				} else {
-					gestionPresupuestosView.clearDataOrdenDeTrabajo();
+					view.clearDataOrdenDeTrabajo();
 				}
 			}
 		}

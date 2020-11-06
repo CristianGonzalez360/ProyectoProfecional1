@@ -150,24 +150,27 @@ vehiculosConOrdenDeTrabajo:
 ordenesDeTrabajo:
   - tipoOrdeTrabajo: service
     idUsuarioAlta: 1
-    fechaDeAlta: 2020-10-10
+    fechaDeAlta: 2020-05-10
+    fechaEntregado: 2020-06-10
     trabajoSolicitado: tren delantero y chapa
     trabajoSujerido: cambio de neumaticos delanteros
     idVehiculoOt: 1
   - tipoOrdeTrabajo: taller
     idUsuarioAlta: 1
-    fechaDeAlta: 2020-10-11
+    fechaDeAlta: 2020-03-11
+    fechaEntregado: 2020-06-10
     trabajoSolicitado: electricidad
     trabajoSujerido: cambio de caja de transmision
     idVehiculoOt: 2
   - tipoOrdeTrabajo: taller
     idUsuarioAlta: 1
     fechaDeAlta: 2020-02-10
+    fechaEntregado: 2020-06-10
     trabajoSolicitado: cambio de cremallera
     trabajoSujerido: cambio el auto
     idVehiculoOt: 3
     descripcion: funciona ok
-
+    
 repuestos:
   - codigoRepuesto: 22230
     precioRepuesto: 126
