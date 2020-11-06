@@ -100,6 +100,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JLabel lblNewLabel_9;
 	private JTextField textNroMotor;
 	private JTextField textNroDeChasis;
+	private Integer idOrdenDetrabajo;
 
 	public static PanelGestionPresupuestoView getInstance() {
 		if (instance == null) {
@@ -335,6 +336,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_7.add(toolBar);
 		
 		btnRegistrarPresupuesto = new JButton("Registrar presupuesto");
+		btnRegistrarPresupuesto.setEnabled(false);
 		toolBar.add(btnRegistrarPresupuesto);
 	}
 	
@@ -417,6 +419,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.textTrabajoSugeridoOt.setText("");
 		this.textFechaAltaOt.setText("");
 		this.textFechaCierreOt.setText("");
+		this.idOrdenDetrabajo = null;
 	}
 	
 	public void setData(FichaTecnicaVehiculoDTO fichaVehiculo) {
@@ -435,6 +438,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.textFechaCierreOt.setText(ordenDeTrabajo.getFechaEntregado() != null ? ordenDeTrabajo.getFechaEntregado().toString() : "");
 		this.textTrabajoSugeridoOt.setText(ordenDeTrabajo.getTrabajoSujerido());
 		this.textTrabajoSolicitadoOt.setText(ordenDeTrabajo.getTrabajoSolicitado());
+		this.idOrdenDetrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
 	}
 	
 	public void clearDataListadoVehiculosCliente() {
@@ -453,4 +457,15 @@ public class PanelGestionPresupuestoView extends JPanel {
 		return txtDNI.getText();
 	}
 
+	public Integer getIdOrdenDetrabajo() {
+		return idOrdenDetrabajo;
+	}
+	
+	public void habilitarBotonRegistrar() {
+		this.btnRegistrarPresupuesto.setEnabled(true);
+	}
+	
+	public void deshabilitarBotonRegistrar() {
+		this.btnRegistrarPresupuesto.setEnabled(false);
+	}
 }

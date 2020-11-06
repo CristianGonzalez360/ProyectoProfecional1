@@ -2,7 +2,6 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.util.Date;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -11,18 +10,14 @@ import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.RepuestosController;
 import business_logic.VehiculosController;
-import dto.validators.Patterns;
 import dto.ClienteDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
-
 import dto.PresupuestoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
 import dto.TrabajoPresupuestadoDTO;
-import dto.TurnoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
-
 import dto.validators.StringValidator;
 import presentacion.views.AgregarTrabajoFormView;
 import presentacion.views.PanelGestionPresupuestoView;
@@ -80,11 +75,21 @@ public class PresupuestosPresenter {
 	
 	private void onAceptarTrabajosPlanificados(ActionEvent a) {
 		this.gestionPresupuestosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
+		if(!nuevoPresupuesto.getTrabajos().isEmpty()) {
+			this.gestionPresupuestosView.habilitarBotonRegistrar();
+		}else {
+			this.gestionPresupuestosView.deshabilitarBotonRegistrar();
+		}
 		this.planTrabajosView.close();
 	}
 	
 	private void onAceptarRepuestosPlanificados(ActionEvent a) {
 		this.gestionPresupuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
+		if(!nuevoPresupuesto.getRepuestos().isEmpty()) {
+			this.gestionPresupuestosView.habilitarBotonRegistrar();
+		}else {
+			this.gestionPresupuestosView.deshabilitarBotonRegistrar();
+		}
 		this.planRepuestosView.close();
 	}
 
@@ -93,7 +98,8 @@ public class PresupuestosPresenter {
 	}
 
 	private void onRegistrar(ActionEvent a) {
-		presupuestosController.save(nuevoPresupuesto);//TODO no esta implementado en el controller
+		nuevoPresupuesto.setIdOT(gestionPresupuestosView.getIdOrdenDetrabajo());
+		presupuestosController.save(nuevoPresupuesto);
 	}
 
 	private void onAgregarRepuesto(ActionEvent a) {		
