@@ -37,8 +37,8 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 				.param(entity.getFechaProgramada())
 				.param(entity.getNombreCliente())
 				.param(entity.getDniCliente())
-				.param(entity.getTelefonoCliente() == null ? new NullObject() : entity.getTelefonoCliente())
-				.param(entity.getEmailCliente() == null ? new NullObject() : entity.getEmailCliente())
+				.param(entity.getTelefonoCliente())
+				.param(entity.getEmailCliente())
 				.excecute();
 	}
 
@@ -79,6 +79,8 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 				turno.setFechaProgramada((Date) obj[4]);
 				turno.setNombreCliente((String) obj[5]);
 				turno.setDniCliente((Integer) obj[6]);
+				turno.setTelefonoCliente((String) obj[7]);
+				turno.setEmailCliente((String) obj[8]);
 				return turno;
 			}
 		};
