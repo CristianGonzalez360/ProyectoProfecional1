@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,14 +20,19 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
-
 import dto.RepuestoPlanificadoDTO;
 import dto.TrabajoPresupuestadoDTO;
+import dto.FichaTecnicaVehiculoDTO;
+import dto.OrdenDeTrabajoDTO;
+import dto.TurnoDTO;
+import dto.VehiculoConOrdenDeTrabajoDTO;
+
 
 import java.awt.event.ActionEvent;
 
@@ -43,6 +47,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JPanel panelEste;
 	private JPanel panelOeste;
 	private JPanel panelEsteNorte;
+	private List<VehiculoConOrdenDeTrabajoDTO> vehiculos;
 
 	private final String[] columnasTablaVehiculos = new String[] { "NRO. VEHICULO", "KM GARANTIA", "ASEGURADORA", "NRO POLIZA SEGURO", "PATENTE" };
 	private DefaultTableModel tableModelVehiculos;
@@ -59,14 +64,14 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JPanel panelEsteSur;
 
 	private JLabel lblTipo;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textTrabajoSolicitado;
+	private JTextField textTipoTrabajo;
+	private JTextField textFechaCierreOt;
+	private JTextField textTrabajoSolicitadoOt;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
-	private JTextField textField_3;
+	private JTextField textTrabajoSugeridoOt;
 	private JLabel lblNewLabel_4;
-	private JTextField textField_4;
+	private JTextField textFechaAltaOt;
 	private JPanel panel_1;
 	private JTabbedPane tabbedPane;
 	private JPanel panel_3;
@@ -84,17 +89,17 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JLabel lblNewLabel;
 	private JPanel panel;
 	private JLabel lblNewLabel_1;
-	private JTextField textField;
+	private JTextField textMarca;
 	private JLabel lblNewLabel_5;
-	private JTextField textField_5;
+	private JTextField textModelo;
 	private JLabel lblNewLabel_6;
-	private JTextField textField_6;
+	private JTextField textColor;
 	private JLabel lblNewLabel_7;
-	private JTextField textField_7;
+	private JTextField textCombustion;
 	private JLabel lblNewLabel_8;
 	private JLabel lblNewLabel_9;
-	private JTextField textField_8;
-	private JTextField textField_9;
+	private JTextField textNroMotor;
+	private JTextField textNroDeChasis;
 
 	public static PanelGestionPresupuestoView getInstance() {
 		if (instance == null) {
@@ -168,37 +173,37 @@ public class PanelGestionPresupuestoView extends JPanel {
 		lblTipo = new JLabel("Tipo de trabajo");
 		panelEsteSur.add(lblTipo, "2, 2");
 		
-		textField_1 = new JTextField();
-		panelEsteSur.add(textField_1, "4, 2, fill, default");
-		textField_1.setColumns(10);
+		textTipoTrabajo = new JTextField();
+		panelEsteSur.add(textTipoTrabajo, "4, 2, fill, default");
+		textTipoTrabajo.setColumns(10);
 		
 		lblNewLabel = new JLabel("Alta");
 		panelEsteSur.add(lblNewLabel, "6, 2");
 		
-		textField_4 = new JTextField();
-		panelEsteSur.add(textField_4, "8, 2, fill, default");
-		textField_4.setColumns(10);
+		textFechaAltaOt = new JTextField();
+		panelEsteSur.add(textFechaAltaOt, "8, 2, fill, default");
+		textFechaAltaOt.setColumns(10);
 		
 		lblNewLabel_4 = new JLabel("Cierre");
 		panelEsteSur.add(lblNewLabel_4, "2, 4");
 		
-		textField_2 = new JTextField();
-		panelEsteSur.add(textField_2, "4, 4, fill, default");
-		textField_2.setColumns(10);
+		textFechaCierreOt = new JTextField();
+		panelEsteSur.add(textFechaCierreOt, "4, 4, fill, default");
+		textFechaCierreOt.setColumns(10);
 		
 		lblNewLabel_3 = new JLabel("Trabajo sugerido");
 		panelEsteSur.add(lblNewLabel_3, "2, 6");
 		
-		textField_3 = new JTextField();
-		panelEsteSur.add(textField_3, "4, 6, 5, 1, fill, default");
-		textField_3.setColumns(10);
+		textTrabajoSugeridoOt = new JTextField();
+		panelEsteSur.add(textTrabajoSugeridoOt, "4, 6, 5, 1, fill, default");
+		textTrabajoSugeridoOt.setColumns(10);
 		
 		lblNewLabel_2 = new JLabel("Trabajo soclicitad");
 		panelEsteSur.add(lblNewLabel_2, "2, 8");
 		
-		textTrabajoSolicitado = new JTextField();
-		panelEsteSur.add(textTrabajoSolicitado, "4, 8, 5, 1, fill, default");
-		textTrabajoSolicitado.setColumns(10);
+		textTrabajoSolicitadoOt = new JTextField();
+		panelEsteSur.add(textTrabajoSolicitadoOt, "4, 8, 5, 1, fill, default");
+		textTrabajoSolicitadoOt.setColumns(10);
 		
 		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Ficha t\u00E9cnica del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -223,44 +228,44 @@ public class PanelGestionPresupuestoView extends JPanel {
 		lblNewLabel_1 = new JLabel("Marca");
 		panel.add(lblNewLabel_1, "2, 2");
 		
-		textField = new JTextField();
-		panel.add(textField, "4, 2, fill, default");
-		textField.setColumns(10);
+		textMarca = new JTextField();
+		panel.add(textMarca, "4, 2, fill, default");
+		textMarca.setColumns(10);
 		
 		lblNewLabel_5 = new JLabel("Modelo");
 		panel.add(lblNewLabel_5, "6, 2");
 		
-		textField_5 = new JTextField();
-		panel.add(textField_5, "8, 2, fill, default");
-		textField_5.setColumns(10);
+		textModelo = new JTextField();
+		panel.add(textModelo, "8, 2, fill, default");
+		textModelo.setColumns(10);
 		
 		lblNewLabel_6 = new JLabel("Color");
 		panel.add(lblNewLabel_6, "2, 4");
 		
-		textField_6 = new JTextField();
-		panel.add(textField_6, "4, 4, fill, default");
-		textField_6.setColumns(10);
+		textColor = new JTextField();
+		panel.add(textColor, "4, 4, fill, default");
+		textColor.setColumns(10);
 		
 		lblNewLabel_7 = new JLabel("Combustion");
 		panel.add(lblNewLabel_7, "6, 4");
 		
-		textField_7 = new JTextField();
-		panel.add(textField_7, "8, 4, fill, default");
-		textField_7.setColumns(10);
+		textCombustion = new JTextField();
+		panel.add(textCombustion, "8, 4, fill, default");
+		textCombustion.setColumns(10);
 		
 		lblNewLabel_8 = new JLabel("Nro. Chasis");
 		panel.add(lblNewLabel_8, "2, 6");
 		
-		textField_9 = new JTextField();
-		panel.add(textField_9, "4, 6, fill, default");
-		textField_9.setColumns(10);
+		textNroDeChasis = new JTextField();
+		panel.add(textNroDeChasis, "4, 6, fill, default");
+		textNroDeChasis.setColumns(10);
 		
 		lblNewLabel_9 = new JLabel("Motor");
 		panel.add(lblNewLabel_9, "6, 6");
 		
-		textField_8 = new JTextField();
-		panel.add(textField_8, "8, 6, fill, default");
-		textField_8.setColumns(10);
+		textNroMotor = new JTextField();
+		panel.add(textNroMotor, "8, 6, fill, default");
+		textNroMotor.setColumns(10);
 	
 		panelOeste = new JPanel();
 		splitPane.setRightComponent(panelOeste);
@@ -333,6 +338,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 		toolBar.add(btnRegistrarPresupuesto);
 	}
 	
+	
+	
 	void addCheckBox(int column, JTable table) {
 	}
 	
@@ -368,4 +375,82 @@ public class PanelGestionPresupuestoView extends JPanel {
 			this.listadoDeTrabajosModel.addRow(row);
 		}
 	}	
+	
+	public void setActionOnBuscar(ActionListener listener) {
+		this.btnBuscar.addActionListener(listener);
+	}
+	
+	public void setActionSelectVehiculoCliente(ListSelectionListener listener) {
+		this.tableVehiculos.getSelectionModel().addListSelectionListener(listener);
+	}
+	public Integer getidVehiculoSeleccionado() {
+		int rows = this.tableVehiculos.getSelectedRowCount();
+		if (rows == 1) {
+			int row = this.tableVehiculos.getSelectedRow();
+			VehiculoConOrdenDeTrabajoDTO dto = this.vehiculos.get(row);
+			return dto.getIdFichaTecnica();
+		}
+		return null;
+	}
+	
+	public void setData(List<VehiculoConOrdenDeTrabajoDTO> vehiculos) {
+		this.vehiculos = vehiculos;
+		for (VehiculoConOrdenDeTrabajoDTO dto : vehiculos) {
+			Object[] row = { dto.getId().toString(), dto.getKilometrajeGarantia().toString(), dto.getAseguradora(),
+					dto.getNroPolizaSeguro().toString(), dto.getPatente() };
+			this.tableModelVehiculos.addRow(row);
+		}
+	}
+	
+	public void clearDataFichaTecnicaVehiculo() {
+		this.textMarca.setText("");
+		this.textColor.setText("");
+		this.textNroDeChasis.setText("");
+		this.textModelo.setText("");
+		this.textCombustion.setText("");
+		this.textNroMotor.setText("");
+	}
+	
+	public void clearDataOrdenDeTrabajo() {
+		this.textTipoTrabajo.setText("");
+		this.textTrabajoSolicitadoOt.setText("");
+		this.textTrabajoSugeridoOt.setText("");
+		this.textFechaAltaOt.setText("");
+		this.textFechaCierreOt.setText("");
+	}
+	
+	public void setData(FichaTecnicaVehiculoDTO fichaVehiculo) {
+		fichaVehiculo.getId();
+		this.textNroDeChasis.setText(fichaVehiculo.getNroChasis().toString());
+		this.textNroMotor.setText(fichaVehiculo.getNroMotor().toString());
+		this.textMarca.setText(fichaVehiculo.getMarca());
+		this.textColor.setText(fichaVehiculo.getColor());
+		this.textCombustion.setText(fichaVehiculo.getCombustion());
+		this.textModelo.setText(fichaVehiculo.getModelo().toString());
+	}
+	
+	public void setData(OrdenDeTrabajoDTO ordenDeTrabajo) {
+		this.textTipoTrabajo.setText(ordenDeTrabajo.getTipoOrdeTrabajo());
+		this.textFechaAltaOt.setText(ordenDeTrabajo.getFechaDeAlta().toString());
+		this.textFechaCierreOt.setText(ordenDeTrabajo.getFechaEntregado() != null ? ordenDeTrabajo.getFechaEntregado().toString() : "");
+		this.textTrabajoSugeridoOt.setText(ordenDeTrabajo.getTrabajoSujerido());
+		this.textTrabajoSolicitadoOt.setText(ordenDeTrabajo.getTrabajoSolicitado());
+	}
+	
+	public void clearDataListadoVehiculosCliente() {
+		this.vehiculos = null;
+		this.tableModelVehiculos.setRowCount(0);
+		tableModelVehiculos.setColumnCount(0);
+		tableModelVehiculos.setColumnIdentifiers(columnasTablaVehiculos);
+	}
+	
+	public void clearAll() {
+		this.clearDataFichaTecnicaVehiculo();
+		this.clearDataListadoVehiculosCliente();
+		this.clearDataOrdenDeTrabajo();
+	}
+	public String getTxtDni() {
+		return txtDNI.getText();
+	}
+
 }

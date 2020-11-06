@@ -1,7 +1,6 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +22,10 @@ public class TurnosPresenter {
 
 	private TurnosController controller;
 
+	private static final String MENSAGE_DNI_INCORRECTO = "No se encontraron turnos para DNI: %s";
+	private static final String MENSAGE_NO_TURNOS = "No se encontraron turnos para DNI: %s";
+	private static final String MENSAGE_NUEVO_TURNO = "Se registró Turno.";
+
 	public TurnosPresenter(TurnosController controller) {
 		this.controller = controller;
 		supervisorView.setActionBuscar((a) -> onBuscarTurnos(a));
@@ -37,15 +40,23 @@ public class TurnosPresenter {
 		int cancelado = new ConfirmationDialog("¿Está seguro que desea cancelar el turno?").open();
 
 		if (cancelado == 0) {
-			TurnoDTO turnoSeleccionado = supervisorView.getSelectedTurno();
-			
-			if(turnoSeleccionado == null)
+			Integer idTurnoSeleccionado = supervisorView.getIdSelectedTurno();
+
+			if (idTurnoSeleccionado == null) {
+				JOptionPane.showMessageDialog(supervisorView, "Para CANCELAR, debe seleccionar un solo turno.");
 				return;
-			
+			}
+			TurnoDTO turnoSeleccionado = controller.readByIdTurno(idTurnoSeleccionado);
+
+			if (turnoSeleccionado == null)
+				return;
+
 			turnoSeleccionado.setFechaCancelado(new Date());
+			controller.update(turnoSeleccionado);
 			supervisorView.clearTurnos();
 
-			JOptionPane.showMessageDialog(supervisorView, String.format("Turno con Nro. Turno: %s fué cancelado.", turnoSeleccionado.getIdTurno()));
+			JOptionPane.showMessageDialog(supervisorView,
+					String.format("Turno con Nro. Turno: %s fué cancelado.", turnoSeleccionado.getIdTurno()));
 		}
 	}
 
@@ -55,18 +66,39 @@ public class TurnosPresenter {
 	}
 
 	private void onBuscarTurnos(ActionEvent e) {
-		String dni = supervisorView.getDniClienteBusquedaTurno();
-		if (dni.trim().isEmpty()) {
-			List<TurnoDTO> turnos = controller.readAll();
-			supervisorView.clearTurnos();
-			supervisorView.setTurnos(turnos);
-		} else {
-			TurnoDTO turno = controller.readByDniCliente(dni);
-			if (turno != null) {
+		String dniBuscado = supervisorView.getDniClienteBusquedaTurno();
+
+		if (dniValido(dniBuscado)) {
+			if (dniBuscado.trim().isEmpty()) {
+				List<TurnoDTO> turnos = controller.readAllDisponibles();
+
 				supervisorView.clearTurnos();
-				supervisorView.setTurnos(Arrays.asList(new TurnoDTO[] { turno }));
+				supervisorView.setTurnos(turnos);
+			} else {
+				Integer dniCliente = Integer.parseInt(dniBuscado);
+				List<TurnoDTO> turnos = controller.readAllByDNI(dniCliente);
+
+				if (turnos == null || turnos.isEmpty()) {
+					JOptionPane.showMessageDialog(supervisorView, String.format(MENSAGE_NO_TURNOS, dniBuscado));
+				} else {
+					supervisorView.clearTurnos();
+					supervisorView.setTurnos(turnos);
+				}
 			}
 		}
+	}
+
+	private boolean dniValido(String dni) {
+		if (dni.trim().isEmpty())
+			return true;
+
+		try {
+			Integer.parseInt(dni);
+		} catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(supervisorView, String.format(MENSAGE_NO_TURNOS, dni));
+			return false;
+		}
+		return true;
 	}
 
 	private void onSave(ActionEvent a) {
@@ -79,7 +111,10 @@ public class TurnosPresenter {
 					turno.getEmailCliente());
 
 			this.controller.save(nuevoTurno);
-			turnoForm.dispose();
+			
+			JOptionPane.showMessageDialog(supervisorView, MENSAGE_NUEVO_TURNO);
+			
+			turnoForm.dispose();			
 		}
 	}
 

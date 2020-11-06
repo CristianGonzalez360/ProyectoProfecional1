@@ -30,6 +30,15 @@ class TurnosControllerTest {
 	}
 
 	@Test
+	void testReadAllByDNI() {
+		LinkedList<TurnoDTO> turnos = new LinkedList<>();
+		for (int i = 0; i < 10; i++)
+			turnos.add(new TurnoDTO().makeTestDTO());
+		Mockito.when(dao.readAll()).thenReturn(turnos);
+		Assertions.assertEquals(controller.readAll().size(), turnos.size());
+	}
+	
+	@Test
 	void testReadByDniCliente() {
 		TurnoDTO target = new TurnoDTO().makeTestDTO();
 		Mockito.when(dao.readByDni(Mockito.any(Integer.class))).thenReturn(target);

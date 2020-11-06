@@ -2,13 +2,27 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import business_logic.ClientesController;
+import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.RepuestosController;
+import business_logic.VehiculosController;
+import dto.validators.Patterns;
+import dto.ClienteDTO;
+import dto.FichaTecnicaVehiculoDTO;
+import dto.OrdenDeTrabajoDTO;
+
 import dto.PresupuestoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
 import dto.TrabajoPresupuestadoDTO;
+import dto.TurnoDTO;
+import dto.VehiculoConOrdenDeTrabajoDTO;
+
 import dto.validators.StringValidator;
 import presentacion.views.AgregarTrabajoFormView;
 import presentacion.views.PanelGestionPresupuestoView;
@@ -23,13 +37,20 @@ public class PresupuestosPresenter {
 	private PlanificarTrabajosFormView planTrabajosView;
 	private AgregarTrabajoFormView agregarTrabajoFormView;
 	private PresupuestoDTO nuevoPresupuesto;
-	
+	private VehiculosController vehiculosController;
 	private PresupuestosController presupuestosController;
 	private RepuestosController repuestosController;
+	private OrdenesTrabajoController ordenDeTrabajoController;
+	private ClientesController clienteController;
 	
-	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController) {
+	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController, OrdenesTrabajoController ordenDetranajoController, VehiculosController vehiculoController, ClientesController clienteController) {
+		
+		
+		this.clienteController = clienteController;
+		this.vehiculosController = vehiculoController;
 		this.presupuestosController = presupuestosController;
 		this.repuestosController = repuestosController;
+		this.ordenDeTrabajoController = ordenDetranajoController;
 		this.gestionPresupuestosView = PanelGestionPresupuestoView.getInstance();
 		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
 		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
@@ -44,6 +65,14 @@ public class PresupuestosPresenter {
 		this.planRepuestosView.setActionOnCancelar(a -> onCancelarRepuestosPlanificados(a));
 		this.planRepuestosView.setActionOnAceptar(a -> onAceptarRepuestosPlanificados(a));
 		this.planTrabajosView.setActionOnAceptar(a -> onAceptarTrabajosPlanificados(a));
+		
+		this.gestionPresupuestosView.setActionOnBuscar(a -> onBuscar(a));
+		this.gestionPresupuestosView.setActionSelectVehiculoCliente(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				onSelectVehiculoDeCliente();
+			}
+		});
 		
 		this.nuevoPresupuesto = new PresupuestoDTO();
 	}
@@ -111,4 +140,41 @@ public class PresupuestosPresenter {
 		this.planTrabajosView.clearData();
 		this.planTrabajosView.display();
 	}	
+	
+	private void onBuscar(ActionEvent a) {
+		String inputDni = gestionPresupuestosView.getTxtDni();
+		if(new StringValidator(inputDni).number("").validate().isEmpty()) {
+			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
+			if (cliente != null) {
+				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
+						.readByIdCliente(cliente.getIdCliente());
+				gestionPresupuestosView.clearDataListadoVehiculosCliente();
+				gestionPresupuestosView.setData(vehiculos);
+				gestionPresupuestosView.clearDataFichaTecnicaVehiculo();
+				gestionPresupuestosView.clearDataOrdenDeTrabajo();
+			} else {
+				gestionPresupuestosView.clearAll();
+			}
+		} else {
+			gestionPresupuestosView.clearAll();
+		}
+	}
+	
+	private void onSelectVehiculoDeCliente() {
+		Integer idVehiculo = gestionPresupuestosView.getidVehiculoSeleccionado();
+		if (idVehiculo != null) {
+			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController.readFichaTecnicaById(idVehiculo);
+			if (fichaVehiculo != null) {
+				gestionPresupuestosView.clearDataFichaTecnicaVehiculo();
+				gestionPresupuestosView.clearDataOrdenDeTrabajo();
+				gestionPresupuestosView.setData(fichaVehiculo);
+				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo);
+				if(ordenDeTrabajo != null) {
+					gestionPresupuestosView.setData(ordenDeTrabajo);
+				} else {
+					gestionPresupuestosView.clearDataOrdenDeTrabajo();
+				}
+			}
+		}
+	}
 }

@@ -14,6 +14,12 @@ class TurnosDaoImplTest {
 	void testTurnosDaoImpl() {
 		Assertions.assertNotNull(dao);
 	}
+	
+	@Test
+	void testUpdate() {
+		TurnoDTO target = new TurnoDTO().makeTestDTOUpdate();
+		Assertions.assertTrue(dao.update(target));
+	}
 
 	@Test
 	void testInsert() {

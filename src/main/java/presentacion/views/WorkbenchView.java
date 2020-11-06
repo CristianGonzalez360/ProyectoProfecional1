@@ -18,6 +18,11 @@ import javax.swing.JDesktopPane;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.EmptyBorder;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class WorkbenchView {
 
@@ -25,7 +30,7 @@ public class WorkbenchView {
 
 	static WorkbenchView vista;
 
-	private Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/agenda.png"));
+	private Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/iconox512.png"));
 
 	private JDesktopPane desktopPane;
 
@@ -49,7 +54,7 @@ public class WorkbenchView {
 		//frame.setResizable(false);
 		frame.setBounds(100, 100, 1132, 391);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Agenda");
+		frame.setTitle("Concesionario");
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setIconImage(icon);
 
@@ -61,12 +66,20 @@ public class WorkbenchView {
 		panel.add(desktopPane, BorderLayout.CENTER);
 
 		JPanel southPanel = new JPanel();
+		southPanel.setEnabled(false);
+		southPanel.setForeground(Color.BLACK);
+		southPanel.setBorder(new EmptyBorder(1, 0, 0, 0));
 		FlowLayout flowLayout = (FlowLayout) southPanel.getLayout();
+		flowLayout.setVgap(2);
 		flowLayout.setAlignment(FlowLayout.TRAILING);
-		southPanel.setBackground(Color.BLACK);
+		southPanel.setBackground(UIManager.getColor("MenuBar.background"));
 		panel.add(southPanel, BorderLayout.SOUTH);
 
 		textSession = new JTextField();
+		textSession.setDisabledTextColor(Color.DARK_GRAY);
+		textSession.setHorizontalAlignment(SwingConstants.CENTER);
+		textSession.setForeground(Color.BLACK);
+		textSession.setBackground(SystemColor.activeCaptionBorder);
 		textSession.setEnabled(false);
 		textSession.setEditable(false);
 		southPanel.add(textSession);
@@ -75,7 +88,7 @@ public class WorkbenchView {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
-		JMenu mnNewMenu = new JMenu("Opciones");
+		JMenu mnNewMenu = new JMenu("Usuario");
 		menuBar.add(mnNewMenu);
 
 		mntmItemLogin = new JMenuItem("Login");
@@ -95,7 +108,7 @@ public class WorkbenchView {
 		this.frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int confirm = JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres salir de la Agenda?",
+				int confirm = JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres salir?",
 						"Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if (confirm == 0) {
 					System.exit(0);
