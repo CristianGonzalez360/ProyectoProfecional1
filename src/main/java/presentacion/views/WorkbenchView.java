@@ -49,7 +49,7 @@ public class WorkbenchView {
 		//frame.setResizable(false);
 		frame.setBounds(100, 100, 1132, 391);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Agenda");
+		frame.setTitle("Concesionario");
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setIconImage(icon);
 
@@ -75,7 +75,7 @@ public class WorkbenchView {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
-		JMenu mnNewMenu = new JMenu("Opciones");
+		JMenu mnNewMenu = new JMenu("Usuario");
 		menuBar.add(mnNewMenu);
 
 		mntmItemLogin = new JMenuItem("Login");
@@ -95,7 +95,7 @@ public class WorkbenchView {
 		this.frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int confirm = JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres salir de la Agenda?",
+				int confirm = JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres salir?",
 						"Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if (confirm == 0) {
 					System.exit(0);
