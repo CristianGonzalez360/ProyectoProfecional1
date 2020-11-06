@@ -1,6 +1,5 @@
 package business_logic;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import dto.RepuestoDTO;
@@ -13,9 +12,8 @@ public class RepuestosController {
 	public RepuestosController(RepuestosDao dao) {
 		this.dao = dao;
 	}
-	public RepuestoDTO readById(int parseInt) {
-		// TODO Auto-generated method stub
-		return null;
+	public RepuestoDTO readById(int idRepuesto) {
+		return dao.readByID(idRepuesto);
 	}
 
 	public List<RepuestoDTO> readAll() {

@@ -3,22 +3,16 @@ package presentacion.views;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 import dto.TrabajoPresupuestadoDTO;
 
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
@@ -108,7 +102,7 @@ public class PlanificarTrabajosFormView extends JDialog {
 	}
 	
 	public void clearData() {
-		// TODO Auto-generated method stub
+		modelo.setRowCount(0);
 	}
 
 	public void display() {

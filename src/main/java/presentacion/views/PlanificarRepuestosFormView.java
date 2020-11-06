@@ -38,8 +38,7 @@ public class PlanificarRepuestosFormView extends JDialog {
 
 	private static final String[] nombreColumnasSuperior = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock",
 			"Precio" };
-	private static final String[] nombreColumnasInferior = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock",
-			"Cantidad" };
+	private static final String[] nombreColumnasInferior = { "Codigo", "Descripcion", "Marca", "Fabricante", "Cantidad" };
 
 	private JPanel panelSuperior = new JPanel();
 	private JPanel panelInterior = new JPanel();
@@ -197,11 +196,11 @@ public class PlanificarRepuestosFormView extends JDialog {
 	}
 
 	public void clearDataRepuestos() {
-		// TODO Auto-generated method stub
+		modelRepuestos.setRowCount(0);
 	}
 	
 	public void clearDataRepuestosPlanificados() {
-		// TODO Auto-generated method stub
+		modelRepuestosInferior.setRowCount(0);
 	}
 
 	public void display() {
@@ -209,11 +208,15 @@ public class PlanificarRepuestosFormView extends JDialog {
 	}
 
 	public void setDataRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestos) {
-		//TODO
+		for(RepuestoPlanificadoDTO r : repuestos) {
+			idRepuestos.add(r.getIdRepuesto());
+			Object[] row = {r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(),
+					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantRequerida()};
+			modelRepuestosInferior.addRow(row);
+		}
 	}
 	
 	public void setDataRepuestos(List<RepuestoDTO> repuestos) {
-		modelRepuestos.setRowCount(0);
 		for(RepuestoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
 			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(),

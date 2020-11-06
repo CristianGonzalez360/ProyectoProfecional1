@@ -66,7 +66,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public PresupuestosController makePresupuestosController() {
 		if (presupuestosController == null)
-			presupuestosController = new PresupuestosController();//TODO faltan los daos
+			presupuestosController = new PresupuestosController(daos.makePresupuestoDao(), daos.makeTrabajosPlanificadosDao(), daos.makeRepuestosPlanificadosDao());
 		return presupuestosController;
 	}
 

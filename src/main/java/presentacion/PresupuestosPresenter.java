@@ -40,10 +40,11 @@ public class PresupuestosPresenter {
 		this.planTrabajosView.setActionOnAgregarTrabajo(a -> onDisplayForAgregarTrabajo(a));
 		this.agregarTrabajoFormView.setActionOnGuardar(a -> onAgregarTrabajos(a));
 		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
+		
+		this.nuevoPresupuesto = new PresupuestoDTO();
 	}
 
 	private void onRegistrar(ActionEvent a) {
-		System.out.println("Registrar");
 		presupuestosController.save(nuevoPresupuesto);//TODO no esta implementado el controller
 	}
 
@@ -59,10 +60,9 @@ public class PresupuestosPresenter {
 		if(errors.isEmpty()) {
 			RepuestoPlanificadoDTO repuestoPlanificado = new RepuestoPlanificadoDTO();
 			repuestoPlanificado.setCantRequerida(Integer.parseInt(cantidad));		
-			RepuestoDTO repuesto = repuestosController.readById(Integer.parseInt(idRepuesto));//TODO no esta implementdo el controller
-			//repuestoPlanificado.setRepuesto(repuesto);
+			RepuestoDTO repuesto = repuestosController.readById(Integer.parseInt(idRepuesto));
+			repuestoPlanificado.setRepuesto(repuesto);
 			nuevoPresupuesto.agregarRepuestos(repuestoPlanificado);
-			planRepuestosView.clearDataRepuestosPlanificados();
 			planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
 		} else {
 			new ErrorDialog().showMessages(errors);;
@@ -71,7 +71,6 @@ public class PresupuestosPresenter {
 
 	private void onAgregarTrabajos(ActionEvent a) {
 		nuevoPresupuesto.agregarTrabajo(this.agregarTrabajoFormView.getData());
-		this.planTrabajosView.clearData();
 		this.planTrabajosView.setData(nuevoPresupuesto.getTrabajos());
 		this.agregarTrabajoFormView.close();
 	}
@@ -83,7 +82,7 @@ public class PresupuestosPresenter {
 
 	private void onDisplayForPlanRepuesto(ActionEvent a) {
 		this.planRepuestosView.clearDataRepuestos();
-		this.planRepuestosView.setDataRepuestos(repuestosController.readAll());//TODO no esta implementado el controller
+		this.planRepuestosView.setDataRepuestos(repuestosController.readAll());
 		this.planRepuestosView.display();
 	}
 	

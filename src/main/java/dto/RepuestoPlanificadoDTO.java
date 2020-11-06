@@ -7,6 +7,8 @@ public class RepuestoPlanificadoDTO {
 	private Integer idPresu;
 
 	private Integer cantRequerida;
+	
+	private RepuestoDTO repuesto;
 
 	public RepuestoPlanificadoDTO() {
 
@@ -40,5 +42,14 @@ public class RepuestoPlanificadoDTO {
 	public String toString() {
 		return "RepuestoPlanificadoDTO [idPresu=" + idPresu + ", idRepuesto=" + idRepuesto + ", cantRequerida="
 				+ cantRequerida + "]";
+	}
+
+	public RepuestoDTO getRepuesto() {
+		return repuesto;
+	}
+
+	public void setRepuesto(RepuestoDTO repuesto) {
+		this.repuesto = repuesto;
+		this.idRepuesto = repuesto.getIdRepuesto();
 	}
 }

@@ -36,6 +36,7 @@ public class PresupuestoDTO {
 	  
 	  public PresupuestoDTO () {
 		  this.trabajos = new ArrayList<>();
+		  this.repuestos = new ArrayList<>();
 	  }
 
 	public Integer getIdPresupuesto() {
