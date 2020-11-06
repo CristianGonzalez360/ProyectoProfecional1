@@ -36,25 +36,16 @@ public class AltaDeTurnoDTO {
 
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
-		errors.addAll(new StringValidator(nombreCliente)
-				.notBlank("El Nombre es obligatorio.")
+		errors.addAll(new StringValidator(nombreCliente).notBlank("El Nombre es obligatorio.")
 				.regex("El Nombre debe tener solo letras.", "[a-zA-Záéíóú ]+")
-				.max(40, "Max 40 caracteres para el Nombre.")
+				.max(40, "Max 40 caracteres para el Nombre.").validate());
+		errors.addAll(new StringValidator(dniCliente).notBlank("El DNI es obligatorio.")
+				.max(8, "Max 8 caracteres para el DNI.").regex("Debe ser un DNI correcto, de 8 números.", Patterns.DNI)
 				.validate());
-		errors.addAll(new StringValidator(dniCliente)
-				.notBlank("El DNI es obligatorio.")
-				.max(8, "Max 8 caracteres para el DNI.")
-				.regex("Debe ser un DNI correcto, de 8 números.", Patterns.DNI)
+		errors.addAll(new StringValidator(telefonoCliente).notBlank("El Teléfono es obligatorio.")
+				.notSpaces("El Teléfono no puede contener espacios.").number("El Teléfono solo puede tener números.")
 				.validate());
-		errors.addAll(
-				new StringValidator(telefonoCliente)
-				.notBlank("El Teléfono es obligatorio.")
-				.notSpaces("El Teléfono no puede contener espacios.")
-				.number("El Teléfono solo puede tener números.")
-				.validate());
-		errors.addAll(new StringValidator(emailCliente)
-				.email("El Email debe ser valido.")
-				.validate());
+		errors.addAll(new StringValidator(emailCliente).email("El Email debe ser valido.").validate());
 		return errors;
 	}
 
