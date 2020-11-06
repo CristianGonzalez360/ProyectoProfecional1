@@ -38,8 +38,8 @@ public class PresupuestosPresenter {
 	private OrdenesTrabajoController ordenDeTrabajoController;
 	private ClientesController clienteController;
 	
-	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController, OrdenesTrabajoController ordenDetranajoController, VehiculosController vehiculoController, ClientesController clienteController) {
-		
+	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController,
+			OrdenesTrabajoController ordenDetranajoController, VehiculosController vehiculoController, ClientesController clienteController) {
 		
 		this.clienteController = clienteController;
 		this.vehiculosController = vehiculoController;
@@ -72,7 +72,6 @@ public class PresupuestosPresenter {
 		this.nuevoPresupuesto = new PresupuestoDTO();
 	}
 
-	
 	private void onAceptarTrabajosPlanificados(ActionEvent a) {
 		this.gestionPresupuestosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
 		if(!nuevoPresupuesto.getTrabajos().isEmpty()) {
@@ -177,6 +176,12 @@ public class PresupuestosPresenter {
 				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo);
 				if(ordenDeTrabajo != null) {
 					gestionPresupuestosView.setData(ordenDeTrabajo);
+					//SOLO TEST//
+					PresupuestoDTO p = presupuestosController.readByOrdenDeTrabajoId(ordenDeTrabajo.getIdOrdenTrabajo());
+					if(p != null) {
+						gestionPresupuestosView.setDataPresupuesto(p);
+					}
+					//*****************//
 				} else {
 					gestionPresupuestosView.clearDataOrdenDeTrabajo();
 				}

@@ -28,12 +28,16 @@ public class PresupuestosController {
 		presupuesto.setFechaAltaPresu(new Date());
 		Pdao.insert(presupuesto);
 		for (TrabajoPresupuestadoDTO t : presupuesto.getTrabajos()) {
-			t.setIdPresupuesto(presupuesto.getIdPresupuesto());//TODO Esta mal, como obtengo el id?
+			t.setIdPresupuesto(3);//(presupuesto.getIdPresupuesto());//TODO Esta mal, como obtengo el id?
 			TPDao.insert(t);
 		}
 		for (RepuestoPlanificadoDTO r : presupuesto.getRepuestos()) {
-			r.setIdPresu(presupuesto.getIdPresupuesto());//TODO Esta mal, como obtengo el id?
+			r.setIdPresu(3);//(presupuesto.getIdPresupuesto());//TODO Esta mal, como obtengo el id?
 			RPDao.insert(r);
 		}
+	}
+	
+	public PresupuestoDTO readByOrdenDeTrabajoId(Integer id) {
+		return Pdao.readByOrdenDeTrabajoId(id).isEmpty()? null : Pdao.readByOrdenDeTrabajoId(id).get(0);
 	}
 }

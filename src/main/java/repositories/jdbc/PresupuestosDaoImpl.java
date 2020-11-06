@@ -81,9 +81,9 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 				dto.setIdUsuCierrePresu(obj[2] == null ? null : (Integer)obj[2]);
 				dto.setIdUsuRegPago(obj[3] == null ? null : (Integer)obj[3]);
 				dto.setIdPago(obj[4] == null ? null : (Integer)obj[4]);
-				dto.setFechaAltaPresu(obj[5] == null ? null : (Date)obj[5]);
-				dto.setComentarioAltaPresu(obj[6] == null ? null : (String)obj[6]);
-				dto.setFechaCierrePresu(obj[7] == null ? null : (Date)obj[7]);
+				dto.setFechaAltaPresu(obj[6] == null ? null : (Date)obj[6]);
+				dto.setComentarioAltaPresu(obj[7] == null ? null : (String)obj[7]);
+				dto.setFechaCierrePresu(obj[5] == null ? null : (Date)obj[5]);
 				dto.setComentarioCierrePresu(obj[8] == null ? "" : (String)obj[8]);
 				dto.setFechaAprobacion(obj[9] == null ? null : (Date)obj[9]);
 				dto.setFechaRechazo(obj[10] == null ? null : (Date)obj[10]);

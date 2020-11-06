@@ -30,6 +30,7 @@ import dto.RepuestoPlanificadoDTO;
 import dto.TrabajoPresupuestadoDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
+import dto.PresupuestoDTO;
 import dto.TurnoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 
@@ -101,6 +102,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JTextField textNroMotor;
 	private JTextField textNroDeChasis;
 	private Integer idOrdenDetrabajo;
+	private JTextField txtFechaTest;//SOLO TEST
 
 	public static PanelGestionPresupuestoView getInstance() {
 		if (instance == null) {
@@ -128,6 +130,10 @@ public class PanelGestionPresupuestoView extends JPanel {
 
 		btnBuscar = new JButton("Buscar");
 		panel_4.add(btnBuscar);
+		
+		txtFechaTest = new JTextField();
+		panel_4.add(txtFechaTest);
+		txtFechaTest.setColumns(10);
 
 		splitPane = new JSplitPane();
 		add(splitPane, BorderLayout.CENTER);
@@ -338,6 +344,9 @@ public class PanelGestionPresupuestoView extends JPanel {
 		btnRegistrarPresupuesto = new JButton("Registrar presupuesto");
 		btnRegistrarPresupuesto.setEnabled(false);
 		toolBar.add(btnRegistrarPresupuesto);
+		
+		this.btnPlanificarRepuestos.setEnabled(false);
+		this.btnPlanificarTrabajos.setEnabled(false);
 	}
 	
 	
@@ -402,6 +411,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 					dto.getNroPolizaSeguro().toString(), dto.getPatente() };
 			this.tableModelVehiculos.addRow(row);
 		}
+		
+		txtFechaTest.setText("");
 	}
 	
 	public void clearDataFichaTecnicaVehiculo() {
@@ -420,6 +431,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.textFechaAltaOt.setText("");
 		this.textFechaCierreOt.setText("");
 		this.idOrdenDetrabajo = null;
+		this.btnPlanificarRepuestos.setEnabled(false);
+		this.btnPlanificarTrabajos.setEnabled(false);
 	}
 	
 	public void setData(FichaTecnicaVehiculoDTO fichaVehiculo) {
@@ -439,6 +452,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.textTrabajoSugeridoOt.setText(ordenDeTrabajo.getTrabajoSujerido());
 		this.textTrabajoSolicitadoOt.setText(ordenDeTrabajo.getTrabajoSolicitado());
 		this.idOrdenDetrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
+		this.btnPlanificarRepuestos.setEnabled(true);
+		this.btnPlanificarTrabajos.setEnabled(true);
 	}
 	
 	public void clearDataListadoVehiculosCliente() {
@@ -467,5 +482,17 @@ public class PanelGestionPresupuestoView extends JPanel {
 	
 	public void deshabilitarBotonRegistrar() {
 		this.btnRegistrarPresupuesto.setEnabled(false);
+	}
+	
+	public void setDataPresupuesto(PresupuestoDTO presupuesto) {
+		txtFechaTest.setText(presupuesto.getFechaAltaPresu().toString());
+	}
+	
+	public void clearDataPresupuestos() {
+		listadoDeRepuestosModel.setRowCount(0);
+		listadoDeTrabajosModel.setRowCount(0);
+		deshabilitarBotonRegistrar();
+		btnPlanificarRepuestos.setEnabled(false);
+		btnPlanificarTrabajos.setEnabled(false);
 	}
 }
