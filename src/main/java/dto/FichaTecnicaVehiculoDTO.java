@@ -21,7 +21,7 @@ public class FichaTecnicaVehiculoDTO {
 	private String descripcion;
 
 	private String patente;
-	
+
 	public FichaTecnicaVehiculoDTO() {
 	}
 

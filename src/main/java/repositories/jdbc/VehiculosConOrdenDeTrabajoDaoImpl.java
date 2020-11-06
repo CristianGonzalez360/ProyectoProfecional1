@@ -16,7 +16,7 @@ public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoCo
 
 	private static final String readByPatente = readAll + " " + "WHERE patenteVehiculo = ?";
 
-	private static String readByClienteId = readAll + " " + "WHERE idCliente = ?";
+	private static final String readByClienteId = readAll + " " + "WHERE idCliente = ?";
 
 	public VehiculosConOrdenDeTrabajoDaoImpl(Connection connection) {
 		super(connection);

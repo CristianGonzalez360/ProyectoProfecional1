@@ -17,10 +17,10 @@ public class Number implements Validator<String> {
 		int valor = 0;
 		try {
 			valor = Integer.parseInt(target);
-			if(valor<0) {
+			if (valor < 0) {
 				ret.add(message);
 			}
-		} catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			ret.add(message);
 		}
 		return ret;

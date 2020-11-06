@@ -25,8 +25,8 @@ public class PlanificarTrabajosFormView extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = -8919580357142104418L;
-	
-	private final String[] columnas = new String[] {"DESCRIPCIÓN", "ESFUERZO", "PRECIO"};
+
+	private final String[] columnas = new String[] { "DESCRIPCIÓN", "ESFUERZO", "PRECIO" };
 	private static PlanificarTrabajosFormView instance;
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
@@ -38,7 +38,8 @@ public class PlanificarTrabajosFormView extends JDialog {
 	public PlanificarTrabajosFormView() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Trabajos Planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		contentPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Trabajos Planificados",
+				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 
@@ -89,20 +90,21 @@ public class PlanificarTrabajosFormView extends JDialog {
 
 		setVisible(false);
 	}
-	
+
 	public void close() {
 		setVisible(false);
 	}
 
 	public static PlanificarTrabajosFormView getInstance() {
-		if(instance == null) instance = new PlanificarTrabajosFormView();
+		if (instance == null)
+			instance = new PlanificarTrabajosFormView();
 		return instance;
 	}
-	
+
 	public void setActionOnAgregarTrabajo(ActionListener a) {
 		this.btnAgregar.addActionListener(a);
 	}
-	
+
 	public void clearData() {
 		modelo.setRowCount(0);
 	}
@@ -114,14 +116,13 @@ public class PlanificarTrabajosFormView extends JDialog {
 	public void setData(List<TrabajoPresupuestadoDTO> trabajos) {
 		modelo.setRowCount(0);
 		for (TrabajoPresupuestadoDTO t : trabajos) {
-			Object[] row = { t.getDescripcionTrabajo(), t.getTiempoEstTrabajo(), t.getPrecioTrabajo()};
+			Object[] row = { t.getDescripcionTrabajo(), t.getTiempoEstTrabajo(), t.getPrecioTrabajo() };
 			modelo.addRow(row);
 		}
 	}
 
 	public void setActionOnAceptar(ActionListener listener) {
-		this.botonAceptar.addActionListener(listener);		
+		this.botonAceptar.addActionListener(listener);
 	}
-
 
 }

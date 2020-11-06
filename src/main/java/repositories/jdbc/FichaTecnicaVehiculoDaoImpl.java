@@ -11,8 +11,7 @@ import repositories.jdbc.utils.NullObject;
 public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehiculoDTO>
 		implements FichaTecnicaVehiculoDao {
 
-	private static final String insert = 
-			"INSERT INTO FichaTecnicaVehiculo (nroChasis, nroMotor, kilometraje, marca, modelo, color, combustion, descripcion) "
+	private static final String insert = "INSERT INTO FichaTecnicaVehiculo (nroChasis, nroMotor, kilometraje, marca, modelo, color, combustion, descripcion) "
 			+ "VALUES (?,?,?,?,?,?,?,?)";
 
 	private static final String readAll = "SELECT * FROM FichaTecnicaVehiculo";
@@ -77,7 +76,7 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 				dto.setMarca((String) obj[4]);
 				dto.setModelo((Integer) obj[5]);
 				dto.setColor((String) obj[6]);
-				dto.setCombustion((String)obj[7]);
+				dto.setCombustion((String) obj[7]);
 				dto.setDescripcion((String) obj[8]);
 				return dto;
 			}

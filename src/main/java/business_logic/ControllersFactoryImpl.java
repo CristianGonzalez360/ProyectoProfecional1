@@ -16,9 +16,9 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	private VehiculosController vehiculosController;
 
 	private OrdenesTrabajoController ordenesDeTrabajoController;
-	
+
 	private PresupuestosController presupuestosController;
-	
+
 	private RepuestosController repuestosController;
 
 	public ControllersFactoryImpl(DaosFactory daos) {
@@ -50,7 +50,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	public VehiculosController makeVehiculosController() {
 		if (vehiculosController == null) {
 			this.vehiculosController = new VehiculosController(daos.makeVehiculoConOrdeDeTrabajoDao(),
-					daos.makeFichaTecnicaVehiculoDao());
+					daos.makeOrdenDeTrabajoDao(), daos.makeFichaTecnicaVehiculoDao());
 		}
 		return this.vehiculosController;
 	}
@@ -65,8 +65,10 @@ public class ControllersFactoryImpl extends ControllersFactory {
 
 	@Override
 	public PresupuestosController makePresupuestosController() {
-		if (presupuestosController == null)
-			presupuestosController = new PresupuestosController(daos.makePresupuestoDao(), daos.makeTrabajosPlanificadosDao(), daos.makeRepuestosPlanificadosDao());
+		if (presupuestosController == null) {
+			presupuestosController = new PresupuestosController(daos.makePresupuestoDao(),
+					daos.makeTrabajosPlanificadosDao(), daos.makeRepuestosPlanificadosDao(), daos.makeRepuestoDao());	
+		}
 		return presupuestosController;
 	}
 

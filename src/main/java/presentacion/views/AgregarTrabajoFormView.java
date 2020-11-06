@@ -85,12 +85,13 @@ public class AgregarTrabajoFormView extends JDialog {
 		tfEsfuerzo = new JTextField();
 		panelInferior.add(tfEsfuerzo);
 		tfEsfuerzo.setColumns(10);
-		
+
 		setVisible(false);
 	}
 
 	public static AgregarTrabajoFormView getInstance() {
-		if(instance == null) instance = new AgregarTrabajoFormView();
+		if (instance == null)
+			instance = new AgregarTrabajoFormView();
 		return instance;
 	}
 
@@ -111,7 +112,7 @@ public class AgregarTrabajoFormView extends JDialog {
 		ret.setTiempoEstTrabajo(Integer.parseInt(tfEsfuerzo.getText()));
 		return ret;
 	}
-	
+
 	public void setActionOnGuardar(ActionListener listener) {
 		this.btnGuardar.addActionListener(listener);
 	}

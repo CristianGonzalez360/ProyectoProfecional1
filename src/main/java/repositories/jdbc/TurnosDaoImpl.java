@@ -10,22 +10,21 @@ import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
 
 public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao {
-	
+
 	private static final String update = "UPDATE Turnos SET fechaCanceladoTurno = ? WHERE idTurno = ?";
 
 	private static final String readAll = "SELECT * FROM Turnos";
-	
+
 	private static final String readByID = "SELECT * FROM Turnos WHERE Turnos.idTurno = ?";
 
 	private static final String readByDni = "SELECT * FROM Turnos WHERE Turnos.dniCliente = ?";
-	
+
 	private static final String readAllDisponibles = "SELECT * FROM Turnos t WHERE (t.fechProgramadaTurno >= CURRENT_DATE()) AND (t.fechaCanceladoTurno IS NULL)";
-	
+
 	private static final String readAllByDNI = "SELECT * FROM Turnos t WHERE ((t.fechProgramadaTurno >= CURRENT_DATE()) AND (t.fechaCanceladoTurno IS NULL)) AND t.dniCliente = ?";
 
 	private static final String insert = "INSERT INTO Turnos (idCliente, fechaCanceladoTurno, fechaAltaTurno, fechProgramadaTurno, nombreCliente, dniCliente, telefonoCliente, emailCliente) VALUES (?,?,?,?,?,?,?,?)";
 
-	
 	public TurnosDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -35,23 +34,15 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 		/*
 		 * Update Cancellation Date
 		 */
-		return getTemplate().query(update)
-				.param(entity.getFechaCancelado())
-				.param(entity.getIdTurno())
-				.excecute();
+		return getTemplate().query(update).param(entity.getFechaCancelado()).param(entity.getIdTurno()).excecute();
 	}
 
 	@Override
 	public boolean insert(TurnoDTO entity) {
-		return getTemplate().query(insert)
-				.param(entity.getIdCliente())
+		return getTemplate().query(insert).param(entity.getIdCliente())
 				.param(entity.getFechaCancelado() == null ? new NullObject() : entity.getFechaCancelado())
-				.param(entity.getFechaAlta())
-				.param(entity.getFechaProgramada())
-				.param(entity.getNombreCliente())
-				.param(entity.getDniCliente())
-				.param(entity.getTelefonoCliente())
-				.param(entity.getEmailCliente())
+				.param(entity.getFechaAlta()).param(entity.getFechaProgramada()).param(entity.getNombreCliente())
+				.param(entity.getDniCliente()).param(entity.getTelefonoCliente()).param(entity.getEmailCliente())
 				.excecute();
 	}
 
@@ -82,7 +73,7 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 		List<TurnoDTO> dtos = getTemplate().query(readByID).param(id).excecute(getMapper());
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}
-	
+
 	@Override
 	protected Mapper<TurnoDTO> getMapper() {
 		return new Mapper<TurnoDTO>() {

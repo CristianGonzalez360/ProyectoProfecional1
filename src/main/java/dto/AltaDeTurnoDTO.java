@@ -39,11 +39,11 @@ public class AltaDeTurnoDTO {
 		errors.addAll(new StringValidator(nombreCliente).notBlank("El Nombre es obligatorio.")
 				.max(40, "Max 40 caracteres para el Nombre.").validate());
 		errors.addAll(new StringValidator(dniCliente).notBlank("El DNI es obligatorio.")
-				.max(8, "Max 8 caracteres para el DNI")
-				.regex("Debe ser un DNI correcto", Patterns.DNI).validate());
+				.max(8, "Max 8 caracteres para el DNI").regex("Debe ser un DNI correcto", Patterns.DNI).validate());
 		errors.addAll(
 				new StringValidator(telefonoCliente).notSpaces("El Teléfono no puede contener espacios.").validate());
-		//errors.addAll(new StringValidator(emailCliente).email("El Email debe ser valido.").validate());
+		// errors.addAll(new StringValidator(emailCliente).email("El Email debe ser
+		// valido.").validate());
 		return errors;
 	}
 

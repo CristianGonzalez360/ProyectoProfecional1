@@ -14,9 +14,13 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 	private static final String readAll = "SELECT idOT, tipoTrabajo, idUsuAlta, idVehiculoOt,"
 			+ "fechaAltaOt, trabajoSolicitado, trabajoSujerido, fechaEntregadoVehiculo " + "FROM OrdenesDeTrabajo";
 
-	private static final String readByIdVehiculo = readAll + " " + "WHERE idVehiculoOt = ? AND fechaEntregadoVehiculo IS NULL";
-	
-	private static final String insert = "INSERT INTO OrdenesDeTrabajo (tipoTrabajo, idUsuAlta, idVehiculoOt, fechaAltaOt, trabajoSolicitado, trabajoSujerido, fechaEntregadoVehiculo) VALUES (?,?,?,?,?,?,?)";
+	private static final String readByVehiculoIdNoEntregado = readAll + " "
+			+ "WHERE idVehiculoOt = ? AND fechaEntregadoVehiculo IS NULL";
+
+	private static final String insert = "INSERT INTO OrdenesDeTrabajo (tipoTrabajo, idUsuAlta, idVehiculoOt, fechaAltaOt, trabajoSolicitado, trabajoSujerido, fechaEntregadoVehiculo) "
+			+ "VALUES (?,?,?,?,?,?,?)";
+
+	private static final String readByVehiculoId = readAll + " " + "WHERE idVehiculoOt = ?";
 
 	public OrdenesDeTrabajoDaoImpl(Connection connection) {
 		super(connection);
@@ -37,7 +41,6 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 
 	@Override
 	public boolean deleteById(Integer id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -51,11 +54,16 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 	public List<OrdenDeTrabajoDTO> readAll() {
 		return getTemplate().query(readAll).excecute(getMapper());
 	}
-	
+
 	@Override
-	public OrdenDeTrabajoDTO readByIdVehiculo(Integer id) {
-		List<OrdenDeTrabajoDTO> dtos = getTemplate().query(readByIdVehiculo).param(id).excecute(getMapper());
-		return dtos.isEmpty() ? null : dtos.get(0);		
+	public List<OrdenDeTrabajoDTO> readByVehiculoId(Integer id) {
+		return getTemplate().query(readByVehiculoId).param(id).excecute(getMapper());
+	}
+
+	@Override
+	public OrdenDeTrabajoDTO readByIdVehiculoConOtNoCerrada(Integer id) {
+		List<OrdenDeTrabajoDTO> dtos = getTemplate().query(readByVehiculoIdNoEntregado).param(id).excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
 	@Override

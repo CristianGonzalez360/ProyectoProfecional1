@@ -21,7 +21,7 @@ public class OrdenDeTrabajoPresenter {
 
 	public void onBuscarOT(ActionEvent e) {
 		String dni = supervisorView.getDniClienteBusquedaOT();
-		
+
 		if (dni.trim().isEmpty()) {
 			List<OrdenDeTrabajoDTO> ordenes = controller.readAll();
 			supervisorView.clearOrdenesDeTrabajo();

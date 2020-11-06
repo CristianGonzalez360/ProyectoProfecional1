@@ -37,7 +37,7 @@ class TurnosControllerTest {
 		Mockito.when(dao.readAll()).thenReturn(turnos);
 		Assertions.assertEquals(controller.readAll().size(), turnos.size());
 	}
-	
+
 	@Test
 	void testReadByDniCliente() {
 		TurnoDTO target = new TurnoDTO().makeTestDTO();

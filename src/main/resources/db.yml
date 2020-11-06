@@ -233,16 +233,12 @@ trabajos:
   - idPresupuesto: 1
     descripcionTrabajo: reparacion de la electricidad
     precioTrabajo: 2033
-    tiempoEstTrabajo: 5
+    tiempoEstTrabajo: 12
   - idPresupuesto: 1
     descripcionTrabajo: reparar rotula izquierda
     precioTrabajo: 800
     tiempoEstTrabajo: 7
-  - idPresupuesto: 1
-    descripcionTrabajo: prender fuego el asiento trasero
-    precioTrabajo: 900
-    tiempoEstTrabajo: 3
-    
+ 
 repuestosPlanificados:
   - idRepuesto: 1
     idPresu: 1
