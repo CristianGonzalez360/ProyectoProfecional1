@@ -73,28 +73,28 @@ public class SupervisorControlView extends JInternalFrame {
 		setMaximizable(true);
 		setIconifiable(true);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setTitle("Supervisor control view");
+		setTitle("Supervisor Control View");
 		setBounds(100, 100, 859, 647);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
 		JPanel clientesPanel = new PanelClientesView();
-		tabbedPane.addTab("Clientes", null, clientesPanel, null);
+		tabbedPane.addTab("Gestión de Clientes", null, clientesPanel, null);
 		clientesPanel.setLayout(new BorderLayout(0, 0));
 
 		panelClientesView = new PanelClientesView();
 		clientesPanel.add(panelClientesView);
 
 		JPanel turnosPanel = new JPanel();
-		tabbedPane.addTab("Turnos", null, turnosPanel, null);
+		tabbedPane.addTab("Gestión de Turnos", null, turnosPanel, null);
 		turnosPanel.setLayout(new BorderLayout(0, 0));
 
 		panelConsultaOTPresupuestadasView = new PanelConsultaDePresupuestosView();
 		tabbedPane.addTab("Consulta OT Presupuestadas", panelConsultaOTPresupuestadasView);
 		
 		panelEntregaVehiculosView = new PanelEntregaVehiculosView();
-		tabbedPane.addTab("Consulta vehiculos para entregar", panelEntregaVehiculosView);
+		tabbedPane.addTab("Gestionar Entrega de Vehiculo", panelEntregaVehiculosView);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
