@@ -32,8 +32,8 @@ public class SupervisorControlView extends JInternalFrame {
 
 	private static final long serialVersionUID = 4306672868994985561L;
 
-	private static final String[] COLUMNAS_TURNOS = new String[] { "NRO. TURNO", "NOMBRE CLIENTE", "DNI CLIENTE",
-			"FECHA DE ALTA", "FECHA PROGRAMADA" };
+	private static final String[] COLUMNAS_TURNOS = new String[] { "NRO. TURNO", "NOMBRE DE CLIENTE", "DNI",
+			"FECHA DE ALTA", "FECHA PROGRAMADA", "TELEFONO", "EMAIL" };
 	
 	private static final String[] COLUMNAS_ORDENES = {"TIPO DE TRABAJO", "ID. USUARIO DE ALTA", "ID. VEHICULO OT", "FECHA ALTA", "TRABAJO SOLICITADO", "TRABAJO SUGERIDO", "FEHCA ENTRGA VEHICULO" };
 	
@@ -150,7 +150,7 @@ public class SupervisorControlView extends JInternalFrame {
 	public void setTurnos(List<TurnoDTO> turnos) {
 		for (TurnoDTO turno : turnos) {
 			Object[] row = { turno.getIdTurno().toString(), turno.getNombreCliente(), turno.getDniCliente(),
-					turno.getFechaAlta().toString(), turno.getFechaProgramada().toString() };
+					turno.getFechaAlta().toString(), turno.getFechaProgramada().toString(), turno.getTelefonoCliente(), turno.getEmailCliente() };
 			tableModelTurnos.addRow(row);
 		}
 	}
@@ -173,6 +173,16 @@ public class SupervisorControlView extends JInternalFrame {
 			ret.setFechaAlta(parse(tableModelTurnos.getValueAt(row, 3).toString()));
 			ret.setFechaProgramada(parse(tableModelTurnos.getValueAt(row, 4).toString()));
 			return ret;
+		}
+		return null;
+	}
+	
+	public Integer getIdSelectedTurno() {
+		int row = table.getSelectedRow();
+		int id;
+		if (table.getSelectedRowCount() == 1) {
+			id = Integer.parseInt(tableModelTurnos.getValueAt(row, 0).toString());
+			return id;
 		}
 		return null;
 	}
