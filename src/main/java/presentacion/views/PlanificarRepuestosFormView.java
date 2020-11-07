@@ -80,6 +80,7 @@ public class PlanificarRepuestosFormView extends JDialog {
 
 	@SuppressWarnings("serial")
 	private PlanificarRepuestosFormView() {
+		setModal(true);
 		setBounds(100, 100, 500, 600);
 		setTitle("Planificacion de repuestos");
 		getContentPane().setLayout(new BorderLayout());

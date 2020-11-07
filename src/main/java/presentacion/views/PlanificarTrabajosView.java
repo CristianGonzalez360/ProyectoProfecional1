@@ -15,6 +15,7 @@ public class PlanificarTrabajosView extends JDialog {
 	private JTable table;
 
 	public PlanificarTrabajosView() {
+		setModal(true);
 		setTitle("Planificación de Trabajos");
 
 		JPanel panel = new JPanel();
