@@ -34,14 +34,18 @@ public class PresupuestosController {
 	public void save(PresupuestoDTO presupuesto) {
 		presupuesto.setIdUsuAltaPresu(SessionServiceImpl.getInstance().getActiveSession().getIdUsuario());
 		presupuesto.setFechaAltaPresu(new Date());
-		Pdao.insert(presupuesto);
+		if(presupuesto.getIdPresupuesto() == null)
+			Pdao.insert(presupuesto);
+		else
+			update(presupuesto);
+	}
+	
+	private void update(PresupuestoDTO presupuesto) {
 		for (TrabajoPresupuestadoDTO t : presupuesto.getTrabajos()) {
-			t.setIdPresupuesto(3);//(presupuesto.getIdPresupuesto());//TODO Esta mal, como obtengo el id?
 			t.setIdPresupuesto(presupuesto.getIdPresupuesto());// TODO Esta mal, como obtengo el id?
 			TPDao.insert(t);
 		}
 		for (RepuestoPlanificadoDTO r : presupuesto.getRepuestos()) {
-			r.setIdPresu(3);//(presupuesto.getIdPresupuesto());//TODO Esta mal, como obtengo el id?
 			r.setIdPresu(presupuesto.getIdPresupuesto());// TODO Esta mal, como obtengo el id?
 			RPDao.insert(r);
 		}
@@ -72,7 +76,6 @@ public class PresupuestosController {
 	}
 
 	public PresupuestoDTO readById(Integer idPresupuesto) {
-		// TODO Auto-generated method stub
-		return null;
+		return Pdao.readByID(idPresupuesto);
 	}
 }

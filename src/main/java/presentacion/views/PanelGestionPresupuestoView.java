@@ -107,6 +107,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JScrollPane scrollPane;
 	private JTable tablePresupuestos;
 	private List<Integer> idsPresupuestos;
+	private JPanel panel_9;
+	private JButton btnNuevoPresupuesto;
 
 	public static PanelGestionPresupuestoView getInstance() {
 		if (instance == null) {
@@ -274,6 +276,14 @@ public class PanelGestionPresupuestoView extends JPanel {
 		scrollPane = new JScrollPane(tablePresupuestos);
 		panel_8.add(scrollPane, BorderLayout.CENTER);
 		
+		panel_9 = new JPanel();
+		FlowLayout flowLayout_4 = (FlowLayout) panel_9.getLayout();
+		flowLayout_4.setAlignment(FlowLayout.RIGHT);
+		panel_8.add(panel_9, BorderLayout.SOUTH);
+		
+		btnNuevoPresupuesto = new JButton("Nuevo Presupuesto");
+		panel_9.add(btnNuevoPresupuesto);
+		
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(
@@ -301,6 +311,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_3.add(panel_2, BorderLayout.SOUTH);
 
 		btnPlanificarRepuestos = new JButton("Planificar repuesto");
+		btnPlanificarRepuestos.setEnabled(false);
 		panel_2.add(btnPlanificarRepuestos);
 
 		panel_5 = new JPanel();
@@ -334,8 +345,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 		btnRegistrarPresupuesto = new JButton("Registrar presupuesto");
 		btnRegistrarPresupuesto.setEnabled(false);
 		toolBar.add(btnRegistrarPresupuesto);
-		
-		this.btnPlanificarRepuestos.setEnabled(false);
 		this.btnPlanificarTrabajos.setEnabled(false);
 	}
 
@@ -366,6 +375,13 @@ public class PanelGestionPresupuestoView extends JPanel {
 					r.getCantRequerida() };
 			this.listadoDeRepuestosModel.addRow(row);
 		}
+		
+		//***PARA QUE NO EDITE POR AHORA***//
+		if(repuestos.isEmpty()) {
+			btnPlanificarRepuestos.setEnabled(true);
+		} else {
+			btnPlanificarRepuestos.setEnabled(false);
+		}
 	}
 
 	public void setDataTrabajosPlanificados(List<TrabajoPresupuestadoDTO> trabajos) {
@@ -374,6 +390,13 @@ public class PanelGestionPresupuestoView extends JPanel {
 			Object[] row = { t.getIdTrabajoPresu(), t.getFechaAlta(), t.getDescripcionTrabajo(), t.getPrecioTrabajo(),
 					t.getTiempoEstTrabajo(), t.getFechaCierre() };
 			this.listadoDeTrabajosModel.addRow(row);
+		}
+		
+		//***PARA QUE NO EDITE POR AHORA***//
+		if(trabajos.isEmpty()) {
+			btnPlanificarTrabajos.setEnabled(true);
+		} else {
+			btnPlanificarTrabajos.setEnabled(false);
 		}
 	}
 
@@ -402,8 +425,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 					dto.getNroPolizaSeguro().toString(), dto.getPatente() };
 			this.tableModelVehiculos.addRow(row);
 		}
-		
-		txtFechaTest.setText("");
 	}
 
 	public void clearDataFichaTecnicaVehiculo() {
@@ -462,6 +483,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	}
 
 	public void clearAll() {
+		this.clearDataPresupuestos();
 		this.clearDataFichaTecnicaVehiculo();
 		this.clearDataListadoVehiculosCliente();
 		this.clearDataOrdenDeTrabajo();
@@ -469,10 +491,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 
 	public String getTxtDni() {
 		return txtDNI.getText();
-	}
-
-	public Integer getIdOrdenDetrabajo() {
-		return idOrdenDeTrabajo;
 	}
 
 	public void habilitarBotonRegistrar() {
@@ -506,11 +524,28 @@ public class PanelGestionPresupuestoView extends JPanel {
 	}
 
 	public Integer getIdPresupuesto() {
-		return this.idsPresupuestos.get(tablePresupuestos.getSelectedRow());
+		Integer fila = tablePresupuestos.getSelectedRow();
+		if(fila>=0) {
+			fila = this.idsPresupuestos.get(fila);
+		} 
+		return fila;
 	}
 
 	public void setDataPresupuesto(PresupuestoDTO presupuesto) {
 		setDataRepuestosPlanificados(presupuesto.getRepuestos());
 		setDataTrabajosPlanificados(presupuesto.getTrabajos());
+		
+		//*****PARA QUE NO PUEDA EDITAR POR AHORA//
+		if(!presupuesto.getRepuestos().isEmpty() || !presupuesto.getTrabajos().isEmpty()) {
+			btnPlanificarRepuestos.setEnabled(false);
+			btnPlanificarTrabajos.setEnabled(false);
+			btnRegistrarPresupuesto.setEnabled(false);
+		}
+		//*****//
 	}
+	
+	public void setActionOnNuevoPresupuesto(ActionListener listener) {
+		this.btnNuevoPresupuesto.addActionListener(listener);
+	}
+	
 }
