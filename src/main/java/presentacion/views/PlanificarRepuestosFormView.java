@@ -278,4 +278,12 @@ public class PlanificarRepuestosFormView extends JDialog {
 		}
 		comboMarcas.setModel(modelo);
 	}
+	
+	public void setActionOnQuitar(ActionListener Listener) {
+		this.btnQuitar.addActionListener(Listener);
+	}
+
+	public Integer getSeleccionado() {
+		return tablaRepuestosInferior.getSelectedRow();
+	}
 }

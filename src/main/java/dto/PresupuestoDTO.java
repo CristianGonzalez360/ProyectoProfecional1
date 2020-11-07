@@ -189,4 +189,8 @@ public class PresupuestoDTO {
 	public void quitarTrabajo(int fila) {
 		this.trabajos.remove(fila);
 	}
+
+	public void quitarRepuesto(int fila) {
+		this.repuestos.remove(fila);
+	}
 }

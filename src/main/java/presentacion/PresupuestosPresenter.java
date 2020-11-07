@@ -18,7 +18,6 @@ import dto.RepuestoPlanificadoDTO;
 import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
-import presentacion.views.AgregarTrabajoFormView;
 import presentacion.views.InputComentarioDialog;
 import presentacion.views.PanelGestionPresupuestoView;
 import presentacion.views.PlanificarRepuestosFormView;
@@ -60,11 +59,21 @@ public class PresupuestosPresenter {
 		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
 		this.planRepuestosView.setActionOnCancelar(a -> onCancelarRepuestosPlanificados(a));
 		this.planRepuestosView.setActionOnAceptar(a -> onAceptarRepuestosPlanificados(a));
+		this.planRepuestosView.setActionOnQuitar(a -> onQuitarRepuesto(a));
 		this.planTrabajosView.setActionOnAceptar(a -> onAceptarTrabajosPlanificados(a));
 		this.planRepuestosView.setActionOnBuscar(a -> onBuscarRepuesto(a));
 
 		this.view.setActionOnBuscar(a -> onBuscar(a));
 		this.view.setActionSelectVehiculoCliente(a -> onSelectVehiculoDeCliente(a));
+	}
+	
+	//Quita un repuesto del presupuesto
+	private void onQuitarRepuesto(ActionEvent a) {
+		Integer fila = this.planRepuestosView.getSeleccionado();
+		if(fila >= 0) {
+			this.nuevoPresupuesto.quitarRepuesto(fila);
+			this.planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
+		}
 	}
 
 	//Quita un trabajo del presupuesto
@@ -150,6 +159,7 @@ public class PresupuestosPresenter {
 	//registra los repuestos y trabajos planificados
 	private void onRegistrar(ActionEvent a) {
 		presupuestosController.save(nuevoPresupuesto);
+		this.view.setDataPresupuestos(presupuestosController.readByIdOt(view.getIdOrdenDeTrabajo()));
 	}
 
 	//Agrega repuesto a el nuevo repuesto

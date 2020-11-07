@@ -34,19 +34,22 @@ public class PresupuestosController {
 	public void save(PresupuestoDTO presupuesto) {
 		presupuesto.setIdUsuAltaPresu(SessionServiceImpl.getInstance().getActiveSession().getIdUsuario());
 		presupuesto.setFechaAltaPresu(new Date());
+		
+		//***FEO, POR AHORA FUNCIONA***//
 		if(presupuesto.getIdPresupuesto() == null)
 			Pdao.insert(presupuesto);
 		else
 			update(presupuesto);
 	}
 	
+	//***provisorio***//
 	private void update(PresupuestoDTO presupuesto) {
 		for (TrabajoPresupuestadoDTO t : presupuesto.getTrabajos()) {
-			t.setIdPresupuesto(presupuesto.getIdPresupuesto());// TODO Esta mal, como obtengo el id?
+			t.setIdPresupuesto(presupuesto.getIdPresupuesto());
 			TPDao.insert(t);
 		}
 		for (RepuestoPlanificadoDTO r : presupuesto.getRepuestos()) {
-			r.setIdPresu(presupuesto.getIdPresupuesto());// TODO Esta mal, como obtengo el id?
+			r.setIdPresu(presupuesto.getIdPresupuesto());
 			RPDao.insert(r);
 		}
 	}
@@ -57,7 +60,12 @@ public class PresupuestosController {
 
 	public List<PresupuestoDTO> readByIdOt(Integer idOrdenTrabajo) {
 		assert idOrdenTrabajo != null;
-		return Pdao.readByOrdenDeTrabajoId(idOrdenTrabajo);
+		List<PresupuestoDTO> ret  = Pdao.readByOrdenDeTrabajoId(idOrdenTrabajo);
+		for (PresupuestoDTO presupuesto : ret) {
+			presupuesto.setRepuestos(RPDao.readByIdPresupuesto(presupuesto.getIdPresupuesto()));
+			presupuesto.setTrabajos(TPDao.readByPresupuestoId(presupuesto.getIdPresupuesto()));
+		}
+		return ret;
 	}
 	
 	public List<TrabajoPresupuestadoDTO> readTrabajosByIdPresupuesto(Integer idPresupuesto) {

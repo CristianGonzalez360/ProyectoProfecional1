@@ -20,11 +20,9 @@ import javax.swing.JTextField;
 
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.BoxLayout;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
