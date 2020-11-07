@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -51,7 +52,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JTable tableVehiculos;
 
 	private final String[] columnasListadoDePresupuestos = new String[] { "NRO. Presupuesto", "FECHA ALTA",
-			"COMENTARIO ALTA", "PRECIO", "APROBAR" };
+			"COMENTARIO ALTA", "PRECIO" };
 	private DefaultTableModel listadoDePresupuestosModel;
 
 	private final String[] columnasListadoDeRepuestos = new String[] { "CODIGO", "MARCA", "DESCRIPCIÓN", "PRECIO",
@@ -100,9 +101,12 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JLabel lblNewLabel_9;
 	private JTextField textNroMotor;
 	private JTextField textNroDeChasis;
-	private Integer idOrdenDetrabajo;
 	private JTextField txtFechaTest;//SOLO TEST
 	private Integer idOrdenDeTrabajo;
+	private JPanel panel_8;
+	private JScrollPane scrollPane;
+	private JTable tablePresupuestos;
+	private List<Integer> idsPresupuestos;
 
 	public static PanelGestionPresupuestoView getInstance() {
 		if (instance == null) {
@@ -114,6 +118,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private PanelGestionPresupuestoView() {
 		setLayout(new BorderLayout(0, 0));
 
+		this.idsPresupuestos = new ArrayList<>();
 		JPanel panel_4 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panel_4.getLayout();
 		flowLayout_1.setHgap(20);
@@ -143,8 +148,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelEste.setLayout(new BoxLayout(panelEste, BoxLayout.Y_AXIS));
 
 		panelEsteNorte = new JPanel();
-		panelEsteNorte.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ordenes de trabajo",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelEsteNorte.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Ordenes de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panelEsteNorte);
 		panelEsteNorte.setLayout(new BorderLayout(0, 0));
 
@@ -156,8 +160,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		scrollPaneVehiculos.setViewportView(tableVehiculos);
 
 		panelEsteSur = new JPanel();
-		panelEsteSur.setBorder(new TitledBorder(null, "Descripci\u00F3n de la orden de trabajo", TitledBorder.LEADING,
-				TitledBorder.TOP, null, null));
+		panelEsteSur.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Descripci\u00F3n de la orden de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panelEsteSur);
 
 		panelEsteSur.setLayout(new FormLayout(
@@ -204,8 +207,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		textTrabajoSolicitadoOt.setColumns(10);
 
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Ficha t\u00E9cnica del veh\u00EDculo", TitledBorder.LEADING,
-				TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Ficha t\u00E9cnica del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panel);
 		panel.setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(33dlu;default)"),
@@ -262,21 +264,25 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelOeste.setLayout(new BoxLayout(panelOeste, BoxLayout.Y_AXIS));
 
 		this.listadoDePresupuestosModel = new DefaultTableModel(null, this.columnasListadoDePresupuestos);
-
-		/**
-		 * 
-		 */
-		Object[] data = new Object[] { "1", "2020-10-04", "Tren delantero", "1500" };
-		this.listadoDePresupuestosModel.addRow(data);
+		
+		panel_8 = new JPanel();
+		panel_8.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Presupuestos", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panelOeste.add(panel_8);
+		panel_8.setLayout(new BorderLayout(0, 0));
+		
+		tablePresupuestos = new JTable(listadoDePresupuestosModel);
+		scrollPane = new JScrollPane(tablePresupuestos);
+		panel_8.add(scrollPane, BorderLayout.CENTER);
+		
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(
-				new TitledBorder(null, "Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelOeste.add(panel_1);
-		panel_1.setLayout(new BorderLayout(0, 0));
+		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		panel_1.add(tabbedPane, BorderLayout.CENTER);
+		panel_1.add(tabbedPane);
 
 		panel_3 = new JPanel();
 		tabbedPane.addTab("Repuestos planificados", null, panel_3, null);
@@ -415,9 +421,10 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.textTrabajoSugeridoOt.setText("");
 		this.textFechaAltaOt.setText("");
 		this.textFechaCierreOt.setText("");
-		this.idOrdenDetrabajo = null;
+		this.idOrdenDeTrabajo = null;
 		this.btnPlanificarRepuestos.setEnabled(false);
 		this.btnPlanificarTrabajos.setEnabled(false);
+		this.idsPresupuestos.clear();
 	}
 
 	public void setData(FichaTecnicaVehiculoDTO fichaVehiculo) {
@@ -431,7 +438,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	}
 
 	public Integer getIdOrdenDeTrabajo() {
-		return this.idOrdenDetrabajo;
+		return this.idOrdenDeTrabajo;
 	}
 	
 	public void setData(OrdenDeTrabajoDTO ordenDeTrabajo) {
@@ -442,7 +449,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 				ordenDeTrabajo.getFechaEntregado() != null ? ordenDeTrabajo.getFechaEntregado().toString() : "");
 		this.textTrabajoSugeridoOt.setText(ordenDeTrabajo.getTrabajoSujerido());
 		this.textTrabajoSolicitadoOt.setText(ordenDeTrabajo.getTrabajoSolicitado());
-		this.idOrdenDetrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
+		this.idOrdenDeTrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
 		this.btnPlanificarRepuestos.setEnabled(true);
 		this.btnPlanificarTrabajos.setEnabled(true);
 	}
@@ -465,7 +472,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	}
 
 	public Integer getIdOrdenDetrabajo() {
-		return idOrdenDetrabajo;
+		return idOrdenDeTrabajo;
 	}
 
 	public void habilitarBotonRegistrar() {
@@ -476,16 +483,34 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.btnRegistrarPresupuesto.setEnabled(false);
 	}
 	
-	public void setDataPresupuesto(PresupuestoDTO presupuesto) {
-		txtFechaTest.setText(presupuesto.getFechaAltaPresu().toString());
+	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
+		clearDataPresupuestos();
+		for(PresupuestoDTO p : presupuestos) {
+			this.idsPresupuestos.add(p.getIdPresupuesto());
+			Object[] row = {p.getIdPresupuesto(), p.getFechaAltaPresu(), p.getComentarioAltaPresu(), p.getPrecio()};
+			this.listadoDePresupuestosModel.addRow(row);
+		}
 	}
 	
 	public void clearDataPresupuestos() {
+		listadoDePresupuestosModel.setRowCount(0);
 		listadoDeRepuestosModel.setRowCount(0);
 		listadoDeTrabajosModel.setRowCount(0);
 		deshabilitarBotonRegistrar();
 		btnPlanificarRepuestos.setEnabled(false);
 		btnPlanificarTrabajos.setEnabled(false);
-		txtFechaTest.setText("");
+	}
+	
+	public void setActionOnSeleccionarPresupuesto(ListSelectionListener listener) {
+		this.tablePresupuestos.getSelectionModel().addListSelectionListener(listener);
+	}
+
+	public Integer getIdPresupuesto() {
+		return this.idsPresupuestos.get(tablePresupuestos.getSelectedRow());
+	}
+
+	public void setDataPresupuesto(PresupuestoDTO presupuesto) {
+		setDataRepuestosPlanificados(presupuesto.getRepuestos());
+		setDataTrabajosPlanificados(presupuesto.getTrabajos());
 	}
 }

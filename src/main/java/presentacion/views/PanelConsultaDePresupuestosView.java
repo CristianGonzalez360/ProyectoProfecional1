@@ -130,6 +130,7 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 		panel_4.add(btnBuscar);
 
 		splitPane = new JSplitPane();
+		splitPane.setResizeWeight(0.5);
 		add(splitPane, BorderLayout.CENTER);
 
 		panelEste = new JPanel();

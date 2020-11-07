@@ -55,6 +55,7 @@ public class PresupuestosPresenter {
 		this.view.setActionOnPlanificarRepuestos(a -> onDisplayForPlanRepuesto(a));
 		this.view.setActionOnPlanificarTrabajos(a -> onDisplayForPlanTrabajos(a));
 		this.view.setActionOnRegistrarPresupuesto(a -> onRegistrar(a));
+		this.view.setActionOnSeleccionarPresupuesto(a -> onSelecionarPresupuesto(a));
 		this.planTrabajosView.setActionOnAgregarTrabajo(a -> onDisplayForAgregarTrabajo(a));
 		this.agregarTrabajoFormView.setActionOnGuardar(a -> onAgregarTrabajos(a));
 		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
@@ -64,14 +65,13 @@ public class PresupuestosPresenter {
 		this.planRepuestosView.setActionOnBuscar(a -> onBuscarRepuesto(a));
 
 		this.view.setActionOnBuscar(a -> onBuscar(a));
-		this.view.setActionSelectVehiculoCliente(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				onSelectVehiculoDeCliente();
-			}
-		});
+		this.view.setActionSelectVehiculoCliente(a -> onSelectVehiculoDeCliente(a));
 
 		this.nuevoPresupuesto = new PresupuestoDTO();
+	}
+
+	private void onSelecionarPresupuesto(ListSelectionEvent a) {
+		view.setDataPresupuesto(presupuestosController.readById(view.getIdPresupuesto()));
 	}
 
 	private void onBuscarRepuesto(ActionEvent a) {
@@ -181,7 +181,7 @@ public class PresupuestosPresenter {
 		}
 	}
 
-	private void onSelectVehiculoDeCliente() {
+	private void onSelectVehiculoDeCliente(ListSelectionEvent a) {
 		Integer idVehiculo = view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
 			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController.readFichaTecnicaById(idVehiculo);
@@ -192,12 +192,11 @@ public class PresupuestosPresenter {
 				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo);				
 				if (ordenDeTrabajo != null) {
 					view.setData(ordenDeTrabajo);
-					PresupuestoDTO p = presupuestosController.readByOrdenDeTrabajoId(ordenDeTrabajo.getIdOrdenTrabajo());
-					if(p != null) {
-						view.setDataPresupuesto(p);
-					}
+					List<PresupuestoDTO> presupuestos = this.presupuestosController.readByIdOt(ordenDeTrabajo.getIdOrdenTrabajo());
+					view.setDataPresupuestos(presupuestos);
 				} else {
 					view.clearDataOrdenDeTrabajo();
+					view.clearDataPresupuestos();
 				}
 			}
 		}

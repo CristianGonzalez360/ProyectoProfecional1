@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import repositories.TrabajosPresupuestadosDao;
+
 public class PresupuestoDTO {
 
 	private Integer idPresupuesto;
@@ -171,5 +173,16 @@ public class PresupuestoDTO {
 
 	public void borrarRepuestosPlanificados() {
 		this.repuestos.clear();
+	}
+
+	public Double getPrecio() {
+		Double ret = 0.0;
+		for(RepuestoPlanificadoDTO dto : repuestos) {
+			ret += dto.getRepuesto().getPrecioRepuesto()*dto.getCantRequerida();
+		}
+		for (TrabajoPresupuestadoDTO dto : trabajos) {
+			ret += dto.getPrecioTrabajo();
+		}
+		return ret;
 	}
 }

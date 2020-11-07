@@ -70,4 +70,9 @@ public class PresupuestosController {
 		}
 		return repuestosplanificados;
 	}
+
+	public PresupuestoDTO readById(Integer idPresupuesto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
