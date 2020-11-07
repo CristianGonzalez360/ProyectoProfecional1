@@ -108,6 +108,16 @@ CREATE TABLE OrdenesDeTrabajo (
   FOREIGN KEY (idVehiculoOt) REFERENCES VehiculoConOrdenesDeTrabajo (idVehiculoConOT)
 );
 
+DROP TABLE Facturas IF EXISTS;
+CREATE TABLE Facturas (
+  idFactura INT AUTO_INCREMENT,
+  idOT INT NULL,
+  fechaDeAlta DATE,
+  fechaDeCierrePorPago DATE,
+  PRIMARY KEY(idFactura, idOT),
+  FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo(idOT)
+);
+
 DROP TABLE Emisores IF EXISTS;
 CREATE TABLE Emisores (
   idEmisor INT NOT NULL AUTO_INCREMENT,
@@ -160,7 +170,7 @@ CREATE TABLE Presupuestos (
   fechaCierrePresu DATE,
   comentarioCierrePresu VARCHAR (60),
   fechaAprobacion DATE,
-  fechaRechazo DATE,
+  estado VARCHAR(20),
   PRIMARY KEY (idPresupuesto),
   FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo (idOT),
   FOREIGN KEY (idUsuAltaPresu) REFERENCES Usuarios (idUsuario),

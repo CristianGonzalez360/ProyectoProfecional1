@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
+import dto.EstadoPresupuesto;
 import dto.PresupuestoDTO;
 import repositories.PresupuestosDao;
 import repositories.jdbc.utils.Mapper;
@@ -18,13 +19,20 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 	private static final String readByOrdenDeTrabajoId = readAll + " " + "WHERE Presupuestos.idOT = ?";
 
 	private static final String insert = "INSERT INTO Presupuestos (idOT, idUsuAltaPresu, idUsuCierrePresu, idUsuRegPago"
-			+ ",idPago,fechaAltaPresu,comentarioAltaPresu,fechaCierrePresu,comentarioCierrePresu,fechaAprobacion,fechaRechazo) "
+			+ ",idPago,fechaAltaPresu,comentarioAltaPresu,fechaCierrePresu,comentarioCierrePresu,fechaAprobacion,estado) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
+	private static final String updateState = "UPDATE Presupuestos SET estado = ?, fechaAprobacion = ? WHERE idPresupuesto = ?";
+	
 	public PresupuestosDaoImpl(Connection connection) {
 		super(connection);
 	}
 
+	@Override
+	public boolean updateStateById(Integer id, Date aprovedDate, EstadoPresupuesto estado) {
+			return getTemplate().query(updateState).param(estado.name()).param(aprovedDate).param(id).excecute();
+	}
+	
 	@Override
 	public boolean update(PresupuestoDTO entity) {
 		return false;
@@ -42,7 +50,8 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 				.param(entity.getFechaCierrePresu() == null ? new NullObject() : entity.getFechaCierrePresu())
 				.param(entity.getComentarioCierrePresu() == null ? new NullObject() : entity.getComentarioCierrePresu())
 				.param(entity.getFechaAprobacion() == null ? new NullObject() : entity.getFechaAprobacion())
-				.param(entity.getFechaRechazo() == null ? new NullObject() : entity.getFechaRechazo()).excecute();
+				.param(entity.getEstado().name())				
+				.excecute();
 	}
 
 	@Override
@@ -73,19 +82,6 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 			@Override
 			public PresupuestoDTO map(Object[] obj) {
 				PresupuestoDTO dto = new PresupuestoDTO();
-
-				dto.setIdOT((Integer) obj[0]);
-				dto.setIdUsuAltaPresu(obj[1] == null ? null : (Integer)obj[1]);
-				dto.setIdUsuCierrePresu(obj[2] == null ? null : (Integer)obj[2]);
-				dto.setIdUsuRegPago(obj[3] == null ? null : (Integer)obj[3]);
-				dto.setIdPago(obj[4] == null ? null : (Integer)obj[4]);
-				dto.setFechaAltaPresu(obj[6] == null ? null : (Date)obj[6]);
-				dto.setComentarioAltaPresu(obj[7] == null ? null : (String)obj[7]);
-				dto.setFechaCierrePresu(obj[5] == null ? null : (Date)obj[5]);
-				dto.setComentarioCierrePresu(obj[8] == null ? "" : (String)obj[8]);
-				dto.setFechaAprobacion(obj[9] == null ? null : (Date)obj[9]);
-				dto.setFechaRechazo(obj[10] == null ? null : (Date)obj[10]);
-
 				dto.setIdPresupuesto((Integer)obj[0]);
 				dto.setIdOT((Integer) obj[1]);
 				dto.setIdUsuAltaPresu(obj[2] == null ? null : (Integer) obj[2]);
@@ -97,7 +93,7 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 				dto.setFechaCierrePresu(obj[8] == null ? null : (Date) obj[8]);
 				dto.setComentarioCierrePresu(obj[9] == null ? "" : (String) obj[9]);
 				dto.setFechaAprobacion(obj[10] == null ? null : (Date) obj[10]);
-				dto.setFechaRechazo(obj[11] == null ? null : (Date) obj[11]);
+				dto.setEstado((Enum.valueOf(EstadoPresupuesto.class, (String) obj[11])));
 				return dto;
 			}
 		};

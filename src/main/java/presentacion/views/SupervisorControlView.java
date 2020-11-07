@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
-import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 
 import javax.swing.border.SoftBevelBorder;

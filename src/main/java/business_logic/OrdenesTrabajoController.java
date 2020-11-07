@@ -5,7 +5,9 @@ import java.util.List;
 
 import business_logic.exceptions.ForbiddenException;
 import dto.AltaOrdenDeTrabajoDTO;
+import dto.FacturaDTO;
 import dto.OrdenDeTrabajoDTO;
+import repositories.FacturasDao;
 import repositories.OrdenesDeTrabajoDao;
 import services.SessionService;
 
@@ -15,11 +17,14 @@ public class OrdenesTrabajoController {
 
 	private OrdenesDeTrabajoDao dao;
 
+	private FacturasDao facturaDao;
+	
 	private final SessionService service;
 
-	public OrdenesTrabajoController(OrdenesDeTrabajoDao dao, SessionService service) {
+	public OrdenesTrabajoController(OrdenesDeTrabajoDao dao, SessionService service, FacturasDao facturasDao) {
 		this.dao = dao;
 		this.service = service;
+		this.facturaDao = facturasDao;
 	}
 
 	public List<OrdenDeTrabajoDTO> readAll() {
@@ -49,5 +54,10 @@ public class OrdenesTrabajoController {
 	public OrdenDeTrabajoDTO readByIdVehiculo(Integer idVehiculo) {
 		assert idVehiculo != null;
 		return dao.readByIdVehiculoConOtNoCerrada(idVehiculo);
+	}
+
+	public FacturaDTO getFactura(Integer id) {
+		assert id != null;
+		return facturaDao.readByOrdenDeTrabajoId(id);
 	}
 }

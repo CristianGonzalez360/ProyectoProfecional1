@@ -2,11 +2,16 @@ package business_logic;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import business_logic.exceptions.ForbiddenException;
+import dto.EstadoPresupuesto;
+import dto.FacturaDTO;
 import dto.PresupuestoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
 import dto.TrabajoPresupuestadoDTO;
+import repositories.FacturasDao;
 import repositories.PresupuestosDao;
 import repositories.RepuestosDao;
 import repositories.RepuestosPlanificadosDao;
@@ -14,6 +19,8 @@ import repositories.TrabajosPresupuestadosDao;
 import services.SessionServiceImpl;
 
 public class PresupuestosController {
+
+	private static final String FORBIDDEN_CAMBIO_ESTADO = "No puede editar el estado del presupuesto.";
 
 	private PresupuestosDao Pdao;
 	
@@ -23,12 +30,16 @@ public class PresupuestosController {
 
 	private RepuestosDao repuestosDao;
 	
+	private FacturasDao facturasDao;
+	
 	public PresupuestosController(PresupuestosDao presupuestosDao, TrabajosPresupuestadosDao trabajosPresupuestadosDao,
-			RepuestosPlanificadosDao repuestosPlanificadosDao, RepuestosDao repuestosDao) {
+			RepuestosPlanificadosDao repuestosPlanificadosDao, RepuestosDao repuestosDao,
+			FacturasDao facDao) {
 		this.Pdao = presupuestosDao;
 		this.TPDao = trabajosPresupuestadosDao;
 		this.RPDao = repuestosPlanificadosDao;
 		this.repuestosDao = repuestosDao;
+		this.facturasDao = facDao;
 	}
 
 	public void save(PresupuestoDTO presupuesto) {
@@ -41,14 +52,6 @@ public class PresupuestosController {
 	}
 	
 	private void update(PresupuestoDTO presupuesto) {
-		for (TrabajoPresupuestadoDTO t : presupuesto.getTrabajos()) {
-			t.setIdPresupuesto(presupuesto.getIdPresupuesto());// TODO Esta mal, como obtengo el id?
-			TPDao.insert(t);
-		}
-		for (RepuestoPlanificadoDTO r : presupuesto.getRepuestos()) {
-			r.setIdPresu(presupuesto.getIdPresupuesto());// TODO Esta mal, como obtengo el id?
-			RPDao.insert(r);
-		}
 	}
 	
 	public PresupuestoDTO readByOrdenDeTrabajoId(Integer id) {
@@ -77,5 +80,28 @@ public class PresupuestosController {
 
 	public PresupuestoDTO readById(Integer idPresupuesto) {
 		return Pdao.readByID(idPresupuesto);
+	}
+	
+	public void generarFactura(Map<Integer, Boolean> presupuestos) throws ForbiddenException {
+		assert presupuestos != null;
+		assert !presupuestos.isEmpty();
+		presupuestos.forEach((k, v) -> {
+			PresupuestoDTO presupuesto = Pdao.readByID(k);
+			if(presupuesto.getEstado().equals(EstadoPresupuesto.PENDIENTE)) {
+				if(v.booleanValue() != true) {
+					Pdao.updateStateById(k,new Date(), EstadoPresupuesto.APROBADO);	
+				} else {
+					Pdao.updateStateById(k,new Date(), EstadoPresupuesto.RECHAZADO);	
+				}
+			} else {
+				throw new ForbiddenException(FORBIDDEN_CAMBIO_ESTADO);
+			}
+		});
+		Object [] keys = presupuestos.keySet().toArray();
+		Integer ordenDeTrabajoId = (Integer) keys[0];
+		FacturaDTO factura = new FacturaDTO();
+		factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
+		factura.setFechaDeAlta(new Date());
+		facturasDao.insert(factura);
 	}
 }

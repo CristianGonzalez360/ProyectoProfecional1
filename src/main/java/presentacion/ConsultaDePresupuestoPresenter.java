@@ -2,6 +2,7 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -10,6 +11,7 @@ import business_logic.ClientesController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.VehiculosController;
+import business_logic.exceptions.ForbiddenException;
 import dto.ClienteDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
@@ -18,6 +20,8 @@ import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.PanelConsultaDePresupuestosView;
+import presentacion.views.utils.ConfirmationDialog;
+import presentacion.views.utils.ErrorDialog;
 
 public class ConsultaDePresupuestoPresenter {
 
@@ -52,6 +56,7 @@ public class ConsultaDePresupuestoPresenter {
 				onSelectPresupuesto();
 			}
 		});
+		view.setActionGenerarFactura((a)->onGenerarFactura(a));
 	}
 
 	private void onSelectVehiculoDeCliente() {
@@ -61,7 +66,16 @@ public class ConsultaDePresupuestoPresenter {
 			view.setData(ordenDeTrabajo);
 			List<PresupuestoDTO> presupuestos = presController.readByIdOt(ordenDeTrabajo.getIdOrdenTrabajo());
 			view.clearDataPresupuestos();
-			view.setDataPresupuestos(presupuestos);
+			this.setDataPresupuestos(presupuestos);
+		}
+	}
+	
+	private void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
+		view.setDataPresupuestos(presupuestos);
+		if(otController.getFactura(view.getIdOrdenDeTrabajoPresentada()) != null) {
+			view.lockButtonGenerarFactura();
+		} else {
+			view.unLockButtonGenerarFactura();
 		}
 	}
 	
@@ -92,6 +106,22 @@ public class ConsultaDePresupuestoPresenter {
 				view.clearDataListadoVehiculosCliente();
 				view.setData(vehiculos);
 			}
+		}
+	}
+	
+	private void onGenerarFactura(ActionEvent a) {
+		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
+		try {
+			int confirmation = new ConfirmationDialog("¿Está seguro de generar una factura para los presupuestos seleccionados?").open();
+			if(confirmation == 0) {
+				presController.generarFactura(presupuestosSeleccionados);
+				view.clearDataPresupuestos();
+				Integer idOrdenDeTrabajo = view.getIdOrdenDeTrabajoPresentada();
+				List<PresupuestoDTO> presupuestos = presController.readByIdOt(idOrdenDeTrabajo);
+				this.setDataPresupuestos(presupuestos);
+			}
+		} catch(ForbiddenException e) {
+			new ErrorDialog().showMessages(e.getMessage());
 		}
 	}
 }
