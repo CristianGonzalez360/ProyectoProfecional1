@@ -62,7 +62,7 @@ public class WorkbenchPresenter implements Presenter {
 	}
 
 	private void onSalir(ActionEvent e) {
-		int confirm = new ConfirmationDialog("¿Estás seguro que quieres salir de la Agenda?").open();
+		int confirm = new ConfirmationDialog("¿Estás seguro que quieres salir?").open();
 		if (confirm == 0) {
 			System.exit(0);
 		}
