@@ -52,7 +52,7 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 
 	@Override
 	public PresupuestoDTO readByID(Integer id) {
-		List<PresupuestoDTO> dtos = getTemplate().query(readById).excecute(getMapper());
+		List<PresupuestoDTO> dtos = getTemplate().query(readById).param(id).excecute(getMapper());
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
