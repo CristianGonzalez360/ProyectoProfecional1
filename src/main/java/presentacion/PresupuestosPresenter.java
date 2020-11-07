@@ -56,6 +56,7 @@ public class PresupuestosPresenter {
 		this.view.setActionOnSeleccionarPresupuesto(a -> onSelecionarPresupuesto(a));
 		this.view.setActionOnNuevoPresupuesto(a -> onNuevoPresupuesto(a));
 		this.planTrabajosView.setActionOnAgregar(a -> onAgregarTrabajos(a));
+		this.planTrabajosView.setActionOnQuitar(a -> onQuitarTrabajo(a));
 		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
 		this.planRepuestosView.setActionOnCancelar(a -> onCancelarRepuestosPlanificados(a));
 		this.planRepuestosView.setActionOnAceptar(a -> onAceptarRepuestosPlanificados(a));
@@ -64,6 +65,15 @@ public class PresupuestosPresenter {
 
 		this.view.setActionOnBuscar(a -> onBuscar(a));
 		this.view.setActionSelectVehiculoCliente(a -> onSelectVehiculoDeCliente(a));
+	}
+
+	//Quita un trabajo del presupuesto
+	private void onQuitarTrabajo(ActionEvent a) {
+		Integer fila = this.planTrabajosView.getSeleccionado();
+		if(fila >= 0) {
+			this.nuevoPresupuesto.quitarTrabajo(fila);
+			this.planTrabajosView.setData(nuevoPresupuesto.getTrabajos());
+		}
 	}
 
 	//Crea un nuevo presupuesto y lo guarda

@@ -185,4 +185,8 @@ public class PresupuestoDTO {
 		}
 		return ret;
 	}
+
+	public void quitarTrabajo(int fila) {
+		this.trabajos.remove(fila);
+	}
 }

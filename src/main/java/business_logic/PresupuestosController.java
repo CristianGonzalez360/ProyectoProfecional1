@@ -76,6 +76,9 @@ public class PresupuestosController {
 	}
 
 	public PresupuestoDTO readById(Integer idPresupuesto) {
-		return Pdao.readByID(idPresupuesto);
+		PresupuestoDTO ret = Pdao.readByID(idPresupuesto);
+		ret.setTrabajos(TPDao.readByPresupuestoId(idPresupuesto));
+		ret.setRepuestos(RPDao.readByIdPresupuesto(idPresupuesto));
+		return ret;
 	}
 }

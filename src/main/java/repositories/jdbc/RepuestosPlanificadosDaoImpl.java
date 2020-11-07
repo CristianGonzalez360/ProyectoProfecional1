@@ -3,6 +3,7 @@ package repositories.jdbc;
 import java.sql.Connection;
 import java.util.List;
 
+import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
 import repositories.RepuestosPlanificadosDao;
 import repositories.jdbc.utils.Mapper;
@@ -12,7 +13,7 @@ public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanifi
 
 	public static final String readAll = "SELECT * FROM RepuestosPlanificados";
 
-	public static final String readByPresupuestoId = "SELECT * FROM RepuestosPlanificados WHERE idPresu = ?";
+	public static final String readByPresupuestoId = "SELECT * FROM RepuestosPlanificados INNER JOIN repuestos ON RepuestosPlanificados.idRepuesto = repuestos.idRepuesto WHERE idPresu = ?";
 
 	public static final String insert = "INSERT INTO RepuestosPlanificados (idPresu, idRepuesto, cantRequerida) VALUES (?,?,?)";
 
@@ -62,6 +63,17 @@ public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanifi
 				dto.setIdPresu((Integer) obj[0]);
 				dto.setIdRepuesto((Integer) obj[1]);
 				dto.setCantRequerida((Integer) obj[2]);
+				
+				RepuestoDTO repuesto = new RepuestoDTO();
+				repuesto.setIdRepuesto((Integer) obj[3]);
+				repuesto.setCodigoRepuesto((Integer) obj[4]);
+				repuesto.setPrecioRepuesto((Double) obj[5]);
+				repuesto.setMarcaRepuesto((String) obj[6]);
+				repuesto.setDescripcionRepuesto((String) obj[7]);
+				repuesto.setStockRepuesto((Integer) obj[8]);
+				repuesto.setFabricante((String) obj[9]);
+				repuesto.setStockMinimo((Integer) obj[10]);
+				dto.setRepuesto(repuesto);
 				return dto;
 			}
 		};
