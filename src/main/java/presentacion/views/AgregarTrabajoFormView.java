@@ -2,7 +2,6 @@ package presentacion.views;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -17,10 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
 
-public class AgregarTrabajoFormView extends JDialog {
+public class AgregarTrabajoFormView extends JPanel
+{
 
 	private static AgregarTrabajoFormView instance;
-	private final JPanel contentPanel = new JPanel();
+	private JPanel panelAgregarTrabajo = new JPanel();
 	private JTextField tfEsfuerzo;
 	private JTextField tfMonto;
 	private JEditorPane editorDescripcion;
@@ -28,15 +28,13 @@ public class AgregarTrabajoFormView extends JDialog {
 
 	private AgregarTrabajoFormView() {
 		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new BorderLayout(0, 0));
+		panelAgregarTrabajo.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panelAgregarTrabajo.setLayout(new BorderLayout(0, 0));
 
 		JPanel panelBotones = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelBotones.getLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
-		contentPanel.add(panelBotones, BorderLayout.SOUTH);
+		panelAgregarTrabajo.add(panelBotones, BorderLayout.SOUTH);
 
 		btnGuardar = new JButton("Guardar");
 		panelBotones.add(btnGuardar);
@@ -45,7 +43,7 @@ public class AgregarTrabajoFormView extends JDialog {
 		panelBotones.add(btnCancelar);
 
 		JPanel panelPrincipal = new JPanel();
-		contentPanel.add(panelPrincipal, BorderLayout.CENTER);
+		panelAgregarTrabajo.add(panelPrincipal, BorderLayout.CENTER);
 		panelPrincipal.setLayout(new BorderLayout(0, 0));
 
 		JPanel panelCentral = new JPanel();
@@ -85,27 +83,21 @@ public class AgregarTrabajoFormView extends JDialog {
 		tfEsfuerzo = new JTextField();
 		panelInferior.add(tfEsfuerzo);
 		tfEsfuerzo.setColumns(10);
-
-		setVisible(false);
 	}
 
-	public static AgregarTrabajoFormView getInstance() {
+	/*public static AgregarTrabajoFormView getInstance() {
 		if (instance == null)
 			instance = new AgregarTrabajoFormView();
 		return instance;
 	}
 
-	public void clearData() {
+	public void clearDataNuevoTrabajo() {
 		editorDescripcion.setText("");
 		tfMonto.setText("");
 		tfEsfuerzo.setText("");
 	}
 
-	public void display() {
-		setVisible(true);
-	}
-
-	public TrabajoPresupuestadoDTO getData() {
+	public TrabajoPresupuestadoDTO getDataNuevoTrabajo() {
 		TrabajoPresupuestadoDTO ret = new TrabajoPresupuestadoDTO();
 		ret.setDescripcionTrabajo(editorDescripcion.getText());
 		ret.setPrecioTrabajo(Double.parseDouble(tfMonto.getText()));
@@ -113,11 +105,8 @@ public class AgregarTrabajoFormView extends JDialog {
 		return ret;
 	}
 
-	public void setActionOnGuardar(ActionListener listener) {
+	public void setActionOnAgregar(ActionListener listener) {
 		this.btnGuardar.addActionListener(listener);
-	}
+	}*/
 
-	public void close() {
-		setVisible(false);
-	}
 }

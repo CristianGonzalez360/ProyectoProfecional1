@@ -19,6 +19,7 @@ import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.AgregarTrabajoFormView;
+import presentacion.views.InputComentarioDialog;
 import presentacion.views.PanelGestionPresupuestoView;
 import presentacion.views.PlanificarRepuestosFormView;
 import presentacion.views.PlanificarTrabajosFormView;
@@ -29,7 +30,6 @@ public class PresupuestosPresenter {
 	private PanelGestionPresupuestoView view;
 	private PlanificarRepuestosFormView planRepuestosView;
 	private PlanificarTrabajosFormView planTrabajosView;
-	private AgregarTrabajoFormView agregarTrabajoFormView;
 	private PresupuestoDTO nuevoPresupuesto;
 	private VehiculosController vehiculosController;
 	private PresupuestosController presupuestosController;
@@ -49,15 +49,13 @@ public class PresupuestosPresenter {
 		this.view = PanelGestionPresupuestoView.getInstance();
 		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
 		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
-		this.agregarTrabajoFormView = AgregarTrabajoFormView.getInstance();
 
 		this.view.setActionOnPlanificarRepuestos(a -> onDisplayForPlanRepuesto(a));
 		this.view.setActionOnPlanificarTrabajos(a -> onDisplayForPlanTrabajos(a));
 		this.view.setActionOnRegistrarPresupuesto(a -> onRegistrar(a));
 		this.view.setActionOnSeleccionarPresupuesto(a -> onSelecionarPresupuesto(a));
 		this.view.setActionOnNuevoPresupuesto(a -> onNuevoPresupuesto(a));
-		this.planTrabajosView.setActionOnAgregarTrabajo(a -> onDisplayForAgregarTrabajo(a));
-		this.agregarTrabajoFormView.setActionOnGuardar(a -> onAgregarTrabajos(a));
+		this.planTrabajosView.setActionOnAgregar(a -> onAgregarTrabajos(a));
 		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
 		this.planRepuestosView.setActionOnCancelar(a -> onCancelarRepuestosPlanificados(a));
 		this.planRepuestosView.setActionOnAceptar(a -> onAceptarRepuestosPlanificados(a));
@@ -72,8 +70,12 @@ public class PresupuestosPresenter {
 	private void onNuevoPresupuesto(ActionEvent a) {
 		Integer idOT = view.getIdOrdenDeTrabajo();
 		if(idOT != null) {
+			String comentario = new InputComentarioDialog()
+					.title("Ingrese un comentario")
+					.open();
 			this.nuevoPresupuesto = new PresupuestoDTO();
 			nuevoPresupuesto.setIdOT(idOT);
+			nuevoPresupuesto.setComentarioAltaPresu(comentario);
 			presupuestosController.save(nuevoPresupuesto);
 			view.setDataPresupuestos(presupuestosController.readByIdOt(idOT));
 		}
@@ -163,17 +165,10 @@ public class PresupuestosPresenter {
 
 	//Agrega trabajos al nuevo repuesto
 	private void onAgregarTrabajos(ActionEvent a) {
-		TrabajoPresupuestadoDTO trabajo = this.agregarTrabajoFormView.getData();
+		TrabajoPresupuestadoDTO trabajo = this.planTrabajosView.getDataNuevoTrabajo();
 		trabajo.setFechaAlta(new Date());
 		nuevoPresupuesto.agregarTrabajo(trabajo);
 		this.planTrabajosView.setData(nuevoPresupuesto.getTrabajos());
-		this.agregarTrabajoFormView.close();
-	}
-
-	//Muestra pantalla de agregar trabajo
-	private void onDisplayForAgregarTrabajo(ActionEvent a) {
-		this.agregarTrabajoFormView.clearData();
-		this.agregarTrabajoFormView.display();
 	}
 
 	//Muestra pantalla de planificacion de repuestos

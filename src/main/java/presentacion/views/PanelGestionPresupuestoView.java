@@ -16,7 +16,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
-import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
@@ -101,7 +100,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JLabel lblNewLabel_9;
 	private JTextField textNroMotor;
 	private JTextField textNroDeChasis;
-	private JTextField txtFechaTest;//SOLO TEST
 	private Integer idOrdenDeTrabajo;
 	private JPanel panel_8;
 	private JScrollPane scrollPane;
@@ -137,10 +135,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 
 		btnBuscar = new JButton("Buscar");
 		panel_4.add(btnBuscar);
-		
-		txtFechaTest = new JTextField();
-		panel_4.add(txtFechaTest);
-		txtFechaTest.setColumns(10);
 
 		splitPane = new JSplitPane();
 		add(splitPane, BorderLayout.CENTER);
