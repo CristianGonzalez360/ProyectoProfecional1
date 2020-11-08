@@ -42,4 +42,5 @@ public abstract class DaosFactory {
 
 	public abstract RepuestosPlanificadosDao makeRepuestosPlanificadosDao();
 
+	public abstract FacturasDao makeFacturasDao();
 }

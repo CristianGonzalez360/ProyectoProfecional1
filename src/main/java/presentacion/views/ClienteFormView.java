@@ -3,8 +3,6 @@ package presentacion.views;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -21,11 +19,6 @@ import dto.DatosPersonalesDTO;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import java.awt.event.ActionEvent;
 
 public class ClienteFormView extends JDialog {
 

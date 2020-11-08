@@ -2,11 +2,12 @@ package business_logic;
 
 import java.util.Date;
 import java.util.List;
-
 import business_logic.exceptions.ForbiddenException;
 import dto.AltaOrdenDeTrabajoDTO;
 import dto.OrdenDeTrabajoDTO;
+import repositories.FacturasDao;
 import repositories.OrdenesDeTrabajoDao;
+import repositories.PresupuestosDao;
 import services.SessionService;
 
 public class OrdenesTrabajoController {
@@ -17,7 +18,7 @@ public class OrdenesTrabajoController {
 
 	private final SessionService service;
 
-	public OrdenesTrabajoController(OrdenesDeTrabajoDao dao, SessionService service) {
+	public OrdenesTrabajoController(OrdenesDeTrabajoDao dao, SessionService service, FacturasDao facturasDao, PresupuestosDao presupuestos) {
 		this.dao = dao;
 		this.service = service;
 	}

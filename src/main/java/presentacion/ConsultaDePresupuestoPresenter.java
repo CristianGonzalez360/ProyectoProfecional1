@@ -2,26 +2,33 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import business_logic.ClientesController;
+import business_logic.FacturasController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.VehiculosController;
+import business_logic.exceptions.ForbiddenException;
+import business_logic.exceptions.NotFoundException;
 import dto.ClienteDTO;
+import dto.FacturaDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
 import dto.RepuestoPlanificadoDTO;
+import dto.ResumenDeFacturaDTO;
 import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
-import presentacion.views.PanelConsultaDePresupuestosView;
+import presentacion.views.ConsultaDePresupuestosSupervisorView;
+import presentacion.views.utils.ErrorDialog;
 
 public class ConsultaDePresupuestoPresenter {
 
-	private PanelConsultaDePresupuestosView view = PanelConsultaDePresupuestosView.getInstance();
+	private ConsultaDePresupuestosSupervisorView view = ConsultaDePresupuestosSupervisorView.getInstance();
 
 	private VehiculosController vehiculoController;
 
@@ -31,14 +38,18 @@ public class ConsultaDePresupuestoPresenter {
 
 	private PresupuestosController presController;
 	
+	private FacturasController facController;
+	
 	public ConsultaDePresupuestoPresenter(VehiculosController controller
 			, ClientesController clienteController,
 			OrdenesTrabajoController otController,
-			PresupuestosController presController) {
+			PresupuestosController presController,
+			FacturasController facController) {
 		this.vehiculoController = controller;
 		this.clientesController = clienteController;
 		this.otController = otController;
 		this.presController = presController;
+		this.facController = facController;
 		view.setActionOnBuscar((a) -> onBuscar(a));
 		view.setActionSelectVehiculoCliente(new ListSelectionListener() {
 			@Override
@@ -52,6 +63,8 @@ public class ConsultaDePresupuestoPresenter {
 				onSelectPresupuesto();
 			}
 		});
+		view.setActionGenerarFactura((a)->onGenerarFactura(a));
+		view.setActionRegistrarPago((a)->onRegistrarPago(a));
 	}
 
 	private void onSelectVehiculoDeCliente() {
@@ -61,7 +74,17 @@ public class ConsultaDePresupuestoPresenter {
 			view.setData(ordenDeTrabajo);
 			List<PresupuestoDTO> presupuestos = presController.readByIdOt(ordenDeTrabajo.getIdOrdenTrabajo());
 			view.clearDataPresupuestos();
-			view.setDataPresupuestos(presupuestos);
+			if(presupuestos != null) this.setDataPresupuestos(presupuestos);
+		}
+	}
+	
+	private void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
+		view.setDataPresupuestos(presupuestos);
+		FacturaDTO factura = facController.readFacturaByOrdenDeTrabajoId(view.getIdOrdenDeTrabajoPresentada());
+		if(factura != null) {
+			view.lockButtonGenerarFactura();
+		} else {
+			view.unLockButtonGenerarFactura();
 		}
 	}
 	
@@ -93,5 +116,38 @@ public class ConsultaDePresupuestoPresenter {
 				view.setData(vehiculos);
 			}
 		}
+	}
+	
+	private void onGenerarFactura(ActionEvent a) {
+		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
+		try {
+			facController.generarFactura(presupuestosSeleccionados);
+			updatePresupuestosView();
+			ResumenDeFacturaDTO resumen = facController.generarResumenFactura(view.getIdOrdenDeTrabajoPresentada());
+			new ErrorDialog().showMessages(resumen.generarResumen());
+		} catch(ForbiddenException e) {
+			new ErrorDialog().showMessages(e.getMessage());
+		}
+	}
+	
+	private void onRegistrarPago(ActionEvent a) {
+		Integer idOrdenDeTrabajo = view.getIdOrdenDeTrabajoPresentada();
+		try {
+			facController.registrarPagoDeFacturaById(idOrdenDeTrabajo);
+			view.clearDataPresupuestos();
+			List<PresupuestoDTO> presupuestos = presController.readByIdOt(idOrdenDeTrabajo);
+			this.setDataPresupuestos(presupuestos);
+		} catch (ForbiddenException e ) {
+			new ErrorDialog().showMessages(e.getMessage());
+		} catch (NotFoundException e) {
+			new ErrorDialog().showMessages(e.getMessage());
+		}
+	}
+	
+	private void updatePresupuestosView () {
+		view.clearDataPresupuestos();
+		Integer idOrdenDeTrabajo = view.getIdOrdenDeTrabajoPresentada();
+		List<PresupuestoDTO> presupuestos = presController.readByIdOt(idOrdenDeTrabajo);
+		this.setDataPresupuestos(presupuestos);
 	}
 }

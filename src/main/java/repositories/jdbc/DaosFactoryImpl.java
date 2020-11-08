@@ -7,6 +7,7 @@ import repositories.ClientesDao;
 import repositories.CuentasDao;
 import repositories.DaosFactory;
 import repositories.DatosPersonalesDao;
+import repositories.FacturasDao;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.PaisDao;
@@ -48,6 +49,8 @@ public class DaosFactoryImpl extends DaosFactory {
 	private TrabajosPresupuestadosDao trabajosPlanificadosDao;
 
 	private RepuestosPlanificadosDao repuestosPlanificadosDao;
+	
+	private FacturasDao facturasDao;
 
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
@@ -148,4 +151,10 @@ public class DaosFactoryImpl extends DaosFactory {
 		return repuestosPlanificadosDao;
 	}
 
+	@Override
+	public FacturasDao makeFacturasDao() {
+		if (facturasDao == null) 
+			facturasDao = new FacturasDaoImpl(ds.getConnection());
+		return facturasDao;
+	}
 }

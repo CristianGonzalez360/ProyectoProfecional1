@@ -6,12 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import dto.TrabajoPresupuestadoDTO;
-
 import javax.swing.JButton;
 import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
@@ -19,6 +15,10 @@ import javax.swing.JEditorPane;
 public class AgregarTrabajoFormView extends JPanel
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5945189647492919676L;
 	private static AgregarTrabajoFormView instance;
 	private JPanel panelAgregarTrabajo = new JPanel();
 	private JTextField tfEsfuerzo;

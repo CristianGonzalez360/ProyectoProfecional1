@@ -151,13 +151,13 @@ ordenesDeTrabajo:
   - tipoOrdeTrabajo: service
     idUsuarioAlta: 1
     fechaDeAlta: 2020-05-10
-    fechaEntregado: 2020-06-10
+    fechaEntregado:
     trabajoSolicitado: tren delantero y chapa
     trabajoSujerido: cambio de neumaticos delanteros
     idVehiculoOt: 1
   - tipoOrdeTrabajo: taller
     idUsuarioAlta: 1
-    fechaDeAlta: 2020-03-11
+    fechaDeAlta:
     fechaEntregado: 2020-06-10
     trabajoSolicitado: electricidad
     trabajoSujerido: cambio de caja de transmision
@@ -165,7 +165,7 @@ ordenesDeTrabajo:
   - tipoOrdeTrabajo: taller
     idUsuarioAlta: 1
     fechaDeAlta: 2020-02-10
-    fechaEntregado: 2020-06-10
+    fechaEntregado:
     trabajoSolicitado: cambio de cremallera
     trabajoSujerido: cambio el auto
     idVehiculoOt: 3
@@ -215,22 +215,18 @@ presupuestos:
     idUsuRegPago: 
     idPago:
     fechaAltaPresu: 2020-10-10
-    comentarioAltaPresu: que onda bigote?
-    fechaCierrePresu:
+    comentarioAltaPresu: El tren delantero esta destrozado
     comentarioCierrePresu:
     fechaAprobacion:
-    fechaRechazo:
   - idOT: 1
     idUsuAltaPresu: 1
     idUsuCierrePresu:
     idUsuRegPago:
     idPago:
     fechaAltaPresu: 2020-10-11
-    comentarioAltaPresu: alto presupuesto
-    fechaCierrePresu:
+    comentarioAltaPresu: revisar bomba de nafta
     comentarioCierrePresu:
     fechaAprobacion:
-    fechaRechazo: 
 
 trabajos: 
   - idPresupuesto: 1

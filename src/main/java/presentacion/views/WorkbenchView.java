@@ -19,7 +19,6 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
-import javax.swing.border.MatteBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
 import javax.swing.UIManager;

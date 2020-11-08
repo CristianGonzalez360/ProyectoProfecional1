@@ -29,19 +29,21 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JTabbedPane;
 
-public class PanelConsultaDePresupuestosView extends JPanel {
+public class ConsultaDePresupuestosSupervisorView extends JPanel {
 
 	private static final long serialVersionUID = -5623725856065117794L;
 	private JTextField txtDNI;
 
-	private static PanelConsultaDePresupuestosView instance;
+	private static ConsultaDePresupuestosSupervisorView instance;
 	private JButton btnBuscar;
 	private JSplitPane splitPane;
 	private JPanel panelEste;
@@ -54,14 +56,15 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 	private JTable tableVehiculos;
 
 	private final String[] columnasListadoDePresupuestos = new String[] { "NRO. Presupuesto", "FECHA ALTA",
-			"COMENTARIO ALTA", "APROBAR" };
+			"COMENTARIO ALTA", "ESTADO", "APROBAR" };
 	private DefaultTableModel listadoDePresupuestosModel;
 
 	private final String[] columnasListadoDeRepuestos = new String[] { "CODIGO", "MARCA", "DESCRIPCIÓN", "PRECIO",
 			"CANTIDAD" };
 	private DefaultTableModel listadoDeRepuestosModel;
 
-	private final String[] columnasListadoDeTrabajos = new String[] { "NRO","DESCRIPCIÓN", "PRECIO","ESFUERZO ESTIMADO Hrs."};
+	private final String[] columnasListadoDeTrabajos = new String[] { "NRO", "DESCRIPCIÓN", "PRECIO",
+			"ESFUERZO ESTIMADO Hrs." };
 	private DefaultTableModel listadoDeTrabajosModel;
 
 	private JTextField textField;
@@ -89,20 +92,21 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 	private JScrollPane scrollPaneRepuestos;
 	private JTable tableRepuestos;
 	private JTable tableTrabajos;
-	
+
 	private List<PresupuestoDTO> presupuestos;
 	private List<VehiculoConOrdenDeTrabajoDTO> vehiculosCliente;
-	private List<TrabajoPresupuestadoDTO> trabajos;
-	private List<RepuestoPlanificadoDTO> repuestos;
-	
-	public static PanelConsultaDePresupuestosView getInstance() {
+	private JButton btnGenerarFactura;
+	private JButton btnRegistrarPago;
+	private Integer idOrdenDeTrabajo;
+
+	public static ConsultaDePresupuestosSupervisorView getInstance() {
 		if (instance == null) {
-			instance = new PanelConsultaDePresupuestosView();
+			instance = new ConsultaDePresupuestosSupervisorView();
 		}
 		return instance;
 	}
 
-	public PanelConsultaDePresupuestosView() {
+	public ConsultaDePresupuestosSupervisorView() {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_4 = new JPanel();
@@ -146,7 +150,16 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 		JScrollPane scrollPaneVehiculos = new JScrollPane();
 		panelEsteNorte.add(scrollPaneVehiculos);
 
-		tableModelVehiculos = new DefaultTableModel(null, this.columnasTablaVehiculos);
+		tableModelVehiculos = new DefaultTableModel(null, this.columnasTablaVehiculos) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 8328745018078060001L;
+
+			public boolean isCellEditable(int row, int column) {
+				return false;// This causes all cells to be not editable
+			}
+		};
 		tableVehiculos = new JTable(tableModelVehiculos);
 		scrollPaneVehiculos.setViewportView(tableVehiculos);
 
@@ -211,14 +224,18 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 		scrollPanePresupuestos = new JScrollPane();
 		panel.add(scrollPanePresupuestos, BorderLayout.CENTER);
 
-		this.listadoDePresupuestosModel = new DefaultTableModel(null, this.columnasListadoDePresupuestos);
+		this.listadoDePresupuestosModel = new DefaultTableModel(null, this.columnasListadoDePresupuestos) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -972882702173668623L;
 
-		/**
-		 * 
-		 */
+			public boolean isCellEditable(int row, int column) {
+				return column == 4;
+			}
+		};
 		tablePresupuestos = new JTable(listadoDePresupuestosModel);
 		scrollPanePresupuestos.setViewportView(tablePresupuestos);
-		this.addCheckBox(3, tablePresupuestos);
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(
@@ -236,7 +253,16 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 		scrollPaneRepuestos = new JScrollPane();
 		panel_3.add(scrollPaneRepuestos, BorderLayout.CENTER);
 
-		this.listadoDeRepuestosModel = new DefaultTableModel(null, this.columnasListadoDeRepuestos);
+		this.listadoDeRepuestosModel = new DefaultTableModel(null, this.columnasListadoDeRepuestos) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column) {
+				return column == 4;
+			}
+		};
 		tableRepuestos = new JTable(listadoDeRepuestosModel);
 		scrollPaneRepuestos.setViewportView(tableRepuestos);
 
@@ -247,7 +273,16 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 		JScrollPane scrollPaneTrabajos = new JScrollPane();
 		panel_5.add(scrollPaneTrabajos, BorderLayout.CENTER);
 
-		this.listadoDeTrabajosModel = new DefaultTableModel(null, this.columnasListadoDeTrabajos);
+		this.listadoDeTrabajosModel = new DefaultTableModel(null, this.columnasListadoDeTrabajos){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column) {
+				return column == 4;
+			}
+		};
 		tableTrabajos = new JTable(listadoDeTrabajosModel);
 		scrollPaneTrabajos.setViewportView(tableTrabajos);
 
@@ -259,17 +294,13 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 		toolBar.setFloatable(false);
 		panel_2.add(toolBar, BorderLayout.NORTH);
 
-		JButton btnNewButton = new JButton("Generar factura");
-		toolBar.add(btnNewButton);
+		btnGenerarFactura = new JButton("Generar factura");
+		toolBar.add(btnGenerarFactura);
 
-		JButton btnNewButton_1 = new JButton("Registrar pago");
-		toolBar.add(btnNewButton_1);
-	}
-
-	void addCheckBox(int column, JTable table) {
-		TableColumn tc = table.getColumnModel().getColumn(column);
-		tc.setCellEditor(table.getDefaultEditor(Boolean.class));
-		tc.setCellRenderer(table.getDefaultRenderer(Boolean.class));
+		btnRegistrarPago = new JButton("Registrar pago");
+		toolBar.add(btnRegistrarPago);
+		
+		this.lockOrdenDeTrabajoPanel();
 	}
 
 	public boolean iPersupuestoAprobado(int row, int column, JTable table) {
@@ -306,14 +337,16 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 		}
 		return null;
 	}
-	
+
 	public void setActionSelectVehiculoCliente(ListSelectionListener listSelectionListener) {
 		this.tableVehiculos.getSelectionModel().addListSelectionListener(listSelectionListener);
 	}
 
 	public void setData(OrdenDeTrabajoDTO ordenDeTrabajo) {
-		this.textFechaAlta.setText(ordenDeTrabajo.getFechaDeAlta().toString() );
-		this.textFechaCierre.setText(ordenDeTrabajo.getFechaEntregado() == null ? null :ordenDeTrabajo.getFechaEntregado().toString());
+		this.idOrdenDeTrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
+		this.textFechaAlta.setText(ordenDeTrabajo.getFechaDeAlta().toString());
+		this.textFechaCierre.setText(
+				ordenDeTrabajo.getFechaEntregado() == null ? null : ordenDeTrabajo.getFechaEntregado().toString());
 		this.textTrabajoSugerido.setText(ordenDeTrabajo.getTrabajoSujerido());
 		this.textTrabajoSolicitado.setText(ordenDeTrabajo.getTrabajoSolicitado());
 		this.textTipoDeTrabajo.setText(ordenDeTrabajo.getTipoOrdeTrabajo());
@@ -322,34 +355,63 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 	public void clearDataPresupuestos() {
 		clearTable(listadoDePresupuestosModel, columnasListadoDePresupuestos);
 	}
+
+	private void lockOrdenDeTrabajoPanel() {
+		this.textFechaAlta.setEditable(false);
+		this.textFechaCierre.setEditable(false);
+		this.textTrabajoSugerido.setEditable(false);
+		this.textTrabajoSolicitado.setEditable(false);
+		this.textTipoDeTrabajo.setEditable(false);
+	}
 	
 	public void clearDataOrdeDeTrabajo() {
+		this.idOrdenDeTrabajo = null;
 		this.textFechaAlta.setText("");
 		this.textFechaCierre.setText("");
 		this.textTrabajoSugerido.setText("");
 		this.textTrabajoSolicitado.setText("");
 		this.textTipoDeTrabajo.setText("");
 	}
-	
-	private void clearTable(DefaultTableModel model, String [] columns) {
+
+	private void clearTable(DefaultTableModel model, String[] columns) {
 		model.setRowCount(0);
 		model.setColumnCount(0);
 		model.setColumnIdentifiers(columns);
 	}
-	
+
+	public Object[] readPresupuestosPresentados() {
+		return listadoDePresupuestosModel.getDataVector().toArray();
+	}
+
 	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		this.presupuestos = presupuestos;
 		for (PresupuestoDTO dto : presupuestos) {
-			Object[] row = { 
-					 dto.getIdPresupuesto().toString()
-					,dto.getFechaAltaPresu().toString()
-					,dto.getComentarioAltaPresu().toString()};
+			Object[] row = { dto.getIdPresupuesto().toString(), dto.getFechaAltaPresu().toString(),
+					dto.getComentarioAltaPresu().toString(), dto.getEstado().name() };
 			this.listadoDePresupuestosModel.addRow(row);
 		}
+		TableColumn tc = tablePresupuestos.getColumnModel().getColumn(4);
+		tc.setCellEditor(tablePresupuestos.getDefaultEditor(Boolean.class));
+		tc.setCellRenderer(tablePresupuestos.getDefaultRenderer(Boolean.class));
 	}
 
 	public void setActionSelectPresupuestoCliente(ListSelectionListener listSelectionListener) {
 		this.tablePresupuestos.getSelectionModel().addListSelectionListener(listSelectionListener);
+	}
+
+	public Map<Integer, Boolean> getPresupuestosPresentados() {
+		Map<Integer, Boolean> presu = new HashMap<>();
+		int rows = this.listadoDePresupuestosModel.getRowCount();
+		for (int index = 0; index < rows; index++) {
+			Integer presupuestoId = Integer.parseInt(listadoDePresupuestosModel.getValueAt(index, 0).toString());
+			Boolean isOk = Boolean.valueOf(this.checkBoxIsSelected(index));
+			presu.put(presupuestoId, isOk);
+		}
+		return presu;
+	}
+
+	private boolean checkBoxIsSelected(int index) {
+		return listadoDePresupuestosModel.getValueAt(index, 4) != null;
 	}
 
 	public PresupuestoDTO getPresupuestoSeleccionado() {
@@ -363,37 +425,56 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 	}
 
 	public void clearDataTrabajos() {
-		clearTable(listadoDeTrabajosModel, columnasListadoDeTrabajos);		
+		clearTable(listadoDeTrabajosModel, columnasListadoDeTrabajos);
 	}
 
 	public void clearDataRepuestos() {
 		clearTable(listadoDeRepuestosModel, columnasListadoDeRepuestos);
 	}
-		
+
 	public void setDataRepuestos(List<RepuestoPlanificadoDTO> repuestos) {
-		this.repuestos = repuestos;
 		for (RepuestoPlanificadoDTO dto : repuestos) {
-			Object[] row = { 
-				 dto.getRepuesto().getIdRepuesto().toString()
-				,dto.getRepuesto().getMarcaRepuesto().toString()
-				,dto.getRepuesto().getDescripcionRepuesto().toString()
-				,dto.getRepuesto().getPrecioRepuesto().toString()
-				,dto.getCantRequerida().toString()
-			};
+			Object[] row = { dto.getRepuesto().getIdRepuesto().toString(),
+					dto.getRepuesto().getMarcaRepuesto().toString(),
+					dto.getRepuesto().getDescripcionRepuesto().toString(),
+					dto.getRepuesto().getPrecioRepuesto().toString(), dto.getCantRequerida().toString() };
 			this.listadoDeRepuestosModel.addRow(row);
 		}
 	}
-	
+
 	public void setDataTrabajos(List<TrabajoPresupuestadoDTO> trabajos) {
-		this.trabajos = trabajos;
 		for (TrabajoPresupuestadoDTO dto : trabajos) {
-			Object[] row = { 
-					 dto.getIdTrabajoPresu().toString()
-					,dto.getDescripcionTrabajo().toString()
-					,dto.getPrecioTrabajo().toString()
-					,dto.getTiempoEstTrabajo().toString()
-					};
+			Object[] row = { dto.getIdTrabajoPresu().toString(), dto.getDescripcionTrabajo().toString(),
+					dto.getPrecioTrabajo().toString(), dto.getTiempoEstTrabajo().toString() };
 			this.listadoDeTrabajosModel.addRow(row);
 		}
+	}
+
+	public void setActionGenerarFactura(ActionListener listener) {
+		this.btnGenerarFactura.addActionListener(listener);
+	}
+
+	public Integer getIdOrdenDeTrabajoPresentada() {
+		return this.idOrdenDeTrabajo;
+	}
+
+	public void setActionRegistrarPago(ActionListener listener) {
+		this.btnRegistrarPago.addActionListener(listener);
+	}
+
+	public void lockButtonGenerarFactura() {
+		this.btnGenerarFactura.setEnabled(false);
+	}
+
+	public void unLockButtonGenerarFactura() {
+		this.btnGenerarFactura.setEnabled(true);
+	}
+
+	public void lockButtonRegistrarPago() {
+		this.btnRegistrarPago.setEnabled(false);
+	}
+
+	public void unLockButtonRegistrarPago() {
+		this.btnRegistrarPago.setEnabled(true);
 	}
 }

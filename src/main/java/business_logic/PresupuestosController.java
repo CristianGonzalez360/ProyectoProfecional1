@@ -2,7 +2,6 @@ package business_logic;
 
 import java.util.Date;
 import java.util.List;
-
 import dto.PresupuestoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
@@ -37,7 +36,6 @@ public class PresupuestosController {
 		Pdao.insert(presupuesto);
 	}
 	
-	//***provisorio***//
 	private void update(PresupuestoDTO presupuesto) {
 		for (TrabajoPresupuestadoDTO t : presupuesto.getTrabajos()) {
 			t.setIdPresupuesto(presupuesto.getIdPresupuesto());

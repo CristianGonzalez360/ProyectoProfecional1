@@ -206,7 +206,16 @@ public class PanelClientesView extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		panel_3.add(scrollPane);
 
-		tableModelVehiculos = new DefaultTableModel(null, this.columnasTablaVehiculos);
+		tableModelVehiculos = new DefaultTableModel(null, this.columnasTablaVehiculos) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -8904398996893892884L;
+
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table = new JTable(tableModelVehiculos);
 		scrollPane.setViewportView(table);
 
@@ -236,26 +245,14 @@ public class PanelClientesView extends JPanel {
 		panel_5.setBorder(new TitledBorder(null, "Ficha tecnica del vehiculo", TitledBorder.LEADING, TitledBorder.TOP,
 				null, null));
 		panel_1.add(panel_5);
-		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
+		panel_5.setLayout(new FormLayout(
+				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
+						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), FormSpecs.RELATED_GAP_COLSPEC,
+						FormSpecs.DEFAULT_COLSPEC, },
+				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
 
 		JLabel lblNewLabel_8 = new JLabel("Nro de motor");
 		panel_5.add(lblNewLabel_8, "2, 2");
@@ -303,24 +300,14 @@ public class PanelClientesView extends JPanel {
 		panel_6.setBorder(
 				new TitledBorder(null, "Orden de trabajo actual", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.add(panel_6);
-		panel_6.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
+		panel_6.setLayout(new FormLayout(
+				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
+						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), FormSpecs.RELATED_GAP_COLSPEC,
+						FormSpecs.DEFAULT_COLSPEC, },
+				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, }));
 
 		lblNewLabel_15 = new JLabel("Fecha de alta");
 		panel_6.add(lblNewLabel_15, "2, 2");
@@ -353,10 +340,10 @@ public class PanelClientesView extends JPanel {
 		textTrabajoSugeridoOt.setEditable(false);
 		panel_6.add(textTrabajoSugeridoOt, "4, 8, fill, default");
 		textTrabajoSugeridoOt.setColumns(10);
-		
+
 		lblTipoDeOrden = new JLabel("Tipo de orden de trabajo");
 		panel_6.add(lblTipoDeOrden, "2, 10, right, default");
-		
+
 		textTipoDeOT = new JTextField();
 		textTipoDeOT.setEditable(false);
 		panel_6.add(textTipoDeOT, "4, 10, fill, default");
@@ -538,5 +525,12 @@ public class PanelClientesView extends JPanel {
 		this.clearDataListadoVehiculosCliente();
 		this.clearDataOrdenDeTrabajo();
 	}
-	
+
+	public void lockButtonRegistrarOrdenDeTrabajo() {
+		this.btnRegistrarOrdenDeTrabajo.setEnabled(false);
+	}
+
+	public void unlockButtonRegistrarOrdenDeTrabajo() {
+		this.btnRegistrarOrdenDeTrabajo.setEnabled(true);
+	}
 }
