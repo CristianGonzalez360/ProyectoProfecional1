@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import repositories.TrabajosPresupuestadosDao;
-
 public class PresupuestoDTO {
-
+	
 	private Integer idPresupuesto;
 
 	private Integer idOT;
@@ -29,14 +27,15 @@ public class PresupuestoDTO {
 	private String comentarioCierrePresu;
 
 	private Date fechaAprobacion;
-
-	private Date fechaRechazo;
-
+	
+	private EstadoPresupuesto estado;
+	
 	private List<TrabajoPresupuestadoDTO> trabajos;
 
 	private List<RepuestoPlanificadoDTO> repuestos;
 
 	public PresupuestoDTO() {
+		estado = EstadoPresupuesto.PENDIENTE;
 		this.trabajos = new ArrayList<>();
 		this.repuestos = new ArrayList<>();
 	}
@@ -125,28 +124,6 @@ public class PresupuestoDTO {
 		return fechaAprobacion;
 	}
 
-	public void setFechaAprobacion(Date fechaAprobacion) {
-		this.fechaAprobacion = fechaAprobacion;
-	}
-
-	public Date getFechaRechazo() {
-		return fechaRechazo;
-	}
-
-	public void setFechaRechazo(Date fechaRechazo) {
-		this.fechaRechazo = fechaRechazo;
-	}
-
-	@Override
-	public String toString() {
-		return "PresupuestoDTO [idPresupuesto=" + idPresupuesto + ", idOT=" + idOT + ", idUsuAltaPresu="
-				+ idUsuAltaPresu + ", idUsuCierrePresu=" + idUsuCierrePresu + ", idUsuRegPago=" + idUsuRegPago
-				+ ", idPago=" + idPago + ", fechaAltaPresu=" + fechaAltaPresu + ", comentarioAltaPresu="
-				+ comentarioAltaPresu + ", fechaCierrePresu=" + fechaCierrePresu + ", comentarioCierrePresu="
-				+ comentarioCierrePresu + ", fechaAprobacion=" + fechaAprobacion + ", fechaRechazo=" + fechaRechazo
-				+ "]";
-	}
-
 	public void agregarTrabajo(TrabajoPresupuestadoDTO trabajo) {
 		this.trabajos.add(trabajo);
 	}
@@ -174,7 +151,7 @@ public class PresupuestoDTO {
 	public void borrarRepuestosPlanificados() {
 		this.repuestos.clear();
 	}
-
+	
 	public Double getPrecio() {
 		Double ret = 0.0;
 		for(RepuestoPlanificadoDTO dto : repuestos) {
@@ -192,5 +169,27 @@ public class PresupuestoDTO {
 
 	public void quitarRepuesto(int fila) {
 		this.repuestos.remove(fila);
+	}
+	
+	public EstadoPresupuesto getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoPresupuesto estado) {
+		this.estado = estado;
+	}
+
+	public void setFechaAprobacion(Date fechaAprobacion) {
+		this.fechaAprobacion = fechaAprobacion;
+	}
+
+	@Override
+	public String toString() {
+		return "PresupuestoDTO [idPresupuesto=" + idPresupuesto + ", idOT=" + idOT + ", idUsuAltaPresu="
+				+ idUsuAltaPresu + ", idUsuCierrePresu=" + idUsuCierrePresu + ", idUsuRegPago=" + idUsuRegPago
+				+ ", idPago=" + idPago + ", fechaAltaPresu=" + fechaAltaPresu + ", comentarioAltaPresu="
+				+ comentarioAltaPresu + ", fechaCierrePresu=" + fechaCierrePresu + ", comentarioCierrePresu="
+				+ comentarioCierrePresu + ", fechaAprobacion=" + fechaAprobacion + ", estado=" + estado + ", trabajos="
+				+ trabajos + ", repuestos=" + repuestos + "]";
 	}
 }

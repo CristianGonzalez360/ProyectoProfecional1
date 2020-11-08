@@ -95,6 +95,10 @@ public class JdbcTemplate {
 					statement.setDate(k, sqldate);
 				} else if (v.type.equals(Double.class)) {
 					statement.setDouble(k, (Double) v.value);
+				} else if (v.type.equals(Boolean.class)) {
+					Boolean bool = (Boolean) v.value;
+					boolean primiteBoolean = bool.booleanValue();
+					statement.setBoolean(k, primiteBoolean);
 				}
 			} catch (SQLException t) {
 				t.printStackTrace();

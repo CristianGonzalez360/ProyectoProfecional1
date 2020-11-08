@@ -34,7 +34,9 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 	@Override
 	public boolean insert(OrdenDeTrabajoDTO entity) {
 		return getTemplate().query(insert).param(entity.getTipoOrdeTrabajo()).param(entity.getIdUsuarioAlta())
-				.param(entity.getIdVehiculoOt()).param(entity.getFechaDeAlta()).param(entity.getTrabajoSolicitado())
+				.param(entity.getIdVehiculoOt())
+				.param(entity.getFechaDeAlta() == null ? new NullObject() : entity.getFechaDeAlta())
+				.param(entity.getTrabajoSolicitado())
 				.param(entity.getTrabajoSujerido())
 				.param(entity.getFechaEntregado() == null ? new NullObject() : entity.getFechaEntregado()).excecute();
 	}
