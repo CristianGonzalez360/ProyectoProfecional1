@@ -34,12 +34,7 @@ public class PresupuestosController {
 	public void save(PresupuestoDTO presupuesto) {
 		presupuesto.setIdUsuAltaPresu(SessionServiceImpl.getInstance().getActiveSession().getIdUsuario());
 		presupuesto.setFechaAltaPresu(new Date());
-		
-		//***FEO, POR AHORA FUNCIONA***//
-		if(presupuesto.getIdPresupuesto() == null)
-			Pdao.insert(presupuesto);
-		else
-			update(presupuesto);
+		Pdao.insert(presupuesto);
 	}
 	
 	//***provisorio***//
@@ -54,10 +49,11 @@ public class PresupuestosController {
 		}
 	}
 	
-	private void update2(PresupuestoDTO presupuesto) {
+	public void update2(PresupuestoDTO presupuesto) {
 		PresupuestoDTO actual = Pdao.readByID(presupuesto.getIdPresupuesto());
 		for(RepuestoPlanificadoDTO nuevoRP : presupuesto.getRepuestos()) {
 			if(nuevoRP.getIdRepuestoPlanificado() == null) {//Es un repuesto planificado nuevo
+				nuevoRP.setIdPresu(presupuesto.getIdPresupuesto());
 				RPDao.insert(nuevoRP);
 			} else if(actual.getRepuestos().contains(nuevoRP)){//Si el repuesto planificado ya estaba guardado
 				RPDao.update(nuevoRP);
@@ -72,6 +68,7 @@ public class PresupuestosController {
 		
 		for(TrabajoPresupuestadoDTO nuevoT : presupuesto.getTrabajos()) {
 			if(nuevoT.getIdTrabajoPresu() == null) {//Es un trabajo planificado nuevo
+				nuevoT.setIdPresupuesto(presupuesto.getIdPresupuesto());
 				TPDao.insert(nuevoT);
 			} else if(actual.getTrabajos().contains(nuevoT)){//Si el trabajo planificado ya estaba guardado
 				TPDao.update(nuevoT);
@@ -83,8 +80,6 @@ public class PresupuestosController {
 				RPDao.deleteById(tp.getIdTrabajoPresu());
 			}
 		}
-		
-		
 	}
 	
 	public PresupuestoDTO readByOrdenDeTrabajoId(Integer id) {

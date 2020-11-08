@@ -11,15 +11,15 @@ import repositories.jdbc.utils.Mapper;
 public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanificadoDTO>
 		implements RepuestosPlanificadosDao {
 
-	public static final String readAll = "SELECT * FROM RepuestosPlanificados INNER JOIN repuestos ON RepuestosPlanificados.idRepuestoPlanificado = repuestos.idRepuestoPlanificado";
+	public static final String readAll = "SELECT * FROM RepuestosPlanificados INNER JOIN repuestos ON RepuestosPlanificados.idRepuesto = repuestos.idRepuesto";
 
 	public static final String readByPresupuestoId = readAll + " " + "WHERE idPresu = ?";
 
 	public static final String insert = "INSERT INTO RepuestosPlanificados (idPresu, idRepuesto, cantRequerida) VALUES (?,?,?)";
 	
-	public static final String update = "UPDATE RepuestosPlanificados SET cantRequerida = ? WHERE idRepuestoPlanificado = ?";
+	private static final String update = "UPDATE RepuestosPlanificados SET cantRequerida = ? WHERE idRepuestoPlanificado = ?";
 	
-	static final String delete = "DELETE FROM RepuestosPlanificados WHERE idRepuestosPlanificado = ?";
+	private static final String delete = "DELETE FROM RepuestosPlanificados WHERE idRepuestosPlanificado = ?";
 
 	public RepuestosPlanificadosDaoImpl(Connection connection) {
 		super(connection);
@@ -33,7 +33,8 @@ public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanifi
 
 	@Override
 	public boolean insert(RepuestoPlanificadoDTO entity) {
-		return getTemplate().query(insert).param(entity.getIdPresu()).param(entity.getIdRepuesto())
+		return getTemplate().query(insert).param(entity.getIdPresu())
+				.param(entity.getIdRepuesto())
 				.param(entity.getCantRequerida()).excecute();
 	}
 

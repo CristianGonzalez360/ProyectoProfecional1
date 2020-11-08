@@ -195,6 +195,7 @@ CREATE TABLE Repuestos (
 
 DROP TABLE RepuestosPlanificados IF EXISTS;
 CREATE TABLE RepuestosPlanificados (
+  idRepuestoPlanificado INT NOT NULL AUTO_INCREMENT,
   idPresu INT NOT NULL,
   idRepuesto INT NOT NULL,
   cantRequerida INT,

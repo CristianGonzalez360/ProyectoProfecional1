@@ -17,6 +17,10 @@ public class TrabajosPresupuestadosDaoImpl extends GenericJdbcDao<TrabajoPresupu
 	private static final String readbByPresupuestoId = readAll + " " + "WHERE TrabajosPresupuestados.idPresupuesto = ?";
 
 	private static final String insert = "INSERT INTO TrabajosPresupuestados (idPresupuesto, descripcionTrabajo, precioTrabajo, tiempoEstTrabajo) VALUES (?,?,?,?)";
+	
+	private static final String update = "UPDATE TrabajosPresupuestados SET descripcionTrabajo = ?, precioTrabajo = ?, tiempoEstTrabajo = ? WHERE idTrabajoPresu = ?";
+	
+	private static final String delete = "DELETE FROM TrabajosPresupuestados WHERE idTrabajoPresu = ?";
 
 	public TrabajosPresupuestadosDaoImpl(Connection connection) {
 		super(connection);
@@ -25,8 +29,10 @@ public class TrabajosPresupuestadosDaoImpl extends GenericJdbcDao<TrabajoPresupu
 
 	@Override
 	public boolean update(TrabajoPresupuestadoDTO entity) {
-		// TODO Auto-generated method stub
-		return false;
+		return getTemplate().query(update).param(entity.getDescripcionTrabajo())
+				.param(entity.getPrecioTrabajo())
+				.param(entity.getTiempoEstTrabajo())
+				.param(entity.getIdTrabajoPresu()).excecute();
 	}
 
 	@Override
@@ -40,8 +46,7 @@ public class TrabajosPresupuestadosDaoImpl extends GenericJdbcDao<TrabajoPresupu
 
 	@Override
 	public boolean deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+		return getTemplate().query(delete).param(id).excecute();
 	}
 
 	@Override

@@ -470,6 +470,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		clearDataPresupuestos();
 		for(PresupuestoDTO p : presupuestos) {
+			this.idsPresupuestos.clear();
 			this.idsPresupuestos.add(p.getIdPresupuesto());
 			Object[] row = {p.getIdPresupuesto(), p.getFechaAltaPresu(), p.getComentarioAltaPresu(), p.getPrecio()};
 			this.listadoDePresupuestosModel.addRow(row);

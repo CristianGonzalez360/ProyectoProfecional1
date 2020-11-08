@@ -151,7 +151,7 @@ public class PresupuestosPresenter {
 
 	//registra los repuestos y trabajos planificados
 	private void onRegistrar(ActionEvent a) {
-		presupuestosController.save(nuevoPresupuesto);
+		presupuestosController.update2(nuevoPresupuesto);
 		this.view.setDataPresupuestos(presupuestosController.readByIdOt(view.getIdOrdenDeTrabajo()));
 	}
 

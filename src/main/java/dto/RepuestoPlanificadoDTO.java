@@ -42,7 +42,7 @@ public class RepuestoPlanificadoDTO {
 
 	@Override
 	public String toString() {
-		return "RepuestoPlanificadoDTO [idPresu=" + idPresu + ", idRepuesto=" + idRepuestoPlanificado + ", cantRequerida="
+		return "RepuestoPlanificadoDTO [idPresu=" + idPresu + ", idRepuesto=" + idRepuesto + ", cantRequerida="
 				+ cantRequerida + "]";
 	}
 
@@ -52,6 +52,7 @@ public class RepuestoPlanificadoDTO {
 
 	public void setRepuesto(RepuestoDTO repuesto) {
 		this.repuesto = repuesto;
+		this.idRepuesto = repuesto.getIdRepuesto();
 	}
 
 	public Integer getIdRepuesto() {
