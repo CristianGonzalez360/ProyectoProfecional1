@@ -19,15 +19,17 @@ public class ResumenDeFacturaDTO {
 	
 	public List<String> generarResumen() {
 		List<String> renglones = new LinkedList<>();
-		renglones.add(" ------ CONCESIONARIOS LARUSSO 'Pateamos la competencia'------");
-		renglones.add(" ------ FECHA DE EMISION DEL RESUMEN ----" + new Date() + "Suecursal: ARG BS.AS");
-		double costofinaltrabajos = 0;
-		for(TrabajoPresupuestadoDTO trabajo : trabajos) {
-			costofinaltrabajos += trabajo.getPrecioTrabajo();
-			renglones.add("COD. " + trabajo.getIdTrabajoPresu() + "PRECIO U. " + trabajo.getPrecioTrabajo());
+		if(trabajos != null && repuestos != null) {
+			renglones.add(" ------ CONCESIONARIOS LARUSSO 'Pateamos la competencia'------");
+			renglones.add(" ------ FECHA DE EMISION DEL RESUMEN ----" + new Date() + "Suecursal: ARG BS.AS");
+			double costofinaltrabajos = 0;
+			for(TrabajoPresupuestadoDTO trabajo : trabajos) {
+				costofinaltrabajos += trabajo.getPrecioTrabajo();
+				renglones.add("COD. " + trabajo.getIdTrabajoPresu() + "PRECIO U. " + trabajo.getPrecioTrabajo());
+			}
+			renglones.add("Cant. trabajos " + trabajos.size());
+			renglones.add(" ----- MONTO TOTAL A PAGAR: " + costofinaltrabajos + "------");	
 		}
-		renglones.add("Cant. trabajos " + trabajos.size());
-		renglones.add(" ----- MONTO TOTAL A PAGAR: " + costofinaltrabajos + "------");
 		return renglones;
 	}
 	

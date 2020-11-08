@@ -11,7 +11,7 @@ public class FacturaDTO {
 	private Date fechaDeAlta;
 	
 	private Date fechaDeCierrePorPago;
-	
+		
 	public FacturaDTO() {
 		super();
 	}
