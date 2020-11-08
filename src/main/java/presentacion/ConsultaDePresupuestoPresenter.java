@@ -8,6 +8,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import business_logic.ClientesController;
+import business_logic.FacturasController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.VehiculosController;
@@ -18,11 +19,11 @@ import dto.FacturaDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
 import dto.RepuestoPlanificadoDTO;
+import dto.ResumenDeFacturaDTO;
 import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.ConsultaDePresupuestosSupervisorView;
-import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.ErrorDialog;
 
 public class ConsultaDePresupuestoPresenter {
@@ -37,14 +38,18 @@ public class ConsultaDePresupuestoPresenter {
 
 	private PresupuestosController presController;
 	
+	private FacturasController facController;
+	
 	public ConsultaDePresupuestoPresenter(VehiculosController controller
 			, ClientesController clienteController,
 			OrdenesTrabajoController otController,
-			PresupuestosController presController) {
+			PresupuestosController presController,
+			FacturasController facController) {
 		this.vehiculoController = controller;
 		this.clientesController = clienteController;
 		this.otController = otController;
 		this.presController = presController;
+		this.facController = facController;
 		view.setActionOnBuscar((a) -> onBuscar(a));
 		view.setActionSelectVehiculoCliente(new ListSelectionListener() {
 			@Override
@@ -75,7 +80,7 @@ public class ConsultaDePresupuestoPresenter {
 	
 	private void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		view.setDataPresupuestos(presupuestos);
-		FacturaDTO factura = otController.getFactura(view.getIdOrdenDeTrabajoPresentada());
+		FacturaDTO factura = facController.readFacturaByOrdenDeTrabajoId(view.getIdOrdenDeTrabajoPresentada());
 		if(factura != null) {
 			view.lockButtonGenerarFactura();
 		} else {
@@ -116,11 +121,10 @@ public class ConsultaDePresupuestoPresenter {
 	private void onGenerarFactura(ActionEvent a) {
 		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
 		try {
-			int confirmation = new ConfirmationDialog("¿Está seguro de generar una factura para los presupuestos seleccionados?").open();
-			if(confirmation == 0) {
-				otController.generarFactura(presupuestosSeleccionados);
-				updatePresupuestosView();
-			}
+			facController.generarFactura(presupuestosSeleccionados);
+			updatePresupuestosView();
+			ResumenDeFacturaDTO resumen = facController.generarResumenFactura(view.getIdOrdenDeTrabajoPresentada());
+			new ErrorDialog().showMessages(resumen.generarResumen());
 		} catch(ForbiddenException e) {
 			new ErrorDialog().showMessages(e.getMessage());
 		}
@@ -129,7 +133,7 @@ public class ConsultaDePresupuestoPresenter {
 	private void onRegistrarPago(ActionEvent a) {
 		Integer idOrdenDeTrabajo = view.getIdOrdenDeTrabajoPresentada();
 		try {
-			this.otController.registrarPagoDeFacturaById(idOrdenDeTrabajo);
+			facController.registrarPagoDeFacturaById(idOrdenDeTrabajo);
 			view.clearDataPresupuestos();
 			List<PresupuestoDTO> presupuestos = presController.readByIdOt(idOrdenDeTrabajo);
 			this.setDataPresupuestos(presupuestos);

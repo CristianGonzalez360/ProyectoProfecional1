@@ -6,7 +6,6 @@ import dto.PresupuestoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
 import dto.TrabajoPresupuestadoDTO;
-import repositories.FacturasDao;
 import repositories.PresupuestosDao;
 import repositories.RepuestosDao;
 import repositories.RepuestosPlanificadosDao;
