@@ -2,6 +2,8 @@ package dto;
 
 public class RepuestoPlanificadoDTO {
 
+	private Integer idRepuestoPlanificado;
+	
 	private Integer idRepuesto;
 
 	private Integer idPresu;
@@ -22,8 +24,8 @@ public class RepuestoPlanificadoDTO {
 		this.idPresu = idPresu;
 	}
 
-	public Integer getIdRepuesto() {
-		return idRepuesto;
+	public Integer getIdRepuestoPlanificado() {
+		return idRepuestoPlanificado;
 	}
 
 	public Integer getCantRequerida() {
@@ -34,13 +36,13 @@ public class RepuestoPlanificadoDTO {
 		this.cantRequerida = cantRequerida;
 	}
 
-	public void setIdRepuesto(Integer idRepuesto) {
-		this.idRepuesto = idRepuesto;
+	public void setIdRepuestoPlanificado(Integer idRepuesto) {
+		this.idRepuestoPlanificado = idRepuesto;
 	}
 
 	@Override
 	public String toString() {
-		return "RepuestoPlanificadoDTO [idPresu=" + idPresu + ", idRepuesto=" + idRepuesto + ", cantRequerida="
+		return "RepuestoPlanificadoDTO [idPresu=" + idPresu + ", idRepuesto=" + idRepuestoPlanificado + ", cantRequerida="
 				+ cantRequerida + "]";
 	}
 
@@ -50,6 +52,23 @@ public class RepuestoPlanificadoDTO {
 
 	public void setRepuesto(RepuestoDTO repuesto) {
 		this.repuesto = repuesto;
-		this.idRepuesto = repuesto.getIdRepuesto();
+	}
+
+	public Integer getIdRepuesto() {
+		return idRepuesto;
+	}
+
+	public void setIdRepuesto(Integer idRepuesto) {
+		this.idRepuesto = idRepuesto;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		boolean ret = false;
+		if(obj instanceof RepuestoPlanificadoDTO) {
+			RepuestoPlanificadoDTO rp = (RepuestoPlanificadoDTO) obj;
+			ret = this.getIdRepuestoPlanificado().equals(rp.getIdRepuestoPlanificado());
+		}
+		return ret;
 	}
 }

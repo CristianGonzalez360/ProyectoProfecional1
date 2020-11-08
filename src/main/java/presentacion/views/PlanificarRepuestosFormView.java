@@ -214,7 +214,7 @@ public class PlanificarRepuestosFormView extends JDialog {
 	public void setDataRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestos) {
 		modelRepuestosInferior.setRowCount(0);
 		for (RepuestoPlanificadoDTO r : repuestos) {
-			idRepuestos.add(r.getIdRepuesto());
+			idRepuestos.add(r.getIdRepuestoPlanificado());
 			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(),
 					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantRequerida() };
 			modelRepuestosInferior.addRow(row);

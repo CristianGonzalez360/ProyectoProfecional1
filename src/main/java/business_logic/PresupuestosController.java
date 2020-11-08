@@ -54,6 +54,39 @@ public class PresupuestosController {
 		}
 	}
 	
+	private void update2(PresupuestoDTO presupuesto) {
+		PresupuestoDTO actual = Pdao.readByID(presupuesto.getIdPresupuesto());
+		for(RepuestoPlanificadoDTO nuevoRP : presupuesto.getRepuestos()) {
+			if(nuevoRP.getIdRepuestoPlanificado() == null) {//Es un repuesto planificado nuevo
+				RPDao.insert(nuevoRP);
+			} else if(actual.getRepuestos().contains(nuevoRP)){//Si el repuesto planificado ya estaba guardado
+				RPDao.update(nuevoRP);
+			}			
+		}
+		//Si alguno de los repuestos planificados fue quitado lo borra de la BD
+		for(RepuestoPlanificadoDTO rp : actual.getRepuestos()) {
+			if(!presupuesto.getRepuestos().contains(rp)) {        
+				RPDao.deleteById(rp.getIdRepuestoPlanificado());
+			}
+		}
+		
+		for(TrabajoPresupuestadoDTO nuevoT : presupuesto.getTrabajos()) {
+			if(nuevoT.getIdTrabajoPresu() == null) {//Es un trabajo planificado nuevo
+				TPDao.insert(nuevoT);
+			} else if(actual.getTrabajos().contains(nuevoT)){//Si el trabajo planificado ya estaba guardado
+				TPDao.update(nuevoT);
+			}			
+		}
+		//Si alguno de los trabjas planificados fue quitado lo borra de la BD
+		for(TrabajoPresupuestadoDTO tp : actual.getTrabajos()) {
+			if(!presupuesto.getTrabajos().contains(tp)) {        
+				RPDao.deleteById(tp.getIdTrabajoPresu());
+			}
+		}
+		
+		
+	}
+	
 	public PresupuestoDTO readByOrdenDeTrabajoId(Integer id) {
 		return Pdao.readByOrdenDeTrabajoId(id).isEmpty()? null : Pdao.readByOrdenDeTrabajoId(id).get(0);
 	}

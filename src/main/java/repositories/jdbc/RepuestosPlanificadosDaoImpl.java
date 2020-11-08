@@ -11,11 +11,15 @@ import repositories.jdbc.utils.Mapper;
 public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanificadoDTO>
 		implements RepuestosPlanificadosDao {
 
-	public static final String readAll = "SELECT * FROM RepuestosPlanificados";
+	public static final String readAll = "SELECT * FROM RepuestosPlanificados INNER JOIN repuestos ON RepuestosPlanificados.idRepuestoPlanificado = repuestos.idRepuestoPlanificado";
 
-	public static final String readByPresupuestoId = "SELECT * FROM RepuestosPlanificados INNER JOIN repuestos ON RepuestosPlanificados.idRepuesto = repuestos.idRepuesto WHERE idPresu = ?";
+	public static final String readByPresupuestoId = readAll + " " + "WHERE idPresu = ?";
 
 	public static final String insert = "INSERT INTO RepuestosPlanificados (idPresu, idRepuesto, cantRequerida) VALUES (?,?,?)";
+	
+	public static final String update = "UPDATE RepuestosPlanificados SET cantRequerida = ? WHERE idRepuestoPlanificado = ?";
+	
+	static final String delete = "DELETE FROM RepuestosPlanificados WHERE idRepuestosPlanificado = ?";
 
 	public RepuestosPlanificadosDaoImpl(Connection connection) {
 		super(connection);
@@ -23,7 +27,8 @@ public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanifi
 
 	@Override
 	public boolean update(RepuestoPlanificadoDTO entity) {
-		return false;
+		return getTemplate().query(update).param(entity.getCantRequerida())
+				.param(entity.getIdRepuestoPlanificado()).excecute();
 	}
 
 	@Override
@@ -34,7 +39,7 @@ public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanifi
 
 	@Override
 	public boolean deleteById(Integer id) {
-		return false;
+		return getTemplate().query(delete).param(id).excecute();
 	}
 
 	@Override
@@ -60,19 +65,21 @@ public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanifi
 			@Override
 			public RepuestoPlanificadoDTO map(Object[] obj) {
 				RepuestoPlanificadoDTO dto = new RepuestoPlanificadoDTO();
-				dto.setIdPresu((Integer) obj[0]);
-				dto.setIdRepuesto((Integer) obj[1]);
-				dto.setCantRequerida((Integer) obj[2]);
+				dto.setIdRepuestoPlanificado((Integer) obj[0]);
+				
+				dto.setIdPresu((Integer) obj[1]);
+				dto.setIdRepuesto((Integer) obj[2]);
+				dto.setCantRequerida((Integer) obj[3]);
 				
 				RepuestoDTO repuesto = new RepuestoDTO();
-				repuesto.setIdRepuesto((Integer) obj[3]);
-				repuesto.setCodigoRepuesto((Integer) obj[4]);
-				repuesto.setPrecioRepuesto((Double) obj[5]);
-				repuesto.setMarcaRepuesto((String) obj[6]);
-				repuesto.setDescripcionRepuesto((String) obj[7]);
-				repuesto.setStockRepuesto((Integer) obj[8]);
-				repuesto.setFabricante((String) obj[9]);
-				repuesto.setStockMinimo((Integer) obj[10]);
+				repuesto.setIdRepuesto((Integer) obj[4]);
+				repuesto.setCodigoRepuesto((Integer) obj[5]);
+				repuesto.setPrecioRepuesto((Double) obj[6]);
+				repuesto.setMarcaRepuesto((String) obj[7]);
+				repuesto.setDescripcionRepuesto((String) obj[8]);
+				repuesto.setStockRepuesto((Integer) obj[9]);
+				repuesto.setFabricante((String) obj[10]);
+				repuesto.setStockMinimo((Integer) obj[11]);
 				dto.setRepuesto(repuesto);
 				return dto;
 			}
