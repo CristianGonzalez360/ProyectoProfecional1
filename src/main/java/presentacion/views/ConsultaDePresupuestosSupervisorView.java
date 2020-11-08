@@ -38,12 +38,12 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JTabbedPane;
 
-public class PanelConsultaDePresupuestosView extends JPanel {
+public class ConsultaDePresupuestosSupervisorView extends JPanel {
 
 	private static final long serialVersionUID = -5623725856065117794L;
 	private JTextField txtDNI;
 
-	private static PanelConsultaDePresupuestosView instance;
+	private static ConsultaDePresupuestosSupervisorView instance;
 	private JButton btnBuscar;
 	private JSplitPane splitPane;
 	private JPanel panelEste;
@@ -98,14 +98,14 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 	private JButton btnRegistrarPago;
 	private Integer idOrdenDeTrabajo;
 	
-	public static PanelConsultaDePresupuestosView getInstance() {
+	public static ConsultaDePresupuestosSupervisorView getInstance() {
 		if (instance == null) {
-			instance = new PanelConsultaDePresupuestosView();
+			instance = new ConsultaDePresupuestosSupervisorView();
 		}
 		return instance;
 	}
 
-	public PanelConsultaDePresupuestosView() {
+	public ConsultaDePresupuestosSupervisorView() {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_4 = new JPanel();
@@ -362,14 +362,17 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 	public Map<Integer, Boolean> getPresupuestosPresentados() {
 		Map<Integer, Boolean> presu = new HashMap<>();
 		int rows = this.listadoDePresupuestosModel.getRowCount();
-		int index = 0;
-		while(index < rows ) {
+		for(int index = 0; index < rows; index++) {
+			System.out.println(index + " " + this.checkBoxIsSelected(index));
 			Integer presupuestoId =  Integer.parseInt(listadoDePresupuestosModel.getValueAt(index, 0).toString());
-			Boolean isOk = Boolean.parseBoolean(listadoDePresupuestosModel.getValueAt(index, 3).toString());
+			Boolean isOk = Boolean.valueOf(this.checkBoxIsSelected(index));
 			presu.put(presupuestoId, isOk);
-			index++;
 		}
 		return presu;
+	}
+	
+	private boolean checkBoxIsSelected(int index) {
+		return listadoDePresupuestosModel.getValueAt(index, 3) != null;
 	}
 	
 	public PresupuestoDTO getPresupuestoSeleccionado() {
@@ -423,11 +426,23 @@ public class PanelConsultaDePresupuestosView extends JPanel {
 		return this.idOrdenDeTrabajo;
 	}
 	
+	public void setActionRegistrarPago(ActionListener listener) {
+		this.btnRegistrarPago.addActionListener(listener);
+	}
+	
 	public void lockButtonGenerarFactura() {
 		this.btnGenerarFactura.setEnabled(false);
 	}
 	
 	public void unLockButtonGenerarFactura() {
 		this.btnGenerarFactura.setEnabled(true);
+	}
+
+	public void lockButtonRegistrarPago() {
+		this.btnRegistrarPago.setEnabled(false);
+	}
+
+	public void unLockButtonRegistrarPago() {
+		this.btnRegistrarPago.setEnabled(true);
 	}
 }

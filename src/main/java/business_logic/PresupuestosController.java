@@ -2,11 +2,6 @@ package business_logic;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
-import business_logic.exceptions.ForbiddenException;
-import dto.EstadoPresupuesto;
-import dto.FacturaDTO;
 import dto.PresupuestoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
@@ -20,8 +15,6 @@ import services.SessionServiceImpl;
 
 public class PresupuestosController {
 
-	private static final String FORBIDDEN_CAMBIO_ESTADO = "No puede editar el estado del presupuesto.";
-
 	private PresupuestosDao Pdao;
 	
 	private TrabajosPresupuestadosDao TPDao;
@@ -30,16 +23,12 @@ public class PresupuestosController {
 
 	private RepuestosDao repuestosDao;
 	
-	private FacturasDao facturasDao;
-	
 	public PresupuestosController(PresupuestosDao presupuestosDao, TrabajosPresupuestadosDao trabajosPresupuestadosDao,
-			RepuestosPlanificadosDao repuestosPlanificadosDao, RepuestosDao repuestosDao,
-			FacturasDao facDao) {
+			RepuestosPlanificadosDao repuestosPlanificadosDao, RepuestosDao repuestosDao) {
 		this.Pdao = presupuestosDao;
 		this.TPDao = trabajosPresupuestadosDao;
 		this.RPDao = repuestosPlanificadosDao;
 		this.repuestosDao = repuestosDao;
-		this.facturasDao = facDao;
 	}
 
 	public void save(PresupuestoDTO presupuesto) {
@@ -98,28 +87,5 @@ public class PresupuestosController {
 		ret.setTrabajos(TPDao.readByPresupuestoId(idPresupuesto));
 		ret.setRepuestos(RPDao.readByIdPresupuesto(idPresupuesto));
 		return ret;
-	}
-	
-	public void generarFactura(Map<Integer, Boolean> presupuestos) throws ForbiddenException {
-		assert presupuestos != null;
-		assert !presupuestos.isEmpty();
-		presupuestos.forEach((k, v) -> {
-			PresupuestoDTO presupuesto = Pdao.readByID(k);
-			if(presupuesto.getEstado().equals(EstadoPresupuesto.PENDIENTE)) {
-				if(v.booleanValue() != true) {
-					Pdao.updateStateById(k,new Date(), EstadoPresupuesto.APROBADO);	
-				} else {
-					Pdao.updateStateById(k,new Date(), EstadoPresupuesto.RECHAZADO);	
-				}
-			} else {
-				throw new ForbiddenException(FORBIDDEN_CAMBIO_ESTADO);
-			}
-		});
-		Object [] keys = presupuestos.keySet().toArray();
-		Integer ordenDeTrabajoId = (Integer) keys[0];
-		FacturaDTO factura = new FacturaDTO();
-		factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
-		factura.setFechaDeAlta(new Date());
-		facturasDao.insert(factura);
 	}
 }

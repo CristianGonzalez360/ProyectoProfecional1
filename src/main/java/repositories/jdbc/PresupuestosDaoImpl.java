@@ -24,6 +24,8 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 
 	private static final String updateState = "UPDATE Presupuestos SET estado = ?, fechaAprobacion = ? WHERE idPresupuesto = ?";
 	
+	private static final String updateStateForPayment = "UPDATE Presupuestos SET estado = ? WHERE idPresupuesto = ?";
+	
 	public PresupuestosDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -32,6 +34,12 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 	public boolean updateStateById(Integer id, Date aprovedDate, EstadoPresupuesto estado) {
 			return getTemplate().query(updateState).param(estado.name()).param(aprovedDate).param(id).excecute();
 	}
+	
+	@Override
+	public boolean updateState(Integer id, EstadoPresupuesto estado) {
+		return getTemplate().query(updateStateForPayment).param(estado.name()).param(id).excecute();
+	}
+	
 	
 	@Override
 	public boolean update(PresupuestoDTO entity) {

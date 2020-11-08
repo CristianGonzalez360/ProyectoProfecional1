@@ -11,7 +11,15 @@ public class FacturaDTO {
 	private Date fechaDeAlta;
 	
 	private Date fechaDeCierrePorPago;
-
+	
+	public FacturaDTO() {
+		super();
+	}
+	
+	public boolean isAprobada() {
+		return fechaDeCierrePorPago == null;
+	}
+	
 	public Integer getIdFactura() {
 		return idFactura;
 	}

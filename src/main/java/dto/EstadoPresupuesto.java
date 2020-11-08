@@ -1,5 +1,5 @@
 package dto;
 
 public enum EstadoPresupuesto {
-	APROBADO, RECHAZADO, PENDIENTE;
+	APROBADO, RECHAZADO, PENDIENTE, PAGADO;
 }

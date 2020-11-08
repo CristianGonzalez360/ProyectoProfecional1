@@ -11,4 +11,6 @@ public interface PresupuestosDao extends GenericDao<PresupuestoDTO, Integer> {
 	List<PresupuestoDTO> readByOrdenDeTrabajoId(Integer id);
 
 	boolean updateStateById(Integer k, Date date, EstadoPresupuesto aprobado);
+
+	boolean updateState(Integer id, EstadoPresupuesto rechazado);
 }

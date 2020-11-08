@@ -59,7 +59,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	public OrdenesTrabajoController makeOrdenesDeTrabajoController() {
 		if (ordenesDeTrabajoController == null)
 			ordenesDeTrabajoController = new OrdenesTrabajoController(daos.makeOrdenDeTrabajoDao(),
-					SessionServiceImpl.getInstance(), daos.makeFacturasDao());
+					SessionServiceImpl.getInstance(), daos.makeFacturasDao(), daos.makePresupuestoDao());
 		return ordenesDeTrabajoController;
 	}
 
@@ -67,8 +67,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	public PresupuestosController makePresupuestosController() {
 		if (presupuestosController == null) {
 			presupuestosController = new PresupuestosController(daos.makePresupuestoDao(),
-					daos.makeTrabajosPlanificadosDao(), daos.makeRepuestosPlanificadosDao(), daos.makeRepuestoDao()
-					,daos.makeFacturasDao());	
+					daos.makeTrabajosPlanificadosDao(), daos.makeRepuestosPlanificadosDao(), daos.makeRepuestoDao());	
 		}
 		return presupuestosController;
 	}
