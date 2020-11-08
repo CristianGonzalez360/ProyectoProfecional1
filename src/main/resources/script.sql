@@ -209,7 +209,7 @@ CREATE TABLE RepuestosPlanificados (
   idPresu INT NOT NULL,
   idRepuesto INT NOT NULL,
   cantRequerida INT,
-  PRIMARY KEY (idPresu, idRepuesto),
+  PRIMARY KEY (idRepuestoPlanificado),
   FOREIGN KEY (idPresu) REFERENCES Presupuestos (idPresupuesto),
   FOREIGN KEY (idRepuesto) REFERENCES Repuestos (idRepuesto)
 );

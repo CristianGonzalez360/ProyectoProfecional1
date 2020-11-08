@@ -76,7 +76,6 @@ public class PlanificarTrabajosFormView extends JDialog {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("fill:66px:grow"),
 				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("30px"),}));
 		
 				JLabel lblDescripcin = new JLabel("Descripción");
@@ -102,7 +101,7 @@ public class PlanificarTrabajosFormView extends JDialog {
 								tfMonto.setColumns(10);
 
 		JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelPrincipal.add(panelInferior, "1, 6, fill, center");
+		panelPrincipal.add(panelInferior, "1, 5, fill, center");
 
 		JLabel lblEsfuerzo = new JLabel("Esfuerzo:");
 		panelInferior.add(lblEsfuerzo);
@@ -141,6 +140,7 @@ public class PlanificarTrabajosFormView extends JDialog {
 		panelBotones2.add(btnQuitar);
 
 		JButton btnQuitarTodo = new JButton("Limpiar");
+		btnQuitarTodo.setVisible(false);
 		panelBotones2.add(btnQuitarTodo);
 
 		JPanel buttonPane = new JPanel();
@@ -158,6 +158,7 @@ public class PlanificarTrabajosFormView extends JDialog {
 		getRootPane().setDefaultButton(botonAceptar);
 
 		cancelButton = new JButton("Cancelar");
+		cancelButton.setVisible(false);
 		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
 

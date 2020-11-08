@@ -179,6 +179,7 @@ public class PlanificarRepuestosFormView extends JDialog {
 		panel.add(btnQuitar);
 
 		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setVisible(false);
 		panel.add(btnLimpiar);
 
 		JPanel buttonPane = new JPanel();
@@ -191,6 +192,7 @@ public class PlanificarRepuestosFormView extends JDialog {
 		getRootPane().setDefaultButton(btnAceptar);
 
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setVisible(false);
 		btnCancelar.setActionCommand("Cancel");
 		buttonPane.add(btnCancelar);
 

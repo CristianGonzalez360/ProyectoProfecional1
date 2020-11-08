@@ -336,7 +336,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_7.add(toolBar);
 
 		btnRegistrarPresupuesto = new JButton("Registrar presupuesto");
-		btnRegistrarPresupuesto.setEnabled(false);
+		//btnRegistrarPresupuesto.setEnabled(false);
 		toolBar.add(btnRegistrarPresupuesto);
 	}
 
@@ -470,7 +470,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		clearDataPresupuestos();
 		for(PresupuestoDTO p : presupuestos) {
-			this.idsPresupuestos.clear();
 			this.idsPresupuestos.add(p.getIdPresupuesto());
 			Object[] row = {p.getIdPresupuesto(), p.getFechaAltaPresu(), p.getComentarioAltaPresu(), p.getPrecio()};
 			this.listadoDePresupuestosModel.addRow(row);
@@ -481,7 +480,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		listadoDePresupuestosModel.setRowCount(0);
 		listadoDeRepuestosModel.setRowCount(0);
 		listadoDeTrabajosModel.setRowCount(0);
-		btnRegistrarPresupuesto.setEnabled(false);
+		idsPresupuestos.clear();
 	}
 	
 	public void setActionOnSeleccionarPresupuesto(ListSelectionListener listener) {
@@ -501,11 +500,11 @@ public class PanelGestionPresupuestoView extends JPanel {
 		setDataTrabajosPlanificados(presupuesto.getTrabajos());
 		
 		//*****PARA QUE NO PUEDA EDITAR POR AHORA//
-		if(presupuesto.getRepuestos().isEmpty() && presupuesto.getTrabajos().isEmpty()) {
-			btnRegistrarPresupuesto.setEnabled(true);
-		} else {
-			btnRegistrarPresupuesto.setEnabled(false);
-		}
+		//if(presupuesto.getRepuestos().isEmpty() && presupuesto.getTrabajos().isEmpty()) {
+		//	btnRegistrarPresupuesto.setEnabled(true);
+		//} else {
+		//	btnRegistrarPresupuesto.setEnabled(false);
+		//}
 		//*****//
 	}
 	

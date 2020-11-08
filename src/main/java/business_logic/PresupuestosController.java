@@ -35,20 +35,9 @@ public class PresupuestosController {
 		presupuesto.setFechaAltaPresu(new Date());
 		Pdao.insert(presupuesto);
 	}
-	
-	private void update(PresupuestoDTO presupuesto) {
-		for (TrabajoPresupuestadoDTO t : presupuesto.getTrabajos()) {
-			t.setIdPresupuesto(presupuesto.getIdPresupuesto());
-			TPDao.insert(t);
-		}
-		for (RepuestoPlanificadoDTO r : presupuesto.getRepuestos()) {
-			r.setIdPresu(presupuesto.getIdPresupuesto());
-			RPDao.insert(r);
-		}
-	}
-	
-	public void update2(PresupuestoDTO presupuesto) {
-		PresupuestoDTO actual = Pdao.readByID(presupuesto.getIdPresupuesto());
+		
+	public void update(PresupuestoDTO presupuesto) {
+		PresupuestoDTO actual = readById(presupuesto.getIdPresupuesto());
 		for(RepuestoPlanificadoDTO nuevoRP : presupuesto.getRepuestos()) {
 			if(nuevoRP.getIdRepuestoPlanificado() == null) {//Es un repuesto planificado nuevo
 				nuevoRP.setIdPresu(presupuesto.getIdPresupuesto());

@@ -1,11 +1,8 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.ErrorManager;
-
 import javax.swing.event.ListSelectionEvent;
 import business_logic.ClientesController;
 import business_logic.OrdenesTrabajoController;
@@ -151,8 +148,11 @@ public class PresupuestosPresenter {
 
 	//registra los repuestos y trabajos planificados
 	private void onRegistrar(ActionEvent a) {
-		presupuestosController.update2(nuevoPresupuesto);
-		this.view.setDataPresupuestos(presupuestosController.readByIdOt(view.getIdOrdenDeTrabajo()));
+		if(nuevoPresupuesto != null) {
+			presupuestosController.update(nuevoPresupuesto);
+			nuevoPresupuesto = null;
+			this.view.setDataPresupuestos(presupuestosController.readByIdOt(view.getIdOrdenDeTrabajo()));
+		}
 	}
 
 	//Agrega repuesto a el nuevo repuesto

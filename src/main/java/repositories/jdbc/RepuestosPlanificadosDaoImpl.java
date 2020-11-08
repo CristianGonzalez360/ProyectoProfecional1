@@ -19,7 +19,7 @@ public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanifi
 	
 	private static final String update = "UPDATE RepuestosPlanificados SET cantRequerida = ? WHERE idRepuestoPlanificado = ?";
 	
-	private static final String delete = "DELETE FROM RepuestosPlanificados WHERE idRepuestosPlanificado = ?";
+	private static final String delete = "DELETE FROM RepuestosPlanificados WHERE idRepuestoPlanificado = ?";
 
 	public RepuestosPlanificadosDaoImpl(Connection connection) {
 		super(connection);
