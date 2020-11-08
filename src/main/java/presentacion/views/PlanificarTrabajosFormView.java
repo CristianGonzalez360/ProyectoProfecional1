@@ -182,7 +182,7 @@ public class PlanificarTrabajosFormView extends JDialog {
 		setVisible(true);
 	}
 
-	public void setData(List<TrabajoPresupuestadoDTO> trabajos) {
+	public void setDataTrabajosPlanificados(List<TrabajoPresupuestadoDTO> trabajos) {
 		modelo.setRowCount(0);
 		for (TrabajoPresupuestadoDTO t : trabajos) {
 			Object[] row = { t.getDescripcionTrabajo(), t.getTiempoEstTrabajo(), t.getPrecioTrabajo() };
@@ -219,4 +219,5 @@ public class PlanificarTrabajosFormView extends JDialog {
 	public Integer getSeleccionado() {
 		return table.getSelectedRow();
 	}
+
 }

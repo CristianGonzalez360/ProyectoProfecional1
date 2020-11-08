@@ -1,8 +1,11 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.ErrorManager;
+
 import javax.swing.event.ListSelectionEvent;
 import business_logic.ClientesController;
 import business_logic.OrdenesTrabajoController;
@@ -81,7 +84,7 @@ public class PresupuestosPresenter {
 		Integer fila = this.planTrabajosView.getSeleccionado();
 		if(fila >= 0) {
 			this.nuevoPresupuesto.quitarTrabajo(fila);
-			this.planTrabajosView.setData(nuevoPresupuesto.getTrabajos());
+			this.planTrabajosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
 		}
 	}
 
@@ -92,10 +95,10 @@ public class PresupuestosPresenter {
 			String comentario = new InputComentarioDialog()
 					.title("Ingrese un comentario")
 					.open();
-			this.nuevoPresupuesto = new PresupuestoDTO();
-			nuevoPresupuesto.setIdOT(idOT);
-			nuevoPresupuesto.setComentarioAltaPresu(comentario);
-			presupuestosController.save(nuevoPresupuesto);
+			PresupuestoDTO presupuesto = new PresupuestoDTO();
+			presupuesto.setIdOT(idOT);
+			presupuesto.setComentarioAltaPresu(comentario);
+			presupuestosController.save(presupuesto);
 			view.setDataPresupuestos(presupuestosController.readByIdOt(idOT));
 		}
 	}
@@ -132,22 +135,12 @@ public class PresupuestosPresenter {
 	//Muestra los trabajos planificados
 	private void onAceptarTrabajosPlanificados(ActionEvent a) {
 		this.view.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
-		if (!nuevoPresupuesto.getTrabajos().isEmpty()) {
-			this.view.habilitarBotonRegistrar();
-		} else {
-			this.view.deshabilitarBotonRegistrar();
-		}
 		this.planTrabajosView.close();
 	}
 
 	//Muestra los repuestos planificados
 	private void onAceptarRepuestosPlanificados(ActionEvent a) {
 		this.view.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
-		if (!nuevoPresupuesto.getRepuestos().isEmpty()) {
-			this.view.habilitarBotonRegistrar();
-		} else {
-			this.view.deshabilitarBotonRegistrar();
-		}
 		this.planRepuestosView.close();
 	}
 
@@ -188,21 +181,32 @@ public class PresupuestosPresenter {
 		TrabajoPresupuestadoDTO trabajo = this.planTrabajosView.getDataNuevoTrabajo();
 		trabajo.setFechaAlta(new Date());
 		nuevoPresupuesto.agregarTrabajo(trabajo);
-		this.planTrabajosView.setData(nuevoPresupuesto.getTrabajos());
+		this.planTrabajosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
 	}
 
 	//Muestra pantalla de planificacion de repuestos
 	private void onDisplayForPlanRepuesto(ActionEvent a) {
-		List<String> marcas = repuestosController.readMarcas();
-		marcas.add("todas");
-		this.planRepuestosView.setDataMarcas(marcas);
-		this.planRepuestosView.setDataRepuestos(repuestosController.readAll());
-		this.planRepuestosView.display();
+		if (nuevoPresupuesto != null) {
+			List<String> marcas = repuestosController.readMarcas();
+			marcas.add("todas");
+			this.planRepuestosView.setDataMarcas(marcas);
+			this.planRepuestosView.setDataRepuestos(repuestosController.readAll());
+			this.planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
+			this.planRepuestosView.display();
+		} else {
+			new ErrorDialog().showMessages("Seleccione un presupuesto");
+		}
 	}
+	
 	//Muestra pantalla de planificacion de trabajos
 	private void onDisplayForPlanTrabajos(ActionEvent a) {
-		this.planTrabajosView.clearData();
-		this.planTrabajosView.display();
+		if (nuevoPresupuesto != null) {
+			this.planTrabajosView.clearData();
+			this.planTrabajosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
+			this.planTrabajosView.display();
+		} else {
+			new ErrorDialog().showMessages("Seleccione un presupuesto");
+		}
 	}
 
 	//Busca vehiculos con orden de trabajo abiertas

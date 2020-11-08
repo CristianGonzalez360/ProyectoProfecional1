@@ -305,7 +305,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_3.add(panel_2, BorderLayout.SOUTH);
 
 		btnPlanificarRepuestos = new JButton("Planificar repuesto");
-		btnPlanificarRepuestos.setEnabled(false);
 		panel_2.add(btnPlanificarRepuestos);
 
 		panel_5 = new JPanel();
@@ -339,7 +338,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 		btnRegistrarPresupuesto = new JButton("Registrar presupuesto");
 		btnRegistrarPresupuesto.setEnabled(false);
 		toolBar.add(btnRegistrarPresupuesto);
-		this.btnPlanificarTrabajos.setEnabled(false);
 	}
 
 	void addCheckBox(int column, JTable table) {
@@ -369,13 +367,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 					r.getCantRequerida() };
 			this.listadoDeRepuestosModel.addRow(row);
 		}
-		
-		//***PARA QUE NO EDITE POR AHORA***//
-		if(repuestos.isEmpty()) {
-			btnPlanificarRepuestos.setEnabled(true);
-		} else {
-			btnPlanificarRepuestos.setEnabled(false);
-		}
 	}
 
 	public void setDataTrabajosPlanificados(List<TrabajoPresupuestadoDTO> trabajos) {
@@ -384,13 +375,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 			Object[] row = { t.getIdTrabajoPresu(), t.getFechaAlta(), t.getDescripcionTrabajo(), t.getPrecioTrabajo(),
 					t.getTiempoEstTrabajo(), t.getFechaCierre() };
 			this.listadoDeTrabajosModel.addRow(row);
-		}
-		
-		//***PARA QUE NO EDITE POR AHORA***//
-		if(trabajos.isEmpty()) {
-			btnPlanificarTrabajos.setEnabled(true);
-		} else {
-			btnPlanificarTrabajos.setEnabled(false);
 		}
 	}
 
@@ -437,8 +421,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.textFechaAltaOt.setText("");
 		this.textFechaCierreOt.setText("");
 		this.idOrdenDeTrabajo = null;
-		this.btnPlanificarRepuestos.setEnabled(false);
-		this.btnPlanificarTrabajos.setEnabled(false);
 		this.idsPresupuestos.clear();
 	}
 
@@ -465,8 +447,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.textTrabajoSugeridoOt.setText(ordenDeTrabajo.getTrabajoSujerido());
 		this.textTrabajoSolicitadoOt.setText(ordenDeTrabajo.getTrabajoSolicitado());
 		this.idOrdenDeTrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
-		this.btnPlanificarRepuestos.setEnabled(true);
-		this.btnPlanificarTrabajos.setEnabled(true);
 	}
 
 	public void clearDataListadoVehiculosCliente() {
@@ -486,14 +466,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 	public String getTxtDni() {
 		return txtDNI.getText();
 	}
-
-	public void habilitarBotonRegistrar() {
-		this.btnRegistrarPresupuesto.setEnabled(true);
-	}
-
-	public void deshabilitarBotonRegistrar() {
-		this.btnRegistrarPresupuesto.setEnabled(false);
-	}
 	
 	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		clearDataPresupuestos();
@@ -508,9 +480,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		listadoDePresupuestosModel.setRowCount(0);
 		listadoDeRepuestosModel.setRowCount(0);
 		listadoDeTrabajosModel.setRowCount(0);
-		deshabilitarBotonRegistrar();
-		btnPlanificarRepuestos.setEnabled(false);
-		btnPlanificarTrabajos.setEnabled(false);
+		btnRegistrarPresupuesto.setEnabled(false);
 	}
 	
 	public void setActionOnSeleccionarPresupuesto(ListSelectionListener listener) {
@@ -530,9 +500,9 @@ public class PanelGestionPresupuestoView extends JPanel {
 		setDataTrabajosPlanificados(presupuesto.getTrabajos());
 		
 		//*****PARA QUE NO PUEDA EDITAR POR AHORA//
-		if(!presupuesto.getRepuestos().isEmpty() || !presupuesto.getTrabajos().isEmpty()) {
-			btnPlanificarRepuestos.setEnabled(false);
-			btnPlanificarTrabajos.setEnabled(false);
+		if(presupuesto.getRepuestos().isEmpty() && presupuesto.getTrabajos().isEmpty()) {
+			btnRegistrarPresupuesto.setEnabled(true);
+		} else {
 			btnRegistrarPresupuesto.setEnabled(false);
 		}
 		//*****//
