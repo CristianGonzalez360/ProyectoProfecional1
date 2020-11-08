@@ -2,11 +2,13 @@ package presentacion.views;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import dto.UserCrendentialsDTO;
@@ -27,7 +29,7 @@ public class LoginView extends JDialog {
 
 	private JTextField textFieldUsuario;
 
-	private JTextField textFieldPassword;
+	private JPasswordField textFieldPassword;
 
 	private JButton okButton;
 
@@ -54,7 +56,7 @@ public class LoginView extends JDialog {
 		JLabel lblNewLabel_1 = new JLabel("Password");
 		contentPanel.add(lblNewLabel_1, "2, 4, right, default");
 
-		textFieldPassword = new JTextField("");
+		textFieldPassword = new JPasswordField("");
 		contentPanel.add(textFieldPassword, "4, 4, fill, default");
 		textFieldPassword.setColumns(10);
 
@@ -71,6 +73,16 @@ public class LoginView extends JDialog {
 		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
 		setModal(true);
+		setResizable(false);
+		
+		this.cancelButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				clearData();
+				close();
+			}
+		});
 	}
 
 	public static LoginView getInstance() {
@@ -89,7 +101,7 @@ public class LoginView extends JDialog {
 	}
 
 	public UserCrendentialsDTO getData() {
-		return new UserCrendentialsDTO(this.textFieldUsuario.getText(), this.textFieldPassword.getText());
+		return new UserCrendentialsDTO(this.textFieldUsuario.getText(), String.valueOf(this.textFieldPassword.getPassword()));
 	}
 
 	public void setActionAceptar(ActionListener listener) {

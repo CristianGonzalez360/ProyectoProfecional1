@@ -4,7 +4,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
@@ -13,6 +12,10 @@ import javax.swing.JEditorPane;
 import java.awt.Dimension;
 
 public class InputComentarioDialog extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel textLabel;
 	private JEditorPane textField;
@@ -24,14 +27,10 @@ public class InputComentarioDialog extends JDialog {
 		textLabel = new JLabel("Comentario (Opcional)");
 		textField = new JEditorPane();
 		textField.setText("");
-		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("8px"),
-				ColumnSpec.decode("164px:grow"),},
-			new RowSpec[] {
-				FormSpecs.LINE_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("61px:grow"),}));
+		contentPane.setLayout(
+				new FormLayout(new ColumnSpec[] { ColumnSpec.decode("8px"), ColumnSpec.decode("164px:grow"), },
+						new RowSpec[] { FormSpecs.LINE_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+								FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("61px:grow"), }));
 		contentPane.add(textLabel, "2, 2, left, top");
 		contentPane.add(textField, "2, 4, fill, fill");
 		title = "";

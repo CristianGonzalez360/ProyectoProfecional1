@@ -22,7 +22,6 @@ public class TurnosPresenter {
 
 	private TurnosController controller;
 
-	private static final String MENSAGE_DNI_INCORRECTO = "No se encontraron turnos para DNI: %s";
 	private static final String MENSAGE_NO_TURNOS = "No se encontraron turnos para DNI: %s";
 	private static final String MENSAGE_NUEVO_TURNO = "Se registró Turno.";
 

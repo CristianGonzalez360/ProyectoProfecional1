@@ -1,8 +1,6 @@
 package presentacion.views;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -16,6 +14,10 @@ import javax.swing.JTable;
 
 public class OTPresupuestadasView extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2023621057575547353L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textDni;
 	private JTextField textPatente;

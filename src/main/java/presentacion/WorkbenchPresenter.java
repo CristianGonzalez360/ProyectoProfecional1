@@ -1,8 +1,6 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
-import java.util.List;
-
 import business_logic.LoginController;
 import business_logic.exceptions.ForbiddenException;
 import presentacion.views.LoginView;

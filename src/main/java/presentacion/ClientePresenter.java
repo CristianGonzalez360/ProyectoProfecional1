@@ -116,8 +116,10 @@ public class ClientePresenter {
 				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo.getId());
 				if (ordenDeTrabajo != null) {
 					view.setData(ordenDeTrabajo);
+					view.lockButtonRegistrarOrdenDeTrabajo();
 				} else {
 					view.clearDataOrdenDeTrabajo();
+					view.unlockButtonRegistrarOrdenDeTrabajo();
 				}
 			}
 		}

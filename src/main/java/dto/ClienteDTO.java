@@ -2,11 +2,6 @@ package dto;
 
 import java.util.Date;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import dto.validators.CompositeValidator;
-
 import java.util.List;
 
 public class ClienteDTO {
