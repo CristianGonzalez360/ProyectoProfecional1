@@ -30,6 +30,7 @@ import javax.swing.border.BevelBorder;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -363,16 +364,15 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		Map<Integer, Boolean> presu = new HashMap<>();
 		int rows = this.listadoDePresupuestosModel.getRowCount();
 		for(int index = 0; index < rows; index++) {
-			System.out.println(index + " " + this.checkBoxIsSelected(index));
 			Integer presupuestoId =  Integer.parseInt(listadoDePresupuestosModel.getValueAt(index, 0).toString());
 			Boolean isOk = Boolean.valueOf(this.checkBoxIsSelected(index));
 			presu.put(presupuestoId, isOk);
 		}
 		return presu;
 	}
-	
+		
 	private boolean checkBoxIsSelected(int index) {
-		return listadoDePresupuestosModel.getValueAt(index, 3) != null;
+		return listadoDePresupuestosModel.getValueAt(index, 4) != null;
 	}
 	
 	public PresupuestoDTO getPresupuestoSeleccionado() {
