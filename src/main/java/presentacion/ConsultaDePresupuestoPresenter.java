@@ -121,10 +121,15 @@ public class ConsultaDePresupuestoPresenter {
 	private void onGenerarFactura(ActionEvent a) {
 		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
 		try {
-			facController.generarFactura(presupuestosSeleccionados);
+			facController.updateEstadoPresupuestos(presupuestosSeleccionados);
 			updatePresupuestosView();
-			ResumenDeFacturaDTO resumen = facController.generarResumenFactura(view.getIdOrdenDeTrabajoPresentada());
-			new ErrorDialog().showMessages(resumen.generarResumen());
+			FacturaDTO factura = facController.generarFactura(presupuestosSeleccionados);
+			if(factura != null) {
+				ResumenDeFacturaDTO resumen = facController.generarResumenFactura(view.getIdOrdenDeTrabajoPresentada());
+				if(resumen != null) {
+					new ErrorDialog().showMessages(resumen.generarResumen());	
+				}	
+			}
 		} catch(ForbiddenException e) {
 			new ErrorDialog().showMessages(e.getMessage());
 		}
@@ -137,6 +142,7 @@ public class ConsultaDePresupuestoPresenter {
 			view.clearDataPresupuestos();
 			List<PresupuestoDTO> presupuestos = presController.readByIdOt(idOrdenDeTrabajo);
 			this.setDataPresupuestos(presupuestos);
+			new ErrorDialog().showMessages("Se ha registrado el pago de la factura existosamente.");
 		} catch (ForbiddenException e ) {
 			new ErrorDialog().showMessages(e.getMessage());
 		} catch (NotFoundException e) {
