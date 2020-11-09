@@ -16,6 +16,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import dto.EstadoPresupuesto;
 import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
 import dto.RepuestoPlanificadoDTO;
@@ -233,6 +234,12 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 			public boolean isCellEditable(int row, int column) {
 				return column == 4;
 			}
+			
+			@Override
+		    public Class getColumnClass(int col) {
+				if(col == 4) return Boolean.class;
+				else return Object.class;
+			}
 		};
 		tablePresupuestos = new JTable(listadoDePresupuestosModel);
 		scrollPanePresupuestos.setViewportView(tablePresupuestos);
@@ -303,6 +310,8 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		this.lockOrdenDeTrabajoPanel();
 	}
 
+	
+	
 	public boolean iPersupuestoAprobado(int row, int column, JTable table) {
 		return table.getValueAt(row, column) != null;
 	}
@@ -386,9 +395,19 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		this.presupuestos = presupuestos;
 		for (PresupuestoDTO dto : presupuestos) {
-			Object[] row = { dto.getIdPresupuesto().toString(), dto.getFechaAltaPresu().toString(),
-					dto.getComentarioAltaPresu().toString(), dto.getEstado().name() };
+			Object[] row = { 
+					dto.getIdPresupuesto().toString(),
+					dto.getFechaAltaPresu().toString(),
+					dto.getComentarioAltaPresu().toString(), 
+					dto.getEstado().name()
+			};
 			this.listadoDePresupuestosModel.addRow(row);
+		}
+		if(!presupuestos.isEmpty()) {
+			boolean estado = presupuestos.get(0).getEstado() != EstadoPresupuesto.PENDIENTE;
+			if(estado) {
+				tablePresupuestos.setEnabled(false);
+			}
 		}
 		TableColumn tc = tablePresupuestos.getColumnModel().getColumn(4);
 		tc.setCellEditor(tablePresupuestos.getDefaultEditor(Boolean.class));
