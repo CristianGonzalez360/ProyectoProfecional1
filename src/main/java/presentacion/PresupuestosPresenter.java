@@ -73,6 +73,7 @@ public class PresupuestosPresenter {
 		if(fila >= 0) {
 			this.nuevoPresupuesto.quitarRepuesto(fila);
 			this.planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
+			this.view.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
 		}
 	}
 
@@ -82,6 +83,7 @@ public class PresupuestosPresenter {
 		if(fila >= 0) {
 			this.nuevoPresupuesto.quitarTrabajo(fila);
 			this.planTrabajosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
+			this.view.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
 		}
 	}
 
@@ -131,13 +133,13 @@ public class PresupuestosPresenter {
 
 	//Muestra los trabajos planificados
 	private void onAceptarTrabajosPlanificados(ActionEvent a) {
-		this.view.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
+		//this.view.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
 		this.planTrabajosView.close();
 	}
 
 	//Muestra los repuestos planificados
 	private void onAceptarRepuestosPlanificados(ActionEvent a) {
-		this.view.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
+		//this.view.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
 		this.planRepuestosView.close();
 	}
 
@@ -170,6 +172,7 @@ public class PresupuestosPresenter {
 			repuestoPlanificado.setRepuesto(repuesto);
 			nuevoPresupuesto.agregarRepuestos(repuestoPlanificado);
 			planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
+			this.view.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
 		} else {
 			new ErrorDialog().showMessages(errors);
 			;
@@ -182,6 +185,7 @@ public class PresupuestosPresenter {
 		trabajo.setFechaAlta(new Date());
 		nuevoPresupuesto.agregarTrabajo(trabajo);
 		this.planTrabajosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
+		this.view.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
 	}
 
 	//Muestra pantalla de planificacion de repuestos
@@ -224,14 +228,15 @@ public class PresupuestosPresenter {
 
 	//Muestra la orden de trabajo del vehiculo seleccionado.
 	private void onSelectVehiculoDeCliente(ListSelectionEvent a) {
-		Integer idVehiculo = view.getidVehiculoSeleccionado();
+		VehiculoConOrdenDeTrabajoDTO idVehiculo = view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
-			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController.readFichaTecnicaById(idVehiculo);
+			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController
+					.readFichaTecnicaById(idVehiculo.getIdFichaTecnica());
 			if (fichaVehiculo != null) {
 				view.clearDataFichaTecnicaVehiculo();
 				view.clearDataOrdenDeTrabajo();
 				view.setData(fichaVehiculo);
-				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo);				
+				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo.getId());				
 				if (ordenDeTrabajo != null) {
 					view.setData(ordenDeTrabajo);
 					List<PresupuestoDTO> presupuestos = this.presupuestosController.readByIdOt(ordenDeTrabajo.getIdOrdenTrabajo());

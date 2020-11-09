@@ -152,7 +152,12 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelEsteNorte.add(scrollPaneVehiculos);
 
 		tableModelVehiculos = new DefaultTableModel(null, this.columnasTablaVehiculos);
-		tableVehiculos = new JTable(tableModelVehiculos);
+		tableVehiculos = new JTable(tableModelVehiculos) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		scrollPaneVehiculos.setViewportView(tableVehiculos);
 
 		panelEsteSur = new JPanel();
@@ -171,6 +176,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelEsteSur.add(lblTipo, "2, 2");
 
 		textTipoTrabajo = new JTextField();
+		textTipoTrabajo.setEditable(false);
 		panelEsteSur.add(textTipoTrabajo, "4, 2, fill, default");
 		textTipoTrabajo.setColumns(10);
 
@@ -178,6 +184,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelEsteSur.add(lblNewLabel, "6, 2");
 
 		textFechaAltaOt = new JTextField();
+		textFechaAltaOt.setEditable(false);
 		panelEsteSur.add(textFechaAltaOt, "8, 2, fill, default");
 		textFechaAltaOt.setColumns(10);
 
@@ -185,6 +192,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelEsteSur.add(lblNewLabel_4, "2, 4");
 
 		textFechaCierreOt = new JTextField();
+		textFechaCierreOt.setEditable(false);
 		panelEsteSur.add(textFechaCierreOt, "4, 4, fill, default");
 		textFechaCierreOt.setColumns(10);
 
@@ -192,6 +200,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelEsteSur.add(lblNewLabel_3, "2, 6");
 
 		textTrabajoSugeridoOt = new JTextField();
+		textTrabajoSugeridoOt.setEditable(false);
 		panelEsteSur.add(textTrabajoSugeridoOt, "4, 6, 5, 1, fill, default");
 		textTrabajoSugeridoOt.setColumns(10);
 
@@ -199,6 +208,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelEsteSur.add(lblNewLabel_2, "2, 8");
 
 		textTrabajoSolicitadoOt = new JTextField();
+		textTrabajoSolicitadoOt.setEditable(false);
 		panelEsteSur.add(textTrabajoSolicitadoOt, "4, 8, 5, 1, fill, default");
 		textTrabajoSolicitadoOt.setColumns(10);
 
@@ -217,6 +227,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel.add(lblNewLabel_1, "2, 2");
 
 		textMarca = new JTextField();
+		textMarca.setEditable(false);
+		
 		panel.add(textMarca, "4, 2, fill, default");
 		textMarca.setColumns(10);
 
@@ -224,6 +236,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel.add(lblNewLabel_5, "6, 2");
 
 		textModelo = new JTextField();
+		textModelo.setEditable(false);
 		panel.add(textModelo, "8, 2, fill, default");
 		textModelo.setColumns(10);
 
@@ -231,6 +244,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel.add(lblNewLabel_6, "2, 4");
 
 		textColor = new JTextField();
+		textColor.setEditable(false);
 		panel.add(textColor, "4, 4, fill, default");
 		textColor.setColumns(10);
 
@@ -238,6 +252,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel.add(lblNewLabel_7, "6, 4");
 
 		textCombustion = new JTextField();
+		textCombustion.setEditable(false);
 		panel.add(textCombustion, "8, 4, fill, default");
 		textCombustion.setColumns(10);
 
@@ -245,6 +260,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel.add(lblNewLabel_8, "2, 6");
 
 		textNroDeChasis = new JTextField();
+		textNroDeChasis.setEditable(false);
 		panel.add(textNroDeChasis, "4, 6, fill, default");
 		textNroDeChasis.setColumns(10);
 
@@ -252,6 +268,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel.add(lblNewLabel_9, "6, 6");
 
 		textNroMotor = new JTextField();
+		textNroMotor.setEditable(false);
 		panel.add(textNroMotor, "8, 6, fill, default");
 		textNroMotor.setColumns(10);
 
@@ -266,7 +283,12 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelOeste.add(panel_8);
 		panel_8.setLayout(new BorderLayout(0, 0));
 		
-		tablePresupuestos = new JTable(listadoDePresupuestosModel);
+		tablePresupuestos = new JTable(listadoDePresupuestosModel){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		scrollPane = new JScrollPane(tablePresupuestos);
 		panel_8.add(scrollPane, BorderLayout.CENTER);
 		
@@ -296,7 +318,12 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_3.add(scrollPaneRepuestos, BorderLayout.CENTER);
 
 		this.listadoDeRepuestosModel = new DefaultTableModel(null, this.columnasListadoDeRepuestos);
-		tableRepuestos = new JTable(listadoDeRepuestosModel);
+		tableRepuestos = new JTable(listadoDeRepuestosModel){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		scrollPaneRepuestos.setViewportView(tableRepuestos);
 
 		panel_2 = new JPanel();
@@ -315,7 +342,12 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_5.add(scrollPaneTrabajos, BorderLayout.CENTER);
 
 		this.listadoDeTrabajosModel = new DefaultTableModel(null, this.columnasListadoDeTrabajos);
-		tableTrabajos = new JTable(listadoDeTrabajosModel);
+		tableTrabajos = new JTable(listadoDeTrabajosModel){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		scrollPaneTrabajos.setViewportView(tableTrabajos);
 
 		panel_6 = new JPanel();
@@ -336,7 +368,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_7.add(toolBar);
 
 		btnRegistrarPresupuesto = new JButton("Registrar presupuesto");
-		//btnRegistrarPresupuesto.setEnabled(false);
 		toolBar.add(btnRegistrarPresupuesto);
 	}
 
@@ -386,12 +417,12 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.tableVehiculos.getSelectionModel().addListSelectionListener(listener);
 	}
 
-	public Integer getidVehiculoSeleccionado() {
+	public VehiculoConOrdenDeTrabajoDTO getidVehiculoSeleccionado() {
 		int rows = this.tableVehiculos.getSelectedRowCount();
 		if (rows == 1) {
 			int row = this.tableVehiculos.getSelectedRow();
 			VehiculoConOrdenDeTrabajoDTO dto = this.vehiculos.get(row);
-			return dto.getIdFichaTecnica();
+			return dto;
 		}
 		return null;
 	}
@@ -498,14 +529,6 @@ public class PanelGestionPresupuestoView extends JPanel {
 	public void setDataPresupuesto(PresupuestoDTO presupuesto) {
 		setDataRepuestosPlanificados(presupuesto.getRepuestos());
 		setDataTrabajosPlanificados(presupuesto.getTrabajos());
-		
-		//*****PARA QUE NO PUEDA EDITAR POR AHORA//
-		//if(presupuesto.getRepuestos().isEmpty() && presupuesto.getTrabajos().isEmpty()) {
-		//	btnRegistrarPresupuesto.setEnabled(true);
-		//} else {
-		//	btnRegistrarPresupuesto.setEnabled(false);
-		//}
-		//*****//
 	}
 	
 	public void setActionOnNuevoPresupuesto(ActionListener listener) {
