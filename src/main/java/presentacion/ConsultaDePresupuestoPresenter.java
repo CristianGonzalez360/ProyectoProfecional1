@@ -121,7 +121,7 @@ public class ConsultaDePresupuestoPresenter {
 	private void onGenerarFactura(ActionEvent a) {
 		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
 		try {
-			facController.updateEstadoPresupuestos(presupuestosSeleccionados);
+			facController.aprobarPresupuestos(presupuestosSeleccionados);
 			updatePresupuestosView();
 			FacturaDTO factura = facController.generarFactura(presupuestosSeleccionados);
 			if(factura != null) {
