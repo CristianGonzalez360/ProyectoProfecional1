@@ -43,7 +43,7 @@ public class FacturasController {
 	}
 	
 	
-	public void updateEstadoPresupuestos(Map<Integer, Boolean> presupuestos) throws ForbiddenException {
+	public void aprobarPresupuestos(Map<Integer, Boolean> presupuestos) throws ForbiddenException {
 		assert presupuestos != null;
 		assert !presupuestos.isEmpty();
 		presupuestos.forEach((k, v) -> {
@@ -62,14 +62,14 @@ public class FacturasController {
 	
 	public FacturaDTO generarFactura(Map<Integer, Boolean> presupuestos) {
 		Object [] keys = presupuestos.keySet().toArray();
-		Integer ordenDeTrabajoId = (Integer) keys[0];
+		Integer ordenDeTrabajoId = presDao.readByID((Integer) keys[0]).getIdOT();
 		FacturaDTO factura = null;
 		boolean esOrdenDeTrabajoRechazada = esRechazada(ordenDeTrabajoId);
 		if(!esOrdenDeTrabajoRechazada) {
 			factura = new FacturaDTO();
 			factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
 			factura.setFechaDeAlta(new Date());
-			facturaDao.insert(factura);	
+			facturaDao.insert(factura);
 		}
 		return factura;
 	}

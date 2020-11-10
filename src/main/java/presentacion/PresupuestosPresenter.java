@@ -96,7 +96,7 @@ public class PresupuestosPresenter {
 					.open();
 			PresupuestoDTO presupuesto = new PresupuestoDTO();
 			presupuesto.setIdOT(idOT);
-			presupuesto.setComentarioAltaPresu(comentario);
+			presupuesto.setComentarioAltaPresu(comentario != null? comentario : "");
 			presupuestosController.save(presupuesto);
 			view.setDataPresupuestos(presupuestosController.readByIdOt(idOT));
 		}

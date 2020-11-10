@@ -2,6 +2,8 @@ package business_logic;
 
 import java.util.Date;
 import java.util.List;
+
+import dto.EstadoPresupuesto;
 import dto.PresupuestoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
