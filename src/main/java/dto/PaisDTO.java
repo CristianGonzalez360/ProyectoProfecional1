@@ -14,19 +14,17 @@ public class PaisDTO {
 		setId(null);
 		setNombre(null);
 	}
-	
+
 	public PaisDTO(Integer id, String nombre) {
 		setId(id);
 		setNombre(nombre);
 	}
 
 	public List<String> validate() {
-		return new StringValidator(nombre)
-				.max(20, "Max 20 chars")
-				.notBlank("El nombre del pais no puede estar en blanco")
-				.validate();
+		return new StringValidator(nombre).max(20, "Max 20 chars")
+				.notBlank("El nombre del pais no puede estar en blanco").validate();
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}

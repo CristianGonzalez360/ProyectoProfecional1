@@ -13,6 +13,11 @@ public class StringValidator {
 		this.value = value;
 	}
 
+	public StringValidator number(String message) {
+		validators.add(new Number(message));
+		return this;
+	}
+
 	public StringValidator min(int min, String message) {
 		validators.add(new MinSizeValidator(min, message));
 		return this;
@@ -40,6 +45,16 @@ public class StringValidator {
 
 	public StringValidator regex(String message, String regxp) {
 		validators.add(new RegexValidator(message, regxp));
+		return this;
+	}
+
+	public StringValidator notInLowerCase(String message) {
+		validators.add(new NotInLowercaseValidator(message));
+		return this;
+	}
+
+	public StringValidator notSpaces(String message) {
+		validators.add(new NotSpacesValidator(message));
 		return this;
 	}
 

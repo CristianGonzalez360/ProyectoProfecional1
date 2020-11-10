@@ -16,22 +16,24 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import dto.PaisDTO;
 
-public class ReporteViewImpl implements ReportView<PaisDTO> {
+public abstract class ReporteViewImpl {
 
 	private JasperReport reporte;
 	private JasperViewer reporteViewer;
 	private JasperPrint reporteLleno;
 	private Logger log = Logger.getLogger(ReporteViewImpl.class);
+	private String file;
 
-	@Override
-	public void setData(List<PaisDTO> dto) {
+	public ReporteViewImpl(String file) {
+		this.file = file;
+	}
+
+	public <T> void setData(List<T> dto) {
 		Map<String, Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 		try {
-			this.reporte = (JasperReport) JRLoader
-					.loadObjectFromFile("reportes" + File.separator + "ReporteAgenda.jasper");
+			this.reporte = (JasperReport) JRLoader.loadObjectFromFile("reportes" + File.separator + file);
 			this.reporteLleno = JasperFillManager.fillReport(this.reporte, parametersMap,
 					new JRBeanCollectionDataSource(dto));
 			log.info("Se cargó correctamente el reporte");
@@ -40,7 +42,6 @@ public class ReporteViewImpl implements ReportView<PaisDTO> {
 		}
 	}
 
-	@Override
 	public void open() {
 		this.reporteViewer = new JasperViewer(this.reporteLleno, false);
 		this.reporteViewer.setVisible(true);
