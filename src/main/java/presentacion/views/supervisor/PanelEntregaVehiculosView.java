@@ -1,4 +1,4 @@
-package presentacion.views;
+package presentacion.views.supervisor;
 
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;

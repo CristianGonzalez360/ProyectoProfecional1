@@ -42,13 +42,6 @@ class TurnosControllerTest {
 	void testReadByDniCliente() {
 		TurnoDTO target = new TurnoDTO().makeTestDTO();
 		Mockito.when(dao.readByDni(Mockito.any(Integer.class))).thenReturn(target);
-		Assertions.assertNotNull(controller.readByDniCliente(Integer.toString(target.getDniCliente())));
-	}
-
-	@Test
-	void testReadByDniReturnsNull() {
-		final String target = "123213";
-		Mockito.when(dao.readByDni(Mockito.any(Integer.class))).thenReturn(null);
-		Assertions.assertNull(controller.readByDniCliente(target));
+		Assertions.assertNotNull(controller.readByDniCliente(target.getDniCliente()));
 	}
 }

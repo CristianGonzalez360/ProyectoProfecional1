@@ -1,8 +1,8 @@
 
 package main;
 
-import presentacion.views.ViewsFactory;
-import presentacion.views.ViewsFactoryImpl;
+import presentacion.ViewsFactory;
+import presentacion.ViewsFactoryImpl;
 
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;

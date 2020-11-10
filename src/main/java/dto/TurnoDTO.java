@@ -22,7 +22,9 @@ public class TurnoDTO {
 	private Date fechaProgramada;
 
 	private String nombreCliente;
+	
 	private String telefonoCliente;
+	
 	private String emailCliente;
 
 	public TurnoDTO() {

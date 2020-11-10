@@ -1,4 +1,4 @@
-package presentacion;
+package presentacion.views.supervisor;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -20,11 +20,7 @@ import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
-import presentacion.views.AltaOrdenTrabajoFormView;
-import presentacion.views.ClienteFormView;
-import presentacion.views.PanelClientesView;
-import presentacion.views.VehiculoFormView;
-import presentacion.views.utils.ErrorDialog;
+import presentacion.views.utils.MessageDialog;
 
 public class ClientePresenter {
 
@@ -134,10 +130,10 @@ public class ClientePresenter {
 				ClienteFormView.getInstance().clearData();
 				ClienteFormView.getInstance().close();
 			} catch (ConflictException e1) {
-				new ErrorDialog().showMessages(e1.getMessage());
+				new MessageDialog().showMessages(e1.getMessage());
 			}
 		} else {
-			new ErrorDialog().showMessages(errors);
+			new MessageDialog().showMessages(errors);
 		}
 	}
 
@@ -151,10 +147,10 @@ public class ClientePresenter {
 				view.clearDataListadoVehiculosCliente();
 				view.setData(vehiculosController.readByIdCliente(view.getIdCliente()));
 			} catch (ConflictException e1) {
-				new ErrorDialog().showMessages(e1.getMessage());
+				new MessageDialog().showMessages(e1.getMessage());
 			}
 		} else {
-			new ErrorDialog().showMessages(errors);
+			new MessageDialog().showMessages(errors);
 		}
 	}
 
@@ -170,10 +166,10 @@ public class ClientePresenter {
 					view.setData(dto);
 					AltaOrdenTrabajoFormView.getInstance().close();
 				} catch (ForbiddenException e1) {
-					new ErrorDialog().showMessages(e1.getMessage());
+					new MessageDialog().showMessages(e1.getMessage());
 				}
 			} else {
-				new ErrorDialog().showMessages(errors);
+				new MessageDialog().showMessages(errors);
 			}
 		}
 	}
@@ -185,7 +181,7 @@ public class ClientePresenter {
 			ClienteFormView.getInstance().display();
 		}
 		else {
-			new ErrorDialog().showMessages(CLIENTE_NO_SELECCIONADO);
+			new MessageDialog().showMessages(CLIENTE_NO_SELECCIONADO);
 		}
 	}
 	
@@ -201,7 +197,7 @@ public class ClientePresenter {
 			view.setData(cliente);
 			ClienteFormView.getInstance().close();
 		} else {
-			new ErrorDialog().showMessages(errores);
+			new MessageDialog().showMessages(errores);
 		}
 	}
 }

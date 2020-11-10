@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-public class ErrorDialog {
+public class MessageDialog {
 
 	public void showMessages(String message) {
 		JOptionPane.showMessageDialog(null, message);

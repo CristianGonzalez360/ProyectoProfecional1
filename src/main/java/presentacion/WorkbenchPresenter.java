@@ -3,13 +3,10 @@ package presentacion;
 import java.awt.event.ActionEvent;
 import business_logic.LoginController;
 import business_logic.exceptions.ForbiddenException;
-import presentacion.views.LoginView;
-import presentacion.views.Presenter;
-import presentacion.views.SupervisorControlView;
-import presentacion.views.TecnicoControlView;
-import presentacion.views.WorkbenchView;
+import presentacion.views.supervisor.SupervisorControlView;
+import presentacion.views.tecnico.TecnicoControlView;
 import presentacion.views.utils.ConfirmationDialog;
-import presentacion.views.utils.ErrorDialog;
+import presentacion.views.utils.MessageDialog;
 import dto.SessionDTO;
 import dto.UserCrendentialsDTO;
 
@@ -54,7 +51,7 @@ public class WorkbenchPresenter implements Presenter {
 				LoginView.getInstance().clearData();
 				LoginView.getInstance().close();
 			} catch (ForbiddenException e1) {
-				new ErrorDialog().showMessages(e1.getMessage());
+				new MessageDialog().showMessages(e1.getMessage());
 			}
 		}
 	}

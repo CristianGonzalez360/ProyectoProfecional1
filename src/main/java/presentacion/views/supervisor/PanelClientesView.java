@@ -1,4 +1,4 @@
-package presentacion.views;
+package presentacion.views.supervisor;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;

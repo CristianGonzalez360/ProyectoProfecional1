@@ -1,4 +1,4 @@
-package presentacion.views;
+package presentacion.views.tecnico;
 
 import javax.swing.JInternalFrame;
 import java.awt.BorderLayout;

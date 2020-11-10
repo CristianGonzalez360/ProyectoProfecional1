@@ -1,12 +1,9 @@
-package presentacion.views;
+package presentacion;
 
 import business_logic.ControllersFactory;
-import presentacion.ClientePresenter;
-import presentacion.ConsultaDePresupuestoPresenter;
-import presentacion.OrdenDeTrabajoPresenter;
-import presentacion.PresupuestosPresenter;
-import presentacion.TurnosPresenter;
-import presentacion.WorkbenchPresenter;
+import presentacion.views.supervisor.ClientePresenter;
+import presentacion.views.supervisor.SupervisorControlView;
+import presentacion.views.tecnico.TecnicoControlView;
 
 public class ViewsFactoryImpl extends ViewsFactory {
 
@@ -20,8 +17,8 @@ public class ViewsFactoryImpl extends ViewsFactory {
 
 	@Override
 	public Presenter makePresenter() {
-		new TurnosPresenter(controllers.makeTurnosController());
-		new ClientePresenter(SupervisorControlView.getInstance().getPanelClientesView(),
+		new TurnosPresenter(SupervisorControlView.getInstance().getTurnosView(),controllers.makeTurnosController());
+		new ClientePresenter(SupervisorControlView.getInstance().getClientesView(),
 				controllers.makeClientesController(), controllers.makeVehiculosController(),
 				controllers.makeOrdenesDeTrabajoController());
 		new OrdenDeTrabajoPresenter(controllers.makeOrdenesDeTrabajoController());

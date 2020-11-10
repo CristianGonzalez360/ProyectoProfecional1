@@ -1,4 +1,4 @@
-package presentacion.views;
+package presentacion.views.tecnico;
 
 import javax.swing.JDialog;
 import javax.swing.JPanel;
