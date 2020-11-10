@@ -62,7 +62,7 @@ public class FacturasController {
 	
 	public FacturaDTO generarFactura(Map<Integer, Boolean> presupuestos) {
 		Object [] keys = presupuestos.keySet().toArray();
-		Integer ordenDeTrabajoId = (Integer) keys[0];
+		Integer ordenDeTrabajoId = presDao.readByID((Integer) keys[0]).getIdOT();
 		FacturaDTO factura = null;
 		boolean esOrdenDeTrabajoRechazada = esRechazada(ordenDeTrabajoId);
 		if(!esOrdenDeTrabajoRechazada) {
