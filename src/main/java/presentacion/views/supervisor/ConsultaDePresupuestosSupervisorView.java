@@ -301,7 +301,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		toolBar.setFloatable(false);
 		panel_2.add(toolBar, BorderLayout.NORTH);
 
-		btnGenerarFactura = new JButton("Generar factura");
+		btnGenerarFactura = new JButton("Aprobar presupuesto");
 		toolBar.add(btnGenerarFactura);
 
 		btnRegistrarPago = new JButton("Registrar pago");
@@ -395,19 +395,14 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		this.presupuestos = presupuestos;
 		for (PresupuestoDTO dto : presupuestos) {
+			
 			Object[] row = { 
 					dto.getIdPresupuesto().toString(),
 					dto.getFechaAltaPresu().toString(),
-					dto.getComentarioAltaPresu().toString(), 
+					dto.getComentarioAltaPresu() != null ? dto.getComentarioAltaPresu() : "", 
 					dto.getEstado().name()
 			};
 			this.listadoDePresupuestosModel.addRow(row);
-		}
-		if(!presupuestos.isEmpty()) {
-			boolean estado = presupuestos.get(0).getEstado() != EstadoPresupuesto.PENDIENTE;
-			if(estado) {
-				tablePresupuestos.setEnabled(false);
-			}
 		}
 		TableColumn tc = tablePresupuestos.getColumnModel().getColumn(4);
 		tc.setCellEditor(tablePresupuestos.getDefaultEditor(Boolean.class));

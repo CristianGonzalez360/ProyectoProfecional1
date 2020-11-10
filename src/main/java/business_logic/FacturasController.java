@@ -43,7 +43,7 @@ public class FacturasController {
 	}
 	
 	
-	public void updateEstadoPresupuestos(Map<Integer, Boolean> presupuestos) throws ForbiddenException {
+	public void aprobarPresupuestos(Map<Integer, Boolean> presupuestos) throws ForbiddenException {
 		assert presupuestos != null;
 		assert !presupuestos.isEmpty();
 		presupuestos.forEach((k, v) -> {
@@ -69,7 +69,7 @@ public class FacturasController {
 			factura = new FacturaDTO();
 			factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
 			factura.setFechaDeAlta(new Date());
-			facturaDao.insert(factura);	
+			facturaDao.insert(factura);
 		}
 		return factura;
 	}

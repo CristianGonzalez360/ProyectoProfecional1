@@ -63,7 +63,7 @@ public class ConsultaDePresupuestoPresenter {
 				onSelectPresupuesto();
 			}
 		});
-		view.setActionGenerarFactura((a)->onGenerarFactura(a));
+		view.setActionGenerarFactura((a)->onAprobarPresupuestos(a));
 		view.setActionRegistrarPago((a)->onRegistrarPago(a));
 	}
 
@@ -118,14 +118,16 @@ public class ConsultaDePresupuestoPresenter {
 		}
 	}
 	
-	private void onGenerarFactura(ActionEvent a) {
+	private void onAprobarPresupuestos(ActionEvent a) {
 		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
 		try {
-			facController.updateEstadoPresupuestos(presupuestosSeleccionados);
+			facController.aprobarPresupuestos(presupuestosSeleccionados);
 			updatePresupuestosView();
 			FacturaDTO factura = facController.generarFactura(presupuestosSeleccionados);
+			System.out.println("es nulllll factura " +  factura);
 			if(factura != null) {
 				ResumenDeFacturaDTO resumen = facController.generarResumenFactura(view.getIdOrdenDeTrabajoPresentada());
+				
 				if(resumen != null) {
 					new MessageDialog().showMessages(resumen.generarResumen());	
 				}	
