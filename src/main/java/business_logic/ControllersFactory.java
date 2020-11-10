@@ -5,7 +5,8 @@ public abstract class ControllersFactory {
 	private static ControllersFactory concreteFactory;
 
 	public static void setFactory(ControllersFactory factory) {
-		if(factory == null) throw new IllegalArgumentException("Factory is null");
+		if (factory == null)
+			throw new IllegalArgumentException("Factory is null");
 		concreteFactory = factory;
 	}
 
@@ -13,6 +14,20 @@ public abstract class ControllersFactory {
 		assert concreteFactory != null;
 		return concreteFactory;
 	}
+
+	public abstract LoginController makeLoginController();
+
+	public abstract TurnosController makeTurnosController();
+
+	public abstract ClientesController makeClientesController();
+
+	public abstract VehiculosController makeVehiculosController();
+
+	public abstract OrdenesTrabajoController makeOrdenesDeTrabajoController();
+
+	public abstract PresupuestosController makePresupuestosController();
+
+	public abstract RepuestosController makeRepuestosController();
 	
-	public abstract PaisController makePaisController();
+	public abstract FacturasController makeFacturasController();
 }

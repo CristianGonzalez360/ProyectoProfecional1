@@ -5,6 +5,7 @@ import java.util.List;
 
 import dto.PaisDTO;
 import repositories.PaisDao;
+import repositories.jdbc.utils.Mapper;
 
 public class PaisDaoImpl extends GenericJdbcDao<PaisDTO> implements PaisDao {
 
@@ -15,62 +16,44 @@ public class PaisDaoImpl extends GenericJdbcDao<PaisDTO> implements PaisDao {
 	static final String readall = "SELECT * FROM Pais";
 	static final String readbyid = "SELECT * FROM Pais WHERE PaisID = ?";
 	static final String readByName = "SELECT * FROM Pais WHERE PaisNombre = ?";
-		
+
 	public PaisDaoImpl(Connection connection) {
 		super(connection);
 	}
 
 	@Override
 	public boolean update(PaisDTO dto) {
-		return getTemplate()
-				.query(update)
-				.param(dto.getNombre())
-				.param(dto.getId())
-				.excecute();
+		return getTemplate().query(update).param(dto.getNombre()).param(dto.getId()).excecute();
 	}
 
 	@Override
 	public boolean insert(PaisDTO dto) {
-		return getTemplate()
-				.query(insert)
-				.param(dto.getNombre())
-				.excecute();
+		return getTemplate().query(insert).param(dto.getNombre()).excecute();
 	}
 
 	@Override
 	public boolean deleteById(Integer id) {
-		return getTemplate()
-				.query(delete)
-				.param(id)
-				.excecute();
+		return getTemplate().query(delete).param(id).excecute();
 	}
 
 	@Override
 	public PaisDTO readByID(Integer id) {
-		return getTemplate()
-				.query(readbyid)
-				.param(id)
-				.excecute(getMapper())
-				.get(FIRST);
+		return getTemplate().query(readbyid).param(id).excecute(getMapper()).get(FIRST);
 	}
 
 	@Override
 	public List<PaisDTO> readAll() {
-		return getTemplate()
-				.query(readall)
-				.excecute(getMapper());
+		return getTemplate().query(readall).excecute(getMapper());
 	}
-	
+
 	@Override
 	public PaisDTO readByName(String nombre) {
-		List<PaisDTO> res = getTemplate()
-				.query(readByName)
-				.param(nombre)
-				.excecute(getMapper());
-		if(res.isEmpty()) return null;
+		List<PaisDTO> res = getTemplate().query(readByName).param(nombre).excecute(getMapper());
+		if (res.isEmpty())
+			return null;
 		return res.get(FIRST);
 	}
-	
+
 	@Override
 	protected Mapper<PaisDTO> getMapper() {
 		return new Mapper<PaisDTO>() {
@@ -79,5 +62,5 @@ public class PaisDaoImpl extends GenericJdbcDao<PaisDTO> implements PaisDao {
 				return new PaisDTO((Integer) obj[0], (String) obj[1]);
 			}
 		};
-	}	
+	}
 }

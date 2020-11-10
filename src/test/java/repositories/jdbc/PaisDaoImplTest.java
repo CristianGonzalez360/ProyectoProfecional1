@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dto.PaisDTO;
+import repositories.jdbc.utils.DataSource;
+import repositories.jdbc.utils.H2DataSource;
 
 class PaisDaoImplTest {
 
@@ -15,28 +17,29 @@ class PaisDaoImplTest {
 		DataSource ds = new H2DataSource();
 		return new PaisDaoImpl(ds.getConnection());
 	}
-	
+
 	PaisDTO makeTestDTO() {
 		PaisDTO target = new PaisDTO(null, "Nicaragua");
 		return target;
 	}
-	
+
 	@BeforeEach
 	void cleanDb() {
-		for(PaisDTO target : dao.readAll())	dao.deleteById(target.getId());
+		for (PaisDTO target : dao.readAll())
+			dao.deleteById(target.getId());
 	}
-	
+
 	@Test
 	void testPaisDaoImpl() {
 		assertNotNull(dao);
 	}
-	
+
 	@Test
 	void testInsert() {
 		PaisDTO target = makeTestDTO();
 		assertTrue(dao.insert(target));
 	}
-	
+
 	@Test
 	void testUpdate() {
 		PaisDTO saved = makeTestDTO();

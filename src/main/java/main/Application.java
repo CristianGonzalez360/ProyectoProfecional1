@@ -1,8 +1,8 @@
 
 package main;
 
-import presentacion.views.ViewsFactory;
-import presentacion.views.ViewsFactoryImpl;
+import presentacion.ViewsFactory;
+import presentacion.ViewsFactoryImpl;
 
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -11,10 +11,11 @@ import business_logic.ControllersFactory;
 import business_logic.ControllersFactoryImpl;
 import repositories.DaosFactory;
 import repositories.jdbc.DaosFactoryImpl;
-import repositories.jdbc.DataSource;
-import repositories.jdbc.DataSourceFactory;
-import repositories.jdbc.DataSourceFactory.DataSourceType;
-import repositories.jdbc.DataSourceFactoryImpl;
+import repositories.jdbc.utils.DataSource;
+import repositories.jdbc.utils.DataSourceFactory;
+import repositories.jdbc.utils.DataSourceFactoryImpl;
+import services.DatabaseSeederServiceImpl;
+import repositories.jdbc.utils.DataSourceFactory.DataSourceType;
 
 public class Application {
 
@@ -41,16 +42,12 @@ public class Application {
 		ControllersFactory.setFactory(new ControllersFactoryImpl(DaosFactory.getFactory()));
 		ViewsFactory.setFactory(new ViewsFactoryImpl(ControllersFactory.getFactory()));
 		ViewsFactory.getFactory().makePresenter().onInit();
+		new DatabaseSeederServiceImpl(DaosFactory.getFactory()).seedDatabase();
 	}
 
 	public static void main(String[] args) {
 		DataSourceFactory.setFactory(new DataSourceFactoryImpl());
-		DataSource ds = DataSourceFactory
-				.getFactory()
-				.makeDataSource(DataSourceType.IN_MEMORY);
-				
-		new Application()
-			.setUpLookAndFeel()
-			.onInit(ds);
+		DataSource ds = DataSourceFactory.getFactory().makeDataSource(DataSourceType.IN_MEMORY);
+		new Application().setUpLookAndFeel().onInit(ds);
 	}
 }

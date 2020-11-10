@@ -1,9 +1,250 @@
 #RECOMENDADO SOLO AGREGAR!!
-paisesList:
-  - nombre: Chile
-  - nombre: Uruguay
-  - nombre: Bolivia
-  - nombre: Argentina
-  - nombre: Colombia
-  - nombre: Paraguay
-  - nombre: Brazil
+cuentas:
+  - fechaDeAlta: 1990-08-07
+    nombreUsuario: u001
+    password: pu001
+    role: tecnico
+  - fechaDeAlta: 2020-10-10
+    nombreUsuario: u002
+    password: pu002
+    role: supervisor
+
+datosPersonales:
+  - nombreCompleto: u001
+    dni: 33390341
+    telefono: 1111
+    email: u001@mail.com
+    calle: calle1
+    altura: 1
+    piso: 1
+    dpto: A1
+    localidad: localidad1
+  - nombreCompleto: u002
+    dni: 33390342
+    telefono: 1112
+    email: u002@mail.com
+    calle: calle1
+    altura: 1
+    piso: 1
+    dpto: A1
+    localidad: localidad1
+  - nombreCompleto: c001
+    dni: 33390343
+    telefono: 321111
+    email: c001@mail.com
+    calle: calle1
+    altura: 11
+    piso: 12
+    dpto: A3
+    localidad: localidad3
+  - nombreCompleto: c002
+    dni: 33390344
+    telefono: 611611
+    email: c002@mail.com
+    calle: calle111
+    altura: 166
+    piso: 11
+    dpto: B1
+    localidad: localidad1
+    
+usuarios:
+  - cuenta:
+      idCuenta: 1
+    datos:
+      id: 1
+  - cuenta:
+      idCuenta: 2
+    datos:
+      id: 2
+      
+turnos:
+  - idCliente: 1
+    dniCliente: 33333
+    fechaAlta: 2020-11-05
+    fechaProgramada: 2020-11-20
+    nombreCliente: c007
+    telefonoCliente: "1136635555"
+    emailCliente: "ejemplo0@dominio.com"
+  - idCliente: 12
+    dniCliente: 22222
+    fechaAlta: 2020-11-05
+    fechaProgramada: 2020-11-24
+    nombreCliente: c008
+    telefonoCliente: "1133335555"
+    emailCliente: "ejemplo1@dominio.com"
+  - idCliente: 3
+    dniCliente: 111111
+    fechaAlta: 2020-11-05
+    fechaProgramada: 2020-11-22
+    nombreCliente: c009
+    telefonoCliente: "1122335555"
+    emailCliente: "ejemplo2@dominio.com"
+  - idCliente: 5
+    dniCliente: 44444
+    fechaAlta: 2020-11-05
+    fechaProgramada: 2020-11-19
+    nombreCliente: c0010
+    telefonoCliente: "1133335955"
+    emailCliente: "ejemplo3@dominio.com"
+    
+fichaTecnicaVehiculos:
+  - nroChasis: 3123
+    nroMotor: 22551
+    kilometraje: 22222
+    marca: suzuki
+    modelo: 1993
+    color: rojo
+    combustion: gas/nafta
+    descripcion: calienta mucho
+  - nroChasis: 3125
+    nroMotor: 22552
+    kilometraje: 22122
+    marca: ford
+    modelo: 1999
+    color: negro
+    combustion: nafta
+    descripcion: funciona ok
+  - nroChasis: 31258
+    nroMotor: 225528
+    kilometraje: 221
+    marca: ford
+    modelo: 1979
+    color: negro
+    combustion: nafta
+    descripcion: funciona ok
+
+clientes:
+  - idDatosPersonales: 1 
+    fechaAltaCliente: 2020-10-25
+  - idDatosPersonales: 2 
+    fechaAltaCliente: 2020-10-25
+  - idDatosPersonales: 3 
+    fechaAltaCliente: 2020-10-25
+
+vehiculosConOrdenDeTrabajo:
+  - idFichaTecnica: 1
+    idCliente: 1
+    kilometrajeGarantia: 123
+    aseguradora: la nueva
+    nroPolizaSeguro: 4234
+    patente: 6664
+  - idFichaTecnica: 1
+    idCliente: 2
+    kilometrajeGarantia: 123
+    aseguradora: la nueva
+    nroPolizaSeguro: 4234
+    patente: 6662
+  - idFichaTecnica: 2
+    idCliente: 2
+    kilometrajeGarantia: 123
+    aseguradora: la nueva
+    nroPolizaSeguro: 4234
+    patente: 6661
+  - idFichaTecnica: 2
+    idCliente: 3
+    kilometrajeGarantia: 123
+    aseguradora: la nueva
+    nroPolizaSeguro: 4234
+    patente: 66611
+
+ordenesDeTrabajo:
+  - tipoOrdeTrabajo: service
+    idUsuarioAlta: 1
+    fechaDeAlta: 2020-05-10
+    fechaEntregado:
+    trabajoSolicitado: tren delantero y chapa
+    trabajoSujerido: cambio de neumaticos delanteros
+    idVehiculoOt: 1
+  - tipoOrdeTrabajo: taller
+    idUsuarioAlta: 1
+    fechaDeAlta:
+    fechaEntregado: 2020-06-10
+    trabajoSolicitado: electricidad
+    trabajoSujerido: cambio de caja de transmision
+    idVehiculoOt: 2
+  - tipoOrdeTrabajo: taller
+    idUsuarioAlta: 1
+    fechaDeAlta: 2020-02-10
+    fechaEntregado:
+    trabajoSolicitado: cambio de cremallera
+    trabajoSujerido: cambio el auto
+    idVehiculoOt: 3
+    descripcion: funciona ok
+    
+repuestos:
+  - codigoRepuesto: 22230
+    precioRepuesto: 126
+    marcaRepuesto: xx1
+    descripcionRepuesto: ruleman
+    stockRepuesto: 337
+    fabricante: fx
+    stockMinimo: 13
+  - codigoRepuesto: 111430
+    precioRepuesto: 876
+    marcaRepuesto: dfv
+    descripcionRepuesto: csdc
+    stockRepuesto: 78
+    fabricante: sdfg
+    stockMinimo: 99
+  - codigoRepuesto: 109986
+    precioRepuesto: 1523
+    marcaRepuesto: ghj
+    descripcionRepuesto: ruleman
+    stockRepuesto: 310
+    fabricante: ghj
+    stockMinimo: 8
+  - codigoRepuesto: 14230
+    precioRepuesto: 102
+    marcaRepuesto: gdfg
+    descripcionRepuesto: rulemanxx
+    stockRepuesto: 355
+    fabricante: sgf
+    stockMinimo: 7
+  - codigoRepuesto: 510230
+    precioRepuesto: 1300
+    marcaRepuesto: skf11
+    descripcionRepuesto: dgruleman
+    stockRepuesto: 303
+    fabricante: sgdfg
+    stockMinimo: 2123
+
+presupuestos:
+  - idOT: 1
+    idUsuAltaPresu:  1
+    idUsuCierrePresu:
+    idUsuRegPago: 
+    idPago:
+    fechaAltaPresu: 2020-10-10
+    comentarioAltaPresu: El tren delantero esta destrozado
+    comentarioCierrePresu:
+    fechaAprobacion:
+  - idOT: 1
+    idUsuAltaPresu: 1
+    idUsuCierrePresu:
+    idUsuRegPago:
+    idPago:
+    fechaAltaPresu: 2020-10-11
+    comentarioAltaPresu: revisar bomba de nafta
+    comentarioCierrePresu:
+    fechaAprobacion:
+
+trabajos: 
+  - idPresupuesto: 1
+    descripcionTrabajo: reparacion de la electricidad
+    precioTrabajo: 2033
+    tiempoEstTrabajo: 12
+  - idPresupuesto: 1
+    descripcionTrabajo: reparar rotula izquierda
+    precioTrabajo: 800
+    tiempoEstTrabajo: 7
+ 
+repuestosPlanificados:
+  - idRepuesto: 1
+    idPresu: 1
+    cantRequerida: 24
+  - idRepuesto: 3
+    idPresu: 1
+    cantRequerida: 14
+  - idRepuesto: 2
+    idPresu: 2
+    cantRequerida: 5
