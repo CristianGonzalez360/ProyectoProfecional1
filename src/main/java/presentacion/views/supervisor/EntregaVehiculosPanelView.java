@@ -75,4 +75,24 @@ public class EntregaVehiculosPanelView extends JPanel {
 		this.btnRegistrarEntrega.addActionListener(listener);
 	}
 
+	public String getDniBusqueda() {
+		return this.textDniCliente.getText();
+	}
+
+	public void clear() {
+		tableModelEntregas.setRowCount(0);
+		tableModelEntregas.setColumnCount(0);
+		tableModelEntregas.setColumnIdentifiers(COLUMNAS_ENTREGAS);
+	}
+
+	public Integer getIdSelectedEntrega() {
+		int row = tableEntregas.getSelectedRow();
+		int id;
+		if (tableEntregas.getSelectedRow() == 1) {
+			id = Integer.parseInt(tableEntregas.getValueAt(row, 0).toString());
+			return id;
+		}
+		return null;
+	}
+
 }
