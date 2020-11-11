@@ -9,7 +9,7 @@ import repositories.jdbc.utils.Mapper;
 
 public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements ClientesDao {
 
-	private static final String readall = "SELECT idCliente, Clientes.idDatosPersonales, nombreCompleto, dni, telefono, email, calle, altura, piso, dpto, localidad FROM Clientes INNER JOIN DatosPersonales on Clientes.idDatosPersonales = DatosPersonales.idDatosPersonales";
+	private static final String readall = "SELECT idCliente, Clientes.idDatosPersonales, nombreCompleto, apellido, dni, telefono, email, calle, altura, piso, dpto, localidad FROM Clientes INNER JOIN DatosPersonales on Clientes.idDatosPersonales = DatosPersonales.idDatosPersonales";
 
 	private static final String readByDni = readall + " " + "WHERE DatosPersonales.dni = ?";
 
@@ -78,14 +78,15 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 				DatosPersonalesDTO datos = new DatosPersonalesDTO();
 				datos.setId((Integer) obj[1]);
 				datos.setNombreCompleto((String) obj[2]);
-				datos.setDni((Integer) obj[3]);
-				datos.setTelefono((String) obj[4]);
-				datos.setEmail(((String) obj[5]));
-				datos.setCalle(((String) obj[6]));
-				datos.setAltura((String) obj[7]);
-				datos.setPiso((String) obj[8]);
-				datos.setDpto((String) obj[9]);
-				datos.setLocalidad((String) obj[10]);
+				datos.setApellido((String) obj[3]);
+				datos.setDni((Integer) obj[4]);
+				datos.setTelefono((String) obj[5]);
+				datos.setEmail(((String) obj[6]));
+				datos.setCalle(((String) obj[7]));
+				datos.setAltura((String) obj[8]);
+				datos.setPiso((String) obj[9]);
+				datos.setDpto((String) obj[10]);
+				datos.setLocalidad((String) obj[11]);
 				ret.setDatosPersonalesDTO(datos);
 				return ret;
 			}
