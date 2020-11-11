@@ -1,33 +1,21 @@
 package presentacion.views.supervisor;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.util.List;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
 
-import javax.swing.border.SoftBevelBorder;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 
 import dto.OrdenDeTrabajoDTO;
 
-import javax.swing.border.BevelBorder;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
 public class SupervisorControlView extends JInternalFrame {
 
 	private static final long serialVersionUID = 4306672868994985561L;
-
-	private static final String[] COLUMNAS_ENTREGAS = {};
 
 	private static final String [] COLUMNAS_ORDENES = new String [] {""};
 
@@ -41,23 +29,7 @@ public class SupervisorControlView extends JInternalFrame {
 
 	private ConsultaDePresupuestosSupervisorView panelConsultaOTPresupuestadasView;
 
-	private PanelEntregaVehiculosView panelEntregaVehiculosView;
-
-	/*
-	 * --- Vehicle Delivery
-	 */
-	private JPanel panelSuperiorEntrega;
-	private FlowLayout flowLayoutSuperiorEntrega;
-	private JTextField textDniDeEntrega;
-	private JLabel lblDniDeEntrega;
-	private JButton btnBuscarEntregas;
-
-	private JScrollPane scrollPanelTablaEntregas;
-	private DefaultTableModel modelEntregas;
-	private JTable tablaEntregas;
-
-	private JPanel panelInferiorEntrega;
-	private JButton btnRegistrarEntrega;
+	private EntregaVehiculosPanelView panelEntregaVehiculosView;
 
 	public static SupervisorControlView getInstance() {
 		if (instance == null)
@@ -93,43 +65,15 @@ public class SupervisorControlView extends JInternalFrame {
 		panelConsultaOTPresupuestadasView = ConsultaDePresupuestosSupervisorView.getInstance();
 		tabbedPane.addTab("Gestión de presupuestos", panelConsultaOTPresupuestadasView);
 
-		panelEntregaVehiculosView = new PanelEntregaVehiculosView();
-		tabbedPane.addTab("Gestion entrega de vehículo", panelEntregaVehiculosView);
-
-		// vehicle delivery
-		panelSuperiorEntrega = new JPanel();
-		panelSuperiorEntrega.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		flowLayoutSuperiorEntrega = (FlowLayout) panelSuperiorEntrega.getLayout();
-		flowLayoutSuperiorEntrega.setHgap(20);
-
-		panelEntregaVehiculosView.add(panelSuperiorEntrega, BorderLayout.NORTH);
-
-		lblDniDeEntrega = new JLabel("Cliente DNI");
-		panelSuperiorEntrega.add(lblDniDeEntrega);
-
-		textDniDeEntrega = new JTextField("");
-		textDniDeEntrega.setHorizontalAlignment(SwingConstants.CENTER);
-		panelSuperiorEntrega.add(textDniDeEntrega);
-		textDniDeEntrega.setColumns(20);
-
-		btnBuscarEntregas = new JButton("Buscar");
-		panelSuperiorEntrega.add(btnBuscarEntregas);
-
-		scrollPanelTablaEntregas = new JScrollPane();
-
-		panelEntregaVehiculosView.add(scrollPanelTablaEntregas, BorderLayout.CENTER);
-
-		modelEntregas = new DefaultTableModel(null, COLUMNAS_ENTREGAS);
-		tablaEntregas = new JTable(modelEntregas);
-		scrollPanelTablaEntregas.setViewportView(tablaEntregas);
-
-		panelInferiorEntrega = new JPanel();
-
-		panelEntregaVehiculosView.add(panelInferiorEntrega, BorderLayout.SOUTH);
-
-		btnRegistrarEntrega = new JButton("Registrar Entrega");
-		panelInferiorEntrega.add(btnRegistrarEntrega);
-
+		/*
+		 * Entregas
+		 */
+		JPanel entregasPanel = new JPanel();
+		tabbedPane.addTab("Gestión entrega de vehículo", null, entregasPanel, null);
+		entregasPanel.setLayout(new BorderLayout(0, 0));
+		
+		panelEntregaVehiculosView = new EntregaVehiculosPanelView();
+		entregasPanel.add(panelEntregaVehiculosView);
 	}
 
 	public void display() {
@@ -166,6 +110,10 @@ public class SupervisorControlView extends JInternalFrame {
 	
 	public PanelClientesView getClientesView() {
 		return this.panelClientesView;
+	}
+	
+	public EntregaVehiculosPanelView getEntregasView() {
+		return this.panelEntregaVehiculosView;
 	}
 
 	public void setActionBuscarOT(ActionListener listener) {
