@@ -111,6 +111,10 @@ public class SupervisorControlView extends JInternalFrame {
 	public PanelClientesView getClientesView() {
 		return this.panelClientesView;
 	}
+	
+	public EntregaVehiculosPanelView getEntregasView() {
+		return this.panelEntregaVehiculosView;
+	}
 
 	public void setActionBuscarOT(ActionListener listener) {
 		// TODO Auto-generated method stub
