@@ -2,6 +2,7 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 
+import business_logic.EntregaDeVehiculoController;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.EntregaVehiculosPanelView;
 import presentacion.views.utils.ConfirmationDialog;
@@ -12,6 +13,7 @@ public class EntregaDeVehiculoPresenter {
 	private static final String CONFIRMATION = "¿Está seguro que desea registrar la entrega?";
 
 	private EntregaVehiculosPanelView view;
+	private EntregaDeVehiculoController controller;
 
 	public EntregaDeVehiculoPresenter(EntregaVehiculosPanelView view) {
 		this.view = view;

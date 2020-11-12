@@ -3,6 +3,7 @@ package presentacion.views.supervisor;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,6 +15,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
+
+import dto.EntregaDeVehiculoDTO;
 
 public class EntregaVehiculosPanelView extends JPanel {
 
@@ -83,6 +86,14 @@ public class EntregaVehiculosPanelView extends JPanel {
 		tableModelEntregas.setRowCount(0);
 		tableModelEntregas.setColumnCount(0);
 		tableModelEntregas.setColumnIdentifiers(COLUMNAS_ENTREGAS);
+	}
+
+	public void setData(List<EntregaDeVehiculoDTO> entregas) {
+		for (EntregaDeVehiculoDTO entrega : entregas) {
+			Object[] row = { entrega.getDniCliente(), entrega.getNombreCompleto(), entrega.getMarcaAuto(),
+					entrega.getModeloAuto(), entrega.getColorAuto(), entrega.getPatenteAuto() };
+			tableModelEntregas.addRow(row);
+		}
 	}
 
 	public Integer getIdSelectedEntrega() {
