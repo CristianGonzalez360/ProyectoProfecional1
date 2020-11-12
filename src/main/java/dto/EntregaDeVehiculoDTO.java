@@ -2,7 +2,7 @@ package dto;
 
 public class EntregaDeVehiculoDTO {
 	
-	private String dniCliente;
+	private Integer dniCliente;
 	private String nombreCompleto;
 	
 	private String marcaAuto;
@@ -10,7 +10,7 @@ public class EntregaDeVehiculoDTO {
 	private String colorAuto;
 	private String patenteAuto;
 	
-	public EntregaDeVehiculoDTO(String dniCliente, String nombreCompleto, String marcaAuto, String modeloAuto,
+	public EntregaDeVehiculoDTO(Integer dniCliente, String nombreCompleto, String marcaAuto, String modeloAuto,
 			String colorAuto, String patenteAuto) {
 		super();
 		this.dniCliente = dniCliente;
@@ -21,10 +21,10 @@ public class EntregaDeVehiculoDTO {
 		this.patenteAuto = patenteAuto;
 	}
 	
-	public String getDniCliente() {
+	public Integer getDniCliente() {
 		return dniCliente;
 	}
-	public void setDniCliente(String dniCliente) {
+	public void setDniCliente(Integer dniCliente) {
 		this.dniCliente = dniCliente;
 	}
 	public String getNombreCompleto() {

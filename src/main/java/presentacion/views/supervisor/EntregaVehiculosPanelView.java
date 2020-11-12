@@ -66,7 +66,7 @@ public class EntregaVehiculosPanelView extends JPanel {
 		JPanel panelInferior = new JPanel();
 		add(panelInferior, BorderLayout.SOUTH);
 
-		btnRegistrarEntrega = new JButton("Registrar turno");
+		btnRegistrarEntrega = new JButton("Registrar Entrega");
 		panelInferior.add(btnRegistrarEntrega);
 	}
 

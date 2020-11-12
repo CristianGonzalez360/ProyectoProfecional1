@@ -27,13 +27,13 @@ public class EntregaDeVehiculoPresenter {
 		
 		if(dniBuscado.trim().isEmpty()) {
 			view.clear();
-			//view.setData(controller.readAll());
+			view.setData(controller.readAll());
 		} else {
 			boolean esDniConFormatoCorrecto = new StringValidator(dniBuscado).number("").validate().isEmpty();
 			if(esDniConFormatoCorrecto) {
 				Integer dniCliente = Integer.parseInt(dniBuscado);
 				view.clear();
-				//view.setData(controller.readByDniCliente(dniCliente));
+				view.setData(controller.readByDniCliente(dniCliente));
 			}
 		}
 	}
@@ -42,7 +42,7 @@ public class EntregaDeVehiculoPresenter {
 		Integer idEntrega = view.getIdSelectedEntrega();
 		if(idEntrega != null) {
 			if(new ConfirmationDialog(CONFIRMATION).open() == 0) {
-				//controller.cancelById(idEntrega);
+				controller.registrarEntregaById(idEntrega);
 				view.clear();
 				new MessageDialog().showMessages("Entrega Registrada");	
 			}
