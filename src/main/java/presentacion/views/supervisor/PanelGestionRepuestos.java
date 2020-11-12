@@ -131,8 +131,12 @@ public class PanelGestionRepuestos extends JPanel{
 		comboMarcas.setModel(modelo);
 	}
 	
-	public int getIdPresupuesto() {
-		return tablaRepuestos.getSelectedRow();
+	public int getIdRepuesto() {
+		int ret = -1;
+		if(tablaRepuestos.getSelectedRow()>=0) {
+			ret = idRepuestos.get(tablaRepuestos.getSelectedRow());
+		}
+		return ret;
 	}
 
 	public void setActionOnBuscar(ActionListener listener) {
@@ -145,7 +149,6 @@ public class PanelGestionRepuestos extends JPanel{
 
 	public void setActionOnCargarArchivo(ActionListener listener) {
 		this.btnCargarArchivo.addActionListener(listener);
-		
 	}
 
 }
