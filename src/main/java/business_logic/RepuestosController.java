@@ -32,5 +32,8 @@ public class RepuestosController {
 	public List<String> readMarcas() {
 		return dao.readMarcas();
 	}
+	public void update(RepuestoDTO entity) {
+		dao.update(entity);
+	}
 
 }

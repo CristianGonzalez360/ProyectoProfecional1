@@ -2,8 +2,6 @@ package presentacion.views.supervisor;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.Container;
-
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -22,7 +20,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
-import javax.swing.plaf.basic.BasicTreeUI.SelectionModelPropertyChangeHandler;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
