@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import dto.validators.NotDateBefore;
 import dto.validators.StringValidator;
 
 public class AltaDeTurnoDTO {
@@ -35,16 +36,18 @@ public class AltaDeTurnoDTO {
 
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
-		errors.addAll(new StringValidator(nombreCliente).notBlank("El Nombre es obligatorio.")
-				.regex("El Nombre debe tener solo letras.", "[a-zA-Záéíóú ]+")
+		errors.addAll(new StringValidator(nombreCliente).regex("El Nombre debe ser un nombre válido.", "[a-zA-Záéíóú ]+")
 				.max(40, "Max 40 caracteres para el Nombre.").validate());
-		errors.addAll(new StringValidator(dniCliente).notBlank("El DNI es obligatorio.")
-				.max(8, "Max 8 caracteres para el DNI.").number("El DNI solo de tener números.")
+		errors.addAll(new StringValidator(dniCliente).max(8, "Max 8 caracteres para el DNI.").number("El DNI debe ser un dni.")
 				.validate());
-		errors.addAll(new StringValidator(telefonoCliente).notBlank("El Teléfono es obligatorio.")
-				.notSpaces("El Teléfono no puede contener espacios.").number("El Teléfono solo puede tener números.")
+		errors.addAll(new StringValidator(telefonoCliente).number("El Teléfono debe ser un nro telefónico.")
 				.validate());
-		errors.addAll(new StringValidator(emailCliente).email("El Email debe ser valido.").validate());
+		errors.addAll(new StringValidator(emailCliente).email("El Email debe ser un email.").validate());
+		if(fechaProgramada != null) {
+			errors.addAll(new NotDateBefore("La fecha debe ser posterior a la actual").validate(fechaProgramada));
+		} else {
+			errors.add("Programar una fecha es obligatorio");
+		}
 		return errors;
 	}
 

@@ -1,4 +1,4 @@
-package presentacion.views;
+package presentacion;
 
 public abstract class ViewsFactory {
 

@@ -1,4 +1,4 @@
-package presentacion.views;
+package presentacion;
 
 public interface Presenter {
 

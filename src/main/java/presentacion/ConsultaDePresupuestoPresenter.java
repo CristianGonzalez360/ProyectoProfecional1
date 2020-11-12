@@ -23,8 +23,8 @@ import dto.ResumenDeFacturaDTO;
 import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
-import presentacion.views.ConsultaDePresupuestosSupervisorView;
-import presentacion.views.utils.ErrorDialog;
+import presentacion.views.supervisor.ConsultaDePresupuestosSupervisorView;
+import presentacion.views.utils.MessageDialog;
 
 public class ConsultaDePresupuestoPresenter {
 
@@ -127,11 +127,11 @@ public class ConsultaDePresupuestoPresenter {
 			if(factura != null) {
 				ResumenDeFacturaDTO resumen = facController.generarResumenFactura(view.getIdOrdenDeTrabajoPresentada());
 				if(resumen != null) {
-					new ErrorDialog().showMessages(resumen.generarResumen());	
+					new MessageDialog().showMessages(resumen.generarResumen());	
 				}	
 			}
 		} catch(ForbiddenException e) {
-			new ErrorDialog().showMessages(e.getMessage());
+			new MessageDialog().showMessages(e.getMessage());
 		}
 	}
 	
@@ -142,11 +142,11 @@ public class ConsultaDePresupuestoPresenter {
 			view.clearDataPresupuestos();
 			List<PresupuestoDTO> presupuestos = presController.readByIdOt(idOrdenDeTrabajo);
 			this.setDataPresupuestos(presupuestos);
-			new ErrorDialog().showMessages("Se ha registrado el pago de la factura existosamente.");
+			new MessageDialog().showMessages("Se ha registrado el pago de la factura existosamente.");
 		} catch (ForbiddenException e ) {
-			new ErrorDialog().showMessages(e.getMessage());
+			new MessageDialog().showMessages(e.getMessage());
 		} catch (NotFoundException e) {
-			new ErrorDialog().showMessages(e.getMessage());
+			new MessageDialog().showMessages(e.getMessage());
 		}
 	}
 	

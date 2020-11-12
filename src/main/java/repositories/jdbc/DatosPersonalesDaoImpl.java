@@ -10,9 +10,9 @@ import repositories.jdbc.utils.NullObject;
 
 public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> implements DatosPersonalesDao {
 
-	private static final String insertDatosPersonales = "INSERT INTO DatosPersonales (nombreCompleto, dni, telefono, email, calle, altura,piso, dpto, localidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String insertDatosPersonales = "INSERT INTO DatosPersonales (nombreCompleto, apellido, dni, telefono, email, calle, altura,piso, dpto, localidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-	private static final String update = "UPDATE DatosPersonales SET nombreCompleto = ?, dni = ?, telefono = ?, email = ?, calle = ?, altura = ?,piso = ?, dpto = ?, localidad = ? WHERE idDatosPersonales = ?";
+	private static final String update = "UPDATE DatosPersonales SET nombreCompleto = ?, apellido = ?, dni = ?, telefono = ?, email = ?, calle = ?, altura = ?,piso = ?, dpto = ?, localidad = ? WHERE idDatosPersonales = ?";
 
 	private static final String readAll = "SELECT * FROM DatosPersonales";
 
@@ -24,14 +24,14 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 
 	@Override
 	public boolean insert(DatosPersonalesDTO entity) {
-		return getTemplate().query(insertDatosPersonales).param(entity.getNombreCompleto()).param(entity.getDni())
+		return getTemplate().query(insertDatosPersonales).param(entity.getNombreCompleto()).param(entity.getApellido()).param(entity.getDni())
 				.param(entity.getTelefono()).param(entity.getEmail()).param(entity.getCalle()).param(entity.getAltura())
 				.param(entity.getPiso()).param(entity.getDpto()).param(entity.getLocalidad()).excecute();
 	}
 
 	@Override
 	public boolean update(DatosPersonalesDTO entity) {
-		return getTemplate().query(update).param(entity.getNombreCompleto())
+		return getTemplate().query(update).param(entity.getNombreCompleto()).param(entity.getApellido())
 				.param(entity.getDni() == null ? new NullObject() : entity.getDni()).param(entity.getTelefono())
 				.param(entity.getEmail()).param(entity.getCalle())
 				.param(entity.getAltura() == null ? new NullObject() : entity.getAltura())
@@ -69,14 +69,15 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 				DatosPersonalesDTO dper = new DatosPersonalesDTO();
 				dper.setId((Integer) obj[0]);
 				dper.setNombreCompleto((String) obj[1]);
-				dper.setDni((Integer) obj[2]);
-				dper.setTelefono((String) obj[3]);
-				dper.setEmail((String) obj[4]);
-				dper.setCalle((String) obj[5]);
-				dper.setAltura((String) obj[6]);
-				dper.setPiso((String) obj[7]);
-				dper.setDpto((String) obj[8]);
-				dper.setLocalidad((String) obj[9]);
+				dper.setApellido((String) obj[2]);
+				dper.setDni((Integer) obj[3]);
+				dper.setTelefono((String) obj[4]);
+				dper.setEmail((String) obj[5]);
+				dper.setCalle((String) obj[6]);
+				dper.setAltura((String) obj[7]);
+				dper.setPiso((String) obj[8]);
+				dper.setDpto((String) obj[9]);
+				dper.setLocalidad((String) obj[10]);
 				return dper;
 			}
 		};

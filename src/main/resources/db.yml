@@ -16,6 +16,7 @@ cuentas:
 
 datosPersonales:
   - nombreCompleto: u001
+    apellido: ap001
     dni: 33390341
     telefono: 1111
     email: u001@mail.com
@@ -25,6 +26,7 @@ datosPersonales:
     dpto: A1
     localidad: localidad1
   - nombreCompleto: u002
+    apellido: ap002
     dni: 33390342
     telefono: 1112
     email: u002@mail.com
@@ -34,6 +36,7 @@ datosPersonales:
     dpto: A1
     localidad: localidad1
   - nombreCompleto: u003
+    apellido: ap003
     dni: 33390388
     telefono: 1113
     email: u003@mail.com
@@ -43,6 +46,7 @@ datosPersonales:
     dpto: A1
     localidad: localidad1
   - nombreCompleto: c001
+    apellido: ap003
     dni: 33390343
     telefono: 321111
     email: c001@mail.com
@@ -52,6 +56,7 @@ datosPersonales:
     dpto: A3
     localidad: localidad3
   - nombreCompleto: c002
+    apellido: ap004
     dni: 33390344
     telefono: 611611
     email: c002@mail.com
@@ -77,33 +82,33 @@ usuarios:
       
 turnos:
   - idCliente: 1
-    dniCliente: 12333
+    dniCliente: 33333
     fechaAlta: 2020-11-05
-    fechaProgramada: 2020-11-08
-    nombreCliente: u007
-    telefonoCliente: "1133335555"
-    emailCliente: "ejemplo@dominio.com"
+    fechaProgramada: 2020-11-20
+    nombreCliente: c007
+    telefonoCliente: "1136635555"
+    emailCliente: "ejemplo0@dominio.com"
   - idCliente: 12
-    dniCliente: 12333
+    dniCliente: 22222
     fechaAlta: 2020-11-05
-    fechaProgramada: 2020-11-08
-    nombreCliente: u008
+    fechaProgramada: 2020-11-24
+    nombreCliente: c008
     telefonoCliente: "1133335555"
-    emailCliente: "ejemplo@dominio.com"
+    emailCliente: "ejemplo1@dominio.com"
   - idCliente: 3
-    dniCliente: 12333
+    dniCliente: 111111
     fechaAlta: 2020-11-05
-    fechaProgramada: 2020-11-08
-    nombreCliente: u009
-    telefonoCliente: "1133335555"
-    emailCliente: "ejemplo@dominio.com"
+    fechaProgramada: 2020-11-22
+    nombreCliente: c009
+    telefonoCliente: "1122335555"
+    emailCliente: "ejemplo2@dominio.com"
   - idCliente: 5
-    dniCliente: 12333
+    dniCliente: 44444
     fechaAlta: 2020-11-05
-    fechaProgramada: 2020-11-08
-    nombreCliente: u0010
-    telefonoCliente: "1133335555"
-    emailCliente: "ejemplo@dominio.com"
+    fechaProgramada: 2020-11-19
+    nombreCliente: c0010
+    telefonoCliente: "1133335955"
+    emailCliente: "ejemplo3@dominio.com"
     
 fichaTecnicaVehiculos:
   - nroChasis: 3123

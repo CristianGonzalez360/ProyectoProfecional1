@@ -1,4 +1,4 @@
-package presentacion.views;
+package presentacion;
 
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;

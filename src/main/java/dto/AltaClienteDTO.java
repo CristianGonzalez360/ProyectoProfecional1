@@ -9,6 +9,8 @@ import dto.validators.StringValidator;
 public class AltaClienteDTO {
 
 	private String nombreCompleto;
+	
+	private String apellido;
 
 	private String dni;
 
@@ -40,6 +42,14 @@ public class AltaClienteDTO {
 
 	public void setNombreCompleto(String nombreCompleto) {
 		this.nombreCompleto = nombreCompleto;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getDni() {
@@ -103,6 +113,9 @@ public class AltaClienteDTO {
 
 		ret.addAll(new StringValidator(nombreCompleto).notBlank("Debe ingresar un nombre.")
 				.regex("El nombre debe tener solo letras.", "[a-zA-Záéíóú ]+").validate());
+		
+		ret.addAll(new StringValidator(apellido).notBlank("Debe ingresar un apellido.")
+				.regex("El apellido debe tener solo letras.", "[a-zA-Záéíóú ]+").validate());
 
 		ret.addAll(new StringValidator(dni).number("El DNI solo de tener números.").validate());
 

@@ -21,6 +21,7 @@ public class ClienteDTO {
 	public ClienteDTO(AltaClienteDTO altaCliente) {
 		this.datosPersonalesDTO = new DatosPersonalesDTO();
 		datosPersonalesDTO.setNombreCompleto(altaCliente.getNombreCompleto());
+		datosPersonalesDTO.setApellido(altaCliente.getApellido());
 		datosPersonalesDTO.setDni(Integer.parseInt(altaCliente.getDni()));
 		datosPersonalesDTO.setEmail(altaCliente.getEmail());
 		datosPersonalesDTO.setTelefono(altaCliente.getTelefono());

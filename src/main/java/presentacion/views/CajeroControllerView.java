@@ -23,6 +23,9 @@ import javax.swing.table.DefaultTableModel;
 
 import dto.OrdenDeTrabajoDTO;
 import dto.TurnoDTO;
+import presentacion.views.supervisor.ConsultaDePresupuestosSupervisorView;
+import presentacion.views.supervisor.EntregaVehiculosPanelView;
+import presentacion.views.supervisor.PanelClientesView;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JScrollPane;
@@ -59,7 +62,7 @@ public class CajeroControllerView extends JInternalFrame {
 
 	private ConsultaDePresupuestosSupervisorView panelConsultaOTPresupuestadasView;
 
-	private PanelEntregaVehiculosView panelEntregaVehiculosView;
+	private EntregaVehiculosPanelView panelEntregaVehiculosView;
 
 	/*
 	 * --- Vehicle Delivery
@@ -139,7 +142,7 @@ public class CajeroControllerView extends JInternalFrame {
 		panelConsultaOTPresupuestadasView = ConsultaDePresupuestosSupervisorView.getInstance();
 		tabbedPane.addTab("Gestión de presupuestos", panelConsultaOTPresupuestadasView);
 
-		panelEntregaVehiculosView = new PanelEntregaVehiculosView();
+		panelEntregaVehiculosView = new EntregaVehiculosPanelView();
 		tabbedPane.addTab("Gestion entrega de vehículo", panelEntregaVehiculosView);
 
 		tableModelTurnos = new DefaultTableModel(null, COLUMNAS_TURNOS);

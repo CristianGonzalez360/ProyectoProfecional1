@@ -53,8 +53,8 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 	}
 
 	@Override
-	public TurnoDTO readByID(Integer dni) {
-		List<TurnoDTO> turnos = getTemplate().query(readByDni).param(dni).excecute(getMapper());
+	public TurnoDTO readByID(Integer id) {
+		List<TurnoDTO> turnos = getTemplate().query(readByID).param(id).excecute(getMapper());
 		return turnos.isEmpty() ? null : turnos.get(0);
 	}
 
@@ -69,11 +69,16 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
-	public TurnoDTO readByIdTurno(Integer id) {
-		List<TurnoDTO> dtos = getTemplate().query(readByID).param(id).excecute(getMapper());
-		return dtos.isEmpty() ? null : dtos.get(0);
+	@Override
+	public List<TurnoDTO> readAllTurnosDisponibles() {
+		return getTemplate().query(readAllDisponibles).excecute(getMapper());
 	}
 
+	@Override
+	public List<TurnoDTO> readAllByDNI(Integer dni) {
+		return getTemplate().query(readAllByDNI).param(dni).excecute(getMapper());
+	}
+	
 	@Override
 	protected Mapper<TurnoDTO> getMapper() {
 		return new Mapper<TurnoDTO>() {
@@ -93,15 +98,5 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 				return turno;
 			}
 		};
-	}
-
-	@Override
-	public List<TurnoDTO> readAllTurnosDisponibles() {
-		return getTemplate().query(readAllDisponibles).excecute(getMapper());
-	}
-
-	@Override
-	public List<TurnoDTO> readAllByDNI(Integer dni) {
-		return getTemplate().query(readAllByDNI).param(dni).excecute(getMapper());
 	}
 }

@@ -1,4 +1,4 @@
-package presentacion.views;
+package presentacion.views.supervisor;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -37,6 +37,7 @@ public class ClienteFormView extends JDialog {
 	private JTextField textPiso;
 	private JTextField textDepto;
 	private JTextField textLocalidad;
+	private JTextField textApellido;
 
 	private ClienteFormView() {
 		setBounds(100, 100, 506, 253);
@@ -64,61 +65,68 @@ public class ClienteFormView extends JDialog {
 		textNombre.setColumns(10);
 		panel.add(textNombre, "4, 2, fill, default");
 
+		JLabel lblApellido = new JLabel("Apellido");
+		panel.add(lblApellido, "6, 2, right, default");
+
+		textApellido = new JTextField();
+		panel.add(textApellido, "8, 2, fill, default");
+		textApellido.setColumns(10);
+
 		JLabel label_2 = new JLabel("Dni");
-		panel.add(label_2, "6, 2, right, default");
+		panel.add(label_2, "2, 4, right, default");
 
 		textDni = new JTextField();
 		textDni.setColumns(10);
-		panel.add(textDni, "8, 2, fill, default");
+		panel.add(textDni, "4, 4, fill, default");
 
 		JLabel label_1 = new JLabel("Teléfono");
-		panel.add(label_1, "2, 4, right, default");
+		panel.add(label_1, "6, 4, right, default");
 
 		textTelefono = new JTextField();
 		textTelefono.setColumns(10);
-		panel.add(textTelefono, "4, 4, fill, default");
+		panel.add(textTelefono, "8, 4, fill, default");
 
 		JLabel label_3 = new JLabel("Email");
-		panel.add(label_3, "6, 4, right, default");
+		panel.add(label_3, "2, 6, right, default");
 
 		textEmail = new JTextField();
 		textEmail.setColumns(10);
-		panel.add(textEmail, "8, 4, fill, default");
+		panel.add(textEmail, "4, 6, fill, default");
 
 		JLabel lblCalle = new JLabel("Calle");
-		panel.add(lblCalle, "2, 6, right, default");
+		panel.add(lblCalle, "6, 6, right, default");
 
 		textCalle = new JTextField();
 		textCalle.setColumns(10);
-		panel.add(textCalle, "4, 6, fill, default");
+		panel.add(textCalle, "8, 6, fill, default");
 
 		JLabel label_4 = new JLabel("Altura");
-		panel.add(label_4, "6, 6, right, default");
+		panel.add(label_4, "2, 8, right, default");
 
 		textAltura = new JTextField();
 		textAltura.setColumns(10);
-		panel.add(textAltura, "8, 6, fill, default");
+		panel.add(textAltura, "4, 8, fill, default");
 
 		JLabel label_5 = new JLabel("Piso");
-		panel.add(label_5, "2, 8, right, default");
+		panel.add(label_5, "6, 8, right, default");
 
 		textPiso = new JTextField();
 		textPiso.setColumns(10);
-		panel.add(textPiso, "4, 8, fill, default");
+		panel.add(textPiso, "8, 8, fill, default");
 
 		JLabel label_6 = new JLabel("Depto.");
-		panel.add(label_6, "6, 8, right, default");
+		panel.add(label_6, "2, 10, right, default");
 
 		textDepto = new JTextField();
 		textDepto.setColumns(10);
-		panel.add(textDepto, "8, 8, fill, default");
+		panel.add(textDepto, "4, 10, fill, default");
 
 		JLabel label_7 = new JLabel("Localidad");
-		panel.add(label_7, "2, 10, right, default");
+		panel.add(label_7, "6, 10, right, default");
 
 		textLocalidad = new JTextField();
 		textLocalidad.setColumns(10);
-		panel.add(textLocalidad, "4, 10, fill, default");
+		panel.add(textLocalidad, "8, 10, fill, default");
 
 		JPanel panel_1 = new JPanel();
 		contentPanel.add(panel_1, BorderLayout.SOUTH);
@@ -152,6 +160,7 @@ public class ClienteFormView extends JDialog {
 	public AltaClienteDTO getData() {
 		AltaClienteDTO datosPersonales = new AltaClienteDTO();
 		datosPersonales.setNombreCompleto(textNombre.getText());
+		datosPersonales.setApellido(textApellido.getText());
 		datosPersonales.setDni(this.textDni.getText());
 		datosPersonales.setEmail(textEmail.getText());
 		datosPersonales.setTelefono(textTelefono.getText());
@@ -167,6 +176,7 @@ public class ClienteFormView extends JDialog {
 	public void setData(ClienteDTO cliente) {
 		DatosPersonalesDTO datos = cliente.getDatosPersonalesDTO();
 		textNombre.setText(datos.getNombreCompleto());
+		textApellido.setText(datos.getApellido());
 		textDni.setText(datos.getDni() + "");
 		textEmail.setText(datos.getEmail());
 		textTelefono.setText(datos.getTelefono());
@@ -190,6 +200,7 @@ public class ClienteFormView extends JDialog {
 
 	public void clearData() {
 		textNombre.setText("");
+		textApellido.setText("");
 		textDni.setText("");
 		textEmail.setText("");
 		textTelefono.setText("");

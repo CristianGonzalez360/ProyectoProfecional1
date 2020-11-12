@@ -14,6 +14,7 @@ DROP TABLE DatosPersonales IF EXISTS;
 CREATE TABLE DatosPersonales (
     idDatosPersonales int NOT NULL AUTO_INCREMENT,
     nombreCompleto VARCHAR(60) NOT NULL,
+	apellido VARCHAR(60) NOT NULL,
     dni INT,
     telefono VARCHAR(15),
     email VARCHAR(25),

@@ -18,11 +18,11 @@ import dto.RepuestoPlanificadoDTO;
 import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
-import presentacion.views.InputComentarioDialog;
-import presentacion.views.PanelGestionPresupuestoView;
-import presentacion.views.PlanificarRepuestosFormView;
-import presentacion.views.PlanificarTrabajosFormView;
-import presentacion.views.utils.ErrorDialog;
+import presentacion.views.tecnico.InputComentarioDialog;
+import presentacion.views.tecnico.PanelGestionPresupuestoView;
+import presentacion.views.tecnico.PlanificarRepuestosFormView;
+import presentacion.views.tecnico.PlanificarTrabajosFormView;
+import presentacion.views.utils.MessageDialog;
 
 public class PresupuestosPresenter {
 
@@ -96,7 +96,7 @@ public class PresupuestosPresenter {
 					.open();
 			PresupuestoDTO presupuesto = new PresupuestoDTO();
 			presupuesto.setIdOT(idOT);
-			presupuesto.setComentarioAltaPresu(comentario);
+			presupuesto.setComentarioAltaPresu(comentario != null? comentario : "");
 			presupuestosController.save(presupuesto);
 			view.setDataPresupuestos(presupuestosController.readByIdOt(idOT));
 		}
@@ -174,7 +174,7 @@ public class PresupuestosPresenter {
 			planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
 			this.view.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
 		} else {
-			new ErrorDialog().showMessages(errors);
+			new MessageDialog().showMessages(errors);
 			;
 		}
 	}
@@ -198,7 +198,7 @@ public class PresupuestosPresenter {
 			this.planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
 			this.planRepuestosView.display();
 		} else {
-			new ErrorDialog().showMessages("Seleccione un presupuesto");
+			new MessageDialog().showMessages("Seleccione un presupuesto");
 		}
 	}
 	
@@ -209,7 +209,7 @@ public class PresupuestosPresenter {
 			this.planTrabajosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
 			this.planTrabajosView.display();
 		} else {
-			new ErrorDialog().showMessages("Seleccione un presupuesto");
+			new MessageDialog().showMessages("Seleccione un presupuesto");
 		}
 	}
 
