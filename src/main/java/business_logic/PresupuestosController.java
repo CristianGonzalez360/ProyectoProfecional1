@@ -106,4 +106,13 @@ public class PresupuestosController {
 		ret.setRepuestos(RPDao.readByIdPresupuesto(idPresupuesto));
 		return ret;
 	}
+	
+	public List<PresupuestoDTO> readAll() {//lee todos los presupuestos
+		List<PresupuestoDTO> ret = Pdao.readAll();
+		return ret;
+	}
+	
+	public void updateEstadoPresupuesto(int id) {//cambia estado de presupuesto por id
+		Pdao.updateState(id, EstadoPresupuesto.REALIZADO);
+	}
 }
