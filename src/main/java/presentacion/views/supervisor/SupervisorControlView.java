@@ -74,7 +74,7 @@ public class SupervisorControlView extends JInternalFrame {
 		setBounds(100, 100, 1280, 739);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		getContentPane().add(tabbedPane, BorderLayout.NORTH);
+		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		JPanel turnosPanel = new JPanel();
 		tabbedPane.addTab("Gestión de Turnos", null, turnosPanel, null);
