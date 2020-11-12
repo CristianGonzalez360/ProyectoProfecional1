@@ -39,10 +39,10 @@ public class Application {
 
 	public void onInit(DataSource ds) {
 		DaosFactory.setFactory(new DaosFactoryImpl(ds));
+		new DatabaseSeederServiceImpl(DaosFactory.getFactory()).seedDatabase();
 		ControllersFactory.setFactory(new ControllersFactoryImpl(DaosFactory.getFactory()));
 		ViewsFactory.setFactory(new ViewsFactoryImpl(ControllersFactory.getFactory()));
 		ViewsFactory.getFactory().makePresenter().onInit();
-		new DatabaseSeederServiceImpl(DaosFactory.getFactory()).seedDatabase();
 	}
 
 	public static void main(String[] args) {
