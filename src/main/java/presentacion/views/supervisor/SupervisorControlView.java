@@ -64,6 +64,9 @@ public class SupervisorControlView extends JInternalFrame {
 
 		panelConsultaOTPresupuestadasView = ConsultaDePresupuestosSupervisorView.getInstance();
 		tabbedPane.addTab("Gestión de presupuestos", panelConsultaOTPresupuestadasView);
+		
+		PanelGestionRepuestos repuestos = PanelGestionRepuestos.getInstance();
+		tabbedPane.add("Gestión de Repuestos", repuestos);
 
 		/*
 		 * Entregas
