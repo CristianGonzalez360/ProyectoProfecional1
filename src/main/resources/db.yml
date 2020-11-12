@@ -8,6 +8,11 @@ cuentas:
     nombreUsuario: u002
     password: pu002
     role: supervisor
+  - fechaDeAlta: 2010-15-10
+    nombreUsuario: u003
+    password: pu003
+    role: cajero
+
 
 datosPersonales:
   - nombreCompleto: u001
@@ -23,6 +28,15 @@ datosPersonales:
     dni: 33390342
     telefono: 1112
     email: u002@mail.com
+    calle: calle1
+    altura: 1
+    piso: 1
+    dpto: A1
+    localidad: localidad1
+  - nombreCompleto: u003
+    dni: 33390388
+    telefono: 1113
+    email: u003@mail.com
     calle: calle1
     altura: 1
     piso: 1
@@ -56,6 +70,10 @@ usuarios:
       idCuenta: 2
     datos:
       id: 2
+  - cuenta:
+      idCuenta: 3
+    datos:
+      id: 3
       
 turnos:
   - idCliente: 1

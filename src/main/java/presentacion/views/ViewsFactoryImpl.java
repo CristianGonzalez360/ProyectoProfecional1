@@ -16,6 +16,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 		controllers = factory;
 		WorkbenchView.getInstance().addFrames(TecnicoControlView.getInstance());
 		WorkbenchView.getInstance().addFrames(SupervisorControlView.getInstance());
+		WorkbenchView.getInstance().addFrames(CajeroControlView.getInstance());
 	}
 
 	@Override
