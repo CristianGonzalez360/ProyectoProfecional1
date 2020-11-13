@@ -18,6 +18,7 @@ import dto.RepuestoPlanificadoDTO;
 import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
+import presentacion.views.cajero.CarritoRepuestosFormView;
 import presentacion.views.tecnico.InputComentarioDialog;
 import presentacion.views.tecnico.PanelGestionPresupuestoView;
 import presentacion.views.tecnico.PlanificarRepuestosFormView;
@@ -35,6 +36,7 @@ public class PresupuestosPresenter {
 	private RepuestosController repuestosController;
 	private OrdenesTrabajoController ordenDeTrabajoController;
 	private ClientesController clienteController;
+	private CarritoRepuestosFormView carritoRepuestosFormView;
 
 	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController,
 			OrdenesTrabajoController ordenDetranajoController, VehiculosController vehiculoController,
@@ -48,6 +50,8 @@ public class PresupuestosPresenter {
 		this.view = PanelGestionPresupuestoView.getInstance();
 		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
 		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
+		this.carritoRepuestosFormView = CarritoRepuestosFormView.getInstance();
+		
 
 		this.view.setActionOnPlanificarRepuestos(a -> onDisplayForPlanRepuesto(a));
 		this.view.setActionOnPlanificarTrabajos(a -> onDisplayForPlanTrabajos(a));

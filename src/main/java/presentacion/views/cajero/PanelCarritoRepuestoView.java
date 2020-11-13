@@ -1,4 +1,4 @@
-package presentacion.views;
+package presentacion.views.cajero;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -32,7 +32,7 @@ import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 
-public class PanelCajeroView extends JPanel {
+public class PanelCarritoRepuestoView extends JPanel {
 
 
 	
@@ -43,7 +43,7 @@ public class PanelCajeroView extends JPanel {
 
 	private JTextField txtDNI;
 
-	private static PanelCajeroView instance;
+	private static PanelCarritoRepuestoView instance;
 	private JButton btnBuscar;
 	private JSplitPane splitPane;
 	private JPanel panelEste;
@@ -114,14 +114,14 @@ public class PanelCajeroView extends JPanel {
 	private JPanel panel_9;
 	private JButton btnNuevoPresupuesto;
 
-	public static PanelCajeroView getInstance() {
+	public static PanelCarritoRepuestoView getInstance() {
 		if (instance == null) {
-			instance = new PanelCajeroView();
+			instance = new PanelCarritoRepuestoView();
 		}
 		return instance;
 	}
 
-	private PanelCajeroView() {
+	private PanelCarritoRepuestoView() {
 		setLayout(new BorderLayout(0, 0));
 
 		this.idsPresupuestos = new ArrayList<>();
