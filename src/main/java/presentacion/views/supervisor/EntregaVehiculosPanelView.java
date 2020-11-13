@@ -22,7 +22,7 @@ public class EntregaVehiculosPanelView extends JPanel {
 
 	private static final long serialVersionUID = -5623725856065117794L;
 
-	private static final String[] COLUMNAS_ENTREGAS = { "DNI CLIENTE", "MARCA DE AUTO", "MODELO DE AUTO", "COLOR",
+	private static final String[] COLUMNAS_ENTREGAS = { "DNI CLIENTE", "NOMBRE Y APELLIDO" , "MARCA DE AUTO", "MODELO DE AUTO", "COLOR",
 			"PATENTE" };
 
 	private JLabel lblDniCliente;

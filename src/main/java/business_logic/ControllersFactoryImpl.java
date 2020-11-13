@@ -93,7 +93,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public EntregaDeVehiculoController makeEntregasController() {
 		if(entregasController == null)
-			entregasController = new EntregaDeVehiculoController(daos.makeDatosPersonalesDao(), daos.makeOrdenDeTrabajoDao(), daos.makePresupuestoDao(), daos.makeVehiculoConOrdeDeTrabajoDao());
+			entregasController = new EntregaDeVehiculoController(daos.makeClienteDao(), daos.makeDatosPersonalesDao(), daos.makeOrdenDeTrabajoDao(), daos.makePresupuestoDao(), daos.makeVehiculoConOrdeDeTrabajoDao(), daos.makeFichaTecnicaVehiculoDao());
 		return entregasController;
 	}
 }
