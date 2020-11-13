@@ -15,8 +15,9 @@ public class EntregaDeVehiculoPresenter {
 	private EntregaVehiculosPanelView view;
 	private EntregaDeVehiculoController controller;
 
-	public EntregaDeVehiculoPresenter(EntregaVehiculosPanelView view) {
+	public EntregaDeVehiculoPresenter(EntregaVehiculosPanelView view, EntregaDeVehiculoController controller) {
 		this.view = view;
+		this.controller = controller;
 
 		this.view.setActionBuscarEntregas((a) -> onBuscarEntregas(a));
 		this.view.setRegistrarEntrega((a) -> onRegistrarEntrega(a));
@@ -27,7 +28,7 @@ public class EntregaDeVehiculoPresenter {
 		
 		if(dniBuscado.trim().isEmpty()) {
 			view.clear();
-			view.setData(controller.readAll());
+			view.setData(controller.readAllOrdenesRealizadas());
 		} else {
 			boolean esDniConFormatoCorrecto = new StringValidator(dniBuscado).number("").validate().isEmpty();
 			if(esDniConFormatoCorrecto) {

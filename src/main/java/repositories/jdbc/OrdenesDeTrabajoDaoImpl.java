@@ -21,6 +21,8 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 			+ "VALUES (?,?,?,?,?,?,?)";
 
 	private static final String readByVehiculoId = readAll + " " + "WHERE idVehiculoOt = ?";
+	
+	private static final String readAllOrdenesRealizadas = "SELECT o.idOT, o.tipoTrabajo, o.idUsuAlta, o.idVehiculoOt, o.fechaAltaOt, o.trabajoSolicitado, o.trabajoSujerido, o.fechaEntregadoVehiculo FROM OrdenesDeTrabajo o INNER JOIN Presupuestos p ON o.idOT = P.idOT WHERE p.estado = 'REALIZADO'";
 
 	public OrdenesDeTrabajoDaoImpl(Connection connection) {
 		super(connection);
@@ -86,5 +88,10 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 				return ot;
 			}
 		};
+	}
+
+	@Override
+	public List<OrdenDeTrabajoDTO> readAllOrdenesRealizadas() {
+		return getTemplate().query(readAllOrdenesRealizadas).excecute(getMapper());
 	}
 }
