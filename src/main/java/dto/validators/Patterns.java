@@ -11,7 +11,7 @@ public class Patterns {
 
 	public static final String TEXT_FIELD = "^(\\S)(.){1,75}(\\S)$";
 	
-	public static final String ALPHANUMERIC = "^[a-zA-Z0-9_]*$";
+	public static final String ALPHANUMERIC = "^[\\w\\-\\s]+$";
 
 	public static final String NON_NEGATIVE_INTEGER_FIELD = "[\\s]*[0-9]*[1-9]+";
 	

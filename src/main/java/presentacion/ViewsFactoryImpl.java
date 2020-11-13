@@ -1,7 +1,7 @@
 package presentacion;
 
 import business_logic.ControllersFactory;
-import presentacion.views.CajeroControlView;
+import presentacion.views.cajero.CajeroControlView;
 import presentacion.views.supervisor.ClientePresenter;
 import presentacion.views.supervisor.RepuestosPresenter;
 import presentacion.views.supervisor.SupervisorControlView;

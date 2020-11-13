@@ -9,6 +9,7 @@ import presentacion.TurnosPresenter;
 import presentacion.ViewsFactory;
 import presentacion.WorkbenchPresenter;
 import presentacion.WorkbenchView;
+import presentacion.views.cajero.CajeroControlView;
 import presentacion.views.supervisor.ClientePresenter;
 import presentacion.views.supervisor.SupervisorControlView;
 import presentacion.views.tecnico.TecnicoControlView;
