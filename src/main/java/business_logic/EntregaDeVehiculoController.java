@@ -24,7 +24,7 @@ public class EntregaDeVehiculoController {
 	private PresupuestosDao presupuestosDao;
 	private VehiculosConOrdenDeTrabajoDao vehiculosDao;
 	private FichaTecnicaVehiculoDao fichaTecnicaDao;
-	
+
 	private List<OrdenDeTrabajoDTO> ordenesRealizadas;
 
 	public EntregaDeVehiculoController(ClientesDao clienteDao, DatosPersonalesDao datosPersonalesDao,
@@ -44,34 +44,33 @@ public class EntregaDeVehiculoController {
 
 	public List<EntregaDeVehiculoDTO> readAllOrdenesRealizadas() {
 		List<EntregaDeVehiculoDTO> entregas = new ArrayList<>();
-		
+
 		ordenesRealizadas = ordenesDeTrabajoDao.readAllOrdenesRealizadas();
-		
-		/*
-		 * falta patente
-		 */
-		for (OrdenDeTrabajoDTO orden : ordenesRealizadas) {
+
+		for (OrdenDeTrabajoDTO orden : ordenesRealizadas) {//Ordenes de trabajo con presupuesto finalizado
 			Integer idVehiculo = orden.getIdVehiculoOt();
-			
+
 			VehiculoConOrdenDeTrabajoDTO vehiculoConOT = vehiculosDao.readByID(idVehiculo);
 			Integer idFichaTecnica = vehiculoConOT.getIdFichaTecnica();
 			Integer idCliente = vehiculoConOT.getIdCliente();
-			
+
 			FichaTecnicaVehiculoDTO fichaTecnica = fichaTecnicaDao.readByID(idFichaTecnica);
-			
+
 			ClienteDTO cliente = clientesDao.readByID(idCliente);
 			Integer idDatos = cliente.getIdDatosPersonales();
-	
+
 			DatosPersonalesDTO datosPersonales = datosPersonalesDao.readByID(idDatos);
-	
+
 			Integer dniCliente = datosPersonales.getDni();
-			String nombreCompleto = String.format("%s %s", datosPersonales.getNombreCompleto(), datosPersonales.getApellido());
+			String nombreCompleto = String.format("%s %s", datosPersonales.getNombreCompleto(),
+					datosPersonales.getApellido());
 			String marcaAuto = fichaTecnica.getMarca();
 			String modeloAuto = String.valueOf(fichaTecnica.getModelo());
 			String colorAuto = fichaTecnica.getColor();
-			String patenteAuto = fichaTecnica.getPatente();
+			String patenteAuto = vehiculoConOT.getPatente();
 
-			entregas.add(new EntregaDeVehiculoDTO(dniCliente, nombreCompleto, marcaAuto, modeloAuto, colorAuto, patenteAuto));
+			entregas.add(new EntregaDeVehiculoDTO(dniCliente, nombreCompleto, marcaAuto, modeloAuto, colorAuto,
+					patenteAuto));
 		}
 		return entregas;
 	}
