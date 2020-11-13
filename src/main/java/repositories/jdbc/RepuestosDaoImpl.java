@@ -23,6 +23,8 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 	private static final String readByMarcaYDescripcion = readAll + " " + "WHERE marcaRepuesto = ? AND descripcionRepuesto = ?";
 	
 	private static final String readMarcas = "SELECT DISTINCT marcaRepuesto FROM Repuestos";
+	
+	private static final String update = "UPDATE repuestos SET stockRepuesto = ?, stockMinimo = ? WHERE idRepuesto = ?";
 
 	public RepuestosDaoImpl(Connection connection) {
 		super(connection);
@@ -31,8 +33,7 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 
 	@Override
 	public boolean update(RepuestoDTO entity) {
-		// TODO Auto-generated method stub
-		return false;
+		return getTemplate().query(update).param(entity.getStockRepuesto()).param(entity.getStockMinimo()).param(entity.getIdRepuesto()).excecute();
 	}
 
 	@Override

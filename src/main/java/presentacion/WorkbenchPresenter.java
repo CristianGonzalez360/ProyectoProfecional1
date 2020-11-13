@@ -3,7 +3,7 @@ package presentacion;
 import java.awt.event.ActionEvent;
 import business_logic.LoginController;
 import business_logic.exceptions.ForbiddenException;
-import presentacion.views.CajeroControlView;
+import presentacion.views.cajero.CajeroControlView;
 import presentacion.views.supervisor.SupervisorControlView;
 import presentacion.views.tecnico.TecnicoControlView;
 import presentacion.views.utils.ConfirmationDialog;

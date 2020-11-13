@@ -1,4 +1,4 @@
-package presentacion.views;
+package presentacion.views.cajero;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JTabbedPane;
@@ -140,7 +140,7 @@ public class CajeroControllerView extends JInternalFrame {
 		clientesPanel.add(panelClientesView);
 
 		panelConsultaOTPresupuestadasView = ConsultaDePresupuestosSupervisorView.getInstance();
-		tabbedPane.addTab("Gestión de presupuestos", panelConsultaOTPresupuestadasView);
+		tabbedPane.addTab("Venta Repuesto", panelConsultaOTPresupuestadasView);
 
 		panelEntregaVehiculosView = new EntregaVehiculosPanelView();
 		tabbedPane.addTab("Gestion entrega de vehículo", panelEntregaVehiculosView);
