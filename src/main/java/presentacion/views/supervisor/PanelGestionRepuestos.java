@@ -151,4 +151,8 @@ public class PanelGestionRepuestos extends JPanel{
 		this.btnCargarArchivo.addActionListener(listener);
 	}
 
+	public void serActionOnConfigurarMinimo(ActionListener listener) {
+		this.btnConfigurarMnimo.addActionListener(listener);
+	}
+
 }
