@@ -76,8 +76,16 @@ public class EntregaDeVehiculoController {
 	}
 
 	public List<EntregaDeVehiculoDTO> readByDniCliente(Integer dniCliente) {
-		// TODO Auto-generated method stub
-		return null;
+		List<EntregaDeVehiculoDTO> ordenesParaEntregar = readAllOrdenesRealizadas();
+		List<EntregaDeVehiculoDTO> entregas  = new ArrayList<>();
+				
+		for(EntregaDeVehiculoDTO entrega : ordenesParaEntregar) {
+			if(entrega.getDniCliente() != null && entrega.getDniCliente().equals(dniCliente)) {
+				entregas.add(entrega);
+			}
+		}
+		
+		return entregas;
 	}
 
 	public void registrarEntregaById(Integer idEntrega) {
