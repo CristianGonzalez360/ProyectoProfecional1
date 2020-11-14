@@ -98,11 +98,13 @@ public class PresupuestosPresenter {
 			String comentario = new InputComentarioDialog()
 					.title("Ingrese un comentario")
 					.open();
-			PresupuestoDTO presupuesto = new PresupuestoDTO();
-			presupuesto.setIdOT(idOT);
-			presupuesto.setComentarioAltaPresu(comentario != null? comentario : "");
-			presupuestosController.save(presupuesto);
-			view.setDataPresupuestos(presupuestosController.readByIdOt(idOT));
+			if(comentario != null) {
+				PresupuestoDTO presupuesto = new PresupuestoDTO();
+				presupuesto.setIdOT(idOT);
+				presupuesto.setComentarioAltaPresu(comentario);
+				presupuestosController.save(presupuesto);
+				view.setDataPresupuestos(presupuestosController.readByIdOt(idOT));
+			}
 		}
 	}
 
