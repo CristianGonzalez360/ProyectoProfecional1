@@ -45,7 +45,7 @@ public class PanelCobroCajeroView extends JPanel {
 		return instance;
 	}
 
-	public PanelCobroCajeroView() {
+	private PanelCobroCajeroView() {
 		setLayout(new BorderLayout(0, 0));
 		
 		panel = new JPanel();
