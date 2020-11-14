@@ -102,7 +102,7 @@ public class FacturasController {
 	}
 	
 	
-	public List<FacturaDTO> readAll() {//lee todos los presupuestos
+	public List<FacturaDTO> readAll() {
 		List<FacturaDTO> ret = facturaDao.readAll();
 		return ret;
 	}

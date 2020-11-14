@@ -26,7 +26,7 @@ public class PanelCobroCajeroView extends JPanel {
 	
 	private static PanelCobroCajeroView instance;
 	
-	private final String[] columnasListadoDeFacturas = new String[] { "Nro. Factura", "ID orden de trabajo","Fecha alta", "Fecha Cierre de pago",};
+	private final String[] columnasListadoDeFacturas = new String[] { "Nro. Factura", "ID orden de trabajo","Fecha alta", "Fecha Cierre de pago","Total"};
 	
 	private DefaultTableModel listadoDeFacturasModel;
 	
@@ -94,7 +94,7 @@ public class PanelCobroCajeroView extends JPanel {
 	public void cargarTabla(List<FacturaDTO> presupuestos) {
 		for (FacturaDTO presupuesto : presupuestos) {
 			
-				Object[] row = { presupuesto.getIdFactura().toString(), presupuesto.getIdOrdenDeTrabajo(), presupuesto.getFechaDeAlta(), presupuesto.getFechaDeCierrePorPago() };
+				Object[] row = { presupuesto.getIdFactura().toString(), presupuesto.getIdOrdenDeTrabajo(), presupuesto.getFechaDeAlta(), presupuesto.getFechaDeCierrePorPago(),presupuesto.getTotal() };
 				listadoDeFacturasModel.addRow(row);
 			
 		}

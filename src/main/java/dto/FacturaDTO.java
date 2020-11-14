@@ -11,6 +11,8 @@ public class FacturaDTO {
 	private Date fechaDeAlta;
 	
 	private Date fechaDeCierrePorPago;
+	
+	private Double total;
 		
 	public FacturaDTO() {
 		super();
@@ -55,6 +57,14 @@ public class FacturaDTO {
 	@Override
 	public String toString() {
 		return "FacturaDTO [idFactura=" + idFactura + ", idOrdenDeTrabajo=" + idOrdenDeTrabajo + ", fechaDeAlta="
-				+ fechaDeAlta + ", fechaDeCierrePorPago=" + fechaDeCierrePorPago + "]";
+				+ fechaDeAlta + ", fechaDeCierrePorPago=" + fechaDeCierrePorPago + ", total=" + total + "]";
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
 	}
 }
