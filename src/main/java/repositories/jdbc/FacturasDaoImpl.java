@@ -11,7 +11,7 @@ import repositories.jdbc.utils.NullObject;
 
 public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements FacturasDao {
 
-	private static final String insert = "INSERT INTO Facturas (idOT, fechaDeAlta, fechaDeCierrePorPago) VALUES (?,?,?)";
+	private static final String insert = "INSERT INTO Facturas (idOT, fechaDeAlta, fechaDeCierrePorPago, total) VALUES (?,?,?,?)";
 	
 	private static final String updateFechaPago = "UPDATE Facturas SET fechaDeCierrePorPago = ? WHERE idFactura = ?";
 
@@ -39,6 +39,7 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 				.param(entity.getIdOrdenDeTrabajo())
 				.param(entity.getFechaDeAlta())
 				.param(entity.getFechaDeCierrePorPago() == null ? new NullObject() : entity.getFechaDeCierrePorPago())
+				.param(entity.getTotal())
 				.excecute();
 	}
 	
@@ -74,6 +75,7 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 				factura.setIdOrdenDeTrabajo((Integer)obj[1]);
 				factura.setFechaDeAlta((Date)obj[2]);
 				factura.setFechaDeCierrePorPago(obj[3] == null ? null : (Date)obj[3]);
+				factura.setTotal((Double)obj[4]);
 				return factura;
 			}
 		};
