@@ -17,6 +17,8 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 
 	private static final String readByOrdenDeTrabajoId = "SELECT * FROM Facturas WHERE idOT = ?";
 	
+	private static final String readAll = "SELECT * FROM Facturas";
+	
 	public FacturasDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -58,7 +60,7 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 
 	@Override
 	public List<FacturaDTO> readAll() {
-		return null;
+		return getTemplate().query(readAll).excecute(getMapper());
 	}
 
 	@Override

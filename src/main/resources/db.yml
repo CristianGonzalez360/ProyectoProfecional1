@@ -271,3 +271,13 @@ repuestosPlanificados:
   - idRepuesto: 2
     idPresu: 2
     cantRequerida: 5
+
+facturas:
+  - idFactura: 1
+    idOrdenDeTrabajo: 1
+    fechaDeAlta: 2020-10-11
+    fechaDeCierrePorPago: 2020-10-11
+  - idFactura: 2
+    idOrdenDeTrabajo: 2
+    fechaDeAlta: 2020-10-11
+    fechaDeCierrePorPago: 2020-10-11

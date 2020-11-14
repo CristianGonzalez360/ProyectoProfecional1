@@ -101,6 +101,13 @@ public class FacturasController {
 		});
 	}
 	
+	
+	public List<FacturaDTO> readAll() {//lee todos los presupuestos
+		List<FacturaDTO> ret = facturaDao.readAll();
+		return ret;
+	}
+	
+	
 	public ResumenDeFacturaDTO generarResumenFactura(Integer idOrdenDeTrabajo) {
 		FacturaDTO factura = readFacturaByOrdenDeTrabajoId(idOrdenDeTrabajo);
 		if(factura == null) throw new NotFoundException(NOT_FOUND);
