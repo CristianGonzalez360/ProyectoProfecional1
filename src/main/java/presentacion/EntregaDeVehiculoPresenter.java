@@ -9,7 +9,7 @@ import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.MessageDialog;
 
 public class EntregaDeVehiculoPresenter {
-	
+
 	private static final String CONFIRMATION = "¿Está seguro que desea registrar la entrega?";
 
 	private EntregaVehiculosPanelView view;
@@ -25,13 +25,13 @@ public class EntregaDeVehiculoPresenter {
 
 	private void onBuscarEntregas(ActionEvent event) {
 		String dniBuscado = view.getDniBusqueda();
-		
-		if(dniBuscado.trim().isEmpty()) {
+
+		if (dniBuscado.trim().isEmpty()) {
 			view.clear();
 			view.setData(controller.readAllOrdenesRealizadas());
 		} else {
 			boolean esDniConFormatoCorrecto = new StringValidator(dniBuscado).number("").validate().isEmpty();
-			if(esDniConFormatoCorrecto) {
+			if (esDniConFormatoCorrecto) {
 				Integer dniCliente = Integer.parseInt(dniBuscado);
 				view.clear();
 				view.setData(controller.readByDniCliente(dniCliente));
@@ -40,14 +40,22 @@ public class EntregaDeVehiculoPresenter {
 	}
 
 	private void onRegistrarEntrega(ActionEvent event) {
-		Integer idEntrega = view.getIdSelectedEntrega();
-		if(idEntrega != null) {
-			if(new ConfirmationDialog(CONFIRMATION).open() == 0) {
-				controller.registrarEntregaById(idEntrega);
+		Integer idFila = view.getIdSelectedRow(); // ID de la fila seleccionada
+
+		if (hayFilaSeleccionada(idFila)) {
+			if (new ConfirmationDialog(CONFIRMATION).open() == 0) {
+				Integer idOt = view.getIdSelectedEntrega();// obtener id de la OT
+				controller.registrarEntregaById(idOt);
 				view.clear();
-				new MessageDialog().showMessages("Entrega Registrada");	
+				new MessageDialog().showMessages("Entrega Registrada");
 			}
 		}
+	}
+
+	private boolean hayFilaSeleccionada(Integer idFila) {
+		if (idFila == -1 || idFila == null)
+			return false;
+		return true;
 	}
 
 }

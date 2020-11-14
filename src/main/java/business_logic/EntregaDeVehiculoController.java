@@ -1,6 +1,7 @@
 package business_logic;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dto.ClienteDTO;
@@ -48,6 +49,7 @@ public class EntregaDeVehiculoController {
 		ordenesRealizadas = ordenesDeTrabajoDao.readAllOrdenesRealizadas();
 
 		for (OrdenDeTrabajoDTO orden : ordenesRealizadas) {//Ordenes de trabajo con presupuesto finalizado
+			Integer idOT = orden.getIdOrdenTrabajo();
 			Integer idVehiculo = orden.getIdVehiculoOt();
 
 			VehiculoConOrdenDeTrabajoDTO vehiculoConOT = vehiculosDao.readByID(idVehiculo);
@@ -69,8 +71,10 @@ public class EntregaDeVehiculoController {
 			String colorAuto = fichaTecnica.getColor();
 			String patenteAuto = vehiculoConOT.getPatente();
 
-			entregas.add(new EntregaDeVehiculoDTO(dniCliente, nombreCompleto, marcaAuto, modeloAuto, colorAuto,
-					patenteAuto));
+			
+			EntregaDeVehiculoDTO nuevaEntrega = new EntregaDeVehiculoDTO(dniCliente, nombreCompleto, marcaAuto, modeloAuto, colorAuto,
+					patenteAuto, idOT);
+			entregas.add(nuevaEntrega);
 		}
 		return entregas;
 	}
@@ -88,8 +92,15 @@ public class EntregaDeVehiculoController {
 		return entregas;
 	}
 
-	public void registrarEntregaById(Integer idEntrega) {
-		// TODO Auto-generated method stub
+	public void registrarEntregaById(Integer idOt) {
+		assert idOt != null;
+		OrdenDeTrabajoDTO orden = ordenesDeTrabajoDao.readByID(idOt);
+		orden.setFechaEntregado(new Date());
+		ordenesDeTrabajoDao.update(orden);
+	}
+
+	public OrdenDeTrabajoDTO readByID(Integer idOt) {
+		return ordenesDeTrabajoDao.readByID(idOt);
 	}
 
 }
