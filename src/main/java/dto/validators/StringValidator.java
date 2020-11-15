@@ -58,7 +58,17 @@ public class StringValidator {
 		return this;
 	}
 
+	public StringValidator positiveInteger(String message) {
+		validators.add(new PositiveInteger(message));
+		return this;
+	}
+	
+	public StringValidator positiveDouble(String message) {
+		validators.add(new PositiveDouble(message));
+		return this;
+	}
+	
 	public List<String> validate() {
 		return new CompositeValidator<String>(validators).validate(value);
-	}
+	}	
 }

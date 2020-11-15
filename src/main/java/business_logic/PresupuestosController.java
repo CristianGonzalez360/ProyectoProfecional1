@@ -39,6 +39,8 @@ public class PresupuestosController {
 	}
 		
 	public void update(PresupuestoDTO presupuesto) {
+		Pdao.update(presupuesto);
+		
 		PresupuestoDTO actual = readById(presupuesto.getIdPresupuesto());
 		for(RepuestoPlanificadoDTO nuevoRP : presupuesto.getRepuestos()) {
 			if(nuevoRP.getIdRepuestoPlanificado() == null) {//Es un repuesto planificado nuevo
@@ -114,5 +116,9 @@ public class PresupuestosController {
 	
 	public void updateEstadoPresupuesto(int id) {//cambia estado de presupuesto por id
 		Pdao.updateState(id, EstadoPresupuesto.REALIZADO);
+	}
+
+	public void delete(Integer idPresupuesto) {
+		Pdao.delete(idPresupuesto);
 	}
 }
