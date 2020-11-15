@@ -13,6 +13,8 @@ public class FacturaDTO {
 	private Date fechaDeCierrePorPago;
 	
 	private Double total;
+	
+	private String estado;
 		
 	public FacturaDTO() {
 		super();
@@ -66,5 +68,13 @@ public class FacturaDTO {
 
 	public void setTotal(Double total) {
 		this.total = total;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 }

@@ -278,8 +278,22 @@ facturas:
     fechaDeAlta: 2020-10-11
     fechaDeCierrePorPago: 2020-10-11
     total: 100
+    estado: IMPAGA
   - idFactura: 2
     idOrdenDeTrabajo: 2
     fechaDeAlta: 2020-10-11
     fechaDeCierrePorPago: 2020-10-11
     total: 100
+    estado: IMPAGA
+  - idFactura: 3
+    idOrdenDeTrabajo: 2
+    fechaDeAlta: 2020-10-11
+    fechaDeCierrePorPago: 2020-10-11
+    total: 200
+    estado: IMPAGA
+  - idFactura: 4
+    idOrdenDeTrabajo: 2
+    fechaDeAlta: 2020-10-11
+    fechaDeCierrePorPago: 2020-10-11
+    total: 200
+    estado: PAGA

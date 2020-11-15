@@ -13,4 +13,8 @@ public interface FacturasDao extends GenericDao<FacturaDTO, Integer>{
 	
 	List<FacturaDTO> readAll();
 
+	boolean updatePorPago(Integer id);
+
+	List<FacturaDTO> readByFactura(Integer id);
+
 }

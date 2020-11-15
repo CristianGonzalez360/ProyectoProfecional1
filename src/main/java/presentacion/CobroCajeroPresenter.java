@@ -20,18 +20,33 @@ public class CobroCajeroPresenter {
 	}
 
 	private void onCargar(ActionEvent a) {
+		
+		String nroFactura = view.getFactura();
+		
+		
+		
 		this.view.clear();
+		
+		if (nroFactura.isEmpty()) {
 		this.view.cargarTabla(this.facturasController.readAll());
+		
+		}
+		else {
+			int i=Integer.parseInt(nroFactura);
+			this.view.cargarTabla(this.facturasController.readByFactura(i));
+		}
 	}
+	
+	
 	
 	private void onRegistrar(ActionEvent a) {
 		
 		int idPresupuesto =this.view.getIdPresupuestoSeleccionada();
 		if(idPresupuesto!=-1) {
-			int resp =JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres registrar el presupuesto realizado?", "Confirmación",
+			int resp =JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres pagar la factura seleccionada?", "Confirmación",
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 			if(resp==0) {
-			//	facturasController.updateEstadoPresupuesto(idPresupuesto);
+				facturasController.updatePorPago(idPresupuesto);
 				this.onCargar(a);
 			}			
 		}
