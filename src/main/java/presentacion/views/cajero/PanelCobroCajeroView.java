@@ -56,7 +56,6 @@ public class PanelCobroCajeroView extends JPanel {
 	private JPanel panel_2;
 	private JTabbedPane tabbedPane;
 	private JPanel panel_4;
-	private JPanel panel_5;
 	private JPanel panel_6;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -65,19 +64,7 @@ public class PanelCobroCajeroView extends JPanel {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
-	private JTextField textField_12;
-	private JTextField textField_13;
-	private JTextField textField_14;
-	private JTextField textField_16;
-	private JTextField textField_17;
-	private JTextField textField_18;
-	private JTextField textField_19;
-	private JTextField textField_20;
+	private JPanel panel_9;
 
 	public static PanelCobroCajeroView getInstance() {
 		if (instance == null) {
@@ -202,136 +189,20 @@ public class PanelCobroCajeroView extends JPanel {
 		panel_4.add(textField_6, "6, 8, fill, top");
 		textField_6.setColumns(10);
 		
-		panel_5 = new JPanel();
-		tabbedPane.addTab("Tarjeta Debito", null, panel_5, null);
-		panel_5.setLayout(null);
-		
-		JPanel panel_4_1 = new JPanel();
-		panel_4_1.setBounds(362, 5, 1, 1);
-		panel_4_1.setLayout(null);
-		panel_5.add(panel_4_1);
-		
-		JLabel lblNewLabel_6 = new JLabel("Numero");
-		lblNewLabel_6.setBounds(10, 11, 90, 14);
-		panel_4_1.add(lblNewLabel_6);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Cantidad Cuotas");
-		lblNewLabel_1_1.setBounds(10, 36, 90, 14);
-		panel_4_1.add(lblNewLabel_1_1);
-		
-		JLabel lblNewLabel_2_1 = new JLabel("Nombre y Apellido");
-		lblNewLabel_2_1.setBounds(10, 61, 90, 14);
-		panel_4_1.add(lblNewLabel_2_1);
-		
-		JLabel lblNewLabel_3_1 = new JLabel("Fecha Vencimiento");
-		lblNewLabel_3_1.setBounds(10, 86, 90, 14);
-		panel_4_1.add(lblNewLabel_3_1);
-		
-		JLabel lblNewLabel_4_1 = new JLabel("Codigo Seguridad");
-		lblNewLabel_4_1.setBounds(10, 111, 90, 14);
-		panel_4_1.add(lblNewLabel_4_1);
-		
-		JLabel lblNewLabel_5_1 = new JLabel("DNI");
-		lblNewLabel_5_1.setBounds(10, 136, 90, 14);
-		panel_4_1.add(lblNewLabel_5_1);
-		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(110, 8, 86, 20);
-		panel_4_1.add(textField_7);
-		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(110, 33, 86, 20);
-		panel_4_1.add(textField_8);
-		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(110, 58, 86, 20);
-		panel_4_1.add(textField_9);
-		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(110, 83, 38, 20);
-		panel_4_1.add(textField_10);
-		
-		textField_11 = new JTextField();
-		textField_11.setColumns(10);
-		textField_11.setBounds(110, 108, 86, 20);
-		panel_4_1.add(textField_11);
-		
-		textField_12 = new JTextField();
-		textField_12.setColumns(10);
-		textField_12.setBounds(110, 133, 86, 20);
-		panel_4_1.add(textField_12);
-		
-		textField_13 = new JTextField();
-		textField_13.setColumns(10);
-		textField_13.setBounds(158, 83, 38, 20);
-		panel_4_1.add(textField_13);
-		
-		JPanel panel_4_2 = new JPanel();
-		panel_4_2.setLayout(null);
-		panel_4_2.setBounds(0, 0, 725, 169);
-		panel_5.add(panel_4_2);
-		
-		JLabel lblNewLabel_7 = new JLabel("Numero");
-		lblNewLabel_7.setBounds(10, 11, 90, 14);
-		panel_4_2.add(lblNewLabel_7);
-		
-		JLabel lblNewLabel_2_2 = new JLabel("Nombre y Apellido");
-		lblNewLabel_2_2.setBounds(10, 34, 90, 14);
-		panel_4_2.add(lblNewLabel_2_2);
-		
-		JLabel lblNewLabel_3_2 = new JLabel("Fecha Vencimiento");
-		lblNewLabel_3_2.setBounds(10, 59, 90, 14);
-		panel_4_2.add(lblNewLabel_3_2);
-		
-		JLabel lblNewLabel_4_2 = new JLabel("Codigo Seguridad");
-		lblNewLabel_4_2.setBounds(10, 84, 90, 14);
-		panel_4_2.add(lblNewLabel_4_2);
-		
-		JLabel lblNewLabel_5_2 = new JLabel("DNI");
-		lblNewLabel_5_2.setBounds(10, 109, 90, 14);
-		panel_4_2.add(lblNewLabel_5_2);
-		
-		textField_14 = new JTextField();
-		textField_14.setColumns(10);
-		textField_14.setBounds(110, 8, 86, 20);
-		panel_4_2.add(textField_14);
-		
-		textField_16 = new JTextField();
-		textField_16.setColumns(10);
-		textField_16.setBounds(110, 31, 86, 20);
-		panel_4_2.add(textField_16);
-		
-		textField_17 = new JTextField();
-		textField_17.setColumns(10);
-		textField_17.setBounds(110, 56, 38, 20);
-		panel_4_2.add(textField_17);
-		
-		textField_18 = new JTextField();
-		textField_18.setColumns(10);
-		textField_18.setBounds(110, 81, 86, 20);
-		panel_4_2.add(textField_18);
-		
-		textField_19 = new JTextField();
-		textField_19.setColumns(10);
-		textField_19.setBounds(110, 106, 86, 20);
-		panel_4_2.add(textField_19);
-		
-		textField_20 = new JTextField();
-		textField_20.setColumns(10);
-		textField_20.setBounds(158, 56, 38, 20);
-		panel_4_2.add(textField_20);
+		panel_9 = new JPanel();
+		panel_9.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tabbedPane.addTab("Tarjeta Debito", null, panel_9, null);
 		
 		panel_6 = new JPanel();
+		panel_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tabbedPane.addTab("Mercado Pago", null, panel_6, null);
 		
 		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tabbedPane.addTab("Bitcoins", null, panel_7, null);
 		
 		JPanel panel_8 = new JPanel();
+		panel_8.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tabbedPane.addTab("Efectivo", null, panel_8, null);
 		panel_2.add(tabbedPane);
 		
