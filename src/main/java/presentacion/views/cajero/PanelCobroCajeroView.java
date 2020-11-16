@@ -23,6 +23,12 @@ import javax.swing.JTabbedPane;
 import javax.swing.JDesktopPane;
 import java.awt.Label;
 import javax.swing.JLabel;
+import javax.swing.border.BevelBorder;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import javax.swing.BoxLayout;
 
 public class PanelCobroCajeroView extends JPanel {
 
@@ -81,16 +87,29 @@ public class PanelCobroCajeroView extends JPanel {
 	}
 
 	public PanelCobroCajeroView() {
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		panel_3 = new JPanel();
+		add(panel_3);
+		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		Label label = new Label("Id Factura");
+		panel_3.add(label);
+		
+		textFactura = new JTextField();
+		panel_3.add(textFactura);
+		textFactura.setColumns(10);
+		
+		btnCargarFacturas = new JButton("Cargar Factura");
+		panel_3.add(btnCargarFacturas);
 		
 		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Listado de facturas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		add(panel, BorderLayout.CENTER);
+		add(panel);
 		
-		this.listadoDeFacturasModel = new DefaultTableModel(null, this.columnasListadoDeFacturas); 
-		panel.setLayout(null);
+		this.listadoDeFacturasModel = new DefaultTableModel(null, this.columnasListadoDeFacturas);;
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		scrollPaneFacturas = new JScrollPane();
-		scrollPaneFacturas.setBounds(10, 16, 740, 149);
 		panel.add(scrollPaneFacturas);
 		tableFacturas = new JTable(listadoDeFacturasModel){//tabla no editable
 			
@@ -104,100 +123,83 @@ public class PanelCobroCajeroView extends JPanel {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
-		};;
+		};
 		scrollPaneFacturas.setViewportView(tableFacturas);
 		
-		panel_1 = new JPanel();
-		panel_1.setBounds(6, 385, 744, 43);
-		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
-		flowLayout.setVgap(15);
-		panel.add(panel_1);
-		
-		btnRegistrarPago = new JButton("Registrar Pago");
-		btnRegistrarPago.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(btnRegistrarPago);
-		btnRegistrarPago.setEnabled(false);
-		
 		panel_2 = new JPanel();
-		panel_2.setBounds(10, 166, 740, 208);
 		panel.add(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
-		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE))
-		);
-		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
-		);
 		
 		panel_4 = new JPanel();
+		panel_4.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tabbedPane.addTab("Tarjeta Credito", null, panel_4, null);
-		panel_4.setLayout(null);
+		panel_4.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("90px"),
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("38px"),
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("38px"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("20px"),}));
 		
 		JLabel lblNewLabel = new JLabel("Numero");
-		lblNewLabel.setBounds(10, 11, 90, 14);
-		panel_4.add(lblNewLabel);
+		panel_4.add(lblNewLabel, "2, 2, fill, center");
 		
 		JLabel lblNewLabel_1 = new JLabel("Cantidad Cuotas");
-		lblNewLabel_1.setBounds(10, 36, 90, 14);
-		panel_4.add(lblNewLabel_1);
+		panel_4.add(lblNewLabel_1, "2, 4, fill, center");
 		
 		JLabel lblNewLabel_2 = new JLabel("Nombre y Apellido");
-		lblNewLabel_2.setBounds(10, 61, 90, 14);
-		panel_4.add(lblNewLabel_2);
+		panel_4.add(lblNewLabel_2, "2, 6, fill, center");
 		
 		JLabel lblNewLabel_3 = new JLabel("Fecha Vencimiento");
-		lblNewLabel_3.setBounds(10, 86, 90, 14);
-		panel_4.add(lblNewLabel_3);
+		panel_4.add(lblNewLabel_3, "2, 8, fill, center");
 		
 		JLabel lblNewLabel_4 = new JLabel("Codigo Seguridad");
-		lblNewLabel_4.setBounds(10, 111, 90, 14);
-		panel_4.add(lblNewLabel_4);
+		panel_4.add(lblNewLabel_4, "2, 10, fill, center");
 		
 		JLabel lblNewLabel_5 = new JLabel("DNI");
-		lblNewLabel_5.setBounds(10, 136, 90, 14);
-		panel_4.add(lblNewLabel_5);
+		panel_4.add(lblNewLabel_5, "2, 12, fill, center");
 		
 		textField = new JTextField();
-		textField.setBounds(110, 8, 86, 20);
-		panel_4.add(textField);
+		panel_4.add(textField, "4, 2, 3, 1, left, top");
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(110, 33, 86, 20);
-		panel_4.add(textField_1);
+		panel_4.add(textField_1, "4, 4, 3, 1, left, top");
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(110, 58, 86, 20);
-		panel_4.add(textField_2);
+		panel_4.add(textField_2, "4, 6, 3, 1, left, top");
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
-		textField_3.setBounds(110, 83, 38, 20);
-		panel_4.add(textField_3);
+		panel_4.add(textField_3, "4, 8, fill, top");
 		textField_3.setColumns(10);
 		
 		textField_4 = new JTextField();
-		textField_4.setBounds(110, 108, 86, 20);
-		panel_4.add(textField_4);
+		panel_4.add(textField_4, "4, 10, 3, 1, left, top");
 		textField_4.setColumns(10);
 		
 		textField_5 = new JTextField();
-		textField_5.setBounds(110, 133, 86, 20);
-		panel_4.add(textField_5);
+		panel_4.add(textField_5, "4, 12, 3, 1, left, top");
 		textField_5.setColumns(10);
 		
 		textField_6 = new JTextField();
-		textField_6.setBounds(158, 83, 38, 20);
-		panel_4.add(textField_6);
+		panel_4.add(textField_6, "6, 8, fill, top");
 		textField_6.setColumns(10);
 		
 		panel_5 = new JPanel();
@@ -331,22 +333,17 @@ public class PanelCobroCajeroView extends JPanel {
 		
 		JPanel panel_8 = new JPanel();
 		tabbedPane.addTab("Efectivo", null, panel_8, null);
-		panel_2.setLayout(gl_panel_2);
+		panel_2.add(tabbedPane);
 		
-		panel_3 = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_3.getLayout();
-		flowLayout_1.setVgap(15);
-		add(panel_3, BorderLayout.NORTH);
+		panel_1 = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
+		flowLayout.setVgap(15);
+		panel.add(panel_1);
 		
-		Label label = new Label("Id Factura");
-		panel_3.add(label);
-		
-		textFactura = new JTextField();
-		panel_3.add(textFactura);
-		textFactura.setColumns(10);
-		
-		btnCargarFacturas = new JButton("Cargar Factura");
-		panel_3.add(btnCargarFacturas);
+		btnRegistrarPago = new JButton("Registrar Pago");
+		btnRegistrarPago.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(btnRegistrarPago);
+		btnRegistrarPago.setEnabled(false);
 		
 	}
 
