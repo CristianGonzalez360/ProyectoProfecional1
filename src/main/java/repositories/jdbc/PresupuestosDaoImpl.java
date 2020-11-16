@@ -26,6 +26,10 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 	
 	private static final String updateStateForPayment = "UPDATE Presupuestos SET estado = ? WHERE idPresupuesto = ?";
 	
+	private static final String delete = "DELETE FROM Presupuestos WHERE idPresupuesto = ?";
+	
+	private static final String update = "UPDATE Presupuestos SET comentarioAltaPresu = ? WHERE idPresupuesto = ?";
+	
 	public PresupuestosDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -43,7 +47,7 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 	
 	@Override
 	public boolean update(PresupuestoDTO entity) {
-		return false;
+		return getTemplate().query(update).param(entity.getComentarioAltaPresu()).param(entity.getIdPresupuesto()).excecute();
 	}
 
 	@Override
@@ -105,5 +109,10 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 				return dto;
 			}
 		};
+	}
+
+	@Override
+	public boolean delete(Integer id) {
+		return getTemplate().query(delete).param(id).excecute();
 	}
 }
