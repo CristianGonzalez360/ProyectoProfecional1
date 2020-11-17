@@ -21,7 +21,7 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 	
 	private static final String readByFactura = "SELECT * FROM Facturas where idFactura = ?";	
 	
-	private static final String updatePago = "UPDATE Facturas SET estado = 'PAGA' WHERE idFactura = ?";
+	private static final String updatePago = "UPDATE Facturas SET estado = 'PAGA' , fechaDeCierrePorPago = SYSDATE WHERE idFactura = ?";
 	
 	public FacturasDaoImpl(Connection connection) {
 		super(connection);

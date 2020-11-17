@@ -41,7 +41,7 @@ public class PanelCobroCajeroView extends JPanel {
 	
 	private static PanelCobroCajeroView instance;
 	
-	private final String[] columnasListadoDeFacturas = new String[] { "Nro. Factura", "ID orden de trabajo","Fecha alta", "Fecha Cierre de pago","Total", "Estado"};
+	private final String[] columnasListadoDeFacturas = new String[] { "Nro. Factura", "Fecha de pago","Total", "Estado"};
 	
 	private DefaultTableModel listadoDeFacturasModel;
 	
@@ -128,7 +128,23 @@ public class PanelCobroCajeroView extends JPanel {
 				FormSpecs.UNRELATED_GAP_COLSPEC,
 				ColumnSpec.decode("38px"),
 				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("38px"),},
+				ColumnSpec.decode("38px"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,},
 			new RowSpec[] {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("20px"),
@@ -146,6 +162,10 @@ public class PanelCobroCajeroView extends JPanel {
 		JLabel lblNewLabel = new JLabel("Numero");
 		panel_4.add(lblNewLabel, "2, 2, fill, center");
 		
+		textField = new JTextField();
+		panel_4.add(textField, "4, 2, left, top");
+		textField.setColumns(10);
+		
 		JLabel lblNewLabel_1 = new JLabel("Cantidad Cuotas");
 		panel_4.add(lblNewLabel_1, "2, 4, fill, center");
 		
@@ -160,10 +180,6 @@ public class PanelCobroCajeroView extends JPanel {
 		
 		JLabel lblNewLabel_5 = new JLabel("DNI");
 		panel_4.add(lblNewLabel_5, "2, 12, fill, center");
-		
-		textField = new JTextField();
-		panel_4.add(textField, "4, 2, 3, 1, left, top");
-		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
 		panel_4.add(textField_1, "4, 4, 3, 1, left, top");
@@ -223,8 +239,7 @@ public class PanelCobroCajeroView extends JPanel {
 			
 			
 			
-				Object[] row = { presupuesto.getIdFactura().toString(), presupuesto.getIdOrdenDeTrabajo(), 
-						presupuesto.getFechaDeAlta(), presupuesto.getFechaDeCierrePorPago(),presupuesto.getTotal(), presupuesto.getEstado() };
+				Object[] row = { presupuesto.getIdFactura().toString(),  presupuesto.getFechaDeCierrePorPago(),presupuesto.getTotal(), presupuesto.getEstado() };
 				listadoDeFacturasModel.addRow(row);
 			
 			
@@ -237,6 +252,8 @@ public class PanelCobroCajeroView extends JPanel {
 	public String getFactura() {
 		return (String) textFactura.getText();
 	}
+	
+	
 	
 	public boolean iPersupuestoAprobado(int row, int column, JTable table) {
 		return table.getValueAt(row, column) != null;
@@ -261,6 +278,16 @@ public class PanelCobroCajeroView extends JPanel {
 		int row = tableFacturas.getSelectedRow();
 		if(row!=-1) {
 			idSeleccionada= Integer.valueOf((String) tableFacturas.getValueAt(row, 0));
+		}
+		return idSeleccionada;
+	}
+	
+	
+	public String getEstadoSeleccionada(){
+		String idSeleccionada = null;
+		int row = tableFacturas.getSelectedRow();
+		if(row!=-1) {
+			idSeleccionada= (String) tableFacturas.getValueAt(row, 3);
 		}
 		return idSeleccionada;
 	}
