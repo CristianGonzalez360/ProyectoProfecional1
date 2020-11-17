@@ -19,6 +19,8 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 
 	private static final String readByTelefono = readall + " " + "WHERE DatosPersonales.telefono = ?";
 
+	private static final String readById = readall + " WHERE Clientes.idCliente = ?";
+			
 	public ClientesDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -41,7 +43,8 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 
 	@Override
 	public ClienteDTO readByID(Integer id) {
-		return null;
+		List<ClienteDTO> dtos = getTemplate().query(readById).param(id).excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
 	@Override
