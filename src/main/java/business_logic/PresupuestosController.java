@@ -1,6 +1,5 @@
 package business_logic;
 
-import java.util.Date;
 import java.util.List;
 
 import dto.EstadoPresupuesto;
@@ -34,11 +33,30 @@ public class PresupuestosController {
 
 	public void save(PresupuestoDTO presupuesto) {
 		presupuesto.setIdUsuAltaPresu(SessionServiceImpl.getInstance().getActiveSession().getIdUsuario());
-		presupuesto.setFechaAltaPresu(new Date());
 		Pdao.insert(presupuesto);
+		
+		//obtengo el id del presupuesto guardado.
+		List<PresupuestoDTO> presupuestos = readByIdOt(presupuesto.getIdOT());
+		int idPresupuesto = presupuestos.get(0).getIdPresupuesto();
+		for (PresupuestoDTO p : presupuestos) {
+			if(idPresupuesto<p.getIdPresupuesto()) {
+				idPresupuesto = p.getIdPresupuesto();
+			}
+		}
+		
+		for(RepuestoPlanificadoDTO nuevoRP : presupuesto.getRepuestos()) {
+			nuevoRP.setIdPresu(idPresupuesto);
+			RPDao.insert(nuevoRP);
+		}
+		for(TrabajoPresupuestadoDTO nuevoT : presupuesto.getTrabajos()) {
+			nuevoT.setIdPresupuesto(idPresupuesto);
+			TPDao.insert(nuevoT);
+		}
 	}
 		
 	public void update(PresupuestoDTO presupuesto) {
+		Pdao.update(presupuesto);
+		
 		PresupuestoDTO actual = readById(presupuesto.getIdPresupuesto());
 		for(RepuestoPlanificadoDTO nuevoRP : presupuesto.getRepuestos()) {
 			if(nuevoRP.getIdRepuestoPlanificado() == null) {//Es un repuesto planificado nuevo
@@ -114,5 +132,9 @@ public class PresupuestosController {
 	
 	public void updateEstadoPresupuesto(int id) {//cambia estado de presupuesto por id
 		Pdao.updateState(id, EstadoPresupuesto.REALIZADO);
+	}
+
+	public void delete(Integer idPresupuesto) {
+		Pdao.delete(idPresupuesto);
 	}
 }

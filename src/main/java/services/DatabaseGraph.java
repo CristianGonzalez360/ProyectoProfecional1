@@ -6,6 +6,7 @@ import java.util.List;
 import dto.ClienteDTO;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
+import dto.FacturaDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
@@ -41,6 +42,8 @@ public class DatabaseGraph {
 	private List<TrabajoPresupuestadoDTO> trabajos;
 
 	private List<RepuestoPlanificadoDTO> repuestosPlanificados;
+	
+	private List<FacturaDTO> facturas;
 
 	public DatabaseGraph() {
 		cuentas = new LinkedList<>();
@@ -150,5 +153,13 @@ public class DatabaseGraph {
 
 	public void setRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestosPlanificados) {
 		this.repuestosPlanificados = repuestosPlanificados;
+	}
+
+	public List<FacturaDTO> getFacturas() {
+		return facturas;
+	}
+
+	public void setFacturas(List<FacturaDTO> facturas) {
+		this.facturas = facturas;
 	}
 }

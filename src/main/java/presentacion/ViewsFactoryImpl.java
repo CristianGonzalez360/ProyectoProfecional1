@@ -7,6 +7,7 @@ import presentacion.views.supervisor.RepuestosPresenter;
 import presentacion.views.supervisor.SupervisorControlView;
 import presentacion.views.tecnico.TecnicoControlView;
 
+
 public class ViewsFactoryImpl extends ViewsFactory {
 
 	private ControllersFactory controllers;
@@ -33,6 +34,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 		new RepuestosPresenter(controllers.makeRepuestosController());
 		new GestionTrabajosPresenter(controllers.makePresupuestosController());
 		new EntregaDeVehiculoPresenter(SupervisorControlView.getInstance().getEntregasView(), controllers.makeEntregasController());
+		new CobroCajeroPresenter(controllers.makeFacturasController());
 		return new WorkbenchPresenter(controllers.makeLoginController());
 	}
 }
