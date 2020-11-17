@@ -2,18 +2,18 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
+
 import business_logic.RepuestosController;
 import dto.PresupuestoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.cajero.PanelCarritoRepuestoView;
-import presentacion.views.tecnico.PlanificarRepuestosFormView;
 import presentacion.views.utils.MessageDialog;
 
 public class CarritoPresenter {
 
-	private PlanificarRepuestosFormView planRepuestosView;
+	private PanelCarritoRepuestoView planRepuestosView;
 	private PresupuestoDTO nuevoPresupuesto;
 	private RepuestosController repuestosController;
 	private PanelCarritoRepuestoView view;
@@ -21,12 +21,18 @@ public class CarritoPresenter {
 	public CarritoPresenter(RepuestosController repuestosController ) {
 		this.repuestosController = repuestosController;
 		this.view = PanelCarritoRepuestoView.getInstance();
-		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
+		this.planRepuestosView = PanelCarritoRepuestoView.getInstance();
 		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
 		this.planRepuestosView.setActionOnCancelar(a -> onCancelarRepuestosPlanificados(a));
 		this.planRepuestosView.setActionOnAceptar(a -> onAceptarRepuestosPlanificados(a));
 		this.planRepuestosView.setActionOnQuitar(a -> onQuitarRepuesto(a));
 		this.planRepuestosView.setActionOnBuscar(a -> onBuscarRepuesto(a));
+		//------------------------------
+		List<String> marcas = repuestosController.readMarcas();
+		marcas.add("todas");
+		this.planRepuestosView.setDataMarcas(marcas);
+		this.planRepuestosView.setDataRepuestos(repuestosController.readAll());
+		//-------------------------------------
 //		this.view.setActionOnBuscar(a -> onBuscar(a));
 //		this.view.setActionSelectVehiculoCliente(a -> onSelectVehiculoDeCliente(a));
 	}
