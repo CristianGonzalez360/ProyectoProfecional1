@@ -74,8 +74,8 @@ public class PresupuestosPresenter {
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				presupuestosController.delete(nuevoPresupuesto.getIdPresupuesto());
 				nuevoPresupuesto = null;
+				altaPresupuesto.clearData();
 				super.windowClosing(e);
 			}
 		});
@@ -83,8 +83,8 @@ public class PresupuestosPresenter {
 	
 	//Cuando se cancela, borra el presupuesto para que no quede vacio.
 	private void onCancelar(ActionEvent a) {
-		presupuestosController.delete(nuevoPresupuesto.getIdPresupuesto());
 		nuevoPresupuesto = null;
+		altaPresupuesto.clearData();
 		altaPresupuesto.close();
 	}
 
@@ -119,16 +119,6 @@ public class PresupuestosPresenter {
 		if(idOT != null) {
 				nuevoPresupuesto = new PresupuestoDTO();
 				nuevoPresupuesto.setIdOT(idOT);
-				presupuestosController.save(nuevoPresupuesto);
-				List<PresupuestoDTO> presupuestos = presupuestosController.readByIdOt(idOT);
-				//No me gusta*****
-				nuevoPresupuesto = presupuestos.get(0);
-				for (PresupuestoDTO presupuesto : presupuestos) {
-					if(nuevoPresupuesto.getIdPresupuesto()<presupuesto.getIdPresupuesto()) {
-						nuevoPresupuesto = presupuesto;
-					}
-				}
-				//****
 				onDisplayForPlanRepuesto(a);
 				onDisplayForPlanTrabajos(a);
 				this.altaPresupuesto.setData(nuevoPresupuesto);
@@ -170,7 +160,7 @@ public class PresupuestosPresenter {
 		String comentario = altaPresupuesto.getComentario();
 		if(!comentario.isEmpty() && !nuevoPresupuesto.getTrabajos().isEmpty() && !nuevoPresupuesto.getRepuestos().isEmpty()) {
 			nuevoPresupuesto.setComentarioAltaPresu(comentario);
-			presupuestosController.update(nuevoPresupuesto);
+			presupuestosController.save(nuevoPresupuesto);
 			nuevoPresupuesto = null;
 			this.view.setDataPresupuestos(presupuestosController.readByIdOt(view.getIdOrdenDeTrabajo()));
 			this.altaPresupuesto.close();
