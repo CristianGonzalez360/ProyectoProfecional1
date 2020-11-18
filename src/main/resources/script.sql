@@ -162,6 +162,7 @@ DROP TABLE Presupuestos IF EXISTS;
 CREATE TABLE Presupuestos (
   idPresupuesto INT NOT NULL AUTO_INCREMENT,
   idOT INT NOT NULL,
+  idFactura INT,
   idUsuAltaPresu INT NOT NULL,
   idUsuCierrePresu INT,
   idUsuRegPago INT,

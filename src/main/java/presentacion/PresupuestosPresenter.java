@@ -40,8 +40,7 @@ public class PresupuestosPresenter {
 	private RepuestosController repuestosController;
 	private OrdenesTrabajoController ordenDeTrabajoController;
 	private ClientesController clienteController;
-	private CarritoRepuestosFormView carritoRepuestosFormView;
-
+	
 	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController,
 			OrdenesTrabajoController ordenDetranajoController, VehiculosController vehiculoController,
 			ClientesController clienteController) {
@@ -55,7 +54,7 @@ public class PresupuestosPresenter {
 		this.altaPresupuesto = AltaPresupuestoFormView.getInstance();
 		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
 		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
-		this.carritoRepuestosFormView = CarritoRepuestosFormView.getInstance();
+		CarritoRepuestosFormView.getInstance();
 		
 		this.altaPresupuesto.setActionOnAceptar(a -> onRegistrar(a));
 		this.altaPresupuesto.setActionOnCancelar(a -> onCancelar(a));
@@ -117,12 +116,12 @@ public class PresupuestosPresenter {
 	private void onNuevoPresupuesto(ActionEvent a) {
 		Integer idOT = view.getIdOrdenDeTrabajo();
 		if(idOT != null) {
-				nuevoPresupuesto = new PresupuestoDTO();
-				nuevoPresupuesto.setIdOT(idOT);
-				onDisplayForPlanRepuesto(a);
-				onDisplayForPlanTrabajos(a);
-				this.altaPresupuesto.setData(nuevoPresupuesto);
-				this.altaPresupuesto.display();
+			nuevoPresupuesto = new PresupuestoDTO();
+			nuevoPresupuesto.setIdOT(idOT);
+			onDisplayForPlanRepuesto(a);
+			onDisplayForPlanTrabajos(a);
+			this.altaPresupuesto.setData(nuevoPresupuesto);
+			this.altaPresupuesto.display();
 		}
 	}
 	

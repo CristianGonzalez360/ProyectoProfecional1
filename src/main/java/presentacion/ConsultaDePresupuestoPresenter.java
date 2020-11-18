@@ -13,8 +13,8 @@ import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.VehiculosController;
 import business_logic.exceptions.ForbiddenException;
-import business_logic.exceptions.NotFoundException;
 import dto.ClienteDTO;
+import dto.EstadoPresupuesto;
 import dto.FacturaDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
@@ -64,7 +64,6 @@ public class ConsultaDePresupuestoPresenter {
 			}
 		});
 		view.setActionGenerarFactura((a)->onGenerarFactura(a));
-		view.setActionRegistrarPago((a)->onRegistrarPago(a));
 	}
 
 	private void onSelectVehiculoDeCliente() {
@@ -80,11 +79,10 @@ public class ConsultaDePresupuestoPresenter {
 	
 	private void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		view.setDataPresupuestos(presupuestos);
-		FacturaDTO factura = facController.readFacturaByOrdenDeTrabajoId(view.getIdOrdenDeTrabajoPresentada());
-		if(factura != null) {
-			view.lockButtonGenerarFactura();
-		} else {
-			view.unLockButtonGenerarFactura();
+		for (PresupuestoDTO presupuestoDTO : presupuestos) {
+			if(presupuestoDTO.getEstado().name() == EstadoPresupuesto.PENDIENTE.name()) {
+				view.unLockButtonGenerarFactura();
+			}
 		}
 	}
 	
@@ -106,6 +104,7 @@ public class ConsultaDePresupuestoPresenter {
 		view.clearDataRepuestos();
 		view.clearDataTrabajos();
 		view.clearDataOrdeDeTrabajo();
+		view.lockButtonGenerarFactura();
 		String inputDni = view.getTextDni();
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
 			ClienteDTO cliente = clientesController.readByDni(Integer.parseInt(inputDni));
@@ -125,27 +124,13 @@ public class ConsultaDePresupuestoPresenter {
 			updatePresupuestosView();
 			FacturaDTO factura = facController.generarFactura(presupuestosSeleccionados);
 			if(factura != null) {
-				ResumenDeFacturaDTO resumen = facController.generarResumenFactura(view.getIdOrdenDeTrabajoPresentada());
+				ResumenDeFacturaDTO resumen = facController.generarResumenFactura(factura.getIdFactura());
+				resumen.setFactura(factura);
 				if(resumen != null) {
 					new MessageDialog().showMessages(resumen.generarResumen());	
 				}	
 			}
 		} catch(ForbiddenException e) {
-			new MessageDialog().showMessages(e.getMessage());
-		}
-	}
-	
-	private void onRegistrarPago(ActionEvent a) {
-		Integer idOrdenDeTrabajo = view.getIdOrdenDeTrabajoPresentada();
-		try {
-			facController.registrarPagoDeFacturaById(idOrdenDeTrabajo);
-			view.clearDataPresupuestos();
-			List<PresupuestoDTO> presupuestos = presController.readByIdOt(idOrdenDeTrabajo);
-			this.setDataPresupuestos(presupuestos);
-			new MessageDialog().showMessages("Se ha registrado el pago de la factura existosamente.");
-		} catch (ForbiddenException e ) {
-			new MessageDialog().showMessages(e.getMessage());
-		} catch (NotFoundException e) {
 			new MessageDialog().showMessages(e.getMessage());
 		}
 	}

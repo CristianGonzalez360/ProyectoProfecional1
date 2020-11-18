@@ -9,6 +9,8 @@ public class PresupuestoDTO {
 	private Integer idPresupuesto;
 
 	private Integer idOT;
+	
+	private Integer idFactura;
 
 	private Integer idUsuAltaPresu;
 
@@ -192,5 +194,13 @@ public class PresupuestoDTO {
 				+ comentarioAltaPresu + ", fechaCierrePresu=" + fechaCierrePresu + ", comentarioCierrePresu="
 				+ comentarioCierrePresu + ", fechaAprobacion=" + fechaAprobacion + ", estado=" + estado + ", trabajos="
 				+ trabajos + ", repuestos=" + repuestos + "]";
+	}
+
+	public Integer getIdFactura() {
+		return idFactura;
+	}
+
+	public void setIdFactura(Integer idFactura) {
+		this.idFactura = idFactura;
 	}
 }

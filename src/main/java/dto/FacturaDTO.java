@@ -1,6 +1,7 @@
 package dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class FacturaDTO {
 	
@@ -11,15 +12,15 @@ public class FacturaDTO {
 	private Date fechaDeAlta;
 	
 	private Date fechaDeCierrePorPago;
-		
+	
+	private Double total;
+	
+	private List<PresupuestoDTO> presupuestosFacturados;
+			
 	public FacturaDTO() {
 		super();
 	}
-	
-	public boolean isAprobada() {
-		return fechaDeCierrePorPago == null;
-	}
-	
+		
 	public Integer getIdFactura() {
 		return idFactura;
 	}
@@ -52,9 +53,28 @@ public class FacturaDTO {
 		this.fechaDeCierrePorPago = fechaDeCierrePorPago;
 	}
 
+	public boolean estaPagada() {
+		return fechaDeAlta == null? false: true;
+	}
 	@Override
 	public String toString() {
 		return "FacturaDTO [idFactura=" + idFactura + ", idOrdenDeTrabajo=" + idOrdenDeTrabajo + ", fechaDeAlta="
 				+ fechaDeAlta + ", fechaDeCierrePorPago=" + fechaDeCierrePorPago + "]";
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
+	public List<PresupuestoDTO> getPresupuestosFacturados() {
+		return presupuestosFacturados;
+	}
+
+	public void setPresupuestosFacturados(List<PresupuestoDTO> presupuestosFacturados) {
+		this.presupuestosFacturados = presupuestosFacturados;
 	}
 }
