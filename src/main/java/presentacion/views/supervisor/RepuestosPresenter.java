@@ -23,12 +23,35 @@ public class RepuestosPresenter {
 		this.gestionRepuestos.setActionOnBuscar(a -> onBuscarRepuesto(a));
 		this.gestionRepuestos.setActionOnIngresarStock(a -> onIngresarStock(a));
 		this.gestionRepuestos.setActionOnCargarArchivo(a -> onCargarArchivo(a));
+		this.gestionRepuestos.serActionOnConfigurarMinimo(a -> onConfigMinimo(a));
 
 		cargarMarcas();
 	}
 
 	private void onCargarArchivo(ActionEvent a) {
 		// TODO Auto-generated method stub
+	}
+	
+	private void onConfigMinimo(ActionEvent a) {
+		int id = this.gestionRepuestos.getIdRepuesto();
+		if (id >= 0) {
+			RepuestoDTO repuesto = repuestosController.readById(id);
+			String stock = new InputDialog().title("Configurar mínimo").setLabel("Mínimo").setText(repuesto.getStockMinimo() + "").open();
+			if (stock != null) {
+				List<String> error = new StringValidator(stock).notBlank("Debe ingresar un valor")
+						.number("El valor debe ser numérico").validate();
+				if (error.isEmpty()) {
+					int minimo = Integer.parseInt(stock);
+					repuesto.setStockMinimo(minimo);
+					repuestosController.update(repuesto);
+					refrescar();
+				} else {
+					new MessageDialog().showMessages(error);
+				}
+			}
+		} else {
+			new MessageDialog().showMessages("Seleccione un repuesto");
+		}
 	}
 
 	private void onIngresarStock(ActionEvent a) {

@@ -33,79 +33,87 @@ public class ClientePanelView extends JPanel {
 	public ClientePanelView() {
 		setBorder(
 				new TitledBorder(null, "Datos del cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		setLayout(new FormLayout(
-				new ColumnSpec[] { ColumnSpec.decode("14px"), ColumnSpec.decode("max(0dlu;default)"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(80dlu;default):grow"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("73px:grow"), FormSpecs.RELATED_GAP_COLSPEC,
-						ColumnSpec.decode("max(93dlu;default):grow"), FormSpecs.RELATED_GAP_COLSPEC,
-						FormSpecs.DEFAULT_COLSPEC, },
-				new RowSpec[] { FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("26px"), FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+		setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Dni");
-		add(lblNewLabel, "2, 4");
+		lblNewLabel.setBounds(20, 50, 42, 14);
+		add(lblNewLabel);
 
 		textDni = new JTextField();
-		add(textDni, "4, 4, fill, default");
+		textDni.setBounds(68, 47, 122, 20);
+		add(textDni);
 		textDni.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("Nombre");
-		add(lblNewLabel_1, "6, 4");
+		lblNewLabel_1.setBounds(196, 50, 76, 14);
+		add(lblNewLabel_1);
 
 		textNombre = new JTextField();
-		add(textNombre, "8, 4, fill, default");
+		textNombre.setBounds(278, 47, 141, 20);
+		add(textNombre);
 		textNombre.setColumns(10);
 
 		JLabel lblNewLabel_2 = new JLabel("Telefono");
-		add(lblNewLabel_2, "2, 6");
+		lblNewLabel_2.setBounds(20, 79, 42, 14);
+		add(lblNewLabel_2);
 
 		textTelefono = new JTextField();
-		add(textTelefono, "4, 6, fill, default");
+		textTelefono.setBounds(68, 76, 122, 20);
+		add(textTelefono);
 		textTelefono.setColumns(10);
 
 		JLabel lblNewLabel_3 = new JLabel("Email");
-		add(lblNewLabel_3, "6, 6");
+		lblNewLabel_3.setBounds(196, 79, 76, 14);
+		add(lblNewLabel_3);
 
 		textEmail = new JTextField();
-		add(textEmail, "8, 6, fill, default");
+		textEmail.setBounds(278, 76, 141, 20);
+		add(textEmail);
 		textEmail.setColumns(10);
 
 		JLabel Calle = new JLabel("calle");
-		add(Calle, "2, 8");
+		Calle.setBounds(20, 105, 42, 14);
+		add(Calle);
 
 		textCalle = new JTextField();
-		add(textCalle, "4, 8, fill, default");
+		textCalle.setBounds(68, 102, 122, 20);
+		add(textCalle);
 		textCalle.setColumns(10);
 
 		JLabel lblNewLabel_4 = new JLabel("Altura");
-		add(lblNewLabel_4, "6, 8");
+		lblNewLabel_4.setBounds(196, 105, 76, 14);
+		add(lblNewLabel_4);
 
 		textAltura = new JTextField();
-		add(textAltura, "8, 8, fill, default");
+		textAltura.setBounds(278, 102, 141, 20);
+		add(textAltura);
 		textAltura.setColumns(10);
 
 		JLabel lblNewLabel_5 = new JLabel("Piso");
-		add(lblNewLabel_5, "2, 10");
+		lblNewLabel_5.setBounds(20, 131, 42, 14);
+		add(lblNewLabel_5);
 
 		textPiso = new JTextField();
-		add(textPiso, "4, 10, fill, default");
+		textPiso.setBounds(68, 128, 122, 20);
+		add(textPiso);
 		textPiso.setColumns(10);
 
 		JLabel lblNewLabel_6 = new JLabel("Dpto");
-		add(lblNewLabel_6, "6, 10");
+		lblNewLabel_6.setBounds(196, 131, 76, 14);
+		add(lblNewLabel_6);
 
 		textDpto = new JTextField();
-		add(textDpto, "8, 10, fill, default");
+		textDpto.setBounds(278, 128, 141, 20);
+		add(textDpto);
 		textDpto.setColumns(10);
 
 		JLabel lblNewLabel_7 = new JLabel("localidad");
-		add(lblNewLabel_7, "2, 12, right, default");
+		lblNewLabel_7.setBounds(21, 157, 41, 14);
+		add(lblNewLabel_7);
 
 		textLocalidad = new JTextField();
-		add(textLocalidad, "4, 12, fill, default");
+		textLocalidad.setBounds(68, 154, 122, 20);
+		add(textLocalidad);
 		textLocalidad.setColumns(10);
 		
 		this.disableAllClienteInputs();

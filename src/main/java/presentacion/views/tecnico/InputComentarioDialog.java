@@ -47,16 +47,21 @@ public class InputComentarioDialog extends JDialog {
 	}
 
 	public String open() {
-		int result = JOptionPane.showConfirmDialog(null, contentPane, title, JOptionPane.OK_CANCEL_OPTION,
-				JOptionPane.QUESTION_MESSAGE);
-		switch (result) {
-		case JOptionPane.OK_OPTION:
-			break;
-		case JOptionPane.OK_CANCEL_OPTION:
-			textField.setText("");
-			break;
+		String ret = null;
+		while (ret == null) {
+			int result = JOptionPane.showConfirmDialog(null, contentPane, title, JOptionPane.OK_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE);
+			if(result == JOptionPane.OK_OPTION) {
+				ret = getData();
+				if(ret == null) {
+					JOptionPane.showMessageDialog(null, "ingrese un comentario", "Campo Obligatorio", JOptionPane.INFORMATION_MESSAGE);
+				}
+			} else {
+				textField.setText("");
+				break;
+			}
 		}
-		return getData();
+		return ret;
 	}
 
 	private String getData() {

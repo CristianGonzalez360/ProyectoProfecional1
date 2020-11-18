@@ -17,6 +17,8 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 	private static final String readAll = "SELECT * FROM DatosPersonales";
 
 	private static final String readByDni = readAll + " wHERE DatosPersonales.dni = ?";
+	
+	private static final String readAllId = readAll + " WHERE DatosPersonales.idDatosPersonales = ?";
 
 	public DatosPersonalesDaoImpl(Connection connection) {
 		super(connection);
@@ -46,7 +48,8 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 
 	@Override
 	public DatosPersonalesDTO readByID(Integer id) {
-		return null;
+		List<DatosPersonalesDTO> dtos = getTemplate().query(readAllId).param(id).excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
 	@Override
