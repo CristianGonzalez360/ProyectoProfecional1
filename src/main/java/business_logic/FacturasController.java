@@ -64,38 +64,42 @@ public class FacturasController {
 	}
 	
 	public FacturaDTO generarFactura(Map<Integer, Boolean> presupuestos) {
-		Object [] keys = presupuestos.keySet().toArray();
-		Integer ordenDeTrabajoId = presDao.readByID((Integer) keys[0]).getIdOT();
-		List<PresupuestoDTO> ps = new ArrayList<PresupuestoDTO>();
-		double total = 0;
-		for (int i = 0; i < keys.length; i++) {
-				int idPresupuesto = (Integer) keys[i];
-				PresupuestoDTO p = readPresupuestoById(idPresupuesto);
-				ps.add(p);
-				total += p.getPrecio();
-		}
 		FacturaDTO factura = null;
-		boolean esOrdenDeTrabajoRechazada = esRechazada(ordenDeTrabajoId);
-		if(!esOrdenDeTrabajoRechazada) {
-			factura = new FacturaDTO();
-			factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
-			factura.setFechaDeAlta(new Date());
-			factura.setTotal(total);
-			facturaDao.insert(factura);	
-			
-			List<FacturaDTO> facturas = facturaDao.readByOrdenDeTrabajoId(ordenDeTrabajoId);
-			int idFactura = facturas.get(0).getIdFactura();
-			for (FacturaDTO f : facturas) {
-				if(idFactura<f.getIdFactura()) {
-					idFactura = f.getIdFactura();
+		if (!presupuestos.isEmpty()) {
+			Object[] keys = presupuestos.keySet().toArray();
+			Integer ordenDeTrabajoId = presDao.readByID((Integer) keys[0]).getIdOT();
+			List<PresupuestoDTO> ps = new ArrayList<PresupuestoDTO>();
+			double total = 0;
+			for (int i = 0; i < keys.length; i++) {
+				if(presupuestos.get(keys[i]) == true) {
+					int idPresupuesto = (Integer) keys[i];
+					PresupuestoDTO p = readPresupuestoById(idPresupuesto);
+					ps.add(p);
+					total += p.getPrecio();
 				}
 			}
-			
-			for (PresupuestoDTO p : ps) {
-				p.setIdFactura(idFactura);
-				presDao.update(p);
-			}
-			factura.setIdFactura(idFactura);
+			boolean esOrdenDeTrabajoRechazada = esRechazada(ordenDeTrabajoId);
+			if (!esOrdenDeTrabajoRechazada) {
+				factura = new FacturaDTO();
+				factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
+				factura.setFechaDeAlta(new Date());
+				factura.setTotal(total);
+				facturaDao.insert(factura);
+
+				List<FacturaDTO> facturas = facturaDao.readByOrdenDeTrabajoId(ordenDeTrabajoId);
+				int idFactura = facturas.get(0).getIdFactura();
+				for (FacturaDTO f : facturas) {
+					if (idFactura < f.getIdFactura()) {
+						idFactura = f.getIdFactura();
+					}
+				}
+
+				for (PresupuestoDTO p : ps) {
+					p.setIdFactura(idFactura);
+					presDao.update(p);
+				}
+				factura.setIdFactura(idFactura);
+			} 
 		}
 		return factura;
 	}
