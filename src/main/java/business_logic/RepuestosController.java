@@ -32,6 +32,7 @@ public class RepuestosController {
 	public List<String> readMarcas() {
 		return dao.readMarcas();
 	}
+
 	public RepuestoDTO readByCodigo(Integer codigo) {
 		return dao.readByCodigo(codigo);
 	}
@@ -48,4 +49,10 @@ public class RepuestosController {
 	public void updateByCodigo(RepuestoDTO repuesto) {
 		dao.updateByCodigo(repuesto);
 	}
+
+	public void update(RepuestoDTO entity) {
+		dao.update(entity);
+	}
+
+
 }

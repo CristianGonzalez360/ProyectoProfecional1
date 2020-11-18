@@ -1,4 +1,4 @@
-package presentacion.views;
+package presentacion.views.cajero;
 
 import javax.swing.JInternalFrame;
 import java.awt.BorderLayout;
@@ -8,6 +8,7 @@ import javax.swing.JTabbedPane;
 
 public class CajeroControlView extends JInternalFrame {
 	  
+	
 
 	
 	/**
@@ -17,7 +18,9 @@ public class CajeroControlView extends JInternalFrame {
 
 	private static CajeroControlView instance;
 
-	private PanelCajeroView cajeroPanel;
+	private PanelCarritoRepuestoView cajeroPanel;
+	private PanelCobroCajeroView cajeroPanel2;
+
 
 	public static CajeroControlView getInstance() {
 		if (instance == null)
@@ -32,12 +35,20 @@ public class CajeroControlView extends JInternalFrame {
 		setIconifiable(true);
 		setBounds(100, 100, 800, 436);
 		getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
-		this.cajeroPanel = PanelCajeroView.getInstance();
-		tabbedPane.add("Gestión de presupuestos", this.cajeroPanel);
+		this.cajeroPanel = PanelCarritoRepuestoView.getInstance();
+		tabbedPane.add("Venta repuesto", this.cajeroPanel);
+		
+		this.cajeroPanel2 = PanelCobroCajeroView.getInstance();
+		tabbedPane.add("Pago Facturas", this.cajeroPanel2);
+		
+		
+		
 	}
 
 	public void display() {

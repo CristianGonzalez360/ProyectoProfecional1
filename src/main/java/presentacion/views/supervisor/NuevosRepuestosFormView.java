@@ -58,10 +58,8 @@ public class NuevosRepuestosFormView extends JDialog {
 					else return Object.class;
 				}
 			};
-//			modelo.setColumnIdentifiers(nombreColumnas);
-			tablaRepuestos = new JTable(modelo);
-//			tablaRepuestos.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			
+			tablaRepuestos = new JTable(modelo);			
 			JScrollPane scrollPane = new JScrollPane(tablaRepuestos);
 			contentPanel.add(scrollPane, BorderLayout.CENTER);
 			
@@ -86,10 +84,6 @@ public class NuevosRepuestosFormView extends JDialog {
 	
 	public void cargarTabla(List<RepuestoDTO> repuestos) {
 		for (RepuestoDTO repuesto : repuestos) {
-//			if(presupuesto.getEstado()==EstadoPresupuesto.PENDIENTE) {
-//				Object[] row = { presupuesto.getIdPresupuesto().toString(), presupuesto.getFechaAltaPresu(), presupuesto.getComentarioAltaPresu(), presupuesto.getEstado() };
-//				modelo.addRow(row);
-//			}
 			Object[] row = {
 			repuesto.getCodigoRepuesto().toString(),
 			repuesto.getDescripcionRepuesto(),

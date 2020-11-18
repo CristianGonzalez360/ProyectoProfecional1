@@ -9,21 +9,31 @@ import java.util.ListIterator;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
+
 import business_logic.RepuestosController;
 import dto.RepuestoDTO;
+import dto.validators.StringValidator;
+import presentacion.views.utils.InputDialog;
+import presentacion.views.utils.MessageDialog;
 import services.DatabaseGraph;
 
 public class RepuestosPresenter {
-	
+
 	private PanelGestionRepuestos gestionRepuestos;
 	private RepuestosController repuestosController;
 	private NuevosRepuestosFormView nuevosRepuestosView;
 	private DatabaseGraph repuestosGraph;
 	
+
+	private String marca;
+	private String descripcion;
+
+
 	public RepuestosPresenter(RepuestosController controller) {
 		this.repuestosController = controller;
 		this.nuevosRepuestosView = NuevosRepuestosFormView.getInstance();
@@ -34,14 +44,38 @@ public class RepuestosPresenter {
 		
 		this.nuevosRepuestosView.setActionOnValidadCarga(a -> onValidarCarga(a));
 		this.nuevosRepuestosView.setActionOnCancelarCarga(a -> onCancelarCarga(a));
-		
+		this.gestionRepuestos.serActionOnConfigurarMinimo(a -> onConfigMinimo(a));
+
+
 		cargarMarcas();
 	}
+
 	
 	
 	private void onCancelarCarga(ActionEvent a) {
 		this.nuevosRepuestosView.cerrar();//cerrar
 		this.nuevosRepuestosView.clear();//limpiar la vista tambn
+	}
+	private void onConfigMinimo(ActionEvent a) {
+		int id = this.gestionRepuestos.getIdRepuesto();
+		if (id >= 0) {
+			RepuestoDTO repuesto = repuestosController.readById(id);
+			String stock = new InputDialog().title("Configurar mínimo").setLabel("Mínimo").setText(repuesto.getStockMinimo() + "").open();
+			if (stock != null) {
+				List<String> error = new StringValidator(stock).notBlank("Debe ingresar un valor")
+						.number("El valor debe ser numérico").validate();
+				if (error.isEmpty()) {
+					int minimo = Integer.parseInt(stock);
+					repuesto.setStockMinimo(minimo);
+					repuestosController.update(repuesto);
+					refrescar();
+				} else {
+					new MessageDialog().showMessages(error);
+				}
+			}
+		} else {
+			new MessageDialog().showMessages("Seleccione un repuesto");
+		}
 	}
 
 
@@ -113,9 +147,45 @@ public class RepuestosPresenter {
 	
 	
 	private void onIngresarStock(ActionEvent a) {
-		// TODO Auto-generated method stub
+		int id = this.gestionRepuestos.getIdRepuesto();
+		if (id >= 0) {
+			String stock = new InputDialog().title("Ingresar Stock").setLabel("Cantidad").open();
+			if (stock != null) {
+				List<String> error = new StringValidator(stock).notBlank("Debe ingresar un valor")
+						.number("El valor debe ser numérico").validate();
+				if (error.isEmpty()) {
+					int cantidad = Integer.parseInt(stock);
+					RepuestoDTO repuesto = repuestosController.readById(id);
+					repuesto.setStockRepuesto(repuesto.getStockRepuesto() + cantidad);
+					repuestosController.update(repuesto);
+					refrescar();
+				} else {
+					new MessageDialog().showMessages(error);
+				}
+			}
+		} else {
+			new MessageDialog().showMessages("Seleccione un repuesto");
+		}
 	}
-	
+
+	private void refrescar() {
+		List<RepuestoDTO> repuestos;
+		if (descripcion.isEmpty()) {
+			if (marca == "todas") {
+				repuestos = repuestosController.readAll();
+			} else {
+				repuestos = repuestosController.readByMarca(marca);
+			}
+		} else {
+			if (marca == "todas") {
+				repuestos = repuestosController.readByDescripcion(descripcion);
+			} else {
+				repuestos = repuestosController.readbyMarcaYDescripcion(marca, descripcion);
+			}
+		}
+		gestionRepuestos.setData(repuestos);
+	}
+
 	public void cargarMarcas() {
 		List<String> marcas = new ArrayList<String>();
 		marcas.add("todas");
@@ -123,24 +193,10 @@ public class RepuestosPresenter {
 		this.gestionRepuestos.setDataMarcas(marcas);
 	}
 
-	//Busca repuestos segun criterio seleccionado
+	// Busca repuestos segun criterio seleccionado
 	private void onBuscarRepuesto(ActionEvent a) {
-		String marca = gestionRepuestos.getMarca();
-		String descripcion = gestionRepuestos.getDescripcion();
-		List<RepuestoDTO> repuestos;
-		if(descripcion.isEmpty()) {
-			if(marca == "todas") {
-				repuestos = repuestosController.readAll();
-			} else {
-				repuestos = repuestosController.readByMarca(marca);
-			}
-		} else {
-			if(marca == "todas") {
-				repuestos = repuestosController.readByDescripcion(descripcion);
-			} else {
-				repuestos = repuestosController.readbyMarcaYDescripcion(marca, descripcion);
-			}
-		}
-		gestionRepuestos.setData(repuestos);
+		marca = gestionRepuestos.getMarca();
+		descripcion = gestionRepuestos.getDescripcion();
+		refrescar();
 	}
 }

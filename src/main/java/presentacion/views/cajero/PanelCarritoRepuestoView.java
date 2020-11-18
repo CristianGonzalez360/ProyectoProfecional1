@@ -1,4 +1,4 @@
-package presentacion.views.tecnico;
+package presentacion.views.cajero;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,29 +8,34 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-import com.jgoodies.forms.layout.FormLayout;
+
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.border.BevelBorder;
 
-public class PlanificarRepuestosFormView extends JPanel {
+public class PanelCarritoRepuestoView extends JInternalFrame {
 
 	private static final long serialVersionUID = -3149040258338164711L;
+
+	private final JPanel contentPanel = new JPanel();
 
 	private static final String[] nombreColumnasSuperior = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock",
 			"Precio" };
@@ -52,7 +57,7 @@ public class PlanificarRepuestosFormView extends JPanel {
 	private DefaultTableModel modelRepuestosInferior;
 	private JTable tablaRepuestosInferior;
 
-	static PlanificarRepuestosFormView vista;
+	static PanelCarritoRepuestoView vista;
 
 	private JButton btnLimpiar;
 	private JButton btnQuitar;
@@ -64,28 +69,32 @@ public class PlanificarRepuestosFormView extends JPanel {
 	private JPanel panel_1;
 	private JPanel panel_2;
 	private List<Integer> idRepuestos;
-	private JLabel lblMarca;
+	private JButton btnAceptar;
+	private JButton btnCancelar;
 
-	public static PlanificarRepuestosFormView getInstance() {
+	public static PanelCarritoRepuestoView getInstance() {
 		if (vista == null)
-			vista = new PlanificarRepuestosFormView();
+			vista = new PanelCarritoRepuestoView();
 		return vista;
 	}
 
 	@SuppressWarnings("serial")
-	private PlanificarRepuestosFormView() {
+	private PanelCarritoRepuestoView() {
+//		setModal(true);
 		setBounds(100, 100, 500, 600);
+		setTitle("Carrito de compras");
+		getContentPane().setLayout(new BorderLayout());
 
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
 		idRepuestos = new ArrayList<>();
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
 		panelSuperior = new JPanel();
 		panelSuperior.setForeground(SystemColor.menu);
 		panelSuperior.setBorder(
-				new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Repuestos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				new TitledBorder(null, "Repuestos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		panelSuperior.setBackground(SystemColor.menu);
-		add(panelSuperior);
+		contentPanel.add(panelSuperior);
 		panelSuperior.setLayout(new BorderLayout(0, 0));
 
 		modelRepuestos = new DefaultTableModel(null, nombreColumnasSuperior) {
@@ -97,39 +106,27 @@ public class PlanificarRepuestosFormView extends JPanel {
 
 		panel_1 = new JPanel();
 		panelSuperior.add(panel_1, BorderLayout.NORTH);
-		FormLayout fl_panel_1 = new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("10px"),
-				ColumnSpec.decode("max(30dlu;default)"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("132px"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("right:75px"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("86px:grow"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("81px"),},
-			new RowSpec[] {
-				FormSpecs.LINE_GAP_ROWSPEC,
-				RowSpec.decode("fill:default:grow"),});
-		panel_1.setLayout(fl_panel_1);
-		
-		lblMarca = new JLabel("Marca:");
-		panel_1.add(lblMarca, "2, 2, right, default");
+		panel_1.setLayout(new FormLayout(
+				new ColumnSpec[] { ColumnSpec.decode("10px"), ColumnSpec.decode("132px"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("right:75px"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("86px:grow"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("65px"), },
+				new RowSpec[] { FormSpecs.LINE_GAP_ROWSPEC, RowSpec.decode("23px"), }));
 
 		comboMarcas = new JComboBox<>();
-		panel_1.add(comboMarcas, "4, 2, fill, center");
+		panel_1.add(comboMarcas, "2, 2, default, center");
 
 		lblDescripcion = new JLabel();
-		panel_1.add(lblDescripcion, "6, 2, right, center");
+		panel_1.add(lblDescripcion, "4, 2, right, center");
 		lblDescripcion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDescripcion.setText("Descripción");
 
 		textDescipcion = new JTextField();
-		panel_1.add(textDescipcion, "8, 2, fill, center");
+		panel_1.add(textDescipcion, "6, 2, default, center");
 		textDescipcion.setColumns(10);
 
 		btnBuscar = new JButton("Buscar");
-		panel_1.add(btnBuscar, "10, 2, fill, top");
+		panel_1.add(btnBuscar, "8, 2, left, top");
 
 		panelInterior = new JPanel();
 		panelInterior.setBackground(SystemColor.menu);
@@ -154,9 +151,10 @@ public class PlanificarRepuestosFormView extends JPanel {
 		panel_2.add(btnAgregar);
 
 		panelInferior = new JPanel();
-		panelInferior.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Repuestos planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelInferior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Repuestos a confirmar",
+				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelInferior.setBackground(SystemColor.menu);
-		add(panelInferior);
+		contentPanel.add(panelInferior);
 		panelInferior.setLayout(new BorderLayout(0, 0));
 
 		scrollPaneRepuestosInferior = new JScrollPane();
@@ -185,6 +183,22 @@ public class PlanificarRepuestosFormView extends JPanel {
 		btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setVisible(false);
 		panel.add(btnLimpiar);
+
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setActionCommand("OK");
+		buttonPane.add(btnAceptar);
+		getRootPane().setDefaultButton(btnAceptar);
+
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setVisible(false);
+		btnCancelar.setActionCommand("Cancel");
+		buttonPane.add(btnCancelar);
+
+		setVisible(false);
 	}
 
 	public void clearDataRepuestos() {
@@ -210,7 +224,6 @@ public class PlanificarRepuestosFormView extends JPanel {
 	}
 
 	public void setDataRepuestos(List<RepuestoDTO> repuestos) {
-		textCantidad.setText("");
 		modelRepuestos.setRowCount(0);
 		for (RepuestoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
@@ -234,6 +247,14 @@ public class PlanificarRepuestosFormView extends JPanel {
 
 	public void setActionOnAgregar(ActionListener listener) {
 		this.btnAgregar.addActionListener(listener);
+	}
+
+	public void setActionOnCancelar(ActionListener listener) {
+		this.btnCancelar.addActionListener(listener);
+	}
+
+	public void setActionOnAceptar(ActionListener listener) {
+		this.btnAceptar.addActionListener(listener);
 	}
 
 	public void close() {

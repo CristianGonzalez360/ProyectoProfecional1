@@ -19,6 +19,17 @@ public class VehiculoConOrdenDeTrabajoDTO {
 	public VehiculoConOrdenDeTrabajoDTO() {
 	}
 
+	public VehiculoConOrdenDeTrabajoDTO makeTestDTO() {
+		VehiculoConOrdenDeTrabajoDTO ret = new VehiculoConOrdenDeTrabajoDTO();
+		ret.setIdCliente(10);
+		ret.setIdFichaTecnica(4);
+		ret.setKilometrajeGarantia(10000);
+		ret.setAseguradora("La Nueva");
+		ret.setNroPolizaSeguro(0012);
+		ret.setPatente("SOA152");
+		return ret;
+	}
+	
 	public VehiculoConOrdenDeTrabajoDTO(AltaDeVehiculoDTO vehiculoDeAlta) {
 		if (vehiculoDeAlta.getKilometrajeGarantia() != null)
 			this.kilometrajeGarantia = Integer.parseInt(vehiculoDeAlta.getKilometrajeGarantia());

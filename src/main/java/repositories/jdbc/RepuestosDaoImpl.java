@@ -28,6 +28,9 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 	
 	private static final String updateByCodigo = "UPDATE Repuestos SET Repuestos.stockRepuesto = ? WHERE Repuestos.codigoRepuesto = ?";
 
+	private static final String update = "UPDATE repuestos SET stockRepuesto = ?, stockMinimo = ? WHERE idRepuesto = ?";
+
+
 	public RepuestosDaoImpl(Connection connection) {
 		super(connection);
 		// TODO Auto-generated constructor stub
@@ -35,8 +38,7 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 
 	@Override
 	public boolean update(RepuestoDTO entity) {
-		// TODO Auto-generated method stub
-		return false;
+		return getTemplate().query(update).param(entity.getStockRepuesto()).param(entity.getStockMinimo()).param(entity.getIdRepuesto()).excecute();
 	}
 
 	@Override
