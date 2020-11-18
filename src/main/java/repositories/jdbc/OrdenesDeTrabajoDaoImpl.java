@@ -21,14 +21,23 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 			+ "VALUES (?,?,?,?,?,?,?)";
 
 	private static final String readByVehiculoId = readAll + " " + "WHERE idVehiculoOt = ?";
+	
+	private static final String readAllOrdenesRealizadas = "SELECT o.idOT, o.tipoTrabajo, o.idUsuAlta, o.idVehiculoOt, o.fechaAltaOt, o.trabajoSolicitado, o.trabajoSujerido, o.fechaEntregadoVehiculo "
+			+ "FROM OrdenesDeTrabajo o INNER JOIN Presupuestos p "
+			+ "ON o.idOT = P.idOT WHERE p.estado = 'REALIZADO' AND o.fechaEntregadoVehiculo IS NULL "
+			+ "GROUP BY o.idOT";
 
+	private static final String readByID = "SELECT * FROM OrdenesDeTrabajo WHERE idOT = ?";
+			
+	private static final String update = "UPDATE OrdenesDeTrabajo SET fechaEntregadoVehiculo = ? WHERE idOT = ?";
+	
 	public OrdenesDeTrabajoDaoImpl(Connection connection) {
 		super(connection);
 	}
 
 	@Override
 	public boolean update(OrdenDeTrabajoDTO entity) {
-		return false;
+		return getTemplate().query(update).param(entity.getFechaEntregado() == null ? new NullObject() : entity.getFechaEntregado()).param(entity.getIdOrdenTrabajo()).excecute();
 	}
 
 	@Override
@@ -48,8 +57,8 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 
 	@Override
 	public OrdenDeTrabajoDTO readByID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<OrdenDeTrabajoDTO> ordenes = getTemplate().query(readByID).param(id).excecute(getMapper());
+		return ordenes.isEmpty() ? null : ordenes.get(0);
 	}
 
 	@Override
@@ -86,5 +95,10 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 				return ot;
 			}
 		};
+	}
+
+	@Override
+	public List<OrdenDeTrabajoDTO> readAllOrdenesRealizadas() {
+		return getTemplate().query(readAllOrdenesRealizadas).excecute(getMapper());
 	}
 }

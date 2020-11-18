@@ -17,6 +17,8 @@ public class FacturaDTO {
 	
 	private List<PresupuestoDTO> presupuestosFacturados;
 			
+	private String estado;
+		
 	public FacturaDTO() {
 		super();
 	}
@@ -59,7 +61,7 @@ public class FacturaDTO {
 	@Override
 	public String toString() {
 		return "FacturaDTO [idFactura=" + idFactura + ", idOrdenDeTrabajo=" + idOrdenDeTrabajo + ", fechaDeAlta="
-				+ fechaDeAlta + ", fechaDeCierrePorPago=" + fechaDeCierrePorPago + "]";
+				+ fechaDeAlta + ", fechaDeCierrePorPago=" + fechaDeCierrePorPago + ", total=" + total + "]";
 	}
 
 	public Double getTotal() {
@@ -68,6 +70,14 @@ public class FacturaDTO {
 
 	public void setTotal(Double total) {
 		this.total = total;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	public List<PresupuestoDTO> getPresupuestosFacturados() {

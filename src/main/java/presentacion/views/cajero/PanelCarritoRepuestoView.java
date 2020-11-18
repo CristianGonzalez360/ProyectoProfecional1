@@ -3,542 +3,289 @@ package presentacion.views.cajero;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.SoftBevelBorder;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
+import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
-import dto.TrabajoPresupuestadoDTO;
-import dto.FichaTecnicaVehiculoDTO;
-import dto.OrdenDeTrabajoDTO;
-import dto.PresupuestoDTO;
-import dto.VehiculoConOrdenDeTrabajoDTO;
 
-public class PanelCarritoRepuestoView extends JPanel {
+public class PanelCarritoRepuestoView extends JInternalFrame {
 
+	private static final long serialVersionUID = -3149040258338164711L;
 
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7129951379688983454L;
+	private final JPanel contentPanel = new JPanel();
 
-	private JTextField txtDNI;
+	private static final String[] nombreColumnasSuperior = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock",
+			"Precio" };
+	private static final String[] nombreColumnasInferior = { "Codigo", "Descripcion", "Marca", "Fabricante",
+			"Cantidad" };
 
-	private static PanelCarritoRepuestoView instance;
+	private JPanel panelSuperior = new JPanel();
+	private JPanel panelInterior = new JPanel();
+	private JComboBox<String> comboMarcas;
+	private JLabel lblDescripcion;
+	private JTextField textDescipcion;
 	private JButton btnBuscar;
-	private JSplitPane splitPane;
-	private JPanel panelEste;
-	private JPanel panelOeste;
-	private JPanel panelEsteNorte;
-	private List<VehiculoConOrdenDeTrabajoDTO> vehiculos;
-
-	private final String[] columnasTablaVehiculos = new String[] { "NRO. VEHICULO", "KM GARANTIA", "ASEGURADORA",
-			"NRO POLIZA SEGURO", "PATENTE" };
-	private DefaultTableModel tableModelVehiculos;
-	private JTable tableVehiculos;
-
-	private final String[] columnasListadoDePresupuestos = new String[] { "NRO. Presupuesto", "FECHA ALTA",
-			"COMENTARIO ALTA", "PRECIO" };
-	private DefaultTableModel listadoDePresupuestosModel;
-
-	private final String[] columnasListadoDeRepuestos = new String[] { "CODIGO", "MARCA", "DESCRIPCIÓN", "PRECIO",
-			"CANTIDAD" };
-	private DefaultTableModel listadoDeRepuestosModel;
-
-	private final String[] columnasListadoDeTrabajos = new String[] { "NRO", "FECHA ALTA", "DESCRIPCIÓN", "PRECIO",
-			"ESTIMADO", "FECHA CIERRE" };
-	private DefaultTableModel listadoDeTrabajosModel;
-	private JPanel panelEsteSur;
-
-	private JLabel lblTipo;
-	private JTextField textTipoTrabajo;
-	private JTextField textFechaCierreOt;
-	private JTextField textTrabajoSolicitadoOt;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
-	private JTextField textTrabajoSugeridoOt;
-	private JLabel lblNewLabel_4;
-	private JTextField textFechaAltaOt;
-	private JPanel panel_1;
-	private JTabbedPane tabbedPane;
-	private JPanel panel_3;
-	private JPanel panel_5;
 	private JScrollPane scrollPaneRepuestos;
-	private JTable tableRepuestos;
-	private JTable tableTrabajos;
-	private JPanel panel_2;
-	private JButton btnPlanificarRepuestos;
-	private JPanel panel_6;
-	private JButton btnPlanificarTrabajos;
-	private JPanel panel_7;
-	private JButton btnRegistrarPresupuesto;
-	private JToolBar toolBar;
-	private JLabel lblNewLabel;
+	private DefaultTableModel modelRepuestos;
+	private JTable tablaRepuestos;
+
+	private JPanel panelInferior = new JPanel();
+	private JScrollPane scrollPaneRepuestosInferior;
+	private DefaultTableModel modelRepuestosInferior;
+	private JTable tablaRepuestosInferior;
+
+	static PanelCarritoRepuestoView vista;
+
+	private JButton btnLimpiar;
+	private JButton btnQuitar;
+	private JButton btnEditar;
+	private JButton btnAgregar;
+	private JLabel lblCantidad;
+	private JTextField textCantidad;
 	private JPanel panel;
-	private JLabel lblNewLabel_1;
-	private JTextField textMarca;
-	private JLabel lblNewLabel_5;
-	private JTextField textModelo;
-	private JLabel lblNewLabel_6;
-	private JTextField textColor;
-	private JLabel lblNewLabel_7;
-	private JTextField textCombustion;
-	private JLabel lblNewLabel_8;
-	private JLabel lblNewLabel_9;
-	private JTextField textNroMotor;
-	private JTextField textNroDeChasis;
-	private Integer idOrdenDeTrabajo;
-	private JPanel panel_8;
-	private JScrollPane scrollPane;
-	private JTable tablePresupuestos;
-	private List<Integer> idsPresupuestos;
-	private JPanel panel_9;
-	private JButton btnNuevoPresupuesto;
+	private JPanel panel_1;
+	private JPanel panel_2;
+	private List<Integer> idRepuestos;
+	private JButton btnAceptar;
+	private JButton btnCancelar;
 
 	public static PanelCarritoRepuestoView getInstance() {
-		if (instance == null) {
-			instance = new PanelCarritoRepuestoView();
-		}
-		return instance;
+		if (vista == null)
+			vista = new PanelCarritoRepuestoView();
+		return vista;
 	}
 
+	@SuppressWarnings("serial")
 	private PanelCarritoRepuestoView() {
-		setLayout(new BorderLayout(0, 0));
+//		setModal(true);
+		setBounds(100, 100, 500, 600);
+		setTitle("Carrito de compras");
+		getContentPane().setLayout(new BorderLayout());
 
-		this.idsPresupuestos = new ArrayList<>();
-		JPanel panel_4 = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_4.getLayout();
-		flowLayout_1.setHgap(20);
-		panel_4.getLayout();
-		panel_4.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		add(panel_4, BorderLayout.NORTH);
+		idRepuestos = new ArrayList<>();
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
-		JLabel lblClienteDNI = new JLabel("Cliente DNI");
-		panel_4.add(lblClienteDNI);
+		panelSuperior = new JPanel();
+		panelSuperior.setForeground(SystemColor.menu);
+		panelSuperior.setBorder(
+				new TitledBorder(null, "Repuestos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panelSuperior.setBackground(SystemColor.menu);
+		contentPanel.add(panelSuperior);
+		panelSuperior.setLayout(new BorderLayout(0, 0));
 
-		txtDNI = new JTextField("");
-		panel_4.add(txtDNI);
-		txtDNI.setColumns(10);
-
-		btnBuscar = new JButton("Buscar");
-		panel_4.add(btnBuscar);
-
-		splitPane = new JSplitPane();
-		add(splitPane, BorderLayout.CENTER);
-
-		panelEste = new JPanel();
-		splitPane.setLeftComponent(panelEste);
-		panelEste.setLayout(new BoxLayout(panelEste, BoxLayout.Y_AXIS));
-
-		panelEsteNorte = new JPanel();
-		panelEsteNorte.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Ordenes de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelEste.add(panelEsteNorte);
-		panelEsteNorte.setLayout(new BorderLayout(0, 0));
-
-		JScrollPane scrollPaneVehiculos = new JScrollPane();
-		panelEsteNorte.add(scrollPaneVehiculos);
-
-		tableModelVehiculos = new DefaultTableModel(null, this.columnasTablaVehiculos);
-		tableVehiculos = new JTable(tableModelVehiculos) {
+		modelRepuestos = new DefaultTableModel(null, nombreColumnasSuperior) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		scrollPaneVehiculos.setViewportView(tableVehiculos);
-
-		panelEsteSur = new JPanel();
-		panelEsteSur.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Descripci\u00F3n de la orden de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelEste.add(panelEsteSur);
-
-		panelEsteSur.setLayout(new FormLayout(
-				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
-						FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
-						FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), },
-				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("default:grow"), }));
-
-		lblTipo = new JLabel("Tipo de trabajo");
-		panelEsteSur.add(lblTipo, "2, 2");
-
-		textTipoTrabajo = new JTextField();
-		textTipoTrabajo.setEditable(false);
-		panelEsteSur.add(textTipoTrabajo, "4, 2, fill, default");
-		textTipoTrabajo.setColumns(10);
-
-		lblNewLabel = new JLabel("Alta");
-		panelEsteSur.add(lblNewLabel, "6, 2");
-
-		textFechaAltaOt = new JTextField();
-		textFechaAltaOt.setEditable(false);
-		panelEsteSur.add(textFechaAltaOt, "8, 2, fill, default");
-		textFechaAltaOt.setColumns(10);
-
-		lblNewLabel_4 = new JLabel("Cierre");
-		panelEsteSur.add(lblNewLabel_4, "2, 4");
-
-		textFechaCierreOt = new JTextField();
-		textFechaCierreOt.setEditable(false);
-		panelEsteSur.add(textFechaCierreOt, "4, 4, fill, default");
-		textFechaCierreOt.setColumns(10);
-
-		lblNewLabel_3 = new JLabel("Trabajo sugerido");
-		panelEsteSur.add(lblNewLabel_3, "2, 6");
-
-		textTrabajoSugeridoOt = new JTextField();
-		textTrabajoSugeridoOt.setEditable(false);
-		panelEsteSur.add(textTrabajoSugeridoOt, "4, 6, 5, 1, fill, default");
-		textTrabajoSugeridoOt.setColumns(10);
-
-		lblNewLabel_2 = new JLabel("Trabajo soclicitad");
-		panelEsteSur.add(lblNewLabel_2, "2, 8");
-
-		textTrabajoSolicitadoOt = new JTextField();
-		textTrabajoSolicitadoOt.setEditable(false);
-		panelEsteSur.add(textTrabajoSolicitadoOt, "4, 8, 5, 1, fill, default");
-		textTrabajoSolicitadoOt.setColumns(10);
-
-		panel = new JPanel();
-		panel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Ficha t\u00E9cnica del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelEste.add(panel);
-		panel.setLayout(new FormLayout(
-				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(33dlu;default)"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(65dlu;default):grow"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(48dlu;default)"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(89dlu;default):grow"), },
-				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
-
-		lblNewLabel_1 = new JLabel("Marca");
-		panel.add(lblNewLabel_1, "2, 2");
-
-		textMarca = new JTextField();
-		textMarca.setEditable(false);
-		
-		panel.add(textMarca, "4, 2, fill, default");
-		textMarca.setColumns(10);
-
-		lblNewLabel_5 = new JLabel("Modelo");
-		panel.add(lblNewLabel_5, "6, 2");
-
-		textModelo = new JTextField();
-		textModelo.setEditable(false);
-		panel.add(textModelo, "8, 2, fill, default");
-		textModelo.setColumns(10);
-
-		lblNewLabel_6 = new JLabel("Color");
-		panel.add(lblNewLabel_6, "2, 4");
-
-		textColor = new JTextField();
-		textColor.setEditable(false);
-		panel.add(textColor, "4, 4, fill, default");
-		textColor.setColumns(10);
-
-		lblNewLabel_7 = new JLabel("Combustion");
-		panel.add(lblNewLabel_7, "6, 4");
-
-		textCombustion = new JTextField();
-		textCombustion.setEditable(false);
-		panel.add(textCombustion, "8, 4, fill, default");
-		textCombustion.setColumns(10);
-
-		lblNewLabel_8 = new JLabel("Nro. Chasis");
-		panel.add(lblNewLabel_8, "2, 6");
-
-		textNroDeChasis = new JTextField();
-		textNroDeChasis.setEditable(false);
-		panel.add(textNroDeChasis, "4, 6, fill, default");
-		textNroDeChasis.setColumns(10);
-
-		lblNewLabel_9 = new JLabel("Motor");
-		panel.add(lblNewLabel_9, "6, 6");
-
-		textNroMotor = new JTextField();
-		textNroMotor.setEditable(false);
-		panel.add(textNroMotor, "8, 6, fill, default");
-		textNroMotor.setColumns(10);
-
-		panelOeste = new JPanel();
-		splitPane.setRightComponent(panelOeste);
-		panelOeste.setLayout(new BoxLayout(panelOeste, BoxLayout.Y_AXIS));
-
-		this.listadoDePresupuestosModel = new DefaultTableModel(null, this.columnasListadoDePresupuestos);
-		
-		panel_8 = new JPanel();
-		panel_8.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Presupuestos", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panelOeste.add(panel_8);
-		panel_8.setLayout(new BorderLayout(0, 0));
-		
-		tablePresupuestos = new JTable(listadoDePresupuestosModel){
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-		scrollPane = new JScrollPane(tablePresupuestos);
-		panel_8.add(scrollPane, BorderLayout.CENTER);
-		
-		panel_9 = new JPanel();
-		FlowLayout flowLayout_4 = (FlowLayout) panel_9.getLayout();
-		flowLayout_4.setAlignment(FlowLayout.RIGHT);
-		panel_8.add(panel_9, BorderLayout.SOUTH);
-		
-		btnNuevoPresupuesto = new JButton("Nuevo Presupuesto");
-		panel_9.add(btnNuevoPresupuesto);
-		
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(
-				new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelOeste.add(panel_1);
-		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
+		panelSuperior.add(panel_1, BorderLayout.NORTH);
+		panel_1.setLayout(new FormLayout(
+				new ColumnSpec[] { ColumnSpec.decode("10px"), ColumnSpec.decode("132px"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("right:75px"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("86px:grow"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("65px"), },
+				new RowSpec[] { FormSpecs.LINE_GAP_ROWSPEC, RowSpec.decode("23px"), }));
 
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		panel_1.add(tabbedPane);
+		comboMarcas = new JComboBox<>();
+		panel_1.add(comboMarcas, "2, 2, default, center");
 
-		panel_3 = new JPanel();
-		tabbedPane.addTab("Repuestos planificados", null, panel_3, null);
-		panel_3.setLayout(new BorderLayout(0, 0));
+		lblDescripcion = new JLabel();
+		panel_1.add(lblDescripcion, "4, 2, right, center");
+		lblDescripcion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDescripcion.setText("Descripción");
 
-		scrollPaneRepuestos = new JScrollPane();
-		panel_3.add(scrollPaneRepuestos, BorderLayout.CENTER);
+		textDescipcion = new JTextField();
+		panel_1.add(textDescipcion, "6, 2, default, center");
+		textDescipcion.setColumns(10);
 
-		this.listadoDeRepuestosModel = new DefaultTableModel(null, this.columnasListadoDeRepuestos);
-		tableRepuestos = new JTable(listadoDeRepuestosModel){
+		btnBuscar = new JButton("Buscar");
+		panel_1.add(btnBuscar, "8, 2, left, top");
+
+		panelInterior = new JPanel();
+		panelInterior.setBackground(SystemColor.menu);
+		panelSuperior.add(panelInterior, BorderLayout.CENTER);
+		panelInterior.setLayout(new BorderLayout(0, 0));
+		tablaRepuestos = new JTable(modelRepuestos);
+		scrollPaneRepuestos = new JScrollPane(tablaRepuestos);
+		panelInterior.add(scrollPaneRepuestos, BorderLayout.CENTER);
+
+		panel_2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		panelSuperior.add(panel_2, BorderLayout.SOUTH);
+
+		lblCantidad = new JLabel("Cantidad");
+		panel_2.add(lblCantidad);
+		lblCantidad.setHorizontalAlignment(SwingConstants.CENTER);
+
+		textCantidad = new JTextField();
+		panel_2.add(textCantidad);
+		textCantidad.setColumns(10);
+
+		btnAgregar = new JButton("Agregar");
+		panel_2.add(btnAgregar);
+
+		panelInferior = new JPanel();
+		panelInferior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Repuestos a confirmar",
+				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelInferior.setBackground(SystemColor.menu);
+		contentPanel.add(panelInferior);
+		panelInferior.setLayout(new BorderLayout(0, 0));
+
+		scrollPaneRepuestosInferior = new JScrollPane();
+		panelInferior.add(scrollPaneRepuestosInferior, BorderLayout.CENTER);
+
+		modelRepuestosInferior = new DefaultTableModel(null, nombreColumnasInferior) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		scrollPaneRepuestos.setViewportView(tableRepuestos);
 
-		panel_2 = new JPanel();
-		FlowLayout flowLayout_3 = (FlowLayout) panel_2.getLayout();
-		flowLayout_3.setAlignment(FlowLayout.TRAILING);
-		panel_3.add(panel_2, BorderLayout.SOUTH);
+		tablaRepuestosInferior = new JTable(modelRepuestosInferior);
 
-		btnPlanificarRepuestos = new JButton("Planificar repuesto");
-		panel_2.add(btnPlanificarRepuestos);
+		scrollPaneRepuestosInferior.setViewportView(tablaRepuestosInferior);
 
-		panel_5 = new JPanel();
-		tabbedPane.addTab("Trabajos planificados", null, panel_5, null);
-		panel_5.setLayout(new BorderLayout(0, 0));
+		panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		panelInferior.add(panel, BorderLayout.SOUTH);
 
-		JScrollPane scrollPaneTrabajos = new JScrollPane();
-		panel_5.add(scrollPaneTrabajos, BorderLayout.CENTER);
+		btnEditar = new JButton("Editar");
+		panel.add(btnEditar);
 
-		this.listadoDeTrabajosModel = new DefaultTableModel(null, this.columnasListadoDeTrabajos);
-		tableTrabajos = new JTable(listadoDeTrabajosModel){
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-		scrollPaneTrabajos.setViewportView(tableTrabajos);
+		btnQuitar = new JButton("Quitar");
+		panel.add(btnQuitar);
 
-		panel_6 = new JPanel();
-		FlowLayout flowLayout_2 = (FlowLayout) panel_6.getLayout();
-		flowLayout_2.setAlignment(FlowLayout.TRAILING);
-		panel_5.add(panel_6, BorderLayout.SOUTH);
+		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setVisible(false);
+		panel.add(btnLimpiar);
 
-		btnPlanificarTrabajos = new JButton("Planificar trabajo");
-		panel_6.add(btnPlanificarTrabajos);
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-		panel_7 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_7.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
-		panelOeste.add(panel_7);
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setActionCommand("OK");
+		buttonPane.add(btnAceptar);
+		getRootPane().setDefaultButton(btnAceptar);
 
-		toolBar = new JToolBar();
-		toolBar.setFloatable(false);
-		panel_7.add(toolBar);
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setVisible(false);
+		btnCancelar.setActionCommand("Cancel");
+		buttonPane.add(btnCancelar);
 
-		btnRegistrarPresupuesto = new JButton("Registrar presupuesto");
-		toolBar.add(btnRegistrarPresupuesto);
+		setVisible(false);
 	}
 
-	void addCheckBox(int column, JTable table) {
+	public void clearDataRepuestos() {
+		modelRepuestos.setRowCount(0);
 	}
 
-	public boolean iPersupuestoAprobado(int row, int column, JTable table) {
-		return table.getValueAt(row, column) != null;
+	public void clearDataRepuestosPlanificados() {
+		modelRepuestosInferior.setRowCount(0);
 	}
 
-	public void setActionOnPlanificarTrabajos(ActionListener listener) {
-		this.btnPlanificarTrabajos.addActionListener(listener);
-	}
-
-	public void setActionOnPlanificarRepuestos(ActionListener listener) {
-		btnPlanificarRepuestos.addActionListener(listener);
-	}
-
-	public void setActionOnRegistrarPresupuesto(ActionListener listener) {
-		this.btnRegistrarPresupuesto.addActionListener(listener);
+	public void display() {
+		setVisible(true);
 	}
 
 	public void setDataRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestos) {
-		this.listadoDeRepuestosModel.setRowCount(0);
+		modelRepuestosInferior.setRowCount(0);
 		for (RepuestoPlanificadoDTO r : repuestos) {
-			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getMarcaRepuesto(),
-					r.getRepuesto().getDescripcionRepuesto(), r.getRepuesto().getPrecioRepuesto(),
-					r.getCantRequerida() };
-			this.listadoDeRepuestosModel.addRow(row);
+			idRepuestos.add(r.getIdRepuestoPlanificado());
+			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(),
+					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantRequerida() };
+			modelRepuestosInferior.addRow(row);
 		}
 	}
 
-	public void setDataTrabajosPlanificados(List<TrabajoPresupuestadoDTO> trabajos) {
-		this.listadoDeTrabajosModel.setRowCount(0);
-		for (TrabajoPresupuestadoDTO t : trabajos) {
-			Object[] row = { t.getIdTrabajoPresu(), t.getFechaAlta(), t.getDescripcionTrabajo(), t.getPrecioTrabajo(),
-					t.getTiempoEstTrabajo(), t.getFechaCierre() };
-			this.listadoDeTrabajosModel.addRow(row);
+	public void setDataRepuestos(List<RepuestoDTO> repuestos) {
+		modelRepuestos.setRowCount(0);
+		for (RepuestoDTO r : repuestos) {
+			idRepuestos.add(r.getIdRepuesto());
+			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(), r.getFabricante(),
+					r.getStockRepuesto(), r.getPrecioRepuesto() };
+			modelRepuestos.addRow(row);
 		}
+	}
+
+	public String getIdRepuesto() {
+		String ret = -1 + "";
+		if (tablaRepuestos.getSelectedRow() >= 0) {
+			ret = "" + idRepuestos.get(tablaRepuestos.getSelectedRow());
+		}
+		return ret;
+	}
+
+	public String getCantidad() {
+		return textCantidad.getText();
+	}
+
+	public void setActionOnAgregar(ActionListener listener) {
+		this.btnAgregar.addActionListener(listener);
+	}
+
+	public void setActionOnCancelar(ActionListener listener) {
+		this.btnCancelar.addActionListener(listener);
+	}
+
+	public void setActionOnAceptar(ActionListener listener) {
+		this.btnAceptar.addActionListener(listener);
+	}
+
+	public void close() {
+		setVisible(false);
 	}
 
 	public void setActionOnBuscar(ActionListener listener) {
 		this.btnBuscar.addActionListener(listener);
 	}
 
-	public void setActionSelectVehiculoCliente(ListSelectionListener listener) {
-		this.tableVehiculos.getSelectionModel().addListSelectionListener(listener);
+	public String getMarca() {
+		return (String) comboMarcas.getSelectedItem();
 	}
 
-	public VehiculoConOrdenDeTrabajoDTO getidVehiculoSeleccionado() {
-		int rows = this.tableVehiculos.getSelectedRowCount();
-		if (rows == 1) {
-			int row = this.tableVehiculos.getSelectedRow();
-			VehiculoConOrdenDeTrabajoDTO dto = this.vehiculos.get(row);
-			return dto;
+	public String getDescripcion() {
+		return textDescipcion.getText();
+	}
+
+	public void setDataMarcas(List<String> marcas) {
+		DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+		for (String marca : marcas) {
+			modelo.addElement(marca);
 		}
-		return null;
-	}
-
-	public void setData(List<VehiculoConOrdenDeTrabajoDTO> vehiculos) {
-		this.vehiculos = vehiculos;
-		for (VehiculoConOrdenDeTrabajoDTO dto : vehiculos) {
-			Object[] row = { dto.getId().toString(), dto.getKilometrajeGarantia().toString(), dto.getAseguradora(),
-					dto.getNroPolizaSeguro().toString(), dto.getPatente() };
-			this.tableModelVehiculos.addRow(row);
-		}
-	}
-
-	public void clearDataFichaTecnicaVehiculo() {
-		this.textMarca.setText("");
-		this.textColor.setText("");
-		this.textNroDeChasis.setText("");
-		this.textModelo.setText("");
-		this.textCombustion.setText("");
-		this.textNroMotor.setText("");
-	}
-
-	public void clearDataOrdenDeTrabajo() {
-		this.textTipoTrabajo.setText("");
-		this.textTrabajoSolicitadoOt.setText("");
-		this.textTrabajoSugeridoOt.setText("");
-		this.textFechaAltaOt.setText("");
-		this.textFechaCierreOt.setText("");
-		this.idOrdenDeTrabajo = null;
-		this.idsPresupuestos.clear();
-	}
-
-	public void setData(FichaTecnicaVehiculoDTO fichaVehiculo) {
-		fichaVehiculo.getId();
-		this.textNroDeChasis.setText(fichaVehiculo.getNroChasis().toString());
-		this.textNroMotor.setText(fichaVehiculo.getNroMotor().toString());
-		this.textMarca.setText(fichaVehiculo.getMarca());
-		this.textColor.setText(fichaVehiculo.getColor());
-		this.textCombustion.setText(fichaVehiculo.getCombustion());
-		this.textModelo.setText(fichaVehiculo.getModelo().toString());
-	}
-
-	public Integer getIdOrdenDeTrabajo() {
-		return this.idOrdenDeTrabajo;
+		comboMarcas.setModel(modelo);
 	}
 	
-	public void setData(OrdenDeTrabajoDTO ordenDeTrabajo) {
-		this.idOrdenDeTrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
-		this.textTipoTrabajo.setText(ordenDeTrabajo.getTipoOrdeTrabajo());
-		this.textFechaAltaOt.setText(ordenDeTrabajo.getFechaDeAlta().toString());
-		this.textFechaCierreOt.setText(
-				ordenDeTrabajo.getFechaEntregado() != null ? ordenDeTrabajo.getFechaEntregado().toString() : "");
-		this.textTrabajoSugeridoOt.setText(ordenDeTrabajo.getTrabajoSujerido());
-		this.textTrabajoSolicitadoOt.setText(ordenDeTrabajo.getTrabajoSolicitado());
-		this.idOrdenDeTrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
+	public void setActionOnQuitar(ActionListener Listener) {
+		this.btnQuitar.addActionListener(Listener);
 	}
 
-	public void clearDataListadoVehiculosCliente() {
-		this.vehiculos = null;
-		this.tableModelVehiculos.setRowCount(0);
-		tableModelVehiculos.setColumnCount(0);
-		tableModelVehiculos.setColumnIdentifiers(columnasTablaVehiculos);
+	public Integer getSeleccionado() {
+		return tablaRepuestosInferior.getSelectedRow();
 	}
-
-	public void clearAll() {
-		this.clearDataPresupuestos();
-		this.clearDataFichaTecnicaVehiculo();
-		this.clearDataListadoVehiculosCliente();
-		this.clearDataOrdenDeTrabajo();
-	}
-
-	public String getTxtDni() {
-		return txtDNI.getText();
-	}
-	
-	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
-		clearDataPresupuestos();
-		for(PresupuestoDTO p : presupuestos) {
-			this.idsPresupuestos.add(p.getIdPresupuesto());
-			Object[] row = {p.getIdPresupuesto(), p.getFechaAltaPresu(), p.getComentarioAltaPresu(), p.getPrecio()};
-			this.listadoDePresupuestosModel.addRow(row);
-		}
-	}
-	
-	public void clearDataPresupuestos() {
-		listadoDePresupuestosModel.setRowCount(0);
-		listadoDeRepuestosModel.setRowCount(0);
-		listadoDeTrabajosModel.setRowCount(0);
-		idsPresupuestos.clear();
-	}
-	
-	public void setActionOnSeleccionarPresupuesto(ListSelectionListener listener) {
-		this.tablePresupuestos.getSelectionModel().addListSelectionListener(listener);
-	}
-
-	public Integer getIdPresupuesto() {
-		Integer fila = tablePresupuestos.getSelectedRow();
-		if(fila>=0) {
-			fila = this.idsPresupuestos.get(fila);
-		} 
-		return fila;
-	}
-
-	public void setDataPresupuesto(PresupuestoDTO presupuesto) {
-		setDataRepuestosPlanificados(presupuesto.getRepuestos());
-		setDataTrabajosPlanificados(presupuesto.getTrabajos());
-	}
-	
-	public void setActionOnNuevoPresupuesto(ActionListener listener) {
-		this.btnNuevoPresupuesto.addActionListener(listener);
-	}
-	
 }

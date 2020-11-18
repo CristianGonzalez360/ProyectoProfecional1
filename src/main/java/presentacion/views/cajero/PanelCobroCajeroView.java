@@ -1,118 +1,70 @@
 package presentacion.views.cajero;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import com.jgoodies.forms.layout.ColumnSpec;
+
+import dto.FacturaDTO;
+
+import javax.swing.border.TitledBorder;
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JRadioButton;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTabbedPane;
+import javax.swing.JDesktopPane;
+import java.awt.Label;
+import javax.swing.JLabel;
+import javax.swing.border.BevelBorder;
 import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
-import dto.RepuestoPlanificadoDTO;
-import dto.TrabajoPresupuestadoDTO;
-import dto.FichaTecnicaVehiculoDTO;
-import dto.OrdenDeTrabajoDTO;
-import dto.PresupuestoDTO;
-import dto.VehiculoConOrdenDeTrabajoDTO;
+import com.jgoodies.forms.layout.FormSpecs;
+import javax.swing.BoxLayout;
 
 public class PanelCobroCajeroView extends JPanel {
 
-
 	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7129951379688983454L;
-
-	private JTextField txtDNI;
-
+	private static final long serialVersionUID = -3152338359660079392L;
+	
 	private static PanelCobroCajeroView instance;
-	private JButton btnBuscar;
-	private JSplitPane splitPane;
-	private JPanel panelEste;
-	private JPanel panelOeste;
-	private JPanel panelEsteNorte;
-	private List<VehiculoConOrdenDeTrabajoDTO> vehiculos;
-
-	private final String[] columnasTablaVehiculos = new String[] { "NRO. VEHICULO", "KM GARANTIA", "ASEGURADORA",
-			"NRO POLIZA SEGURO", "PATENTE" };
-	private DefaultTableModel tableModelVehiculos;
-	private JTable tableVehiculos;
-
-	private final String[] columnasListadoDePresupuestos = new String[] { "NRO. Presupuesto", "FECHA ALTA",
-			"COMENTARIO ALTA", "PRECIO" };
-	private DefaultTableModel listadoDePresupuestosModel;
-
-	private final String[] columnasListadoDeRepuestos = new String[] { "CODIGO", "MARCA", "DESCRIPCIÓN", "PRECIO",
-			"CANTIDAD" };
-	private DefaultTableModel listadoDeRepuestosModel;
-
-	private final String[] columnasListadoDeTrabajos = new String[] { "NRO", "FECHA ALTA", "DESCRIPCIÓN", "PRECIO",
-			"ESTIMADO", "FECHA CIERRE" };
-	private DefaultTableModel listadoDeTrabajosModel;
-	private JPanel panelEsteSur;
-
-	private JLabel lblTipo;
-	private JTextField textTipoTrabajo;
-	private JTextField textFechaCierreOt;
-	private JTextField textTrabajoSolicitadoOt;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
-	private JTextField textTrabajoSugeridoOt;
-	private JLabel lblNewLabel_4;
-	private JTextField textFechaAltaOt;
-	private JPanel panel_1;
-	private JTabbedPane tabbedPane;
-	private JPanel panel_3;
-	private JPanel panel_5;
-	private JScrollPane scrollPaneRepuestos;
-	private JTable tableRepuestos;
-	private JTable tableTrabajos;
-	private JPanel panel_2;
-	private JButton btnPlanificarRepuestos;
-	private JPanel panel_6;
-	private JButton btnPlanificarTrabajos;
-	private JPanel panel_7;
-	private JButton btnRegistrarPresupuesto;
-	private JToolBar toolBar;
-	private JLabel lblNewLabel;
+	
+	private final String[] columnasListadoDeFacturas = new String[] { "Nro. Factura", "Fecha de pago","Total", "Estado"};
+	
+	private DefaultTableModel listadoDeFacturasModel;
+	
 	private JPanel panel;
-	private JLabel lblNewLabel_1;
-	private JTextField textMarca;
-	private JLabel lblNewLabel_5;
-	private JTextField textModelo;
-	private JLabel lblNewLabel_6;
-	private JTextField textColor;
-	private JLabel lblNewLabel_7;
-	private JTextField textCombustion;
-	private JLabel lblNewLabel_8;
-	private JLabel lblNewLabel_9;
-	private JTextField textNroMotor;
-	private JTextField textNroDeChasis;
-	private Integer idOrdenDeTrabajo;
-	private JPanel panel_8;
-	private JScrollPane scrollPane;
-	private JTable tablePresupuestos;
-	private List<Integer> idsPresupuestos;
+	private JScrollPane scrollPaneFacturas;
+	private JTable tableFacturas;
+	private JPanel panel_1;
+	private JButton btnRegistrarPago;
+	private JPanel panel_3;
+	private JButton btnCargarFacturas;
+	private JTextField textFactura;
+	private JPanel panel_2;
+	private JTabbedPane tabbedPane;
+	private JPanel panel_4;
+	private JPanel panel_6;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
 	private JPanel panel_9;
-	private JButton btnNuevoPresupuesto;
 
 	public static PanelCobroCajeroView getInstance() {
 		if (instance == null) {
@@ -121,424 +73,234 @@ public class PanelCobroCajeroView extends JPanel {
 		return instance;
 	}
 
-	private PanelCobroCajeroView() {
-		setLayout(new BorderLayout(0, 0));
-
-		this.idsPresupuestos = new ArrayList<>();
-		JPanel panel_4 = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_4.getLayout();
-		flowLayout_1.setHgap(20);
-		panel_4.getLayout();
-		panel_4.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		add(panel_4, BorderLayout.NORTH);
-
-		JLabel lblClienteDNI = new JLabel("Cliente DNI");
-		panel_4.add(lblClienteDNI);
-
-		txtDNI = new JTextField("");
-		panel_4.add(txtDNI);
-		txtDNI.setColumns(10);
-
-		btnBuscar = new JButton("Buscar");
-		panel_4.add(btnBuscar);
-
-		splitPane = new JSplitPane();
-		add(splitPane, BorderLayout.CENTER);
-
-		panelEste = new JPanel();
-		splitPane.setLeftComponent(panelEste);
-		panelEste.setLayout(new BoxLayout(panelEste, BoxLayout.Y_AXIS));
-
-		panelEsteNorte = new JPanel();
-		panelEsteNorte.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Ordenes de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelEste.add(panelEsteNorte);
-		panelEsteNorte.setLayout(new BorderLayout(0, 0));
-
-		JScrollPane scrollPaneVehiculos = new JScrollPane();
-		panelEsteNorte.add(scrollPaneVehiculos);
-
-		tableModelVehiculos = new DefaultTableModel(null, this.columnasTablaVehiculos);
-		tableVehiculos = new JTable(tableModelVehiculos) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-		scrollPaneVehiculos.setViewportView(tableVehiculos);
-
-		panelEsteSur = new JPanel();
-		panelEsteSur.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Descripci\u00F3n de la orden de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelEste.add(panelEsteSur);
-
-		panelEsteSur.setLayout(new FormLayout(
-				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
-						FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
-						FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), },
-				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("default:grow"), }));
-
-		lblTipo = new JLabel("Tipo de trabajo");
-		panelEsteSur.add(lblTipo, "2, 2");
-
-		textTipoTrabajo = new JTextField();
-		textTipoTrabajo.setEditable(false);
-		panelEsteSur.add(textTipoTrabajo, "4, 2, fill, default");
-		textTipoTrabajo.setColumns(10);
-
-		lblNewLabel = new JLabel("Alta");
-		panelEsteSur.add(lblNewLabel, "6, 2");
-
-		textFechaAltaOt = new JTextField();
-		textFechaAltaOt.setEditable(false);
-		panelEsteSur.add(textFechaAltaOt, "8, 2, fill, default");
-		textFechaAltaOt.setColumns(10);
-
-		lblNewLabel_4 = new JLabel("Cierre");
-		panelEsteSur.add(lblNewLabel_4, "2, 4");
-
-		textFechaCierreOt = new JTextField();
-		textFechaCierreOt.setEditable(false);
-		panelEsteSur.add(textFechaCierreOt, "4, 4, fill, default");
-		textFechaCierreOt.setColumns(10);
-
-		lblNewLabel_3 = new JLabel("Trabajo sugerido");
-		panelEsteSur.add(lblNewLabel_3, "2, 6");
-
-		textTrabajoSugeridoOt = new JTextField();
-		textTrabajoSugeridoOt.setEditable(false);
-		panelEsteSur.add(textTrabajoSugeridoOt, "4, 6, 5, 1, fill, default");
-		textTrabajoSugeridoOt.setColumns(10);
-
-		lblNewLabel_2 = new JLabel("Trabajo soclicitad");
-		panelEsteSur.add(lblNewLabel_2, "2, 8");
-
-		textTrabajoSolicitadoOt = new JTextField();
-		textTrabajoSolicitadoOt.setEditable(false);
-		panelEsteSur.add(textTrabajoSolicitadoOt, "4, 8, 5, 1, fill, default");
-		textTrabajoSolicitadoOt.setColumns(10);
-
+	public PanelCobroCajeroView() {
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		panel_3 = new JPanel();
+		add(panel_3);
+		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		Label label = new Label("Id Factura");
+		panel_3.add(label);
+		
+		textFactura = new JTextField();
+		panel_3.add(textFactura);
+		textFactura.setColumns(10);
+		
+		btnCargarFacturas = new JButton("Cargar Factura");
+		panel_3.add(btnCargarFacturas);
+		
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Ficha t\u00E9cnica del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelEste.add(panel);
-		panel.setLayout(new FormLayout(
-				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(33dlu;default)"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(65dlu;default):grow"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(48dlu;default)"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(89dlu;default):grow"), },
-				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
-
-		lblNewLabel_1 = new JLabel("Marca");
-		panel.add(lblNewLabel_1, "2, 2");
-
-		textMarca = new JTextField();
-		textMarca.setEditable(false);
+		panel.setBorder(new TitledBorder(null, "Listado de facturas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		add(panel);
 		
-		panel.add(textMarca, "4, 2, fill, default");
-		textMarca.setColumns(10);
+		this.listadoDeFacturasModel = new DefaultTableModel(null, this.columnasListadoDeFacturas);;
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		scrollPaneFacturas = new JScrollPane();
+		panel.add(scrollPaneFacturas);
+		tableFacturas = new JTable(listadoDeFacturasModel){//tabla no editable
+			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -7694783590163789939L;
+			
 
-		lblNewLabel_5 = new JLabel("Modelo");
-		panel.add(lblNewLabel_5, "6, 2");
-
-		textModelo = new JTextField();
-		textModelo.setEditable(false);
-		panel.add(textModelo, "8, 2, fill, default");
-		textModelo.setColumns(10);
-
-		lblNewLabel_6 = new JLabel("Color");
-		panel.add(lblNewLabel_6, "2, 4");
-
-		textColor = new JTextField();
-		textColor.setEditable(false);
-		panel.add(textColor, "4, 4, fill, default");
-		textColor.setColumns(10);
-
-		lblNewLabel_7 = new JLabel("Combustion");
-		panel.add(lblNewLabel_7, "6, 4");
-
-		textCombustion = new JTextField();
-		textCombustion.setEditable(false);
-		panel.add(textCombustion, "8, 4, fill, default");
-		textCombustion.setColumns(10);
-
-		lblNewLabel_8 = new JLabel("Nro. Chasis");
-		panel.add(lblNewLabel_8, "2, 6");
-
-		textNroDeChasis = new JTextField();
-		textNroDeChasis.setEditable(false);
-		panel.add(textNroDeChasis, "4, 6, fill, default");
-		textNroDeChasis.setColumns(10);
-
-		lblNewLabel_9 = new JLabel("Motor");
-		panel.add(lblNewLabel_9, "6, 6");
-
-		textNroMotor = new JTextField();
-		textNroMotor.setEditable(false);
-		panel.add(textNroMotor, "8, 6, fill, default");
-		textNroMotor.setColumns(10);
-
-		panelOeste = new JPanel();
-		splitPane.setRightComponent(panelOeste);
-		panelOeste.setLayout(new BoxLayout(panelOeste, BoxLayout.Y_AXIS));
-
-		this.listadoDePresupuestosModel = new DefaultTableModel(null, this.columnasListadoDePresupuestos);
-		
-		panel_8 = new JPanel();
-		panel_8.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Presupuestos", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		panelOeste.add(panel_8);
-		panel_8.setLayout(new BorderLayout(0, 0));
-		
-		tablePresupuestos = new JTable(listadoDePresupuestosModel){
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		scrollPane = new JScrollPane(tablePresupuestos);
-		panel_8.add(scrollPane, BorderLayout.CENTER);
+		scrollPaneFacturas.setViewportView(tableFacturas);
+		
+		panel_2 = new JPanel();
+		panel.add(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		
+		panel_4 = new JPanel();
+		panel_4.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tabbedPane.addTab("Tarjeta Credito", null, panel_4, null);
+		panel_4.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("90px"),
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("38px"),
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("38px"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("20px"),}));
+		
+		JLabel lblNewLabel = new JLabel("Numero");
+		panel_4.add(lblNewLabel, "2, 2, fill, center");
+		
+		textField = new JTextField();
+		panel_4.add(textField, "4, 2, left, top");
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Cantidad Cuotas");
+		panel_4.add(lblNewLabel_1, "2, 4, fill, center");
+		
+		JLabel lblNewLabel_2 = new JLabel("Nombre y Apellido");
+		panel_4.add(lblNewLabel_2, "2, 6, fill, center");
+		
+		JLabel lblNewLabel_3 = new JLabel("Fecha Vencimiento");
+		panel_4.add(lblNewLabel_3, "2, 8, fill, center");
+		
+		JLabel lblNewLabel_4 = new JLabel("Codigo Seguridad");
+		panel_4.add(lblNewLabel_4, "2, 10, fill, center");
+		
+		JLabel lblNewLabel_5 = new JLabel("DNI");
+		panel_4.add(lblNewLabel_5, "2, 12, fill, center");
+		
+		textField_1 = new JTextField();
+		panel_4.add(textField_1, "4, 4, 3, 1, left, top");
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		panel_4.add(textField_2, "4, 6, 3, 1, left, top");
+		textField_2.setColumns(10);
+		
+		textField_3 = new JTextField();
+		panel_4.add(textField_3, "4, 8, fill, top");
+		textField_3.setColumns(10);
+		
+		textField_4 = new JTextField();
+		panel_4.add(textField_4, "4, 10, 3, 1, left, top");
+		textField_4.setColumns(10);
+		
+		textField_5 = new JTextField();
+		panel_4.add(textField_5, "4, 12, 3, 1, left, top");
+		textField_5.setColumns(10);
+		
+		textField_6 = new JTextField();
+		panel_4.add(textField_6, "6, 8, fill, top");
+		textField_6.setColumns(10);
 		
 		panel_9 = new JPanel();
-		FlowLayout flowLayout_4 = (FlowLayout) panel_9.getLayout();
-		flowLayout_4.setAlignment(FlowLayout.RIGHT);
-		panel_8.add(panel_9, BorderLayout.SOUTH);
+		panel_9.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tabbedPane.addTab("Tarjeta Debito", null, panel_9, null);
 		
-		btnNuevoPresupuesto = new JButton("Nuevo Presupuesto");
-		panel_9.add(btnNuevoPresupuesto);
-		
-
-		panel_1 = new JPanel();
-		panel_1.setBorder(
-				new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelOeste.add(panel_1);
-		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
-
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		panel_1.add(tabbedPane);
-
-		panel_3 = new JPanel();
-		tabbedPane.addTab("Repuestos planificados", null, panel_3, null);
-		panel_3.setLayout(new BorderLayout(0, 0));
-
-		scrollPaneRepuestos = new JScrollPane();
-		panel_3.add(scrollPaneRepuestos, BorderLayout.CENTER);
-
-		this.listadoDeRepuestosModel = new DefaultTableModel(null, this.columnasListadoDeRepuestos);
-		tableRepuestos = new JTable(listadoDeRepuestosModel){
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-		scrollPaneRepuestos.setViewportView(tableRepuestos);
-
-		panel_2 = new JPanel();
-		FlowLayout flowLayout_3 = (FlowLayout) panel_2.getLayout();
-		flowLayout_3.setAlignment(FlowLayout.TRAILING);
-		panel_3.add(panel_2, BorderLayout.SOUTH);
-
-		btnPlanificarRepuestos = new JButton("Planificar repuesto");
-		panel_2.add(btnPlanificarRepuestos);
-
-		panel_5 = new JPanel();
-		tabbedPane.addTab("Trabajos planificados", null, panel_5, null);
-		panel_5.setLayout(new BorderLayout(0, 0));
-
-		JScrollPane scrollPaneTrabajos = new JScrollPane();
-		panel_5.add(scrollPaneTrabajos, BorderLayout.CENTER);
-
-		this.listadoDeTrabajosModel = new DefaultTableModel(null, this.columnasListadoDeTrabajos);
-		tableTrabajos = new JTable(listadoDeTrabajosModel){
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-		scrollPaneTrabajos.setViewportView(tableTrabajos);
-
 		panel_6 = new JPanel();
-		FlowLayout flowLayout_2 = (FlowLayout) panel_6.getLayout();
-		flowLayout_2.setAlignment(FlowLayout.TRAILING);
-		panel_5.add(panel_6, BorderLayout.SOUTH);
-
-		btnPlanificarTrabajos = new JButton("Planificar trabajo");
-		panel_6.add(btnPlanificarTrabajos);
-
-		panel_7 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_7.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
-		panelOeste.add(panel_7);
-
-		toolBar = new JToolBar();
-		toolBar.setFloatable(false);
-		panel_7.add(toolBar);
-
-		btnRegistrarPresupuesto = new JButton("Registrar presupuesto");
-		toolBar.add(btnRegistrarPresupuesto);
+		panel_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tabbedPane.addTab("Mercado Pago", null, panel_6, null);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tabbedPane.addTab("Bitcoins", null, panel_7, null);
+		
+		JPanel panel_8 = new JPanel();
+		panel_8.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tabbedPane.addTab("Efectivo", null, panel_8, null);
+		panel_2.add(tabbedPane);
+		
+		panel_1 = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
+		flowLayout.setVgap(15);
+		panel.add(panel_1);
+		
+		btnRegistrarPago = new JButton("Registrar Pago");
+		btnRegistrarPago.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(btnRegistrarPago);
+		btnRegistrarPago.setEnabled(false);
+		
 	}
 
-	void addCheckBox(int column, JTable table) {
+	public void cargarTabla(List<FacturaDTO> presupuestos) {
+		for (FacturaDTO presupuesto : presupuestos) {
+			
+			
+			
+				Object[] row = { presupuesto.getIdFactura().toString(),  presupuesto.getFechaDeCierrePorPago(),presupuesto.getTotal(), presupuesto.getEstado() };
+				listadoDeFacturasModel.addRow(row);
+			
+			
+		}
+		if(presupuestos.size()>=1) {
+			botonvisible();
+		}
+	}
+	
+	public void cargarTabla(FacturaDTO presupuesto) {
+		if(presupuesto != null) {
+			Object[] row = { presupuesto.getIdFactura().toString(),  presupuesto.getFechaDeCierrePorPago(),presupuesto.getTotal(), presupuesto.getEstado() };
+			listadoDeFacturasModel.addRow(row);
+			botonvisible();
+		}
 	}
 
+	public String getFactura() {
+		return (String) textFactura.getText();
+	}
+	
+	
+	
 	public boolean iPersupuestoAprobado(int row, int column, JTable table) {
 		return table.getValueAt(row, column) != null;
 	}
 
-	public void setActionOnPlanificarTrabajos(ActionListener listener) {
-		this.btnPlanificarTrabajos.addActionListener(listener);
-	}
-
-	public void setActionOnPlanificarRepuestos(ActionListener listener) {
-		btnPlanificarRepuestos.addActionListener(listener);
-	}
-
-	public void setActionOnRegistrarPresupuesto(ActionListener listener) {
-		this.btnRegistrarPresupuesto.addActionListener(listener);
-	}
-
-	public void setDataRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestos) {
-		this.listadoDeRepuestosModel.setRowCount(0);
-		for (RepuestoPlanificadoDTO r : repuestos) {
-			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getMarcaRepuesto(),
-					r.getRepuesto().getDescripcionRepuesto(), r.getRepuesto().getPrecioRepuesto(),
-					r.getCantRequerida() };
-			this.listadoDeRepuestosModel.addRow(row);
-		}
-	}
-
-	public void setDataTrabajosPlanificados(List<TrabajoPresupuestadoDTO> trabajos) {
-		this.listadoDeTrabajosModel.setRowCount(0);
-		for (TrabajoPresupuestadoDTO t : trabajos) {
-			Object[] row = { t.getIdTrabajoPresu(), t.getFechaAlta(), t.getDescripcionTrabajo(), t.getPrecioTrabajo(),
-					t.getTiempoEstTrabajo(), t.getFechaCierre() };
-			this.listadoDeTrabajosModel.addRow(row);
-		}
-	}
-
 	public void setActionOnBuscar(ActionListener listener) {
-		this.btnBuscar.addActionListener(listener);
+		this.btnCargarFacturas.addActionListener(listener);
 	}
-
-	public void setActionSelectVehiculoCliente(ListSelectionListener listener) {
-		this.tableVehiculos.getSelectionModel().addListSelectionListener(listener);
+	
+	public void setActionOnRegistrar(ActionListener listener) {
+		this.btnRegistrarPago.addActionListener(listener);
 	}
-
-	public VehiculoConOrdenDeTrabajoDTO getidVehiculoSeleccionado() {
-		int rows = this.tableVehiculos.getSelectedRowCount();
-		if (rows == 1) {
-			int row = this.tableVehiculos.getSelectedRow();
-			VehiculoConOrdenDeTrabajoDTO dto = this.vehiculos.get(row);
-			return dto;
+	
+	public void clear() {
+		listadoDeFacturasModel.setRowCount(0);
+		listadoDeFacturasModel.setColumnCount(0);
+		listadoDeFacturasModel.setColumnIdentifiers(columnasListadoDeFacturas);
+	}
+	
+	public int getIdPresupuestoSeleccionada(){
+		int idSeleccionada=-1;
+		int row = tableFacturas.getSelectedRow();
+		if(row!=-1) {
+			idSeleccionada= Integer.valueOf((String) tableFacturas.getValueAt(row, 0));
 		}
-		return null;
+		return idSeleccionada;
 	}
-
-	public void setData(List<VehiculoConOrdenDeTrabajoDTO> vehiculos) {
-		this.vehiculos = vehiculos;
-		for (VehiculoConOrdenDeTrabajoDTO dto : vehiculos) {
-			Object[] row = { dto.getId().toString(), dto.getKilometrajeGarantia().toString(), dto.getAseguradora(),
-					dto.getNroPolizaSeguro().toString(), dto.getPatente() };
-			this.tableModelVehiculos.addRow(row);
+	
+	
+	public String getEstadoSeleccionada(){
+		String idSeleccionada = null;
+		int row = tableFacturas.getSelectedRow();
+		if(row!=-1) {
+			idSeleccionada= (String) tableFacturas.getValueAt(row, 3);
 		}
-	}
-
-	public void clearDataFichaTecnicaVehiculo() {
-		this.textMarca.setText("");
-		this.textColor.setText("");
-		this.textNroDeChasis.setText("");
-		this.textModelo.setText("");
-		this.textCombustion.setText("");
-		this.textNroMotor.setText("");
-	}
-
-	public void clearDataOrdenDeTrabajo() {
-		this.textTipoTrabajo.setText("");
-		this.textTrabajoSolicitadoOt.setText("");
-		this.textTrabajoSugeridoOt.setText("");
-		this.textFechaAltaOt.setText("");
-		this.textFechaCierreOt.setText("");
-		this.idOrdenDeTrabajo = null;
-		this.idsPresupuestos.clear();
-	}
-
-	public void setData(FichaTecnicaVehiculoDTO fichaVehiculo) {
-		fichaVehiculo.getId();
-		this.textNroDeChasis.setText(fichaVehiculo.getNroChasis().toString());
-		this.textNroMotor.setText(fichaVehiculo.getNroMotor().toString());
-		this.textMarca.setText(fichaVehiculo.getMarca());
-		this.textColor.setText(fichaVehiculo.getColor());
-		this.textCombustion.setText(fichaVehiculo.getCombustion());
-		this.textModelo.setText(fichaVehiculo.getModelo().toString());
-	}
-
-	public Integer getIdOrdenDeTrabajo() {
-		return this.idOrdenDeTrabajo;
+		return idSeleccionada;
 	}
 	
-	public void setData(OrdenDeTrabajoDTO ordenDeTrabajo) {
-		this.idOrdenDeTrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
-		this.textTipoTrabajo.setText(ordenDeTrabajo.getTipoOrdeTrabajo());
-		this.textFechaAltaOt.setText(ordenDeTrabajo.getFechaDeAlta().toString());
-		this.textFechaCierreOt.setText(
-				ordenDeTrabajo.getFechaEntregado() != null ? ordenDeTrabajo.getFechaEntregado().toString() : "");
-		this.textTrabajoSugeridoOt.setText(ordenDeTrabajo.getTrabajoSujerido());
-		this.textTrabajoSolicitadoOt.setText(ordenDeTrabajo.getTrabajoSolicitado());
-		this.idOrdenDeTrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
+	public void botonvisible() {
+		this.btnRegistrarPago.setEnabled(true);
 	}
-
-	public void clearDataListadoVehiculosCliente() {
-		this.vehiculos = null;
-		this.tableModelVehiculos.setRowCount(0);
-		tableModelVehiculos.setColumnCount(0);
-		tableModelVehiculos.setColumnIdentifiers(columnasTablaVehiculos);
-	}
-
-	public void clearAll() {
-		this.clearDataPresupuestos();
-		this.clearDataFichaTecnicaVehiculo();
-		this.clearDataListadoVehiculosCliente();
-		this.clearDataOrdenDeTrabajo();
-	}
-
-	public String getTxtDni() {
-		return txtDNI.getText();
-	}
-	
-	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
-		clearDataPresupuestos();
-		for(PresupuestoDTO p : presupuestos) {
-			this.idsPresupuestos.add(p.getIdPresupuesto());
-			Object[] row = {p.getIdPresupuesto(), p.getFechaAltaPresu(), p.getComentarioAltaPresu(), p.getPrecio()};
-			this.listadoDePresupuestosModel.addRow(row);
-		}
-	}
-	
-	public void clearDataPresupuestos() {
-		listadoDePresupuestosModel.setRowCount(0);
-		listadoDeRepuestosModel.setRowCount(0);
-		listadoDeTrabajosModel.setRowCount(0);
-		idsPresupuestos.clear();
-	}
-	
-	public void setActionOnSeleccionarPresupuesto(ListSelectionListener listener) {
-		this.tablePresupuestos.getSelectionModel().addListSelectionListener(listener);
-	}
-
-	public Integer getIdPresupuesto() {
-		Integer fila = tablePresupuestos.getSelectedRow();
-		if(fila>=0) {
-			fila = this.idsPresupuestos.get(fila);
-		} 
-		return fila;
-	}
-
-	public void setDataPresupuesto(PresupuestoDTO presupuesto) {
-		setDataRepuestosPlanificados(presupuesto.getRepuestos());
-		setDataTrabajosPlanificados(presupuesto.getTrabajos());
-	}
-	
-	public void setActionOnNuevoPresupuesto(ActionListener listener) {
-		this.btnNuevoPresupuesto.addActionListener(listener);
-	}
-	
 }

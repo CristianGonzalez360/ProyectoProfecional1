@@ -43,6 +43,8 @@ public class FacturasController {
 		return facturaDao.readByOrdenDeTrabajoId(id);
 	}
 	
+
+	
 	
 	public void updateEstadoPresupuestos(Map<Integer, Boolean> presupuestos) throws ForbiddenException {
 		assert presupuestos != null;
@@ -135,8 +137,20 @@ public class FacturasController {
 	
 	public FacturaDTO readByFactura(Integer id) {
 		FacturaDTO ret = facturaDao.readById(id);
-		ret.setPresupuestosFacturados(presDao.readByFacturaId(id));
+		if(ret != null) {
+			ret.setPresupuestosFacturados(presDao.readByFacturaId(id));
+		}
 		return ret;
+	}
+
+	public List<FacturaDTO> readAll() {
+		List<FacturaDTO> ret = facturaDao.readAll();
+		return ret;
+	}
+	
+	public boolean updatePorPago(Integer id) {
+		assert id != null;
+		return facturaDao.updatePorPago(id);
 	}
 		
 	public ResumenDeFacturaDTO generarResumenFactura(Integer idFactura) {

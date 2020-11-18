@@ -116,7 +116,9 @@ CREATE TABLE Facturas (
   fechaDeAlta DATE,
   fechaDeCierrePorPago DATE,
   PRIMARY KEY(idFactura, idOT),
-  FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo(idOT)
+  FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo(idOT),
+  total DOUBLE,
+  estado VARCHAR(10)
 );
 
 DROP TABLE Emisores IF EXISTS;

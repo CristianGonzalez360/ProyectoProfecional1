@@ -6,7 +6,9 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.swing.event.ListSelectionEvent;
+
 import business_logic.ClientesController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
@@ -21,7 +23,6 @@ import dto.RepuestoPlanificadoDTO;
 import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
-import presentacion.views.cajero.CarritoRepuestosFormView;
 import presentacion.views.tecnico.AltaPresupuestoFormView;
 import presentacion.views.tecnico.PanelGestionPresupuestoView;
 import presentacion.views.tecnico.PlanificarRepuestosFormView;
@@ -40,7 +41,7 @@ public class PresupuestosPresenter {
 	private RepuestosController repuestosController;
 	private OrdenesTrabajoController ordenDeTrabajoController;
 	private ClientesController clienteController;
-	
+
 	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController,
 			OrdenesTrabajoController ordenDetranajoController, VehiculosController vehiculoController,
 			ClientesController clienteController) {
@@ -54,7 +55,6 @@ public class PresupuestosPresenter {
 		this.altaPresupuesto = AltaPresupuestoFormView.getInstance();
 		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
 		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
-		CarritoRepuestosFormView.getInstance();
 		
 		this.altaPresupuesto.setActionOnAceptar(a -> onRegistrar(a));
 		this.altaPresupuesto.setActionOnCancelar(a -> onCancelar(a));
