@@ -43,6 +43,7 @@ public class PanelGestionRepuestos extends JPanel{
 	private JButton btnConfigurarMnimo;
 	private JSeparator separator_1;
 	
+	
 	private PanelGestionRepuestos() {
 		setLayout(new BorderLayout(0, 0));
 		

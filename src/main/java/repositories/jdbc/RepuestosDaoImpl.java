@@ -23,6 +23,10 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 	private static final String readByMarcaYDescripcion = readAll + " " + "WHERE marcaRepuesto = ? AND descripcionRepuesto = ?";
 	
 	private static final String readMarcas = "SELECT DISTINCT marcaRepuesto FROM Repuestos";
+	
+	private static final String readByCodigo = "SELECT * FROM Repuestos WHERE Repuestos.codigoRepuesto = ?";
+	
+	private static final String updateByCodigo = "UPDATE Repuestos SET Repuestos.stockRepuesto = ? WHERE Repuestos.codigoRepuesto = ?";
 
 	public RepuestosDaoImpl(Connection connection) {
 		super(connection);
@@ -107,5 +111,17 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 			}
 		};
 		return getTemplate().query(readMarcas).excecute(mapper);
+	}
+
+	@Override
+	public RepuestoDTO readByCodigo(Integer codigo) {
+		List<RepuestoDTO> dtos = getTemplate().query(readByCodigo).param(codigo).excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
+	}
+
+	@Override
+	public void updateByCodigo(RepuestoDTO repuesto) {
+		getTemplate().query(updateByCodigo).param(repuesto.getStockRepuesto()).param(repuesto.getCodigoRepuesto()).excecute();
 	}	
+	
 }

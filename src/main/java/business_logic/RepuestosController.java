@@ -32,5 +32,20 @@ public class RepuestosController {
 	public List<String> readMarcas() {
 		return dao.readMarcas();
 	}
-
+	public RepuestoDTO readByCodigo(Integer codigo) {
+		return dao.readByCodigo(codigo);
+	}
+	
+	public void saveByCodigo(RepuestoDTO nuevoRepuesto) {
+		
+		if(dao.readByCodigo(nuevoRepuesto.getCodigoRepuesto()) != null) {
+			dao.updateByCodigo(nuevoRepuesto);
+		}else {
+			dao.insert(nuevoRepuesto);
+		}
+	}
+	
+	public void updateByCodigo(RepuestoDTO repuesto) {
+		dao.updateByCodigo(repuesto);
+	}
 }
