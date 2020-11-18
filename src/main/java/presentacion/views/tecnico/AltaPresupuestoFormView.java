@@ -144,6 +144,10 @@ public class AltaPresupuestoFormView extends JDialog {
 	public void clearData() {
 		this.trabajos.clearData();;
 		this.repuestos.clearDataRepuestosPlanificados();
+		this.tfComentario.setText("");
+		this.tfFechaAlta.setText("");
+		this.tfPrecio.setText("");
+		this.tftNumero.setText("");
 	}
 
 	public void display() {

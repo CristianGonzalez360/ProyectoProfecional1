@@ -38,6 +38,7 @@ public class PresupuestoDTO {
 		estado = EstadoPresupuesto.PENDIENTE;
 		this.trabajos = new ArrayList<>();
 		this.repuestos = new ArrayList<>();
+		this.fechaAltaPresu = new Date();
 	}
 
 	public Integer getIdPresupuesto() {

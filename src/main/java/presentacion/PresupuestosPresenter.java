@@ -6,7 +6,9 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.swing.event.ListSelectionEvent;
+
 import business_logic.ClientesController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
@@ -21,7 +23,6 @@ import dto.RepuestoPlanificadoDTO;
 import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
-import presentacion.views.cajero.CarritoRepuestosFormView;
 import presentacion.views.tecnico.AltaPresupuestoFormView;
 import presentacion.views.tecnico.PanelGestionPresupuestoView;
 import presentacion.views.tecnico.PlanificarRepuestosFormView;
@@ -40,7 +41,6 @@ public class PresupuestosPresenter {
 	private RepuestosController repuestosController;
 	private OrdenesTrabajoController ordenDeTrabajoController;
 	private ClientesController clienteController;
-	private CarritoRepuestosFormView carritoRepuestosFormView;
 
 	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController,
 			OrdenesTrabajoController ordenDetranajoController, VehiculosController vehiculoController,
@@ -55,7 +55,6 @@ public class PresupuestosPresenter {
 		this.altaPresupuesto = AltaPresupuestoFormView.getInstance();
 		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
 		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
-		this.carritoRepuestosFormView = CarritoRepuestosFormView.getInstance();
 		
 		this.altaPresupuesto.setActionOnAceptar(a -> onRegistrar(a));
 		this.altaPresupuesto.setActionOnCancelar(a -> onCancelar(a));
@@ -74,8 +73,8 @@ public class PresupuestosPresenter {
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				presupuestosController.delete(nuevoPresupuesto.getIdPresupuesto());
 				nuevoPresupuesto = null;
+				altaPresupuesto.clearData();
 				super.windowClosing(e);
 			}
 		});
@@ -83,8 +82,8 @@ public class PresupuestosPresenter {
 	
 	//Cuando se cancela, borra el presupuesto para que no quede vacio.
 	private void onCancelar(ActionEvent a) {
-		presupuestosController.delete(nuevoPresupuesto.getIdPresupuesto());
 		nuevoPresupuesto = null;
+		altaPresupuesto.clearData();
 		altaPresupuesto.close();
 	}
 
@@ -119,16 +118,6 @@ public class PresupuestosPresenter {
 		if(idOT != null) {
 				nuevoPresupuesto = new PresupuestoDTO();
 				nuevoPresupuesto.setIdOT(idOT);
-				presupuestosController.save(nuevoPresupuesto);
-				List<PresupuestoDTO> presupuestos = presupuestosController.readByIdOt(idOT);
-				//No me gusta*****
-				nuevoPresupuesto = presupuestos.get(0);
-				for (PresupuestoDTO presupuesto : presupuestos) {
-					if(nuevoPresupuesto.getIdPresupuesto()<presupuesto.getIdPresupuesto()) {
-						nuevoPresupuesto = presupuesto;
-					}
-				}
-				//****
 				onDisplayForPlanRepuesto(a);
 				onDisplayForPlanTrabajos(a);
 				this.altaPresupuesto.setData(nuevoPresupuesto);
@@ -170,7 +159,7 @@ public class PresupuestosPresenter {
 		String comentario = altaPresupuesto.getComentario();
 		if(!comentario.isEmpty() && !nuevoPresupuesto.getTrabajos().isEmpty() && !nuevoPresupuesto.getRepuestos().isEmpty()) {
 			nuevoPresupuesto.setComentarioAltaPresu(comentario);
-			presupuestosController.update(nuevoPresupuesto);
+			presupuestosController.save(nuevoPresupuesto);
 			nuevoPresupuesto = null;
 			this.view.setDataPresupuestos(presupuestosController.readByIdOt(view.getIdOrdenDeTrabajo()));
 			this.altaPresupuesto.close();
