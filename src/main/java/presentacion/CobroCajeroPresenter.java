@@ -43,9 +43,10 @@ public class CobroCajeroPresenter {
 		
 		int idPresupuesto =this.view.getIdPresupuestoSeleccionada();
 		String IdEstado = this.view.getEstadoSeleccionada();
+		Double idTotal = this.view.getTotalSeleccionada();
 		
 		if(idPresupuesto!=-1) {
-			int resp =JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres pagar la factura seleccionada?", "Confirmación",
+			int resp =JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres pagar la factura seleccionada por un total de: "+idTotal+" ?", "Confirmación",
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 			if(resp==0 && IdEstado.equals("PAGA")) {
 				JOptionPane.showMessageDialog(null, "La factura ya esta paga!","Error", JOptionPane.ERROR_MESSAGE);

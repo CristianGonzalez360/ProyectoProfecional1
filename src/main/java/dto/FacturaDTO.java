@@ -15,6 +15,9 @@ public class FacturaDTO {
 	private Double total;
 	
 	private String estado;
+	
+	private Integer dni;
+	
 		
 	public FacturaDTO() {
 		super();
@@ -76,5 +79,13 @@ public class FacturaDTO {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public Integer getDni() {
+		return dni;
+	}
+
+	public void setDni(Integer dni) {
+		this.dni = dni;
 	}
 }

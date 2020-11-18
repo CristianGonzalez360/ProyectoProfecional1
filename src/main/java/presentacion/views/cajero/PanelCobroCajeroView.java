@@ -41,7 +41,7 @@ public class PanelCobroCajeroView extends JPanel {
 	
 	private static PanelCobroCajeroView instance;
 	
-	private final String[] columnasListadoDeFacturas = new String[] { "Nro. Factura", "Fecha de pago","Total", "Estado"};
+	private final String[] columnasListadoDeFacturas = new String[] { "Nro. Factura" ,"DNI" ,"Fecha de pago","Total", "Estado" };
 	
 	private DefaultTableModel listadoDeFacturasModel;
 	
@@ -239,7 +239,8 @@ public class PanelCobroCajeroView extends JPanel {
 			
 			
 			
-				Object[] row = { presupuesto.getIdFactura().toString(),  presupuesto.getFechaDeCierrePorPago(),presupuesto.getTotal(), presupuesto.getEstado() };
+				Object[] row = { presupuesto.getIdFactura().toString(),  presupuesto.getDni(), presupuesto.getFechaDeCierrePorPago(),
+						presupuesto.getTotal(), presupuesto.getEstado() };
 				listadoDeFacturasModel.addRow(row);
 			
 			
@@ -287,7 +288,17 @@ public class PanelCobroCajeroView extends JPanel {
 		String idSeleccionada = null;
 		int row = tableFacturas.getSelectedRow();
 		if(row!=-1) {
-			idSeleccionada= (String) tableFacturas.getValueAt(row, 3);
+			idSeleccionada= (String) tableFacturas.getValueAt(row, 4);
+		}
+		return idSeleccionada;
+	}
+	
+	
+	public Double getTotalSeleccionada(){
+		Double idSeleccionada = null;
+		int row = tableFacturas.getSelectedRow();
+		if(row!=-1) {
+			idSeleccionada= (Double) tableFacturas.getValueAt(row, 3);
 		}
 		return idSeleccionada;
 	}
