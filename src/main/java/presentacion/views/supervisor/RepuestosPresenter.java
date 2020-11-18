@@ -45,17 +45,42 @@ public class RepuestosPresenter {
 		this.nuevosRepuestosView.setActionOnValidadCarga(a -> onValidarCarga(a));
 		this.nuevosRepuestosView.setActionOnCancelarCarga(a -> onCancelarCarga(a));
 		this.gestionRepuestos.serActionOnConfigurarMinimo(a -> onConfigMinimo(a));
-
+		this.gestionRepuestos.setActionOnEditarStock(a -> onEditarSock(a));
 
 		cargarMarcas();
 	}
 
 	
 	
+	private void onEditarSock(ActionEvent a) {
+		int id = this.gestionRepuestos.getIdRepuesto();
+		if (id >= 0) {
+			RepuestoDTO repuesto = repuestosController.readById(id);
+			String stock = new InputDialog().title("Editar Stock").setText(repuesto.getStockRepuesto()+"").setLabel("Cantidad").open();
+			if (stock != null) {
+				List<String> error = new StringValidator(stock).notBlank("Debe ingresar un valor")
+						.number("El valor debe ser numérico").validate();
+				if (error.isEmpty()) {
+					int cantidad = Integer.parseInt(stock);
+					repuesto.setStockRepuesto(cantidad);
+					repuestosController.update(repuesto);
+					refrescar();
+				} else {
+					new MessageDialog().showMessages(error);
+				}
+			}
+		} else {
+			new MessageDialog().showMessages("Seleccione un repuesto");
+		}
+	}
+
+
+
 	private void onCancelarCarga(ActionEvent a) {
 		this.nuevosRepuestosView.cerrar();//cerrar
 		this.nuevosRepuestosView.clear();//limpiar la vista tambn
 	}
+	
 	private void onConfigMinimo(ActionEvent a) {
 		int id = this.gestionRepuestos.getIdRepuesto();
 		if (id >= 0) {
@@ -149,7 +174,7 @@ public class RepuestosPresenter {
 	private void onIngresarStock(ActionEvent a) {
 		int id = this.gestionRepuestos.getIdRepuesto();
 		if (id >= 0) {
-			String stock = new InputDialog().title("Ingresar Stock").setLabel("Cantidad").open();
+			String stock = new InputDialog().title("Agregar Stock").setLabel("Cantidad").open();
 			if (stock != null) {
 				List<String> error = new StringValidator(stock).notBlank("Debe ingresar un valor")
 						.number("El valor debe ser numérico").validate();
