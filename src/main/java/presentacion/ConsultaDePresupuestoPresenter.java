@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ConsultaDePresupuestosSupervisorView;
+import presentacion.views.supervisor.InputComentarioDialog;
 import presentacion.views.utils.MessageDialog;
 
 public class ConsultaDePresupuestoPresenter {
@@ -50,6 +52,7 @@ public class ConsultaDePresupuestoPresenter {
 		this.otController = otController;
 		this.presController = presController;
 		this.facController = facController;
+		
 		view.setActionOnBuscar((a) -> onBuscar(a));
 		view.setActionSelectVehiculoCliente(new ListSelectionListener() {
 			@Override
@@ -119,8 +122,23 @@ public class ConsultaDePresupuestoPresenter {
 	
 	private void onGenerarFactura(ActionEvent a) {
 		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
+		presupuestosSeleccionados.forEach((k,v) -> {
+			PresupuestoDTO presupuesto = presController.readById(k);
+			if(presupuesto.getEstado().equals(EstadoPresupuesto.PENDIENTE)) {
+				presupuesto.setFechaAprobacion(new Date());
+				if(v.booleanValue() == false) {
+					String comentario = new InputComentarioDialog(presupuesto).open();
+					presupuesto.setComentarioRechazo(comentario);
+					presupuesto.setEstado(EstadoPresupuesto.RECHAZADO);
+				} else {
+					presupuesto.setEstado(EstadoPresupuesto.APROBADO);
+				}
+				presController.registrarAprobacion(presupuesto);
+			} 
+		});
+		
 		try {
-			facController.updateEstadoPresupuestos(presupuestosSeleccionados);
+			//facController.updateEstadoPresupuestos(presupuestosSeleccionados);
 			updatePresupuestosView();
 			FacturaDTO factura = facController.generarFactura(presupuestosSeleccionados);
 			if(factura != null) {
