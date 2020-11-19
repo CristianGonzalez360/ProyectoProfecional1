@@ -4,21 +4,36 @@ import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import business_logic.FacturasController;
 import presentacion.views.cajero.PanelCobroCajeroView;
+import presentacion.views.cajero.TarjetaCreditoFormView;
+import presentacion.views.supervisor.ClienteFormView;
 
 public class CobroCajeroPresenter {
 
 	private PanelCobroCajeroView view;
 	private FacturasController facturasController;
+	private TarjetaCreditoFormView viewCredito;
 
 	public CobroCajeroPresenter(FacturasController facturasController) {
 		
 		this.facturasController = facturasController;
 		this.view = PanelCobroCajeroView.getInstance();
+		this.viewCredito = TarjetaCreditoFormView.getInstance();
 		
 		this.view.setActionOnBuscar(a -> onCargar(a));
-		this.view.setActionOnRegistrar(a -> onRegistrar(a));
+		//this.view.setActionOnRegistrar(a -> onRegistrar(a));
+		this.view.setActionRegistrarTarjetaCredito((a) -> onDisplayClienteFormView(a));
+		
+		this.viewCredito.setActionOnRegistrar(a -> onRegistrar(a));
+		
 	}
 
+	private void onDisplayClienteFormView(ActionEvent e) {
+		//view.clear();
+		TarjetaCreditoFormView.getInstance().clearData();
+		TarjetaCreditoFormView.getInstance().display();
+	}
+	
+	
 	private void onCargar(ActionEvent a) {
 		
 		String nroFactura = view.getFactura();
@@ -55,7 +70,11 @@ public class CobroCajeroPresenter {
 				facturasController.updatePorPago(idPresupuesto);
 				this.onCargar(a);
 				JOptionPane.showMessageDialog(null, "Operación realizada correctamente","Exito", JOptionPane.INFORMATION_MESSAGE);
+				this.viewCredito.setVisible(false);
 			}			
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Debe seleccionar una factura","Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
