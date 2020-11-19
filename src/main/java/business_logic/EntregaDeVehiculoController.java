@@ -53,56 +53,40 @@ public class EntregaDeVehiculoController {
 	public List<EntregaDeVehiculoDTO> readAllOrdenesRealizadas() {
 		List<EntregaDeVehiculoDTO> entregas = new ArrayList<>();
 
-		// ordenesRealizadas = ordenesDeTrabajoDao.readAllOrdenesRealizadas();
-		ordenesRealizadas = ordenesDeTrabajoDao.readAll();
+		ordenesRealizadas = ordenesDeTrabajoDao.readAllOrdenesParaEntregar(); // Ordenes de Trabajo sin fecha de entrega
 
-		for (OrdenDeTrabajoDTO orden : ordenesRealizadas) {// Ordenes de trabajo con presupuesto finalizado
+		for (OrdenDeTrabajoDTO orden : ordenesRealizadas) {
 			Integer idOT = orden.getIdOrdenTrabajo();
-			Integer idVehiculo = orden.getIdVehiculoOt();
-
-			VehiculoConOrdenDeTrabajoDTO vehiculoConOT = vehiculosDao.readByID(idVehiculo);
-			Integer idFichaTecnica = vehiculoConOT.getIdFichaTecnica();
-			Integer idCliente = vehiculoConOT.getIdCliente();
-
-			FichaTecnicaVehiculoDTO fichaTecnica = fichaTecnicaDao.readByID(idFichaTecnica);
-
-			ClienteDTO cliente = clientesDao.readByID(idCliente);
-			Integer idDatos = cliente.getIdDatosPersonales();
-
-			DatosPersonalesDTO datosPersonales = datosPersonalesDao.readByID(idDatos);
-
-			Integer dniCliente = datosPersonales.getDni();
-			String nombreCompleto = String.format("%s %s", datosPersonales.getNombreCompleto(),
-					datosPersonales.getApellido());
-			String marcaAuto = fichaTecnica.getMarca();
-			String modeloAuto = String.valueOf(fichaTecnica.getModelo());
-			String colorAuto = fichaTecnica.getColor();
-			String patenteAuto = vehiculoConOT.getPatente();
 
 			List<FacturaDTO> facturas = facturaDao.readByOrdenDeTrabajoId(idOT);
 			List<PresupuestoDTO> presupuestos = presupuestosDao.readByOrdenDeTrabajoId(idOT);
 
-			System.out.println(orden.toString());
-
-			if (facturasPagas(facturas)) {
-				for (FacturaDTO factura : facturas) {
-					System.out.println(factura.toString());
-				}
-
-				EntregaDeVehiculoDTO nuevaEntrega = new EntregaDeVehiculoDTO(dniCliente, nombreCompleto, marcaAuto,
-						modeloAuto, colorAuto, patenteAuto, idOT);
-
-				System.out.println(nuevaEntrega);
-				System.out.println();
-//				entregas.add(nuevaEntrega);
-			}
-
-			for (PresupuestoDTO presupuesto : presupuestos) {
-				System.out.println(presupuesto.toString());
-			}
-
+			if (facturasPagas(facturas) && presupuetosRealizados(presupuestos))
+				entregas.add(generarEntrega(orden));
 		}
 		return entregas;
+	}
+
+	private EntregaDeVehiculoDTO generarEntrega(OrdenDeTrabajoDTO orden) {
+		VehiculoConOrdenDeTrabajoDTO vehiculoConOT = vehiculosDao.readByID(orden.getIdVehiculoOt());
+
+		FichaTecnicaVehiculoDTO fichaTecnica = fichaTecnicaDao.readByID(vehiculoConOT.getIdFichaTecnica());
+
+		ClienteDTO cliente = clientesDao.readByID(vehiculoConOT.getIdCliente());
+
+		DatosPersonalesDTO datosPersonales = datosPersonalesDao.readByID(cliente.getIdDatosPersonales());
+
+		Integer idOrdenDeTrabajo = orden.getIdOrdenTrabajo();
+		Integer dniCliente = datosPersonales.getDni();
+		String nombreCompleto = String.format("%s %s", datosPersonales.getNombreCompleto(),
+				datosPersonales.getApellido());
+		String marcaAuto = fichaTecnica.getMarca();
+		String modeloAuto = String.valueOf(fichaTecnica.getModelo());
+		String colorAuto = fichaTecnica.getColor();
+		String patenteAuto = vehiculoConOT.getPatente();
+
+		return new EntregaDeVehiculoDTO(dniCliente, nombreCompleto, marcaAuto, modeloAuto, colorAuto, patenteAuto,
+				idOrdenDeTrabajo);
 	}
 
 	private boolean facturasPagas(List<FacturaDTO> facturas) {
@@ -116,13 +100,16 @@ public class EntregaDeVehiculoController {
 		return true;
 	}
 
-//	private boolean presupuetosPagos(FacturaDTO factura) {
-//		for(PresupuestoDTO presupuesto : factura.getPresupuestosFacturados()){
-//			if(!presupuesto.getEstado().equals(EstadoPresupuesto.REALIZADO))
-//				return false;
-//		}
-//		return true;
-//	}
+	private boolean presupuetosRealizados(List<PresupuestoDTO> presupuestos) {
+		if (presupuestos.isEmpty())
+			return false;
+
+		for (PresupuestoDTO presupuesto : presupuestos) {
+			if (!presupuesto.getEstado().equals(EstadoPresupuesto.REALIZADO))
+				return false;
+		}
+		return true;
+	}
 
 	public List<EntregaDeVehiculoDTO> readByDniCliente(Integer dniCliente) {
 		List<EntregaDeVehiculoDTO> ordenesParaEntregar = readAllOrdenesRealizadas();
