@@ -188,9 +188,9 @@ public class PresupuestoDTO {
 
 	@Override
 	public String toString() {
-		return "PresupuestoDTO [idPresupuesto=" + idPresupuesto + ", idOT=" + idOT + ", idUsuAltaPresu="
-				+ idUsuAltaPresu + ", idUsuCierrePresu=" + idUsuCierrePresu + ", idUsuRegPago=" + idUsuRegPago
-				+ ", idPago=" + idPago + ", fechaAltaPresu=" + fechaAltaPresu + ", comentarioAltaPresu="
+		return "PresupuestoDTO [idPresupuesto=" + idPresupuesto + ", idOT=" + idOT + ", idFactura=" + idFactura
+				+ ", idUsuAltaPresu=" + idUsuAltaPresu + ", idUsuCierrePresu=" + idUsuCierrePresu + ", idUsuRegPago="
+				+ idUsuRegPago + ", idPago=" + idPago + ", fechaAltaPresu=" + fechaAltaPresu + ", comentarioAltaPresu="
 				+ comentarioAltaPresu + ", fechaCierrePresu=" + fechaCierrePresu + ", comentarioCierrePresu="
 				+ comentarioRechazo + ", fechaAprobacion=" + fechaAprobacion + ", estado=" + estado + ", trabajos="
 				+ trabajos + ", repuestos=" + repuestos + "]";
