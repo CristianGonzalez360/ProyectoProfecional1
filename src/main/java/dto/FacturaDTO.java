@@ -61,7 +61,8 @@ public class FacturaDTO {
 	@Override
 	public String toString() {
 		return "FacturaDTO [idFactura=" + idFactura + ", idOrdenDeTrabajo=" + idOrdenDeTrabajo + ", fechaDeAlta="
-				+ fechaDeAlta + ", fechaDeCierrePorPago=" + fechaDeCierrePorPago + ", total=" + total + "]";
+				+ fechaDeAlta + ", fechaDeCierrePorPago=" + fechaDeCierrePorPago + ", total=" + total
+				+ ", presupuestosFacturados=" + presupuestosFacturados + ", estado=" + estado + "]";
 	}
 
 	public Double getTotal() {
