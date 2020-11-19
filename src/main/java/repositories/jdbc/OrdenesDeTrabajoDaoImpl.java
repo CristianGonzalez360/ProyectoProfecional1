@@ -22,10 +22,9 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 
 	private static final String readByVehiculoId = readAll + " " + "WHERE idVehiculoOt = ?";
 	
-	private static final String readAllOrdenesRealizadas = "SELECT o.idOT, o.tipoTrabajo, o.idUsuAlta, o.idVehiculoOt, o.fechaAltaOt, o.trabajoSolicitado, o.trabajoSujerido, o.fechaEntregadoVehiculo "
-			+ "FROM OrdenesDeTrabajo o INNER JOIN Presupuestos p "
-			+ "ON o.idOT = P.idOT WHERE p.estado = 'REALIZADO' AND o.fechaEntregadoVehiculo IS NULL "
-			+ "GROUP BY o.idOT";
+	private static final String readAllOrdenesParaEntregar = "SELECT o.idOT, o.tipoTrabajo, o.idUsuAlta, o.idVehiculoOt, o.fechaAltaOt, o.trabajoSolicitado, o.trabajoSujerido, o.fechaEntregadoVehiculo "
+			+ "FROM OrdenesDeTrabajo o "
+			+ "WHERE o.fechaEntregadoVehiculo IS NULL ";
 
 	private static final String readByID = "SELECT * FROM OrdenesDeTrabajo WHERE idOT = ?";
 			
@@ -98,7 +97,7 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 	}
 
 	@Override
-	public List<OrdenDeTrabajoDTO> readAllOrdenesRealizadas() {
-		return getTemplate().query(readAllOrdenesRealizadas).excecute(getMapper());
+	public List<OrdenDeTrabajoDTO> readAllOrdenesParaEntregar() {
+		return getTemplate().query(readAllOrdenesParaEntregar).excecute(getMapper());
 	}
 }

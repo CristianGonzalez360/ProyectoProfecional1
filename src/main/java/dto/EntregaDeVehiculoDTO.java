@@ -80,4 +80,11 @@ public class EntregaDeVehiculoDTO {
 		this.idOrdenDeTrabajo = idOrdenDeTrabajo;
 	}
 
+	@Override
+	public String toString() {
+		return "EntregaDeVehiculoDTO [dniCliente=" + dniCliente + ", nombreCompleto=" + nombreCompleto + ", marcaAuto="
+				+ marcaAuto + ", modeloAuto=" + modeloAuto + ", colorAuto=" + colorAuto + ", patenteAuto=" + patenteAuto
+				+ ", idOrdenDeTrabajo=" + idOrdenDeTrabajo + "]";
+	}
+
 }
