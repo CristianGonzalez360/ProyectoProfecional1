@@ -20,7 +20,7 @@ public class FacturaDTO {
 	private String estado;
 		
 	public FacturaDTO() {
-		super();
+		this.estado = "IMPAGA";
 	}
 		
 	public Integer getIdFactura() {

@@ -92,7 +92,7 @@ public class PresupuestosPresenter {
 		Integer fila = this.planRepuestosView.getSeleccionado();
 		if(fila >= 0) {
 			RepuestoPlanificadoDTO repuestoPlanificado = nuevoPresupuesto.getRepuestos().get(fila);
-			RepuestoDTO repuesto = repuestoPlanificado.getRepuesto();
+			RepuestoDTO repuesto = repuestosController.readById(repuestoPlanificado.getRepuesto().getIdRepuesto());
 			repuesto.setStockRepuesto(repuestoPlanificado.getCantRequerida() + repuesto.getStockRepuesto());
 			repuestosController.update(repuesto);
 			onBuscarRepuesto(a);

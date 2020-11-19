@@ -299,6 +299,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		panel_2.add(toolBar, BorderLayout.NORTH);
 
 		btnGenerarFactura = new JButton("Generar factura");
+		lockButtonGenerarFactura();
 		toolBar.add(btnGenerarFactura);
 		
 		this.lockOrdenDeTrabajoPanel();
@@ -412,11 +413,10 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		Map<Integer, Boolean> presu = new HashMap<>();
 		int rows = this.listadoDePresupuestosModel.getRowCount();
 		for (int index = 0; index < rows; index++) {
-			if(listadoDePresupuestosModel.getValueAt(index, 3) == EstadoPresupuesto.PENDIENTE.name()
-					&& (Boolean) listadoDePresupuestosModel.getValueAt(index, 4) == true) {
+			if(listadoDePresupuestosModel.getValueAt(index, 3) == EstadoPresupuesto.PENDIENTE.name()) {
 				Integer presupuestoId = Integer.parseInt(listadoDePresupuestosModel.getValueAt(index, 0).toString());
-				//Boolean isOk = (Boolean) listadoDePresupuestosModel.getValueAt(index, 4);
-				presu.put(presupuestoId, true);
+				Boolean isOk = (Boolean) listadoDePresupuestosModel.getValueAt(index, 4);
+				presu.put(presupuestoId, isOk);
 			}
 		}
 		return presu;

@@ -8,13 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import dto.PresupuestoDTO;
-import dto.RepuestoPlanificadoDTO;
-import dto.TrabajoPresupuestadoDTO;
-
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
-import java.util.Date;
-import java.util.List;
 import javax.swing.JSplitPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;

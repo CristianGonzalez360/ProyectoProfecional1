@@ -124,6 +124,7 @@ public class PanelGestionRepuestos extends JPanel{
 	}
 	public void setData(List<RepuestoDTO> repuestos) {
 		modelo.setRowCount(0);
+		idRepuestos.clear();
 		for (RepuestoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
 			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(), r.getFabricante(),
