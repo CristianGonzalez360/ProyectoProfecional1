@@ -1,209 +1,307 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.swing.event.ListSelectionEvent;
 
 import business_logic.ClientesController;
 import business_logic.FacturasController;
+import business_logic.OrdenesTrabajoController;
+import business_logic.PresupuestosController;
 import business_logic.RepuestosController;
-import business_logic.exceptions.ConflictException;
-import dto.AltaClienteDTO;
+import business_logic.VehiculosController;
 import dto.ClienteDTO;
+import dto.FichaTecnicaVehiculoDTO;
+import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
+import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.cajero.PanelCarritoRepuestoView;
 import presentacion.views.supervisor.ClienteFormView;
+import presentacion.views.tecnico.AltaPresupuestoFormView;
+import presentacion.views.tecnico.PanelGestionPresupuestoView;
+import presentacion.views.tecnico.PlanificarRepuestosFormView;
+import presentacion.views.tecnico.PlanificarTrabajosFormView;
 import presentacion.views.utils.MessageDialog;
 
 public class CarritoPresenter {
 
-	private static final String CLIENTE_NO_SELECCIONADO = "Debe seleccionar un cliente";
+	private PanelCarritoRepuestoView view;
+	private AltaPresupuestoFormView altaPresupuesto;
+	private PlanificarRepuestosFormView planRepuestosView;
+	private PlanificarTrabajosFormView planTrabajosView;
+	private PresupuestoDTO nuevoPresupuesto;
+	private VehiculosController vehiculosController;
+	private PresupuestosController presupuestosController;
+	private RepuestosController repuestosController;
+	private OrdenesTrabajoController ordenDeTrabajoController;
+	private ClientesController clienteController;
+	private FacturasController facturasController;
 
 	
-	private PanelCarritoRepuestoView planRepuestosView;
-	private PresupuestoDTO nuevoPresupuesto;
-	private RepuestosController repuestosController;
-	private ClientesController clientesController;
-	private FacturasController facturasController;
-	private PanelCarritoRepuestoView view;
-	private ClienteFormView clienteFormView;
 	
-	public CarritoPresenter(RepuestosController repuestosController, ClientesController clientesController, 
+	  public CarritoPresenter(RepuestosController repuestosController, ClientesController clientesController, 
 		FacturasController facturasController ) {
 		this.repuestosController = repuestosController;
-		this.clientesController = clientesController;
+		this.clienteController = clientesController;
 		this.facturasController = facturasController;
+//		this.ordenDeTrabajoController = ordenDetranajoController;
 		this.view = PanelCarritoRepuestoView.getInstance();
-		this.clienteFormView = clienteFormView.getInstance();
-//		this.planRepuestosView = PanelCarritoRepuestoView.getInstance();
-//		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
-//		this.planRepuestosView.setActionOnCancelar(a -> onCancelarRepuestosPlanificados(a));
-//		this.planRepuestosView.setActionOnAceptar(a -> onAceptarRepuestosPlanificados(a));
-//		this.planRepuestosView.setActionOnQuitar(a -> onQuitarRepuesto(a));
-//		this.planRepuestosView.setActionOnBuscar(a -> onBuscarRepuesto(a));
-		//------------------------------
-		List<String> marcas = repuestosController.readMarcas();
-		marcas.add("todas");
-//		this.planRepuestosView.setDataMarcas(marcas);
-//		this.planRepuestosView.setDataRepuestos(repuestosController.readAll());
-		//-------------------------------------
+		this.altaPresupuesto = AltaPresupuestoFormView.getInstance();
+		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
+		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
+		
+//		this.altaPresupuesto.setActionOnAceptar(a -> onRegistrar(a));
+		this.altaPresupuesto.setActionOnCancelar(a -> onCancelar(a));
+		
+//		this.view.setActionOnSeleccionarPresupuesto(a -> onSelecionarPresupuesto(a));
+//		this.view.setActionOnNuevoPresupuesto(a -> onNuevoPresupuesto(a));
+		this.planTrabajosView.setActionOnAgregar(a -> onAgregarTrabajos(a));
+		this.planTrabajosView.setActionOnQuitar(a -> onQuitarTrabajo(a));
+		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
+		this.planRepuestosView.setActionOnQuitar(a -> onQuitarRepuesto(a));
+		this.planRepuestosView.setActionOnBuscar(a -> onBuscarRepuesto(a));
+
+		this.view.setActionOnAgregarCliente(a -> onDisplayClienteForm(a));
+
 //		this.view.setActionOnBuscar(a -> onBuscar(a));
 //		this.view.setActionSelectVehiculoCliente(a -> onSelectVehiculoDeCliente(a));
-		
-		this.view.setActionRegistrarCliente(a -> onDisplayClienteFormView(a));
-		view.setActionOnEditarCliente(a -> onDisplayFormForUpdate(a));
-		view.setActionBuscar((a) -> onBuscar(a));
-		ClienteFormView.getInstance().setActionOnUpdate(a -> onUpdate(a));
-
-	}
+		this.altaPresupuesto.setActionOnClose(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				nuevoPresupuesto = null;
+				altaPresupuesto.clearData();
+				super.windowClosing(e);
+			}
+		});
 	
+	  
+	 view.setDataMarcas(repuestosController.readMarcas()); 
+	 view.setDataRepuestos(repuestosController.readAll());
+	  
+	  }
+	
+	private void onDisplayClienteForm(ActionEvent a) {
+		// TODO Auto-generated method stub
+		ClienteFormView.getInstance().display();;
+	}
+
+	//Cuando se cancela, borra el presupuesto para que no quede vacio.
+	private void onCancelar(ActionEvent a) {
+		nuevoPresupuesto = null;
+		altaPresupuesto.clearData();
+		altaPresupuesto.close();
+	}
+
 	//Quita un repuesto del presupuesto
 	private void onQuitarRepuesto(ActionEvent a) {
-//		Integer fila = this.planRepuestosView.getSeleccionado();
-//		if(fila >= 0) {
-//			this.nuevoPresupuesto.quitarRepuesto(fila);
-//			this.planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
-//			this.view.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
-//		}
+		Integer fila = this.planRepuestosView.getSeleccionado();
+		if(fila >= 0) {
+			RepuestoPlanificadoDTO repuestoPlanificado = nuevoPresupuesto.getRepuestos().get(fila);
+			RepuestoDTO repuesto = repuestoPlanificado.getRepuesto();
+			repuesto.setStockRepuesto(repuestoPlanificado.getCantRequerida() + repuesto.getStockRepuesto());
+			repuestosController.update(repuesto);
+			onBuscarRepuesto(a);
+			this.nuevoPresupuesto.quitarRepuesto(fila);
+			this.planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
+			this.altaPresupuesto.setPrecio(nuevoPresupuesto.getPrecio());
+		}
 	}
+
+	//Quita un trabajo del presupuesto
+	private void onQuitarTrabajo(ActionEvent a) {
+		Integer fila = this.planTrabajosView.getSeleccionado();
+		if(fila >= 0) {
+			this.nuevoPresupuesto.quitarTrabajo(fila);
+			this.planTrabajosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
+			this.altaPresupuesto.setPrecio(nuevoPresupuesto.getPrecio());
+		}
+	}
+
+	//Crea un nuevo presupuesto y lo guarda
+//	private void onNuevoPresupuesto(ActionEvent a) {
+////		Integer idOT = view.getIdOrdenDeTrabajo();
+//		if(idOT != null) {
+//				nuevoPresupuesto = new PresupuestoDTO();
+//				nuevoPresupuesto.setIdOT(idOT);
+//				onDisplayForPlanRepuesto(a);
+//				onDisplayForPlanTrabajos(a);
+//				this.altaPresupuesto.setData(nuevoPresupuesto);
+//				this.altaPresupuesto.display();
+//		}
+//	}
+	
+	//Muestra datos presupuesto seleccionado
+//	private void onSelecionarPresupuesto(ListSelectionEvent a) {
+//		if(view.getIdPresupuesto() >= 0) {
+//			this.nuevoPresupuesto = presupuestosController.readById(view.getIdPresupuesto());
+//			view.setDataPresupuesto(nuevoPresupuesto);
+//		}
+//	}
 
 	//Busca repuestos segun criterio seleccionado
 	private void onBuscarRepuesto(ActionEvent a) {
-//		String marca = planRepuestosView.getMarca();
-//		String descripcion = planRepuestosView.getDescripcion();
+		String marca = planRepuestosView.getMarca();
+		String descripcion = planRepuestosView.getDescripcion();
 		List<RepuestoDTO> repuestos;
-//		if(descripcion.isEmpty()) {
-//			if(marca == "todas") {
-//				repuestos = repuestosController.readAll();
-//			} else {
-//				repuestos = repuestosController.readByMarca(marca);
-//			}
+		if(descripcion.isEmpty()) {
+			if(marca == "Todas") {
+				repuestos = repuestosController.readAll();
+			} else {
+				repuestos = repuestosController.readByMarca(marca);
+			}
+		} else {
+			if(marca == "Todas") {
+				repuestos = repuestosController.readByDescripcion(descripcion);
+			} else {
+				repuestos = repuestosController.readbyMarcaYDescripcion(marca, descripcion);
+			}
+		}
+		planRepuestosView.setDataRepuestos(repuestos);
+	}
+
+//	//registra los repuestos y trabajos planificados
+//	private void onRegistrar(ActionEvent a) {
+//		String comentario = altaPresupuesto.getComentario();
+//		if(!comentario.isEmpty() && !nuevoPresupuesto.getTrabajos().isEmpty() && !nuevoPresupuesto.getRepuestos().isEmpty()) {
+//			nuevoPresupuesto.setComentarioAltaPresu(comentario);
+//			presupuestosController.save(nuevoPresupuesto);
+//			nuevoPresupuesto = null;
+//			this.view.setDataPresupuestos(presupuestosController.readByIdOt(view.getIdOrdenDeTrabajo()));
+//			this.altaPresupuesto.close();
 //		} else {
-//			if(marca == "todas") {
-//				repuestos = repuestosController.readByDescripcion(descripcion);
-//			} else {
-//				repuestos = repuestosController.readbyMarcaYDescripcion(marca, descripcion);
+//			List<String> errors = new ArrayList<>();
+//			if(comentario.isEmpty()) {
+//				errors.add("Ingrece un comentario");
 //			}
-//		}
-//		planRepuestosView.setDataRepuestos(repuestos);
-	}
-
-	//Muestra los repuestos planificados
-	private void onAceptarRepuestosPlanificados(ActionEvent a) {
-		//this.view.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
-//		this.planRepuestosView.close();
-	}
-
-	//Borra los repuestos planificados si se cancela la operacion de planificacion
-	private void onCancelarRepuestosPlanificados(ActionEvent a) {
-		this.nuevoPresupuesto.borrarRepuestosPlanificados();
-	}
-
-	//Agrega repuesto a el nuevo repuesto
-	private void onAgregarRepuesto(ActionEvent a) {
-//		String cantidad = planRepuestosView.getCantidad();
-//		String idRepuesto = planRepuestosView.getIdRepuesto();
-//		List<String> errors = new StringValidator(idRepuesto).number("Debe seleccionar un repuesto.").validate();
-//		errors.addAll(new StringValidator(cantidad).notBlank("Debe ingresar una cantidad")
-//				.number("La cantidad debe ser un número").validate());
-//
-//		if (errors.isEmpty()) {
-//			RepuestoPlanificadoDTO repuestoPlanificado = new RepuestoPlanificadoDTO();
-//			repuestoPlanificado.setCantRequerida(Integer.parseInt(cantidad));
-//			RepuestoDTO repuesto = repuestosController.readById(Integer.parseInt(idRepuesto));
-//			repuestoPlanificado.setRepuesto(repuesto);
-//			nuevoPresupuesto.agregarRepuestos(repuestoPlanificado);
-//			planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
-//			this.view.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
-//		} else {
+//			if(nuevoPresupuesto.getTrabajos().isEmpty()) {
+//				errors.add("Agregue al menos un trabajo");
+//			}
+//			if(nuevoPresupuesto.getRepuestos().isEmpty()) {
+//				errors.add("Agregue al menos un repuesto");
+//			}
 //			new MessageDialog().showMessages(errors);
-//			;
 //		}
+//	}
+
+	//Agrega repuesto a el carrito
+	private void onAgregarRepuesto(ActionEvent a) {
+		String cantidad = planRepuestosView.getCantidad();
+		String idRepuesto = planRepuestosView.getIdRepuesto();
+		List<String> errors = new StringValidator(idRepuesto).number("Debe seleccionar un repuesto.").validate();
+		errors.addAll(new StringValidator(cantidad).notBlank("Debe ingresar una cantidad.")
+				.positiveInteger("La cantidad debe ser un número mayor a 0.").validate());
+		if (errors.isEmpty()) {
+			RepuestoDTO repuesto = repuestosController.readById(Integer.parseInt(idRepuesto));
+			int cant = Integer.parseInt(cantidad);
+			int stock = repuesto.getStockRepuesto();
+			if(cant <= stock) {
+				RepuestoPlanificadoDTO repuestoPlanificado = new RepuestoPlanificadoDTO();
+				repuestoPlanificado.setCantRequerida(cant);
+				repuestoPlanificado.setRepuesto(repuesto);
+				repuesto.setStockRepuesto(stock - cant);
+				repuestosController.update(repuesto);
+				nuevoPresupuesto.agregarRepuestos(repuestoPlanificado);
+				altaPresupuesto.setPrecio(nuevoPresupuesto.getPrecio());
+				onBuscarRepuesto(a);
+				planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
+			} else {
+				new MessageDialog().showMessages("No hay stock suficiente.");
+			}
+		} else {
+			new MessageDialog().showMessages(errors);
+			;
+		}
+	}
+
+	//Agrega trabajos al nuevo repuesto
+	private void onAgregarTrabajos(ActionEvent a) {
+		String descripcion = planTrabajosView.getDescripcion();
+		String monto = planTrabajosView.getMonto();
+		String esfuerzo = planTrabajosView.getEsfuerzo();
+		List<String> errors = new StringValidator(descripcion).notBlank("Ingrese una descripción.").validate();
+		errors.addAll(new StringValidator(monto).notBlank("Ingrese un monto.").positiveDouble("El monto debe ser un número mayor a 0.").validate());
+		errors.addAll(new StringValidator(esfuerzo).notBlank("Ingrese un esfuerzo estimado.").positiveInteger("El esfuerzo debe ser un número entero mayor a 0.").validate());
+		if(errors.isEmpty()) {
+			TrabajoPresupuestadoDTO trabajo = this.planTrabajosView.getDataNuevoTrabajo();
+			trabajo.setFechaAlta(new Date());
+			nuevoPresupuesto.agregarTrabajo(trabajo);
+			altaPresupuesto.setPrecio(nuevoPresupuesto.getPrecio());
+			this.planTrabajosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
+			this.planTrabajosView.clearDataNuevoTrabajo();
+		} else {
+			new MessageDialog().showMessages(errors);
+		}
 	}
 
 	//Muestra pantalla de planificacion de repuestos
 	private void onDisplayForPlanRepuesto(ActionEvent a) {
-//		if (nuevoPresupuesto != null) {
-//			List<String> marcas = repuestosController.readMarcas();
-//			marcas.add("todas");
-//			this.planRepuestosView.setDataMarcas(marcas);
-//			this.planRepuestosView.setDataRepuestos(repuestosController.readAll());
-//			this.planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
-//			this.planRepuestosView.display();
-//		} else {
-//			new MessageDialog().showMessages("Seleccione un presupuesto");
-//		}
+		if (nuevoPresupuesto != null) {
+			List<String> marcas = new ArrayList<>();
+			marcas.add("Todas");
+			marcas.addAll(repuestosController.readMarcas());
+			this.planRepuestosView.setDataMarcas(marcas);
+			this.planRepuestosView.setDataRepuestos(repuestosController.readAll());
+			this.planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
+			this.planRepuestosView.display();
+		} else {
+			new MessageDialog().showMessages("Seleccione un presupuesto");
+		}
+	}
+	
+	//Muestra pantalla de planificacion de trabajos
+	private void onDisplayForPlanTrabajos(ActionEvent a) {
+		if (nuevoPresupuesto != null) {
+			this.planTrabajosView.clearData();
+			this.planTrabajosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
+			this.planTrabajosView.display();
+		} else {
+			new MessageDialog().showMessages("Seleccione un presupuesto");
+		}
 	}
 
-//Supervisor reutilizados----------------------------------------------------------	
-	private void onDisplayClienteFormView(ActionEvent e) {
-		view.clearAll();
-		ClienteFormView.getInstance().clearData();
-		ClienteFormView.getInstance().display();
-	}
-	
-	private void onRegistrarCliente(ActionEvent e) {
-		AltaClienteDTO cliente = ClienteFormView.getInstance().getData();
-		List<String> errors = cliente.validate();
-		if (errors.isEmpty()) {
-			try {
-				clientesController.save(new ClienteDTO(cliente));
-				ClienteFormView.getInstance().clearData();
-				ClienteFormView.getInstance().close();
-			} catch (ConflictException e1) {
-				new MessageDialog().showMessages(e1.getMessage());
-			}
-		} else {
-			new MessageDialog().showMessages(errors);
-		}
-	}	
-	
-	private void onDisplayFormForUpdate(ActionEvent a) {
-		if (view.getIdCliente() != null) {
-			ClienteFormView.getInstance().clearData();
-			ClienteFormView.getInstance().setData(clientesController.readByDni(Integer.parseInt(view.getDniCliente())));
-			ClienteFormView.getInstance().display();
-		}
-		else {
-			new MessageDialog().showMessages(CLIENTE_NO_SELECCIONADO);
-		}
-	}
-	
-	private void onBuscar(ActionEvent a) {
-		String inputDni = view.getDniCliente();
-		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
-			ClienteDTO cliente = clientesController.readByDni(Integer.parseInt(inputDni));
-			if (cliente != null) {
-				view.clearDataCliente();
-				view.setData(cliente);
-//				view.clearDataListadoVehiculosCliente();
+	//Busca vehiculos con orden de trabajo abiertas
+//	private void onBuscar(ActionEvent a) {
+//		view.clearAll();
+//		String inputDni = view.getTxtDni();
+//		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
+//			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
+//			if (cliente != null) {
+//				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController.readVehicleWithClientIdWhereOtIsOpen(cliente.getIdCliente());
+//				view.setData(vehiculos);
+//			}
+//		}
+//	}
+
+	//Muestra la orden de trabajo del vehiculo seleccionado.
+//	private void onSelectVehiculoDeCliente(ListSelectionEvent a) {
+//		VehiculoConOrdenDeTrabajoDTO idVehiculo = view.getidVehiculoSeleccionado();
+//		if (idVehiculo != null) {
+//			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController
+//					.readFichaTecnicaById(idVehiculo.getIdFichaTecnica());
+//			if (fichaVehiculo != null) {
 //				view.clearDataFichaTecnicaVehiculo();
 //				view.clearDataOrdenDeTrabajo();
-			} else {
-				view.clearAll();
-			}
-		} else {
-			view.clearAll();
-		}
-	}
-	
-	private void onUpdate(ActionEvent a) {
-		AltaClienteDTO clienteAux = ClienteFormView.getInstance().getData();
-		List<String> errores = clienteAux.validate();
-		if (errores.isEmpty()) {
-			ClienteDTO cliente = new ClienteDTO(clienteAux);
-			cliente.setIdCliente(view.getIdCliente());
-			cliente.getDatosPersonalesDTO().setId(view.getIdDatosPersonalesCliente());
-			clientesController.update(cliente);
-			view.clearDataCliente();
-			view.setData(cliente);
-			ClienteFormView.getInstance().close();
-		} else {
-			new MessageDialog().showMessages(errores);
-		}
-	}
-	
+//				view.setData(fichaVehiculo);
+//				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo.getId());				
+//				if (ordenDeTrabajo != null) {
+//					view.setData(ordenDeTrabajo);
+//					List<PresupuestoDTO> presupuestos = this.presupuestosController.readByIdOt(ordenDeTrabajo.getIdOrdenTrabajo());
+//					view.setDataPresupuestos(presupuestos);
+//				} else {
+//					view.clearDataOrdenDeTrabajo();
+//					view.clearDataPresupuestos();
+//				}
+//			}
+//		}
+//	}
 }

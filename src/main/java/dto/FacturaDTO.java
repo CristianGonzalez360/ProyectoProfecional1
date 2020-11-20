@@ -16,6 +16,9 @@ public class FacturaDTO {
 	
 	private String estado;
 		
+	private ClienteDTO cliente;
+//	**jere**
+//	private List<RepuestosCarritoDTO> repuestos;
 	public FacturaDTO() {
 		super();
 	}
