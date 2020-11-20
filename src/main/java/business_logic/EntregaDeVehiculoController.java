@@ -20,6 +20,7 @@ import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.PresupuestosDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
+import services.EmailSenderService;
 
 public class EntregaDeVehiculoController {
 
@@ -30,7 +31,7 @@ public class EntregaDeVehiculoController {
 	private VehiculosConOrdenDeTrabajoDao vehiculosDao;
 	private FichaTecnicaVehiculoDao fichaTecnicaDao;
 	private FacturasDao facturaDao;
-
+	
 	private List<OrdenDeTrabajoDTO> ordenesRealizadas;
 
 	public EntregaDeVehiculoController(ClientesDao clienteDao, DatosPersonalesDao datosPersonalesDao,
@@ -44,6 +45,8 @@ public class EntregaDeVehiculoController {
 		this.vehiculosDao = vehiculoConOrdeDeTrabajoDao;
 		this.fichaTecnicaDao = fichaTecnicaDao;
 		this.facturaDao = facturaDao;
+		
+		new EmailSenderService();
 	}
 
 	public DatosPersonalesDTO readDatosClienteByDni(Integer dni) {
@@ -135,4 +138,7 @@ public class EntregaDeVehiculoController {
 		return ordenesDeTrabajoDao.readByID(idOt);
 	}
 
+	public boolean enviarCorreoDeSatisfaccion(String correoDestinatario) {
+		return EmailSenderService.enviarMailDeSatisfaccion(correoDestinatario);
+	}
 }
