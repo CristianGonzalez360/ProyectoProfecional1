@@ -28,14 +28,19 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import dto.ClienteDTO;
+import dto.RepuestoCompradoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
+import presentacion.views.supervisor.ClientePanelView;
 
-public class PanelCarritoRepuestoView extends JInternalFrame {
+import javax.swing.JSplitPane;
+
+public class PanelCarritoRepuestoView extends JPanel {
 
 	private static final long serialVersionUID = -3149040258338164711L;
 
-	private final JPanel contentPanel = new JPanel();
+	private final JPanel panelDerecho = new JPanel();
 
 	private static final String[] nombreColumnasSuperior = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock",
 			"Precio" };
@@ -71,7 +76,13 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 	private List<Integer> idRepuestos;
 	private JButton btnAceptar;
 	private JButton btnCancelar;
-	private JButton btnAddClient;
+	private ClientePanelView panelCliente;
+	private JSplitPane splitPane;
+	private JPanel panelBotonesCliente;
+	private JButton btnRegistrarCliente;
+	private JPanel panelBuscador;
+	private JTextField tfDni;
+	private JButton btnBuscarCliente;
 
 	public static PanelCarritoRepuestoView getInstance() {
 		if (vista == null)
@@ -81,22 +92,9 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 
 	@SuppressWarnings("serial")
 	private PanelCarritoRepuestoView() {
-//		setModal(true);
-		setBounds(100, 100, 500, 600);
-		setTitle("Carrito de compras");
-		getContentPane().setLayout(new BorderLayout());
-
+		setBounds(100, 100, 712, 600);
+		setLayout(new BorderLayout());
 		idRepuestos = new ArrayList<>();
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-
-		panelSuperior = new JPanel();
-		panelSuperior.setForeground(SystemColor.menu);
-		panelSuperior.setBorder(
-				new TitledBorder(null, "Repuestos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-		panelSuperior.setBackground(SystemColor.menu);
-		contentPanel.add(panelSuperior);
-		panelSuperior.setLayout(new BorderLayout(0, 0));
 
 		modelRepuestos = new DefaultTableModel(null, nombreColumnasSuperior) {
 			@Override
@@ -104,6 +102,67 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 				return false;
 			}
 		};
+
+		modelRepuestosInferior = new DefaultTableModel(null, nombreColumnasInferior) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		add(buttonPane, BorderLayout.SOUTH);
+
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setActionCommand("OK");
+		buttonPane.add(btnAceptar);
+
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setVisible(false);
+		btnCancelar.setActionCommand("Cancel");
+		buttonPane.add(btnCancelar);
+
+		splitPane = new JSplitPane();
+		splitPane.setResizeWeight(1.0);
+		add(splitPane, BorderLayout.CENTER);
+		splitPane.setRightComponent(panelDerecho);
+		
+		JPanel panelIzquierdo = new JPanel(new BorderLayout());
+		
+		panelCliente = new ClientePanelView();
+		panelIzquierdo.add(panelCliente, BorderLayout.CENTER);
+		
+		
+		splitPane.setLeftComponent(panelIzquierdo);
+		
+		panelBotonesCliente = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panelBotonesCliente.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		panelIzquierdo.add(panelBotonesCliente, BorderLayout.SOUTH);
+		
+		btnRegistrarCliente = new JButton("RegistrarCliente");
+		panelBotonesCliente.add(btnRegistrarCliente);
+		
+		panelBuscador = new JPanel();
+		panelIzquierdo.add(panelBuscador, BorderLayout.NORTH);
+		
+		tfDni = new JTextField();
+		panelBuscador.add(tfDni);
+		tfDni.setColumns(15);
+		
+		btnBuscarCliente = new JButton("Buscar");
+		panelBuscador.add(btnBuscarCliente);
+		
+		panelDerecho.setLayout(new BoxLayout(panelDerecho, BoxLayout.Y_AXIS));
+
+		panelSuperior = new JPanel();
+		panelSuperior.setForeground(SystemColor.menu);
+		panelSuperior.setBorder(
+				new TitledBorder(null, "Repuestos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panelSuperior.setBackground(SystemColor.menu);
+		panelDerecho.add(panelSuperior);
+		panelSuperior.setLayout(new BorderLayout(0, 0));
 
 		panel_1 = new JPanel();
 		panelSuperior.add(panel_1, BorderLayout.NORTH);
@@ -152,21 +211,14 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 		panel_2.add(btnAgregar);
 
 		panelInferior = new JPanel();
-		panelInferior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Repuestos planificados",
+		panelInferior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Carrito",
 				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelInferior.setBackground(SystemColor.menu);
-		contentPanel.add(panelInferior);
+		panelDerecho.add(panelInferior);
 		panelInferior.setLayout(new BorderLayout(0, 0));
 
 		scrollPaneRepuestosInferior = new JScrollPane();
 		panelInferior.add(scrollPaneRepuestosInferior, BorderLayout.CENTER);
-
-		modelRepuestosInferior = new DefaultTableModel(null, nombreColumnasInferior) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
 
 		tablaRepuestosInferior = new JTable(modelRepuestosInferior);
 
@@ -174,11 +226,9 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 
 		panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		panelInferior.add(panel, BorderLayout.SOUTH);
-		
-		btnAddClient = new JButton("Agregar Cliente");
-		panel.add(btnAddClient);
 
 		btnEditar = new JButton("Editar");
+		btnEditar.setVisible(false);
 		panel.add(btnEditar);
 
 		btnQuitar = new JButton("Quitar");
@@ -187,22 +237,6 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 		btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setVisible(false);
 		panel.add(btnLimpiar);
-
-		JPanel buttonPane = new JPanel();
-		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		getContentPane().add(buttonPane, BorderLayout.SOUTH);
-
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setActionCommand("OK");
-		buttonPane.add(btnAceptar);
-		getRootPane().setDefaultButton(btnAceptar);
-
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setVisible(false);
-		btnCancelar.setActionCommand("Cancel");
-		buttonPane.add(btnCancelar);
-
-		setVisible(false);
 	}
 
 	public void clearDataRepuestos() {
@@ -217,9 +251,9 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 		setVisible(true);
 	}
 
-	public void setDataRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestos) {
+	public void setDataRepuestosPlanificados(List<RepuestoCompradoDTO> repuestos) {
 		modelRepuestosInferior.setRowCount(0);
-		for (RepuestoPlanificadoDTO r : repuestos) {
+		for (RepuestoCompradoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuestoPlanificado());
 			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(),
 					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantRequerida() };
@@ -268,14 +302,18 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 	public void setActionOnBuscar(ActionListener listener) {
 		this.btnBuscar.addActionListener(listener);
 	}
-//-------jere----------
 	
-	public void setActionOnAgregarCliente(ActionListener listener) {
-		this.btnAddClient.addActionListener(listener);
+	public void setActionOnBuscarCliente(ActionListener listener) {
+		this.btnBuscarCliente.addActionListener(listener);
 	}
-	
 //-------jere----------
-	
+
+	public void setActionOnAgregarCliente(ActionListener listener) {
+		this.btnRegistrarCliente.addActionListener(listener);
+	}
+
+//-------jere----------
+
 	public String getMarca() {
 		return (String) comboMarcas.getSelectedItem();
 	}
@@ -291,12 +329,24 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 		}
 		comboMarcas.setModel(modelo);
 	}
-	
+
 	public void setActionOnQuitar(ActionListener Listener) {
 		this.btnQuitar.addActionListener(Listener);
 	}
 
 	public Integer getSeleccionado() {
 		return tablaRepuestosInferior.getSelectedRow();
+	}
+
+	public void clearClienteData() {
+		panelCliente.clearData();
+	}
+
+	public String getDniCliente() {
+		return this.tfDni.getText();
+	}
+
+	public void setDataCliente(ClienteDTO cliente) {
+		this.panelCliente.setData(cliente);
 	}
 }
