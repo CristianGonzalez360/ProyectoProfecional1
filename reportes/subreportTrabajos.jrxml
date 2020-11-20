@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreporteCliente" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5ed656c3-22a6-430f-a7a8-a351e096732a">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="descipcionTrabajo" class="java.lang.String"/>
+	<field name="precio" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="20" width="480" height="20" uuid="e80d6008-2b4a-4994-b856-0cc3b9278aea">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="952ff757-0e89-41bc-9bac-99fca8c4f578"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Descipcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="20" width="75" height="20" uuid="6e10cf98-1714-4296-b05e-8ce4ca635b5c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="73a6de57-10b3-41fe-b4c0-a62866ff70e6"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="23f13ff9-8bcf-49c2-8f5f-c5d2be87e8a2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Trabajos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="480" height="20" uuid="6e2dec3c-776a-454d-b97a-3e0203f75835">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="952ff757-0e89-41bc-9bac-99fca8c4f578"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descipcionTrabajo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="75" height="20" uuid="5791e1f7-e8ef-4df4-befa-f07d37e636c3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="73a6de57-10b3-41fe-b4c0-a62866ff70e6"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

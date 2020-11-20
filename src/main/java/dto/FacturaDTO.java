@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -87,5 +88,21 @@ public class FacturaDTO {
 
 	public void setPresupuestosFacturados(List<PresupuestoDTO> presupuestosFacturados) {
 		this.presupuestosFacturados = presupuestosFacturados;
+	}
+	
+	public List<TrabajoPresupuestadoDTO> getTabajos(){
+		List<TrabajoPresupuestadoDTO> ret = new ArrayList<>();
+		for (PresupuestoDTO presupuesto : presupuestosFacturados) {
+			ret.addAll(presupuesto.getTrabajos());
+		}
+		return ret;
+	}
+	
+	public List<RepuestoPlanificadoDTO> getRepuestos(){
+		List<RepuestoPlanificadoDTO> ret = new ArrayList<>();
+		for (PresupuestoDTO presupuesto : presupuestosFacturados) {
+			ret.addAll(presupuesto.getRepuestos());
+		}
+		return ret;
 	}
 }
