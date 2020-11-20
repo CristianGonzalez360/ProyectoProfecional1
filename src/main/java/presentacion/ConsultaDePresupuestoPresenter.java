@@ -141,7 +141,6 @@ public class ConsultaDePresupuestoPresenter {
 		});
 		
 		try {
-			//facController.updateEstadoPresupuestos(presupuestosSeleccionados);
 			updatePresupuestosView();
 			FacturaDTO factura = facController.generarFactura(presupuestosSeleccionados);
 			if(factura != null) {
@@ -150,12 +149,6 @@ public class ConsultaDePresupuestoPresenter {
 				ReporteViewImpl ventanaReporte = new ReporteViewImpl("FacturaTaller.jasper");
 				ventanaReporte.setData(report);
 				ventanaReporte.open();
-				
-				/*ResumenDeFacturaDTO resumen = facController.generarResumenFactura(factura.getIdFactura());
-				resumen.setFactura(factura);
-				if(resumen != null) {
-					new MessageDialog().showMessages(resumen.generarResumen());	
-				}	*/
 			}
 		} catch(ForbiddenException e) {
 			new MessageDialog().showMessages(e.getMessage());
