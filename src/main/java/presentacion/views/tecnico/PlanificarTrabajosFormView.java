@@ -129,9 +129,6 @@ public class PlanificarTrabajosFormView extends JPanel {
 		FlowLayout flowLayout_1 = (FlowLayout) panelBotones2.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.RIGHT);
 		panelTrabajosPlanificados.add(panelBotones2, BorderLayout.SOUTH);
-		
-		JButton btnEditar = new JButton("Editar");
-		panelBotones2.add(btnEditar);
 
 		btnQuitar = new JButton("Quitar");
 		panelBotones2.add(btnQuitar);

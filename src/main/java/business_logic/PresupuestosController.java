@@ -1,5 +1,7 @@
 package business_logic;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dto.EstadoPresupuesto;
@@ -94,11 +96,13 @@ public class PresupuestosController {
 	}
 
 	public List<PresupuestoDTO> readByIdOt(Integer idOrdenTrabajo) {
-		assert idOrdenTrabajo != null;
-		List<PresupuestoDTO> ret  = Pdao.readByOrdenDeTrabajoId(idOrdenTrabajo);
-		for (PresupuestoDTO presupuesto : ret) {
-			presupuesto.setRepuestos(RPDao.readByIdPresupuesto(presupuesto.getIdPresupuesto()));
-			presupuesto.setTrabajos(TPDao.readByPresupuestoId(presupuesto.getIdPresupuesto()));
+		List<PresupuestoDTO> ret = new ArrayList<>();
+		if(idOrdenTrabajo != null) {
+			ret  = Pdao.readByOrdenDeTrabajoId(idOrdenTrabajo);
+			for (PresupuestoDTO presupuesto : ret) {
+				presupuesto.setRepuestos(RPDao.readByIdPresupuesto(presupuesto.getIdPresupuesto()));
+				presupuesto.setTrabajos(TPDao.readByPresupuestoId(presupuesto.getIdPresupuesto()));
+			}
 		}
 		return ret;
 	}
@@ -137,4 +141,10 @@ public class PresupuestosController {
 	public void delete(Integer idPresupuesto) {
 		Pdao.delete(idPresupuesto);
 	}
+
+	public void registrarAprobacion(PresupuestoDTO presupuesto) {
+		Pdao.registrarAprobacion(presupuesto);
+		
+	}
+	
 }

@@ -248,6 +248,14 @@ public class PanelCobroCajeroView extends JPanel {
 			botonvisible();
 		}
 	}
+	
+	public void cargarTabla(FacturaDTO presupuesto) {
+		if(presupuesto != null) {
+			Object[] row = { presupuesto.getIdFactura().toString(),  presupuesto.getFechaDeCierrePorPago(),presupuesto.getTotal(), presupuesto.getEstado() };
+			listadoDeFacturasModel.addRow(row);
+			botonvisible();
+		}
+	}
 
 	public String getFactura() {
 		return (String) textFactura.getText();

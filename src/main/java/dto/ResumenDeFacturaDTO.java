@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +16,8 @@ public class ResumenDeFacturaDTO {
 	private List<TrabajoPresupuestadoDTO> trabajos;
 
 	public ResumenDeFacturaDTO() {
+		this.trabajos = new ArrayList<>();
+		this.repuestos = new ArrayList<>();
 	}
 	
 	public List<String> generarResumen() {
@@ -22,13 +25,15 @@ public class ResumenDeFacturaDTO {
 		if(trabajos != null && repuestos != null) {
 			renglones.add(" ------ CONCESIONARIOS LARUSSO 'Pateamos la competencia'------");
 			renglones.add(" ------ FECHA DE EMISION DEL RESUMEN ----" + new Date() + "Suecursal: ARG BS.AS");
-			double costofinaltrabajos = 0;
 			for(TrabajoPresupuestadoDTO trabajo : trabajos) {
-				costofinaltrabajos += trabajo.getPrecioTrabajo();
-				renglones.add("COD. " + trabajo.getIdTrabajoPresu() + "PRECIO U. " + trabajo.getPrecioTrabajo());
+				renglones.add("COD. " + trabajo.getIdTrabajoPresu() + "PRECIO " + trabajo.getPrecioTrabajo());
 			}
-			renglones.add("Cant. trabajos " + trabajos.size());
-			renglones.add(" ----- MONTO TOTAL A PAGAR: " + costofinaltrabajos + "------");	
+			for (RepuestoPlanificadoDTO repuesto : repuestos) {
+				renglones.add("COD. " + repuesto.getIdRepuesto() + "PRECIO U. " 
+						+ repuesto.getRepuesto().getPrecioRepuesto() 
+						+ "SUBTOTAL " + repuesto.getRepuesto().getPrecioRepuesto()*repuesto.getCantRequerida());
+			}
+			renglones.add(" ----- MONTO TOTAL A PAGAR: " + factura.getTotal() + "------");	
 		}
 		return renglones;
 	}
@@ -64,4 +69,14 @@ public class ResumenDeFacturaDTO {
 	public void setTrabajos(List<TrabajoPresupuestadoDTO> trabajos) {
 		this.trabajos = trabajos;
 	}
+	
+	public void agregarRepuestos(List<RepuestoPlanificadoDTO> repuestos) {
+		this.repuestos.addAll(repuestos);
+	}
+	
+	public void agregarTrabajos(List<TrabajoPresupuestadoDTO> trabajos) {
+		this.trabajos.addAll(trabajos);
+	}
+	
+	
 }

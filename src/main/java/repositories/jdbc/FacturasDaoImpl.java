@@ -59,9 +59,8 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 	}
 
 	@Override
-	public FacturaDTO readByOrdenDeTrabajoId(Integer id) {
-		List<FacturaDTO> dtos = getTemplate().query(readByOrdenDeTrabajoId).param(id).excecute(getMapper());
-		return dtos.isEmpty() ? null : dtos.get(0);
+	public List<FacturaDTO> readByOrdenDeTrabajoId(Integer id) {
+		return getTemplate().query(readByOrdenDeTrabajoId).param(id).excecute(getMapper());
 	}
 	
 	@Override
@@ -73,13 +72,11 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 	public List<FacturaDTO> readAll() {
 		return getTemplate().query(readAll).excecute(getMapper());
 	}
-
 	
 	@Override
 	public List<FacturaDTO> readByFactura(Integer id) {
 		return  getTemplate().query(readByFactura).param(id).excecute(getMapper());
 	}
-
 	
 	@Override
 	protected Mapper<FacturaDTO> getMapper() {
@@ -97,5 +94,11 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 				return factura;
 			}
 		};
+	}
+
+	@Override
+	public FacturaDTO readById(Integer id) {
+		List<FacturaDTO>  dtos = getTemplate().query(readByFactura).param(id).excecute(getMapper());
+		return dtos .isEmpty() ? null : dtos.get(0);
 	}
 }

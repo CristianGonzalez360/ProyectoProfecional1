@@ -106,6 +106,16 @@ public class EntregaVehiculosPanelView extends JPanel {
 		return null;
 	}
 	
+	public Integer getDNISelectedEntrega() {
+		int row = tableEntregas.getSelectedRow(); //id de fila seleccionada
+		int dni; //para dni
+		if (tableEntregas.getSelectedRow() == 0) {
+			dni = Integer.parseInt(tableEntregas.getValueAt(row, 1).toString());
+			return dni;
+		}
+		return null;
+	}
+	
 	public Integer getIdSelectedRow() {
 		int row = tableEntregas.getSelectedRow();
 		return row; //id de fila seleccionada

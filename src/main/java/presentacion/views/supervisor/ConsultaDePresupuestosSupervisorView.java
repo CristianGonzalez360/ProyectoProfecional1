@@ -9,8 +9,6 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
@@ -97,7 +95,6 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 	private List<PresupuestoDTO> presupuestos;
 	private List<VehiculoConOrdenDeTrabajoDTO> vehiculosCliente;
 	private JButton btnGenerarFactura;
-	private JButton btnRegistrarPago;
 	private Integer idOrdenDeTrabajo;
 
 	public static ConsultaDePresupuestosSupervisorView getInstance() {
@@ -232,13 +229,13 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 			private static final long serialVersionUID = -972882702173668623L;
 
 			public boolean isCellEditable(int row, int column) {
-				return column == 4;
+				return listadoDePresupuestosModel.getValueAt(row, 3) == EstadoPresupuesto.PENDIENTE.name();
 			}
 			
 			@Override
 		    public Class getColumnClass(int col) {
 				if(col == 4) return Boolean.class;
-				else return Object.class;
+				else return super.getColumnClass(col);
 			}
 		};
 		tablePresupuestos = new JTable(listadoDePresupuestosModel);
@@ -302,10 +299,8 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		panel_2.add(toolBar, BorderLayout.NORTH);
 
 		btnGenerarFactura = new JButton("Generar factura");
+		lockButtonGenerarFactura();
 		toolBar.add(btnGenerarFactura);
-
-		btnRegistrarPago = new JButton("Registrar pago");
-		toolBar.add(btnRegistrarPago);
 		
 		this.lockOrdenDeTrabajoPanel();
 	}
@@ -395,23 +390,19 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		this.presupuestos = presupuestos;
 		for (PresupuestoDTO dto : presupuestos) {
+			boolean check = false;
+			if(dto.getEstado() == EstadoPresupuesto.APROBADO) {
+				check = true;
+			}
 			Object[] row = { 
 					dto.getIdPresupuesto().toString(),
 					dto.getFechaAltaPresu().toString(),
 					dto.getComentarioAltaPresu().toString(), 
-					dto.getEstado().name()
+					dto.getEstado().name(),
+					check
 			};
 			this.listadoDePresupuestosModel.addRow(row);
 		}
-		if(!presupuestos.isEmpty()) {
-			boolean estado = presupuestos.get(0).getEstado() != EstadoPresupuesto.PENDIENTE;
-			if(estado) {
-				tablePresupuestos.setEnabled(false);
-			}
-		}
-		TableColumn tc = tablePresupuestos.getColumnModel().getColumn(4);
-		tc.setCellEditor(tablePresupuestos.getDefaultEditor(Boolean.class));
-		tc.setCellRenderer(tablePresupuestos.getDefaultRenderer(Boolean.class));
 	}
 
 	public void setActionSelectPresupuestoCliente(ListSelectionListener listSelectionListener) {
@@ -422,15 +413,13 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		Map<Integer, Boolean> presu = new HashMap<>();
 		int rows = this.listadoDePresupuestosModel.getRowCount();
 		for (int index = 0; index < rows; index++) {
-			Integer presupuestoId = Integer.parseInt(listadoDePresupuestosModel.getValueAt(index, 0).toString());
-			Boolean isOk = Boolean.valueOf(this.checkBoxIsSelected(index));
-			presu.put(presupuestoId, isOk);
+			if(listadoDePresupuestosModel.getValueAt(index, 3) == EstadoPresupuesto.PENDIENTE.name()) {
+				Integer presupuestoId = Integer.parseInt(listadoDePresupuestosModel.getValueAt(index, 0).toString());
+				Boolean isOk = (Boolean) listadoDePresupuestosModel.getValueAt(index, 4);
+				presu.put(presupuestoId, isOk);
+			}
 		}
 		return presu;
-	}
-
-	private boolean checkBoxIsSelected(int index) {
-		return listadoDePresupuestosModel.getValueAt(index, 4) != null;
 	}
 
 	public PresupuestoDTO getPresupuestoSeleccionado() {
@@ -477,23 +466,11 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		return this.idOrdenDeTrabajo;
 	}
 
-	public void setActionRegistrarPago(ActionListener listener) {
-		this.btnRegistrarPago.addActionListener(listener);
-	}
-
 	public void lockButtonGenerarFactura() {
 		this.btnGenerarFactura.setEnabled(false);
 	}
 
 	public void unLockButtonGenerarFactura() {
 		this.btnGenerarFactura.setEnabled(true);
-	}
-
-	public void lockButtonRegistrarPago() {
-		this.btnRegistrarPago.setEnabled(false);
-	}
-
-	public void unLockButtonRegistrarPago() {
-		this.btnRegistrarPago.setEnabled(true);
 	}
 }

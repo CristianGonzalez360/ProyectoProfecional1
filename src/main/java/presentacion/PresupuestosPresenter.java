@@ -92,7 +92,7 @@ public class PresupuestosPresenter {
 		Integer fila = this.planRepuestosView.getSeleccionado();
 		if(fila >= 0) {
 			RepuestoPlanificadoDTO repuestoPlanificado = nuevoPresupuesto.getRepuestos().get(fila);
-			RepuestoDTO repuesto = repuestoPlanificado.getRepuesto();
+			RepuestoDTO repuesto = repuestosController.readById(repuestoPlanificado.getRepuesto().getIdRepuesto());
 			repuesto.setStockRepuesto(repuestoPlanificado.getCantRequerida() + repuesto.getStockRepuesto());
 			repuestosController.update(repuesto);
 			onBuscarRepuesto(a);
@@ -116,12 +116,12 @@ public class PresupuestosPresenter {
 	private void onNuevoPresupuesto(ActionEvent a) {
 		Integer idOT = view.getIdOrdenDeTrabajo();
 		if(idOT != null) {
-				nuevoPresupuesto = new PresupuestoDTO();
-				nuevoPresupuesto.setIdOT(idOT);
-				onDisplayForPlanRepuesto(a);
-				onDisplayForPlanTrabajos(a);
-				this.altaPresupuesto.setData(nuevoPresupuesto);
-				this.altaPresupuesto.display();
+			nuevoPresupuesto = new PresupuestoDTO();
+			nuevoPresupuesto.setIdOT(idOT);
+			onDisplayForPlanRepuesto(a);
+			onDisplayForPlanTrabajos(a);
+			this.altaPresupuesto.setData(nuevoPresupuesto);
+			this.altaPresupuesto.display();
 		}
 	}
 	
