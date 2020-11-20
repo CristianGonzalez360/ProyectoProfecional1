@@ -1,5 +1,7 @@
 package services;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -10,23 +12,32 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailSenderService {
 
-	private final static String correoRemitente = "";
-	private final static String contraseñaRemitente = "";
+	private PropertiesServiceImpl propertyService;
+	private final static String pathArchivoEncuestas = "conf/smtp.properties";
 
-	private final static String asuntoSatisfaccion = "Encuesta de Satisfaccion - Concesionario Larusso";
-	private final static String mensajeSatisfaccion = "ENCUESTA DE SATISFACIÓN.\n\n"
-			+ "Ayudanos a mejorar completando esta breve encuesta:\n\n\n"
-			+ "https://docs.google.com/forms/d/e/1FAIpQLSd2f7w-q2bkI3OzbRt5zvUe_LubL_Nt8V0QS_eSgFf-G5WF5g/viewform?usp=sf_link\n\n\n"
-			+ "Muchas Gracias.";
+	private String correoRemitente = "";
+	private String contraseñaRemitente = "";
 
-	public static boolean enviarMailDeSatisfaccion(String correoDestinatario) {
+	private Properties props;
 
-		Properties props = System.getProperties();
-
+	public EmailSenderService() {
+		props = System.getProperties();
 		props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
 		props.put("mail.smtp.starttls.enable", "true"); // Para conectar de manera segura al servidor SMTP
 		props.put("mail.smtp.port", "587"); // El puerto SMTP seguro de Google
 		props.put("mail.smtp.auth", "true"); // Usar autenticación mediante usuario y clave
+	}
+
+	public boolean enviarMailRecordatorio(String correoDestinatario) {
+		return false;
+	}
+
+	public boolean enviarMailDeSatisfaccion(String correoDestinatario) {
+		if (!cargarArchivoDePropiedades())
+			return false;
+
+		if (!cargarDatosDeRemitente())
+			return false;
 
 		Session session = Session.getDefaultInstance(props);
 		MimeMessage message = new MimeMessage(session);
@@ -35,8 +46,8 @@ public class EmailSenderService {
 		try {
 			message.setFrom(new InternetAddress(correoRemitente));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoDestinatario));
-			message.setSubject(asuntoSatisfaccion);
-			message.setText(mensajeSatisfaccion);
+			message.setSubject(Encuesta.asunto);
+			message.setContent(Encuesta.encuestaHYML, "text/html");
 
 			transport = session.getTransport("smtp");
 			transport.connect(correoRemitente, contraseñaRemitente);
@@ -44,6 +55,36 @@ public class EmailSenderService {
 			transport.close();
 
 		} catch (Exception me) {
+			return false;
+		}
+		return true;
+	}
+
+	private boolean cargarArchivoDePropiedades() {
+		String path = getAbsolutePath();
+		if (path.isEmpty())
+			return false;
+
+		this.propertyService = new PropertiesServiceImpl(path);
+		return true;
+	}
+
+	private String getAbsolutePath() {
+		File file = new File(pathArchivoEncuestas);
+		if (!file.exists())
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		return file.getAbsolutePath();
+	}
+
+	private boolean cargarDatosDeRemitente() {
+		try {
+			correoRemitente = propertyService.readProperty("email");
+			contraseñaRemitente = propertyService.readProperty("password");
+		} catch (IOException e) {
 			return false;
 		}
 		return true;

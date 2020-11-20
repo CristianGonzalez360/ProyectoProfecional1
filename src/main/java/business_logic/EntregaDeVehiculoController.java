@@ -31,8 +31,10 @@ public class EntregaDeVehiculoController {
 	private VehiculosConOrdenDeTrabajoDao vehiculosDao;
 	private FichaTecnicaVehiculoDao fichaTecnicaDao;
 	private FacturasDao facturaDao;
-	
+
 	private List<OrdenDeTrabajoDTO> ordenesRealizadas;
+
+	private EmailSenderService servicio;
 
 	public EntregaDeVehiculoController(ClientesDao clienteDao, DatosPersonalesDao datosPersonalesDao,
 			OrdenesDeTrabajoDao ordenDeTrabajoDao, PresupuestosDao presupuestoDao,
@@ -45,8 +47,8 @@ public class EntregaDeVehiculoController {
 		this.vehiculosDao = vehiculoConOrdeDeTrabajoDao;
 		this.fichaTecnicaDao = fichaTecnicaDao;
 		this.facturaDao = facturaDao;
-		
-		new EmailSenderService();
+
+		this.servicio = new EmailSenderService();
 	}
 
 	public DatosPersonalesDTO readDatosClienteByDni(Integer dni) {
@@ -139,6 +141,6 @@ public class EntregaDeVehiculoController {
 	}
 
 	public boolean enviarCorreoDeSatisfaccion(String correoDestinatario) {
-		return EmailSenderService.enviarMailDeSatisfaccion(correoDestinatario);
+		return this.servicio.enviarMailDeSatisfaccion(correoDestinatario);
 	}
 }
