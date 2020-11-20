@@ -116,6 +116,7 @@ public class FacturasController {
 					p.setIdFactura(idFactura);
 					presDao.update(p);
 				}
+				factura.setPresupuestosFacturados(ps);
 				factura.setIdFactura(idFactura);
 			} 
 		}
@@ -201,6 +202,7 @@ public class FacturasController {
 		ret.setRepuestos(factura.getRepuestos());
 		ret.setTotal(factura.getTotal());
 		ret.setFecha(factura.getFechaDeAlta());
+		ret.setNumero(factura.getIdFactura());
 		
 		return ret;
 	}

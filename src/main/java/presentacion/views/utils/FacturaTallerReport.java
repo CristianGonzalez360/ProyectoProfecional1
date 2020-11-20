@@ -1,5 +1,6 @@
 package presentacion.views.utils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,19 +19,24 @@ public class FacturaTallerReport {
 	private List<RepuestoPlanificadoDTO> repuestos;
 	private Double total;
 	private Date fecha;
+	private Integer numero;
 	
 	public FacturaTallerReport() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public DatosPersonalesDTO getCliente() {
-		return cliente;
+	public JRDataSource getCliente() {
+		List<DatosPersonalesDTO> cliente = new ArrayList<>();
+		cliente.add(this.cliente);
+		return new JRBeanCollectionDataSource(cliente) ;
 	}
 	public void setCliente(DatosPersonalesDTO cliente) {
 		this.cliente = cliente;
 	}
-	public FichaTecnicaVehiculoDTO getVehiculo() {
-		return vehiculo;
+	public JRDataSource getVehiculo() {
+		List<FichaTecnicaVehiculoDTO> vehiculo = new ArrayList<>();
+		vehiculo.add(this.vehiculo);
+		return new JRBeanCollectionDataSource(vehiculo);
 	}
 	public void setVehiculo(FichaTecnicaVehiculoDTO vehiculo) {
 		this.vehiculo = vehiculo;
@@ -62,5 +68,13 @@ public class FacturaTallerReport {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
 	}
 }

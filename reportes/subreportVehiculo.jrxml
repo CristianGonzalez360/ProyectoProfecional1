@@ -5,6 +5,11 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="marca" class="java.lang.String"/>
+	<field name="modelo" class="java.lang.Integer"/>
+	<field name="nroChasis" class="java.lang.Integer"/>
+	<field name="nroMotor" class="java.lang.Integer"/>
+	<field name="patente" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -40,6 +45,31 @@
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Patente:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="32" y="20" width="98" height="20" uuid="0988185f-d904-4664-b470-3111b73c4dda"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="167" y="20" width="113" height="20" uuid="063d96e5-aa8f-43b2-ae33-04919b0f8bbe"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="40" width="96" height="20" uuid="6e17d098-d372-44f3-a34a-5e06f78c1f68"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroChasis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="40" width="120" height="20" uuid="73261658-0595-46c9-8c85-77adce99ac09"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroMotor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="60" width="240" height="20" uuid="bbf88885-7553-42b4-b8cf-2076062adbec"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{patente}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 </jasperReport>

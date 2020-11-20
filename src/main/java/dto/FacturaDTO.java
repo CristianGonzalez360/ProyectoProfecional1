@@ -22,6 +22,7 @@ public class FacturaDTO {
 		
 	public FacturaDTO() {
 		this.estado = "IMPAGA";
+		presupuestosFacturados = new ArrayList<>();
 	}
 		
 	public Integer getIdFactura() {

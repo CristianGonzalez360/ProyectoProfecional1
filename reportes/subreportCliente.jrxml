@@ -6,10 +6,10 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="nombre" class="java.lang.String"/>
+	<field name="nombreCompleto" class="java.lang.String"/>
 	<field name="apellido" class="java.lang.String"/>
 	<field name="email" class="java.lang.String"/>
-	<field name="dni" class="java.lang.String"/>
+	<field name="dni" class="java.lang.Integer"/>
 	<field name="telefono" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -39,7 +39,7 @@
 			<textField>
 				<reportElement x="40" y="20" width="240" height="20" uuid="63b9869a-52ec-436c-a9ac-526faf4b7bc5"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{nombre}+" " +$F{apellido}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombreCompleto}+" " +$F{apellido}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="20" y="40" width="260" height="20" uuid="087c98e0-9427-40bb-9c54-dbcf4593ff2f"/>

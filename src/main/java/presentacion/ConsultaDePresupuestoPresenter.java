@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,9 @@ import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ConsultaDePresupuestosSupervisorView;
 import presentacion.views.supervisor.InputComentarioDialog;
+import presentacion.views.utils.FacturaTallerReport;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.utils.ReporteViewImpl;
 
 public class ConsultaDePresupuestoPresenter {
 
@@ -142,11 +145,17 @@ public class ConsultaDePresupuestoPresenter {
 			updatePresupuestosView();
 			FacturaDTO factura = facController.generarFactura(presupuestosSeleccionados);
 			if(factura != null) {
-				ResumenDeFacturaDTO resumen = facController.generarResumenFactura(factura.getIdFactura());
+				List<FacturaTallerReport> report  = new ArrayList<>();
+				report.add(facController.make(factura));
+				ReporteViewImpl ventanaReporte = new ReporteViewImpl("FacturaTaller.jasper");
+				ventanaReporte.setData(report);
+				ventanaReporte.open();
+				
+				/*ResumenDeFacturaDTO resumen = facController.generarResumenFactura(factura.getIdFactura());
 				resumen.setFactura(factura);
 				if(resumen != null) {
 					new MessageDialog().showMessages(resumen.generarResumen());	
-				}	
+				}	*/
 			}
 		} catch(ForbiddenException e) {
 			new MessageDialog().showMessages(e.getMessage());

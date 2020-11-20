@@ -77,7 +77,7 @@ public class RepuestoPlanificadoDTO {
 		return repuesto.getPrecioRepuesto()*cantRequerida;
 	}
 	
-	public String getDescripcionRepuesto() {
+	public String getDescripcion() {
 		return repuesto.getDescripcionRepuesto();
 	}
 	
