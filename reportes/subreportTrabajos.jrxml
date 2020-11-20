@@ -48,7 +48,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="555" height="20" uuid="23f13ff9-8bcf-49c2-8f5f-c5d2be87e8a2"/>
-				<box padding="5"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="5"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Trabajos]]></text>
 			</staticText>
