@@ -135,6 +135,8 @@ public class PanelCobroCajeroView extends JPanel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("max(47dlu;default)"),}));
 		
 		btnTarjetaCredito = new JButton("Tarjeta de Credito");
@@ -145,35 +147,36 @@ public class PanelCobroCajeroView extends JPanel {
 		
 		lblNewLabel = new JLabel("Seleccione un medio de pago:");
 		panel_2.add(lblNewLabel, "2, 2, default, center");
-		panel_2.add(btnTarjetaCredito, "2, 4");
-		
-		btnTarjetaDebito = new JButton("Tarjeta de Debito");
-		btnTarjetaDebito.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panel_2.add(btnTarjetaDebito, "6, 4");
-		
-		btnMercadoPago = new JButton("MercadoPago");
-		btnMercadoPago.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panel_2.add(btnMercadoPago, "10, 4");
-		
-		btnBitcoins = new JButton("Bitcoins");
-		btnBitcoins.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panel_2.add(btnBitcoins, "14, 4");
 		
 		btnEfectivo = new JButton("Efectivo");
 		btnEfectivo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		panel_2.add(btnEfectivo, "18, 4");
+		panel_2.add(btnEfectivo, "2, 4");
+		this.btnEfectivo.setEnabled(false);
+		panel_2.add(btnTarjetaCredito, "2, 6");
+		
+		btnTarjetaDebito = new JButton("Tarjeta de Debito");
+		btnTarjetaDebito.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		panel_2.add(btnTarjetaDebito, "6, 6");
+		
+		btnMercadoPago = new JButton("MercadoPago");
+		btnMercadoPago.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		panel_2.add(btnMercadoPago, "10, 6");
+		
+		btnBitcoins = new JButton("Bitcoins");
+		btnBitcoins.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		panel_2.add(btnBitcoins, "14, 6");
 		
 		panel_1 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
@@ -184,7 +187,6 @@ public class PanelCobroCajeroView extends JPanel {
 		this.btnTarjetaDebito.setEnabled(false);
 		this.btnMercadoPago.setEnabled(false);
 		this.btnBitcoins.setEnabled(false);
-		this.btnEfectivo.setEnabled(false);
 	
 	}
 
@@ -268,4 +270,19 @@ public class PanelCobroCajeroView extends JPanel {
 		this.btnTarjetaCredito.addActionListener(listener);
 	}
 	
+	public void setActionRegistrarTarjetaDebito(ActionListener listener) {
+		this.btnTarjetaDebito.addActionListener(listener);
+	}
+	
+	public void setActionRegistrarMercadoPago(ActionListener listener) {
+		this.btnMercadoPago.addActionListener(listener);
+	}
+	
+	public void setActionRegistrarBitcoins(ActionListener listener) {
+		this.btnBitcoins.addActionListener(listener);
+	}
+	
+	public void setActionRegistrarEfectivo(ActionListener listener) {
+		this.btnEfectivo.addActionListener(listener);
+	}
 }

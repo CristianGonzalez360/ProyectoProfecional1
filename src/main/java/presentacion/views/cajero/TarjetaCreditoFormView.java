@@ -16,6 +16,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import dto.AltaClienteDTO;
 import dto.ClienteDTO;
 import dto.DatosPersonalesDTO;
+import dto.TarjetaCreditoDTO;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -27,12 +28,12 @@ public class TarjetaCreditoFormView extends JDialog {
 
 	private static TarjetaCreditoFormView instance;
 	private JButton btnSalvar;
-	private JTextField textNombre;
+	private JTextField textNumeroTarjeta;
+	private JTextField textNombreYApellido;
+	private JTextField textFechaExpiracion;
+	private JTextField textCod;
 	private JTextField textDni;
-	private JTextField textEmail;
-	private JTextField textCalle;
-	private JTextField textAltura;
-	private JTextField textDepto;
+	private JTextField textCuotas;
 
 	private TarjetaCreditoFormView() {
 		setBounds(100, 100, 506, 253);
@@ -67,44 +68,44 @@ public class TarjetaCreditoFormView extends JDialog {
 		JLabel lblNumeroTarjeta = new JLabel("Numero tarjeta");
 		panel.add(lblNumeroTarjeta, "2, 2, right, default");
 
-		textNombre = new JTextField();
-		textNombre.setColumns(10);
-		panel.add(textNombre, "4, 2, fill, default");
+		textNumeroTarjeta = new JTextField();
+		textNumeroTarjeta.setColumns(10);
+		panel.add(textNumeroTarjeta, "4, 2, fill, default");
 
 		JLabel lblNombreYApellido = new JLabel("Nombre y apellido");
 		panel.add(lblNombreYApellido, "2, 4, right, default");
 
-		textDni = new JTextField();
-		textDni.setColumns(10);
-		panel.add(textDni, "4, 4, fill, default");
+		textNombreYApellido = new JTextField();
+		textNombreYApellido.setColumns(10);
+		panel.add(textNombreYApellido, "4, 4, fill, default");
 
 		JLabel lblFechaExpiracion = new JLabel("Fecha expiracion");
 		panel.add(lblFechaExpiracion, "2, 6, right, default");
 
-		textEmail = new JTextField();
-		textEmail.setColumns(10);
-		panel.add(textEmail, "4, 6, fill, default");
+		textFechaExpiracion = new JTextField();
+		textFechaExpiracion.setColumns(10);
+		panel.add(textFechaExpiracion, "4, 6, fill, default");
 
-		JLabel lblCalle = new JLabel("Cod Seguridad");
-		panel.add(lblCalle, "6, 6, right, default");
+		JLabel lblCod = new JLabel("Cod Seguridad");
+		panel.add(lblCod, "6, 6, right, default");
 
-		textCalle = new JTextField();
-		textCalle.setColumns(10);
-		panel.add(textCalle, "8, 6, fill, default");
+		textCod = new JTextField();
+		textCod.setColumns(10);
+		panel.add(textCod, "8, 6, fill, default");
 
 		JLabel lblDni = new JLabel("DNI");
 		panel.add(lblDni, "2, 8, right, default");
 
-		textAltura = new JTextField();
-		textAltura.setColumns(10);
-		panel.add(textAltura, "4, 8, fill, default");
+		textDni = new JTextField();
+		textDni.setColumns(10);
+		panel.add(textDni, "4, 8, fill, default");
 
 		JLabel lblCuotas = new JLabel("Cuotas");
 		panel.add(lblCuotas, "2, 10, right, default");
 
-		textDepto = new JTextField();
-		textDepto.setColumns(10);
-		panel.add(textDepto, "4, 10, fill, default");
+		textCuotas = new JTextField();
+		textCuotas.setColumns(10);
+		panel.add(textCuotas, "4, 10, fill, default");
 
 		JPanel panel_1 = new JPanel();
 		contentPanel.add(panel_1, BorderLayout.SOUTH);
@@ -122,6 +123,7 @@ public class TarjetaCreditoFormView extends JDialog {
 
 		setVisible(false);
 		clearData();
+	
 	}
 
 	public static TarjetaCreditoFormView getInstance() {
@@ -131,33 +133,31 @@ public class TarjetaCreditoFormView extends JDialog {
 		return instance;
 	}
 
-	public AltaClienteDTO getData() {
-		AltaClienteDTO datosPersonales = new AltaClienteDTO();
-		datosPersonales.setNombreCompleto(textNombre.getText());
-		
-		datosPersonales.setDni(this.textDni.getText());
-		datosPersonales.setEmail(textEmail.getText());
-		
-		datosPersonales.setCalle(textCalle.getText());
-		datosPersonales.setAltura(textAltura.getText());
-		
-		datosPersonales.setDpto(textDepto.getText());
-		
-		return datosPersonales;
+	public TarjetaCreditoDTO getData() {
+		TarjetaCreditoDTO datosTarjeta = new TarjetaCreditoDTO();
+				
+		datosTarjeta.setNumeroTarjeta(textNumeroTarjeta.getText());
+		datosTarjeta.setNombreyapellido(textNombreYApellido.getText());
+		datosTarjeta.setFechaExpiracion(textFechaExpiracion.getText());
+		datosTarjeta.setCodSeguridad(textCod.getText());
+		datosTarjeta.setDni(textDni.getText());
+		datosTarjeta.setCuotas(textCuotas.getText());
+				
+		return datosTarjeta;
 
 	}
 
-	public void setData(ClienteDTO cliente) {
-		DatosPersonalesDTO datos = cliente.getDatosPersonalesDTO();
-		textNombre.setText(datos.getNombreCompleto());
+	public void setData(TarjetaCreditoDTO tarjeta) {
 		
-		textDni.setText(datos.getDni() + "");
-		textEmail.setText(datos.getEmail());
+		TarjetaCreditoDTO datosTarjeta = new TarjetaCreditoDTO();
+	//	TarjetaCreditoDTO datosTarjeta = tarjeta.getDatosPersonalesDTO();
 		
-		textCalle.setText(datos.getCalle());
-		textAltura.setText(datos.getAltura() + "");
-		
-		textDepto.setText(datos.getDpto());
+		textNumeroTarjeta.setText(datosTarjeta.getNumeroTarjeta());		
+		textNombreYApellido.setText(datosTarjeta.getNombreyapellido() + "");
+		textFechaExpiracion.setText(datosTarjeta.getFechaExpiracion());		
+		textCod.setText(datosTarjeta.getCodSeguridad());
+		textDni.setText(datosTarjeta.getDni() + "");		
+		textCuotas.setText(datosTarjeta.getCuotas());
 		
 
 	//	this.btnSalvar.setVisible(false);
@@ -174,12 +174,12 @@ public class TarjetaCreditoFormView extends JDialog {
 	}
 
 	public void clearData() {
-		textNombre.setText("");
+		textNumeroTarjeta.setText("");
+		textNombreYApellido.setText("");
+		textFechaExpiracion.setText("");
+		textCod.setText("");
 		textDni.setText("");
-		textEmail.setText("");
-		textCalle.setText("");
-		textAltura.setText("");
-		textDepto.setText("");
+		textCuotas.setText("");
 
 		this.btnSalvar.setVisible(true);
 	}
