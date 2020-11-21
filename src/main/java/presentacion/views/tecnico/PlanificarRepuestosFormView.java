@@ -56,7 +56,6 @@ public class PlanificarRepuestosFormView extends JPanel {
 
 	private JButton btnLimpiar;
 	private JButton btnQuitar;
-	private JButton btnEditar;
 	private JButton btnAgregar;
 	private JLabel lblCantidad;
 	private JTextField textCantidad;
@@ -175,9 +174,6 @@ public class PlanificarRepuestosFormView extends JPanel {
 
 		panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		panelInferior.add(panel, BorderLayout.SOUTH);
-
-		btnEditar = new JButton("Editar");
-		panel.add(btnEditar);
 
 		btnQuitar = new JButton("Quitar");
 		panel.add(btnQuitar);

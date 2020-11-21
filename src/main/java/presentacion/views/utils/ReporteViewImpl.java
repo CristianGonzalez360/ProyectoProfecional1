@@ -17,7 +17,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-public abstract class ReporteViewImpl {
+public class ReporteViewImpl {
 
 	private JasperReport reporte;
 	private JasperViewer reporteViewer;
