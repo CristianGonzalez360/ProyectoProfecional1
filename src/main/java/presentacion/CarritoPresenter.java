@@ -37,11 +37,15 @@ public class CarritoPresenter {
 
 	private PanelCarritoRepuestoView view;
 	private AltaPresupuestoFormView altaPresupuesto;
-	private PlanificarRepuestosFormView planRepuestosView;
 	private PresupuestoDTO nuevoPresupuesto;
 	private RepuestosController repuestosController;
 	private ClientesController clienteController;
 	private FacturasController facturasController;
+
+	private String marca;
+	private String descripcion;
+
+	
 	
 	private List<RepuestoCompradoDTO> repuestos;
 
@@ -53,18 +57,24 @@ public class CarritoPresenter {
 
 		this.view = PanelCarritoRepuestoView.getInstance();
 		this.altaPresupuesto = AltaPresupuestoFormView.getInstance();
-		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
 
 		this.altaPresupuesto.setActionOnCancelar(a -> onCancelar(a));
-		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
-		this.planRepuestosView.setActionOnQuitar(a -> onQuitarRepuesto(a));
-		this.planRepuestosView.setActionOnBuscar(a -> onBuscarRepuesto(a));
+		this.view.setActionOnAgregar(a -> onAgregarRepuesto(a));
+		this.view.setActionOnQuitar(a -> onQuitarRepuesto(a));
 
 		this.view.setActionOnAgregarCliente(a -> onDisplayClienteForm(a));
 
-		this.view.setActionOnBuscar(a -> onBuscar(a));
-
+		
+		this.view.setActionOnBuscarCliente(a -> onBuscarCliente(a));
+		this.view.setActionOnBuscar(a -> onBuscarRepuesto(a));
+		
+		
+		
 		repuestos = new ArrayList<>();
+		
+		this.cargarBuscadorRepuestos();
+		
+		
 	}
 
 	private void onDisplayClienteForm(ActionEvent a) {
@@ -82,16 +92,15 @@ public class CarritoPresenter {
 
 	// Quita un repuesto del presupuesto
 	private void onQuitarRepuesto(ActionEvent a) {
-		Integer fila = this.planRepuestosView.getSeleccionado();
+		Integer fila = this.view.getSeleccionado();
 		if (fila >= 0) {
-			RepuestoPlanificadoDTO repuestoPlanificado = nuevoPresupuesto.getRepuestos().get(fila);
-			RepuestoDTO repuesto = repuestoPlanificado.getRepuesto();
-			repuesto.setStockRepuesto(repuestoPlanificado.getCantRequerida() + repuesto.getStockRepuesto());
+			RepuestoCompradoDTO repuestocomprado = repuestos.get(fila);
+			RepuestoDTO repuesto = repuestosController.readById(repuestocomprado.getRepuesto().getIdRepuesto());
+			repuesto.setStockRepuesto(repuestocomprado.getCantidad() + repuesto.getStockRepuesto());
 			repuestosController.update(repuesto);
 			onBuscarRepuesto(a);
-			this.nuevoPresupuesto.quitarRepuesto(fila);
-			this.planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
-			this.altaPresupuesto.setPrecio(nuevoPresupuesto.getPrecio());
+			this.repuestos.remove(fila.intValue());
+			this.view.setDataRepuestosComprados(repuestos);
 		}
 	}
 
@@ -109,27 +118,6 @@ public class CarritoPresenter {
 //				this.altaPresupuesto.display();
 //		}
 //	}
-
-	// Busca repuestos segun criterio seleccionado
-	private void onBuscarRepuesto(ActionEvent a) {
-		String marca = planRepuestosView.getMarca();
-		String descripcion = planRepuestosView.getDescripcion();
-		List<RepuestoDTO> repuestos;
-		if (descripcion.isEmpty()) {
-			if (marca == "Todas") {
-				repuestos = repuestosController.readAll();
-			} else {
-				repuestos = repuestosController.readByMarca(marca);
-			}
-		} else {
-			if (marca == "Todas") {
-				repuestos = repuestosController.readByDescripcion(descripcion);
-			} else {
-				repuestos = repuestosController.readbyMarcaYDescripcion(marca, descripcion);
-			}
-		}
-		planRepuestosView.setDataRepuestos(repuestos);
-	}
 
 //	//registra los repuestos y trabajos planificados
 //	private void onRegistrar(ActionEvent a) {
@@ -173,9 +161,9 @@ public class CarritoPresenter {
 				repuesto.setStockRepuesto(stock - cant);
 				repuestosController.update(repuesto);
 				repuestos.add(repuestoComprado);
-				//view.setPrecio(nuevoPresupuesto.getPrecio());
+//				view.setPrecio(nuevoPresupuesto.getPrecio());
 				onBuscarRepuesto(a);
-				view.setDataRepuestosPlanificados(repuestos);
+				view.setDataRepuestosComprados(repuestos);
 			} else {
 				new MessageDialog().showMessages("No hay stock suficiente.");
 			}
@@ -195,7 +183,7 @@ public class CarritoPresenter {
 	}
 
 	// Busca vehiculos con orden de trabajo abiertas
-	private void onBuscar(ActionEvent a) {
+	private void onBuscarCliente(ActionEvent a) {
 		view.clearClienteData();
 		String inputDni = view.getDniCliente();
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
@@ -228,4 +216,40 @@ public class CarritoPresenter {
 //			}
 //		}
 //	}
+	
+	private void refrescar() {
+		List<RepuestoDTO> repuestos;
+		if (descripcion.isEmpty()) {
+			if (marca == "Todas") {
+				repuestos = repuestosController.readAll();
+			} else {
+				repuestos = repuestosController.readByMarca(marca);
+			}
+		} else {
+			if (marca == "Todas") {
+				repuestos = repuestosController.readByDescripcion(descripcion);
+			} else {
+				repuestos = repuestosController.readbyMarcaYDescripcion(marca, descripcion);
+			}
+		}
+		view.setDataRepuestos(repuestos);
+	}
+
+	public void cargarMarcas() {
+		List<String> marcas = new ArrayList<String>();
+		marcas.add("todas");
+		marcas.addAll(repuestosController.readMarcas());
+		this.view.setDataMarcas(marcas);
+	}
+
+	// Busca repuestos segun criterio seleccionado
+	private void onBuscarRepuesto(ActionEvent a) {
+		marca = view.getMarca();
+		descripcion = view.getDescripcion();
+		refrescar();
+	}
+	
+	
+
+	
 }

@@ -2,6 +2,7 @@ package presentacion.views.cajero;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
@@ -84,6 +85,8 @@ public class PanelCarritoRepuestoView extends JPanel {
 	private JTextField tfDni;
 	private JButton btnBuscarCliente;
 
+	private List<Integer> idRepuestosComprados;
+
 	public static PanelCarritoRepuestoView getInstance() {
 		if (vista == null)
 			vista = new PanelCarritoRepuestoView();
@@ -95,7 +98,8 @@ public class PanelCarritoRepuestoView extends JPanel {
 		setBounds(100, 100, 712, 600);
 		setLayout(new BorderLayout());
 		idRepuestos = new ArrayList<>();
-
+		idRepuestosComprados = new ArrayList<>();
+		
 		modelRepuestos = new DefaultTableModel(null, nombreColumnasSuperior) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -251,18 +255,19 @@ public class PanelCarritoRepuestoView extends JPanel {
 		setVisible(true);
 	}
 
-	public void setDataRepuestosPlanificados(List<RepuestoCompradoDTO> repuestos) {
+	public void setDataRepuestosComprados(List<RepuestoCompradoDTO> repuestos) {
 		modelRepuestosInferior.setRowCount(0);
 		for (RepuestoCompradoDTO r : repuestos) {
-			idRepuestos.add(r.getIdRepuestoPlanificado());
+			idRepuestosComprados.add(r.getIdRepuestoComprado());
 			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(),
-					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantRequerida() };
+					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantidad() };
 			modelRepuestosInferior.addRow(row);
 		}
 	}
 
 	public void setDataRepuestos(List<RepuestoDTO> repuestos) {
 		modelRepuestos.setRowCount(0);
+		idRepuestos.clear();
 		for (RepuestoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
 			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(), r.getFabricante(),
@@ -349,4 +354,22 @@ public class PanelCarritoRepuestoView extends JPanel {
 	public void setDataCliente(ClienteDTO cliente) {
 		this.panelCliente.setData(cliente);
 	}
+	
+	
+	
+	public void setData(List<RepuestoCompradoDTO> repuestos) {
+		modelRepuestosInferior.setRowCount(0);
+		idRepuestos.clear();
+		for (RepuestoCompradoDTO r : repuestos) {
+			idRepuestos.add(r.getIdRepuestoComprado());
+			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(), r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(),
+					r.getRepuesto().getStockRepuesto(), r.getRepuesto().getStockMinimo(), r.getRepuesto().getPrecioRepuesto() };
+			modelRepuestosInferior.addRow(row);
+		}
+	}
+	
+	
 }
+	
+	
+	
