@@ -118,7 +118,9 @@ CREATE TABLE Facturas (
   PRIMARY KEY(idFactura, idOT),
   FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo(idOT),
   total DOUBLE,
-  estado VARCHAR(10)
+  estado VARCHAR(10),
+  dni INT,
+  FOREIGN KEY (dni) REFERENCES DatosPersonales(dni)
 );
 
 DROP TABLE Emisores IF EXISTS;
@@ -172,7 +174,7 @@ CREATE TABLE Presupuestos (
   fechaAltaPresu DATE,
   comentarioAltaPresu VARCHAR (60),
   fechaCierrePresu DATE,
-  comentarioCierrePresu VARCHAR (60),
+  comentarioRechazo VARCHAR (60),
   fechaAprobacion DATE,
   estado VARCHAR(20),
   PRIMARY KEY (idPresupuesto),

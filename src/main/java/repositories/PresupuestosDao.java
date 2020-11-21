@@ -17,4 +17,6 @@ public interface PresupuestosDao extends GenericDao<PresupuestoDTO, Integer> {
 	boolean delete(Integer id);
 
 	List<PresupuestoDTO> readByFacturaId(Integer idFactura);
+
+	boolean registrarAprobacion(PresupuestoDTO presupuesto);
 }

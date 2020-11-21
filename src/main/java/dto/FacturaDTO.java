@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,9 +19,13 @@ public class FacturaDTO {
 	private List<PresupuestoDTO> presupuestosFacturados;
 			
 	private String estado;
+	
+	private Integer dni;
+	
 		
 	public FacturaDTO() {
 		this.estado = "IMPAGA";
+		presupuestosFacturados = new ArrayList<>();
 	}
 		
 	public Integer getIdFactura() {
@@ -81,11 +86,36 @@ public class FacturaDTO {
 		this.estado = estado;
 	}
 
+
+	public Integer getDni() {
+		return dni;
+	}
+
+	public void setDni(Integer dni) {
+		this.dni = dni;
+	}
 	public List<PresupuestoDTO> getPresupuestosFacturados() {
 		return presupuestosFacturados;
 	}
 
 	public void setPresupuestosFacturados(List<PresupuestoDTO> presupuestosFacturados) {
 		this.presupuestosFacturados = presupuestosFacturados;
+	}
+	
+	public List<TrabajoPresupuestadoDTO> getTabajos(){
+		List<TrabajoPresupuestadoDTO> ret = new ArrayList<>();
+		for (PresupuestoDTO presupuesto : presupuestosFacturados) {
+			ret.addAll(presupuesto.getTrabajos());
+		}
+		return ret;
+	}
+	
+	public List<RepuestoPlanificadoDTO> getRepuestos(){
+		List<RepuestoPlanificadoDTO> ret = new ArrayList<>();
+		for (PresupuestoDTO presupuesto : presupuestosFacturados) {
+			ret.addAll(presupuesto.getRepuestos());
+		}
+		return ret;
+
 	}
 }

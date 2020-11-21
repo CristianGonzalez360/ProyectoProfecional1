@@ -19,7 +19,7 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 	private static final String readByOrdenDeTrabajoId = readAll + " " + "WHERE Presupuestos.idOT = ?";
 
 	private static final String insert = "INSERT INTO Presupuestos (idOT, idUsuAltaPresu, idUsuCierrePresu, idUsuRegPago"
-			+ ",idPago,fechaAltaPresu,comentarioAltaPresu,fechaCierrePresu,comentarioCierrePresu,fechaAprobacion,estado) "
+			+ ",idPago,fechaAltaPresu,comentarioAltaPresu,fechaCierrePresu,comentarioRechazo,fechaAprobacion,estado) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 	private static final String updateState = "UPDATE Presupuestos SET estado = ?, fechaAprobacion = ? WHERE idPresupuesto = ?";
@@ -31,6 +31,8 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 	private static final String update = "UPDATE Presupuestos SET comentarioAltaPresu = ?, idFactura = ? WHERE idPresupuesto = ?";
 	
 	private static final String readByIdFactura = readAll + " " + "WHERE Presupuestos.idFactura = ?";
+	
+	private static final String rechazo = "UPDATE Presupuestos SET estado = ?, fechaAprobacion = ?, comentarioRechazo = ? WHERE idPresupuesto = ?";
 		
 	public PresupuestosDaoImpl(Connection connection) {
 		super(connection);
@@ -64,7 +66,7 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 				.param(entity.getFechaAltaPresu() == null ? new NullObject() : entity.getFechaAltaPresu())
 				.param(entity.getComentarioAltaPresu() == null ? new NullObject() : entity.getComentarioAltaPresu())
 				.param(entity.getFechaCierrePresu() == null ? new NullObject() : entity.getFechaCierrePresu())
-				.param(entity.getComentarioCierrePresu() == null ? new NullObject() : entity.getComentarioCierrePresu())
+				.param(entity.getComentarioRechazo() == null ? new NullObject() : entity.getComentarioRechazo())
 				.param(entity.getFechaAprobacion() == null ? new NullObject() : entity.getFechaAprobacion())
 				.param(entity.getEstado().name())				
 				.excecute();
@@ -108,7 +110,7 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 				dto.setFechaAltaPresu(obj[7] == null ? null : (Date) obj[7]);
 				dto.setComentarioAltaPresu(obj[8] == null ? null : (String) obj[8]);
 				dto.setFechaCierrePresu(obj[9] == null ? null : (Date) obj[9]);
-				dto.setComentarioCierrePresu(obj[10] == null ? "" : (String) obj[10]);
+				dto.setComentarioRechazo(obj[10] == null ? "" : (String) obj[10]);
 				dto.setFechaAprobacion(obj[11] == null ? null : (Date) obj[11]);
 				dto.setEstado((Enum.valueOf(EstadoPresupuesto.class, (String) obj[12])));
 				return dto;
@@ -124,5 +126,14 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 	@Override
 	public List<PresupuestoDTO> readByFacturaId(Integer idFactura) {
 		return getTemplate().query(readByIdFactura).param(idFactura).excecute(getMapper());
+	}
+
+	@Override
+	public boolean registrarAprobacion(PresupuestoDTO presupuesto) {
+		return getTemplate().query(rechazo).param(presupuesto.getEstado().name())
+				.param(presupuesto.getFechaAprobacion())
+				.param(presupuesto.getComentarioRechazo() == null? new NullObject() : presupuesto.getComentarioRechazo())
+				.param(presupuesto.getIdPresupuesto())
+				.excecute();
 	}
 }

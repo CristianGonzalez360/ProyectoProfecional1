@@ -72,4 +72,20 @@ public class RepuestoPlanificadoDTO {
 		}
 		return ret;
 	}
+	
+	public Double getPrecioTotal() {
+		return repuesto.getPrecioRepuesto()*cantRequerida;
+	}
+	
+	public String getDescripcion() {
+		return repuesto.getDescripcionRepuesto();
+	}
+	
+	public Double getPrecio() {
+		return repuesto.getPrecioRepuesto();
+	}
+	
+	public String getMarca() {
+		return repuesto.getMarcaRepuesto();
+	}
 }

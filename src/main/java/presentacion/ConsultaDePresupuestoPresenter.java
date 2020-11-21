@@ -1,6 +1,8 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +26,10 @@ import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ConsultaDePresupuestosSupervisorView;
+import presentacion.views.supervisor.InputComentarioDialog;
+import presentacion.views.utils.FacturaTallerReport;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.utils.ReporteViewImpl;
 
 public class ConsultaDePresupuestoPresenter {
 
@@ -50,6 +55,7 @@ public class ConsultaDePresupuestoPresenter {
 		this.otController = otController;
 		this.presController = presController;
 		this.facController = facController;
+		
 		view.setActionOnBuscar((a) -> onBuscar(a));
 		view.setActionSelectVehiculoCliente(new ListSelectionListener() {
 			@Override
@@ -119,16 +125,30 @@ public class ConsultaDePresupuestoPresenter {
 	
 	private void onGenerarFactura(ActionEvent a) {
 		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
+		presupuestosSeleccionados.forEach((k,v) -> {
+			PresupuestoDTO presupuesto = presController.readById(k);
+			if(presupuesto.getEstado().equals(EstadoPresupuesto.PENDIENTE)) {
+				presupuesto.setFechaAprobacion(new Date());
+				if(v.booleanValue() == false) {
+					String comentario = new InputComentarioDialog(presupuesto).open();
+					presupuesto.setComentarioRechazo(comentario);
+					presupuesto.setEstado(EstadoPresupuesto.RECHAZADO);
+				} else {
+					presupuesto.setEstado(EstadoPresupuesto.APROBADO);
+				}
+				presController.registrarAprobacion(presupuesto);
+			} 
+		});
+		
 		try {
-			facController.updateEstadoPresupuestos(presupuestosSeleccionados);
 			updatePresupuestosView();
 			FacturaDTO factura = facController.generarFactura(presupuestosSeleccionados);
 			if(factura != null) {
-				ResumenDeFacturaDTO resumen = facController.generarResumenFactura(factura.getIdFactura());
-				resumen.setFactura(factura);
-				if(resumen != null) {
-					new MessageDialog().showMessages(resumen.generarResumen());	
-				}	
+				List<FacturaTallerReport> report  = new ArrayList<>();
+				report.add(facController.make(factura));
+				ReporteViewImpl ventanaReporte = new ReporteViewImpl("FacturaTaller.jasper");
+				ventanaReporte.setData(report);
+				ventanaReporte.open();
 			}
 		} catch(ForbiddenException e) {
 			new MessageDialog().showMessages(e.getMessage());
