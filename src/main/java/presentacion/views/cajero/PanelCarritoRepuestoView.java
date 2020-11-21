@@ -36,6 +36,7 @@ import dto.RepuestoPlanificadoDTO;
 import presentacion.views.supervisor.ClientePanelView;
 
 import javax.swing.JSplitPane;
+import javax.swing.border.BevelBorder;
 
 public class PanelCarritoRepuestoView extends JPanel {
 
@@ -86,6 +87,7 @@ public class PanelCarritoRepuestoView extends JPanel {
 	private JButton btnBuscarCliente;
 
 	private List<Integer> idRepuestosComprados;
+	private JLabel lblMarca;
 
 	public static PanelCarritoRepuestoView getInstance() {
 		if (vista == null)
@@ -128,7 +130,8 @@ public class PanelCarritoRepuestoView extends JPanel {
 		buttonPane.add(btnCancelar);
 
 		splitPane = new JSplitPane();
-		splitPane.setResizeWeight(1.0);
+		splitPane.setEnabled(false);
+		splitPane.setResizeWeight(0.0);
 		add(splitPane, BorderLayout.CENTER);
 		splitPane.setRightComponent(panelDerecho);
 		
@@ -145,7 +148,7 @@ public class PanelCarritoRepuestoView extends JPanel {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panelIzquierdo.add(panelBotonesCliente, BorderLayout.SOUTH);
 		
-		btnRegistrarCliente = new JButton("RegistrarCliente");
+		btnRegistrarCliente = new JButton("Registrar Cliente");
 		panelBotonesCliente.add(btnRegistrarCliente);
 		
 		panelBuscador = new JPanel();
@@ -170,27 +173,38 @@ public class PanelCarritoRepuestoView extends JPanel {
 
 		panel_1 = new JPanel();
 		panelSuperior.add(panel_1, BorderLayout.NORTH);
-		panel_1.setLayout(new FormLayout(
-				new ColumnSpec[] { ColumnSpec.decode("10px"), ColumnSpec.decode("132px"),
-						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("right:75px"),
-						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("86px:grow"),
-						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("65px"), },
-				new RowSpec[] { FormSpecs.LINE_GAP_ROWSPEC, RowSpec.decode("23px"), }));
+		panel_1.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("10px"),
+				ColumnSpec.decode("max(34dlu;default)"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("132px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("right:75px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("78px:grow"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("85px"),},
+			new RowSpec[] {
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("23px"),}));
+		
+		lblMarca = new JLabel("Marca");
+		panel_1.add(lblMarca, "2, 2, right, default");
 
 		comboMarcas = new JComboBox<>();
-		panel_1.add(comboMarcas, "2, 2, default, center");
+		panel_1.add(comboMarcas, "4, 2, default, center");
 
 		lblDescripcion = new JLabel();
-		panel_1.add(lblDescripcion, "4, 2, right, center");
+		panel_1.add(lblDescripcion, "6, 2, right, center");
 		lblDescripcion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDescripcion.setText("Descripción");
 
 		textDescipcion = new JTextField();
-		panel_1.add(textDescipcion, "6, 2, default, center");
+		panel_1.add(textDescipcion, "8, 2, default, center");
 		textDescipcion.setColumns(10);
 
 		btnBuscar = new JButton("Buscar");
-		panel_1.add(btnBuscar, "8, 2, left, top");
+		panel_1.add(btnBuscar, "10, 2, fill, top");
 
 		panelInterior = new JPanel();
 		panelInterior.setBackground(SystemColor.menu);

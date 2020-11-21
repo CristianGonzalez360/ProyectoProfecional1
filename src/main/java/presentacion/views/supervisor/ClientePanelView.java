@@ -11,6 +11,8 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import dto.ClienteDTO;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
 
 public class ClientePanelView extends JPanel {
 
@@ -33,7 +35,7 @@ public class ClientePanelView extends JPanel {
 	private JTextField tfApellido;
 	
 	public ClientePanelView() {
-		setBorder(new TitledBorder(null, "Datos del cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Datos del cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("right:72px"),
@@ -41,9 +43,9 @@ public class ClientePanelView extends JPanel {
 				ColumnSpec.decode("122px:grow"),},
 			new RowSpec[] {
 				FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -65,6 +67,7 @@ public class ClientePanelView extends JPanel {
 				add(lblNewLabel_1, "2, 2, right, center");
 																				
 																						textNombre = new JTextField();
+																						textNombre.setFocusable(false);
 																						add(textNombre, "4, 2, fill, top");
 																						textNombre.setColumns(10);
 																				
@@ -133,7 +136,7 @@ public class ClientePanelView extends JPanel {
 								add(textDpto, "4, 18, fill, top");
 								textDpto.setColumns(10);
 				
-						JLabel lblNewLabel_7 = new JLabel("localidad");
+						JLabel lblNewLabel_7 = new JLabel("Localidad");
 						add(lblNewLabel_7, "2, 20, right, center");
 						
 								textLocalidad = new JTextField();
