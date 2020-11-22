@@ -13,6 +13,7 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="idRepuesto" class="java.lang.Integer"/>
 	<field name="descripcion" class="java.lang.String"/>
 	<field name="marca" class="java.lang.String"/>
 	<field name="precio" class="java.lang.Double"/>

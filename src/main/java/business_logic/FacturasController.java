@@ -78,7 +78,9 @@ public class FacturasController {
 				factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
 				factura.setFechaDeAlta(new Date());
 				factura.setTotal(total);
+
 				factura.setCliente(getCliente(factura));
+
 				facturaDao.insert(factura);
 
 				int idFactura = readIdUltimaFacturaGuardada();
@@ -169,6 +171,7 @@ public class FacturasController {
 		}
 		return resumen;
 	}
+
 
 	public void generarFacturaCarrito(FacturaDTO facturaCarrito) {
 		facturaDao.insertFacturaCarrito(facturaCarrito);

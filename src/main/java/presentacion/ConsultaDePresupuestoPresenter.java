@@ -1,7 +1,6 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,13 +20,11 @@ import dto.FacturaDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
 import dto.RepuestoPlanificadoDTO;
-import dto.ResumenDeFacturaDTO;
 import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ConsultaDePresupuestosSupervisorView;
 import presentacion.views.supervisor.InputComentarioDialog;
-import presentacion.views.utils.FacturaTallerReport;
 import presentacion.views.utils.MessageDialog;
 import presentacion.views.utils.ReporteViewImpl;
 

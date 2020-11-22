@@ -66,5 +66,6 @@ public class ReporteViewImpl {
 		List<FacturaRepuestosReport> report  = new ArrayList<>();
 		report.add(factura);
 		setData(report);
+
 	}
 }

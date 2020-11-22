@@ -1,3 +1,4 @@
+
 package presentacion.views.cajero;
 
 import javax.swing.JButton;
@@ -208,7 +209,8 @@ public class PanelCobroCajeroView extends JPanel {
 	
 	public void cargarTabla(FacturaDTO presupuesto) {
 		if(presupuesto != null) {
-			Object[] row = { presupuesto.getIdFactura().toString(),  presupuesto.getFechaDeCierrePorPago(),presupuesto.getTotal(), presupuesto.getEstado() };
+			Object[] row = { presupuesto.getIdFactura().toString(),  presupuesto.getDni(), presupuesto.getFechaDeCierrePorPago(),
+					presupuesto.getTotal(), presupuesto.getEstado() };
 			listadoDeFacturasModel.addRow(row);
 			botonvisible();
 		}

@@ -21,13 +21,15 @@ public class FacturaDTO {
 	private String estado;
 	
 	private Integer dni;
-	
+
+
 	private ClienteDTO cliente;
 
 	private List<RepuestoCompradoDTO> repuestos;
 	
 	private int idCliente;
-	
+
+
 	public FacturaDTO() {
 		this.estado = "IMPAGA";
 		presupuestosFacturados = new ArrayList<>();
@@ -107,6 +109,7 @@ public class FacturaDTO {
 		this.presupuestosFacturados = presupuestosFacturados;
 	}
 
+
 	public ClienteDTO getCliente() {
 		return cliente;
 	}
@@ -140,7 +143,7 @@ public class FacturaDTO {
 		}
 		return ret;
 	}
-	
+
 	public List<RepuestoPlanificadoDTO> getRepuestosPlanificados(){
 		List<RepuestoPlanificadoDTO> ret = new ArrayList<>();
 		for (PresupuestoDTO presupuesto : presupuestosFacturados) {
@@ -148,6 +151,10 @@ public class FacturaDTO {
 		}
 		return ret;
 
+	}
+
+	public boolean estaPaga() {
+		return getEstado().equals("PAGA");
 	}
 
 }
