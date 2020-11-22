@@ -17,6 +17,7 @@ import presentacion.views.cajero.PanelCarritoRepuestoView;
 import presentacion.views.supervisor.ClienteFormView;
 import presentacion.views.tecnico.AltaPresupuestoFormView;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.utils.ReporteViewImpl;
 
 public class CarritoPresenter {
 
@@ -189,10 +190,16 @@ public class CarritoPresenter {
 		facturaCarrito.setTotal(precioTotal);
 		facturaCarrito.setFechaDeAlta(new Date());
 		facturasController.generarFacturaCarrito(facturaCarrito);
+		mostrarFactura(facturaCarrito);
 		view.clear();
 		this.precioTotal = 0.0;
 		this.clienteFactura = null;
 		this.repuestos.clear();
 	}
 	
+	private void mostrarFactura(FacturaDTO factura) {
+		ReporteViewImpl ventanaReporte = new ReporteViewImpl();
+		ventanaReporte.setData(facturasController.makeFacturaRepuestos(factura));
+		ventanaReporte.open();
+	}
 }
