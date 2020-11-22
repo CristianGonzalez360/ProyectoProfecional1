@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,15 +19,18 @@ public class FacturaDTO {
 	private List<PresupuestoDTO> presupuestosFacturados;
 			
 	private String estado;
+	
+	private Integer dni;
+	
 		
 	private ClienteDTO cliente;
 
-	//	**jere**
 	private List<RepuestoCompradoDTO> repuestos;
 	private int idCliente;
 	
 	public FacturaDTO() {
 		this.estado = "IMPAGA";
+		presupuestosFacturados = new ArrayList<>();
 	}
 		
 	public Integer getIdFactura() {
@@ -87,6 +91,14 @@ public class FacturaDTO {
 		this.estado = estado;
 	}
 
+
+	public Integer getDni() {
+		return dni;
+	}
+
+	public void setDni(Integer dni) {
+		this.dni = dni;
+	}
 	public List<PresupuestoDTO> getPresupuestosFacturados() {
 		return presupuestosFacturados;
 	}
@@ -94,7 +106,6 @@ public class FacturaDTO {
 	public void setPresupuestosFacturados(List<PresupuestoDTO> presupuestosFacturados) {
 		this.presupuestosFacturados = presupuestosFacturados;
 	}
-//--------------------------------------issue32---------------------------------------
 
 	public ClienteDTO getCliente() {
 		return cliente;
@@ -105,11 +116,11 @@ public class FacturaDTO {
 		this.idCliente = cliente.getIdCliente();
 	}
 
-	public List<RepuestoCompradoDTO> getRepuestos() {
+	public List<RepuestoCompradoDTO> getRepuestosComprados() {
 		return repuestos;
 	}
 
-	public void setRepuestos(List<RepuestoCompradoDTO> repuestos) {
+	public void setRepuestosComprados(List<RepuestoCompradoDTO> repuestos) {
 		this.repuestos = repuestos;
 	}
 
@@ -121,5 +132,22 @@ public class FacturaDTO {
 		this.idCliente = idCliente;
 	}
 
+
+	public List<TrabajoPresupuestadoDTO> getTabajos(){
+		List<TrabajoPresupuestadoDTO> ret = new ArrayList<>();
+		for (PresupuestoDTO presupuesto : presupuestosFacturados) {
+			ret.addAll(presupuesto.getTrabajos());
+		}
+		return ret;
+	}
+	
+	public List<RepuestoPlanificadoDTO> getRepuestosPlanificados(){
+		List<RepuestoPlanificadoDTO> ret = new ArrayList<>();
+		for (PresupuestoDTO presupuesto : presupuestosFacturados) {
+			ret.addAll(presupuesto.getRepuestos());
+		}
+		return ret;
+
+	}
 
 }

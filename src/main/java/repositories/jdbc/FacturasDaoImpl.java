@@ -11,7 +11,7 @@ import repositories.jdbc.utils.NullObject;
 
 public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements FacturasDao {
 
-	private static final String insert = "INSERT INTO Facturas (idOT, fechaDeAlta, fechaDeCierrePorPago, total, estado) VALUES (?,?,?,?,?)";
+	private static final String insert = "INSERT INTO Facturas (idOT, fechaDeAlta, fechaDeCierrePorPago, total, estado , dni) VALUES (?,?,?,?,?,?)";
 	
 	private static final String updateFechaPago = "UPDATE Facturas SET fechaDeCierrePorPago = ? WHERE idFactura = ?";
 
@@ -23,7 +23,7 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 	
 	private static final String updatePago = "UPDATE Facturas SET estado = 'PAGA' , fechaDeCierrePorPago = SYSDATE WHERE idFactura = ?";
 	
-	private static final String insertFacturaCarrito = "INSERT INTO Facturas (estado, fechaDeAlta, total, idCliente) VALUES (?,?,?,?)";
+	private static final String insertFacturaCarrito = "INSERT INTO Facturas (estado, fechaDeAlta, total, dni, idCliente) VALUES (?,?,?,?,?)";
 
 	
 	public FacturasDaoImpl(Connection connection) {
@@ -53,6 +53,7 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 				.param(entity.getFechaDeCierrePorPago() == null ? new NullObject() : entity.getFechaDeCierrePorPago())
 				.param(entity.getTotal())
 				.param(entity.getEstado())
+				.param(entity.getDni())
 				.excecute();
 	}
 	
@@ -94,6 +95,7 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 				factura.setFechaDeCierrePorPago(obj[3] == null ? null : (Date)obj[3]);
 				factura.setTotal((Double)obj[4]);
 				factura.setEstado((String)obj[5]);
+				factura.setDni((Integer)obj[6]);
 				return factura;
 			}
 		};
@@ -111,17 +113,8 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 			.param(facturaCarrito.getEstado())
 			.param(facturaCarrito.getFechaDeAlta())
 			.param(facturaCarrito.getTotal())
+			.param(facturaCarrito.getCliente().getDatosPersonalesDTO().getDni())
 			.param(facturaCarrito.getCliente().getIdCliente()).excecute();
 	}
 
-//	@Override
-//	public boolean insert(FacturaDTO entity) {
-//		return getTemplate().query(insert)
-//				.param(entity.getIdOrdenDeTrabajo())
-//				.param(entity.getFechaDeAlta())
-//				.param(entity.getFechaDeCierrePorPago() == null ? new NullObject() : entity.getFechaDeCierrePorPago())
-//				.param(entity.getTotal())
-//				.param(entity.getEstado())
-//				.excecute();
-//	}
 }

@@ -276,24 +276,27 @@ facturas:
   - idFactura: 1
     idOrdenDeTrabajo: 1
     fechaDeAlta: 2020-10-11
-    fechaDeCierrePorPago: 2020-10-11
+    fechaDeCierrePorPago: 
     total: 100
     estado: IMPAGA
     idCliente: 1
+    dni: 33390341
   - idFactura: 2
     idOrdenDeTrabajo: 2
     fechaDeAlta: 2020-10-11
-    fechaDeCierrePorPago: 2020-10-11
+    fechaDeCierrePorPago: 
     total: 100
     estado: IMPAGA
     idCliente: 1
+    dni: 33390341
   - idFactura: 3
     idOrdenDeTrabajo: 2
     fechaDeAlta: 2020-10-11
-    fechaDeCierrePorPago: 2020-10-11
+    fechaDeCierrePorPago: 
     total: 200
     estado: IMPAGA
     idCliente: 1
+    dni: 33390342
   - idFactura: 4
     idOrdenDeTrabajo: 2
     fechaDeAlta: 2020-10-11
@@ -301,3 +304,4 @@ facturas:
     total: 200
     estado: PAGA
     idCliente: 1
+    dni: 33390343

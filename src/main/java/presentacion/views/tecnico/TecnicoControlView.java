@@ -13,7 +13,7 @@ public class TecnicoControlView extends JInternalFrame {
 	private static TecnicoControlView instance;
 
 	private PanelGestionPresupuestoView gestionPresupuestoPanel;
-	private PanelRegistrarTrabajoRealizadoView registrarTrabajoPanel;
+	private PanelGestionTrabajoView registrarTrabajoPanel;
 	
 	public static TecnicoControlView getInstance() {
 		if (instance == null)
@@ -35,7 +35,7 @@ public class TecnicoControlView extends JInternalFrame {
 		this.gestionPresupuestoPanel = PanelGestionPresupuestoView.getInstance();
 		tabbedPane.add("Gestión de presupuestos", this.gestionPresupuestoPanel);
 		
-		this.registrarTrabajoPanel = PanelRegistrarTrabajoRealizadoView.getInstance();
+		this.registrarTrabajoPanel = PanelGestionTrabajoView.getInstance();
 		tabbedPane.add("Gestión trabajos", this.registrarTrabajoPanel);
 	}
 

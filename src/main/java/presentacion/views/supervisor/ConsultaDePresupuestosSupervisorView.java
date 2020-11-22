@@ -66,8 +66,6 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 			"ESFUERZO ESTIMADO Hrs." };
 	private DefaultTableModel listadoDeTrabajosModel;
 
-	private JTextField textField;
-	private JLabel lblNewLabel;
 	private JPanel panelEsteSur;
 
 	private JLabel lblTipo;
@@ -120,13 +118,6 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		txtDNI = new JTextField("");
 		panel_4.add(txtDNI);
 		txtDNI.setColumns(10);
-
-		lblNewLabel = new JLabel("PATENTE");
-		panel_4.add(lblNewLabel);
-
-		textField = new JTextField();
-		panel_4.add(textField);
-		textField.setColumns(10);
 
 		btnBuscar = new JButton("Buscar");
 		panel_4.add(btnBuscar);
@@ -231,11 +222,13 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 			public boolean isCellEditable(int row, int column) {
 				return listadoDePresupuestosModel.getValueAt(row, 3) == EstadoPresupuesto.PENDIENTE.name();
 			}
-			
+
 			@Override
-		    public Class getColumnClass(int col) {
-				if(col == 4) return Boolean.class;
-				else return super.getColumnClass(col);
+			public Class getColumnClass(int col) {
+				if (col == 4)
+					return Boolean.class;
+				else
+					return super.getColumnClass(col);
 			}
 		};
 		tablePresupuestos = new JTable(listadoDePresupuestosModel);
@@ -277,7 +270,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		JScrollPane scrollPaneTrabajos = new JScrollPane();
 		panel_5.add(scrollPaneTrabajos, BorderLayout.CENTER);
 
-		this.listadoDeTrabajosModel = new DefaultTableModel(null, this.columnasListadoDeTrabajos){
+		this.listadoDeTrabajosModel = new DefaultTableModel(null, this.columnasListadoDeTrabajos) {
 			/**
 			 * 
 			 */
@@ -301,12 +294,10 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		btnGenerarFactura = new JButton("Generar factura");
 		lockButtonGenerarFactura();
 		toolBar.add(btnGenerarFactura);
-		
+
 		this.lockOrdenDeTrabajoPanel();
 	}
 
-	
-	
 	public boolean iPersupuestoAprobado(int row, int column, JTable table) {
 		return table.getValueAt(row, column) != null;
 	}
@@ -367,7 +358,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		this.textTrabajoSolicitado.setEditable(false);
 		this.textTipoDeTrabajo.setEditable(false);
 	}
-	
+
 	public void clearDataOrdeDeTrabajo() {
 		this.idOrdenDeTrabajo = null;
 		this.textFechaAlta.setText("");
@@ -391,16 +382,11 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		this.presupuestos = presupuestos;
 		for (PresupuestoDTO dto : presupuestos) {
 			boolean check = false;
-			if(dto.getEstado() == EstadoPresupuesto.APROBADO) {
+			if (dto.getEstado() == EstadoPresupuesto.APROBADO) {
 				check = true;
 			}
-			Object[] row = { 
-					dto.getIdPresupuesto().toString(),
-					dto.getFechaAltaPresu().toString(),
-					dto.getComentarioAltaPresu().toString(), 
-					dto.getEstado().name(),
-					check
-			};
+			Object[] row = { dto.getIdPresupuesto().toString(), dto.getFechaAltaPresu().toString(),
+					dto.getComentarioAltaPresu().toString(), dto.getEstado().name(), check };
 			this.listadoDePresupuestosModel.addRow(row);
 		}
 	}
@@ -413,7 +399,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		Map<Integer, Boolean> presu = new HashMap<>();
 		int rows = this.listadoDePresupuestosModel.getRowCount();
 		for (int index = 0; index < rows; index++) {
-			if(listadoDePresupuestosModel.getValueAt(index, 3) == EstadoPresupuesto.PENDIENTE.name()) {
+			if (listadoDePresupuestosModel.getValueAt(index, 3) == EstadoPresupuesto.PENDIENTE.name()) {
 				Integer presupuestoId = Integer.parseInt(listadoDePresupuestosModel.getValueAt(index, 0).toString());
 				Boolean isOk = (Boolean) listadoDePresupuestosModel.getValueAt(index, 4);
 				presu.put(presupuestoId, isOk);

@@ -49,9 +49,7 @@ public class PanelRegistrarTrabajoRealizadoView extends JPanel {
 		scrollPaneRepuestos = new JScrollPane();
 		panel.add(scrollPaneRepuestos);
 		tablePresupuestos = new JTable(listadoDePresupuestosModel){//tabla no editable
-			/**
-			 * 
-			 */
+			
 			private static final long serialVersionUID = -3765331683649186159L;
 
 			@Override

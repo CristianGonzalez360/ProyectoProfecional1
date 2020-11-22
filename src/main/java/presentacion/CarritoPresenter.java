@@ -184,7 +184,7 @@ public class CarritoPresenter {
 		//TODO agregar validaciones
 		FacturaDTO facturaCarrito = new FacturaDTO();
 		facturaCarrito.setCliente(clienteFactura);
-		facturaCarrito.setRepuestos(repuestos);
+		facturaCarrito.setRepuestosComprados(repuestos);
 		facturaCarrito.setTotal(precioTotal);
 		facturaCarrito.setFechaDeAlta(new Date());
 		facturasController.generarFacturaCarrito(facturaCarrito);

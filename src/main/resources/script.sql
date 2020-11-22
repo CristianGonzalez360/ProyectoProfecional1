@@ -118,10 +118,11 @@ CREATE TABLE Facturas (
   PRIMARY KEY(idFactura),
   total DOUBLE,
   estado VARCHAR(10),
-  idCliente INT,
    FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo(idOT),
-   FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente)
-
+   FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente),
+  dni INT,
+  idCliente INT,
+  FOREIGN KEY (dni) REFERENCES DatosPersonales(dni)
 );
 
 DROP TABLE Emisores IF EXISTS;

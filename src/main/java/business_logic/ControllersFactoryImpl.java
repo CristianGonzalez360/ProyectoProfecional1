@@ -86,7 +86,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public FacturasController makeFacturasController() {
 		if(facturasController == null) 
-			facturasController = new FacturasController(daos.makeFacturasDao(), daos.makePresupuestoDao(), daos.makeTrabajosPlanificadosDao(), daos.makeRepuestosPlanificadosDao());
+			facturasController = new FacturasController(daos);
 		return facturasController;
 	}
 	
