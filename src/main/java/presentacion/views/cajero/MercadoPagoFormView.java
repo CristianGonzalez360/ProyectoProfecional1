@@ -39,6 +39,8 @@ public class MercadoPagoFormView extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
+		
+		setModal(true);
 
 		JPanel panel = new JPanel();
 		contentPanel.add(panel);
@@ -121,5 +123,4 @@ public class MercadoPagoFormView extends JDialog {
 
 	public void close() {
 		setVisible(false);
-	}
-}
+	}}
