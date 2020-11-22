@@ -294,7 +294,7 @@ public class PanelCarritoRepuestoView extends JPanel {
 		for (RepuestoCompradoDTO r : repuestos) {
 			idRepuestosComprados.add(r.getIdRepuestoComprado());
 			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(),
-					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantidad() };
+					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantRequerida() };
 			modelRepuestosInferior.addRow(row);
 		}
 	}

@@ -2,6 +2,7 @@ package presentacion.views.utils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,8 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class ReporteViewImpl {
 
+	private static final String URLFacturaTaller = "FacturaTaller.jasper";
+	private static final String URLFacturaRepuestos = "FacturaRepuestos.jasper";
 	private JasperReport reporte;
 	private JasperViewer reporteViewer;
 	private JasperPrint reporteLleno;
@@ -27,6 +30,10 @@ public class ReporteViewImpl {
 
 	public ReporteViewImpl(String file) {
 		this.file = file;
+	}
+	
+	public ReporteViewImpl() {
+
 	}
 
 	public <T> void setData(List<T> dto) {
@@ -45,5 +52,19 @@ public class ReporteViewImpl {
 	public void open() {
 		this.reporteViewer = new JasperViewer(this.reporteLleno, false);
 		this.reporteViewer.setVisible(true);
+	}
+	
+	public void setData(FacturaTallerReport factura) {
+		this.file = URLFacturaTaller;
+		List<FacturaTallerReport> report  = new ArrayList<>();
+		report.add(factura);
+		setData(report);
+	}
+	
+	public void setData(FacturaRepuestosReport factura) {
+		this.file = URLFacturaRepuestos;
+		List<FacturaRepuestosReport> report  = new ArrayList<>();
+		report.add(factura);
+		setData(report);
 	}
 }

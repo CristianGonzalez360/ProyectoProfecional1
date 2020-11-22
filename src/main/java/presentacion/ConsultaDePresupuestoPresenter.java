@@ -144,10 +144,8 @@ public class ConsultaDePresupuestoPresenter {
 			updatePresupuestosView();
 			FacturaDTO factura = facController.generarFactura(presupuestosSeleccionados);
 			if(factura != null) {
-				List<FacturaTallerReport> report  = new ArrayList<>();
-				report.add(facController.make(factura));
-				ReporteViewImpl ventanaReporte = new ReporteViewImpl("FacturaTaller.jasper");
-				ventanaReporte.setData(report);
+				ReporteViewImpl ventanaReporte = new ReporteViewImpl();
+				ventanaReporte.setData(facController.makeFacturaTaller(factura));
 				ventanaReporte.open();
 			}
 		} catch(ForbiddenException e) {

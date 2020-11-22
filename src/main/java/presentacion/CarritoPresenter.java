@@ -17,6 +17,7 @@ import presentacion.views.cajero.PanelCarritoRepuestoView;
 import presentacion.views.supervisor.ClienteFormView;
 import presentacion.views.tecnico.AltaPresupuestoFormView;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.utils.ReporteViewImpl;
 
 public class CarritoPresenter {
 
@@ -83,13 +84,13 @@ public class CarritoPresenter {
 		if (fila >= 0) {
 			RepuestoCompradoDTO repuestocomprado = repuestos.get(fila);
 			RepuestoDTO repuesto = repuestosController.readById(repuestocomprado.getRepuesto().getIdRepuesto());
-			repuesto.setStockRepuesto(repuestocomprado.getCantidad() + repuesto.getStockRepuesto());
+			repuesto.setStockRepuesto(repuestocomprado.getCantRequerida() + repuesto.getStockRepuesto());
 			repuestosController.update(repuesto);
 			onBuscarRepuesto(a);
 			this.repuestos.remove(fila.intValue());
 			this.view.setDataRepuestosComprados(repuestos);
 			//issue32
-			precioTotal = precioTotal - repuestocomprado.getRepuesto().getPrecioRepuesto() * (repuestocomprado.getCantidad());
+			precioTotal = precioTotal - repuestocomprado.getRepuesto().getPrecioRepuesto() * (repuestocomprado.getCantRequerida());
 			this.view.getTfTotalFactura().setText(precioTotal.toString());
 		}
 	}
@@ -188,12 +189,17 @@ public class CarritoPresenter {
 		facturaCarrito.setTotal(precioTotal);
 		facturaCarrito.setFechaDeAlta(new Date());
 		facturasController.generarFacturaCarrito(facturaCarrito);
+		mostrarFactura(facturaCarrito);
 		view.clear();
 		this.precioTotal = 0.0;
 		this.clienteFactura = null;
 		this.repuestos.clear();
 	}
 	
-
+	private void mostrarFactura(FacturaDTO factura) {
+		ReporteViewImpl ventanaReporte = new ReporteViewImpl();
+		ventanaReporte.setData(facturasController.makeFacturaRepuestos(factura));
+		ventanaReporte.open();
+	}
 	
 }
