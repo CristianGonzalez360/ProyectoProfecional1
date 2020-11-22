@@ -152,4 +152,12 @@ public class FacturaDTO {
 		return ret;
 
 	}
+<<<<<<< HEAD
+	
+	public boolean estaPaga() {
+		return getEstado().equals("PAGA");
+	}
+
+=======
+>>>>>>> 1672af6df82ab26e8ef76c1fcf139fd433ed7a84
 }

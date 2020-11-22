@@ -5,11 +5,11 @@ import java.util.Date;
 import java.util.List;
 
 public class PresupuestoDTO {
-	
+
 	private Integer idPresupuesto;
 
 	private Integer idOT;
-	
+
 	private Integer idFactura;
 
 	private Integer idUsuAltaPresu;
@@ -29,9 +29,9 @@ public class PresupuestoDTO {
 	private String comentarioRechazo;
 
 	private Date fechaAprobacion;
-	
+
 	private EstadoPresupuesto estado;
-	
+
 	private List<TrabajoPresupuestadoDTO> trabajos;
 
 	private List<RepuestoPlanificadoDTO> repuestos;
@@ -154,11 +154,11 @@ public class PresupuestoDTO {
 	public void borrarRepuestosPlanificados() {
 		this.repuestos.clear();
 	}
-	
+
 	public Double getPrecio() {
 		Double ret = 0.0;
-		for(RepuestoPlanificadoDTO dto : repuestos) {
-			ret += dto.getRepuesto().getPrecioRepuesto()*dto.getCantRequerida();
+		for (RepuestoPlanificadoDTO dto : repuestos) {
+			ret += dto.getRepuesto().getPrecioRepuesto() * dto.getCantRequerida();
 		}
 		for (TrabajoPresupuestadoDTO dto : trabajos) {
 			ret += dto.getPrecioTrabajo();
@@ -173,7 +173,7 @@ public class PresupuestoDTO {
 	public void quitarRepuesto(int fila) {
 		this.repuestos.remove(fila);
 	}
-	
+
 	public EstadoPresupuesto getEstado() {
 		return estado;
 	}
@@ -202,5 +202,17 @@ public class PresupuestoDTO {
 
 	public void setIdFactura(Integer idFactura) {
 		this.idFactura = idFactura;
+	}
+
+	public boolean estaRealizado() {
+		return estado.equals(EstadoPresupuesto.REALIZADO);
+	}
+
+	public boolean estaRechazado() {
+		return estado.equals(EstadoPresupuesto.RECHAZADO);
+	}
+
+	public boolean estaPendiente() {
+		return estado.equals(EstadoPresupuesto.PENDIENTE);
 	}
 }
