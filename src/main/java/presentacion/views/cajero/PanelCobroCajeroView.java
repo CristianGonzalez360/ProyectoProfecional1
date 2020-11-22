@@ -76,7 +76,7 @@ public class PanelCobroCajeroView extends JPanel {
 		add(panel_3);
 		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		Label label = new Label("Id Factura");
+		Label label = new Label("ID Factura");
 		panel_3.add(label);
 		
 		textFactura = new JTextField();
@@ -140,7 +140,7 @@ public class PanelCobroCajeroView extends JPanel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("max(47dlu;default)"),}));
 		
-		btnTarjetaCredito = new JButton("Tarjeta de Credito");
+		btnTarjetaCredito = new JButton("Tarjeta de Crédito");
 		btnTarjetaCredito.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
