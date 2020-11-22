@@ -7,7 +7,6 @@ import java.util.List;
 import dto.ClienteDTO;
 import dto.DatosPersonalesDTO;
 import dto.EntregaDeVehiculoDTO;
-import dto.EstadoPresupuesto;
 import dto.FacturaDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
@@ -32,8 +31,6 @@ public class EntregaDeVehiculoController {
 	private FichaTecnicaVehiculoDao fichaTecnicaDao;
 	private FacturasDao facturaDao;
 
-	private List<OrdenDeTrabajoDTO> ordenesRealizadas;
-
 	private EmailSenderService servicio;
 
 	public EntregaDeVehiculoController(ClientesDao clienteDao, DatosPersonalesDao datosPersonalesDao,
@@ -51,34 +48,57 @@ public class EntregaDeVehiculoController {
 		this.servicio = new EmailSenderService();
 	}
 
-	public DatosPersonalesDTO readDatosClienteByDni(Integer dni) {
-		return datosPersonalesDao.readByDni(dni);
+	public List<EntregaDeVehiculoDTO> readByDniCliente(Integer dniCliente) {
+		List<EntregaDeVehiculoDTO> ordenesParaEntregar = readAllOrdenesRealizadas();
+		List<EntregaDeVehiculoDTO> entregas = new ArrayList<>();
+
+		for (EntregaDeVehiculoDTO entrega : ordenesParaEntregar)
+			if (entrega.getDniCliente() != null && entrega.getDniCliente().equals(dniCliente))
+				entregas.add(entrega);
+		return entregas;
 	}
 
 	public List<EntregaDeVehiculoDTO> readAllOrdenesRealizadas() {
 		List<EntregaDeVehiculoDTO> entregas = new ArrayList<>();
 
-		ordenesRealizadas = ordenesDeTrabajoDao.readAllOrdenesParaEntregar(); // Ordenes de Trabajo sin fecha de entrega
-
-		for (OrdenDeTrabajoDTO orden : ordenesRealizadas) {
-			Integer idOT = orden.getIdOrdenTrabajo();
-
-			List<FacturaDTO> facturas = facturaDao.readByOrdenDeTrabajoId(idOT);
-			List<PresupuestoDTO> presupuestos = presupuestosDao.readByOrdenDeTrabajoId(idOT);
-
-			if (facturasPagas(facturas) && presupuetosRealizados(presupuestos))
+		for (OrdenDeTrabajoDTO orden : ordenesDeTrabajoDao.readAllOrdenesSinEntregar())
+			if (disponibleParaEntrega(orden))
 				entregas.add(generarEntrega(orden));
-		}
 		return entregas;
+	}
+
+	private boolean disponibleParaEntrega(OrdenDeTrabajoDTO orden) {
+		Integer idOT = orden.getIdOrdenTrabajo();
+		List<FacturaDTO> facturas = facturaDao.readByOrdenDeTrabajoId(idOT);
+		List<PresupuestoDTO> presupuestos = presupuestosDao.readByOrdenDeTrabajoId(idOT);
+
+		return (facturasPagas(facturas) && presupuetosRealizados(presupuestos));
+	}
+
+	private boolean facturasPagas(List<FacturaDTO> facturas) {
+		if (facturas.isEmpty())
+			return true;
+
+		for (FacturaDTO factura : facturas)
+			if (!factura.estaPaga())
+				return false;
+		return true;
+	}
+
+	private boolean presupuetosRealizados(List<PresupuestoDTO> presupuestos) {
+		if (presupuestos.isEmpty())
+			return true;
+
+		for (PresupuestoDTO presupuesto : presupuestos)
+			if (presupuesto.estaPendiente() || (!presupuesto.estaRealizado() && !presupuesto.estaRechazado()))
+				return false;
+		return true;
 	}
 
 	private EntregaDeVehiculoDTO generarEntrega(OrdenDeTrabajoDTO orden) {
 		VehiculoConOrdenDeTrabajoDTO vehiculoConOT = vehiculosDao.readByID(orden.getIdVehiculoOt());
-
 		FichaTecnicaVehiculoDTO fichaTecnica = fichaTecnicaDao.readByID(vehiculoConOT.getIdFichaTecnica());
-
 		ClienteDTO cliente = clientesDao.readByID(vehiculoConOT.getIdCliente());
-
 		DatosPersonalesDTO datosPersonales = datosPersonalesDao.readByID(cliente.getIdDatosPersonales());
 
 		Integer idOrdenDeTrabajo = orden.getIdOrdenTrabajo();
@@ -94,50 +114,13 @@ public class EntregaDeVehiculoController {
 				idOrdenDeTrabajo);
 	}
 
-	private boolean facturasPagas(List<FacturaDTO> facturas) {
-		if (facturas.isEmpty())
-			return false;
-
-		for (FacturaDTO factura : facturas) {
-			if (!factura.getEstado().equals("PAGA"))
-				return false;
-		}
-		return true;
-	}
-
-	private boolean presupuetosRealizados(List<PresupuestoDTO> presupuestos) {
-		if (presupuestos.isEmpty())
-			return false;
-
-		for (PresupuestoDTO presupuesto : presupuestos) {
-			if (!presupuesto.getEstado().equals(EstadoPresupuesto.REALIZADO))
-				return false;
-		}
-		return true;
-	}
-
-	public List<EntregaDeVehiculoDTO> readByDniCliente(Integer dniCliente) {
-		List<EntregaDeVehiculoDTO> ordenesParaEntregar = readAllOrdenesRealizadas();
-		List<EntregaDeVehiculoDTO> entregas = new ArrayList<>();
-
-		for (EntregaDeVehiculoDTO entrega : ordenesParaEntregar) {
-			if (entrega.getDniCliente() != null && entrega.getDniCliente().equals(dniCliente)) {
-				entregas.add(entrega);
-			}
-		}
-
-		return entregas;
-	}
-
 	public void registrarEntregaById(Integer idOt) {
-		assert idOt != null;
+		if (idOt == null)
+			return;
+
 		OrdenDeTrabajoDTO orden = ordenesDeTrabajoDao.readByID(idOt);
 		orden.setFechaEntregado(new Date());
 		ordenesDeTrabajoDao.update(orden);
-	}
-
-	public OrdenDeTrabajoDTO readByID(Integer idOt) {
-		return ordenesDeTrabajoDao.readByID(idOt);
 	}
 
 	public boolean enviarCorreoDeSatisfaccion(String correoDestinatario) {

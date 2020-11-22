@@ -152,4 +152,9 @@ public class FacturaDTO {
 		return ret;
 
 	}
+
+	public boolean estaPaga() {
+		return getEstado().equals("PAGA");
+	}
+
 }
