@@ -99,6 +99,7 @@ public class FacturasController {
 				factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
 				factura.setFechaDeAlta(new Date());
 				factura.setTotal(total);
+				factura.setCliente(getCliente(factura));
 				facturaDao.insert(factura);
 
 				List<FacturaDTO> facturas = facturaDao.readByOrdenDeTrabajoId(ordenDeTrabajoId);
@@ -195,7 +196,7 @@ public class FacturasController {
 		OrdenDeTrabajoDTO ordenTrabajo = ordenTrabajoDao.readByID(factura.getIdOrdenDeTrabajo());
 		VehiculoConOrdenDeTrabajoDTO vehiculoConOrdenTrabajo = vehiculoConOrdenTrabajoDao.readByID(ordenTrabajo.getIdOrdenTrabajo());
 		FichaTecnicaVehiculoDTO fichaTecnica = fichaTecnicaDao.readByID(vehiculoConOrdenTrabajo.getIdFichaTecnica());
-		ClienteDTO cliente = clienteDao.readByID(vehiculoConOrdenTrabajo.getIdCliente());
+		ClienteDTO cliente = getCliente(factura);
 		
 		ret.setCliente(cliente.getDatosPersonalesDTO());
 		ret.setVehiculo(fichaTecnica);
@@ -206,5 +207,15 @@ public class FacturasController {
 		ret.setNumero(factura.getIdFactura());
 		
 		return ret;
+	}
+	
+	private ClienteDTO getCliente(FacturaDTO factura) {
+		
+		ClienteDTO cliente = null;
+		OrdenDeTrabajoDTO ordenTrabajo = ordenTrabajoDao.readByID(factura.getIdOrdenDeTrabajo());
+		VehiculoConOrdenDeTrabajoDTO vehiculoConOrdenTrabajo = vehiculoConOrdenTrabajoDao.readByID(ordenTrabajo.getIdOrdenTrabajo());
+		cliente = clienteDao.readByID(vehiculoConOrdenTrabajo.getIdCliente());
+		
+		return cliente;
 	}
 }

@@ -27,6 +27,7 @@ import dto.RepuestoPlanificadoDTO;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.BevelBorder;
+import javax.swing.UIManager;
 
 public class PlanificarRepuestosFormView extends JPanel {
 
@@ -82,7 +83,7 @@ public class PlanificarRepuestosFormView extends JPanel {
 		panelSuperior = new JPanel();
 		panelSuperior.setForeground(SystemColor.menu);
 		panelSuperior.setBorder(
-				new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Repuestos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Repuestos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelSuperior.setBackground(SystemColor.menu);
 		add(panelSuperior);
 		panelSuperior.setLayout(new BorderLayout(0, 0));
@@ -153,7 +154,7 @@ public class PlanificarRepuestosFormView extends JPanel {
 		panel_2.add(btnAgregar);
 
 		panelInferior = new JPanel();
-		panelInferior.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Repuestos planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelInferior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Repuestos planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelInferior.setBackground(SystemColor.menu);
 		add(panelInferior);
 		panelInferior.setLayout(new BorderLayout(0, 0));

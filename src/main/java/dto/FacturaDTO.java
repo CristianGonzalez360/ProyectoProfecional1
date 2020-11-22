@@ -22,10 +22,10 @@ public class FacturaDTO {
 	
 	private Integer dni;
 	
-		
 	private ClienteDTO cliente;
 
 	private List<RepuestoCompradoDTO> repuestos;
+	
 	private int idCliente;
 	
 	public FacturaDTO() {
@@ -114,6 +114,7 @@ public class FacturaDTO {
 	public void setCliente(ClienteDTO cliente) {
 		this.cliente = cliente;
 		this.idCliente = cliente.getIdCliente();
+		this.dni = cliente.getDatosPersonalesDTO().getDni();
 	}
 
 	public List<RepuestoCompradoDTO> getRepuestosComprados() {
@@ -131,7 +132,6 @@ public class FacturaDTO {
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
-
 
 	public List<TrabajoPresupuestadoDTO> getTabajos(){
 		List<TrabajoPresupuestadoDTO> ret = new ArrayList<>();

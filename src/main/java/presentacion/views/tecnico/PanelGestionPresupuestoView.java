@@ -31,6 +31,7 @@ import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
+import javax.swing.UIManager;
 
 public class PanelGestionPresupuestoView extends JPanel {
 
@@ -138,7 +139,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelEste.setLayout(new BoxLayout(panelEste, BoxLayout.Y_AXIS));
 
 		panelEsteNorte = new JPanel();
-		panelEsteNorte.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Ordenes de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelEsteNorte.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ordenes de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panelEsteNorte);
 		panelEsteNorte.setLayout(new BorderLayout(0, 0));
 
@@ -155,7 +156,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		scrollPaneVehiculos.setViewportView(tableVehiculos);
 
 		panelEsteSur = new JPanel();
-		panelEsteSur.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Descripci\u00F3n de la orden de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelEsteSur.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Descripci\u00F3n de la orden de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panelEsteSur);
 
 		panelEsteSur.setLayout(new FormLayout(
@@ -207,7 +208,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		textTrabajoSolicitadoOt.setColumns(10);
 
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Ficha t\u00E9cnica del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ficha t\u00E9cnica del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panel);
 		panel.setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(33dlu;default)"),
@@ -273,7 +274,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.listadoDePresupuestosModel = new DefaultTableModel(null, this.columnasListadoDePresupuestos);
 		
 		panel_8 = new JPanel();
-		panel_8.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Presupuestos", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel_8.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Presupuestos", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelOeste.add(panel_8);
 		panel_8.setLayout(new BorderLayout(0, 0));
 		
@@ -289,7 +290,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(
-				new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelOeste.add(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 
