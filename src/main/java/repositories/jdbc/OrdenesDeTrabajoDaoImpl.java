@@ -97,7 +97,7 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 	}
 
 	@Override
-	public List<OrdenDeTrabajoDTO> readAllOrdenesParaEntregar() {
+	public List<OrdenDeTrabajoDTO> readAllOrdenesSinEntregar() {
 		return getTemplate().query(readAllOrdenesParaEntregar).excecute(getMapper());
 	}
 }
