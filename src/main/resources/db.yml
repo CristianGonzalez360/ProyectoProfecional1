@@ -239,7 +239,7 @@ presupuestos:
     idPago:
     fechaAltaPresu: 2020-10-10
     comentarioAltaPresu: El tren delantero esta destrozado
-    comentarioCierrePresu:
+    comentarioRechazo:
     fechaAprobacion:
   - idOT: 1
     idUsuAltaPresu: 1
@@ -248,7 +248,7 @@ presupuestos:
     idPago:
     fechaAltaPresu: 2020-10-11
     comentarioAltaPresu: revisar bomba de nafta
-    comentarioCierrePresu:
+    comentarioRechazo:
     fechaAprobacion:
 
 trabajos: 

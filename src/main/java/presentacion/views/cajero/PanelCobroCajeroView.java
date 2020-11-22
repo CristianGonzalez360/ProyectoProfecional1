@@ -205,6 +205,14 @@ public class PanelCobroCajeroView extends JPanel {
 			botonvisible();
 		}
 	}
+	
+	public void cargarTabla(FacturaDTO presupuesto) {
+		if(presupuesto != null) {
+			Object[] row = { presupuesto.getIdFactura().toString(),  presupuesto.getFechaDeCierrePorPago(),presupuesto.getTotal(), presupuesto.getEstado() };
+			listadoDeFacturasModel.addRow(row);
+			botonvisible();
+		}
+	}
 
 	public String getFactura() {
 		return (String) textFactura.getText();
@@ -243,7 +251,7 @@ public class PanelCobroCajeroView extends JPanel {
 		String idSeleccionada = null;
 		int row = tableFacturas.getSelectedRow();
 		if(row!=-1) {
-			idSeleccionada= (String) tableFacturas.getValueAt(row, 4);
+			idSeleccionada= (String) tableFacturas.getValueAt(row, 3);
 		}
 		return idSeleccionada;
 	}
@@ -253,7 +261,7 @@ public class PanelCobroCajeroView extends JPanel {
 		Double idSeleccionada = null;
 		int row = tableFacturas.getSelectedRow();
 		if(row!=-1) {
-			idSeleccionada= (Double) tableFacturas.getValueAt(row, 3);
+			idSeleccionada= (Double) tableFacturas.getValueAt(row, 2);
 		}
 		return idSeleccionada;
 	}

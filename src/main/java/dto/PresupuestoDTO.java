@@ -9,6 +9,8 @@ public class PresupuestoDTO {
 	private Integer idPresupuesto;
 
 	private Integer idOT;
+	
+	private Integer idFactura;
 
 	private Integer idUsuAltaPresu;
 
@@ -24,7 +26,7 @@ public class PresupuestoDTO {
 
 	private Date fechaCierrePresu;
 
-	private String comentarioCierrePresu;
+	private String comentarioRechazo;
 
 	private Date fechaAprobacion;
 	
@@ -38,6 +40,7 @@ public class PresupuestoDTO {
 		estado = EstadoPresupuesto.PENDIENTE;
 		this.trabajos = new ArrayList<>();
 		this.repuestos = new ArrayList<>();
+		this.fechaAltaPresu = new Date();
 	}
 
 	public Integer getIdPresupuesto() {
@@ -112,12 +115,12 @@ public class PresupuestoDTO {
 		this.fechaCierrePresu = fechaCierrePresu;
 	}
 
-	public String getComentarioCierrePresu() {
-		return comentarioCierrePresu;
+	public String getComentarioRechazo() {
+		return comentarioRechazo;
 	}
 
-	public void setComentarioCierrePresu(String comentarioCierrePresu) {
-		this.comentarioCierrePresu = comentarioCierrePresu;
+	public void setComentarioRechazo(String comentarioCierrePresu) {
+		this.comentarioRechazo = comentarioCierrePresu;
 	}
 
 	public Date getFechaAprobacion() {
@@ -185,11 +188,19 @@ public class PresupuestoDTO {
 
 	@Override
 	public String toString() {
-		return "PresupuestoDTO [idPresupuesto=" + idPresupuesto + ", idOT=" + idOT + ", idUsuAltaPresu="
-				+ idUsuAltaPresu + ", idUsuCierrePresu=" + idUsuCierrePresu + ", idUsuRegPago=" + idUsuRegPago
-				+ ", idPago=" + idPago + ", fechaAltaPresu=" + fechaAltaPresu + ", comentarioAltaPresu="
+		return "PresupuestoDTO [idPresupuesto=" + idPresupuesto + ", idOT=" + idOT + ", idFactura=" + idFactura
+				+ ", idUsuAltaPresu=" + idUsuAltaPresu + ", idUsuCierrePresu=" + idUsuCierrePresu + ", idUsuRegPago="
+				+ idUsuRegPago + ", idPago=" + idPago + ", fechaAltaPresu=" + fechaAltaPresu + ", comentarioAltaPresu="
 				+ comentarioAltaPresu + ", fechaCierrePresu=" + fechaCierrePresu + ", comentarioCierrePresu="
-				+ comentarioCierrePresu + ", fechaAprobacion=" + fechaAprobacion + ", estado=" + estado + ", trabajos="
+				+ comentarioRechazo + ", fechaAprobacion=" + fechaAprobacion + ", estado=" + estado + ", trabajos="
 				+ trabajos + ", repuestos=" + repuestos + "]";
+	}
+
+	public Integer getIdFactura() {
+		return idFactura;
+	}
+
+	public void setIdFactura(Integer idFactura) {
+		this.idFactura = idFactura;
 	}
 }

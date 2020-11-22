@@ -166,6 +166,7 @@ DROP TABLE Presupuestos IF EXISTS;
 CREATE TABLE Presupuestos (
   idPresupuesto INT NOT NULL AUTO_INCREMENT,
   idOT INT NOT NULL,
+  idFactura INT,
   idUsuAltaPresu INT NOT NULL,
   idUsuCierrePresu INT,
   idUsuRegPago INT,
@@ -173,7 +174,7 @@ CREATE TABLE Presupuestos (
   fechaAltaPresu DATE,
   comentarioAltaPresu VARCHAR (60),
   fechaCierrePresu DATE,
-  comentarioCierrePresu VARCHAR (60),
+  comentarioRechazo VARCHAR (60),
   fechaAprobacion DATE,
   estado VARCHAR(20),
   PRIMARY KEY (idPresupuesto),

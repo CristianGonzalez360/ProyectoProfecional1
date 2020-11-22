@@ -77,25 +77,33 @@ public class CobroCajeroPresenter {
 	}
 	
 	private void onCargar(ActionEvent a) {
-		
+							
 		String nroFactura = view.getFactura();	
+			
+		try {
+		     Integer.parseInt(nroFactura);
+		     
+		     this.view.clear();
 				
-		this.view.clear();
-		
-		if (nroFactura.isEmpty()) {
-		this.view.cargarTabla(this.facturasController.readAll());
-		
+				if (nroFactura.isEmpty()) {
+				//this.view.cargarTabla(this.facturasController.readAll());
+				
+				}
+				else {
+					int i=Integer.parseInt(nroFactura);
+					this.view.cargarTabla(this.facturasController.readByFactura(i));
+				}   
+		     		     
 		}
-		else {
-			int i=Integer.parseInt(nroFactura);
-			this.view.cargarTabla(this.facturasController.readByFactura(i));
-		}
+		catch (NumberFormatException e) {
+		}		
+		
 	}
-	
-	
+		
 	
 	private void onRegistrar(ActionEvent a) {
 		
+			
 		TarjetaCreditoDTO tarjeta = TarjetaCreditoFormView.getInstance().getData();
 		List<String> errors = tarjeta.validate();
 		if (errors.isEmpty()) {
@@ -134,7 +142,7 @@ public class CobroCajeroPresenter {
 	
 	
 	private void onRegistrarDebito(ActionEvent a) {
-		
+	    			
 		TarjetaDebitoDTO tarjeta = TarjetaDebitoFormView.getInstance().getData();
 		List<String> errors = tarjeta.validate();
 		if (errors.isEmpty()) {
@@ -172,8 +180,7 @@ public class CobroCajeroPresenter {
 	
 	
 private void onRegistrarMercadoPago(ActionEvent a) {
-		
-		
+			
 		
 		int idPresupuesto =this.view.getIdPresupuestoSeleccionada();
 		String IdEstado = this.view.getEstadoSeleccionada();
@@ -199,8 +206,7 @@ private void onRegistrarMercadoPago(ActionEvent a) {
 			} 
 		
 private void onRegistrarBitcoin(ActionEvent a) {
-	
-	
+		
 	
 	int idPresupuesto =this.view.getIdPresupuestoSeleccionada();
 	String IdEstado = this.view.getEstadoSeleccionada();
@@ -228,7 +234,6 @@ private void onRegistrarBitcoin(ActionEvent a) {
 private void onRegistrarEfectivo(ActionEvent a) {
 	
 	
-	
 	int idPresupuesto =this.view.getIdPresupuestoSeleccionada();
 	String IdEstado = this.view.getEstadoSeleccionada();
 	Double idTotal = this.view.getTotalSeleccionada();
@@ -243,7 +248,7 @@ private void onRegistrarEfectivo(ActionEvent a) {
 			facturasController.updatePorPago(idPresupuesto);
 			this.onCargar(a);
 			JOptionPane.showMessageDialog(null, "Operación realizada correctamente","Exito", JOptionPane.INFORMATION_MESSAGE);
-			this.viewBitcoin.setVisible(false);
+			
 		}			
 	}
 	else {

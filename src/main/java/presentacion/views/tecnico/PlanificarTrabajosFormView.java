@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,8 +27,9 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.ScrollPaneConstants;
+import java.awt.Component;
 
-public class PlanificarTrabajosFormView extends JDialog {
+public class PlanificarTrabajosFormView extends JPanel {
 
 	/**
 	 * 
@@ -45,15 +45,12 @@ public class PlanificarTrabajosFormView extends JDialog {
 	private JTextField tfEsfuerzo;
 	private JTextField tfMonto;
 	private JButton btnAgregar;
-	private JButton botonAceptar;
-	private JButton cancelButton;
 	private JEditorPane editorDescripcion;
 	private JButton btnQuitar;
 
 	private PlanificarTrabajosFormView() {
-		setTitle("Planificador de Trabajos");
-		setBounds(100, 100, 450, 605);
-		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+		setBounds(100, 100, 500, 600);
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel panelAgregarTrabajo = new JPanel();
 		panelAgregarTrabajo.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Nuevo Trabajo", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -79,7 +76,7 @@ public class PlanificarTrabajosFormView extends JDialog {
 				RowSpec.decode("30px"),}));
 		
 				JLabel lblDescripcin = new JLabel("Descripción");
-				panelPrincipal.add(lblDescripcin, "1, 1");
+				panelPrincipal.add(lblDescripcin, "1, 1, default, center");
 				
 				JScrollPane scrollPane_1 = new JScrollPane();
 				scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -110,10 +107,10 @@ public class PlanificarTrabajosFormView extends JDialog {
 		panelInferior.add(tfEsfuerzo);
 		tfEsfuerzo.setColumns(10);
 		
-		getContentPane().add(panelAgregarTrabajo);
+		add(panelAgregarTrabajo);
 		
 		panelTrabajosPlanificados.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Trabajos Planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		getContentPane().add(panelTrabajosPlanificados);
+		add(panelTrabajosPlanificados);
 		panelTrabajosPlanificados.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
@@ -132,9 +129,6 @@ public class PlanificarTrabajosFormView extends JDialog {
 		FlowLayout flowLayout_1 = (FlowLayout) panelBotones2.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.RIGHT);
 		panelTrabajosPlanificados.add(panelBotones2, BorderLayout.SOUTH);
-		
-		JButton btnEditar = new JButton("Editar");
-		panelBotones2.add(btnEditar);
 
 		btnQuitar = new JButton("Quitar");
 		panelBotones2.add(btnQuitar);
@@ -142,31 +136,6 @@ public class PlanificarTrabajosFormView extends JDialog {
 		JButton btnQuitarTodo = new JButton("Limpiar");
 		btnQuitarTodo.setVisible(false);
 		panelBotones2.add(btnQuitarTodo);
-
-		JPanel buttonPane = new JPanel();
-		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		getContentPane().add(buttonPane);
-
-		botonAceptar = new JButton("Aceptar");
-		botonAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				close();
-			}
-		});
-		botonAceptar.setActionCommand("OK");
-		buttonPane.add(botonAceptar);
-		getRootPane().setDefaultButton(botonAceptar);
-
-		cancelButton = new JButton("Cancelar");
-		cancelButton.setVisible(false);
-		cancelButton.setActionCommand("Cancel");
-		buttonPane.add(cancelButton);
-
-		setVisible(false);
-	}
-
-	public void close() {
-		setVisible(false);
 	}
 
 	public static PlanificarTrabajosFormView getInstance() {
@@ -176,6 +145,7 @@ public class PlanificarTrabajosFormView extends JDialog {
 	}
 
 	public void clearData() {
+		clearDataNuevoTrabajo();
 		modelo.setRowCount(0);
 	}
 
@@ -189,10 +159,6 @@ public class PlanificarTrabajosFormView extends JDialog {
 			Object[] row = { t.getDescripcionTrabajo(), t.getTiempoEstTrabajo(), t.getPrecioTrabajo() };
 			modelo.addRow(row);
 		}
-	}
-
-	public void setActionOnAceptar(ActionListener listener) {
-		this.botonAceptar.addActionListener(listener);
 	}
 	
 	public void clearDataNuevoTrabajo() {
@@ -219,6 +185,18 @@ public class PlanificarTrabajosFormView extends JDialog {
 
 	public Integer getSeleccionado() {
 		return table.getSelectedRow();
+	}
+	
+	public String getDescripcion() {
+		return this.editorDescripcion.getText();
+	}
+	
+	public String getMonto() {
+		return this.tfMonto.getText();
+	}
+	
+	public String getEsfuerzo() {
+		return this.tfEsfuerzo.getText();
 	}
 
 }

@@ -41,6 +41,8 @@ public class TarjetaDebitoFormView extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 
+		setModal(true);
+		
 		JPanel panel = new JPanel();
 		contentPanel.add(panel);
 		panel.setLayout(new FormLayout(new ColumnSpec[] {

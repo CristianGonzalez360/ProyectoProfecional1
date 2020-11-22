@@ -22,6 +22,8 @@ import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.BevelBorder;
 
 public class PanelGestionRepuestos extends JPanel{
 	private JTextField txtDescripcion;
@@ -39,8 +41,13 @@ public class PanelGestionRepuestos extends JPanel{
 	private JSeparator separator;
 	private JButton btnConfigurarMnimo;
 	private JSeparator separator_1;
+	private JLabel lblMarca;
+	private JButton btnEditarStock;
+	private JSeparator separator_2;
+	
 	
 	private PanelGestionRepuestos() {
+		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new BorderLayout(0, 0));
 		
 		this.idRepuestos = new ArrayList<>();
@@ -49,6 +56,9 @@ public class PanelGestionRepuestos extends JPanel{
 		FlowLayout flowLayout = (FlowLayout) panelBuscador.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		add(panelBuscador, BorderLayout.NORTH);
+		
+		lblMarca = new JLabel("Marca:");
+		panelBuscador.add(lblMarca);
 		
 		comboMarcas = new JComboBox<>();
 		panelBuscador.add(comboMarcas);
@@ -81,12 +91,19 @@ public class PanelGestionRepuestos extends JPanel{
 		panel.add(toolBar);
 		add(panel, BorderLayout.SOUTH);
 		
-		btnIngresarStock = new JButton("Ingresar Stock");
+		btnIngresarStock = new JButton("Agregar Stock");
 		toolBar.add(btnIngresarStock);
 		
 		separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		toolBar.add(separator);
+		
+		btnEditarStock = new JButton("Editar Stock");
+		toolBar.add(btnEditarStock);
+		
+		separator_2 = new JSeparator();
+		separator_2.setOrientation(SwingConstants.VERTICAL);
+		toolBar.add(separator_2);
 		
 		btnConfigurarMnimo = new JButton("Configurar Mínimo");
 		toolBar.add(btnConfigurarMnimo);
@@ -107,6 +124,7 @@ public class PanelGestionRepuestos extends JPanel{
 	}
 	public void setData(List<RepuestoDTO> repuestos) {
 		modelo.setRowCount(0);
+		idRepuestos.clear();
 		for (RepuestoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
 			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(), r.getFabricante(),
@@ -155,4 +173,8 @@ public class PanelGestionRepuestos extends JPanel{
 		this.btnConfigurarMnimo.addActionListener(listener);
 	}
 
+	public void setActionOnEditarStock(ActionListener listener) {
+		this.btnEditarStock.addActionListener(listener);
+	}
+	
 }
