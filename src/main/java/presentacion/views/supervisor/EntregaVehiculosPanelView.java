@@ -99,7 +99,7 @@ public class EntregaVehiculosPanelView extends JPanel {
 	public Integer getIdSelectedEntrega() {
 		int row = tableEntregas.getSelectedRow(); //id de fila seleccionada
 		int id; //para id de la OT
-		if (tableEntregas.getSelectedRow() == 0) {
+		if (tableEntregas.getSelectedRow() != -1) {
 			id = Integer.parseInt(tableEntregas.getValueAt(row, 0).toString());
 			return id;
 		}
@@ -109,7 +109,7 @@ public class EntregaVehiculosPanelView extends JPanel {
 	public Integer getDNISelectedEntrega() {
 		int row = tableEntregas.getSelectedRow(); //id de fila seleccionada
 		int dni; //para dni
-		if (tableEntregas.getSelectedRow() == 0) {
+		if (tableEntregas.getSelectedRow() != -1) {
 			dni = Integer.parseInt(tableEntregas.getValueAt(row, 1).toString());
 			return dni;
 		}
