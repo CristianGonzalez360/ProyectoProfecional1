@@ -12,6 +12,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+import com.toedter.calendar.JDateChooser;
 
 import dto.AltaClienteDTO;
 import dto.ClienteDTO;
@@ -33,6 +34,8 @@ public class TarjetaDebitoFormView extends JDialog {
 	private JTextField textFechaExpiracion;
 	private JTextField textCod;
 	private JTextField textDni;
+	
+	private JDateChooser fechaExpiracion;
 
 	private TarjetaDebitoFormView() {
 		setBounds(100, 100, 506, 253);
@@ -83,9 +86,8 @@ public class TarjetaDebitoFormView extends JDialog {
 		JLabel lblFechaExpiracion = new JLabel("Fecha expiracion");
 		panel.add(lblFechaExpiracion, "2, 6, right, default");
 
-		textFechaExpiracion = new JTextField();
-		textFechaExpiracion.setColumns(10);
-		panel.add(textFechaExpiracion, "4, 6, fill, default");
+		fechaExpiracion = new JDateChooser();
+		panel.add(fechaExpiracion, "4, 6, fill, default");
 
 		JLabel lblCod = new JLabel("Cod Seguridad");
 		panel.add(lblCod, "6, 6, right, default");
@@ -135,7 +137,7 @@ public class TarjetaDebitoFormView extends JDialog {
 				
 		datosTarjeta.setNumeroTarjeta(textNumeroTarjeta.getText());
 		datosTarjeta.setNombreyapellido(textNombreYApellido.getText());
-		datosTarjeta.setFechaExpiracion(textFechaExpiracion.getText());
+
 		datosTarjeta.setCodSeguridad(textCod.getText());
 		datosTarjeta.setDni(textDni.getText());
 	
@@ -170,10 +172,9 @@ public class TarjetaDebitoFormView extends JDialog {
 	public void clearData() {
 		textNumeroTarjeta.setText("");
 		textNombreYApellido.setText("");
-		textFechaExpiracion.setText("");
+
 		textCod.setText("");
 		textDni.setText("");
-
 
 		this.btnSalvar.setVisible(true);
 	}

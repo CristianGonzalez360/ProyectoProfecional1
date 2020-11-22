@@ -3,15 +3,20 @@ package presentacion.views.cajero;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.formdev.flatlaf.json.ParseException;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+import com.toedter.calendar.JDateChooser;
 
 import dto.AltaClienteDTO;
 import dto.ClienteDTO;
@@ -34,6 +39,8 @@ public class TarjetaCreditoFormView extends JDialog {
 	private JTextField textCod;
 	private JTextField textDni;
 	private JTextField textCuotas;
+	
+	private JDateChooser fechaExpiracion;
 
 	private TarjetaCreditoFormView() {
 		setBounds(100, 100, 506, 253);
@@ -83,10 +90,11 @@ public class TarjetaCreditoFormView extends JDialog {
 
 		JLabel lblFechaExpiracion = new JLabel("Fecha expiracion");
 		panel.add(lblFechaExpiracion, "2, 6, right, default");
-
-		textFechaExpiracion = new JTextField();
-		textFechaExpiracion.setColumns(10);
-		panel.add(textFechaExpiracion, "4, 6, fill, default");
+			
+		
+		fechaExpiracion = new JDateChooser();
+		panel.add(fechaExpiracion, "4, 6, fill, default");
+		
 
 		JLabel lblCod = new JLabel("Cod Seguridad");
 		panel.add(lblCod, "6, 6, right, default");
@@ -104,10 +112,12 @@ public class TarjetaCreditoFormView extends JDialog {
 
 		JLabel lblCuotas = new JLabel("Cuotas");
 		panel.add(lblCuotas, "2, 10, right, default");
+		
+		String[] bookTitles = new String[] {"1", "3","6", "12"};
 
-		textCuotas = new JTextField();
-		textCuotas.setColumns(10);
-		panel.add(textCuotas, "4, 10, fill, default");
+		JComboBox<String> bookList = new JComboBox<>(bookTitles);			
+			
+		panel.add(bookList, "4, 10, fill, default");
 
 		JPanel panel_1 = new JPanel();
 		contentPanel.add(panel_1, BorderLayout.SOUTH);
@@ -140,10 +150,10 @@ public class TarjetaCreditoFormView extends JDialog {
 				
 		datosTarjeta.setNumeroTarjeta(textNumeroTarjeta.getText());
 		datosTarjeta.setNombreyapellido(textNombreYApellido.getText());
-		datosTarjeta.setFechaExpiracion(textFechaExpiracion.getText());
+
 		datosTarjeta.setCodSeguridad(textCod.getText());
 		datosTarjeta.setDni(textDni.getText());
-		datosTarjeta.setCuotas(textCuotas.getText());
+
 				
 		return datosTarjeta;
 
@@ -178,10 +188,10 @@ public class TarjetaCreditoFormView extends JDialog {
 	public void clearData() {
 		textNumeroTarjeta.setText("");
 		textNombreYApellido.setText("");
-		textFechaExpiracion.setText("");
+		
 		textCod.setText("");
 		textDni.setText("");
-		textCuotas.setText("");
+
 
 		this.btnSalvar.setVisible(true);
 	}

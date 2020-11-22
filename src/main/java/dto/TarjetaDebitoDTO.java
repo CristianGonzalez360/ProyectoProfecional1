@@ -82,8 +82,7 @@ public class TarjetaDebitoDTO {
 		ret.addAll(new StringValidator(dni).notBlank("Debe ingresar un numero de dni.")
 				.number("El DNI solo de tener números.").validate());
 		
-		ret.addAll(new StringValidator(fechaExpiracion).notBlank("Debe ingresar una fecha de expiracion.")
-				.min(4, "El formato de la fecha debe ser MMAA").max(4, "El formato de la fecha debe ser MMAA").validate());
+		
 		
 		ret.addAll(new StringValidator(codSeguridad).notBlank("Debe ingresar un codigo de seguridad")
 				.min(3, "El codigo de seguridad debe ser de 3 digitos").max(3, "El codigo de seguridad debe ser de 3 digitos").validate());
