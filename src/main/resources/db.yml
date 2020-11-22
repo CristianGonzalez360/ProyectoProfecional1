@@ -278,7 +278,7 @@ facturas:
     fechaDeAlta: 2020-10-11
     fechaDeCierrePorPago: 
     total: 100
-    estado: PAGA
+    estado: IMPAGA
     idCliente: 1
     dni: 33390341
   - idFactura: 2
