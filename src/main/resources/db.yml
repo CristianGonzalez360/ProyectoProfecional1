@@ -279,6 +279,7 @@ facturas:
     fechaDeCierrePorPago: 
     total: 100
     estado: IMPAGA
+    idCliente: 1
     dni: 33390341
   - idFactura: 2
     idOrdenDeTrabajo: 2
@@ -286,6 +287,7 @@ facturas:
     fechaDeCierrePorPago: 
     total: 100
     estado: IMPAGA
+    idCliente: 1
     dni: 33390341
   - idFactura: 3
     idOrdenDeTrabajo: 2
@@ -293,6 +295,7 @@ facturas:
     fechaDeCierrePorPago: 
     total: 200
     estado: IMPAGA
+    idCliente: 1
     dni: 33390342
   - idFactura: 4
     idOrdenDeTrabajo: 2
@@ -300,4 +303,5 @@ facturas:
     fechaDeCierrePorPago: 2020-10-11
     total: 200
     estado: PAGA
+    idCliente: 1
     dni: 33390343

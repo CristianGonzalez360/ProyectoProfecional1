@@ -1,3 +1,4 @@
+
 package presentacion.views.cajero;
 
 import java.awt.BorderLayout;
@@ -132,5 +133,4 @@ public class BitcoinFormView extends JDialog {
 
 	public void close() {
 		setVisible(false);
-	}
-}
+	}}

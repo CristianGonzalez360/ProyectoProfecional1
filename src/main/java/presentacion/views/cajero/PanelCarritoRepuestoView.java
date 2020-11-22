@@ -2,6 +2,7 @@ package presentacion.views.cajero;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
@@ -28,14 +29,21 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import dto.ClienteDTO;
+import dto.RepuestoCompradoDTO;
 import dto.RepuestoDTO;
 import dto.RepuestoPlanificadoDTO;
+import presentacion.views.supervisor.ClientePanelView;
 
-public class PanelCarritoRepuestoView extends JInternalFrame {
+import javax.swing.JSplitPane;
+import javax.swing.border.BevelBorder;
+import java.awt.event.ActionEvent;
+
+public class PanelCarritoRepuestoView extends JPanel {
 
 	private static final long serialVersionUID = -3149040258338164711L;
 
-	private final JPanel contentPanel = new JPanel();
+	private final JPanel panelDerecho = new JPanel();
 
 	private static final String[] nombreColumnasSuperior = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock",
 			"Precio" };
@@ -69,8 +77,20 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 	private JPanel panel_1;
 	private JPanel panel_2;
 	private List<Integer> idRepuestos;
-	private JButton btnAceptar;
+	private JButton btnCrearFactura;
 	private JButton btnCancelar;
+	private ClientePanelView panelCliente;
+	private JSplitPane splitPane;
+	private JPanel panelBotonesCliente;
+	private JButton btnRegistrarCliente;
+	private JPanel panelBuscador;
+	private JTextField tfDni;
+	private JButton btnBuscarCliente;
+
+	private List<Integer> idRepuestosComprados;
+	private JLabel lblMarca;
+	private JTextField tfTotalFactura;
+	private JLabel lblTotalFactura;
 
 	public static PanelCarritoRepuestoView getInstance() {
 		if (vista == null)
@@ -80,23 +100,11 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 
 	@SuppressWarnings("serial")
 	private PanelCarritoRepuestoView() {
-//		setModal(true);
-		setBounds(100, 100, 500, 600);
-		setTitle("Carrito de compras");
-		getContentPane().setLayout(new BorderLayout());
-
+		setBounds(100, 100, 712, 600);
+		setLayout(new BorderLayout());
 		idRepuestos = new ArrayList<>();
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-
-		panelSuperior = new JPanel();
-		panelSuperior.setForeground(SystemColor.menu);
-		panelSuperior.setBorder(
-				new TitledBorder(null, "Repuestos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-		panelSuperior.setBackground(SystemColor.menu);
-		contentPanel.add(panelSuperior);
-		panelSuperior.setLayout(new BorderLayout(0, 0));
-
+		idRepuestosComprados = new ArrayList<>();
+		
 		modelRepuestos = new DefaultTableModel(null, nombreColumnasSuperior) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -104,29 +112,115 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 			}
 		};
 
+		modelRepuestosInferior = new DefaultTableModel(null, nombreColumnasInferior) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		add(buttonPane, BorderLayout.SOUTH);
+
+		btnCrearFactura = new JButton("Aceptar");
+		btnCrearFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
+		lblTotalFactura = new JLabel("Total factura: ");
+		buttonPane.add(lblTotalFactura);
+		
+		tfTotalFactura = new JTextField();
+		tfTotalFactura.setEditable(false);
+		buttonPane.add(tfTotalFactura);
+		tfTotalFactura.setColumns(10);
+		btnCrearFactura.setActionCommand("OK");
+		buttonPane.add(btnCrearFactura);
+//		tfTotalFactura.setText(arg0);
+
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setVisible(false);
+		btnCancelar.setActionCommand("Cancel");
+		buttonPane.add(btnCancelar);
+
+		splitPane = new JSplitPane();
+		splitPane.setEnabled(false);
+		splitPane.setResizeWeight(0.0);
+		add(splitPane, BorderLayout.CENTER);
+		splitPane.setRightComponent(panelDerecho);
+		
+		JPanel panelIzquierdo = new JPanel(new BorderLayout());
+		
+		panelCliente = new ClientePanelView();
+		panelIzquierdo.add(panelCliente, BorderLayout.CENTER);
+		
+		
+		splitPane.setLeftComponent(panelIzquierdo);
+		
+		panelBotonesCliente = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panelBotonesCliente.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		panelIzquierdo.add(panelBotonesCliente, BorderLayout.SOUTH);
+		
+		btnRegistrarCliente = new JButton("Registrar Cliente");
+		panelBotonesCliente.add(btnRegistrarCliente);
+		
+		panelBuscador = new JPanel();
+		panelIzquierdo.add(panelBuscador, BorderLayout.NORTH);
+		
+		tfDni = new JTextField();
+		panelBuscador.add(tfDni);
+		tfDni.setColumns(15);
+		
+		btnBuscarCliente = new JButton("Buscar");
+		panelBuscador.add(btnBuscarCliente);
+		
+		panelDerecho.setLayout(new BoxLayout(panelDerecho, BoxLayout.Y_AXIS));
+
+		panelSuperior = new JPanel();
+		panelSuperior.setForeground(SystemColor.menu);
+		panelSuperior.setBorder(
+				new TitledBorder(null, "Repuestos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panelSuperior.setBackground(SystemColor.menu);
+		panelDerecho.add(panelSuperior);
+		panelSuperior.setLayout(new BorderLayout(0, 0));
+
 		panel_1 = new JPanel();
 		panelSuperior.add(panel_1, BorderLayout.NORTH);
-		panel_1.setLayout(new FormLayout(
-				new ColumnSpec[] { ColumnSpec.decode("10px"), ColumnSpec.decode("132px"),
-						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("right:75px"),
-						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("86px:grow"),
-						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("65px"), },
-				new RowSpec[] { FormSpecs.LINE_GAP_ROWSPEC, RowSpec.decode("23px"), }));
+		panel_1.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("10px"),
+				ColumnSpec.decode("max(34dlu;default)"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("132px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("right:75px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("78px:grow"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("85px"),},
+			new RowSpec[] {
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("23px"),}));
+		
+		lblMarca = new JLabel("Marca");
+		panel_1.add(lblMarca, "2, 2, right, default");
 
 		comboMarcas = new JComboBox<>();
-		panel_1.add(comboMarcas, "2, 2, default, center");
+		panel_1.add(comboMarcas, "4, 2, default, center");
 
 		lblDescripcion = new JLabel();
-		panel_1.add(lblDescripcion, "4, 2, right, center");
+		panel_1.add(lblDescripcion, "6, 2, right, center");
 		lblDescripcion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDescripcion.setText("Descripción");
 
 		textDescipcion = new JTextField();
-		panel_1.add(textDescipcion, "6, 2, default, center");
+		panel_1.add(textDescipcion, "8, 2, default, center");
 		textDescipcion.setColumns(10);
 
 		btnBuscar = new JButton("Buscar");
-		panel_1.add(btnBuscar, "8, 2, left, top");
+		panel_1.add(btnBuscar, "10, 2, fill, top");
 
 		panelInterior = new JPanel();
 		panelInterior.setBackground(SystemColor.menu);
@@ -148,24 +242,21 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 		textCantidad.setColumns(10);
 
 		btnAgregar = new JButton("Agregar");
+		btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		panel_2.add(btnAgregar);
 
 		panelInferior = new JPanel();
-		panelInferior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Repuestos a confirmar",
+		panelInferior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Carrito",
 				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelInferior.setBackground(SystemColor.menu);
-		contentPanel.add(panelInferior);
+		panelDerecho.add(panelInferior);
 		panelInferior.setLayout(new BorderLayout(0, 0));
 
 		scrollPaneRepuestosInferior = new JScrollPane();
 		panelInferior.add(scrollPaneRepuestosInferior, BorderLayout.CENTER);
-
-		modelRepuestosInferior = new DefaultTableModel(null, nombreColumnasInferior) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
 
 		tablaRepuestosInferior = new JTable(modelRepuestosInferior);
 
@@ -175,30 +266,15 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 		panelInferior.add(panel, BorderLayout.SOUTH);
 
 		btnEditar = new JButton("Editar");
+		btnEditar.setVisible(false);
 		panel.add(btnEditar);
 
 		btnQuitar = new JButton("Quitar");
 		panel.add(btnQuitar);
 
 		btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setVisible(false);
 		panel.add(btnLimpiar);
-
-		JPanel buttonPane = new JPanel();
-		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		getContentPane().add(buttonPane, BorderLayout.SOUTH);
-
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setActionCommand("OK");
-		buttonPane.add(btnAceptar);
-		getRootPane().setDefaultButton(btnAceptar);
-
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setVisible(false);
-		btnCancelar.setActionCommand("Cancel");
-		buttonPane.add(btnCancelar);
-
-		setVisible(false);
+		btnLimpiar.setVisible(false);
 	}
 
 	public void clearDataRepuestos() {
@@ -213,18 +289,19 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 		setVisible(true);
 	}
 
-	public void setDataRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestos) {
+	public void setDataRepuestosComprados(List<RepuestoCompradoDTO> repuestos) {
 		modelRepuestosInferior.setRowCount(0);
-		for (RepuestoPlanificadoDTO r : repuestos) {
-			idRepuestos.add(r.getIdRepuestoPlanificado());
+		for (RepuestoCompradoDTO r : repuestos) {
+			idRepuestosComprados.add(r.getIdRepuestoComprado());
 			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(),
-					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantRequerida() };
+					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantidad() };
 			modelRepuestosInferior.addRow(row);
 		}
 	}
 
 	public void setDataRepuestos(List<RepuestoDTO> repuestos) {
 		modelRepuestos.setRowCount(0);
+		idRepuestos.clear();
 		for (RepuestoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
 			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(), r.getFabricante(),
@@ -254,7 +331,7 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 	}
 
 	public void setActionOnAceptar(ActionListener listener) {
-		this.btnAceptar.addActionListener(listener);
+		this.btnCrearFactura.addActionListener(listener);
 	}
 
 	public void close() {
@@ -263,6 +340,14 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 
 	public void setActionOnBuscar(ActionListener listener) {
 		this.btnBuscar.addActionListener(listener);
+	}
+	
+	public void setActionOnBuscarCliente(ActionListener listener) {
+		this.btnBuscarCliente.addActionListener(listener);
+	}
+
+	public void setActionOnAgregarCliente(ActionListener listener) {
+		this.btnRegistrarCliente.addActionListener(listener);
 	}
 
 	public String getMarca() {
@@ -280,7 +365,7 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 		}
 		comboMarcas.setModel(modelo);
 	}
-	
+
 	public void setActionOnQuitar(ActionListener Listener) {
 		this.btnQuitar.addActionListener(Listener);
 	}
@@ -288,4 +373,57 @@ public class PanelCarritoRepuestoView extends JInternalFrame {
 	public Integer getSeleccionado() {
 		return tablaRepuestosInferior.getSelectedRow();
 	}
+
+	public void clearClienteData() {
+		panelCliente.clearData();
+	}
+
+	public String getDniCliente() {
+		return this.tfDni.getText();
+	}
+
+	public void setDataCliente(ClienteDTO cliente) {
+		this.panelCliente.setData(cliente);
+	}
+	
+	public void setData(List<RepuestoCompradoDTO> repuestos) {
+		modelRepuestosInferior.setRowCount(0);
+		idRepuestos.clear();
+		for (RepuestoCompradoDTO r : repuestos) {
+			idRepuestos.add(r.getIdRepuestoComprado());
+			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(), r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(),
+					r.getRepuesto().getStockRepuesto(), r.getRepuesto().getStockMinimo(), r.getRepuesto().getPrecioRepuesto() };
+			modelRepuestosInferior.addRow(row);
+		}
+	}
+
+	public JLabel getLblTotalFactura() {
+		return lblTotalFactura;
+	}
+
+	public void setLblTotalFactura(JLabel lblTotalFactura) {
+		this.lblTotalFactura = lblTotalFactura;
+	}
+
+	public JTextField getTfTotalFactura() {
+		return tfTotalFactura;
+	}
+
+	public void setTfTotalFactura(JTextField tfTotalFactura) {
+		this.tfTotalFactura = tfTotalFactura;
+	}
+
+	public void setActionOnCrearFactura(ActionListener listener) {
+		this.btnCrearFactura.addActionListener(listener);
+		//poner algun modal de confirmacion issue32s
+	}
+	
+	public void clear() {
+	this.modelRepuestosInferior.setRowCount(0);
+	this.panelCliente.clearData();
+	this.tfTotalFactura.setText("0.0");
+	
+	}
 }
+	
+	

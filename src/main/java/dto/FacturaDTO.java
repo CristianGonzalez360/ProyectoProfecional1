@@ -21,8 +21,15 @@ public class FacturaDTO {
 	private String estado;
 	
 	private Integer dni;
+
+
+	private ClienteDTO cliente;
+
+	private List<RepuestoCompradoDTO> repuestos;
 	
-		
+	private int idCliente;
+
+
 	public FacturaDTO() {
 		this.estado = "IMPAGA";
 		presupuestosFacturados = new ArrayList<>();
@@ -101,7 +108,34 @@ public class FacturaDTO {
 	public void setPresupuestosFacturados(List<PresupuestoDTO> presupuestosFacturados) {
 		this.presupuestosFacturados = presupuestosFacturados;
 	}
-	
+
+
+	public ClienteDTO getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(ClienteDTO cliente) {
+		this.cliente = cliente;
+		this.idCliente = cliente.getIdCliente();
+		this.dni = cliente.getDatosPersonalesDTO().getDni();
+	}
+
+	public List<RepuestoCompradoDTO> getRepuestosComprados() {
+		return repuestos;
+	}
+
+	public void setRepuestosComprados(List<RepuestoCompradoDTO> repuestos) {
+		this.repuestos = repuestos;
+	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+
 	public List<TrabajoPresupuestadoDTO> getTabajos(){
 		List<TrabajoPresupuestadoDTO> ret = new ArrayList<>();
 		for (PresupuestoDTO presupuesto : presupuestosFacturados) {
@@ -109,8 +143,8 @@ public class FacturaDTO {
 		}
 		return ret;
 	}
-	
-	public List<RepuestoPlanificadoDTO> getRepuestos(){
+
+	public List<RepuestoPlanificadoDTO> getRepuestosPlanificados(){
 		List<RepuestoPlanificadoDTO> ret = new ArrayList<>();
 		for (PresupuestoDTO presupuesto : presupuestosFacturados) {
 			ret.addAll(presupuesto.getRepuestos());

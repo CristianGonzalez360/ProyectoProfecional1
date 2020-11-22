@@ -123,5 +123,4 @@ public class MercadoPagoFormView extends JDialog {
 
 	public void close() {
 		setVisible(false);
-	}
-}
+	}}

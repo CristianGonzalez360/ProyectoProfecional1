@@ -1,3 +1,4 @@
+
 package dto;
 
 import java.util.LinkedList;
@@ -16,13 +17,7 @@ public class TarjetaDebitoDTO {
 
 	private String fechaExpiracion;
 
-	private String codSeguridad;
-
-	
-
-	
-
-	
+	private String codSeguridad;	
 
 	public String getNumeroTarjeta() {
 		return numeroTarjeta;
