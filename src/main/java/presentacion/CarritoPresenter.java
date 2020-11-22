@@ -182,19 +182,31 @@ public class CarritoPresenter {
 		this.view.setTextCantidad("0");
 	}
 
+	
+	//Crea la factura con el cliente seleciconado, una suma total del precio de los productos y la lista de repuestos
 	private void onCrearFactura(ActionEvent a) {
-		//TODO agregar validaciones
-		FacturaDTO facturaCarrito = new FacturaDTO();
-		facturaCarrito.setCliente(clienteFactura);
-		facturaCarrito.setRepuestosComprados(repuestos);
-		facturaCarrito.setTotal(precioTotal);
-		facturaCarrito.setFechaDeAlta(new Date());
-		facturasController.generarFacturaCarrito(facturaCarrito);
-		mostrarFactura(facturaCarrito);
-		view.clear();
-		this.precioTotal = 0.0;
-		this.clienteFactura = null;
-		this.repuestos.clear();
+		List<String> errors = new ArrayList<String>();
+		if (clienteFactura==null) {
+			errors.add("Debe seleccionar un cliente.");
+		}
+		if (repuestos.isEmpty()) {
+			errors.add("Debe seleccionar un repuesto.");
+		}
+		if (clienteFactura!=null && precioTotal>.00 && !repuestos.isEmpty()) {
+			FacturaDTO facturaCarrito = new FacturaDTO();
+			facturaCarrito.setCliente(clienteFactura);
+			facturaCarrito.setRepuestosComprados(repuestos);
+			facturaCarrito.setTotal(precioTotal);
+			facturaCarrito.setFechaDeAlta(new Date());
+			facturasController.generarFacturaCarrito(facturaCarrito);
+			mostrarFactura(facturaCarrito);
+			view.clear();
+			this.precioTotal = 0.0;
+			this.clienteFactura = null;
+			this.repuestos.clear();
+		}else {
+			new MessageDialog().showMessages(errors);
+		}
 	}
 	
 	private void mostrarFactura(FacturaDTO factura) {

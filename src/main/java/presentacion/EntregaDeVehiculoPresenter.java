@@ -52,7 +52,8 @@ public class EntregaDeVehiculoPresenter {
 				controller.registrarEntregaById(idOt);
 
 				if (!enviarEmail(dni))
-					new MessageDialog().showMessages("¡Entrega Registrada!.\n¡No se pudo enviar el mail de Calificación!");
+					new MessageDialog()
+							.showMessages("¡Entrega Registrada!.\n¡No se pudo enviar el mail de Calificación!");
 				else
 					new MessageDialog().showMessages("¡Entrega Registrada!.\n¡Se envió un mail de Calificación!");
 				view.clear();
