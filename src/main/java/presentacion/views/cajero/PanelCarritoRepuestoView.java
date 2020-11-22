@@ -2,9 +2,9 @@ package presentacion.views.cajero;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +13,10 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -32,12 +32,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import dto.ClienteDTO;
 import dto.RepuestoCompradoDTO;
 import dto.RepuestoDTO;
-import dto.RepuestoPlanificadoDTO;
 import presentacion.views.supervisor.ClientePanelView;
-
-import javax.swing.JSplitPane;
-import javax.swing.border.BevelBorder;
-import java.awt.event.ActionEvent;
 
 public class PanelCarritoRepuestoView extends JPanel {
 
@@ -73,6 +68,7 @@ public class PanelCarritoRepuestoView extends JPanel {
 	private JButton btnAgregar;
 	private JLabel lblCantidad;
 	private JTextField textCantidad;
+
 	private JPanel panel;
 	private JPanel panel_1;
 	private JPanel panel_2;
@@ -424,6 +420,12 @@ public class PanelCarritoRepuestoView extends JPanel {
 	this.tfTotalFactura.setText("0.0");
 	
 	}
+
+	public void setTextCantidad(String string) {
+		this.textCantidad.setText(string);
+	}
+
+	
 }
 	
 	

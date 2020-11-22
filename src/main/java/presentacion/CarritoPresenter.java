@@ -179,6 +179,7 @@ public class CarritoPresenter {
 		marca = view.getMarca();
 		descripcion = view.getDescripcion();
 		refrescar();
+		this.view.setTextCantidad("0");
 	}
 
 	private void onCrearFactura(ActionEvent a) {
