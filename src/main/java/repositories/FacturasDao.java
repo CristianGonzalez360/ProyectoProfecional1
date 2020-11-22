@@ -20,4 +20,6 @@ public interface FacturasDao extends GenericDao<FacturaDTO, Integer>{
 
 	boolean updatePorPago(Integer id);
 
+	void insertFacturaCarrito(FacturaDTO facturaCarrito);
+
 }

@@ -112,13 +112,16 @@ CREATE TABLE OrdenesDeTrabajo (
 DROP TABLE Facturas IF EXISTS;
 CREATE TABLE Facturas (
   idFactura INT AUTO_INCREMENT,
-  idOT INT NULL,
+  idOT INT,
   fechaDeAlta DATE,
   fechaDeCierrePorPago DATE,
-  PRIMARY KEY(idFactura, idOT),
-  FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo(idOT),
+  PRIMARY KEY(idFactura),
   total DOUBLE,
-  estado VARCHAR(10)
+  estado VARCHAR(10),
+  idCliente INT,
+   FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo(idOT),
+   FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente)
+
 );
 
 DROP TABLE Emisores IF EXISTS;
@@ -215,5 +218,16 @@ CREATE TABLE RepuestosPlanificados (
   cantRequerida INT,
   PRIMARY KEY (idRepuestoPlanificado),
   FOREIGN KEY (idPresu) REFERENCES Presupuestos (idPresupuesto),
+  FOREIGN KEY (idRepuesto) REFERENCES Repuestos (idRepuesto)
+);
+
+DROP TABLE RepuestosComprados IF EXISTS;
+CREATE TABLE RepuestosComprados (
+  idRepuestoComprado INT NOT NULL AUTO_INCREMENT,
+  idFactura INT NOT NULL,
+  idRepuesto INT NOT NULL,
+  cantRequerida INT,
+  PRIMARY KEY (idRepuestoComprado),
+  FOREIGN KEY (idFactura) REFERENCES Facturas (idFactura),
   FOREIGN KEY (idRepuesto) REFERENCES Repuestos (idRepuesto)
 );

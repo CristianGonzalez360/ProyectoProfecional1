@@ -5,7 +5,7 @@ public class RepuestoCompradoDTO {
 	private int cantidad;
 	private RepuestoDTO repuesto;
 	private Integer idRepuestoComprado;
-
+	private Integer idFacturaCarrito;
 
 	public void setCantRequerida(int cant) {
 		this.cantidad = cant;
@@ -35,6 +35,12 @@ public class RepuestoCompradoDTO {
 		this.idRepuestoComprado = idRepuestoComprado;
 	}
 
-	
-	
+	public Integer getIdFacturaCarrito() {
+		return idFacturaCarrito;
+	}
+
+	public void setIdFacturaCarrito(Integer idFacturaCarrito) {
+		this.idFacturaCarrito = idFacturaCarrito;
+	}
+
 }

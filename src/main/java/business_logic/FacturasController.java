@@ -43,9 +43,6 @@ public class FacturasController {
 		return facturaDao.readByOrdenDeTrabajoId(id);
 	}
 	
-
-	
-	
 	public void updateEstadoPresupuestos(Map<Integer, Boolean> presupuestos) throws ForbiddenException {
 		assert presupuestos != null;
 		assert !presupuestos.isEmpty();
@@ -103,47 +100,6 @@ public class FacturasController {
 		}
 		return factura;
 	}
-	
-//	public FacturaDTO generarFactura(List<PresupuestoDTO> presupuestos) {
-//		FacturaDTO factura = null;
-//		if (!presupuestos.isEmpty()) {
-//			Object[] keys = presupuestos.keySet().toArray();
-//			Integer ordenDeTrabajoId = presDao.readByID((Integer) keys[0]).getIdOT();
-//			List<PresupuestoDTO> ps = new ArrayList<PresupuestoDTO>();
-//			double total = 0;
-//			for (int i = 0; i < keys.length; i++) {
-//				if(presupuestos.get(keys[i]) == true) {
-//					int idPresupuesto = (Integer) keys[i];
-//					PresupuestoDTO p = readPresupuestoById(idPresupuesto);
-//					ps.add(p);
-//					total += p.getPrecio();
-//				}
-//			}
-//			boolean esOrdenDeTrabajoRechazada = esRechazada(ordenDeTrabajoId);
-//			if (!esOrdenDeTrabajoRechazada) {
-//				factura = new FacturaDTO();
-//				factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
-//				factura.setFechaDeAlta(new Date());
-//				factura.setTotal(total);
-//				facturaDao.insert(factura);
-//
-//				List<FacturaDTO> facturas = facturaDao.readByOrdenDeTrabajoId(ordenDeTrabajoId);
-//				int idFactura = facturas.get(0).getIdFactura();
-//				for (FacturaDTO f : facturas) {
-//					if (idFactura < f.getIdFactura()) {
-//						idFactura = f.getIdFactura();
-//					}
-//				}
-//
-//				for (PresupuestoDTO p : ps) {
-//					p.setIdFactura(idFactura);
-//					presDao.update(p);
-//				}
-//				factura.setIdFactura(idFactura);
-//			} 
-//		}
-//		return factura;
-//	}
 	
 	private PresupuestoDTO readPresupuestoById(Integer idPresupuesto) {
 		PresupuestoDTO ret = presDao.readByID(idPresupuesto);
@@ -208,5 +164,12 @@ public class FacturasController {
 			}
 		}
 		return resumen;
+	}
+
+	public void generarFacturaCarrito(FacturaDTO facturaCarrito) {
+		// TODO Auto-generated method stub
+//		repuestoDao
+		
+		facturaDao.insertFacturaCarrito(facturaCarrito);
 	}
 }

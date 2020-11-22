@@ -37,6 +37,7 @@ import presentacion.views.supervisor.ClientePanelView;
 
 import javax.swing.JSplitPane;
 import javax.swing.border.BevelBorder;
+import java.awt.event.ActionEvent;
 
 public class PanelCarritoRepuestoView extends JPanel {
 
@@ -76,7 +77,7 @@ public class PanelCarritoRepuestoView extends JPanel {
 	private JPanel panel_1;
 	private JPanel panel_2;
 	private List<Integer> idRepuestos;
-	private JButton btnAceptar;
+	private JButton btnCrearFactura;
 	private JButton btnCancelar;
 	private ClientePanelView panelCliente;
 	private JSplitPane splitPane;
@@ -88,6 +89,8 @@ public class PanelCarritoRepuestoView extends JPanel {
 
 	private List<Integer> idRepuestosComprados;
 	private JLabel lblMarca;
+	private JTextField tfTotalFactura;
+	private JLabel lblTotalFactura;
 
 	public static PanelCarritoRepuestoView getInstance() {
 		if (vista == null)
@@ -120,9 +123,22 @@ public class PanelCarritoRepuestoView extends JPanel {
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		add(buttonPane, BorderLayout.SOUTH);
 
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setActionCommand("OK");
-		buttonPane.add(btnAceptar);
+		btnCrearFactura = new JButton("Aceptar");
+		btnCrearFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
+		lblTotalFactura = new JLabel("Total factura: ");
+		buttonPane.add(lblTotalFactura);
+		
+		tfTotalFactura = new JTextField();
+		tfTotalFactura.setEditable(false);
+		buttonPane.add(tfTotalFactura);
+		tfTotalFactura.setColumns(10);
+		btnCrearFactura.setActionCommand("OK");
+		buttonPane.add(btnCrearFactura);
+//		tfTotalFactura.setText(arg0);
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setVisible(false);
@@ -226,6 +242,10 @@ public class PanelCarritoRepuestoView extends JPanel {
 		textCantidad.setColumns(10);
 
 		btnAgregar = new JButton("Agregar");
+		btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		panel_2.add(btnAgregar);
 
 		panelInferior = new JPanel();
@@ -253,8 +273,8 @@ public class PanelCarritoRepuestoView extends JPanel {
 		panel.add(btnQuitar);
 
 		btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setVisible(false);
 		panel.add(btnLimpiar);
+		btnLimpiar.setVisible(false);
 	}
 
 	public void clearDataRepuestos() {
@@ -311,7 +331,7 @@ public class PanelCarritoRepuestoView extends JPanel {
 	}
 
 	public void setActionOnAceptar(ActionListener listener) {
-		this.btnAceptar.addActionListener(listener);
+		this.btnCrearFactura.addActionListener(listener);
 	}
 
 	public void close() {
@@ -325,13 +345,10 @@ public class PanelCarritoRepuestoView extends JPanel {
 	public void setActionOnBuscarCliente(ActionListener listener) {
 		this.btnBuscarCliente.addActionListener(listener);
 	}
-//-------jere----------
 
 	public void setActionOnAgregarCliente(ActionListener listener) {
 		this.btnRegistrarCliente.addActionListener(listener);
 	}
-
-//-------jere----------
 
 	public String getMarca() {
 		return (String) comboMarcas.getSelectedItem();
@@ -369,8 +386,6 @@ public class PanelCarritoRepuestoView extends JPanel {
 		this.panelCliente.setData(cliente);
 	}
 	
-	
-	
 	public void setData(List<RepuestoCompradoDTO> repuestos) {
 		modelRepuestosInferior.setRowCount(0);
 		idRepuestos.clear();
@@ -381,9 +396,34 @@ public class PanelCarritoRepuestoView extends JPanel {
 			modelRepuestosInferior.addRow(row);
 		}
 	}
+
+	public JLabel getLblTotalFactura() {
+		return lblTotalFactura;
+	}
+
+	public void setLblTotalFactura(JLabel lblTotalFactura) {
+		this.lblTotalFactura = lblTotalFactura;
+	}
+
+	public JTextField getTfTotalFactura() {
+		return tfTotalFactura;
+	}
+
+	public void setTfTotalFactura(JTextField tfTotalFactura) {
+		this.tfTotalFactura = tfTotalFactura;
+	}
+
+	public void setActionOnCrearFactura(ActionListener listener) {
+		this.btnCrearFactura.addActionListener(listener);
+		//poner algun modal de confirmacion issue32s
+	}
 	
+	public void clear() {
+	this.modelRepuestosInferior.setRowCount(0);
+	this.panelCliente.clearData();
+	this.tfTotalFactura.setText("0.0");
 	
+	}
 }
-	
 	
 	

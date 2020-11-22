@@ -23,6 +23,9 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 	
 	private static final String updatePago = "UPDATE Facturas SET estado = 'PAGA' , fechaDeCierrePorPago = SYSDATE WHERE idFactura = ?";
 	
+	private static final String insertFacturaCarrito = "INSERT INTO Facturas (estado, fechaDeAlta, total, idCliente) VALUES (?,?,?,?)";
+
+	
 	public FacturasDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -101,4 +104,24 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 		List<FacturaDTO>  dtos = getTemplate().query(readByFactura).param(id).excecute(getMapper());
 		return dtos .isEmpty() ? null : dtos.get(0);
 	}
+	
+	public void insertFacturaCarrito(FacturaDTO facturaCarrito) {
+		// TODO Auto-generated method stub
+		getTemplate().query(insertFacturaCarrito)
+			.param(facturaCarrito.getEstado())
+			.param(facturaCarrito.getFechaDeAlta())
+			.param(facturaCarrito.getTotal())
+			.param(facturaCarrito.getCliente().getIdCliente()).excecute();
+	}
+
+//	@Override
+//	public boolean insert(FacturaDTO entity) {
+//		return getTemplate().query(insert)
+//				.param(entity.getIdOrdenDeTrabajo())
+//				.param(entity.getFechaDeAlta())
+//				.param(entity.getFechaDeCierrePorPago() == null ? new NullObject() : entity.getFechaDeCierrePorPago())
+//				.param(entity.getTotal())
+//				.param(entity.getEstado())
+//				.excecute();
+//	}
 }

@@ -1,51 +1,37 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.event.ListSelectionEvent;
-
 import business_logic.ClientesController;
 import business_logic.FacturasController;
-import business_logic.OrdenesTrabajoController;
-import business_logic.PresupuestosController;
 import business_logic.RepuestosController;
-import business_logic.VehiculosController;
 import dto.ClienteDTO;
-import dto.FichaTecnicaVehiculoDTO;
-import dto.OrdenDeTrabajoDTO;
-import dto.PresupuestoDTO;
+import dto.FacturaDTO;
 import dto.RepuestoCompradoDTO;
 import dto.RepuestoDTO;
-import dto.RepuestoPlanificadoDTO;
-import dto.TrabajoPresupuestadoDTO;
-import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.cajero.PanelCarritoRepuestoView;
 import presentacion.views.supervisor.ClienteFormView;
 import presentacion.views.tecnico.AltaPresupuestoFormView;
-import presentacion.views.tecnico.PanelGestionPresupuestoView;
-import presentacion.views.tecnico.PlanificarRepuestosFormView;
-import presentacion.views.tecnico.PlanificarTrabajosFormView;
 import presentacion.views.utils.MessageDialog;
 
 public class CarritoPresenter {
 
 	private PanelCarritoRepuestoView view;
 	private AltaPresupuestoFormView altaPresupuesto;
-	private PresupuestoDTO nuevoPresupuesto;
+//	private PresupuestoDTO nuevoPresupuesto;
 	private RepuestosController repuestosController;
 	private ClientesController clienteController;
 	private FacturasController facturasController;
 
 	private String marca;
 	private String descripcion;
-
-	
+	private Double precioTotal = 0.00;
+	RepuestoCompradoDTO repuestoComprado = new RepuestoCompradoDTO();
+	ClienteDTO clienteFactura;
 	
 	private List<RepuestoCompradoDTO> repuestos;
 
@@ -68,7 +54,8 @@ public class CarritoPresenter {
 		this.view.setActionOnBuscarCliente(a -> onBuscarCliente(a));
 		this.view.setActionOnBuscar(a -> onBuscarRepuesto(a));
 		
-		
+		//issue#32
+		this.view.setActionOnCrearFactura(a -> onCrearFactura(a));
 		
 		repuestos = new ArrayList<>();
 		
@@ -85,9 +72,9 @@ public class CarritoPresenter {
 
 	// Cuando se cancela, borra el presupuesto para que no quede vacio.
 	private void onCancelar(ActionEvent a) {
-		nuevoPresupuesto = null;
-		altaPresupuesto.clearData();
-		altaPresupuesto.close();
+//		nuevoPresupuesto = null;
+//		altaPresupuesto.clearData();
+//		altaPresupuestso.close();
 	}
 
 	// Quita un repuesto del presupuesto
@@ -101,48 +88,12 @@ public class CarritoPresenter {
 			onBuscarRepuesto(a);
 			this.repuestos.remove(fila.intValue());
 			this.view.setDataRepuestosComprados(repuestos);
+			//issue32
+			precioTotal = precioTotal - repuestocomprado.getRepuesto().getPrecioRepuesto() * (repuestocomprado.getCantidad());
+			this.view.getTfTotalFactura().setText(precioTotal.toString());
 		}
 	}
-
 	
-
-	// Crea un nuevo presupuesto y lo guarda
-//	private void onNuevoPresupuesto(ActionEvent a) {
-////		Integer idOT = view.getIdOrdenDeTrabajo();
-//		if(idOT != null) {
-//				nuevoPresupuesto = new PresupuestoDTO();
-//				nuevoPresupuesto.setIdOT(idOT);
-//				onDisplayForPlanRepuesto(a);
-//				onDisplayForPlanTrabajos(a);
-//				this.altaPresupuesto.setData(nuevoPresupuesto);
-//				this.altaPresupuesto.display();
-//		}
-//	}
-
-//	//registra los repuestos y trabajos planificados
-//	private void onRegistrar(ActionEvent a) {
-//		String comentario = altaPresupuesto.getComentario();
-//		if(!comentario.isEmpty() && !nuevoPresupuesto.getTrabajos().isEmpty() && !nuevoPresupuesto.getRepuestos().isEmpty()) {
-//			nuevoPresupuesto.setComentarioAltaPresu(comentario);
-//			presupuestosController.save(nuevoPresupuesto);
-//			nuevoPresupuesto = null;
-//			this.view.setDataPresupuestos(presupuestosController.readByIdOt(view.getIdOrdenDeTrabajo()));
-//			this.altaPresupuesto.close();
-//		} else {
-//			List<String> errors = new ArrayList<>();
-//			if(comentario.isEmpty()) {
-//				errors.add("Ingrece un comentario");
-//			}
-//			if(nuevoPresupuesto.getTrabajos().isEmpty()) {
-//				errors.add("Agregue al menos un trabajo");
-//			}
-//			if(nuevoPresupuesto.getRepuestos().isEmpty()) {
-//				errors.add("Agregue al menos un repuesto");
-//			}
-//			new MessageDialog().showMessages(errors);
-//		}
-//	}
-
 	// Agrega repuesto a el carrito
 	private void onAgregarRepuesto(ActionEvent a) {
 		String cantidad = view.getCantidad();
@@ -161,9 +112,11 @@ public class CarritoPresenter {
 				repuesto.setStockRepuesto(stock - cant);
 				repuestosController.update(repuesto);
 				repuestos.add(repuestoComprado);
-//				view.setPrecio(nuevoPresupuesto.getPrecio());
+//				issue#32
+				precioTotal = precioTotal + (repuestoComprado.getRepuesto().getPrecioRepuesto()) * (Integer.parseInt(cantidad) )  ;
 				onBuscarRepuesto(a);
 				view.setDataRepuestosComprados(repuestos);
+				view.getTfTotalFactura().setText(precioTotal.toString());
 			} else {
 				new MessageDialog().showMessages("No hay stock suficiente.");
 			}
@@ -190,33 +143,11 @@ public class CarritoPresenter {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
 				view.setDataCliente(cliente);
+				clienteFactura = cliente;
 			}
 		}
 	}
 
-	// Muestra la orden de trabajo del vehiculo seleccionado.
-//	private void onSelectVehiculoDeCliente(ListSelectionEvent a) {
-//		VehiculoConOrdenDeTrabajoDTO idVehiculo = view.getidVehiculoSeleccionado();
-//		if (idVehiculo != null) {
-//			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController
-//					.readFichaTecnicaById(idVehiculo.getIdFichaTecnica());
-//			if (fichaVehiculo != null) {
-//				view.clearDataFichaTecnicaVehiculo();
-//				view.clearDataOrdenDeTrabajo();
-//				view.setData(fichaVehiculo);
-//				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo.getId());				
-//				if (ordenDeTrabajo != null) {
-//					view.setData(ordenDeTrabajo);
-//					List<PresupuestoDTO> presupuestos = this.presupuestosController.readByIdOt(ordenDeTrabajo.getIdOrdenTrabajo());
-//					view.setDataPresupuestos(presupuestos);
-//				} else {
-//					view.clearDataOrdenDeTrabajo();
-//					view.clearDataPresupuestos();
-//				}
-//			}
-//		}
-//	}
-	
 	private void refrescar() {
 		List<RepuestoDTO> repuestos;
 		if (descripcion.isEmpty()) {
@@ -248,7 +179,20 @@ public class CarritoPresenter {
 		descripcion = view.getDescripcion();
 		refrescar();
 	}
-	
+
+	private void onCrearFactura(ActionEvent a) {
+		//TODO agregar validaciones
+		FacturaDTO facturaCarrito = new FacturaDTO();
+		facturaCarrito.setCliente(clienteFactura);
+		facturaCarrito.setRepuestos(repuestos);
+		facturaCarrito.setTotal(precioTotal);
+		facturaCarrito.setFechaDeAlta(new Date());
+		facturasController.generarFacturaCarrito(facturaCarrito);
+		view.clear();
+		this.precioTotal = 0.0;
+		this.clienteFactura = null;
+		this.repuestos.clear();
+	}
 	
 
 	

@@ -20,8 +20,11 @@ public class FacturaDTO {
 	private String estado;
 		
 	private ClienteDTO cliente;
-//	**jere**
-//	private List<RepuestosCarritoDTO> repuestos;
+
+	//	**jere**
+	private List<RepuestoCompradoDTO> repuestos;
+	private int idCliente;
+	
 	public FacturaDTO() {
 		this.estado = "IMPAGA";
 	}
@@ -91,4 +94,32 @@ public class FacturaDTO {
 	public void setPresupuestosFacturados(List<PresupuestoDTO> presupuestosFacturados) {
 		this.presupuestosFacturados = presupuestosFacturados;
 	}
+//--------------------------------------issue32---------------------------------------
+
+	public ClienteDTO getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(ClienteDTO cliente) {
+		this.cliente = cliente;
+		this.idCliente = cliente.getIdCliente();
+	}
+
+	public List<RepuestoCompradoDTO> getRepuestos() {
+		return repuestos;
+	}
+
+	public void setRepuestos(List<RepuestoCompradoDTO> repuestos) {
+		this.repuestos = repuestos;
+	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+
+
 }
