@@ -145,7 +145,10 @@ public class CarritoPresenter {
 			if (cliente != null) {
 				view.setDataCliente(cliente);
 				clienteFactura = cliente;
+			}else {
+				clienteFactura = null;
 			}
+			
 		}
 		if (inputDni.isEmpty() || inputDni == null ) {
 			clienteFactura = null;
