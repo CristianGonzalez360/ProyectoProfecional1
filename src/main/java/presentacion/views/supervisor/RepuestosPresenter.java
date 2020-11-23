@@ -6,15 +6,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
-
 import business_logic.RepuestosController;
 import dto.RepuestoDTO;
 import dto.validators.StringValidator;
@@ -29,10 +26,8 @@ public class RepuestosPresenter {
 	private NuevosRepuestosFormView nuevosRepuestosView;
 	private DatabaseGraph repuestosGraph;
 	private static final String All= "Todas";
-
 	private String marca;
 	private String descripcion;
-
 
 	public RepuestosPresenter(RepuestosController controller) {
 		this.repuestosController = controller;
@@ -50,8 +45,6 @@ public class RepuestosPresenter {
 		cargarMarcas();
 	}
 
-	
-	
 	private void onEditarSock(ActionEvent a) {
 		int id = this.gestionRepuestos.getIdRepuesto();
 		if (id >= 0) {
@@ -73,8 +66,6 @@ public class RepuestosPresenter {
 			new MessageDialog().showMessages("Seleccione un repuesto");
 		}
 	}
-
-
 
 	private void onCancelarCarga(ActionEvent a) {
 		this.nuevosRepuestosView.cerrar();//cerrar
@@ -103,7 +94,6 @@ public class RepuestosPresenter {
 		}
 	}
 
-
 	private void onCargarArchivo(ActionEvent a) {
 		
 		JFileChooser chooser = new JFileChooser();
@@ -114,19 +104,45 @@ public class RepuestosPresenter {
 		
 		if(seleccion==JFileChooser.APPROVE_OPTION) {
 			try {
-				LogManager.getLogger(this.getClass()).log(Level.INFO,
-						"Seed database operation status: [INITIALIZED - LOADING .YML]");
+				LogManager.getLogger(this.getClass()).log(Level.INFO,"Seed database operation status: [INITIALIZED - LOADING .YML]");
 				Yaml yaml = new Yaml(new Constructor(DatabaseGraph.class));
 				InputStream inputStream = new FileInputStream(chooser.getSelectedFile().getAbsolutePath());//FileInputStream cambio
 				repuestosGraph = yaml.load(inputStream);
-				this.nuevosRepuestosView.cargarTabla(repuestosGraph.getRepuestos());
-				this.nuevosRepuestosView.mostrar();
 				
+				if(revisarRepuestos(repuestosGraph.getRepuestos())) {
+					this.nuevosRepuestosView.cargarTabla(repuestosGraph.getRepuestos());
+					this.nuevosRepuestosView.mostrar();
+				}else {
+					new MessageDialog().showMessages("El archivo contiene datos erroneos, por favor revisar el contenido del archivo\nEjemplo de formato recomendado:\nrepuestos:\n   - codigoRepuesto: 1122\r\n" + 
+							"      precioRepuesto: 3000\r\n" + 
+							"      marcaRepuesto: Renault\r\n" + 
+							"      descripcionRepuesto: Volante\r\n" + 
+							"      stockRepuesto: 20\r\n" + 
+							"      fabricante: Autopartes Argentinas\r\n" + 
+							"      stockMinimo: 13");
+					}
 			} catch (Exception e) {
-				LogManager.getLogger(this.getClass()).log(Level.ERROR,
-						"Seed database operation status: [ABORT - ERROR LOADING .YML, " + e.getMessage() + "]");
+				LogManager.getLogger(this.getClass()).log(Level.ERROR,"Seed database operation status: [ABORT - ERROR LOADING .YML, " + e.getMessage() + "]");
+				new MessageDialog().showMessages("El archivo esta vacío, por favor revisar el contenido del archivo\nEjemplo de formato recomendado:\nrepuestos:\n   - codigoRepuesto: 1122\r\n" + 
+						"      precioRepuesto: 3000\r\n" + 
+						"      marcaRepuesto: Renault\r\n" + 
+						"      descripcionRepuesto: Volante\r\n" + 
+						"      stockRepuesto: 20\r\n" + 
+						"      fabricante: Autopartes Argentinas\r\n" + 
+						"      stockMinimo: 13");
 			}
 		}
+	}
+
+	private boolean revisarRepuestos(List<RepuestoDTO> repuestos) {
+		boolean ret=false;
+		for (RepuestoDTO repuesto : repuestos) {
+			if(repuesto.getCodigoRepuesto()!=null && repuesto.getPrecioRepuesto()!=null && repuesto.getMarcaRepuesto()!=null && 
+					repuesto.getDescripcionRepuesto()!=null && repuesto.getStockRepuesto()!=null && repuesto.getFabricante()!=null && repuesto.getStockMinimo()!=null) {
+				ret=true;
+			}
+		}
+		return ret;
 	}
 
 	private void onValidarCarga(ActionEvent a) {
@@ -169,7 +185,6 @@ public class RepuestosPresenter {
 		this.gestionRepuestos.setData(repuestos);//actualizo tabla repuestos
 		
 	}
-	
 	
 	private void onIngresarStock(ActionEvent a) {
 		int id = this.gestionRepuestos.getIdRepuesto();
