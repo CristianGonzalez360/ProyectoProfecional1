@@ -28,7 +28,7 @@ public class RepuestosPresenter {
 	private RepuestosController repuestosController;
 	private NuevosRepuestosFormView nuevosRepuestosView;
 	private DatabaseGraph repuestosGraph;
-	
+	private static final String All= "Todas";
 
 	private String marca;
 	private String descripcion;
@@ -46,7 +46,7 @@ public class RepuestosPresenter {
 		this.nuevosRepuestosView.setActionOnCancelarCarga(a -> onCancelarCarga(a));
 		this.gestionRepuestos.serActionOnConfigurarMinimo(a -> onConfigMinimo(a));
 		this.gestionRepuestos.setActionOnEditarStock(a -> onEditarSock(a));
-
+		this.gestionRepuestos.setActionBajoStock(a -> onMostrarRepuestosSinStock(a));
 		cargarMarcas();
 	}
 
@@ -196,13 +196,13 @@ public class RepuestosPresenter {
 	private void refrescar() {
 		List<RepuestoDTO> repuestos;
 		if (descripcion.isEmpty()) {
-			if (marca == "todas") {
+			if (marca == All) {
 				repuestos = repuestosController.readAll();
 			} else {
 				repuestos = repuestosController.readByMarca(marca);
 			}
 		} else {
-			if (marca == "todas") {
+			if (marca == All) {
 				repuestos = repuestosController.readByDescripcion(descripcion);
 			} else {
 				repuestos = repuestosController.readbyMarcaYDescripcion(marca, descripcion);
@@ -213,7 +213,7 @@ public class RepuestosPresenter {
 
 	public void cargarMarcas() {
 		List<String> marcas = new ArrayList<String>();
-		marcas.add("todas");
+		marcas.add(All);
 		marcas.addAll(repuestosController.readMarcas());
 		this.gestionRepuestos.setDataMarcas(marcas);
 	}
@@ -223,5 +223,12 @@ public class RepuestosPresenter {
 		marca = gestionRepuestos.getMarca();
 		descripcion = gestionRepuestos.getDescripcion();
 		refrescar();
+	}
+	
+	private void onMostrarRepuestosSinStock(ActionEvent a) {
+		marca = All;
+		descripcion = "";
+		gestionRepuestos.resetBuscador();
+		gestionRepuestos.setData(repuestosController.readRepuestosSinStock());
 	}
 }

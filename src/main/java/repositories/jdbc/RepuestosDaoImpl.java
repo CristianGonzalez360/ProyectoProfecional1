@@ -29,6 +29,8 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 	private static final String updateByCodigo = "UPDATE Repuestos SET Repuestos.stockRepuesto = ? WHERE Repuestos.codigoRepuesto = ?";
 
 	private static final String update = "UPDATE repuestos SET stockRepuesto = ?, stockMinimo = ? WHERE idRepuesto = ?";
+	
+	private static final String readSinStock = readAll + " " + "WHERE stockRepuesto<stockMinimo";
 
 
 	public RepuestosDaoImpl(Connection connection) {
@@ -125,5 +127,10 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 	public void updateByCodigo(RepuestoDTO repuesto) {
 		getTemplate().query(updateByCodigo).param(repuesto.getStockRepuesto()).param(repuesto.getCodigoRepuesto()).excecute();
 	}	
+	
+	@Override
+	public List<RepuestoDTO> readRepuestosSinStock(){
+		return getTemplate().query(readSinStock).excecute(getMapper());
+	}
 	
 }
