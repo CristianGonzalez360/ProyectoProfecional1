@@ -142,6 +142,7 @@ public class ClienteFormView extends JDialog {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
+				clearData();
 			}
 		});
 		panel_1.add(btnCancelar);
