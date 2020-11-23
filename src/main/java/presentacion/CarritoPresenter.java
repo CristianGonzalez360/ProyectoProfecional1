@@ -203,7 +203,9 @@ public class CarritoPresenter {
 			view.clear();
 			this.precioTotal = 0.0;
 			this.clienteFactura = null;
+			this.view.setTfDni("");
 			this.repuestos.clear();
+
 		}else {
 			new MessageDialog().showMessages(errors);
 		}
