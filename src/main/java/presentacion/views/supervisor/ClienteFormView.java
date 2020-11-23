@@ -153,6 +153,8 @@ public class ClienteFormView extends JDialog {
 	public static ClienteFormView getInstance() {
 		if (instance == null) {
 			instance = new ClienteFormView();
+			instance.setTitle("Registrar Cliente");
+
 		}
 		return instance;
 	}
