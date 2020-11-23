@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import business_logic.exceptions.ForbiddenException;
 import business_logic.exceptions.NotFoundException;
 import dto.ClienteDTO;
 import dto.EstadoPresupuesto;
@@ -15,6 +14,7 @@ import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
 import dto.ResumenDeFacturaDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
+import presentacion.views.utils.FacturaRepuestosReport;
 import presentacion.views.utils.FacturaTallerReport;
 import repositories.ClientesDao;
 import repositories.DaosFactory;
@@ -28,10 +28,6 @@ import repositories.VehiculosConOrdenDeTrabajoDao;
 
 public class FacturasController {
 	
-	private static final String NOT_FOUND = "La orden de trabajo no tiene una factura.";
-
-	private static final String FORBIDDEN_CAMBIO_ESTADO = "No puede editar el estado del presupuesto.";
-		
 	private FacturasDao facturaDao;
 
 	private PresupuestosDao presDao;
@@ -60,24 +56,7 @@ public class FacturasController {
 		assert id != null;
 		return facturaDao.readByOrdenDeTrabajoId(id);
 	}
-	
-	public void updateEstadoPresupuestos(Map<Integer, Boolean> presupuestos) throws ForbiddenException {
-		assert presupuestos != null;
-		assert !presupuestos.isEmpty();
-		presupuestos.forEach((k, v) -> {
-			PresupuestoDTO presupuesto = presDao.readByID(k);
-			if(presupuesto.getEstado().equals(EstadoPresupuesto.PENDIENTE)) {
-				if(v.booleanValue() == true) {
-					presDao.updateStateById(k,new Date(), EstadoPresupuesto.APROBADO);	
-				} else {
-					presDao.updateStateById(k,new Date(), EstadoPresupuesto.RECHAZADO);	
-				}
-			} else {
-				throw new ForbiddenException(FORBIDDEN_CAMBIO_ESTADO);
-			}
-		});
-	}
-	
+		
 	public FacturaDTO generarFactura(Map<Integer, Boolean> presupuestos) {
 		FacturaDTO factura = null;
 		if (!presupuestos.isEmpty()) {
@@ -104,13 +83,7 @@ public class FacturasController {
 
 				facturaDao.insert(factura);
 
-				List<FacturaDTO> facturas = facturaDao.readByOrdenDeTrabajoId(ordenDeTrabajoId);
-				int idFactura = facturas.get(0).getIdFactura();
-				for (FacturaDTO f : facturas) {
-					if (idFactura < f.getIdFactura()) {
-						idFactura = f.getIdFactura();
-					}
-				}
+				int idFactura = readIdUltimaFacturaGuardada();
 
 				for (PresupuestoDTO p : ps) {
 					p.setIdFactura(idFactura);
@@ -121,6 +94,17 @@ public class FacturasController {
 			} 
 		}
 		return factura;
+	}
+	
+	private int  readIdUltimaFacturaGuardada() {
+		List<FacturaDTO> facturas = facturaDao.readAll();
+		int idFactura = facturas.get(0).getIdFactura();
+		for (FacturaDTO f : facturas) {
+			if (idFactura < f.getIdFactura()) {
+				idFactura = f.getIdFactura();
+			}
+		}
+		return idFactura;
 	}
 
 	private PresupuestoDTO readPresupuestoById(Integer idPresupuesto) {
@@ -191,18 +175,13 @@ public class FacturasController {
 
 	public void generarFacturaCarrito(FacturaDTO facturaCarrito) {
 		facturaDao.insertFacturaCarrito(facturaCarrito);
+		facturaCarrito.setIdFactura(readIdUltimaFacturaGuardada());
 	}
 	
-	public FacturaTallerReport make(FacturaDTO factura) {
-		
+	public FacturaTallerReport makeFacturaTaller(FacturaDTO factura) {
 		FacturaTallerReport ret = new FacturaTallerReport();
-		OrdenDeTrabajoDTO ordenTrabajo = ordenTrabajoDao.readByID(factura.getIdOrdenDeTrabajo());
-		VehiculoConOrdenDeTrabajoDTO vehiculoConOrdenTrabajo = vehiculoConOrdenTrabajoDao.readByID(ordenTrabajo.getIdOrdenTrabajo());
-		FichaTecnicaVehiculoDTO fichaTecnica = fichaTecnicaDao.readByID(vehiculoConOrdenTrabajo.getIdFichaTecnica());
-		ClienteDTO cliente = getCliente(factura);
-		
-		ret.setCliente(cliente.getDatosPersonalesDTO());
-		ret.setVehiculo(fichaTecnica);
+		ret.setCliente(getCliente(factura).getDatosPersonalesDTO());
+		ret.setVehiculo(getFichaTecnica(factura));
 		ret.setTrabajos(factura.getTabajos());
 		ret.setRepuestos(factura.getRepuestosPlanificados());
 		ret.setTotal(factura.getTotal());
@@ -220,5 +199,24 @@ public class FacturasController {
 		cliente = clienteDao.readByID(vehiculoConOrdenTrabajo.getIdCliente());
 		
 		return cliente;
+	}
+	
+	private FichaTecnicaVehiculoDTO getFichaTecnica(FacturaDTO factura) {
+		OrdenDeTrabajoDTO ordenTrabajo = ordenTrabajoDao.readByID(factura.getIdOrdenDeTrabajo());
+		VehiculoConOrdenDeTrabajoDTO vehiculoConOrdenTrabajo = vehiculoConOrdenTrabajoDao.readByID(ordenTrabajo.getIdOrdenTrabajo());
+		return fichaTecnicaDao.readByID(vehiculoConOrdenTrabajo.getIdFichaTecnica());
+	}
+	
+	public FacturaRepuestosReport makeFacturaRepuestos(FacturaDTO factura) {
+		
+		FacturaRepuestosReport ret = new FacturaRepuestosReport();
+		
+		ret.setCliente(factura.getCliente().getDatosPersonalesDTO());
+		ret.setRepuestos(factura.getRepuestosComprados());
+		ret.setTotal(factura.getTotal());
+		ret.setFecha(factura.getFechaDeAlta());
+		ret.setNumero(factura.getIdFactura());
+		
+		return ret;
 	}
 }

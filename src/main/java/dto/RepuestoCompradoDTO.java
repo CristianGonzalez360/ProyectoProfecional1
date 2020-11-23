@@ -2,25 +2,21 @@ package dto;
 
 public class RepuestoCompradoDTO {
 	
-	private int cantidad;
+	private int cantRequerida;
 	private RepuestoDTO repuesto;
 	private Integer idRepuestoComprado;
 	private Integer idFacturaCarrito;
-
-	public void setCantRequerida(int cant) {
-		this.cantidad = cant;
-	}
 
 	public void setRepuesto(RepuestoDTO repuesto) {
 		this.repuesto = repuesto;
 	}
 
-	public int getCantidad() {
-		return cantidad;
+	public int getCantRequerida() {
+		return cantRequerida;
 	}
 
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
+	public void setCantRequerida(int cantidad) {
+		this.cantRequerida = cantidad;
 	}
 
 	public RepuestoDTO getRepuesto() {
@@ -43,4 +39,19 @@ public class RepuestoCompradoDTO {
 		this.idFacturaCarrito = idFacturaCarrito;
 	}
 
+	public Double getPrecioTotal() {
+		return repuesto.getPrecioRepuesto()*cantRequerida;
+	}
+	
+	public String getDescripcion() {
+		return repuesto.getDescripcionRepuesto();
+	}
+	
+	public Double getPrecio() {
+		return repuesto.getPrecioRepuesto();
+	}
+	
+	public String getMarca() {
+		return repuesto.getMarcaRepuesto();
+	}
 }
