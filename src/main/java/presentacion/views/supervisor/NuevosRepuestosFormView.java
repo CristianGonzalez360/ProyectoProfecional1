@@ -3,7 +3,6 @@ package presentacion.views.supervisor;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowListener;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JButton;
@@ -13,12 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import dto.EstadoPresupuesto;
-import dto.PresupuestoDTO;
 import dto.RepuestoDTO;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 
 public class NuevosRepuestosFormView extends JDialog {
 
