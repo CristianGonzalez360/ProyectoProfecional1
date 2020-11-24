@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 import business_logic.exceptions.ForbiddenException;
 import dto.AltaOrdenDeTrabajoDTO;
+import dto.EstadoPresupuesto;
 import dto.OrdenDeTrabajoDTO;
+import dto.PresupuestoDTO;
 import repositories.FacturasDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.PresupuestosDao;
@@ -15,11 +17,13 @@ public class OrdenesTrabajoController {
 	private static final String FORBIDDEN_ALTA_OT = "Operación no permitida. El vehículo tiene una orde de trabajo activa.";
 
 	private OrdenesDeTrabajoDao dao;
+	private PresupuestosDao presDao;
 
 	private final SessionService service;
 
 	public OrdenesTrabajoController(OrdenesDeTrabajoDao dao, SessionService service, FacturasDao facturasDao, PresupuestosDao presupuestos) {
 		this.dao = dao;
+		this.presDao = presupuestos;
 		this.service = service;
 	}
 
@@ -50,5 +54,17 @@ public class OrdenesTrabajoController {
 	public OrdenDeTrabajoDTO readByIdVehiculo(Integer idVehiculo) {
 		assert idVehiculo != null;
 		return dao.readByIdVehiculoConOtNoCerrada(idVehiculo);
+	}
+	
+	public boolean esRechazada(Integer ordenDeTrabajoId) {
+		List<PresupuestoDTO> presu = presDao.readByOrdenDeTrabajoId(ordenDeTrabajoId);
+		int cantPresupuestos = presu.size();
+		int cantRechazadas = 0;
+		for(PresupuestoDTO temp: presu) {
+			if(temp.getEstado().equals(EstadoPresupuesto.RECHAZADO)) {
+				cantRechazadas++;
+			}
+		}
+		return cantRechazadas == cantPresupuestos;
 	}
 }
