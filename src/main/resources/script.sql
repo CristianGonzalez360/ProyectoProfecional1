@@ -70,6 +70,7 @@ CREATE TABLE FichaTecnicaVehiculo (
    color VARCHAR (15),
    combustion VARCHAR (15),
    descripcion VARCHAR (60),
+   patente VARCHAR (10),
    PRIMARY KEY (idFichaTecnicaVehiculo)
 );
 
