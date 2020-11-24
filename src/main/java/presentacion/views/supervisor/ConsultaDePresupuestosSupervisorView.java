@@ -49,14 +49,16 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 	private JPanel panelEste;
 	private JPanel panelOeste;
 	private JPanel panelEsteNorte;
+	private static final int EDITABLE = 6; 
+	private static final int ESTADO = 4; 
 
 	private final String[] columnasTablaVehiculos = new String[] { "NRO. VEHICULO", "KM GARANTIA", "ASEGURADORA",
 			"NRO POLIZA SEGURO", "PATENTE" };
 	private DefaultTableModel tableModelVehiculos;
 	private JTable tableVehiculos;
 
-	private final String[] columnasListadoDePresupuestos = new String[] { "NRO. Presupuesto", "FECHA ALTA",
-			"COMENTARIO ALTA", "ESTADO", "APROBAR" };
+	private final String[] columnasListadoDePresupuestos = new String[] { "NRO.", "FECHA ALTA",
+			"COMENTARIO ALTA", "PRECIO","ESTADO", "COMENTARIO RECHAZO", "APROBAR" };
 	private DefaultTableModel listadoDePresupuestosModel;
 
 	private final String[] columnasListadoDeRepuestos = new String[] { "CODIGO", "MARCA", "DESCRIPCIÓN", "PRECIO",
@@ -221,12 +223,12 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 			private static final long serialVersionUID = -972882702173668623L;
 
 			public boolean isCellEditable(int row, int column) {
-				return listadoDePresupuestosModel.getValueAt(row, 3) == EstadoPresupuesto.PENDIENTE.name();
+				return listadoDePresupuestosModel.getValueAt(row, ESTADO) == EstadoPresupuesto.PENDIENTE.name();
 			}
 
 			@Override
 			public Class getColumnClass(int col) {
-				if (col == 4)
+				if (col == EDITABLE)
 					return Boolean.class;
 				else
 					return super.getColumnClass(col);
@@ -258,7 +260,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column) {
-				return column == 4;
+				return false;
 			}
 		};
 		tableRepuestos = new JTable(listadoDeRepuestosModel);
@@ -278,7 +280,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column) {
-				return column == 4;
+				return false;
 			}
 		};
 		tableTrabajos = new JTable(listadoDeTrabajosModel);
@@ -387,7 +389,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 				check = true;
 			}
 			Object[] row = { dto.getIdPresupuesto().toString(), dto.getFechaAltaPresu().toString(),
-					dto.getComentarioAltaPresu().toString(), dto.getEstado().name(), check };
+					dto.getComentarioAltaPresu().toString(), dto.getPrecio(), dto.getEstado().name(), dto.getComentarioRechazo(), check };
 			this.listadoDePresupuestosModel.addRow(row);
 		}
 	}
@@ -400,9 +402,9 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		Map<Integer, Boolean> presu = new HashMap<>();
 		int rows = this.listadoDePresupuestosModel.getRowCount();
 		for (int index = 0; index < rows; index++) {
-			if (listadoDePresupuestosModel.getValueAt(index, 3) == EstadoPresupuesto.PENDIENTE.name()) {
+			if (listadoDePresupuestosModel.getValueAt(index, ESTADO) == EstadoPresupuesto.PENDIENTE.name()) {
 				Integer presupuestoId = Integer.parseInt(listadoDePresupuestosModel.getValueAt(index, 0).toString());
-				Boolean isOk = (Boolean) listadoDePresupuestosModel.getValueAt(index, 4);
+				Boolean isOk = (Boolean) listadoDePresupuestosModel.getValueAt(index, EDITABLE);
 				presu.put(presupuestoId, isOk);
 			}
 		}
