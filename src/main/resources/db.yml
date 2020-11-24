@@ -119,6 +119,7 @@ fichaTecnicaVehiculos:
     color: rojo
     combustion: gas/nafta
     descripcion: calienta mucho
+    patente: 123abc
   - nroChasis: 3125
     nroMotor: 22552
     kilometraje: 22122
@@ -127,6 +128,7 @@ fichaTecnicaVehiculos:
     color: negro
     combustion: nafta
     descripcion: funciona ok
+    patente: 456def
   - nroChasis: 31258
     nroMotor: 225528
     kilometraje: 221
@@ -135,6 +137,7 @@ fichaTecnicaVehiculos:
     color: negro
     combustion: nafta
     descripcion: funciona ok
+    patente: 789ghi
 
 clientes:
   - idDatosPersonales: 1 

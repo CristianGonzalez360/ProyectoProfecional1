@@ -62,6 +62,8 @@ public class VehiculosController {
 			for (OrdenDeTrabajoDTO temp : otDao.readByVehiculoId(aux.getId())) {
 				if (temp != null) {
 					if (temp.getFechaEntregado() == null) {
+						String patente = fichasDao.readByID(aux.getIdFichaTecnica()).getPatente();
+						aux.setPatente(patente);
 						vClienteRet.add(aux);
 					}
 				}

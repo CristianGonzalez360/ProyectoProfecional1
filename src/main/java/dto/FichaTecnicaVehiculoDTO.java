@@ -34,6 +34,7 @@ public class FichaTecnicaVehiculoDTO {
 		this.color = vehiculoDeAlta.getColor();
 		this.combustion = vehiculoDeAlta.getCombustion();
 		this.descripcion = vehiculoDeAlta.getDescripcion();
+		this.patente = vehiculoDeAlta.getPatente();
 	}
 
 	public FichaTecnicaVehiculoDTO makeTestDTO() {
@@ -46,6 +47,7 @@ public class FichaTecnicaVehiculoDTO {
 		ret.setColor("rojo");
 		ret.setCombustion("nafta");
 		ret.setDescripcion("Funciona correctamente");
+		ret.setPatente("123456");
 		return ret;
 	}
 
