@@ -144,6 +144,7 @@ public class ConsultaDePresupuestoPresenter {
 	
 	private void onGenerarFactura(ActionEvent a) {
 		List<PresupuestoDTO> ps = getPresupuestosFacturados();
+		actualizarEstadoPresupuestos();
 		FacturaDTO factura = null;
 		Integer ordenDeTrabajoId = null;
 		if(!ps.isEmpty()) {
@@ -164,15 +165,12 @@ public class ConsultaDePresupuestoPresenter {
 					presController.update(p);
 				}
 				factura.setPresupuestosFacturados(ps);
-			}
-			
-			if(factura != null) {
+				
 				ReporteViewImpl ventanaReporte = new ReporteViewImpl();
 				ventanaReporte.setData(facController.makeFacturaTaller(factura));
 				ventanaReporte.open();
 			}
 		}
-		actualizarEstadoPresupuestos();
 	}
 	
 	private List<PresupuestoDTO> getPresupuestosFacturados(){
