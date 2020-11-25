@@ -146,30 +146,29 @@ public class RepuestosPresenter {
 	}
 
 	private void onValidarCarga(ActionEvent a) {
+		int j=0;
 		List<Integer> idRepuestosNoAceptados = this.nuevosRepuestosView.getIdRepuestosNoAceptados();//obtengo id de repuestos que estoy leyendo que no fueron aceptados para cargar
 		int codigo;
 		List<RepuestoDTO> repuestosCargados = this.repuestosGraph.getRepuestos();//lista con todos los repuestos del archivo
 		ListIterator<RepuestoDTO> it = repuestosCargados.listIterator();
 		RepuestoDTO repuestoAuxiliar;
-		while(it.hasNext()) {//elimino los no seleccionados
-			
+		
+		while(it.hasNext()&&j<idRepuestosNoAceptados.size() ) {//quito los que selecciono
 			codigo=it.next().getCodigoRepuesto();
-			for(int i=0;i<idRepuestosNoAceptados.size();i++) {
-				if(codigo==idRepuestosNoAceptados.get(i)) {
-					it.remove();
-				}
+			if(codigo==idRepuestosNoAceptados.get(j)) {
+				j++;
+				it.remove();
 			}
 		}
 		
 		it = repuestosCargados.listIterator();
 		while(it.hasNext()) {//busco los que ya existen y actualizo la cantidad de repuestos
-			
 			repuestoAuxiliar=it.next();			
 			if(repuestosController.readByCodigo(repuestoAuxiliar.getCodigoRepuesto()) != null) {
 				repuestoAuxiliar.setStockRepuesto(repuestoAuxiliar.getStockRepuesto()+repuestosController.readByCodigo(repuestoAuxiliar.getCodigoRepuesto()).getStockRepuesto());
 			}
 		}
-
+		
 		it = repuestosCargados.listIterator();
 		while(it.hasNext()) {//inserto en la base de datos.
 			repuestoAuxiliar=it.next();
@@ -180,10 +179,8 @@ public class RepuestosPresenter {
 		this.nuevosRepuestosView.cerrar();//cerrar
 		this.nuevosRepuestosView.clear();//limpiar la vista tambn
 		cargarMarcas();//actualizo combobox
-		
 		List<RepuestoDTO> repuestos = repuestosController.readAll();
 		this.gestionRepuestos.setData(repuestos);//actualizo tabla repuestos
-		
 	}
 	
 	private void onIngresarStock(ActionEvent a) {

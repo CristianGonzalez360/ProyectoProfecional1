@@ -16,13 +16,13 @@ import dto.RepuestoDTO;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+@SuppressWarnings("serial")
 public class NuevosRepuestosFormView extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable tablaRepuestos;
 	private DefaultTableModel modelo;
 	private static final String[] nombreColumnas = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock", "Precio" , "quitar"};//columna checkbox editable
-	
 	private JButton okButton;
 	private JButton cancelButton;
 	private static NuevosRepuestosFormView instance;
@@ -32,6 +32,7 @@ public class NuevosRepuestosFormView extends JDialog {
 			instance = new NuevosRepuestosFormView();
 		return instance;
 	}
+	
 	
 	public NuevosRepuestosFormView() {
 		setTitle("Nuevos repuestos");
@@ -48,6 +49,7 @@ public class NuevosRepuestosFormView extends JDialog {
 					return column == 6;
 				}
 				
+				@SuppressWarnings({ "unchecked", "rawtypes" })
 				@Override
 			    public Class getColumnClass(int col) {
 					if(col == 6) return Boolean.class;
@@ -57,9 +59,7 @@ public class NuevosRepuestosFormView extends JDialog {
 			
 			tablaRepuestos = new JTable(modelo);			
 			JScrollPane scrollPane = new JScrollPane(tablaRepuestos);
-			contentPanel.add(scrollPane, BorderLayout.CENTER);
-			
-		}
+			contentPanel.add(scrollPane, BorderLayout.CENTER);}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -68,8 +68,7 @@ public class NuevosRepuestosFormView extends JDialog {
 				okButton = new JButton("Cargar repuestos");
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
+				getRootPane().setDefaultButton(okButton);}
 			{
 				cancelButton = new JButton("Cancelar carga");
 				cancelButton.setActionCommand("Cancel");
@@ -92,7 +91,6 @@ public class NuevosRepuestosFormView extends JDialog {
 		TableColumn tc = tablaRepuestos.getColumnModel().getColumn(6);
 		tc.setCellEditor(tablaRepuestos.getDefaultEditor(Boolean.class));
 		tc.setCellRenderer(tablaRepuestos.getDefaultRenderer(Boolean.class));
-		
 	}
 	
 	public void mostrar () {
@@ -119,21 +117,15 @@ public class NuevosRepuestosFormView extends JDialog {
 	
 	public List<Integer> getIdRepuestosNoAceptados() {
 		List<Integer> repuestosId = new LinkedList<Integer>();
-		int rows = this.modelo.getRowCount();
-		Boolean isOk=false;
-		Integer repuestoId;
-		
+		int rows = this.modelo.getRowCount();		
+		Integer repuestoId;		
 		for (int index = 0; index < rows; index++) {
 			repuestoId = Integer.parseInt(modelo.getValueAt(index, 0).toString());
-			isOk = Boolean.valueOf(this.checkBoxIsSelected(index));
-			if(isOk) {
+			Boolean isOk = (Boolean) modelo.getValueAt(index, 6);
+			if(isOk!=null && isOk!=false) {//igual true quitar
 				repuestosId.add(repuestoId);
 			}
 		}
 		return repuestosId;
-	}
-
-	private boolean checkBoxIsSelected(int index) {//si esta tildado se quita
-		return modelo.getValueAt(index, 6) != null;
-	}
+	}	
 }
