@@ -17,14 +17,14 @@ import dto.RepuestoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.utils.InputDialog;
 import presentacion.views.utils.MessageDialog;
-import services.DatabaseGraph;
+import services.DatabaseGraphRepuesto;
 
 public class RepuestosPresenter {
 
 	private PanelGestionRepuestos gestionRepuestos;
 	private RepuestosController repuestosController;
 	private NuevosRepuestosFormView nuevosRepuestosView;
-	private DatabaseGraph repuestosGraph;
+	private DatabaseGraphRepuesto repuestosGraph;
 	private static final String All= "Todas";
 	private String marca;
 	private String descripcion;
@@ -105,11 +105,11 @@ public class RepuestosPresenter {
 		if(seleccion==JFileChooser.APPROVE_OPTION) {
 			try {
 				LogManager.getLogger(this.getClass()).log(Level.INFO,"Seed database operation status: [INITIALIZED - LOADING .YML]");
-				Yaml yaml = new Yaml(new Constructor(DatabaseGraph.class));
+				Yaml yaml = new Yaml(new Constructor(DatabaseGraphRepuesto.class));
 				InputStream inputStream = new FileInputStream(chooser.getSelectedFile().getAbsolutePath());//FileInputStream cambio
 				repuestosGraph = yaml.load(inputStream);
 				
-				if(revisarRepuestos(repuestosGraph.getRepuestos())) {
+				if(validarRepuestos(repuestosGraph.getRepuestos())) {
 					this.nuevosRepuestosView.cargarTabla(repuestosGraph.getRepuestos());
 					this.nuevosRepuestosView.mostrar();
 				}else {
@@ -134,7 +134,7 @@ public class RepuestosPresenter {
 		}
 	}
 
-	private boolean revisarRepuestos(List<RepuestoDTO> repuestos) {
+	private boolean validarRepuestos(List<RepuestoDTO> repuestos) {
 		boolean ret=false;
 		for (RepuestoDTO repuesto : repuestos) {
 			if(repuesto.getCodigoRepuesto()!=null && repuesto.getPrecioRepuesto()!=null && repuesto.getMarcaRepuesto()!=null && 
