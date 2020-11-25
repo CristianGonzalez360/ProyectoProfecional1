@@ -135,14 +135,14 @@ public class RepuestosPresenter {
 	}
 
 	private boolean validarRepuestos(List<RepuestoDTO> repuestos) {
-		boolean ret=false;
+		boolean flag=true;
 		for (RepuestoDTO repuesto : repuestos) {
-			if(repuesto.getCodigoRepuesto()!=null && repuesto.getPrecioRepuesto()!=null && repuesto.getMarcaRepuesto()!=null && 
-					repuesto.getDescripcionRepuesto()!=null && repuesto.getStockRepuesto()!=null && repuesto.getFabricante()!=null && repuesto.getStockMinimo()!=null) {
-				ret=true;
+			if(repuesto.getCodigoRepuesto()==null || repuesto.getPrecioRepuesto()==null || repuesto.getMarcaRepuesto()==null ||
+					repuesto.getDescripcionRepuesto()==null || repuesto.getStockRepuesto()==null || repuesto.getFabricante()==null || repuesto.getStockMinimo()==null) {
+				flag=false;
 			}
 		}
-		return ret;
+		return flag;
 	}
 
 	private void onValidarCarga(ActionEvent a) {
