@@ -309,6 +309,7 @@ CREATE TABLE VehiculoReservado (
   idVehiculoReservado INTEGER NOT NULL,
   idFichaTecnica INTEGER NOT NULL,
   idPedido INTEGER NOT NULL,
+  precioVenta INTEGER NOT NULL,
   PRIMARY KEY (idVehiculoReservado),
   FOREIGN KEY (idFichaTecnica) REFERENCES FichaTecnicaVehiculo(idFichaTecnicaVehiculo)
 );
