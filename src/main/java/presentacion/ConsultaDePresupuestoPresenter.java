@@ -1,6 +1,8 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,18 +15,19 @@ import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.VehiculosController;
 import business_logic.exceptions.ForbiddenException;
-import business_logic.exceptions.NotFoundException;
 import dto.ClienteDTO;
+import dto.EstadoPresupuesto;
 import dto.FacturaDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.PresupuestoDTO;
 import dto.RepuestoPlanificadoDTO;
-import dto.ResumenDeFacturaDTO;
 import dto.TrabajoPresupuestadoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ConsultaDePresupuestosSupervisorView;
+import presentacion.views.supervisor.InputComentarioDialog;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.utils.ReporteViewImpl;
 
 public class ConsultaDePresupuestoPresenter {
 
@@ -39,6 +42,8 @@ public class ConsultaDePresupuestoPresenter {
 	private PresupuestosController presController;
 	
 	private FacturasController facController;
+
+	private ClienteDTO cliente;
 	
 	public ConsultaDePresupuestoPresenter(VehiculosController controller
 			, ClientesController clienteController,
@@ -50,6 +55,7 @@ public class ConsultaDePresupuestoPresenter {
 		this.otController = otController;
 		this.presController = presController;
 		this.facController = facController;
+		
 		view.setActionOnBuscar((a) -> onBuscar(a));
 		view.setActionSelectVehiculoCliente(new ListSelectionListener() {
 			@Override
@@ -63,8 +69,12 @@ public class ConsultaDePresupuestoPresenter {
 				onSelectPresupuesto();
 			}
 		});
+<<<<<<< HEAD
 		view.setActionGenerarFactura((a)->onAprobarPresupuestos(a));
 		view.setActionRegistrarPago((a)->onRegistrarPago(a));
+=======
+		view.setActionGenerarFactura((a)->onGenerarFactura(a));
+>>>>>>> release#2.0.0
 	}
 
 	private void onSelectVehiculoDeCliente() {
@@ -80,11 +90,10 @@ public class ConsultaDePresupuestoPresenter {
 	
 	private void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		view.setDataPresupuestos(presupuestos);
-		FacturaDTO factura = facController.readFacturaByOrdenDeTrabajoId(view.getIdOrdenDeTrabajoPresentada());
-		if(factura != null) {
-			view.lockButtonGenerarFactura();
-		} else {
-			view.unLockButtonGenerarFactura();
+		for (PresupuestoDTO presupuestoDTO : presupuestos) {
+			if(presupuestoDTO.getEstado().name() == EstadoPresupuesto.PENDIENTE.name()) {
+				view.unLockButtonGenerarFactura();
+			}
 		}
 	}
 	
@@ -106,9 +115,10 @@ public class ConsultaDePresupuestoPresenter {
 		view.clearDataRepuestos();
 		view.clearDataTrabajos();
 		view.clearDataOrdeDeTrabajo();
+		view.lockButtonGenerarFactura();
 		String inputDni = view.getTextDni();
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
-			ClienteDTO cliente = clientesController.readByDni(Integer.parseInt(inputDni));
+			cliente = clientesController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
 				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculoController
 						.readVehicleWithClientIdWhereOtIsOpen(cliente.getIdCliente());
@@ -118,6 +128,7 @@ public class ConsultaDePresupuestoPresenter {
 		}
 	}
 	
+<<<<<<< HEAD
 	private void onAprobarPresupuestos(ActionEvent a) {
 		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
 		try {
@@ -131,25 +142,70 @@ public class ConsultaDePresupuestoPresenter {
 				if(resumen != null) {
 					new MessageDialog().showMessages(resumen.generarResumen());	
 				}	
+=======
+	private void actualizarEstadoPresupuestos() {
+		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
+		presupuestosSeleccionados.forEach((k,v) -> {
+			PresupuestoDTO presupuesto = presController.readById(k);
+			if(presupuesto.getEstado().equals(EstadoPresupuesto.PENDIENTE)) {
+				presupuesto.setFechaAprobacion(new Date());
+				if(v.booleanValue() == false) {
+					String comentario = new InputComentarioDialog(presupuesto).open();
+					presupuesto.setComentarioRechazo(comentario);
+					presupuesto.setEstado(EstadoPresupuesto.RECHAZADO);
+				} else {
+					presupuesto.setEstado(EstadoPresupuesto.APROBADO);
+				}
+				presController.registrarAprobacion(presupuesto);
+			} 
+		});
+		updatePresupuestosView();
+	}
+	
+	private void onGenerarFactura(ActionEvent a) {
+		List<PresupuestoDTO> ps = getPresupuestosFacturados();
+		actualizarEstadoPresupuestos();
+		FacturaDTO factura = null;
+		Integer ordenDeTrabajoId = null;
+		if(!ps.isEmpty()) {
+			ordenDeTrabajoId = ps.get(0).getIdOT();
+			if (!otController.esRechazada(ordenDeTrabajoId)) {
+				factura = new FacturaDTO();
+				factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
+				double total = 0;
+				for (PresupuestoDTO p : ps) {
+					total += p.getPrecio();
+				}
+				factura.setTotal(total);
+				factura.setCliente(cliente);
+				facController.save(factura);
+	
+				for (PresupuestoDTO p : ps) {
+					p.setIdFactura(factura.getIdFactura());
+					presController.update(p);
+				}
+				factura.setPresupuestosFacturados(ps);
+				
+				ReporteViewImpl ventanaReporte = new ReporteViewImpl();
+				ventanaReporte.setData(facController.makeFacturaTaller(factura));
+				ventanaReporte.open();
+>>>>>>> release#2.0.0
 			}
-		} catch(ForbiddenException e) {
-			new MessageDialog().showMessages(e.getMessage());
 		}
 	}
 	
-	private void onRegistrarPago(ActionEvent a) {
-		Integer idOrdenDeTrabajo = view.getIdOrdenDeTrabajoPresentada();
-		try {
-			facController.registrarPagoDeFacturaById(idOrdenDeTrabajo);
-			view.clearDataPresupuestos();
-			List<PresupuestoDTO> presupuestos = presController.readByIdOt(idOrdenDeTrabajo);
-			this.setDataPresupuestos(presupuestos);
-			new MessageDialog().showMessages("Se ha registrado el pago de la factura existosamente.");
-		} catch (ForbiddenException e ) {
-			new MessageDialog().showMessages(e.getMessage());
-		} catch (NotFoundException e) {
-			new MessageDialog().showMessages(e.getMessage());
+	private List<PresupuestoDTO> getPresupuestosFacturados(){
+		Map<Integer, Boolean> presupuestos = view.getPresupuestosPresentados();
+		Object[] keys = presupuestos.keySet().toArray();
+		List<PresupuestoDTO> ps = new ArrayList<PresupuestoDTO>();
+		for (int i = 0; i < keys.length; i++) {
+			if(presupuestos.get(keys[i]) == true) {
+				int idPresupuesto = (Integer) keys[i];
+				PresupuestoDTO p = presController.readById(idPresupuesto);
+				ps.add(p);
+			}
 		}
+		return ps;
 	}
 	
 	private void updatePresupuestosView () {

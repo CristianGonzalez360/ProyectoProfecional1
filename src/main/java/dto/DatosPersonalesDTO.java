@@ -9,7 +9,9 @@ public class DatosPersonalesDTO {
 
 	private Integer id;
 
-	private String nombreCompleto;
+	private String nombre;
+	
+	private String apellido;
 
 	private Integer dni;
 
@@ -35,6 +37,7 @@ public class DatosPersonalesDTO {
 		DatosPersonalesDTO datos = new DatosPersonalesDTO();
 		datos.setId(2);
 		datos.setNombreCompleto("u001");
+		datos.setApellido("ap001");
 		datos.setDni(33390111);
 		datos.setTelefono("111134");
 		datos.setEmail("u001@mail.com");
@@ -48,13 +51,15 @@ public class DatosPersonalesDTO {
 
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
-		errors.addAll(new StringValidator(nombreCompleto).notBlank("El nombre es obligatorio")
+		errors.addAll(new StringValidator(nombre).notBlank("El nombre es obligatorio")
 				.max(20, "Maximo una longitud de 20 caracteres para el nombre").validate());
 
+		errors.addAll(new StringValidator(apellido).notBlank("El apellido es obligatorio")
+				.max(20, "Maximo una longitud de 20 caracteres para el apellido").validate());
 		if (this.dni == null) {
 			errors.add("El dni es obligatorio");
 		}
-		errors.addAll(new StringValidator(altura).number("El telefono debe ser un número").validate());
+		errors.addAll(new StringValidator(telefono).number("El telefono debe ser un número").validate());
 		if (!altura.trim().isEmpty())
 			errors.addAll(new StringValidator(altura).number("La altura debe ser un número").validate());
 		if (!piso.trim().isEmpty())
@@ -71,11 +76,11 @@ public class DatosPersonalesDTO {
 	}
 
 	public String getNombreCompleto() {
-		return nombreCompleto;
+		return nombre;
 	}
 
 	public void setNombreCompleto(String nombreCompleto) {
-		this.nombreCompleto = nombreCompleto;
+		this.nombre = nombreCompleto;
 	}
 
 	public Integer getDni() {
@@ -144,9 +149,17 @@ public class DatosPersonalesDTO {
 
 	@Override
 	public String toString() {
-		return "DatosPersonalesDTO [id=" + id + ", nombreCompleto=" + nombreCompleto + ", dni=" + dni + ", telefono="
+		return "DatosPersonalesDTO [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido +", dni=" + dni + ", telefono="
 				+ telefono + ", email=" + email + ", calle=" + calle + ", altura=" + altura + ", piso=" + piso
 				+ ", dpto=" + dpto + ", localidad=" + localidad + "]";
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 }

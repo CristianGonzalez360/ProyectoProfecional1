@@ -6,115 +6,119 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
-import dto.RepuestoPlanificadoDTO;
-import dto.TrabajoPresupuestadoDTO;
-
+import dto.PresupuestoDTO;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.awt.event.ActionEvent;
-import javax.swing.JTabbedPane;
+import java.awt.event.WindowListener;
+import javax.swing.JSplitPane;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
+import java.awt.Dimension;
 
 public class AltaPresupuestoFormView extends JDialog {
 
 	private static final long serialVersionUID = 2771968410097489023L;
-
-	private static final String[] nombreColumnasRepuestos = { "Codigo", "Descripcion", "Marca", "Fabricante",
-			"Cantidad" };
-	private static final String[] nombreColumnasTrabajos = { "Codigo", "Descripcion" };
-
-	private JPanel panelIzquierdo;
-	private JScrollPane scrollPaneRepuestos;
-	private DefaultTableModel modelTablaRepuestos;
-	private JTable tablaRepuestos;
-	private JButton btnPlanificarRepuestos;
-
-	private JPanel panelDerecho;
-	private JScrollPane scrollPanelTrabajos;
-	private DefaultTableModel modelTablaTrabajos;
-	private JTable tablaTrabajos;
-	private JButton btnPlanificarTrabajos;
-	private JPanel panel;
-	private JPanel panel_1;
-	private JTabbedPane tabbedPane;
-
+	
 	private static AltaPresupuestoFormView instance;
-	private JButton btnGuardar;
+	private JButton btnAceptar;
+	private JButton btnCancelar;
+	
+	private PlanificarTrabajosFormView trabajos;
+	private PlanificarRepuestosFormView repuestos;
+	private JTextField tftNumero;
+	private JTextField tfComentario;
+	private JTextField tfFechaAlta;
+	private JTextField tfPrecio;
 
-	@SuppressWarnings("serial")
 	private AltaPresupuestoFormView() {
-		setBounds(100, 100, 700, 350);
+		setMinimumSize(new Dimension(1000, 600));
+		setBounds(100, 100, 800, 600);
 		setTitle("Formulario de Alta de Presupuesto");
-		getContentPane().setLayout(new BorderLayout());
-
-		modelTablaRepuestos = new DefaultTableModel(null, nombreColumnasRepuestos) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-
-		modelTablaTrabajos = new DefaultTableModel(null, nombreColumnasTrabajos) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-
-		JPanel buttonPane = new JPanel();
-		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		getContentPane().add(buttonPane, BorderLayout.SOUTH);
-
-		btnGuardar = new JButton("Guardar");
-		btnGuardar.setActionCommand("OK");
-		buttonPane.add(btnGuardar);
-		getRootPane().setDefaultButton(btnGuardar);
-
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setActionCommand("Cancel");
-		buttonPane.add(btnCancelar);
-
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		getContentPane().add(tabbedPane, BorderLayout.CENTER);
-		panelDerecho = new JPanel();
-		tabbedPane.addTab("Trabajos", null, panelDerecho, null);
-		panelDerecho.setLayout(new BorderLayout(0, 0));
-		scrollPanelTrabajos = new JScrollPane();
-		panelDerecho.add(scrollPanelTrabajos);
-
-		tablaTrabajos = new JTable(modelTablaTrabajos);
-
-		scrollPanelTrabajos.setViewportView(tablaTrabajos);
-
-		panel_1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelDerecho.add(panel_1, BorderLayout.SOUTH);
-
-		btnPlanificarTrabajos = new JButton("Planificar");
-		panel_1.add(btnPlanificarTrabajos);
-
-		panelIzquierdo = new JPanel();
-		tabbedPane.addTab("Repuestos", null, panelIzquierdo, null);
-		panelIzquierdo.setLayout(new BorderLayout(0, 0));
-		scrollPaneRepuestos = new JScrollPane();
-		panelIzquierdo.add(scrollPaneRepuestos, BorderLayout.CENTER);
-
-		tablaRepuestos = new JTable(modelTablaRepuestos);
-
-		scrollPaneRepuestos.setViewportView(tablaRepuestos);
-
-		panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelIzquierdo.add(panel, BorderLayout.SOUTH);
-
-		btnPlanificarRepuestos = new JButton("Planificar");
-		panel.add(btnPlanificarRepuestos);
-		btnPlanificarRepuestos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-
+		setModal(true);
+		
+		JPanel panelBotones = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panelBotones.getLayout();
+		flowLayout.setAlignment(FlowLayout.RIGHT);
+		getContentPane().add(panelBotones, BorderLayout.SOUTH);
+		
+		btnAceptar = new JButton("Aceptar");
+		panelBotones.add(btnAceptar);
+		
+		btnCancelar = new JButton("Cancelar");
+		panelBotones.add(btnCancelar);
+		
+		JSplitPane splitPane = new JSplitPane();
+		splitPane.setEnabled(false);
+		splitPane.setResizeWeight(0.5);
+	    getContentPane().add(splitPane, BorderLayout.CENTER);
+		
+		trabajos = PlanificarTrabajosFormView.getInstance();
+		repuestos = PlanificarRepuestosFormView.getInstance();
+		
+		splitPane.setLeftComponent(trabajos);
+		splitPane.setRightComponent(repuestos);
+		
+		JPanel panel = new JPanel();
+		getContentPane().add(panel, BorderLayout.NORTH);
+		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("57px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("94px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("84px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("86px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("76px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("278px:grow"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("45px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("86px"),},
+			new RowSpec[] {
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("top:28px"),}));
+		
+		JLabel lblNmero = new JLabel("Número:");
+		panel.add(lblNmero, "2, 2, right, center");
+		
+		tftNumero = new JTextField();
+		tftNumero.setFocusable(false);
+		tftNumero.setEditable(false);
+		panel.add(tftNumero, "4, 2, fill, fill");
+		tftNumero.setColumns(10);
+		
+		JLabel lblFechaDeAlta = new JLabel("Fecha de Alta:");
+		panel.add(lblFechaDeAlta, "6, 2, right, center");
+		
+		tfFechaAlta = new JTextField();
+		tfFechaAlta.setFocusable(false);
+		tfFechaAlta.setEditable(false);
+		panel.add(tfFechaAlta, "8, 2, fill, fill");
+		tfFechaAlta.setColumns(10);
+		
+		JLabel lblComentario = new JLabel("Comentario:");
+		panel.add(lblComentario, "10, 2, right, center");
+		
+		tfComentario = new JTextField();
+		panel.add(tfComentario, "12, 2, fill, fill");
+		tfComentario.setColumns(10);
+		
+		JLabel lblPrecio = new JLabel("Precio:");
+		panel.add(lblPrecio, "14, 2, right, center");
+		
+		tfPrecio = new JTextField();
+		tfPrecio.setFocusable(false);
+		tfPrecio.setEditable(false);
+		panel.add(tfPrecio, "16, 2, fill, fill");
+		tfPrecio.setColumns(10);
+		
 		setVisible(false);
 	}
 
@@ -124,35 +128,50 @@ public class AltaPresupuestoFormView extends JDialog {
 		return instance;
 	}
 
-	public void setActionOnPlanificarRepuestos(ActionListener listener) {
-		this.btnPlanificarRepuestos.addActionListener(listener);
+	public void setActionOnAceptar(ActionListener listener) {
+		this.btnAceptar.addActionListener(listener);
 	}
-
-	public void setActionOnPlanificarTrabajos(ActionListener listener) {
-		this.btnPlanificarTrabajos.addActionListener(listener);
-	}
-
-	public void setActionOnGuardar(ActionListener listener) {
-		this.btnGuardar.addActionListener(listener);
-	}
-
-	public void setDataRepuestos(List<RepuestoPlanificadoDTO> repuestos) {
-		// TODO llenar tabla repuestos
-	}
-
-	public void setDataTrabajos(List<TrabajoPresupuestadoDTO> trabajos) {
-		for (TrabajoPresupuestadoDTO t : trabajos) {
-			// TODO llenar tabla trabajos
-		}
+	
+	public void setActionOnCancelar(ActionListener listener) {
+		this.btnCancelar.addActionListener(listener);
 	}
 
 	public void clearData() {
-		// TODO Auto-generated method stub
-
+		this.trabajos.clearData();;
+		this.repuestos.clearDataRepuestosPlanificados();
+		this.tfComentario.setText("");
+		this.tfFechaAlta.setText("");
+		this.tfPrecio.setText("");
+		this.tftNumero.setText("");
 	}
 
 	public void display() {
 		setVisible(true);
 	}
+	
+	public String getComentario() {
+		return this.tfComentario.getText();
+	}
+	
+	public void setData(PresupuestoDTO presupuesto) {
+		this.tftNumero.setText(presupuesto.getIdPresupuesto()+"");
+		this.tfFechaAlta.setText(presupuesto.getFechaAltaPresu().toString());
+		this.tfComentario.setText(presupuesto.getComentarioAltaPresu());
+		this.tfPrecio.setText(presupuesto.getPrecio()+"");
+		this.repuestos.setDataRepuestosPlanificados(presupuesto.getRepuestos());
+		this.trabajos.setDataTrabajosPlanificados(presupuesto.getTrabajos());
+	}
+	
+	public void setActionOnClose(WindowListener listener) {
+		addWindowListener(listener);
+	}
 
+	public void close() {
+		setVisible(false);
+	}
+	
+	public void setPrecio(double precio) {
+		this.tfPrecio.setText(precio+"");
+	}
+	
 }

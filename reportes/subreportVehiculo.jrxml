@@ -1,0 +1,153 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreportVehiculo" pageWidth="280" pageHeight="842" columnWidth="280" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="15257b8a-e71f-4ed3-8976-ffb9f85fe759">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="marca" class="java.lang.String"/>
+	<field name="modelo" class="java.lang.Integer"/>
+	<field name="nroChasis" class="java.lang.Integer"/>
+	<field name="nroMotor" class="java.lang.Integer"/>
+	<field name="patente" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="f2c81f33-0535-414e-a9a7-ac1b91f83abf"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Datos del Vehículo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="32" height="20" uuid="9d238bbc-1167-4db6-a0cf-0afc00326126"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Marca:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="20" width="37" height="20" uuid="12c9272a-3eb6-4b9c-8677-de2c69a6e3fb"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Modelo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="34" height="20" uuid="8ea38d45-0f02-4898-a442-775975ac10c6"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Chasis:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="40" width="30" height="20" uuid="e7ceee1d-ec81-46d5-8868-b8057d0b8203"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Motor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="40" height="20" uuid="a55a7085-fec6-41c1-aaea-71b80cc4f8eb"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Patente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="32" y="20" width="98" height="20" uuid="0988185f-d904-4664-b470-3111b73c4dda"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="167" y="20" width="113" height="20" uuid="063d96e5-aa8f-43b2-ae33-04919b0f8bbe"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="40" width="96" height="20" uuid="6e17d098-d372-44f3-a34a-5e06f78c1f68"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroChasis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="40" width="120" height="20" uuid="73261658-0595-46c9-8c85-77adce99ac09"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroMotor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="60" width="240" height="20" uuid="bbf88885-7553-42b4-b8cf-2076062adbec"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{patente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreportVehiculo" pageWidth="280" pageHeight="842" columnWidth="280" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="15257b8a-e71f-4ed3-8976-ffb9f85fe759">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="marca" class="java.lang.String"/>
+	<field name="modelo" class="java.lang.Integer"/>
+	<field name="nroChasis" class="java.lang.Integer"/>
+	<field name="nroMotor" class="java.lang.Integer"/>
+	<field name="patente" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="f2c81f33-0535-414e-a9a7-ac1b91f83abf"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Datos del Vehículo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="32" height="20" uuid="9d238bbc-1167-4db6-a0cf-0afc00326126"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Marca:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="20" width="37" height="20" uuid="12c9272a-3eb6-4b9c-8677-de2c69a6e3fb"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Modelo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="34" height="20" uuid="8ea38d45-0f02-4898-a442-775975ac10c6"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Chasis:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="40" width="30" height="20" uuid="e7ceee1d-ec81-46d5-8868-b8057d0b8203"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Motor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="40" height="20" uuid="a55a7085-fec6-41c1-aaea-71b80cc4f8eb"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Patente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="32" y="20" width="98" height="20" uuid="0988185f-d904-4664-b470-3111b73c4dda"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="167" y="20" width="113" height="20" uuid="063d96e5-aa8f-43b2-ae33-04919b0f8bbe"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="40" width="96" height="20" uuid="6e17d098-d372-44f3-a34a-5e06f78c1f68"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroChasis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="40" width="120" height="20" uuid="73261658-0595-46c9-8c85-77adce99ac09"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroMotor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="60" width="240" height="20" uuid="bbf88885-7553-42b4-b8cf-2076062adbec"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{patente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>
+>>>>>>> develop

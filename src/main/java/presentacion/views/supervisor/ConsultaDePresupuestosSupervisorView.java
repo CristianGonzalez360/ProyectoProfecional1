@@ -1,3 +1,4 @@
+
 package presentacion.views.supervisor;
 
 import javax.swing.JButton;
@@ -9,8 +10,6 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
@@ -50,14 +49,16 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 	private JPanel panelEste;
 	private JPanel panelOeste;
 	private JPanel panelEsteNorte;
+	private static final int EDITABLE = 6; 
+	private static final int ESTADO = 4; 
 
 	private final String[] columnasTablaVehiculos = new String[] { "NRO. VEHICULO", "KM GARANTIA", "ASEGURADORA",
 			"NRO POLIZA SEGURO", "PATENTE" };
 	private DefaultTableModel tableModelVehiculos;
 	private JTable tableVehiculos;
 
-	private final String[] columnasListadoDePresupuestos = new String[] { "NRO. Presupuesto", "FECHA ALTA",
-			"COMENTARIO ALTA", "ESTADO", "APROBAR" };
+	private final String[] columnasListadoDePresupuestos = new String[] { "NRO.", "FECHA ALTA",
+			"COMENTARIO ALTA", "PRECIO","ESTADO", "COMENTARIO RECHAZO", "APROBAR" };
 	private DefaultTableModel listadoDePresupuestosModel;
 
 	private final String[] columnasListadoDeRepuestos = new String[] { "CODIGO", "MARCA", "DESCRIPCIÓN", "PRECIO",
@@ -68,8 +69,6 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 			"ESFUERZO ESTIMADO Hrs." };
 	private DefaultTableModel listadoDeTrabajosModel;
 
-	private JTextField textField;
-	private JLabel lblNewLabel;
 	private JPanel panelEsteSur;
 
 	private JLabel lblTipo;
@@ -97,7 +96,6 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 	private List<PresupuestoDTO> presupuestos;
 	private List<VehiculoConOrdenDeTrabajoDTO> vehiculosCliente;
 	private JButton btnGenerarFactura;
-	private JButton btnRegistrarPago;
 	private Integer idOrdenDeTrabajo;
 
 	public static ConsultaDePresupuestosSupervisorView getInstance() {
@@ -123,13 +121,6 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		txtDNI = new JTextField("");
 		panel_4.add(txtDNI);
 		txtDNI.setColumns(10);
-
-		lblNewLabel = new JLabel("PATENTE");
-		panel_4.add(lblNewLabel);
-
-		textField = new JTextField();
-		panel_4.add(textField);
-		textField.setColumns(10);
 
 		btnBuscar = new JButton("Buscar");
 		panel_4.add(btnBuscar);
@@ -232,13 +223,15 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 			private static final long serialVersionUID = -972882702173668623L;
 
 			public boolean isCellEditable(int row, int column) {
-				return column == 4;
+				return listadoDePresupuestosModel.getValueAt(row, ESTADO) == EstadoPresupuesto.PENDIENTE.name();
 			}
-			
+
 			@Override
-		    public Class getColumnClass(int col) {
-				if(col == 4) return Boolean.class;
-				else return Object.class;
+			public Class getColumnClass(int col) {
+				if (col == EDITABLE)
+					return Boolean.class;
+				else
+					return super.getColumnClass(col);
 			}
 		};
 		tablePresupuestos = new JTable(listadoDePresupuestosModel);
@@ -267,7 +260,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column) {
-				return column == 4;
+				return false;
 			}
 		};
 		tableRepuestos = new JTable(listadoDeRepuestosModel);
@@ -280,14 +273,14 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		JScrollPane scrollPaneTrabajos = new JScrollPane();
 		panel_5.add(scrollPaneTrabajos, BorderLayout.CENTER);
 
-		this.listadoDeTrabajosModel = new DefaultTableModel(null, this.columnasListadoDeTrabajos){
+		this.listadoDeTrabajosModel = new DefaultTableModel(null, this.columnasListadoDeTrabajos) {
 			/**
 			 * 
 			 */
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column) {
-				return column == 4;
+				return false;
 			}
 		};
 		tableTrabajos = new JTable(listadoDeTrabajosModel);
@@ -301,17 +294,17 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		toolBar.setFloatable(false);
 		panel_2.add(toolBar, BorderLayout.NORTH);
 
+<<<<<<< HEAD
 		btnGenerarFactura = new JButton("Aprobar presupuesto");
+=======
+		btnGenerarFactura = new JButton("Generar factura");
+		lockButtonGenerarFactura();
+>>>>>>> release#2.0.0
 		toolBar.add(btnGenerarFactura);
 
-		btnRegistrarPago = new JButton("Registrar pago");
-		toolBar.add(btnRegistrarPago);
-		
 		this.lockOrdenDeTrabajoPanel();
 	}
 
-	
-	
 	public boolean iPersupuestoAprobado(int row, int column, JTable table) {
 		return table.getValueAt(row, column) != null;
 	}
@@ -372,7 +365,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		this.textTrabajoSolicitado.setEditable(false);
 		this.textTipoDeTrabajo.setEditable(false);
 	}
-	
+
 	public void clearDataOrdeDeTrabajo() {
 		this.idOrdenDeTrabajo = null;
 		this.textFechaAlta.setText("");
@@ -395,6 +388,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		this.presupuestos = presupuestos;
 		for (PresupuestoDTO dto : presupuestos) {
+<<<<<<< HEAD
 			
 			Object[] row = { 
 					dto.getIdPresupuesto().toString(),
@@ -407,6 +401,16 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		TableColumn tc = tablePresupuestos.getColumnModel().getColumn(4);
 		tc.setCellEditor(tablePresupuestos.getDefaultEditor(Boolean.class));
 		tc.setCellRenderer(tablePresupuestos.getDefaultRenderer(Boolean.class));
+=======
+			boolean check = false;
+			if (dto.getEstado() == EstadoPresupuesto.APROBADO) {
+				check = true;
+			}
+			Object[] row = { dto.getIdPresupuesto().toString(), dto.getFechaAltaPresu().toString(),
+					dto.getComentarioAltaPresu().toString(), dto.getPrecio(), dto.getEstado().name(), dto.getComentarioRechazo(), check };
+			this.listadoDePresupuestosModel.addRow(row);
+		}
+>>>>>>> release#2.0.0
 	}
 
 	public void setActionSelectPresupuestoCliente(ListSelectionListener listSelectionListener) {
@@ -417,15 +421,13 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		Map<Integer, Boolean> presu = new HashMap<>();
 		int rows = this.listadoDePresupuestosModel.getRowCount();
 		for (int index = 0; index < rows; index++) {
-			Integer presupuestoId = Integer.parseInt(listadoDePresupuestosModel.getValueAt(index, 0).toString());
-			Boolean isOk = Boolean.valueOf(this.checkBoxIsSelected(index));
-			presu.put(presupuestoId, isOk);
+			if (listadoDePresupuestosModel.getValueAt(index, ESTADO) == EstadoPresupuesto.PENDIENTE.name()) {
+				Integer presupuestoId = Integer.parseInt(listadoDePresupuestosModel.getValueAt(index, 0).toString());
+				Boolean isOk = (Boolean) listadoDePresupuestosModel.getValueAt(index, EDITABLE);
+				presu.put(presupuestoId, isOk);
+			}
 		}
 		return presu;
-	}
-
-	private boolean checkBoxIsSelected(int index) {
-		return listadoDePresupuestosModel.getValueAt(index, 4) != null;
 	}
 
 	public PresupuestoDTO getPresupuestoSeleccionado() {
@@ -472,23 +474,11 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		return this.idOrdenDeTrabajo;
 	}
 
-	public void setActionRegistrarPago(ActionListener listener) {
-		this.btnRegistrarPago.addActionListener(listener);
-	}
-
 	public void lockButtonGenerarFactura() {
 		this.btnGenerarFactura.setEnabled(false);
 	}
 
 	public void unLockButtonGenerarFactura() {
 		this.btnGenerarFactura.setEnabled(true);
-	}
-
-	public void lockButtonRegistrarPago() {
-		this.btnRegistrarPago.setEnabled(false);
-	}
-
-	public void unLockButtonRegistrarPago() {
-		this.btnRegistrarPago.setEnabled(true);
 	}
 }

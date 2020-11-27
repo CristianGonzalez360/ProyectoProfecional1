@@ -11,6 +11,8 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import dto.ClienteDTO;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
 
 public class ClientePanelView extends JPanel {
 
@@ -29,84 +31,118 @@ public class ClientePanelView extends JPanel {
 	private JTextField textPiso;
 	private JTextField textDpto;
 	private JTextField textLocalidad;	
+	private JLabel lblApellido;
+	private JTextField tfApellido;
 	
 	public ClientePanelView() {
-		setBorder(
-				new TitledBorder(null, "Datos del cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		setLayout(new FormLayout(
-				new ColumnSpec[] { ColumnSpec.decode("14px"), ColumnSpec.decode("max(0dlu;default)"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(80dlu;default):grow"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("73px:grow"), FormSpecs.RELATED_GAP_COLSPEC,
-						ColumnSpec.decode("max(93dlu;default):grow"), FormSpecs.RELATED_GAP_COLSPEC,
-						FormSpecs.DEFAULT_COLSPEC, },
-				new RowSpec[] { FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("26px"), FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
-
-		JLabel lblNewLabel = new JLabel("Dni");
-		add(lblNewLabel, "2, 4");
-
-		textDni = new JTextField();
-		add(textDni, "4, 4, fill, default");
-		textDni.setColumns(10);
-
-		JLabel lblNewLabel_1 = new JLabel("Nombre");
-		add(lblNewLabel_1, "6, 4");
-
-		textNombre = new JTextField();
-		add(textNombre, "8, 4, fill, default");
-		textNombre.setColumns(10);
-
-		JLabel lblNewLabel_2 = new JLabel("Telefono");
-		add(lblNewLabel_2, "2, 6");
-
-		textTelefono = new JTextField();
-		add(textTelefono, "4, 6, fill, default");
-		textTelefono.setColumns(10);
-
-		JLabel lblNewLabel_3 = new JLabel("Email");
-		add(lblNewLabel_3, "6, 6");
-
-		textEmail = new JTextField();
-		add(textEmail, "8, 6, fill, default");
-		textEmail.setColumns(10);
-
-		JLabel Calle = new JLabel("calle");
-		add(Calle, "2, 8");
-
-		textCalle = new JTextField();
-		add(textCalle, "4, 8, fill, default");
-		textCalle.setColumns(10);
-
-		JLabel lblNewLabel_4 = new JLabel("Altura");
-		add(lblNewLabel_4, "6, 8");
-
-		textAltura = new JTextField();
-		add(textAltura, "8, 8, fill, default");
-		textAltura.setColumns(10);
-
-		JLabel lblNewLabel_5 = new JLabel("Piso");
-		add(lblNewLabel_5, "2, 10");
-
-		textPiso = new JTextField();
-		add(textPiso, "4, 10, fill, default");
-		textPiso.setColumns(10);
-
-		JLabel lblNewLabel_6 = new JLabel("Dpto");
-		add(lblNewLabel_6, "6, 10");
-
-		textDpto = new JTextField();
-		add(textDpto, "8, 10, fill, default");
-		textDpto.setColumns(10);
-
-		JLabel lblNewLabel_7 = new JLabel("localidad");
-		add(lblNewLabel_7, "2, 12, right, default");
-
-		textLocalidad = new JTextField();
-		add(textLocalidad, "4, 12, fill, default");
-		textLocalidad.setColumns(10);
+		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Datos del cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("right:72px"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("122px:grow"),},
+			new RowSpec[] {
+				FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+				JLabel lblNewLabel_1 = new JLabel("Nombre");
+				add(lblNewLabel_1, "2, 2, right, center");
+																				
+																						textNombre = new JTextField();
+																						textNombre.setFocusable(false);
+																						add(textNombre, "4, 2, fill, top");
+																						textNombre.setColumns(10);
+																				
+																				lblApellido = new JLabel("Apellido");
+																				add(lblApellido, "2, 4, right, default");
+																				
+																				tfApellido = new JTextField();
+																				tfApellido.setFocusable(false);
+																				tfApellido.setEditable(false);
+																				add(tfApellido, "4, 4, fill, top");
+																				tfApellido.setColumns(10);
+																		
+																				JLabel lblNewLabel = new JLabel("Dni");
+																				add(lblNewLabel, "2, 6, right, center");
+																		
+																				textDni = new JTextField();
+																				textDni.setFocusable(false);
+																				add(textDni, "4, 6, fill, top");
+																				textDni.setColumns(10);
+																
+																		JLabel lblNewLabel_2 = new JLabel("Telefono");
+																		add(lblNewLabel_2, "2, 8, right, center");
+																
+																		textTelefono = new JTextField();
+																		textTelefono.setFocusable(false);
+																		add(textTelefono, "4, 8, fill, top");
+																		textTelefono.setColumns(10);
+														
+																JLabel lblNewLabel_3 = new JLabel("Email");
+																add(lblNewLabel_3, "2, 10, right, center");
+												
+														textEmail = new JTextField();
+														textEmail.setFocusable(false);
+														add(textEmail, "4, 10, fill, top");
+														textEmail.setColumns(10);
+										
+												JLabel Calle = new JLabel("calle");
+												add(Calle, "2, 12, right, center");
+										
+												textCalle = new JTextField();
+												textCalle.setFocusable(false);
+												add(textCalle, "4, 12, fill, top");
+												textCalle.setColumns(10);
+										
+												JLabel lblNewLabel_4 = new JLabel("Altura");
+												add(lblNewLabel_4, "2, 14, right, center");
+										
+												textAltura = new JTextField();
+												textAltura.setFocusable(false);
+												add(textAltura, "4, 14, fill, top");
+												textAltura.setColumns(10);
+								
+										JLabel lblNewLabel_5 = new JLabel("Piso");
+										add(lblNewLabel_5, "2, 16, right, center");
+								
+										textPiso = new JTextField();
+										textPiso.setFocusable(false);
+										add(textPiso, "4, 16, fill, top");
+										textPiso.setColumns(10);
+						
+								JLabel lblNewLabel_6 = new JLabel("Dpto");
+								add(lblNewLabel_6, "2, 18, right, center");
+						
+								textDpto = new JTextField();
+								textDpto.setFocusable(false);
+								add(textDpto, "4, 18, fill, top");
+								textDpto.setColumns(10);
+				
+						JLabel lblNewLabel_7 = new JLabel("Localidad");
+						add(lblNewLabel_7, "2, 20, right, center");
+						
+								textLocalidad = new JTextField();
+								textLocalidad.setFocusable(false);
+								add(textLocalidad, "4, 20, fill, top");
+								textLocalidad.setColumns(10);
 		
 		this.disableAllClienteInputs();
 	}
@@ -135,12 +171,14 @@ public class ClientePanelView extends JPanel {
 		this.textPiso.setText("");
 		this.textDpto.setText("");
 		this.textLocalidad.setText("");
+		this.tfApellido.setText("");
 	}
 	
 	public void setData(ClienteDTO cliente) {
 		this.idDatosPersonalesDelCliente = cliente.getDatosPersonalesDTO().getId();
 		this.idCliente = cliente.getIdCliente();
 		this.textNombre.setText(cliente.getDatosPersonalesDTO().getNombreCompleto());
+		this.tfApellido.setText(cliente.getDatosPersonalesDTO().getApellido());
 		this.textDni.setText(cliente.getDatosPersonalesDTO().getDni().toString());
 		this.textTelefono.setText(cliente.getDatosPersonalesDTO().getTelefono());
 		this.textEmail.setText(cliente.getDatosPersonalesDTO().getEmail());

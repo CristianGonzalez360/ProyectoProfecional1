@@ -8,9 +8,15 @@ cuentas:
     nombreUsuario: u002
     password: pu002
     role: supervisor
+  - fechaDeAlta: 2010-15-10
+    nombreUsuario: u003
+    password: pu003
+    role: cajero
+
 
 datosPersonales:
   - nombreCompleto: u001
+    apellido: ap001
     dni: 33390341
     telefono: 1111
     email: u001@mail.com
@@ -20,6 +26,7 @@ datosPersonales:
     dpto: A1
     localidad: localidad1
   - nombreCompleto: u002
+    apellido: ap002
     dni: 33390342
     telefono: 1112
     email: u002@mail.com
@@ -28,7 +35,18 @@ datosPersonales:
     piso: 1
     dpto: A1
     localidad: localidad1
+  - nombreCompleto: u003
+    apellido: ap003
+    dni: 33390388
+    telefono: 1113
+    email: u003@mail.com
+    calle: calle1
+    altura: 1
+    piso: 1
+    dpto: A1
+    localidad: localidad1
   - nombreCompleto: c001
+    apellido: ap003
     dni: 33390343
     telefono: 321111
     email: c001@mail.com
@@ -38,6 +56,7 @@ datosPersonales:
     dpto: A3
     localidad: localidad3
   - nombreCompleto: c002
+    apellido: ap004
     dni: 33390344
     telefono: 611611
     email: c002@mail.com
@@ -56,6 +75,10 @@ usuarios:
       idCuenta: 2
     datos:
       id: 2
+  - cuenta:
+      idCuenta: 3
+    datos:
+      id: 3
       
 turnos:
   - idCliente: 1
@@ -96,6 +119,7 @@ fichaTecnicaVehiculos:
     color: rojo
     combustion: gas/nafta
     descripcion: calienta mucho
+    patente: 123abc
   - nroChasis: 3125
     nroMotor: 22552
     kilometraje: 22122
@@ -104,6 +128,7 @@ fichaTecnicaVehiculos:
     color: negro
     combustion: nafta
     descripcion: funciona ok
+    patente: 456def
   - nroChasis: 31258
     nroMotor: 225528
     kilometraje: 221
@@ -112,6 +137,7 @@ fichaTecnicaVehiculos:
     color: negro
     combustion: nafta
     descripcion: funciona ok
+    patente: 789ghi
 
 clientes:
   - idDatosPersonales: 1 
@@ -216,7 +242,7 @@ presupuestos:
     idPago:
     fechaAltaPresu: 2020-10-10
     comentarioAltaPresu: El tren delantero esta destrozado
-    comentarioCierrePresu:
+    comentarioRechazo:
     fechaAprobacion:
   - idOT: 1
     idUsuAltaPresu: 1
@@ -225,7 +251,7 @@ presupuestos:
     idPago:
     fechaAltaPresu: 2020-10-11
     comentarioAltaPresu: revisar bomba de nafta
-    comentarioCierrePresu:
+    comentarioRechazo:
     fechaAprobacion:
 
 trabajos: 
@@ -248,3 +274,37 @@ repuestosPlanificados:
   - idRepuesto: 2
     idPresu: 2
     cantRequerida: 5
+
+facturas:
+  - idFactura: 1
+    idOrdenDeTrabajo: 1
+    fechaDeAlta: 2020-10-11
+    fechaDeCierrePorPago: 
+    total: 100
+    estado: IMPAGA
+    idCliente: 1
+    dni: 33390341
+  - idFactura: 2
+    idOrdenDeTrabajo: 2
+    fechaDeAlta: 2020-10-11
+    fechaDeCierrePorPago: 
+    total: 100
+    estado: IMPAGA
+    idCliente: 1
+    dni: 33390341
+  - idFactura: 3
+    idOrdenDeTrabajo: 2
+    fechaDeAlta: 2020-10-11
+    fechaDeCierrePorPago: 
+    total: 200
+    estado: IMPAGA
+    idCliente: 1
+    dni: 33390342
+  - idFactura: 4
+    idOrdenDeTrabajo: 2
+    fechaDeAlta: 2020-10-11
+    fechaDeCierrePorPago: 2020-10-11
+    total: 200
+    estado: PAGA
+    idCliente: 1
+    dni: 33390343

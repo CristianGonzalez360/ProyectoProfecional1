@@ -27,7 +27,7 @@ public class TurnosPanelView extends JPanel {
 
 	private static final String[] COLUMNAS_TURNOS = new String[] { "NRO. TURNO", "NOMBRE DE CLIENTE", "DNI",
 			"FECHA DE ALTA", "FECHA PROGRAMADA", "TELEFONO", "EMAIL" };
-	
+
 	private JTextField textFieldDni;
 
 	private JTable tableTurnos;
@@ -38,10 +38,10 @@ public class TurnosPanelView extends JPanel {
 
 	private JButton btnRegistrarTurno;
 
-	private JButton btnCancelarTurno;	
-	
+	private JButton btnCancelarTurno;
+
 	private JLabel lblNewLabel;
-	
+
 	public TurnosPanelView() {
 		setLayout(new BorderLayout(0, 0));
 		JPanel panel_1 = new JPanel();
@@ -49,7 +49,7 @@ public class TurnosPanelView extends JPanel {
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
 		flowLayout.setHgap(20);
 		add(panel_1, BorderLayout.NORTH);
-		
+
 		lblNewLabel = new JLabel("DNI");
 		panel_1.add(lblNewLabel);
 
@@ -58,7 +58,7 @@ public class TurnosPanelView extends JPanel {
 		panel_1.add(textFieldDni);
 		textFieldDni.setColumns(20);
 
-		btnBuscar = new JButton("buscar");
+		btnBuscar = new JButton("Buscar");
 		panel_1.add(btnBuscar);
 
 		JPanel panel_2 = new JPanel();
@@ -85,7 +85,7 @@ public class TurnosPanelView extends JPanel {
 			tableModelTurnos.addRow(row);
 		}
 	}
-	
+
 	public TurnoDTO getData() {
 		int row = tableTurnos.getSelectedRow();
 		if (tableTurnos.getSelectedRowCount() == 1) {
@@ -99,7 +99,7 @@ public class TurnosPanelView extends JPanel {
 		}
 		return null;
 	}
-	
+
 	public Integer getIdSelectedTurno() {
 		int row = tableTurnos.getSelectedRow();
 		int id;
@@ -115,7 +115,7 @@ public class TurnosPanelView extends JPanel {
 		tableModelTurnos.setColumnCount(0);
 		tableModelTurnos.setColumnIdentifiers(COLUMNAS_TURNOS);
 	}
-	
+
 	private Date parse(String str) {
 		try {
 			return new SimpleDateFormat("yyyy-mm-dd").parse(str);
@@ -140,4 +140,5 @@ public class TurnosPanelView extends JPanel {
 	public String getDniBusqueda() {
 		return this.textFieldDni.getText();
 	}
+
 }

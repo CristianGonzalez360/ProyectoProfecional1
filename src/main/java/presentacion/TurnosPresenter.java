@@ -54,6 +54,9 @@ public class TurnosPresenter {
 	}
 	
 	private void onCancelar(ActionEvent e) {
+		if(view.getIdSelectedTurno() == null)
+			return;
+		
 		if (new ConfirmationDialog(CONFIRMATION).open() == 0) {
 			Integer idTurno = view.getIdSelectedTurno();
 			if (idTurno != null) {

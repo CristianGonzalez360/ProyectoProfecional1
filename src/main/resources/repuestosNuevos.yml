@@ -1,0 +1,22 @@
+repuestos:
+  - codigoRepuesto: 1122
+    precioRepuesto: 3000
+    marcaRepuesto: Renault
+    descripcionRepuesto: Volante
+    stockRepuesto: 20
+    fabricante: Autopartes Argentinas
+    stockMinimo: 13
+  - codigoRepuesto: 1123
+    precioRepuesto: 500
+    marcaRepuesto: Renault
+    descripcionRepuesto: Espejo exterior
+    stockRepuesto: 50
+    fabricante: Autopartes Argentinas
+    stockMinimo: 11
+  - codigoRepuesto: 22230
+    precioRepuesto: 200
+    marcaRepuesto: xx1
+    descripcionRepuesto: ruleman
+    stockRepuesto: 200
+    fabricante: fx
+    stockMinimo: 13

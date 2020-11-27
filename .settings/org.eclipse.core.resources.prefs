@@ -1,5 +1,18 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+encoding//reportes/FacturaRepuestos.jrxml=UTF-8
+encoding//reportes/FacturaServicio.jrxml=UTF-8
+encoding//reportes/FacturaTaller.jrxml=UTF-8
 encoding//reportes/ReporteAgenda.jrxml=UTF-8
+encoding//reportes/subreportCliente.jrxml=UTF-8
+encoding//reportes/subreportRepuestos.jrxml=UTF-8
+encoding//reportes/subreportTrabajos.jrxml=UTF-8
+=======
+encoding//reportes/FacturaServicio.jrxml=UTF-8
+encoding//reportes/ReporteAgenda.jrxml=UTF-8
+encoding//reportes/subreportCliente.jrxml=UTF-8
+>>>>>>> refs/heads/develop
+encoding//reportes/subreportVehiculo.jrxml=UTF-8
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/test/java=UTF-8
