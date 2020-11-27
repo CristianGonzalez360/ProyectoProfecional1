@@ -1,4 +1,3 @@
-
 package presentacion.views.supervisor;
 
 import javax.swing.JButton;
@@ -294,12 +293,8 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		toolBar.setFloatable(false);
 		panel_2.add(toolBar, BorderLayout.NORTH);
 
-<<<<<<< HEAD
-		btnGenerarFactura = new JButton("Aprobar presupuesto");
-=======
 		btnGenerarFactura = new JButton("Generar factura");
 		lockButtonGenerarFactura();
->>>>>>> release#2.0.0
 		toolBar.add(btnGenerarFactura);
 
 		this.lockOrdenDeTrabajoPanel();
@@ -388,20 +383,6 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		this.presupuestos = presupuestos;
 		for (PresupuestoDTO dto : presupuestos) {
-<<<<<<< HEAD
-			
-			Object[] row = { 
-					dto.getIdPresupuesto().toString(),
-					dto.getFechaAltaPresu().toString(),
-					dto.getComentarioAltaPresu() != null ? dto.getComentarioAltaPresu() : "", 
-					dto.getEstado().name()
-			};
-			this.listadoDePresupuestosModel.addRow(row);
-		}
-		TableColumn tc = tablePresupuestos.getColumnModel().getColumn(4);
-		tc.setCellEditor(tablePresupuestos.getDefaultEditor(Boolean.class));
-		tc.setCellRenderer(tablePresupuestos.getDefaultRenderer(Boolean.class));
-=======
 			boolean check = false;
 			if (dto.getEstado() == EstadoPresupuesto.APROBADO) {
 				check = true;
@@ -410,7 +391,6 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 					dto.getComentarioAltaPresu().toString(), dto.getPrecio(), dto.getEstado().name(), dto.getComentarioRechazo(), check };
 			this.listadoDePresupuestosModel.addRow(row);
 		}
->>>>>>> release#2.0.0
 	}
 
 	public void setActionSelectPresupuestoCliente(ListSelectionListener listSelectionListener) {

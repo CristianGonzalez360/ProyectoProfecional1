@@ -14,7 +14,6 @@ import business_logic.FacturasController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.VehiculosController;
-import business_logic.exceptions.ForbiddenException;
 import dto.ClienteDTO;
 import dto.EstadoPresupuesto;
 import dto.FacturaDTO;
@@ -26,7 +25,6 @@ import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ConsultaDePresupuestosSupervisorView;
 import presentacion.views.supervisor.InputComentarioDialog;
-import presentacion.views.utils.MessageDialog;
 import presentacion.views.utils.ReporteViewImpl;
 
 public class ConsultaDePresupuestoPresenter {
@@ -69,12 +67,7 @@ public class ConsultaDePresupuestoPresenter {
 				onSelectPresupuesto();
 			}
 		});
-<<<<<<< HEAD
-		view.setActionGenerarFactura((a)->onAprobarPresupuestos(a));
-		view.setActionRegistrarPago((a)->onRegistrarPago(a));
-=======
 		view.setActionGenerarFactura((a)->onGenerarFactura(a));
->>>>>>> release#2.0.0
 	}
 
 	private void onSelectVehiculoDeCliente() {
@@ -128,21 +121,6 @@ public class ConsultaDePresupuestoPresenter {
 		}
 	}
 	
-<<<<<<< HEAD
-	private void onAprobarPresupuestos(ActionEvent a) {
-		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
-		try {
-			facController.aprobarPresupuestos(presupuestosSeleccionados);
-			updatePresupuestosView();
-			FacturaDTO factura = facController.generarFactura(presupuestosSeleccionados);
-			System.out.println("es nulllll factura " +  factura);
-			if(factura != null) {
-				ResumenDeFacturaDTO resumen = facController.generarResumenFactura(view.getIdOrdenDeTrabajoPresentada());
-				
-				if(resumen != null) {
-					new MessageDialog().showMessages(resumen.generarResumen());	
-				}	
-=======
 	private void actualizarEstadoPresupuestos() {
 		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
 		presupuestosSeleccionados.forEach((k,v) -> {
@@ -189,7 +167,6 @@ public class ConsultaDePresupuestoPresenter {
 				ReporteViewImpl ventanaReporte = new ReporteViewImpl();
 				ventanaReporte.setData(facController.makeFacturaTaller(factura));
 				ventanaReporte.open();
->>>>>>> release#2.0.0
 			}
 		}
 	}

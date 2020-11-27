@@ -49,23 +49,6 @@ public class FacturasController {
 		assert id != null;
 		return facturaDao.readByOrdenDeTrabajoId(id);
 	}
-<<<<<<< HEAD
-	
-	
-	public void aprobarPresupuestos(Map<Integer, Boolean> presupuestos) throws ForbiddenException {
-		assert presupuestos != null;
-		assert !presupuestos.isEmpty();
-		presupuestos.forEach((k, v) -> {
-			PresupuestoDTO presupuesto = presDao.readByID(k);
-			if(presupuesto.getEstado().equals(EstadoPresupuesto.PENDIENTE)) {
-				if(v.booleanValue() == true) {
-					presDao.updateStateById(k,new Date(), EstadoPresupuesto.APROBADO);	
-				} else {
-					presDao.updateStateById(k,new Date(), EstadoPresupuesto.RECHAZADO);	
-				}
-			} else {
-				throw new ForbiddenException(FORBIDDEN_CAMBIO_ESTADO);
-=======
 		
 	public void save(FacturaDTO factura) {
 		facturaDao.insert(factura);
@@ -78,24 +61,10 @@ public class FacturasController {
 		for (FacturaDTO f : facturas) {
 			if (idFactura < f.getIdFactura()) {
 				idFactura = f.getIdFactura();
->>>>>>> release#2.0.0
 			}
 		}
 		return idFactura;
 	}
-<<<<<<< HEAD
-	
-	public FacturaDTO generarFactura(Map<Integer, Boolean> presupuestos) {
-		Object [] keys = presupuestos.keySet().toArray();
-		Integer ordenDeTrabajoId = presDao.readByID((Integer) keys[0]).getIdOT();
-		FacturaDTO factura = null;
-		boolean esOrdenDeTrabajoRechazada = esRechazada(ordenDeTrabajoId);
-		if(!esOrdenDeTrabajoRechazada) {
-			factura = new FacturaDTO();
-			factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
-			factura.setFechaDeAlta(new Date());
-			facturaDao.insert(factura);
-=======
 		
 	public void registrarPagoDeFacturaById(Integer IdOrdenDeTrabajo) throws NotFoundException {
 		assert IdOrdenDeTrabajo != null;
@@ -110,7 +79,6 @@ public class FacturasController {
 			if(p.getEstado().name() == EstadoPresupuesto.APROBADO.name()) {
 				presDao.updateState(p.getIdPresupuesto(), EstadoPresupuesto.PAGADO);
 			}
->>>>>>> release#2.0.0
 		}
 	}
 	
