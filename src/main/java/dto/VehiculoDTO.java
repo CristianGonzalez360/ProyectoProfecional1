@@ -11,6 +11,7 @@ public class VehiculoDTO {
 	private boolean disponible;
 	private Boolean  usado;
 	private Integer idCompra;
+	private FichaTecnicaVehiculoDTO fichaTecnica;
 	
 	public VehiculoDTO() {
 		// TODO Auto-generated constructor stub
@@ -57,5 +58,13 @@ public class VehiculoDTO {
 	}
 	public void setIdCompra(Integer idCompra) {
 		this.idCompra = idCompra;
+	}
+
+	public FichaTecnicaVehiculoDTO getFichaTecnica() {
+		return fichaTecnica;
+	}
+
+	public void setFichaTecnica(FichaTecnicaVehiculoDTO fichaTecnica) {
+		this.fichaTecnica = fichaTecnica;
 	}
 }

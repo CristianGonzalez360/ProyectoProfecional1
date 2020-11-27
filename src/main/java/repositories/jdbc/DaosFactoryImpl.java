@@ -17,6 +17,7 @@ import repositories.RepuestosPlanificadosDao;
 import repositories.TrabajosPresupuestadosDao;
 import repositories.TurnosDao;
 import repositories.UsuariosDao;
+import repositories.VehiculoDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
 import repositories.jdbc.utils.DataSource;
 
@@ -52,6 +53,8 @@ public class DaosFactoryImpl extends DaosFactory {
 	
 	private FacturasDao facturasDao;
 
+	private VehiculoDao vehiculoDao;
+	
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
 	}
@@ -156,5 +159,12 @@ public class DaosFactoryImpl extends DaosFactory {
 		if (facturasDao == null) 
 			facturasDao = new FacturasDaoImpl(ds.getConnection());
 		return facturasDao;
+	}
+
+	@Override
+	public VehiculoDao makeVehiculoDao() {
+		if (vehiculoDao == null) 
+			vehiculoDao = new VehiculoDaoImpl(ds.getConnection());
+		return vehiculoDao;
 	}
 }
