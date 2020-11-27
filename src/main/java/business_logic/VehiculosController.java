@@ -8,8 +8,10 @@ import dto.AltaDeVehiculoDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
+import dto.VehiculoDTO;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
+import repositories.VehiculoDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
 
 public class VehiculosController {
@@ -19,14 +21,17 @@ public class VehiculosController {
 	private FichaTecnicaVehiculoDao fichasDao;
 
 	private OrdenesDeTrabajoDao otDao;
+	
+	private VehiculoDao vehiculoDao;
 
 	public VehiculosController(VehiculosConOrdenDeTrabajoDao vehiculosDao, OrdenesDeTrabajoDao otDao,
-			FichaTecnicaVehiculoDao fichasDao) {
+			FichaTecnicaVehiculoDao fichasDao, VehiculoDao vehiculoDao) {
 		assert vehiculosDao != null;
 		assert fichasDao != null;
 		this.vehiculosDao = vehiculosDao;
 		this.fichasDao = fichasDao;
 		this.otDao = otDao;
+		this.vehiculoDao = vehiculoDao;
 	}
 
 	public List<VehiculoConOrdenDeTrabajoDTO> readByIdCliente(Integer idCliente) {
@@ -62,11 +67,22 @@ public class VehiculosController {
 			for (OrdenDeTrabajoDTO temp : otDao.readByVehiculoId(aux.getId())) {
 				if (temp != null) {
 					if (temp.getFechaEntregado() == null) {
+						String patente = fichasDao.readByID(aux.getIdFichaTecnica()).getPatente();
+						aux.setPatente(patente);
 						vClienteRet.add(aux);
 					}
 				}
 			}
 		}
 		return vClienteRet;
+	}
+	
+	public List<VehiculoDTO> readVehiculosNuevosDisponibles() {
+		List<VehiculoDTO> ret = vehiculoDao.readNuevosDisponibles();
+		for (VehiculoDTO vehiculo : ret) {
+			FichaTecnicaVehiculoDTO ficha = fichasDao.readByID(vehiculo.getIdFichaTecnica());
+			vehiculo.setFichaTecnica(ficha);
+		}
+		return ret;
 	}
 }

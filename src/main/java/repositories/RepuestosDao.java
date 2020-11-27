@@ -17,4 +17,6 @@ public interface RepuestosDao extends GenericDao<RepuestoDTO, Integer> {
 	RepuestoDTO readByCodigo(Integer codigo);
 
 	void updateByCodigo(RepuestoDTO repuesto);
+
+	List<RepuestoDTO> readRepuestosSinStock();
 }

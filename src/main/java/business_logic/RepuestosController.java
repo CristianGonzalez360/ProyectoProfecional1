@@ -55,4 +55,7 @@ public class RepuestosController {
 	}
 
 
+	public List<RepuestoDTO> readRepuestosSinStock(){
+		return dao.readRepuestosSinStock();
+	}
 }

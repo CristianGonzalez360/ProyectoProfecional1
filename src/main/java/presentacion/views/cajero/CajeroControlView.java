@@ -30,7 +30,7 @@ public class CajeroControlView extends JInternalFrame {
 
 	private CajeroControlView() {
 		setClosable(false);
-		setTitle("Cajero control view");
+		setTitle("Cajero Control View");
 		setMaximizable(true);
 		setIconifiable(true);
 		setBounds(100, 100, 800, 436);
@@ -42,10 +42,10 @@ public class CajeroControlView extends JInternalFrame {
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
 		this.cajeroPanel = PanelCarritoRepuestoView.getInstance();
-		tabbedPane.add("Venta repuesto", this.cajeroPanel);
+		tabbedPane.add("Venta de Repuesto", this.cajeroPanel);
 		
 		this.cajeroPanel2 = PanelCobroCajeroView.getInstance();
-		tabbedPane.add("Pago Facturas", this.cajeroPanel2);
+		tabbedPane.add("Pago de Facturas", this.cajeroPanel2);
 		
 		
 		

@@ -199,7 +199,6 @@ public class PlanificarRepuestosFormView extends JPanel {
 	public void setDataRepuestosPlanificados(List<RepuestoPlanificadoDTO> repuestos) {
 		modelRepuestosInferior.setRowCount(0);
 		for (RepuestoPlanificadoDTO r : repuestos) {
-			idRepuestos.add(r.getIdRepuestoPlanificado());
 			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(),
 					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantRequerida() };
 			modelRepuestosInferior.addRow(row);
@@ -209,6 +208,7 @@ public class PlanificarRepuestosFormView extends JPanel {
 	public void setDataRepuestos(List<RepuestoDTO> repuestos) {
 		textCantidad.setText("");
 		modelRepuestos.setRowCount(0);
+		idRepuestos.clear();
 		for (RepuestoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
 			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(), r.getFabricante(),

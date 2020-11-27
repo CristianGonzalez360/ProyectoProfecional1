@@ -425,6 +425,9 @@ public class PanelCarritoRepuestoView extends JPanel {
 		this.textCantidad.setText(string);
 	}
 
+	public void setTfDni(String string) {
+		this.tfDni.setText(string);
+	}
 	
 }
 	

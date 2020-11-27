@@ -33,6 +33,7 @@ public class FacturaDTO {
 	public FacturaDTO() {
 		this.estado = "IMPAGA";
 		presupuestosFacturados = new ArrayList<>();
+		setFechaDeAlta(new Date());
 	}
 		
 	public Integer getIdFactura() {

@@ -44,6 +44,7 @@ public class PanelGestionRepuestos extends JPanel{
 	private JLabel lblMarca;
 	private JButton btnEditarStock;
 	private JSeparator separator_2;
+	private JButton btnBajoStock;
 	
 	
 	private PanelGestionRepuestos() {
@@ -72,6 +73,9 @@ public class PanelGestionRepuestos extends JPanel{
 		
 		btnBuscar = new JButton("Buscar");
 		panelBuscador.add(btnBuscar);
+		
+		btnBajoStock = new JButton("Bajo Stock");
+		panelBuscador.add(btnBajoStock);
 		
 		modelo = new DefaultTableModel();
 		modelo.setColumnIdentifiers(nombreColumnas);
@@ -177,4 +181,12 @@ public class PanelGestionRepuestos extends JPanel{
 		this.btnEditarStock.addActionListener(listener);
 	}
 	
+	public void resetBuscador() {
+		this.comboMarcas.setSelectedIndex(0);
+		this.txtDescripcion.setText("");
+	}
+	
+	public void setActionBajoStock(ActionListener listener) {
+		this.btnBajoStock.addActionListener(listener);
+	}
 }

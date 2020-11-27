@@ -6,33 +6,28 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
-
 import business_logic.RepuestosController;
 import dto.RepuestoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.utils.InputDialog;
 import presentacion.views.utils.MessageDialog;
-import services.DatabaseGraph;
+import services.DatabaseGraphRepuesto;
 
 public class RepuestosPresenter {
 
 	private PanelGestionRepuestos gestionRepuestos;
 	private RepuestosController repuestosController;
 	private NuevosRepuestosFormView nuevosRepuestosView;
-	private DatabaseGraph repuestosGraph;
-	
-
+	private DatabaseGraphRepuesto repuestosGraph;
+	private static final String All= "Todas";
 	private String marca;
 	private String descripcion;
-
 
 	public RepuestosPresenter(RepuestosController controller) {
 		this.repuestosController = controller;
@@ -46,12 +41,10 @@ public class RepuestosPresenter {
 		this.nuevosRepuestosView.setActionOnCancelarCarga(a -> onCancelarCarga(a));
 		this.gestionRepuestos.serActionOnConfigurarMinimo(a -> onConfigMinimo(a));
 		this.gestionRepuestos.setActionOnEditarStock(a -> onEditarSock(a));
-
+		this.gestionRepuestos.setActionBajoStock(a -> onMostrarRepuestosSinStock(a));
 		cargarMarcas();
 	}
 
-	
-	
 	private void onEditarSock(ActionEvent a) {
 		int id = this.gestionRepuestos.getIdRepuesto();
 		if (id >= 0) {
@@ -73,8 +66,6 @@ public class RepuestosPresenter {
 			new MessageDialog().showMessages("Seleccione un repuesto");
 		}
 	}
-
-
 
 	private void onCancelarCarga(ActionEvent a) {
 		this.nuevosRepuestosView.cerrar();//cerrar
@@ -103,7 +94,6 @@ public class RepuestosPresenter {
 		}
 	}
 
-
 	private void onCargarArchivo(ActionEvent a) {
 		
 		JFileChooser chooser = new JFileChooser();
@@ -114,46 +104,71 @@ public class RepuestosPresenter {
 		
 		if(seleccion==JFileChooser.APPROVE_OPTION) {
 			try {
-				LogManager.getLogger(this.getClass()).log(Level.INFO,
-						"Seed database operation status: [INITIALIZED - LOADING .YML]");
-				Yaml yaml = new Yaml(new Constructor(DatabaseGraph.class));
+				LogManager.getLogger(this.getClass()).log(Level.INFO,"Seed database operation status: [INITIALIZED - LOADING .YML]");
+				Yaml yaml = new Yaml(new Constructor(DatabaseGraphRepuesto.class));
 				InputStream inputStream = new FileInputStream(chooser.getSelectedFile().getAbsolutePath());//FileInputStream cambio
 				repuestosGraph = yaml.load(inputStream);
-				this.nuevosRepuestosView.cargarTabla(repuestosGraph.getRepuestos());
-				this.nuevosRepuestosView.mostrar();
 				
+				if(validarRepuestos(repuestosGraph.getRepuestos())) {
+					this.nuevosRepuestosView.cargarTabla(repuestosGraph.getRepuestos());
+					this.nuevosRepuestosView.mostrar();
+				}else {
+					new MessageDialog().showMessages("El archivo contiene datos erroneos, por favor revisar el contenido del archivo\nEjemplo de formato recomendado:\nrepuestos:\n   - codigoRepuesto: 1122\r\n" + 
+							"      precioRepuesto: 3000\r\n" + 
+							"      marcaRepuesto: Renault\r\n" + 
+							"      descripcionRepuesto: Volante\r\n" + 
+							"      stockRepuesto: 20\r\n" + 
+							"      fabricante: Autopartes Argentinas\r\n" + 
+							"      stockMinimo: 13");
+					}
 			} catch (Exception e) {
-				LogManager.getLogger(this.getClass()).log(Level.ERROR,
-						"Seed database operation status: [ABORT - ERROR LOADING .YML, " + e.getMessage() + "]");
+				LogManager.getLogger(this.getClass()).log(Level.ERROR,"Seed database operation status: [ABORT - ERROR LOADING .YML, " + e.getMessage() + "]");
+				new MessageDialog().showMessages("El archivo esta vacío, por favor revisar el contenido del archivo\nEjemplo de formato recomendado:\nrepuestos:\n   - codigoRepuesto: 1122\r\n" + 
+						"      precioRepuesto: 3000\r\n" + 
+						"      marcaRepuesto: Renault\r\n" + 
+						"      descripcionRepuesto: Volante\r\n" + 
+						"      stockRepuesto: 20\r\n" + 
+						"      fabricante: Autopartes Argentinas\r\n" + 
+						"      stockMinimo: 13");
 			}
 		}
 	}
 
+	private boolean validarRepuestos(List<RepuestoDTO> repuestos) {
+		boolean flag=true;
+		for (RepuestoDTO repuesto : repuestos) {
+			if(repuesto.getCodigoRepuesto()==null || repuesto.getPrecioRepuesto()==null || repuesto.getMarcaRepuesto()==null ||
+					repuesto.getDescripcionRepuesto()==null || repuesto.getStockRepuesto()==null || repuesto.getFabricante()==null || repuesto.getStockMinimo()==null) {
+				flag=false;
+			}
+		}
+		return flag;
+	}
+
 	private void onValidarCarga(ActionEvent a) {
+		int j=0;
 		List<Integer> idRepuestosNoAceptados = this.nuevosRepuestosView.getIdRepuestosNoAceptados();//obtengo id de repuestos que estoy leyendo que no fueron aceptados para cargar
 		int codigo;
 		List<RepuestoDTO> repuestosCargados = this.repuestosGraph.getRepuestos();//lista con todos los repuestos del archivo
 		ListIterator<RepuestoDTO> it = repuestosCargados.listIterator();
 		RepuestoDTO repuestoAuxiliar;
-		while(it.hasNext()) {//elimino los no seleccionados
-			
+		
+		while(it.hasNext()&&j<idRepuestosNoAceptados.size() ) {//quito los que selecciono
 			codigo=it.next().getCodigoRepuesto();
-			for(int i=0;i<idRepuestosNoAceptados.size();i++) {
-				if(codigo==idRepuestosNoAceptados.get(i)) {
-					it.remove();
-				}
+			if(codigo==idRepuestosNoAceptados.get(j)) {
+				j++;
+				it.remove();
 			}
 		}
 		
 		it = repuestosCargados.listIterator();
 		while(it.hasNext()) {//busco los que ya existen y actualizo la cantidad de repuestos
-			
 			repuestoAuxiliar=it.next();			
 			if(repuestosController.readByCodigo(repuestoAuxiliar.getCodigoRepuesto()) != null) {
 				repuestoAuxiliar.setStockRepuesto(repuestoAuxiliar.getStockRepuesto()+repuestosController.readByCodigo(repuestoAuxiliar.getCodigoRepuesto()).getStockRepuesto());
 			}
 		}
-
+		
 		it = repuestosCargados.listIterator();
 		while(it.hasNext()) {//inserto en la base de datos.
 			repuestoAuxiliar=it.next();
@@ -164,12 +179,9 @@ public class RepuestosPresenter {
 		this.nuevosRepuestosView.cerrar();//cerrar
 		this.nuevosRepuestosView.clear();//limpiar la vista tambn
 		cargarMarcas();//actualizo combobox
-		
 		List<RepuestoDTO> repuestos = repuestosController.readAll();
 		this.gestionRepuestos.setData(repuestos);//actualizo tabla repuestos
-		
 	}
-	
 	
 	private void onIngresarStock(ActionEvent a) {
 		int id = this.gestionRepuestos.getIdRepuesto();
@@ -196,13 +208,13 @@ public class RepuestosPresenter {
 	private void refrescar() {
 		List<RepuestoDTO> repuestos;
 		if (descripcion.isEmpty()) {
-			if (marca == "todas") {
+			if (marca == All) {
 				repuestos = repuestosController.readAll();
 			} else {
 				repuestos = repuestosController.readByMarca(marca);
 			}
 		} else {
-			if (marca == "todas") {
+			if (marca == All) {
 				repuestos = repuestosController.readByDescripcion(descripcion);
 			} else {
 				repuestos = repuestosController.readbyMarcaYDescripcion(marca, descripcion);
@@ -213,7 +225,7 @@ public class RepuestosPresenter {
 
 	public void cargarMarcas() {
 		List<String> marcas = new ArrayList<String>();
-		marcas.add("todas");
+		marcas.add(All);
 		marcas.addAll(repuestosController.readMarcas());
 		this.gestionRepuestos.setDataMarcas(marcas);
 	}
@@ -223,5 +235,12 @@ public class RepuestosPresenter {
 		marca = gestionRepuestos.getMarca();
 		descripcion = gestionRepuestos.getDescripcion();
 		refrescar();
+	}
+	
+	private void onMostrarRepuestosSinStock(ActionEvent a) {
+		marca = All;
+		descripcion = "";
+		gestionRepuestos.resetBuscador();
+		gestionRepuestos.setData(repuestosController.readRepuestosSinStock());
 	}
 }

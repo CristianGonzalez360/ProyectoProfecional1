@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,8 @@ public class ConsultaDePresupuestoPresenter {
 	private PresupuestosController presController;
 	
 	private FacturasController facController;
+
+	private ClienteDTO cliente;
 	
 	public ConsultaDePresupuestoPresenter(VehiculosController controller
 			, ClientesController clienteController,
@@ -110,7 +113,7 @@ public class ConsultaDePresupuestoPresenter {
 		view.lockButtonGenerarFactura();
 		String inputDni = view.getTextDni();
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
-			ClienteDTO cliente = clientesController.readByDni(Integer.parseInt(inputDni));
+			cliente = clientesController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
 				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculoController
 						.readVehicleWithClientIdWhereOtIsOpen(cliente.getIdCliente());
@@ -120,7 +123,7 @@ public class ConsultaDePresupuestoPresenter {
 		}
 	}
 	
-	private void onGenerarFactura(ActionEvent a) {
+	private void actualizarEstadoPresupuestos() {
 		Map<Integer, Boolean> presupuestosSeleccionados = view.getPresupuestosPresentados();
 		presupuestosSeleccionados.forEach((k,v) -> {
 			PresupuestoDTO presupuesto = presController.readById(k);
@@ -136,18 +139,52 @@ public class ConsultaDePresupuestoPresenter {
 				presController.registrarAprobacion(presupuesto);
 			} 
 		});
-		
-		try {
-			updatePresupuestosView();
-			FacturaDTO factura = facController.generarFactura(presupuestosSeleccionados);
-			if(factura != null) {
+		updatePresupuestosView();
+	}
+	
+	private void onGenerarFactura(ActionEvent a) {
+		List<PresupuestoDTO> ps = getPresupuestosFacturados();
+		actualizarEstadoPresupuestos();
+		FacturaDTO factura = null;
+		Integer ordenDeTrabajoId = null;
+		if(!ps.isEmpty()) {
+			ordenDeTrabajoId = ps.get(0).getIdOT();
+			if (!otController.esRechazada(ordenDeTrabajoId)) {
+				factura = new FacturaDTO();
+				factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
+				double total = 0;
+				for (PresupuestoDTO p : ps) {
+					total += p.getPrecio();
+				}
+				factura.setTotal(total);
+				factura.setCliente(cliente);
+				facController.save(factura);
+	
+				for (PresupuestoDTO p : ps) {
+					p.setIdFactura(factura.getIdFactura());
+					presController.update(p);
+				}
+				factura.setPresupuestosFacturados(ps);
+				
 				ReporteViewImpl ventanaReporte = new ReporteViewImpl();
 				ventanaReporte.setData(facController.makeFacturaTaller(factura));
 				ventanaReporte.open();
 			}
-		} catch(ForbiddenException e) {
-			new MessageDialog().showMessages(e.getMessage());
 		}
+	}
+	
+	private List<PresupuestoDTO> getPresupuestosFacturados(){
+		Map<Integer, Boolean> presupuestos = view.getPresupuestosPresentados();
+		Object[] keys = presupuestos.keySet().toArray();
+		List<PresupuestoDTO> ps = new ArrayList<PresupuestoDTO>();
+		for (int i = 0; i < keys.length; i++) {
+			if(presupuestos.get(keys[i]) == true) {
+				int idPresupuesto = (Integer) keys[i];
+				PresupuestoDTO p = presController.readById(idPresupuesto);
+				ps.add(p);
+			}
+		}
+		return ps;
 	}
 	
 	private void updatePresupuestosView () {

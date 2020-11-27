@@ -1,12 +1,8 @@
 package business_logic;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
 import business_logic.exceptions.NotFoundException;
-import dto.ClienteDTO;
 import dto.EstadoPresupuesto;
 import dto.FacturaDTO;
 import dto.FichaTecnicaVehiculoDTO;
@@ -16,7 +12,6 @@ import dto.ResumenDeFacturaDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import presentacion.views.utils.FacturaRepuestosReport;
 import presentacion.views.utils.FacturaTallerReport;
-import repositories.ClientesDao;
 import repositories.DaosFactory;
 import repositories.FacturasDao;
 import repositories.FichaTecnicaVehiculoDao;
@@ -37,7 +32,6 @@ public class FacturasController {
 	private RepuestosPlanificadosDao repuPresuDao;
 	
 	private OrdenesDeTrabajoDao ordenTrabajoDao;
-	private ClientesDao clienteDao;
 	private FichaTecnicaVehiculoDao fichaTecnicaDao;
 	private VehiculosConOrdenDeTrabajoDao vehiculoConOrdenTrabajoDao;
 	
@@ -47,7 +41,6 @@ public class FacturasController {
 		this.trabajosPresuDao = daos.makeTrabajosPlanificadosDao();
 		this.repuPresuDao = daos.makeRepuestosPlanificadosDao();
 		this.ordenTrabajoDao = daos.makeOrdenDeTrabajoDao();
-		this.clienteDao = daos.makeClienteDao();
 		this.fichaTecnicaDao = daos.makeFichaTecnicaVehiculoDao();
 		this.vehiculoConOrdenTrabajoDao = daos.makeVehiculoConOrdeDeTrabajoDao();
 	}
@@ -57,45 +50,11 @@ public class FacturasController {
 		return facturaDao.readByOrdenDeTrabajoId(id);
 	}
 		
-	public FacturaDTO generarFactura(Map<Integer, Boolean> presupuestos) {
-		FacturaDTO factura = null;
-		if (!presupuestos.isEmpty()) {
-			Object[] keys = presupuestos.keySet().toArray();
-			Integer ordenDeTrabajoId = presDao.readByID((Integer) keys[0]).getIdOT();
-			List<PresupuestoDTO> ps = new ArrayList<PresupuestoDTO>();
-			double total = 0;
-			for (int i = 0; i < keys.length; i++) {
-				if(presupuestos.get(keys[i]) == true) {
-					int idPresupuesto = (Integer) keys[i];
-					PresupuestoDTO p = readPresupuestoById(idPresupuesto);
-					ps.add(p);
-					total += p.getPrecio();
-				}
-			}
-			boolean esOrdenDeTrabajoRechazada = esRechazada(ordenDeTrabajoId);
-			if (!esOrdenDeTrabajoRechazada) {
-				factura = new FacturaDTO();
-				factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
-				factura.setFechaDeAlta(new Date());
-				factura.setTotal(total);
-
-				factura.setCliente(getCliente(factura));
-
-				facturaDao.insert(factura);
-
-				int idFactura = readIdUltimaFacturaGuardada();
-
-				for (PresupuestoDTO p : ps) {
-					p.setIdFactura(idFactura);
-					presDao.update(p);
-				}
-				factura.setPresupuestosFacturados(ps);
-				factura.setIdFactura(idFactura);
-			} 
-		}
-		return factura;
+	public void save(FacturaDTO factura) {
+		facturaDao.insert(factura);
+		factura.setIdFactura(readIdUltimaFacturaGuardada());
 	}
-	
+		
 	private int  readIdUltimaFacturaGuardada() {
 		List<FacturaDTO> facturas = facturaDao.readAll();
 		int idFactura = facturas.get(0).getIdFactura();
@@ -105,25 +64,6 @@ public class FacturasController {
 			}
 		}
 		return idFactura;
-	}
-
-	private PresupuestoDTO readPresupuestoById(Integer idPresupuesto) {
-		PresupuestoDTO ret = presDao.readByID(idPresupuesto);
-		ret.setTrabajos(trabajosPresuDao.readByPresupuestoId(idPresupuesto));
-		ret.setRepuestos(repuPresuDao.readByIdPresupuesto(idPresupuesto));
-		return ret;
-	}
-	
-	private boolean esRechazada(Integer ordenDeTrabajoId) {
-		List<PresupuestoDTO> presu = presDao.readByOrdenDeTrabajoId(ordenDeTrabajoId);
-		int cantPresupuestos = presu.size();
-		int cantRechazadas = 0;
-		for(PresupuestoDTO temp: presu) {
-			if(temp.getEstado().equals(EstadoPresupuesto.RECHAZADO)) {
-				cantRechazadas++;
-			}
-		}
-		return cantRechazadas == cantPresupuestos;
 	}
 		
 	public void registrarPagoDeFacturaById(Integer IdOrdenDeTrabajo) throws NotFoundException {
@@ -180,7 +120,7 @@ public class FacturasController {
 	
 	public FacturaTallerReport makeFacturaTaller(FacturaDTO factura) {
 		FacturaTallerReport ret = new FacturaTallerReport();
-		ret.setCliente(getCliente(factura).getDatosPersonalesDTO());
+		ret.setCliente(factura.getCliente().getDatosPersonalesDTO());
 		ret.setVehiculo(getFichaTecnica(factura));
 		ret.setTrabajos(factura.getTabajos());
 		ret.setRepuestos(factura.getRepuestosPlanificados());
@@ -190,17 +130,7 @@ public class FacturasController {
 		
 		return ret;
 	}
-	
-	private ClienteDTO getCliente(FacturaDTO factura) {
 		
-		ClienteDTO cliente = null;
-		OrdenDeTrabajoDTO ordenTrabajo = ordenTrabajoDao.readByID(factura.getIdOrdenDeTrabajo());
-		VehiculoConOrdenDeTrabajoDTO vehiculoConOrdenTrabajo = vehiculoConOrdenTrabajoDao.readByID(ordenTrabajo.getIdOrdenTrabajo());
-		cliente = clienteDao.readByID(vehiculoConOrdenTrabajo.getIdCliente());
-		
-		return cliente;
-	}
-	
 	private FichaTecnicaVehiculoDTO getFichaTecnica(FacturaDTO factura) {
 		OrdenDeTrabajoDTO ordenTrabajo = ordenTrabajoDao.readByID(factura.getIdOrdenDeTrabajo());
 		VehiculoConOrdenDeTrabajoDTO vehiculoConOrdenTrabajo = vehiculoConOrdenTrabajoDao.readByID(ordenTrabajo.getIdOrdenTrabajo());

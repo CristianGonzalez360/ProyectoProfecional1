@@ -140,14 +140,21 @@ public class CarritoPresenter {
 	private void onBuscarCliente(ActionEvent a) {
 		view.clearClienteData();
 		String inputDni = view.getDniCliente();
-		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
+		if (new StringValidator(inputDni).number("").validate().isEmpty() ) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
 				view.setDataCliente(cliente);
 				clienteFactura = cliente;
+			}else {
+				clienteFactura = null;
 			}
+			
+		}
+		if (inputDni.isEmpty() || inputDni == null ) {
+			clienteFactura = null;
 		}
 	}
+
 
 	private void refrescar() {
 		List<RepuestoDTO> repuestos;
@@ -203,7 +210,9 @@ public class CarritoPresenter {
 			view.clear();
 			this.precioTotal = 0.0;
 			this.clienteFactura = null;
+			this.view.setTfDni("");
 			this.repuestos.clear();
+
 		}else {
 			new MessageDialog().showMessages(errors);
 		}
