@@ -234,6 +234,33 @@ CREATE TABLE RepuestosComprados (
   FOREIGN KEY (idRepuesto) REFERENCES Repuestos (idRepuesto)
 );
 
+DROP TABLE CompraVehiculo IF EXISTS;
+CREATE TABLE CompraVehiculo (
+  idCompraVehiculo INTEGER NOT NULL,
+  idVehiculo INTEGER NOT NULL,
+  PrecioCompra DOUBLE NOT NULL,
+  precioVenta DOUBLE NOT NULL,
+  fechaCompra DATE NOT NULL,
+  idUsuCompra INTEGER NOT NULL,
+  PRIMARY KEY (idCompraVehiculo),
+  FOREIGN KEY (idUsuCompra) REFERENCES Usuarios(idUsuario),
+);
+
+DROP TABLE Vehiculos IF EXISTS;
+CREATE TABLE Vehiculos (
+  idVehiculo INTEGER NOT NULL,
+  precioVenta DOUBLE NOT NULL,
+  idFichaTecnica INTEGER NOT NULL,
+  fechaIngreso DATE NOT NULL,
+  disponible BOOLEAN NOT NULL,
+  usado BOOLEAN NOT NULL,
+  idCompra INTEGER,
+  PRIMARY KEY (idVehiculo),
+  FOREIGN KEY (idFichaTecnica) REFERENCES FichaTecnicaVehiculo(idFichaTecnicaVehiculo),
+  FOREIGN KEY (idCompra) REFERENCES CompraVehiculo(idCompraVehiculo)
+);
+
+DROP TABLE VentasVehiculos IF EXISTS;
 CREATE TABLE VentasVehiculos (
   idVentaVehiculo INTEGER NOT NULL,
   idUsuVentaVN INTEGER NOT NULL,
@@ -258,6 +285,17 @@ CREATE TABLE VentasVehiculos (
   FOREIGN KEY (idUsuEntrega) REFERENCES Usuarios(idUsuario)
 );
 
+DROP TABLE VehiculoReservado IF EXISTS;
+CREATE TABLE VehiculoReservado (
+  idVehiculoReservado INTEGER NOT NULL,
+  idFichaTecnica INTEGER NOT NULL,
+  idPedido INTEGER NOT NULL,
+  precioVenta INTEGER NOT NULL,
+  PRIMARY KEY (idVehiculoReservado),
+  FOREIGN KEY (idFichaTecnica) REFERENCES FichaTecnicaVehiculo(idFichaTecnicaVehiculo)
+);
+
+DROP TABLE PedidoVehiculo IF EXISTS;
 CREATE TABLE PedidoVehiculo (
   idPedidoVehiculo INTEGER NOT NULL,
   idVehiculoReservado INTEGER NOT NULL,
@@ -273,19 +311,16 @@ CREATE TABLE PedidoVehiculo (
   FOREIGN KEY (idUsuIngreso) REFERENCES Usuarios(idUsuario)
 );
 
-CREATE TABLE Vehiculos (
-  idVehiculo INTEGER NOT NULL,
-  precioVenta DOUBLE NOT NULL,
-  idFichaTecnica INTEGER NOT NULL,
-  fechaIngreso DATE NOT NULL,
-  disponible BOOLEAN NOT NULL,
-  usado BOOLEAN NOT NULL,
-  idCompra INTEGER NOT NULL,
-  PRIMARY KEY (idVehiculo),
-  FOREIGN KEY (idFichaTecnica) REFERENCES FichaTecnicaVehiculo(idFichaTecnicaVehiculo),
-  FOREIGN KEY (idCompra) REFERENCES CompraVehiculo(idCompraVehiculo)
+DROP TABLE Moneda IF EXISTS;
+CREATE TABLE Moneda (
+  idMoneda INTEGER NOT NULL,
+  nombre VARCHAR NOT NULL,
+  simbolo VARCHAR NOT NULL,
+  cotizacionDolar DOUBLE NOT NULL,
+  PRIMARY KEY (idMoneda)
 );
 
+DROP TABLE Sucursal IF EXISTS;
 CREATE TABLE Sucursal (
   idSucursal INTEGER NOT NULL,
   pais VARCHAR NOT NULL,
@@ -297,31 +332,3 @@ CREATE TABLE Sucursal (
   FOREIGN KEY (idMoneda) REFERENCES Moneda(idMoneda)
 );
 
-REATE TABLE Moneda (
-  idMoneda INTEGER NOT NULL,
-  nombre VARCHAR NOT NULL,
-  simbolo VARCHAR NOT NULL,
-  cotizacionDolar DOUBLE NOT NULL,
-  PRIMARY KEY (idMoneda)
-);
-
-CREATE TABLE VehiculoReservado (
-  idVehiculoReservado INTEGER NOT NULL,
-  idFichaTecnica INTEGER NOT NULL,
-  idPedido INTEGER NOT NULL,
-  precioVenta INTEGER NOT NULL,
-  PRIMARY KEY (idVehiculoReservado),
-  FOREIGN KEY (idFichaTecnica) REFERENCES FichaTecnicaVehiculo(idFichaTecnicaVehiculo)
-);
-
-CREATE TABLE CompraVehiculo (
-  idCompraVehiculo INTEGER NOT NULL,
-  idVehiculo INTEGER NOT NULL,
-  PrecioCompra DOUBLE NOT NULL,
-  precioVenta DOUBLE NOT NULL,
-  fechaCompra DATE NOT NULL,
-  idUsuCompra INTEGER NOT NULL,
-  PRIMARY KEY (idCompraVehiculo),
-  FOREIGN KEY (idUsuCompra) REFERENCES Usuarios(idUsuario),
-  FOREIGN KEY (idVehiculo) REFERENCES Vehiculos(idVehiculo)
-);
