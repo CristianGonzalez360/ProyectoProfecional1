@@ -3,6 +3,7 @@ package presentacion;
 
 import business_logic.ControllersFactory;
 import presentacion.views.cajero.CajeroControlView;
+import presentacion.views.gerente.GerenteControlView;
 import presentacion.views.supervisor.ClientePresenter;
 import presentacion.views.supervisor.RepuestosPresenter;
 import presentacion.views.supervisor.SupervisorControlView;
@@ -18,6 +19,8 @@ public class ViewsFactoryImpl extends ViewsFactory {
 		WorkbenchView.getInstance().addFrames(TecnicoControlView.getInstance());
 		WorkbenchView.getInstance().addFrames(SupervisorControlView.getInstance());
 		WorkbenchView.getInstance().addFrames(CajeroControlView.getInstance());
+		WorkbenchView.getInstance().addFrames(GerenteControlView.getInstance());
+
 	}
 
 	@Override

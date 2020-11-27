@@ -12,6 +12,10 @@ cuentas:
     nombreUsuario: u003
     password: pu003
     role: cajero
+  - fechaDeAlta: 2016-15-10
+    nombreUsuario: u004
+    password: pu004
+    role: gerente
 
 
 datosPersonales:
@@ -30,6 +34,16 @@ datosPersonales:
     dni: 33390342
     telefono: 1112
     email: u002@mail.com
+    calle: calle1
+    altura: 1
+    piso: 1
+    dpto: A1
+    localidad: localidad1
+  - nombreCompleto: u004
+    apellido: ap004
+    dni: 12345
+    telefono: 1112
+    email: u004@mail.com
     calle: calle1
     altura: 1
     piso: 1
