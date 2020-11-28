@@ -13,13 +13,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class MercadoPagoFormView extends JDialog {
 
 	private static final long serialVersionUID = -6293870932970697649L;
+	
 	private final JPanel contentPanel = new JPanel();
 
 	private static MercadoPagoFormView instance;
+	
 	private JButton btnSalvar;
 
 	private MercadoPagoFormView() {
@@ -37,12 +40,13 @@ public class MercadoPagoFormView extends JDialog {
 		panel.setLayout(null);
 
 		JLabel lblNumeroTarjeta = new JLabel("Escanear el siguiente Código QR");
+		lblNumeroTarjeta.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNumeroTarjeta.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNumeroTarjeta.setBounds(10, 3, 415, 14);
+		lblNumeroTarjeta.setBounds(10, 11, 415, 14);
 		panel.add(lblNumeroTarjeta);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(73, 28, 316, 420);
+		panel_2.setBounds(48, 57, 350, 350);
 		panel.add(panel_2);
 
 		JPanel panel_1 = new JPanel();
@@ -81,7 +85,7 @@ public class MercadoPagoFormView extends JDialog {
 		private static final long serialVersionUID = -2207187888506087014L;
 
 		public Imagen() {
-			this.setSize(300, 400);
+			this.setSize(350, 350);
 		}
 
 		public void paint(Graphics grafico) {

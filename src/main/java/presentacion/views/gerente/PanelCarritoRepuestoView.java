@@ -1,4 +1,4 @@
-package presentacion.views.cajero;
+package presentacion.views.gerente;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -134,6 +134,7 @@ public class PanelCarritoRepuestoView extends JPanel {
 		tfTotalFactura.setColumns(10);
 		btnCrearFactura.setActionCommand("OK");
 		buttonPane.add(btnCrearFactura);
+//		tfTotalFactura.setText(arg0);
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setVisible(false);

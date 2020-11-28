@@ -3,14 +3,18 @@ package dto;
 public class SucursalDTO {
 
 	private Integer idSucursal;
+
 	private String pais;
+	
 	private String calle;
+	
 	private Integer altura;
+	
 	private String  localidad;
+	
 	private Integer idMoneda;
 	
 	public SucursalDTO() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Integer getIdSucursal() {

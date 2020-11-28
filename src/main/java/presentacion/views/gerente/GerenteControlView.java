@@ -1,4 +1,4 @@
-package presentacion.views.cajero;
+package presentacion.views.gerente;
 
 import javax.swing.JInternalFrame;
 import java.awt.BorderLayout;
@@ -6,41 +6,47 @@ import java.beans.PropertyVetoException;
 
 import javax.swing.JTabbedPane;
 
-public class CajeroControlView extends JInternalFrame {
-	  	
+public class GerenteControlView extends JInternalFrame {
+	  
+	
+
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1308877516578945407L;
 
-	private static CajeroControlView instance;
+	private static GerenteControlView instance;
 
-	private PanelCarritoRepuestoView cajeroPanel;
-	
-	private PanelCobroCajeroView cajeroPanel2;
+//	private PanelCarritoRepuestoView cajeroPanel;
+//	private PanelCobroCajeroView cajeroPanel2;
 
-	public static CajeroControlView getInstance() {
+
+	public static GerenteControlView getInstance() {
 		if (instance == null)
-			instance = new CajeroControlView();
+			instance = new GerenteControlView();
 		return instance;
 	}
 
-	private CajeroControlView() {
+	private GerenteControlView() {
 		setClosable(false);
-		setTitle("Cajero Control View");
+		setTitle("Gerente Control View");
 		setMaximizable(true);
 		setIconifiable(true);
 		setBounds(100, 100, 800, 436);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
+		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
-		this.cajeroPanel = PanelCarritoRepuestoView.getInstance();
-		tabbedPane.add("Venta de Repuesto", this.cajeroPanel);
+//		this.cajeroPanel = PanelCarritoRepuestoView.getInstance();
+//		tabbedPane.add("Venta de Repuesto", this.cajeroPanel);
 		
-		this.cajeroPanel2 = PanelCobroCajeroView.getInstance();
-		tabbedPane.add("Pago de Facturas", this.cajeroPanel2);	
+//		this.cajeroPanel2 = PanelCobroCajeroView.getInstance();
+//		tabbedPane.add("Pago de Facturas", this.cajeroPanel2);
+		
 		
 	}
 

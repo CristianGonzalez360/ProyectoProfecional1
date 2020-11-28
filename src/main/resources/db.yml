@@ -12,6 +12,14 @@ cuentas:
     nombreUsuario: u003
     password: pu003
     role: cajero
+  - fechaDeAlta: 2016-15-10
+    nombreUsuario: u004
+    password: pu004
+    role: gerente
+  - fechaDeAlta: 2017-05-12
+    nombreUsuario: u005
+    password: pu005
+    role: vendedor
 
 
 datosPersonales:
@@ -30,6 +38,16 @@ datosPersonales:
     dni: 33390342
     telefono: 1112
     email: u002@mail.com
+    calle: calle1
+    altura: 1
+    piso: 1
+    dpto: A1
+    localidad: localidad1
+  - nombreCompleto: u004
+    apellido: ap004
+    dni: 12345
+    telefono: 1112
+    email: u004@mail.com
     calle: calle1
     altura: 1
     piso: 1
@@ -55,6 +73,26 @@ datosPersonales:
     piso: 12
     dpto: A3
     localidad: localidad3
+  - nombreCompleto: c004
+    apellido: ap004
+    dni: 123456
+    telefono: 321111
+    email: c004@mail.com
+    calle: calle1
+    altura: 11
+    piso: 12
+    dpto: A3
+    localidad: localidad4
+  - nombreCompleto: c005
+    apellido: ap005
+    dni: 111222
+    telefono: 3211323
+    email: c005@mail.com
+    calle: calle1
+    altura: 11
+    piso: 12
+    dpto: A3
+    localidad: localidad4
   - nombreCompleto: c002
     apellido: ap004
     dni: 33390344
@@ -66,6 +104,7 @@ datosPersonales:
     dpto: B1
     localidad: localidad1
     
+
 usuarios:
   - cuenta:
       idCuenta: 1
@@ -79,6 +118,14 @@ usuarios:
       idCuenta: 3
     datos:
       id: 3
+  - cuenta:
+      idCuenta: 4
+    datos:
+      id: 4
+  - cuenta:
+      idCuenta: 5
+    datos:
+      id: 5
       
 turnos:
   - idCliente: 1

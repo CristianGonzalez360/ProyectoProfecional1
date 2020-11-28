@@ -4,10 +4,12 @@ import java.awt.event.ActionEvent;
 import business_logic.LoginController;
 import business_logic.exceptions.ForbiddenException;
 import presentacion.views.cajero.CajeroControlView;
+import presentacion.views.gerente.GerenteControlView;
 import presentacion.views.supervisor.SupervisorControlView;
 import presentacion.views.tecnico.TecnicoControlView;
 import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.vendedor.VendedorControlView;
 import dto.SessionDTO;
 import dto.UserCrendentialsDTO;
 
@@ -52,6 +54,14 @@ public class WorkbenchPresenter implements Presenter {
 					CajeroControlView.getInstance().clearData();
 					CajeroControlView.getInstance().display();
 				}
+				if (session.getRole().equals("gerente")) {
+					GerenteControlView.getInstance().clearData();
+					GerenteControlView.getInstance().display();
+				}
+				if (session.getRole().equals("vendedor")) {
+					VendedorControlView.getInstance().clearData();
+					VendedorControlView.getInstance().display();
+				}
 				workbenchView.disableLoginButton();
 				LoginView.getInstance().clearData();
 				LoginView.getInstance().close();
@@ -76,6 +86,10 @@ public class WorkbenchPresenter implements Presenter {
 		SupervisorControlView.getInstance().close();
 		CajeroControlView.getInstance().clearData();
 		CajeroControlView.getInstance().close();
+		GerenteControlView.getInstance().clearData();
+		GerenteControlView.getInstance().close();
+		VendedorControlView.getInstance().clearData();
+		VendedorControlView.getInstance().close();
 		workbenchView.enableLoginButton();
 		workbenchView.clearData();
 	}

@@ -1,4 +1,4 @@
-package presentacion.views.cajero;
+package presentacion.views.gerente;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JTabbedPane;
@@ -31,7 +31,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class CajeroControllerView extends JInternalFrame {
+public class GerenteControllerView extends JInternalFrame {
 
 
 	private static final String[] COLUMNAS_TURNOS = new String[] { "NRO. TURNO", "NOMBRE DE CLIENTE", "DNI",
@@ -42,7 +42,7 @@ public class CajeroControllerView extends JInternalFrame {
 
 	private static final String[] COLUMNAS_ENTREGAS = {};
 
-	private static CajeroControllerView instance;
+	private static GerenteControllerView instance;
 
 	private JTextField textFieldTurno;
 
@@ -80,13 +80,13 @@ public class CajeroControllerView extends JInternalFrame {
 	private JPanel panelInferiorEntrega;
 	private JButton btnRegistrarEntrega;
 
-	public static CajeroControllerView getInstance() {
+	public static GerenteControllerView getInstance() {
 		if (instance == null)
-			instance = new CajeroControllerView();
+			instance = new GerenteControllerView();
 		return instance;
 	}
 
-	private CajeroControllerView() {
+	private GerenteControllerView() {
 
 		setMaximizable(true);
 		setIconifiable(true);

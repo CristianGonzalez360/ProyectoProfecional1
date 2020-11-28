@@ -3,22 +3,34 @@ package dto;
 import java.util.Date;
 
 public class VentaVehiculoDTO {
+	
 	private Integer idVentaVehiculo;
+	
 	private Integer idUsuVentaVN ;
+	
 	private Integer idUsuPedido;
+	
 	private Integer idUsuLlegada;
+	
 	private Integer idPagoVentaVN;
+	
 	private Date fechaVentaVN;
+	
 	private Date fechaEntregaReal;
+	
 	private String fabricante;
+	
 	private Double comisionCobrada;
+	
 	private Double precioVenta;
+	
 	private Integer idVehiculo;
+	
 	private Integer idCliente ;
+	
 	private Integer idUsuEntrega ;
 	
 	public VentaVehiculoDTO() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Integer getIdVentaVehiculo() {

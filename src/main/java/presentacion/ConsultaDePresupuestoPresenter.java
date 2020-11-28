@@ -14,7 +14,6 @@ import business_logic.FacturasController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.VehiculosController;
-import business_logic.exceptions.ForbiddenException;
 import dto.ClienteDTO;
 import dto.EstadoPresupuesto;
 import dto.FacturaDTO;
@@ -26,7 +25,6 @@ import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ConsultaDePresupuestosSupervisorView;
 import presentacion.views.supervisor.InputComentarioDialog;
-import presentacion.views.utils.MessageDialog;
 import presentacion.views.utils.ReporteViewImpl;
 
 public class ConsultaDePresupuestoPresenter {
