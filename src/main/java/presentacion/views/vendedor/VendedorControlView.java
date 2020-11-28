@@ -2,10 +2,12 @@ package presentacion.views.vendedor;
 
 import javax.swing.JInternalFrame;
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 
 import javax.swing.JTabbedPane;
 
+import dto.ClienteDTO;
 import presentacion.views.supervisor.ClientePanelView;
 
 import javax.swing.JPanel;
@@ -107,6 +109,22 @@ public class VendedorControlView extends JInternalFrame {
 	}
 
 	public void clearData() {
+		
+	}
 
+	public void setActionConsultarCliente(ActionListener listener) {
+		this.busquedaPanel.setActionBuscar(listener);
+	}
+	
+	public String getData() {
+		return this.busquedaPanel.getData();
+	}
+
+	public void clearDataCliente() {
+		this.clientePanel.clearData();
+	}
+
+	public void setData(ClienteDTO cliente) {
+		this.clientePanel.setData(cliente);
 	}
 }
