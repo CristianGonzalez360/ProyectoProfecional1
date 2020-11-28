@@ -140,21 +140,13 @@ public class TarjetaCreditoFormView extends JDialog {
 
 	public void setData(TarjetaCreditoDTO tarjeta) {
 		TarjetaCreditoDTO datosTarjeta = new TarjetaCreditoDTO();
-		// TarjetaCreditoDTO datosTarjeta = tarjeta.getDatosPersonalesDTO();
-
 		textNumeroTarjeta.setText(datosTarjeta.getNumeroTarjeta());
 		textNombreYApellido.setText(datosTarjeta.getNombreyapellido() + "");
 		textFechaExpiracion.setText(datosTarjeta.getFechaExpiracion());
 		textCod.setText(datosTarjeta.getCodSeguridad());
 		textDni.setText(datosTarjeta.getDni() + "");
 		textCuotas.setText(datosTarjeta.getCuotas());
-
-		// this.btnSalvar.setVisible(false);
 	}
-
-	// public void setActionOnSave(ActionListener listener) {
-	// this.btnSalvar.addActionListener(listener);
-//	}
 
 	public void setActionOnRegistrar(ActionListener listener) {
 		this.btnSalvar.addActionListener(listener);

@@ -139,10 +139,6 @@ public class TarjetaDebitoFormView extends JDialog {
 		textDni.setText(datosTarjeta.getDni() + "");
 	}
 
-	// public void setActionOnSave(ActionListener listener) {
-	// this.btnSalvar.addActionListener(listener);
-//	}
-
 	public void setActionOnRegistrar(ActionListener listener) {
 		this.btnSalvar.addActionListener(listener);
 	}

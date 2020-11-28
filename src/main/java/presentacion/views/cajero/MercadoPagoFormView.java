@@ -18,9 +18,11 @@ import java.awt.Font;
 public class MercadoPagoFormView extends JDialog {
 
 	private static final long serialVersionUID = -6293870932970697649L;
+	
 	private final JPanel contentPanel = new JPanel();
 
 	private static MercadoPagoFormView instance;
+	
 	private JButton btnSalvar;
 
 	private MercadoPagoFormView() {

@@ -6,22 +6,32 @@ import java.beans.PropertyVetoException;
 
 import javax.swing.JTabbedPane;
 
-public class VendedorControlView extends JInternalFrame {
-	  
-	
+import presentacion.views.supervisor.ClientePanelView;
 
-	
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.JSplitPane;
+import javax.swing.border.TitledBorder;
+
+public class VendedorControlView extends JInternalFrame {
+	  	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1308877516578945407L;
 
 	private static VendedorControlView instance;
-
-//	private PanelCarritoRepuestoView cajeroPanel;
-//	private PanelCobroCajeroView cajeroPanel2;
-
-
+	
+	private PanelBusquedaPorDniView busquedaPanel;
+	
+	private ClientePanelView clientePanel;
+	
+	private BusquedaVehiculoPanel busquedaVehiculoPanel;
+	
+	private TableView tablaVehiculos;
+	
+	private CaracteristicaDeVehiculoPanel caracteristicaVehiculoPanel;
+	
 	public static VendedorControlView getInstance() {
 		if (instance == null)
 			instance = new VendedorControlView();
@@ -33,21 +43,45 @@ public class VendedorControlView extends JInternalFrame {
 		setTitle("Vendedor Control View");
 		setMaximizable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 800, 436);
+		setBounds(100, 100, 1055, 453);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		
-
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		getContentPane().add(tabbedPane, BorderLayout.CENTER);
-
-//		this.cajeroPanel = PanelCarritoRepuestoView.getInstance();
-//		tabbedPane.add("Venta de Repuesto", this.cajeroPanel);
+		getContentPane().add(tabbedPane);
 		
-//		this.cajeroPanel2 = PanelCobroCajeroView.getInstance();
-//		tabbedPane.add("Pago de Facturas", this.cajeroPanel2);
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("Venta de vehículos", null, panel, null);
+		panel.setLayout(new BorderLayout(0, 0));
 		
+		JSplitPane splitPane = new JSplitPane();
+		panel.add(splitPane, BorderLayout.CENTER);
 		
+		JPanel panel_1 = new JPanel();
+		splitPane.setLeftComponent(panel_1);
+		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
+		busquedaPanel = new PanelBusquedaPorDniView();
+		panel_1.add(busquedaPanel);
+		clientePanel = new ClientePanelView();
+		panel_1.add(clientePanel);
+		
+		JPanel panel_2 = new JPanel();
+		splitPane.setRightComponent(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		busquedaVehiculoPanel = new BusquedaVehiculoPanel();
+		panel_2.add(busquedaVehiculoPanel, BorderLayout.NORTH);
+		
+		JPanel panel_3 = new JPanel();
+		panel_2.add(panel_3, BorderLayout.CENTER);
+		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
+		
+		tablaVehiculos = new TableView(new String [] {"Código", "Familia", "Cilindrada", "Sucursal"});
+		tablaVehiculos.setBorder(new TitledBorder(null, "Listado de vehículos"));
+		panel_3.add(tablaVehiculos);
+		
+		caracteristicaVehiculoPanel = new CaracteristicaDeVehiculoPanel();
+		caracteristicaVehiculoPanel.setBorder(new TitledBorder(null, "Caracter\u00EDsticas del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_3.add(caracteristicaVehiculoPanel);
 	}
 
 	public void display() {

@@ -20,18 +20,31 @@ public class ClientePanelView extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -8951435029326569045L;
+	
 	private Integer idCliente;
+	
 	private Integer idDatosPersonalesDelCliente;
+
 	private JTextField textDni;
+	
 	private JTextField textNombre;
+
 	private JTextField textTelefono;
+	
 	private JTextField textEmail;
+	
 	private JTextField textCalle;
+	
 	private JTextField textAltura;
+	
 	private JTextField textPiso;
+	
 	private JTextField textDpto;
+	
 	private JTextField textLocalidad;	
+	
 	private JLabel lblApellido;
+	
 	private JTextField tfApellido;
 	
 	public ClientePanelView() {

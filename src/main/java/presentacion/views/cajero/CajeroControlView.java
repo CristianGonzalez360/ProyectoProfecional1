@@ -7,10 +7,7 @@ import java.beans.PropertyVetoException;
 import javax.swing.JTabbedPane;
 
 public class CajeroControlView extends JInternalFrame {
-	  
-	
-
-	
+	  	
 	/**
 	 * 
 	 */
@@ -19,8 +16,8 @@ public class CajeroControlView extends JInternalFrame {
 	private static CajeroControlView instance;
 
 	private PanelCarritoRepuestoView cajeroPanel;
+	
 	private PanelCobroCajeroView cajeroPanel2;
-
 
 	public static CajeroControlView getInstance() {
 		if (instance == null)
@@ -36,8 +33,6 @@ public class CajeroControlView extends JInternalFrame {
 		setBounds(100, 100, 800, 436);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		
-
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
@@ -45,9 +40,7 @@ public class CajeroControlView extends JInternalFrame {
 		tabbedPane.add("Venta de Repuesto", this.cajeroPanel);
 		
 		this.cajeroPanel2 = PanelCobroCajeroView.getInstance();
-		tabbedPane.add("Pago de Facturas", this.cajeroPanel2);
-		
-		
+		tabbedPane.add("Pago de Facturas", this.cajeroPanel2);	
 		
 	}
 

@@ -4,7 +4,6 @@ package presentacion.views.cajero;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import java.awt.BorderLayout;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,17 +13,9 @@ import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JRadioButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTabbedPane;
-import javax.swing.JDesktopPane;
 import java.awt.Label;
 import javax.swing.JLabel;
-import javax.swing.border.BevelBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -33,8 +24,6 @@ import javax.swing.BoxLayout;
 import java.awt.event.ActionEvent;
 
 public class PanelCobroCajeroView extends JPanel {
-
-	
 
 	/**
 	 * 
@@ -100,7 +89,6 @@ public class PanelCobroCajeroView extends JPanel {
 			 * 
 			 */
 			private static final long serialVersionUID = -7694783590163789939L;
-			
 
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -219,9 +207,7 @@ public class PanelCobroCajeroView extends JPanel {
 	public String getFactura() {
 		return (String) textFactura.getText();
 	}
-	
-	
-	
+		
 	public boolean iPersupuestoAprobado(int row, int column, JTable table) {
 		return table.getValueAt(row, column) != null;
 	}
@@ -230,9 +216,7 @@ public class PanelCobroCajeroView extends JPanel {
 		this.btnCargarFacturas.addActionListener(listener);
 		
 	}
-	
-	
-	
+		
 	public void clear() {
 		listadoDeFacturasModel.setRowCount(0);
 		listadoDeFacturasModel.setColumnCount(0);
