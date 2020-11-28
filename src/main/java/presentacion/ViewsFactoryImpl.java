@@ -8,6 +8,7 @@ import presentacion.views.supervisor.ClientePresenter;
 import presentacion.views.supervisor.RepuestosPresenter;
 import presentacion.views.supervisor.SupervisorControlView;
 import presentacion.views.tecnico.TecnicoControlView;
+import presentacion.views.vendedor.VendedorControlView;
 
 
 public class ViewsFactoryImpl extends ViewsFactory {
@@ -20,6 +21,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 		WorkbenchView.getInstance().addFrames(SupervisorControlView.getInstance());
 		WorkbenchView.getInstance().addFrames(CajeroControlView.getInstance());
 		WorkbenchView.getInstance().addFrames(GerenteControlView.getInstance());
+		WorkbenchView.getInstance().addFrames(VendedorControlView.getInstance());
 
 	}
 

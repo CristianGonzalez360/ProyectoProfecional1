@@ -9,6 +9,7 @@ import presentacion.views.supervisor.SupervisorControlView;
 import presentacion.views.tecnico.TecnicoControlView;
 import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.vendedor.VendedorControlView;
 import dto.SessionDTO;
 import dto.UserCrendentialsDTO;
 
@@ -57,6 +58,10 @@ public class WorkbenchPresenter implements Presenter {
 					GerenteControlView.getInstance().clearData();
 					GerenteControlView.getInstance().display();
 				}
+				if (session.getRole().equals("vendedor")) {
+					VendedorControlView.getInstance().clearData();
+					VendedorControlView.getInstance().display();
+				}
 				workbenchView.disableLoginButton();
 				LoginView.getInstance().clearData();
 				LoginView.getInstance().close();
@@ -83,6 +88,8 @@ public class WorkbenchPresenter implements Presenter {
 		CajeroControlView.getInstance().close();
 		GerenteControlView.getInstance().clearData();
 		GerenteControlView.getInstance().close();
+		VendedorControlView.getInstance().clearData();
+		VendedorControlView.getInstance().close();
 		workbenchView.enableLoginButton();
 		workbenchView.clearData();
 	}

@@ -16,6 +16,10 @@ cuentas:
     nombreUsuario: u004
     password: pu004
     role: gerente
+  - fechaDeAlta: 2017-05-12
+    nombreUsuario: u005
+    password: pu005
+    role: vendedor
 
 
 datosPersonales:
@@ -79,6 +83,16 @@ datosPersonales:
     piso: 12
     dpto: A3
     localidad: localidad4
+  - nombreCompleto: c005
+    apellido: ap005
+    dni: 111222
+    telefono: 3211323
+    email: c005@mail.com
+    calle: calle1
+    altura: 11
+    piso: 12
+    dpto: A3
+    localidad: localidad4
   - nombreCompleto: c002
     apellido: ap004
     dni: 33390344
@@ -108,6 +122,10 @@ usuarios:
       idCuenta: 4
     datos:
       id: 4
+  - cuenta:
+      idCuenta: 5
+    datos:
+      id: 5
       
 turnos:
   - idCliente: 1
