@@ -3,12 +3,14 @@ package dto;
 public class VehiculoReservadoDTO {
 
 	private Integer idVehiculoReservado;
+	
 	private Integer idFichaTecnica;
+	
 	private Integer idPedido;
+	
 	private Double precioVenta;
 	
 	public VehiculoReservadoDTO() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Integer getIdVehiculoReservado() {

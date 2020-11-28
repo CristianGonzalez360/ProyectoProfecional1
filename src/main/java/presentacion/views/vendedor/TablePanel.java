@@ -2,7 +2,12 @@ package presentacion.views.vendedor;
 
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+
+import dto.VehiculoDTO;
+
 import java.awt.BorderLayout;
+import java.util.List;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -26,5 +31,11 @@ public class TablePanel extends JPanel {
 		model = new DefaultTableModel(null, this.nombreColumnas);
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
+	}
+
+	public void clearData() {
+	}
+
+	public void setData(List<VehiculoDTO> vehiculos) {
 	} 
 }

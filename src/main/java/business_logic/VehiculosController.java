@@ -5,6 +5,7 @@ import java.util.List;
 
 import business_logic.exceptions.ConflictException;
 import dto.AltaDeVehiculoDTO;
+import dto.ConsultaVehiculoDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
@@ -84,5 +85,10 @@ public class VehiculosController {
 			vehiculo.setFichaTecnica(ficha);
 		}
 		return ret;
+	}
+
+	public List<VehiculoDTO> readByCriteria(ConsultaVehiculoDTO consulta) {
+		List<VehiculoDTO> vehiculos = new LinkedList<VehiculoDTO>();
+		return vehiculos;
 	}
 }
