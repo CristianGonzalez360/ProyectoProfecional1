@@ -32,6 +32,8 @@ public class VendedorControlView extends JInternalFrame {
 	
 	private CaracteristicaDeVehiculoPanel caracteristicaVehiculoPanel;
 	
+	private DatosVentaVehiculo datosVentaVehiculoPanel;
+	
 	public static VendedorControlView getInstance() {
 		if (instance == null)
 			instance = new VendedorControlView();
@@ -43,7 +45,7 @@ public class VendedorControlView extends JInternalFrame {
 		setTitle("Vendedor Control View");
 		setMaximizable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 1055, 453);
+		setBounds(100, 100, 1055, 516);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -71,17 +73,20 @@ public class VendedorControlView extends JInternalFrame {
 		busquedaVehiculoPanel = new BusquedaVehiculoPanel();
 		panel_2.add(busquedaVehiculoPanel, BorderLayout.NORTH);
 		
-		JPanel panel_3 = new JPanel();
-		panel_2.add(panel_3, BorderLayout.CENTER);
-		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
+		JPanel panelListadoVehiculos = new JPanel();
+		panel_2.add(panelListadoVehiculos, BorderLayout.CENTER);
+		panelListadoVehiculos.setLayout(new BoxLayout(panelListadoVehiculos, BoxLayout.X_AXIS));
 		
-		tablaVehiculos = new TableView(new String [] {"Código", "Familia", "Cilindrada", "Sucursal"});
+		tablaVehiculos = new TableView(new String [] {"Código", "Familia", "Cilindrada", "Precio", "Sucursal"});
 		tablaVehiculos.setBorder(new TitledBorder(null, "Listado de vehículos"));
-		panel_3.add(tablaVehiculos);
+		panelListadoVehiculos.add(tablaVehiculos);
 		
 		caracteristicaVehiculoPanel = new CaracteristicaDeVehiculoPanel();
 		caracteristicaVehiculoPanel.setBorder(new TitledBorder(null, "Caracter\u00EDsticas del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.add(caracteristicaVehiculoPanel);
+		panelListadoVehiculos.add(caracteristicaVehiculoPanel);
+		
+		datosVentaVehiculoPanel = new DatosVentaVehiculo();
+		panel_2.add(datosVentaVehiculoPanel, BorderLayout.SOUTH);
 	}
 
 	public void display() {

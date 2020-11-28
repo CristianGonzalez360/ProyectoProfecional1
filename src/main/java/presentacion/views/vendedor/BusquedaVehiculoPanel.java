@@ -9,8 +9,20 @@ import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
 public class BusquedaVehiculoPanel extends JPanel {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4304226028387787383L;
+	
 	private JTextField textField;
+	
 	private JTextField textField_1;
+
+	private JComboBox<String> comboBox;
+
+	private JComboBox<String> comboBox_1;
+	
 	public BusquedaVehiculoPanel() {
 		setBorder(new TitledBorder(null, "B\u00FAsqueda de vehiculos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		FlowLayout flowLayout = (FlowLayout) getLayout();
@@ -19,7 +31,7 @@ public class BusquedaVehiculoPanel extends JPanel {
 		JLabel lblNewLabel = new JLabel("Tipo");
 		add(lblNewLabel);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox<String>();
 		add(comboBox);
 		
 		JLabel lblNewLabel_1 = new JLabel("Marca");
@@ -39,7 +51,7 @@ public class BusquedaVehiculoPanel extends JPanel {
 		JLabel lblNewLabel_3 = new JLabel("Sucursal");
 		add(lblNewLabel_3);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1 = new JComboBox<String>();
 		add(comboBox_1);
 		
 		JButton btnNewButton = new JButton("Buscar");

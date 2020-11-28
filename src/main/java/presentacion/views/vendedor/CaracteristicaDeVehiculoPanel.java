@@ -9,15 +9,30 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class CaracteristicaDeVehiculoPanel extends JPanel {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6366092727436773232L;
+	
 	private JTextField textField;
+	
 	private JTextField textField_1;
+	
 	private JTextField textField_2;
+	
 	private JTextField textField_3;
+	
 	private JTextField textField_4;
+	
 	private JTextField textField_5;
+	
 	private JTextField textField_6;
+	
 	private JTextField textField_7;
+	
 	private JTextField textField_8;
+	
 	private JTextField textField_9;
 	
 	public CaracteristicaDeVehiculoPanel() {
