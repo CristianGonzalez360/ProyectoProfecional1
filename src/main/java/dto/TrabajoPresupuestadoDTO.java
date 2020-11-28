@@ -89,7 +89,6 @@ public class TrabajoPresupuestadoDTO {
 	public boolean equals(Object obj) {
 		boolean ret = false;
 		if(obj instanceof TrabajoPresupuestadoDTO) {
-			TrabajoPresupuestadoDTO t = (TrabajoPresupuestadoDTO) obj;
 			ret = this.getIdTrabajoPresu().equals(((TrabajoPresupuestadoDTO) obj).getIdTrabajoPresu());
 		}
 		return ret;

@@ -6,7 +6,7 @@ import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class TableView extends JPanel {
+public class TablePanel extends JPanel {
 	
 	private static final long serialVersionUID = -6624934592820387877L;
 
@@ -16,7 +16,7 @@ public class TableView extends JPanel {
 	
 	private JTable table;
 	
-	public TableView(String [] nombreColumnas) {
+	public TablePanel(String [] nombreColumnas) {
 		this.nombreColumnas = nombreColumnas; 
 		setLayout(new BorderLayout(0, 0));
 		

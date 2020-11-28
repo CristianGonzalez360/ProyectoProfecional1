@@ -11,7 +11,7 @@ import presentacion.views.supervisor.ClientePanelView;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.JSplitPane;
-import javax.swing.border.TitledBorder;
+import javax.swing.JButton;
 
 public class VendedorControlView extends JInternalFrame {
 	  	
@@ -28,11 +28,13 @@ public class VendedorControlView extends JInternalFrame {
 	
 	private BusquedaVehiculoPanel busquedaVehiculoPanel;
 	
-	private TableView tablaVehiculos;
+	private DatosVentaVehiculo datosVentaVehiculoPanel;
+
+	private TablePanel tableView;
 	
 	private CaracteristicaDeVehiculoPanel caracteristicaVehiculoPanel;
 	
-	private DatosVentaVehiculo datosVentaVehiculoPanel;
+	private JButton btnRegistrarVenta;
 	
 	public static VendedorControlView getInstance() {
 		if (instance == null)
@@ -45,7 +47,7 @@ public class VendedorControlView extends JInternalFrame {
 		setTitle("Vendedor Control View");
 		setMaximizable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 1055, 516);
+		setBounds(100, 100, 1055, 739);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -66,6 +68,12 @@ public class VendedorControlView extends JInternalFrame {
 		clientePanel = new ClientePanelView();
 		panel_1.add(clientePanel);
 		
+		JPanel panel_3 = new JPanel();
+		panel_1.add(panel_3);
+		
+		btnRegistrarVenta = new JButton("Registrar venta");
+		panel_3.add(btnRegistrarVenta);
+		
 		JPanel panel_2 = new JPanel();
 		splitPane.setRightComponent(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
@@ -73,20 +81,16 @@ public class VendedorControlView extends JInternalFrame {
 		busquedaVehiculoPanel = new BusquedaVehiculoPanel();
 		panel_2.add(busquedaVehiculoPanel, BorderLayout.NORTH);
 		
-		JPanel panelListadoVehiculos = new JPanel();
-		panel_2.add(panelListadoVehiculos, BorderLayout.CENTER);
-		panelListadoVehiculos.setLayout(new BoxLayout(panelListadoVehiculos, BoxLayout.X_AXIS));
-		
-		tablaVehiculos = new TableView(new String [] {"Código", "Familia", "Cilindrada", "Precio", "Sucursal"});
-		tablaVehiculos.setBorder(new TitledBorder(null, "Listado de vehículos"));
-		panelListadoVehiculos.add(tablaVehiculos);
-		
-		caracteristicaVehiculoPanel = new CaracteristicaDeVehiculoPanel();
-		caracteristicaVehiculoPanel.setBorder(new TitledBorder(null, "Caracter\u00EDsticas del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelListadoVehiculos.add(caracteristicaVehiculoPanel);
-		
 		datosVentaVehiculoPanel = new DatosVentaVehiculo();
 		panel_2.add(datosVentaVehiculoPanel, BorderLayout.SOUTH);
+		
+		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+		panel_2.add(tabbedPane_1, BorderLayout.CENTER);
+		tableView = new TablePanel(new String [] {"Código", "Familia","Linea","Cilindrada", "Color", "Precio"});
+		tabbedPane_1.addTab("Listado de vehículos", null, tableView, null);
+		
+		caracteristicaVehiculoPanel = new CaracteristicaDeVehiculoPanel();
+		tabbedPane_1.addTab("Caracteristica del Vehículo", null, caracteristicaVehiculoPanel, null);
 	}
 
 	public void display() {

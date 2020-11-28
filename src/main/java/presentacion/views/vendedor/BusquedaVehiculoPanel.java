@@ -24,7 +24,7 @@ public class BusquedaVehiculoPanel extends JPanel {
 	private JComboBox<String> comboBox_1;
 	
 	public BusquedaVehiculoPanel() {
-		setBorder(new TitledBorder(null, "B\u00FAsqueda de vehiculos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(null, "Consulta de veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		FlowLayout flowLayout = (FlowLayout) getLayout();
 		flowLayout.setHgap(10);
 		

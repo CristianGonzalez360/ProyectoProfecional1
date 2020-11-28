@@ -30,8 +30,6 @@ public class DatosVentaVehiculo extends JPanel {
 	private JTextField textFieldComisionVenta;
 
 	private JComboBox<String> comboBoxFinanciera;
-
-	private JComboBox<String> comboBoxNroCuotas;
 	
 	public DatosVentaVehiculo() {
 		setBorder(new TitledBorder(null, "Datos de la venta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -83,8 +81,8 @@ public class DatosVentaVehiculo extends JPanel {
 		JLabel lblNewLabel_3 = new JLabel("Nro. de cuotas");
 		add(lblNewLabel_3, "2, 8, left, default");
 		
-		comboBoxNroCuotas = new JComboBox<String>();
-		add(comboBoxNroCuotas, "4, 8, fill, default");
+		JSpinner spinner = new JSpinner();
+		add(spinner, "4, 8");
 		
 		JLabel lblNewLabel_4 = new JLabel("Monto cuota");
 		add(lblNewLabel_4, "6, 8, left, default");
