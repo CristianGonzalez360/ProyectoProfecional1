@@ -4,10 +4,13 @@ import javax.swing.JInternalFrame;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
+import java.util.List;
 
 import javax.swing.JTabbedPane;
 
 import dto.ClienteDTO;
+import dto.ConsultaVehiculoDTO;
+import dto.VehiculoDTO;
 import presentacion.views.supervisor.ClientePanelView;
 
 import javax.swing.JPanel;
@@ -126,5 +129,21 @@ public class VendedorControlView extends JInternalFrame {
 
 	public void setData(ClienteDTO cliente) {
 		this.clientePanel.setData(cliente);
+	}
+
+	public void setActionConsultarVehiculo(ActionListener listener) {
+		this.busquedaVehiculoPanel.setActionBuscar(listener);
+	}
+
+	public ConsultaVehiculoDTO getDataConsultaVehiculo() {
+		return this.busquedaVehiculoPanel.getData();
+	}
+
+	public void clearDataVehiculos() {
+		this.tableView.clearData();
+	}
+
+	public void setData(List<VehiculoDTO> vehiculos) {
+		this.tableView.setData(vehiculos);
 	}
 }

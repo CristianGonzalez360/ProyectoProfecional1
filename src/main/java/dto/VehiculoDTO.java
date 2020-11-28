@@ -5,12 +5,19 @@ import java.util.Date;
 public class VehiculoDTO {
 
 	private Integer idVehiculo;
+	
 	private Double precioVenta;
+	
 	private Integer  idFichaTecnica;
+	
 	private Date fechaIngreso;
+	
 	private boolean disponible;
+	
 	private Boolean  usado;
+	
 	private Integer idCompra;
+	
 	private FichaTecnicaVehiculoDTO fichaTecnica;
 	
 	public VehiculoDTO() {
