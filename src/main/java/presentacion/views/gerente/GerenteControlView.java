@@ -18,7 +18,7 @@ public class GerenteControlView extends JInternalFrame {
 
 	private static GerenteControlView instance;
 
-	private PanelCarritoRepuestoView cajeroPanel;
+//	private PanelCarritoRepuestoView cajeroPanel;
 //	private PanelCobroCajeroView cajeroPanel2;
 
 
@@ -30,7 +30,7 @@ public class GerenteControlView extends JInternalFrame {
 
 	private GerenteControlView() {
 		setClosable(false);
-		setTitle("Cajero Control View");
+		setTitle("Gerente Control View");
 		setMaximizable(true);
 		setIconifiable(true);
 		setBounds(100, 100, 800, 436);
@@ -41,8 +41,8 @@ public class GerenteControlView extends JInternalFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
-		this.cajeroPanel = PanelCarritoRepuestoView.getInstance();
-		tabbedPane.add("Venta de Repuesto", this.cajeroPanel);
+//		this.cajeroPanel = PanelCarritoRepuestoView.getInstance();
+//		tabbedPane.add("Venta de Repuesto", this.cajeroPanel);
 		
 //		this.cajeroPanel2 = PanelCobroCajeroView.getInstance();
 //		tabbedPane.add("Pago de Facturas", this.cajeroPanel2);
