@@ -127,4 +127,8 @@ public class VendedorControlView extends JInternalFrame {
 	public void setData(ClienteDTO cliente) {
 		this.clientePanel.setData(cliente);
 	}
+
+	public void setActionConsultarVehiculo(ActionListener listener) {
+		this.busquedaVehiculoPanel.setActionBuscar(listener);
+	}
 }

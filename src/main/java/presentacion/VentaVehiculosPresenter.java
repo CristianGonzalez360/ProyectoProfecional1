@@ -17,8 +17,13 @@ public class VentaVehiculosPresenter {
 		assert clientesController != null;
 		this.clientesController = clientesController;
 		this.view.setActionConsultarCliente((a) -> onConsultarCliente(a));
+		this.view.setActionConsultarVehiculo((a) -> onConsultarVehiculo(a));
 	}
 	
+	private void onConsultarVehiculo(ActionEvent a) {
+		// TODO Auto-generated method stub
+	}
+
 	private void onConsultarCliente(ActionEvent e) {
 		String dniBuscado = view.getData();
 		if(!dniBuscado.trim().isEmpty() && dniBuscado != null ) {

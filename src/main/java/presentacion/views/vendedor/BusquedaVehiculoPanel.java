@@ -5,8 +5,12 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
+
+import dto.ConsultaVehiculoDTO;
 
 public class BusquedaVehiculoPanel extends JPanel {
 	
@@ -15,13 +19,15 @@ public class BusquedaVehiculoPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = -4304226028387787383L;
 	
-	private JTextField textField;
+	private JTextField textMarca;
 	
-	private JTextField textField_1;
+	private JTextField textLinea;
 
-	private JComboBox<String> comboBox;
+	private JComboBox<String> comboBoxTipo;
 
-	private JComboBox<String> comboBox_1;
+	private JComboBox<String> comboBoxSucursal;
+
+	private JButton btnConsultar;
 	
 	public BusquedaVehiculoPanel() {
 		setBorder(new TitledBorder(null, "Consulta de veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -31,31 +37,50 @@ public class BusquedaVehiculoPanel extends JPanel {
 		JLabel lblNewLabel = new JLabel("Tipo");
 		add(lblNewLabel);
 		
-		comboBox = new JComboBox<String>();
-		add(comboBox);
+		comboBoxTipo = new JComboBox<String>();
+		add(comboBoxTipo);
 		
 		JLabel lblNewLabel_1 = new JLabel("Marca");
 		add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		add(textField);
-		textField.setColumns(10);
+		textMarca = new JTextField();
+		add(textMarca);
+		textMarca.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Familia");
 		add(lblNewLabel_2);
 		
-		textField_1 = new JTextField();
-		add(textField_1);
-		textField_1.setColumns(10);
+		textLinea = new JTextField();
+		add(textLinea);
+		textLinea.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Sucursal");
 		add(lblNewLabel_3);
 		
-		comboBox_1 = new JComboBox<String>();
-		add(comboBox_1);
+		comboBoxSucursal = new JComboBox<String>();
+		add(comboBoxSucursal);
 		
-		JButton btnNewButton = new JButton("Buscar");
-		add(btnNewButton);
+		btnConsultar = new JButton("Buscar");
+		add(btnConsultar);
+		
+		clearData();
 	}
-
+	
+	public void clearData() {
+		this.textMarca.setText("");
+		this.textLinea.setText("");
+	}
+	
+	public ConsultaVehiculoDTO getData() {
+		ConsultaVehiculoDTO dto = new ConsultaVehiculoDTO();
+		dto.setMarca(this.textMarca.getText());
+		dto.setLinea(this.textLinea.getText());
+		dto.setTipo(this.comboBoxTipo.getSelectedItem().toString());
+		dto.setSucursal(this.comboBoxSucursal.getSelectedItem().toString());
+		return dto;
+	}
+	
+	public void setActionBuscar(ActionListener listener) {
+		this.btnConsultar.addActionListener(listener);
+	}
 }
