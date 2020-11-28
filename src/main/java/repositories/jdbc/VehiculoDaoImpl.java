@@ -72,15 +72,6 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 		};
 	}
 
-	/*
-	 private Integer idVehiculo;
-	private Double precioVenta;
-	private Integer  idFichaTecnica;
-	private Date fechaIngreso;
-	private boolean disponible;
-	private Boolean  usado;
-	private Integer idCompra;
-	 */
 	@Override
 	public List<VehiculoDTO> readUsados() {
 		// TODO Auto-generated method stub
