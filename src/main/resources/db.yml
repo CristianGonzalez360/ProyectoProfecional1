@@ -69,6 +69,16 @@ datosPersonales:
     piso: 12
     dpto: A3
     localidad: localidad3
+  - nombreCompleto: c004
+    apellido: ap004
+    dni: 123456
+    telefono: 321111
+    email: c004@mail.com
+    calle: calle1
+    altura: 11
+    piso: 12
+    dpto: A3
+    localidad: localidad4
   - nombreCompleto: c002
     apellido: ap004
     dni: 33390344
@@ -80,6 +90,7 @@ datosPersonales:
     dpto: B1
     localidad: localidad1
     
+
 usuarios:
   - cuenta:
       idCuenta: 1
@@ -93,6 +104,10 @@ usuarios:
       idCuenta: 3
     datos:
       id: 3
+  - cuenta:
+      idCuenta: 4
+    datos:
+      id: 4
       
 turnos:
   - idCliente: 1
