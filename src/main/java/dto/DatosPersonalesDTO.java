@@ -35,7 +35,6 @@ public class DatosPersonalesDTO {
 
 	public DatosPersonalesDTO makeTestDTO() {
 		DatosPersonalesDTO datos = new DatosPersonalesDTO();
-		datos.setId(2);
 		datos.setNombreCompleto("u001");
 		datos.setApellido("ap001");
 		datos.setDni(33390111);

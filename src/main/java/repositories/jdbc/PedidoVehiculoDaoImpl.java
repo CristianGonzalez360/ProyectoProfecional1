@@ -1,17 +1,22 @@
 package repositories.jdbc;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 
 import dto.PedidoVehiculoDTO;
 import repositories.PedidoVehiculoDao;
 import repositories.jdbc.utils.Mapper;
+import repositories.jdbc.utils.NullObject;
 
 public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> implements PedidoVehiculoDao {
 
+	private static final String readAll = "SELECT * FROM PedidoVehiculo";
+
+	private static final String insert = "INSERT INTO PedidoVehiculo (idVehiculoReservado, fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso, idCliente) VALUES (?,?,?,?,?,?)";
+
 	public PedidoVehiculoDaoImpl(Connection connection) {
 		super(connection);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -22,8 +27,13 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	@Override
 	public boolean insert(PedidoVehiculoDTO entity) {
-		// TODO Auto-generated method stub
-		return false;
+		return getTemplate().query(insert)
+				.param(entity.getIdVehiculoReservado() == null ? new NullObject() : entity.getIdVehiculoReservado())
+				.param(entity.getFechaPedido() == null ? new NullObject() : entity.getFechaPedido())
+				.param(entity.getFechaIngreso() == null ? new NullObject() : entity.getFechaIngreso())
+				.param(entity.getIdUsuPedido() == null ? new NullObject() : entity.getIdUsuPedido())
+				.param(entity.getIdUsuIngreso() == null ? new NullObject() : entity.getIdUsuIngreso())
+				.param(entity.getIdCliente() == null ? new NullObject() : entity.getIdCliente()).excecute();
 	}
 
 	@Override
@@ -40,8 +50,7 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	@Override
 	public List<PedidoVehiculoDTO> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return getTemplate().query(readAll).excecute(getMapper());
 	}
 
 	@Override
@@ -52,8 +61,21 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	@Override
 	protected Mapper<PedidoVehiculoDTO> getMapper() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Mapper<PedidoVehiculoDTO>() {
+
+			@Override
+			public PedidoVehiculoDTO map(Object[] obj) {
+				PedidoVehiculoDTO pedido = new PedidoVehiculoDTO();
+				pedido.setIdPedidoVehiculo((Integer) obj[0]);
+				pedido.setIdVehiculoReservado((Integer) obj[1] != null ? (Integer) obj[1] : null);
+				pedido.setFechaPedido((Date) obj[2] == null ? null : (Date) obj[2]);
+				pedido.setFechaIngreso((Date) obj[3]);
+				pedido.setIdUsuPedido((Integer) obj[4]);
+				pedido.setIdUsuIngreso((Integer) obj[5]);
+				pedido.setIdCliente((Integer) obj[6]);
+				return pedido;
+			}
+		};
 	}
 
 }

@@ -17,6 +17,17 @@ public class CuentaDTO {
 	private String role;
 
 	public CuentaDTO() {
+		
+	}
+	
+	public CuentaDTO makeTestDTO() {
+		CuentaDTO cuenta = new CuentaDTO();
+		cuenta.setFechaDeAlta(new Date());
+		cuenta.setFechaDeBaja(new Date());
+		cuenta.setNombreUsuario("u001");
+		cuenta.setPassword("pu001");
+		cuenta.setRole("test");
+		return cuenta;
 	}
 
 	public Date getFechaDeAlta() {
