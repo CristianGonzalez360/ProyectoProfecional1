@@ -1,9 +1,13 @@
 package dto;
 
 public class MonedaDTO {
+	
 	private Integer idMoneda;
+	
 	private String nombre;
+	
 	private String simbolo;
+	
 	private Double cotizacionDolar;
 	
 	

@@ -1,5 +1,7 @@
 package dto;
 
+import dto.temporal.AltaDeVehiculoDTO;
+
 public class FichaTecnicaVehiculoDTO {
 
 	private Integer id;

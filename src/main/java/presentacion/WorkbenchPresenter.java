@@ -10,8 +10,8 @@ import presentacion.views.tecnico.TecnicoControlView;
 import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.MessageDialog;
 import presentacion.views.vendedor.VendedorControlView;
-import dto.SessionDTO;
 import dto.UserCrendentialsDTO;
+import dto.temporal.SessionDTO;
 
 public class WorkbenchPresenter implements Presenter {
 

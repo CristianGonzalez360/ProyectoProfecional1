@@ -19,7 +19,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import com.toedter.calendar.JDateChooser;
 
-import dto.AltaDeTurnoDTO;
+import dto.temporal.AltaDeTurnoDTO;
 
 @SuppressWarnings("serial")
 public class TurnoFormView extends JDialog {
