@@ -56,10 +56,10 @@ public class PedidosPanelView extends JPanel {
 		JPanel panelSur = new JPanel();
 		add(panelSur, BorderLayout.SOUTH);
 
-		btnRegistrarPedido = new JButton("Registrar turno");
+		btnRegistrarPedido = new JButton("Registrar Pedido");
 		panelSur.add(btnRegistrarPedido);
 
-		btnCancelarPedido = new JButton("Cancelar turno");
+		btnCancelarPedido = new JButton("Cancelar Pedido");
 		panelSur.add(btnCancelarPedido);
 
 		JScrollPane scrollPanelPedidos = new JScrollPane();
