@@ -1,26 +1,20 @@
 package presentacion.views.gerente;
 
 import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import java.beans.PropertyVetoException;
 
 import javax.swing.JTabbedPane;
 
 public class GerenteControlView extends JInternalFrame {
-	  
-	
 
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1308877516578945407L;
 
 	private static GerenteControlView instance;
 
-//	private PanelCarritoRepuestoView cajeroPanel;
-//	private PanelCobroCajeroView cajeroPanel2;
-
+	private PedidosPanelView pedidosPanelView;
 
 	public static GerenteControlView getInstance() {
 		if (instance == null)
@@ -35,19 +29,16 @@ public class GerenteControlView extends JInternalFrame {
 		setIconifiable(true);
 		setBounds(100, 100, 800, 436);
 		getContentPane().setLayout(new BorderLayout(0, 0));
-		
-		
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
-//		this.cajeroPanel = PanelCarritoRepuestoView.getInstance();
-//		tabbedPane.add("Venta de Repuesto", this.cajeroPanel);
-		
-//		this.cajeroPanel2 = PanelCobroCajeroView.getInstance();
-//		tabbedPane.add("Pago de Facturas", this.cajeroPanel2);
-		
-		
+		JPanel pedidosPanel = new JPanel();
+		tabbedPane.addTab("Gestión de Pedidos", null, pedidosPanel, null);
+		pedidosPanel.setLayout(new BorderLayout(0, 0));
+
+		pedidosPanelView = new PedidosPanelView();
+		pedidosPanel.add(pedidosPanelView);
 	}
 
 	public void display() {
@@ -64,6 +55,6 @@ public class GerenteControlView extends JInternalFrame {
 	}
 
 	public void clearData() {
-
+		pedidosPanelView.clear();
 	}
 }
