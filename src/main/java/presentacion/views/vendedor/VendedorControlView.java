@@ -79,7 +79,7 @@ public class VendedorControlView extends JInternalFrame {
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3);
 		
-		btnRegistrarCliente = new JButton("Registrar venta");
+		btnRegistrarCliente = new JButton("Registrar Cliente");
 		panel_3.add(btnRegistrarCliente);
 		
 		JPanel panel_2 = new JPanel();
