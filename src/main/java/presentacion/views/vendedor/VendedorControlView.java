@@ -9,8 +9,9 @@ import java.util.List;
 import javax.swing.JTabbedPane;
 
 import dto.ClienteDTO;
-import dto.VehiculoDTO;
+import dto.VehiculoParaVentaDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
+import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import presentacion.views.supervisor.ClientePanelView;
 
 import javax.swing.JPanel;
@@ -35,7 +36,7 @@ public class VendedorControlView extends JInternalFrame {
 	
 	private DatosVentaVehiculo datosVentaVehiculoPanel;
 
-	private TablePanel tableView;
+	private TablePanel<OutputConsultaVehiculoEnVentaDTO> tableView;
 	
 	private CaracteristicaDeVehiculoPanel caracteristicaVehiculoPanel;
 	
@@ -91,9 +92,24 @@ public class VendedorControlView extends JInternalFrame {
 		
 		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
 		panel_2.add(tabbedPane_1, BorderLayout.CENTER);
-		tableView = new TablePanel(new String [] {"Código", "Familia","Linea","Cilindrada", "Color", "Precio"});
-		tabbedPane_1.addTab("Listado de vehículos", null, tableView, null);
 		
+		tableView = new TablePanel<OutputConsultaVehiculoEnVentaDTO>(new String [] {"Código", "Marca", "Familia", "Linea", "Cilindrada", "Color", "Precio"}) {
+			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -6912872259496249346L;
+
+			@Override
+			public void setData(List<OutputConsultaVehiculoEnVentaDTO> data) {
+				for(OutputConsultaVehiculoEnVentaDTO dto : data) {
+					Object [] row = { dto.getCodigo(), dto.getMarca(), dto.getFamilia(), dto.getLinea(), dto.getCilindrada(), dto.getColor(), dto.getPrecio() };
+					model.addRow(row);	
+				}
+			}
+		};
+		
+		tabbedPane_1.addTab("Listado de vehículos", null, tableView, null);
 		caracteristicaVehiculoPanel = new CaracteristicaDeVehiculoPanel();
 		tabbedPane_1.addTab("Caracteristica del Vehículo", null, caracteristicaVehiculoPanel, null);
 	}
@@ -143,7 +159,15 @@ public class VendedorControlView extends JInternalFrame {
 		this.tableView.clearData();
 	}
 
-	public void setData(List<VehiculoDTO> vehiculos) {
+	public void setData(List<OutputConsultaVehiculoEnVentaDTO> vehiculos) {
 		this.tableView.setData(vehiculos);
+	}
+
+	public void addTiposBusqueda(String[] tipos) {
+		this.busquedaVehiculoPanel.addTipos(tipos);
+	}
+
+	public void addSucursalesBusqueda(String[] suc) {
+		this.busquedaVehiculoPanel.addSucursales(suc);
 	}
 }

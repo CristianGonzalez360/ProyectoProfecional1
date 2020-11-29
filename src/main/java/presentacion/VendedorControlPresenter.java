@@ -6,12 +6,12 @@ import java.util.List;
 import business_logic.ClientesController;
 import business_logic.VehiculosController;
 import dto.ClienteDTO;
-import dto.VehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
+import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import dto.validators.StringValidator;
 import presentacion.views.vendedor.VendedorControlView;
 
-public class VentaVehiculosPresenter {
+public class VendedorControlPresenter {
 	
 	private final VendedorControlView view = VendedorControlView.getInstance();
 	
@@ -19,12 +19,16 @@ public class VentaVehiculosPresenter {
 	
 	private VehiculosController vehiculosController;
 	
-	public VentaVehiculosPresenter(ClientesController clientesController, VehiculosController vehiculosController) {
+	public VendedorControlPresenter(ClientesController clientesController, VehiculosController vehiculosController) {
 		assert clientesController != null;
 		assert vehiculosController != null;
 		this.clientesController = clientesController;
+		this.vehiculosController = vehiculosController;
 		this.view.setActionConsultarCliente((a) -> onConsultarCliente(a));
 		this.view.setActionConsultarVehiculo((a) -> onConsultarVehiculo(a));
+		this.view.addTiposBusqueda(new String [] {"NUEVO", "USADO"});
+		this.view.addSucursalesBusqueda(new String [] {"Martinez", "Avellaneda", "Quilmes"});
+		
 	}
 	
 	private void onConsultarCliente(ActionEvent e) {
@@ -46,7 +50,7 @@ public class VentaVehiculosPresenter {
 		ConsultaVehiculoParaVentaDTO consulta = view.getDataConsultaVehiculo();
 		view.clearDataVehiculos();
 		if(consulta.validate().isEmpty()) {
-			List<VehiculoDTO> vehiculos = vehiculosController.readByCriteria(consulta);
+			List<OutputConsultaVehiculoEnVentaDTO> vehiculos = vehiculosController.readByCriteria(consulta);
 			view.setData(vehiculos);
 		}
 	}

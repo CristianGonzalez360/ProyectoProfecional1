@@ -5,11 +5,13 @@ import java.util.List;
 
 import business_logic.exceptions.ConflictException;
 import dto.VehiculoDTO;
+import dto.VehiculoParaVentaDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
 import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 import dto.temporal.AltaDeVehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
+import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.VehiculoDao;
@@ -87,8 +89,17 @@ public class VehiculosController {
 		return ret;
 	}
 
-	public List<VehiculoDTO> readByCriteria(ConsultaVehiculoParaVentaDTO consulta) {
-		List<VehiculoDTO> vehiculos = new LinkedList<VehiculoDTO>();
+	public List<OutputConsultaVehiculoEnVentaDTO> readByCriteria(ConsultaVehiculoParaVentaDTO consulta) {
+		List<OutputConsultaVehiculoEnVentaDTO> vehiculos = new LinkedList<>();
+		OutputConsultaVehiculoEnVentaDTO dto = new OutputConsultaVehiculoEnVentaDTO();
+		VehiculoParaVentaDTO temp = new VehiculoParaVentaDTO().makeTestDTO();
+		dto.setMarca(temp.getMarca());
+		dto.setCodigo("11123");
+		dto.setFamilia(temp.getFamilia());
+		dto.setLinea(temp.getLinea());
+		dto.setPrecio(temp.getCaracteristicas().getPrecio());
+		dto.setCilindrada(temp.getCaracteristicas().getCilindrada());
+		vehiculos.add(dto);
 		return vehiculos;
 	}
 }

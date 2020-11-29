@@ -83,4 +83,14 @@ public class BusquedaVehiculoPanel extends JPanel {
 	public void setActionBuscar(ActionListener listener) {
 		this.btnConsultar.addActionListener(listener);
 	}
+
+	public void addTipos(String[] tipos) {
+		assert tipos != null;
+		for(String str : tipos) this.comboBoxTipo.addItem(str);
+	}
+
+	public void addSucursales(String[] suc) {
+		assert suc != null;
+		for(String str : suc) this.comboBoxSucursal.addItem(str);
+	}
 }
