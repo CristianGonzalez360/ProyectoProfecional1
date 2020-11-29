@@ -16,7 +16,7 @@ import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.VehiculoDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
-import repositories.VentaVehiculoDao;
+import repositories.VehiculosEnVentaDao;
 
 public class VehiculosController {
 
@@ -28,16 +28,16 @@ public class VehiculosController {
 	
 	private VehiculoDao vehiculoDao;
 	
-	private VentaVehiculoDao ventaVehiculoDao;
+	private VehiculosEnVentaDao vehiculosEnVentaDao;
 	
 	public VehiculosController(VehiculosConOrdenDeTrabajoDao vehiculosDao, OrdenesDeTrabajoDao otDao,
-			FichaTecnicaVehiculoDao fichasDao, VehiculoDao vehiculoDao) {
+			FichaTecnicaVehiculoDao fichasDao, VehiculosEnVentaDao vehiculosEnVentaDao) {
 		assert vehiculosDao != null;
 		assert fichasDao != null;
 		this.vehiculosDao = vehiculosDao;
 		this.fichasDao = fichasDao;
 		this.otDao = otDao;
-		this.vehiculoDao = vehiculoDao;
+		this.vehiculosEnVentaDao = vehiculosEnVentaDao;
 	}
 
 	public List<VehiculoConOrdenDeTrabajoDTO> readByIdCliente(Integer idCliente) {
@@ -93,17 +93,19 @@ public class VehiculosController {
 	}
 
 	public List<OutputConsultaVehiculoEnVentaDTO> readByCriteria(ConsultaVehiculoParaVentaDTO consulta) {
+		List<VehiculoParaVentaDTO> vehiculosEnVenta = vehiculosEnVentaDao.readByCriteria(consulta);
 		List<OutputConsultaVehiculoEnVentaDTO> vehiculos = new LinkedList<>();
-		OutputConsultaVehiculoEnVentaDTO dto = new OutputConsultaVehiculoEnVentaDTO();
-		VehiculoParaVentaDTO temp = new VehiculoParaVentaDTO().makeTestDTO();
-		dto.setMarca(temp.getMarca());
-		dto.setCodigo("11123");
-		dto.setFamilia(temp.getFamilia());
-		dto.setLinea(temp.getLinea());
-		dto.setPrecio(temp.getCaracteristicas().getPrecio());
-		dto.setCilindrada(temp.getCaracteristicas().getCilindrada());
-		dto.setColor(temp.getColorVehiculo());
-		vehiculos.add(dto);
+		for(VehiculoParaVentaDTO temp : vehiculosEnVenta) {
+			OutputConsultaVehiculoEnVentaDTO dto = new OutputConsultaVehiculoEnVentaDTO();	
+			dto.setMarca(temp.getMarca());
+			dto.setCodigo("11123");
+			dto.setFamilia(temp.getFamilia());
+			dto.setLinea(temp.getLinea());
+			dto.setPrecio(temp.getCaracteristicas().getPrecio());
+			dto.setCilindrada(temp.getCaracteristicas().getCilindrada());
+			dto.setColor(temp.getColorVehiculo());
+			vehiculos.add(dto);
+		}		
 		return vehiculos;
 	}
 

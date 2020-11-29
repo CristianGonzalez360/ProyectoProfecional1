@@ -56,7 +56,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	public VehiculosController makeVehiculosController() {
 		if (vehiculosController == null) {
 			this.vehiculosController = new VehiculosController(daos.makeVehiculoConOrdeDeTrabajoDao(),
-					daos.makeOrdenDeTrabajoDao(), daos.makeFichaTecnicaVehiculoDao(), daos.makeVehiculoDao());
+					daos.makeOrdenDeTrabajoDao(), daos.makeFichaTecnicaVehiculoDao(), daos.makeVehiculosParaVentaDao());
 		}
 		return this.vehiculosController;
 	}
