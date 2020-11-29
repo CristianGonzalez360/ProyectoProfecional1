@@ -1,10 +1,15 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 import business_logic.PedidosController;
+import business_logic.VehiculosController;
+import dto.temporal.ConsultaVehiculoParaVentaDTO;
+import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import dto.validators.StringValidator;
 import presentacion.views.gerente.PedidosPanelView;
+import presentacion.views.gerente.RegistroPedidoView;
 
 public class PedidosPresenter {
 
@@ -13,10 +18,14 @@ public class PedidosPresenter {
 
 	private PedidosPanelView view;
 	private PedidosController controller;
+	private RegistroPedidoView regPedidoView;
+	private VehiculosController vehiculosController;
+	
 
 	public PedidosPresenter(PedidosPanelView view, PedidosController controller) {
 		this.view = view;
 		this.controller = controller;
+		regPedidoView = RegistroPedidoView.getInstance();
 
 		view.setActionBuscar((a) -> onBuscar(a));
 		view.setActionRegistrarPedido((a) -> onRegistrar(a));
@@ -45,8 +54,17 @@ public class PedidosPresenter {
 	}
 
 	private Object onRegistrar(ActionEvent a) {
-		// TODO Auto-generated method stub
+		regPedidoView.display();
 		return null;
 	}
 
+	
+	private void onBuscarVehiculo(ActionEvent a) {
+		ConsultaVehiculoParaVentaDTO consulta = regPedidoView.getData();
+		regPedidoView.clearData();
+		if(consulta.validate().isEmpty()) {
+			List<OutputConsultaVehiculoEnVentaDTO> vehiculos = vehiculosController.readByCriteria(consulta);
+			regPedidoView.setData(vehiculos);
+		}
+	}
 }
