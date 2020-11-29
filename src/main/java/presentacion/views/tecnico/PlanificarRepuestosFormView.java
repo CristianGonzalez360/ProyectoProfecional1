@@ -22,8 +22,10 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
-import dto.RepuestoDTO;
-import dto.RepuestoPlanificadoDTO;
+
+import dto.taller.RepuestoDTO;
+import dto.taller.RepuestoPlanificadoDTO;
+
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.BevelBorder;

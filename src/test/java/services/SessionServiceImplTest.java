@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import business_logic.exceptions.ForbiddenException;
-import dto.SessionDTO;
 import dto.UsuarioDTO;
+import dto.temporal.SessionDTO;
 
 class SessionServiceImplTest {
 

@@ -4,16 +4,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 import business_logic.exceptions.ConflictException;
-import dto.AltaDeVehiculoDTO;
-import dto.ConsultaVehiculoDTO;
-import dto.FichaTecnicaVehiculoDTO;
-import dto.OrdenDeTrabajoDTO;
-import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.VehiculoDTO;
+import dto.VehiculoParaVentaDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
+import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.temporal.AltaDeVehiculoDTO;
+import dto.temporal.ConsultaVehiculoParaVentaDTO;
+import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.VehiculoDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
+import repositories.VehiculosEnVentaDao;
 
 public class VehiculosController {
 
@@ -24,15 +27,17 @@ public class VehiculosController {
 	private OrdenesDeTrabajoDao otDao;
 	
 	private VehiculoDao vehiculoDao;
-
+	
+	private VehiculosEnVentaDao vehiculosEnVentaDao;
+	
 	public VehiculosController(VehiculosConOrdenDeTrabajoDao vehiculosDao, OrdenesDeTrabajoDao otDao,
-			FichaTecnicaVehiculoDao fichasDao, VehiculoDao vehiculoDao) {
+			FichaTecnicaVehiculoDao fichasDao, VehiculosEnVentaDao vehiculosEnVentaDao) {
 		assert vehiculosDao != null;
 		assert fichasDao != null;
 		this.vehiculosDao = vehiculosDao;
 		this.fichasDao = fichasDao;
 		this.otDao = otDao;
-		this.vehiculoDao = vehiculoDao;
+		this.vehiculosEnVentaDao = vehiculosEnVentaDao;
 	}
 
 	public List<VehiculoConOrdenDeTrabajoDTO> readByIdCliente(Integer idCliente) {
@@ -87,8 +92,24 @@ public class VehiculosController {
 		return ret;
 	}
 
-	public List<VehiculoDTO> readByCriteria(ConsultaVehiculoDTO consulta) {
-		List<VehiculoDTO> vehiculos = new LinkedList<VehiculoDTO>();
+	public List<OutputConsultaVehiculoEnVentaDTO> readByCriteria(ConsultaVehiculoParaVentaDTO consulta) {
+		List<VehiculoParaVentaDTO> vehiculosEnVenta = vehiculosEnVentaDao.readByCriteria(consulta);
+		List<OutputConsultaVehiculoEnVentaDTO> vehiculos = new LinkedList<>();
+		for(VehiculoParaVentaDTO temp : vehiculosEnVenta) {
+			OutputConsultaVehiculoEnVentaDTO dto = new OutputConsultaVehiculoEnVentaDTO();	
+			dto.setMarca(temp.getMarca());
+			dto.setCodigo(temp.getId().toString());
+			dto.setFamilia(temp.getFamilia());
+			dto.setLinea(temp.getLinea());
+			dto.setPrecio(temp.getCaracteristicas().getPrecio());
+			dto.setCilindrada(temp.getCaracteristicas().getCilindrada());
+			dto.setColor(temp.getColorVehiculo());
+			vehiculos.add(dto);
+		}		
 		return vehiculos;
+	}
+
+	public VehiculoParaVentaDTO readByCodigo(Integer codigoVehiculo) {
+		return new VehiculoParaVentaDTO().makeTestDTO();
 	}
 }

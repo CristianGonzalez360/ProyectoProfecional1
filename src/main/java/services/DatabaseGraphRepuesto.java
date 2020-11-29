@@ -3,7 +3,7 @@ package services;
 import java.util.LinkedList;
 import java.util.List;
 
-import dto.RepuestoDTO;
+import dto.taller.RepuestoDTO;
 
 public class DatabaseGraphRepuesto {
 	private List<RepuestoDTO> repuestos;

@@ -6,9 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import dto.FacturaDTO;
-
 import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -19,6 +16,9 @@ import javax.swing.JLabel;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import dto.taller.FacturaDTO;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.BoxLayout;
 import java.awt.event.ActionEvent;

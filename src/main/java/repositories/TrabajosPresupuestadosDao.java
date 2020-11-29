@@ -2,7 +2,7 @@ package repositories;
 
 import java.util.List;
 
-import dto.TrabajoPresupuestadoDTO;
+import dto.taller.TrabajoPresupuestadoDTO;
 
 public interface TrabajosPresupuestadosDao extends GenericDao<TrabajoPresupuestadoDTO, Integer> {
 

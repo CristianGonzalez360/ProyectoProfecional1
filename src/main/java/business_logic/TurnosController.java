@@ -3,8 +3,8 @@ package business_logic;
 import java.util.Date;
 import java.util.List;
 
-import dto.AltaDeTurnoDTO;
-import dto.TurnoDTO;
+import dto.taller.TurnoDTO;
+import dto.temporal.AltaDeTurnoDTO;
 import repositories.TurnosDao;
 
 public class TurnosController {

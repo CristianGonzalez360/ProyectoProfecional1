@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
-import dto.OrdenDeTrabajoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;

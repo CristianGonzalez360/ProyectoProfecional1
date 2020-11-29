@@ -13,9 +13,9 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import dto.AltaClienteDTO;
 import dto.ClienteDTO;
 import dto.DatosPersonalesDTO;
+import dto.temporal.AltaClienteDTO;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;

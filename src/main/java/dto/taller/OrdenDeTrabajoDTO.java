@@ -1,6 +1,8 @@
-package dto;
+package dto.taller;
 
 import java.util.Date;
+
+import dto.temporal.AltaOrdenDeTrabajoDTO;
 
 public class OrdenDeTrabajoDTO {
 

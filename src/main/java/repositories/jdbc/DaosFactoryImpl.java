@@ -10,22 +10,21 @@ import repositories.DatosPersonalesDao;
 import repositories.FacturasDao;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
-import repositories.PaisDao;
 import repositories.PresupuestosDao;
 import repositories.RepuestosDao;
 import repositories.RepuestosPlanificadosDao;
+import repositories.SucursalDao;
 import repositories.TrabajosPresupuestadosDao;
 import repositories.TurnosDao;
 import repositories.UsuariosDao;
 import repositories.VehiculoDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
+import repositories.VehiculosEnVentaDao;
 import repositories.jdbc.utils.DataSource;
 
 public class DaosFactoryImpl extends DaosFactory {
 
 	private DataSource ds;
-
-	private PaisDao paisDao;
 
 	private UsuariosDao usuariosDao;
 
@@ -55,15 +54,12 @@ public class DaosFactoryImpl extends DaosFactory {
 
 	private VehiculoDao vehiculoDao;
 	
+	private SucursalDao sucursalesDao;
+	
+	private VehiculosEnVentaDao vehiculosParaVentaDao;
+	
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
-	}
-
-	@Override
-	public PaisDao makePaisDao() {
-		if (paisDao == null)
-			paisDao = new PaisDaoImpl(ds.getConnection());
-		return paisDao;
 	}
 
 	@Override
@@ -166,5 +162,19 @@ public class DaosFactoryImpl extends DaosFactory {
 		if (vehiculoDao == null) 
 			vehiculoDao = new VehiculoDaoImpl(ds.getConnection());
 		return vehiculoDao;
+	}
+
+	@Override
+	public SucursalDao makeSucursalesDao() {
+		if(sucursalesDao == null) sucursalesDao = new SucursalesDaoImpl(ds.getConnection());
+		return sucursalesDao;
+	}
+
+	@Override
+	public VehiculosEnVentaDao makeVehiculosParaVentaDao() {
+		if(vehiculosParaVentaDao == null) {
+			vehiculosParaVentaDao = new VehiculosParaVentaDaoImpl(ds.getConnection());
+		}
+		return vehiculosParaVentaDao;
 	}
 }

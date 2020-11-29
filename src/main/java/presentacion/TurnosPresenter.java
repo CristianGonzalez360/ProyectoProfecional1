@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 import business_logic.TurnosController;
-import dto.AltaDeTurnoDTO;
+import dto.temporal.AltaDeTurnoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.TurnoFormView;
 import presentacion.views.supervisor.TurnosPanelView;

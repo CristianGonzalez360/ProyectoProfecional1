@@ -3,8 +3,8 @@ package services;
 import java.util.Date;
 
 import business_logic.exceptions.ForbiddenException;
-import dto.SessionDTO;
 import dto.UsuarioDTO;
+import dto.temporal.SessionDTO;
 
 public class SessionServiceImpl implements SessionService {
 

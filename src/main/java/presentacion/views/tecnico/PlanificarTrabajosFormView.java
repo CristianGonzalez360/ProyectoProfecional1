@@ -11,9 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-
-import dto.TrabajoPresupuestadoDTO;
-
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -25,6 +22,9 @@ import javax.swing.border.BevelBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import dto.taller.TrabajoPresupuestadoDTO;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.ScrollPaneConstants;
 import java.awt.Component;

@@ -1,8 +1,10 @@
-package dto;
+package dto.taller;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import dto.ClienteDTO;
 
 public class FacturaDTO {
 	
