@@ -3,7 +3,7 @@ package repositories.jdbc;
 import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
-
+import dto.ConsultaVehiculoDTO;
 import dto.VehiculoDTO;
 import repositories.VehiculoDao;
 import repositories.jdbc.utils.Mapper;
@@ -67,6 +67,7 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 				ret.setDisponible((boolean) obj[3]);
 				ret.setUsado((Boolean) obj[4]);
 				ret.setIdCompra((Integer) obj[5]);
+				ret.setIdSucursal((Integer) obj[6]);
 				return ret;
 			}
 		};
@@ -84,4 +85,22 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 		return null;
 	}
 
+	@Override
+	public List<VehiculoDTO> readByCriteria(ConsultaVehiculoDTO consulta) {
+		String query = readAll;
+		if(consulta.getTipo() != null) {
+			query += " WHERE tipo = " + consulta.getTipo();
+		}
+		if(consulta.getMarca() != null) {
+			query += " WHERE marca = " + consulta.getMarca();
+		}
+		if(consulta.getLinea() != null) {
+			query += " WHERE linea = " + consulta.getLinea();
+		}
+		if(consulta.getSucursal() != null) {
+			query += " WHERE idSucursal = " + consulta.getLinea();
+		}
+		
+		return getTemplate().query(query).excecute(getMapper());
+	}
 }

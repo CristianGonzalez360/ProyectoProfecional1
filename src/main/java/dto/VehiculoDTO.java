@@ -8,7 +8,7 @@ public class VehiculoDTO {
 	
 	private Double precioVenta;
 	
-	private Integer  idFichaTecnica;
+	private Integer  idCaracteristicas;
 	
 	private Date fechaIngreso;
 	
@@ -18,7 +18,9 @@ public class VehiculoDTO {
 	
 	private Integer idCompra;
 	
-	private FichaTecnicaVehiculoDTO fichaTecnica;
+	private Integer	idSucursal;
+	
+	private CaracteristicasVehiculoDTO caracteristicasVehiculo;
 	
 	public VehiculoDTO() {
 		// TODO Auto-generated constructor stub
@@ -36,11 +38,11 @@ public class VehiculoDTO {
 	public void setPrecioVenta(Double precioVenta) {
 		this.precioVenta = precioVenta;
 	}
-	public Integer getIdFichaTecnica() {
-		return idFichaTecnica;
+	public Integer getIdCaracteristicas() {
+		return idCaracteristicas;
 	}
-	public void setIdFichaTecnica(Integer idFichaTecnica) {
-		this.idFichaTecnica = idFichaTecnica;
+	public void setIdCaracteristicas(Integer IdCaracteristicas) {
+		this.idCaracteristicas = IdCaracteristicas;
 	}
 	public Date getFechaIngreso() {
 		return fechaIngreso;
@@ -67,11 +69,19 @@ public class VehiculoDTO {
 		this.idCompra = idCompra;
 	}
 
-	public FichaTecnicaVehiculoDTO getFichaTecnica() {
-		return fichaTecnica;
+	public CaracteristicasVehiculoDTO getCaracteristicasVehiculo() {
+		return caracteristicasVehiculo;
 	}
 
-	public void setFichaTecnica(FichaTecnicaVehiculoDTO fichaTecnica) {
-		this.fichaTecnica = fichaTecnica;
+	public void setCaracteristicasVehiculo(CaracteristicasVehiculoDTO caracteristicasVehiculo) {
+		this.caracteristicasVehiculo = caracteristicasVehiculo;
+	}
+
+	public Integer getIdSucursal() {
+		return idSucursal;
+	}
+
+	public void setIdSucursal(Integer idSucursal) {
+		this.idSucursal = idSucursal;
 	}
 }

@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
 import dto.ConsultaVehiculoDTO;
+import dto.SucursalDTO;
 
 public class BusquedaVehiculoPanel extends JPanel {
 	
@@ -25,7 +26,7 @@ public class BusquedaVehiculoPanel extends JPanel {
 
 	private JComboBox<String> comboBoxTipo;
 
-	private JComboBox<String> comboBoxSucursal;
+	private JComboBox<SucursalDTO> comboBoxSucursal;
 
 	private JButton btnConsultar;
 	
@@ -57,7 +58,7 @@ public class BusquedaVehiculoPanel extends JPanel {
 		JLabel lblNewLabel_3 = new JLabel("Sucursal");
 		add(lblNewLabel_3);
 		
-		comboBoxSucursal = new JComboBox<String>();
+		comboBoxSucursal = new JComboBox<>();
 		add(comboBoxSucursal);
 		
 		btnConsultar = new JButton("Buscar");
@@ -76,7 +77,7 @@ public class BusquedaVehiculoPanel extends JPanel {
 		dto.setMarca(this.textMarca.getText());
 		dto.setLinea(this.textLinea.getText());
 		dto.setTipo(this.comboBoxTipo.getSelectedItem().toString());
-		dto.setSucursal(this.comboBoxSucursal.getSelectedItem().toString());
+		dto.setSucursal(((SucursalDTO)this.comboBoxSucursal.getSelectedItem()).getIdSucursal());
 		return dto;
 	}
 	

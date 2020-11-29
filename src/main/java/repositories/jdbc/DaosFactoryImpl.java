@@ -3,6 +3,7 @@
  */
 package repositories.jdbc;
 
+import repositories.CaracteristicasVehiculoDao;
 import repositories.ClientesDao;
 import repositories.CuentasDao;
 import repositories.DaosFactory;
@@ -14,6 +15,7 @@ import repositories.PaisDao;
 import repositories.PresupuestosDao;
 import repositories.RepuestosDao;
 import repositories.RepuestosPlanificadosDao;
+import repositories.SucursalDao;
 import repositories.TrabajosPresupuestadosDao;
 import repositories.TurnosDao;
 import repositories.UsuariosDao;
@@ -54,6 +56,10 @@ public class DaosFactoryImpl extends DaosFactory {
 	private FacturasDao facturasDao;
 
 	private VehiculoDao vehiculoDao;
+	
+	private CaracteristicasVehiculoDao caracteristicasVehiculoDao;
+	
+	private SucursalDao sucursalDao;
 	
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
@@ -166,5 +172,19 @@ public class DaosFactoryImpl extends DaosFactory {
 		if (vehiculoDao == null) 
 			vehiculoDao = new VehiculoDaoImpl(ds.getConnection());
 		return vehiculoDao;
+	}
+
+	@Override
+	public CaracteristicasVehiculoDao makeCaracteristicasDao() {
+		if (caracteristicasVehiculoDao == null) 
+			caracteristicasVehiculoDao = new CaracteristicasVehiculoDaoImpl(ds.getConnection());
+		return caracteristicasVehiculoDao;
+	}
+
+	@Override
+	public SucursalDao makeSucursalDao() {
+		if (sucursalDao == null) 
+			sucursalDao = new SucursalDaoImpl(ds.getConnection());
+		return sucursalDao;
 	}
 }

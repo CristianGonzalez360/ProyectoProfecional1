@@ -5,13 +5,17 @@ import java.util.List;
 
 import business_logic.exceptions.ConflictException;
 import dto.AltaDeVehiculoDTO;
+import dto.CaracteristicasVehiculoDTO;
 import dto.ConsultaVehiculoDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
+import dto.SucursalDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.VehiculoDTO;
+import repositories.CaracteristicasVehiculoDao;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
+import repositories.SucursalDao;
 import repositories.VehiculoDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
 
@@ -24,15 +28,18 @@ public class VehiculosController {
 	private OrdenesDeTrabajoDao otDao;
 	
 	private VehiculoDao vehiculoDao;
-
+	
+	private CaracteristicasVehiculoDao caracteristicasVehiculoDao;
+	
 	public VehiculosController(VehiculosConOrdenDeTrabajoDao vehiculosDao, OrdenesDeTrabajoDao otDao,
-			FichaTecnicaVehiculoDao fichasDao, VehiculoDao vehiculoDao) {
+			FichaTecnicaVehiculoDao fichasDao, VehiculoDao vehiculoDao, CaracteristicasVehiculoDao caractDao) {
 		assert vehiculosDao != null;
 		assert fichasDao != null;
 		this.vehiculosDao = vehiculosDao;
 		this.fichasDao = fichasDao;
 		this.otDao = otDao;
 		this.vehiculoDao = vehiculoDao;
+		this.caracteristicasVehiculoDao = caractDao;
 	}
 
 	public List<VehiculoConOrdenDeTrabajoDTO> readByIdCliente(Integer idCliente) {
@@ -80,15 +87,16 @@ public class VehiculosController {
 	
 	public List<VehiculoDTO> readVehiculosNuevosDisponibles() {
 		List<VehiculoDTO> ret = vehiculoDao.readNuevosDisponibles();
-		for (VehiculoDTO vehiculo : ret) {
-			FichaTecnicaVehiculoDTO ficha = fichasDao.readByID(vehiculo.getIdFichaTecnica());
-			vehiculo.setFichaTecnica(ficha);
-		}
+		
 		return ret;
 	}
 
 	public List<VehiculoDTO> readByCriteria(ConsultaVehiculoDTO consulta) {
-		List<VehiculoDTO> vehiculos = new LinkedList<VehiculoDTO>();
+		List<VehiculoDTO> vehiculos = vehiculoDao.readByCriteria(consulta);
+		for (VehiculoDTO vehiculo : vehiculos) {
+			CaracteristicasVehiculoDTO caracteristicas = caracteristicasVehiculoDao.readByID(vehiculo.getIdCaracteristicas());
+			vehiculo.setCaracteristicasVehiculo(caracteristicas);
+		}
 		return vehiculos;
 	}
 }

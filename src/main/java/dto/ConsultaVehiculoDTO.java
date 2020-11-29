@@ -13,9 +13,7 @@ public class ConsultaVehiculoDTO {
 	
 	private String linea;
 	
-	private String cilindrada;
-	
-	private String Sucursal;
+	private Integer Sucursal;
 	
 	public ConsultaVehiculoDTO() {
 	}
@@ -44,19 +42,11 @@ public class ConsultaVehiculoDTO {
 		this.linea = linea;
 	}
 
-	public String getCilindrada() {
-		return cilindrada;
-	}
-
-	public void setCilindrada(String cilindrada) {
-		this.cilindrada = cilindrada;
-	}
-
-	public String getSucursal() {
+	public Integer getSucursal() {
 		return Sucursal;
 	}
 
-	public void setSucursal(String sucursal) {
+	public void setSucursal(Integer sucursal) {
 		Sucursal = sucursal;
 	}
 
