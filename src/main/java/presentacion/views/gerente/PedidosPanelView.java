@@ -88,11 +88,11 @@ public class PedidosPanelView extends JPanel {
 		this.btnBuscar.addActionListener(listener);
 	}
 
-	public void setActionRegistrarTurno(ActionListener listener) {
+	public void setActionRegistrarPedido(ActionListener listener) {
 		this.btnRegistrarPedido.addActionListener(listener);
 	}
 
-	public void setActionCancelarTurno(ActionListener listener) {
+	public void setActionCancelarPedido(ActionListener listener) {
 		this.btnCancelarPedido.addActionListener(listener);
 	}
 }

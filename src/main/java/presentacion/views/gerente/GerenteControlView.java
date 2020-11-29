@@ -57,4 +57,5 @@ public class GerenteControlView extends JInternalFrame {
 	public void clearData() {
 		pedidosPanelView.clear();
 	}
+
 }
