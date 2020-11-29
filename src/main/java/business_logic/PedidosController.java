@@ -32,4 +32,8 @@ public class PedidosController {
 
 		return pedidos;
 	}
+	
+	public void registrarPedido(PedidoVehiculoDTO pedido) {
+		pedidosDao.insert(pedido);
+	}
 }
