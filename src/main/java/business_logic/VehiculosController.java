@@ -98,7 +98,7 @@ public class VehiculosController {
 		for(VehiculoParaVentaDTO temp : vehiculosEnVenta) {
 			OutputConsultaVehiculoEnVentaDTO dto = new OutputConsultaVehiculoEnVentaDTO();	
 			dto.setMarca(temp.getMarca());
-			dto.setCodigo("11123");
+			dto.setCodigo(temp.getId().toString());
 			dto.setFamilia(temp.getFamilia());
 			dto.setLinea(temp.getLinea());
 			dto.setPrecio(temp.getCaracteristicas().getPrecio());

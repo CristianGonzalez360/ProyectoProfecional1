@@ -4,6 +4,8 @@ import dto.taller.FichaTecnicaVehiculoDTO;
 
 public class VehiculoParaVentaDTO {
 	
+	private Integer id;
+	
 	private String marca;
 	
 	private String familia;
@@ -86,9 +88,18 @@ public class VehiculoParaVentaDTO {
 	public void setLinea(String linea) {
 		this.linea = linea;
 	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public VehiculoParaVentaDTO makeTestDTO() {
 		VehiculoParaVentaDTO dto = new VehiculoParaVentaDTO();
+		dto.setId(11111);
 		dto.setMarca("Wolkswagen");
 		dto.setFamilia("Polo");
 		dto.setLinea("Trend");
