@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import dto.TurnoDTO;
+import dto.taller.TurnoDTO;
 import repositories.TurnosDao;
 
 class TurnosControllerTest {

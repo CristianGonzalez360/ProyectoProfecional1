@@ -13,7 +13,7 @@ import org.apache.log4j.LogManager;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import business_logic.RepuestosController;
-import dto.RepuestoDTO;
+import dto.taller.RepuestoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.utils.InputDialog;
 import presentacion.views.utils.MessageDialog;

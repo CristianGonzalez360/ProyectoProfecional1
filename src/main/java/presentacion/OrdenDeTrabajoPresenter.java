@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import business_logic.OrdenesTrabajoController;
-import dto.OrdenDeTrabajoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
 import presentacion.views.supervisor.SupervisorControlView;
 
 public class OrdenDeTrabajoPresenter {

@@ -3,7 +3,7 @@ package repositories.jdbc;
 import java.sql.Connection;
 import java.util.List;
 
-import dto.RepuestoDTO;
+import dto.taller.RepuestoDTO;
 import repositories.RepuestosDao;
 import repositories.jdbc.utils.Mapper;
 

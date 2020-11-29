@@ -19,7 +19,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 
-import dto.TurnoDTO;
+import dto.taller.TurnoDTO;
 
 public class TurnosPanelView extends JPanel {
 

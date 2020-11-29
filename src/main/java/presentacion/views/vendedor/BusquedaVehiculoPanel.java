@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
-import dto.temporal.ConsultaVehiculoDTO;
+import dto.temporal.ConsultaVehiculoParaVentaDTO;
 
 public class BusquedaVehiculoPanel extends JPanel {
 	
@@ -71,8 +71,8 @@ public class BusquedaVehiculoPanel extends JPanel {
 		this.textLinea.setText("");
 	}
 	
-	public ConsultaVehiculoDTO getData() {
-		ConsultaVehiculoDTO dto = new ConsultaVehiculoDTO();
+	public ConsultaVehiculoParaVentaDTO getData() {
+		ConsultaVehiculoParaVentaDTO dto = new ConsultaVehiculoParaVentaDTO();
 		dto.setMarca(this.textMarca.getText());
 		dto.setLinea(this.textLinea.getText());
 		dto.setTipo(this.comboBoxTipo.getSelectedItem().toString());

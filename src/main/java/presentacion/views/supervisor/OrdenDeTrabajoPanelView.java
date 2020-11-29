@@ -10,7 +10,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import dto.OrdenDeTrabajoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
 
 public class OrdenDeTrabajoPanelView extends JPanel {
 

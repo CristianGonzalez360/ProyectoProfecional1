@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
-import dto.FacturaDTO;
+import dto.taller.FacturaDTO;
 import repositories.FacturasDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;

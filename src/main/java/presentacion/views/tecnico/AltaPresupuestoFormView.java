@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
-import dto.PresupuestoDTO;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 import javax.swing.JSplitPane;
@@ -17,6 +16,9 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
+import dto.taller.PresupuestoDTO;
+
 import java.awt.Dimension;
 
 public class AltaPresupuestoFormView extends JDialog {

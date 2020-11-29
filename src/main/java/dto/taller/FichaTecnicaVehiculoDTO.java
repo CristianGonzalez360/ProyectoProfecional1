@@ -1,4 +1,4 @@
-package dto;
+package dto.taller;
 
 import dto.temporal.AltaDeVehiculoDTO;
 

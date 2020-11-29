@@ -3,7 +3,7 @@ package repositories.jdbc;
 import java.sql.Connection;
 import java.util.List;
 
-import dto.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 import repositories.VehiculosConOrdenDeTrabajoDao;
 import repositories.jdbc.utils.Mapper;
 

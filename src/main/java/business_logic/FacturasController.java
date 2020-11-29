@@ -3,13 +3,13 @@ package business_logic;
 import java.util.Date;
 import java.util.List;
 import business_logic.exceptions.NotFoundException;
-import dto.EstadoPresupuesto;
-import dto.FacturaDTO;
-import dto.FichaTecnicaVehiculoDTO;
-import dto.OrdenDeTrabajoDTO;
-import dto.PresupuestoDTO;
-import dto.ResumenDeFacturaDTO;
-import dto.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.EstadoPresupuesto;
+import dto.taller.FacturaDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
+import dto.taller.PresupuestoDTO;
+import dto.taller.ResumenDeFacturaOrdenTrabajoDTO;
+import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 import presentacion.views.utils.FacturaRepuestosReport;
 import presentacion.views.utils.FacturaTallerReport;
 import repositories.DaosFactory;
@@ -100,9 +100,9 @@ public class FacturasController {
 		return facturaDao.updatePorPago(id);
 	}
 		
-	public ResumenDeFacturaDTO generarResumenFactura(Integer idFactura) {
+	public ResumenDeFacturaOrdenTrabajoDTO generarResumenFactura(Integer idFactura) {
 		List<PresupuestoDTO> presupuestos = presDao.readByFacturaId(idFactura);
-		ResumenDeFacturaDTO resumen = new ResumenDeFacturaDTO();
+		ResumenDeFacturaOrdenTrabajoDTO resumen = new ResumenDeFacturaOrdenTrabajoDTO();
 		for (PresupuestoDTO presupuesto : presupuestos) {
 			if(presupuesto.getEstado().equals(EstadoPresupuesto.APROBADO)) {
 				resumen.agregarRepuestos(this.repuPresuDao.readByIdPresupuesto(presupuesto.getIdPresupuesto()));

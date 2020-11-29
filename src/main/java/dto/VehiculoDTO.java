@@ -2,6 +2,8 @@ package dto;
 
 import java.util.Date;
 
+import dto.taller.FichaTecnicaVehiculoDTO;
+
 public class VehiculoDTO {
 
 	private Integer idVehiculo;

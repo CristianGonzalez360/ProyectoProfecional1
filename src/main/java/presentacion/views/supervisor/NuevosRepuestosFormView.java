@@ -12,7 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import dto.RepuestoDTO;
+
+import dto.taller.RepuestoDTO;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 

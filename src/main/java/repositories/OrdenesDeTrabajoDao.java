@@ -2,7 +2,7 @@ package repositories;
 
 import java.util.List;
 
-import dto.OrdenDeTrabajoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
 
 public interface OrdenesDeTrabajoDao extends GenericDao<OrdenDeTrabajoDTO, Integer> {
 

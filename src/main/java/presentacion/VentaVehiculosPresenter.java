@@ -7,7 +7,7 @@ import business_logic.ClientesController;
 import business_logic.VehiculosController;
 import dto.ClienteDTO;
 import dto.VehiculoDTO;
-import dto.temporal.ConsultaVehiculoDTO;
+import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.validators.StringValidator;
 import presentacion.views.vendedor.VendedorControlView;
 
@@ -43,7 +43,7 @@ public class VentaVehiculosPresenter {
 	}
 	
 	private void onConsultarVehiculo(ActionEvent a) {
-		ConsultaVehiculoDTO consulta = view.getDataConsultaVehiculo();
+		ConsultaVehiculoParaVentaDTO consulta = view.getDataConsultaVehiculo();
 		view.clearDataVehiculos();
 		if(consulta.validate().isEmpty()) {
 			List<VehiculoDTO> vehiculos = vehiculosController.readByCriteria(consulta);
