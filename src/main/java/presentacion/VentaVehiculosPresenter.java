@@ -6,8 +6,8 @@ import java.util.List;
 import business_logic.ClientesController;
 import business_logic.VehiculosController;
 import dto.ClienteDTO;
-import dto.ConsultaVehiculoDTO;
 import dto.VehiculoDTO;
+import dto.temporal.ConsultaVehiculoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.vendedor.VendedorControlView;
 

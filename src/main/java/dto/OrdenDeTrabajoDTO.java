@@ -2,6 +2,8 @@ package dto;
 
 import java.util.Date;
 
+import dto.temporal.AltaOrdenDeTrabajoDTO;
+
 public class OrdenDeTrabajoDTO {
 
 	private Integer idOrdenTrabajo;

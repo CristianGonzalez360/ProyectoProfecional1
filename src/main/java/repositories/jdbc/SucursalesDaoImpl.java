@@ -7,9 +7,9 @@ import dto.SucursalDTO;
 import repositories.SucursalDao;
 import repositories.jdbc.utils.Mapper;
 
-public class SucursalDaoImpl extends GenericJdbcDao<SucursalDTO> implements SucursalDao{
+public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements SucursalDao{
 
-	public SucursalDaoImpl(Connection connection) {
+	public SucursalesDaoImpl(Connection connection) {
 		super(connection);
 		// TODO Auto-generated constructor stub
 	}
@@ -46,6 +46,12 @@ public class SucursalDaoImpl extends GenericJdbcDao<SucursalDTO> implements Sucu
 
 	@Override
 	protected Mapper<SucursalDTO> getMapper() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SucursalDTO readByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}

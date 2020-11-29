@@ -11,14 +11,13 @@ import business_logic.OrdenesTrabajoController;
 import business_logic.VehiculosController;
 import business_logic.exceptions.ConflictException;
 import business_logic.exceptions.ForbiddenException;
-import dto.AltaClienteDTO;
-import dto.AltaDeVehiculoDTO;
-import dto.AltaOrdenDeTrabajoDTO;
-
 import dto.ClienteDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
+import dto.temporal.AltaClienteDTO;
+import dto.temporal.AltaDeVehiculoDTO;
+import dto.temporal.AltaOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.utils.MessageDialog;
 

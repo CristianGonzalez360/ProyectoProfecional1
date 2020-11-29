@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
-import dto.ConsultaVehiculoDTO;
+import dto.temporal.ConsultaVehiculoDTO;
 
 public class BusquedaVehiculoPanel extends JPanel {
 	

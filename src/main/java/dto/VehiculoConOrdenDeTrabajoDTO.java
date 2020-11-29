@@ -1,5 +1,7 @@
 package dto;
 
+import dto.temporal.AltaDeVehiculoDTO;
+
 public class VehiculoConOrdenDeTrabajoDTO {
 
 	private Integer id;

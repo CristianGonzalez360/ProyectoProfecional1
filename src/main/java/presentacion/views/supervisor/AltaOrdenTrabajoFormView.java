@@ -10,7 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import dto.AltaOrdenDeTrabajoDTO;
+import dto.temporal.AltaOrdenDeTrabajoDTO;
 
 import javax.swing.JSplitPane;
 import javax.swing.JLabel;

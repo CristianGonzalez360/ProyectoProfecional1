@@ -4,12 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import business_logic.exceptions.ConflictException;
-import dto.AltaDeVehiculoDTO;
-import dto.ConsultaVehiculoDTO;
 import dto.FichaTecnicaVehiculoDTO;
 import dto.OrdenDeTrabajoDTO;
 import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.VehiculoDTO;
+import dto.temporal.AltaDeVehiculoDTO;
+import dto.temporal.ConsultaVehiculoDTO;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.VehiculoDao;

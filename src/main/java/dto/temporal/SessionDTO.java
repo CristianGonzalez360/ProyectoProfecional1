@@ -1,6 +1,8 @@
-package dto;
+package dto.temporal;
 
 import java.util.Date;
+
+import dto.UsuarioDTO;
 
 public class SessionDTO {
 

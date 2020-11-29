@@ -9,8 +9,8 @@ import java.util.List;
 import javax.swing.JTabbedPane;
 
 import dto.ClienteDTO;
-import dto.ConsultaVehiculoDTO;
 import dto.VehiculoDTO;
+import dto.temporal.ConsultaVehiculoDTO;
 import presentacion.views.supervisor.ClientePanelView;
 
 import javax.swing.JPanel;
