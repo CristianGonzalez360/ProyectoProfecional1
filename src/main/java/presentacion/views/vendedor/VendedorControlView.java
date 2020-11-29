@@ -14,6 +14,7 @@ import dto.SucursalDTO;
 import dto.VehiculoParaVentaDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
+import presentacion.views.cajero.PanelCobroCajeroView;
 import presentacion.views.supervisor.ClientePanelView;
 
 import javax.swing.JPanel;
@@ -41,6 +42,8 @@ public class VendedorControlView extends JInternalFrame {
 	private TablePanel<OutputConsultaVehiculoEnVentaDTO> tableView;
 	
 	private CaracteristicaDeVehiculoPanel caracteristicaVehiculoPanel;
+	
+	private HistorialVentasView panelHistorial;
 	
 	private JButton btnRegistrarCliente;
 	
@@ -95,7 +98,12 @@ public class VendedorControlView extends JInternalFrame {
 		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
 		panel_2.add(tabbedPane_1, BorderLayout.CENTER);
 		
+		this.panelHistorial = HistorialVentasView.getInstance();
+		tabbedPane.add("Historial Ventas", this.panelHistorial);	
+		
 		tableView = new TablePanel<OutputConsultaVehiculoEnVentaDTO>(new String [] {"Código", "Marca", "Familia", "Linea", "Cilindrada", "Color", "Precio"}) {
+		
+			
 			
 			/**
 			 * 
