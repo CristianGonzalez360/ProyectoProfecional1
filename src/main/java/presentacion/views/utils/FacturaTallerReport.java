@@ -6,9 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import dto.DatosPersonalesDTO;
-import dto.FichaTecnicaVehiculoDTO;
-import dto.RepuestoPlanificadoDTO;
-import dto.TrabajoPresupuestadoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.taller.RepuestoPlanificadoDTO;
+import dto.taller.TrabajoPresupuestadoDTO;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 

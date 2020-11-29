@@ -10,7 +10,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import dto.FichaTecnicaVehiculoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
 
 public class FichaTecnicaVehiculoPanelView extends JPanel {
 

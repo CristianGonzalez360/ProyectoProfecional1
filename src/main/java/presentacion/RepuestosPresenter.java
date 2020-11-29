@@ -1,4 +1,4 @@
-package presentacion.views.supervisor;
+package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.io.FileInputStream;
@@ -13,8 +13,10 @@ import org.apache.log4j.LogManager;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import business_logic.RepuestosController;
-import dto.RepuestoDTO;
+import dto.taller.RepuestoDTO;
 import dto.validators.StringValidator;
+import presentacion.views.supervisor.NuevosRepuestosFormView;
+import presentacion.views.supervisor.PanelGestionRepuestos;
 import presentacion.views.utils.InputDialog;
 import presentacion.views.utils.MessageDialog;
 import services.DatabaseGraphRepuesto;

@@ -15,12 +15,12 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import dto.EstadoPresupuesto;
-import dto.OrdenDeTrabajoDTO;
-import dto.PresupuestoDTO;
-import dto.RepuestoPlanificadoDTO;
-import dto.TrabajoPresupuestadoDTO;
-import dto.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.EstadoPresupuesto;
+import dto.taller.OrdenDeTrabajoDTO;
+import dto.taller.PresupuestoDTO;
+import dto.taller.RepuestoPlanificadoDTO;
+import dto.taller.TrabajoPresupuestadoDTO;
+import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 
 import javax.swing.BoxLayout;
 import javax.swing.border.TitledBorder;

@@ -9,7 +9,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import dto.PresupuestoDTO;
+import dto.taller.PresupuestoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.utils.MessageDialog;
 

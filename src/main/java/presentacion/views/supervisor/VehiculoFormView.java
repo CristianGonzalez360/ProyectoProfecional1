@@ -14,7 +14,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import dto.AltaDeVehiculoDTO;
+import dto.temporal.AltaDeVehiculoDTO;
 
 public class VehiculoFormView extends JDialog {
 

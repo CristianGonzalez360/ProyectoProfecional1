@@ -30,8 +30,8 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import dto.ClienteDTO;
-import dto.RepuestoCompradoDTO;
-import dto.RepuestoDTO;
+import dto.taller.RepuestoCompradoDTO;
+import dto.taller.RepuestoDTO;
 import presentacion.views.supervisor.ClientePanelView;
 
 public class PanelCarritoRepuestoView extends JPanel {

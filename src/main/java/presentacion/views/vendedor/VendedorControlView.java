@@ -7,10 +7,13 @@ import java.beans.PropertyVetoException;
 import java.util.List;
 
 import javax.swing.JTabbedPane;
+import javax.swing.event.ListSelectionListener;
 
 import dto.ClienteDTO;
-import dto.ConsultaVehiculoDTO;
-import dto.VehiculoDTO;
+import dto.SucursalDTO;
+import dto.VehiculoParaVentaDTO;
+import dto.temporal.ConsultaVehiculoParaVentaDTO;
+import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import presentacion.views.supervisor.ClientePanelView;
 
 import javax.swing.JPanel;
@@ -35,11 +38,11 @@ public class VendedorControlView extends JInternalFrame {
 	
 	private DatosVentaVehiculo datosVentaVehiculoPanel;
 
-	private TablePanel tableView;
+	private TablePanel<OutputConsultaVehiculoEnVentaDTO> tableView;
 	
 	private CaracteristicaDeVehiculoPanel caracteristicaVehiculoPanel;
 	
-	private JButton btnRegistrarVenta;
+	private JButton btnRegistrarCliente;
 	
 	public static VendedorControlView getInstance() {
 		if (instance == null)
@@ -76,8 +79,8 @@ public class VendedorControlView extends JInternalFrame {
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3);
 		
-		btnRegistrarVenta = new JButton("Registrar venta");
-		panel_3.add(btnRegistrarVenta);
+		btnRegistrarCliente = new JButton("Registrar Cliente");
+		panel_3.add(btnRegistrarCliente);
 		
 		JPanel panel_2 = new JPanel();
 		splitPane.setRightComponent(panel_2);
@@ -91,9 +94,41 @@ public class VendedorControlView extends JInternalFrame {
 		
 		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
 		panel_2.add(tabbedPane_1, BorderLayout.CENTER);
-		tableView = new TablePanel(new String [] {"Código", "Familia","Linea","Cilindrada", "Color", "Precio"});
-		tabbedPane_1.addTab("Listado de vehículos", null, tableView, null);
 		
+		tableView = new TablePanel<OutputConsultaVehiculoEnVentaDTO>(new String [] {"Código", "Marca", "Familia", "Linea", "Cilindrada", "Color", "Precio"}) {
+			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -6912872259496249346L;
+
+			@Override
+			public void setData(List<OutputConsultaVehiculoEnVentaDTO> data) {
+				for(OutputConsultaVehiculoEnVentaDTO dto : data) {
+					Object [] row = { dto.getCodigo(), dto.getMarca(), dto.getFamilia(), dto.getLinea(), dto.getCilindrada(), dto.getColor(), dto.getPrecio() };
+					model.addRow(row);	
+				}
+			}
+
+			@Override
+			public OutputConsultaVehiculoEnVentaDTO getData() {
+				OutputConsultaVehiculoEnVentaDTO ret = null;
+				if(table.getSelectedRowCount() == 1) {
+					int row = table.getSelectedRow();
+					ret = new OutputConsultaVehiculoEnVentaDTO();
+					ret.setCodigo(model.getValueAt(row, 0).toString());
+					ret.setMarca(model.getValueAt(row, 1).toString());
+					ret.setFamilia(model.getValueAt(row, 2).toString());
+					ret.setLinea(model.getValueAt(row, 3).toString());
+					ret.setCilindrada(model.getValueAt(row, 4).toString());
+					ret.setColor(model.getValueAt(row, 5).toString());
+					ret.setPrecio(model.getValueAt(row, 6).toString());
+				}
+				return ret;
+			}
+		};
+		
+		tabbedPane_1.addTab("Listado de vehículos", null, tableView, null);
 		caracteristicaVehiculoPanel = new CaracteristicaDeVehiculoPanel();
 		tabbedPane_1.addTab("Caracteristica del Vehículo", null, caracteristicaVehiculoPanel, null);
 	}
@@ -135,7 +170,7 @@ public class VendedorControlView extends JInternalFrame {
 		this.busquedaVehiculoPanel.setActionBuscar(listener);
 	}
 
-	public ConsultaVehiculoDTO getDataConsultaVehiculo() {
+	public ConsultaVehiculoParaVentaDTO getDataConsultaVehiculo() {
 		return this.busquedaVehiculoPanel.getData();
 	}
 
@@ -143,7 +178,55 @@ public class VendedorControlView extends JInternalFrame {
 		this.tableView.clearData();
 	}
 
-	public void setData(List<VehiculoDTO> vehiculos) {
+	public void setData(List<OutputConsultaVehiculoEnVentaDTO> vehiculos) {
 		this.tableView.setData(vehiculos);
+	}
+
+	public void addTiposBusqueda(String[] tipos) {
+		this.busquedaVehiculoPanel.addTipos(tipos);
+	}
+
+	public void addSucursalesBusqueda(List<SucursalDTO> list) {
+		this.busquedaVehiculoPanel.addSucursales(list);
+	}
+
+	public void setActionSelectVehiculo(ListSelectionListener listener) {
+		this.tableView.setActionSelect(listener);
+	}
+
+	public OutputConsultaVehiculoEnVentaDTO getDataCodigoDeVehiculo() {
+		return this.tableView.getData();
+	}
+
+	public void setData(VehiculoParaVentaDTO dto) {
+		this.caracteristicaVehiculoPanel.setData(dto);
+	}
+
+	public void addFinancieras(List<String> list) {
+		this.datosVentaVehiculoPanel.setData(list);
+	}
+
+	public void setActionSelectVentaEnEfectivo(ActionListener listener) {
+		this.datosVentaVehiculoPanel.setActionSelectVentaEnEfectivo(listener);
+	}
+
+	public boolean isVentaEnEfectivo() {
+		return this.datosVentaVehiculoPanel.isVentaEnEfectivo();
+	}
+	
+	public void disableVentaFinanciada() {
+		this.datosVentaVehiculoPanel.disableFinanciamiento();
+	}
+
+	public void enableVentafinanciada() {
+		this.datosVentaVehiculoPanel.enableFinanciamiento();
+	}
+	
+	public void setActionRegistrarCliente(ActionListener listener) {
+		this.btnRegistrarCliente.addActionListener(listener);
+	}
+
+	public void setDataIVA(String iva) {
+		this.datosVentaVehiculoPanel.setIVA(iva);
 	}
 }

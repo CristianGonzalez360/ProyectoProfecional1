@@ -1,4 +1,4 @@
-package dto;
+package dto.taller;
 
 import java.util.ArrayList;
 import java.util.Date;

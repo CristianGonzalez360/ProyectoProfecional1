@@ -3,8 +3,8 @@ package repositories;
 import java.util.Date;
 import java.util.List;
 
-import dto.EstadoPresupuesto;
-import dto.PresupuestoDTO;
+import dto.taller.EstadoPresupuesto;
+import dto.taller.PresupuestoDTO;
 
 public interface PresupuestosDao extends GenericDao<PresupuestoDTO, Integer> {
 

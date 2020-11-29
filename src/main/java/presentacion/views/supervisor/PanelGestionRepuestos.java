@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import dto.RepuestoDTO;
+import dto.taller.RepuestoDTO;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;

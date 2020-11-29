@@ -7,8 +7,10 @@ import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import dto.EstadoPresupuesto;
-import dto.PresupuestoDTO;
+
+import dto.taller.EstadoPresupuesto;
+import dto.taller.PresupuestoDTO;
+
 import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;

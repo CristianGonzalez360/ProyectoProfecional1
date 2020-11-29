@@ -3,7 +3,7 @@ package repositories.jdbc;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import dto.TurnoDTO;
+import dto.taller.TurnoDTO;
 import repositories.jdbc.utils.H2DataSource;
 
 class TurnosDaoImplTest {

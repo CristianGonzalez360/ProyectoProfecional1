@@ -2,7 +2,7 @@ package repositories;
 
 import java.util.List;
 
-import dto.RepuestoDTO;
+import dto.taller.RepuestoDTO;
 
 public interface RepuestosDao extends GenericDao<RepuestoDTO, Integer> {
 

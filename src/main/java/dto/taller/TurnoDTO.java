@@ -1,4 +1,4 @@
-package dto;
+package dto.taller;
 
 import java.util.Date;
 import java.util.LinkedList;

@@ -1,9 +1,9 @@
 package business_logic;
 
 import business_logic.exceptions.ForbiddenException;
-import dto.SessionDTO;
 import dto.UserCrendentialsDTO;
 import dto.UsuarioDTO;
+import dto.temporal.SessionDTO;
 import repositories.UsuariosDao;
 import services.SessionService;
 

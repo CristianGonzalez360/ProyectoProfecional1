@@ -3,11 +3,11 @@ package business_logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import dto.EstadoPresupuesto;
-import dto.PresupuestoDTO;
-import dto.RepuestoDTO;
-import dto.RepuestoPlanificadoDTO;
-import dto.TrabajoPresupuestadoDTO;
+import dto.taller.EstadoPresupuesto;
+import dto.taller.PresupuestoDTO;
+import dto.taller.RepuestoDTO;
+import dto.taller.RepuestoPlanificadoDTO;
+import dto.taller.TrabajoPresupuestadoDTO;
 import repositories.PresupuestosDao;
 import repositories.RepuestosDao;
 import repositories.RepuestosPlanificadosDao;

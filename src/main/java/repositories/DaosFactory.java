@@ -16,8 +16,6 @@ public abstract class DaosFactory {
 		return concreteFactory;
 	}
 
-	public abstract PaisDao makePaisDao();
-
 	public abstract UsuariosDao makeUsuariosDao();
 
 	public abstract CuentasDao makeCuentasDao();
@@ -45,4 +43,8 @@ public abstract class DaosFactory {
 	public abstract FacturasDao makeFacturasDao();
 
 	public abstract VehiculoDao makeVehiculoDao();
+
+	public abstract SucursalDao makeSucursalesDao();
+
+	public abstract VehiculosEnVentaDao makeVehiculosParaVentaDao();
 }

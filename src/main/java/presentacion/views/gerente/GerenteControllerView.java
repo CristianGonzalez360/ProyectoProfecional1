@@ -21,8 +21,8 @@ import java.awt.event.ActionListener;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 
-import dto.OrdenDeTrabajoDTO;
-import dto.TurnoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
+import dto.taller.TurnoDTO;
 import presentacion.views.supervisor.ConsultaDePresupuestosSupervisorView;
 import presentacion.views.supervisor.EntregaVehiculosPanelView;
 import presentacion.views.supervisor.PanelClientesView;

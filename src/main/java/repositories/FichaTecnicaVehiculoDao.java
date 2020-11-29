@@ -1,6 +1,6 @@
 package repositories;
 
-import dto.FichaTecnicaVehiculoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
 
 public interface FichaTecnicaVehiculoDao extends GenericDao<FichaTecnicaVehiculoDTO, Integer> {
 

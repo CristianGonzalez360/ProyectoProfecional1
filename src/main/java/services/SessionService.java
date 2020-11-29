@@ -1,8 +1,8 @@
 package services;
 
 import business_logic.exceptions.ForbiddenException;
-import dto.SessionDTO;
 import dto.UsuarioDTO;
+import dto.temporal.SessionDTO;
 
 public interface SessionService {
 
