@@ -88,17 +88,46 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	@Override
 	public List<VehiculoDTO> readByCriteria(ConsultaVehiculoDTO consulta) {
 		String query = readAll;
+		boolean anterior = false;
+		boolean where = false;
 		if(consulta.getTipo() != null) {
 			query += " WHERE tipo = " + consulta.getTipo();
+			anterior = true;
+			where = true;
 		}
+		
 		if(consulta.getMarca() != null) {
-			query += " WHERE marca = " + consulta.getMarca();
+			if (anterior) 
+				query += " AND";
+			else if(!where) {
+				query += " WHERE";
+				where = true;
+			}
+			query += "  marca = " + consulta.getMarca();
 		}
+		else {
+			anterior = false;
+		}
+		
 		if(consulta.getLinea() != null) {
-			query += " WHERE linea = " + consulta.getLinea();
+			if (anterior) 
+				query += " AND";
+			else if(!where) {
+				query += " WHERE";
+				where = true;
+			}
+			query += " linea = " + consulta.getLinea();
 		}
+		else {
+			anterior = false;
+		}
+		
 		if(consulta.getSucursal() != null) {
-			query += " WHERE idSucursal = " + consulta.getLinea();
+			if (anterior) 
+				query += " AND";
+			else if(!where) 
+				query += " WHERE";
+			query += " idSucursal = " + consulta.getLinea();
 		}
 		
 		return getTemplate().query(query).excecute(getMapper());
