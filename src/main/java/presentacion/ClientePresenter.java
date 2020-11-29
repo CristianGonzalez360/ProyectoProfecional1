@@ -1,4 +1,4 @@
-package presentacion.views.supervisor;
+package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -19,6 +19,10 @@ import dto.temporal.AltaClienteDTO;
 import dto.temporal.AltaDeVehiculoDTO;
 import dto.temporal.AltaOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
+import presentacion.views.supervisor.AltaOrdenTrabajoFormView;
+import presentacion.views.supervisor.ClienteFormView;
+import presentacion.views.supervisor.PanelClientesView;
+import presentacion.views.supervisor.VehiculoFormView;
 import presentacion.views.utils.MessageDialog;
 
 public class ClientePresenter {

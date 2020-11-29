@@ -1,6 +1,7 @@
 package repositories.jdbc;
 
 import java.sql.Connection;
+import java.util.LinkedList;
 import java.util.List;
 
 import dto.SucursalDTO;
@@ -40,8 +41,11 @@ public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements Su
 
 	@Override
 	public List<SucursalDTO> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		LinkedList<SucursalDTO> mock = new LinkedList<>();
+		SucursalDTO ret = new SucursalDTO();
+		ret.setLocalidad("Avellaneda");
+		mock.add(ret);
+		return mock;
 	}
 
 	@Override
@@ -54,6 +58,15 @@ public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements Su
 	public SucursalDTO readByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<String> readFinancierasByPais(String pais) {
+		LinkedList<String> mock = new LinkedList<>();
+		mock.add("ICBC");
+		mock.add("Santander");
+		mock.add("CityGroup");
+		return mock;
 	}
 
 }

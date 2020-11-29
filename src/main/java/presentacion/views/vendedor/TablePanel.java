@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionListener;
 
 public abstract class TablePanel<T> extends JPanel {
 	
@@ -33,19 +34,15 @@ public abstract class TablePanel<T> extends JPanel {
 	
 	public abstract void setData(List<T> data);
 	
-	public Integer getData() {
-		int row = table.getSelectedRow();
-		Integer id = null;
-		if (table.getSelectedRowCount() == 1) {
-			id = Integer.parseInt(table.getValueAt(row, 0).toString());
-			return id;
-		}
-		return null;
-	}
-		
+	public abstract T getData();
+	
 	public void clearData() {
 		model.setRowCount(0);
 		model.setColumnCount(0);
 		model.setColumnIdentifiers(nombreColumnas);
+	}
+	
+	public void setActionSelect(ListSelectionListener listener) {
+		this.table.getSelectionModel().addListSelectionListener(listener);
 	}
 }

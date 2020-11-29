@@ -43,4 +43,6 @@ public abstract class DaosFactory {
 	public abstract FacturasDao makeFacturasDao();
 
 	public abstract VehiculoDao makeVehiculoDao();
+
+	public abstract SucursalDao makeSucursalesDao();
 }

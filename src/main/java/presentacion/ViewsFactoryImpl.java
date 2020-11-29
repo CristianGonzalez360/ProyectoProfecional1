@@ -3,7 +3,6 @@ package presentacion;
 import business_logic.ControllersFactory;
 import presentacion.views.cajero.CajeroControlView;
 import presentacion.views.gerente.GerenteControlView;
-import presentacion.views.supervisor.ClientePresenter;
 import presentacion.views.supervisor.SupervisorControlView;
 import presentacion.views.tecnico.TecnicoControlView;
 import presentacion.views.vendedor.VendedorControlView;
@@ -35,7 +34,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 		new ConsultaDePresupuestoPresenter(controllers.makeVehiculosController(), controllers.makeClientesController(), controllers.makeOrdenesDeTrabajoController()
 				,controllers.makePresupuestosController(), controllers.makeFacturasController());
 		new CobroCajeroPresenter(controllers.makeFacturasController());
-		new VendedorControlPresenter(controllers.makeClientesController(), controllers.makeVehiculosController());
+		new VendedorControlPresenter(controllers.makeClientesController(), controllers.makeVehiculosController(), controllers.makeSucursalesController());
 		return new WorkbenchPresenter(controllers.makeLoginController());
 	}
 }

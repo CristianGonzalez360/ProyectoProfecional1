@@ -6,10 +6,12 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
+import dto.SucursalDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 
 public class BusquedaVehiculoPanel extends JPanel {
@@ -89,8 +91,8 @@ public class BusquedaVehiculoPanel extends JPanel {
 		for(String str : tipos) this.comboBoxTipo.addItem(str);
 	}
 
-	public void addSucursales(String[] suc) {
-		assert suc != null;
-		for(String str : suc) this.comboBoxSucursal.addItem(str);
+	public void addSucursales(List<SucursalDTO> list) {
+		assert list != null;
+		for(SucursalDTO str : list) this.comboBoxSucursal.addItem(str.getLocalidad());
 	}
 }

@@ -16,6 +16,7 @@ import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.VehiculoDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
+import repositories.VentaVehiculoDao;
 
 public class VehiculosController {
 
@@ -26,7 +27,9 @@ public class VehiculosController {
 	private OrdenesDeTrabajoDao otDao;
 	
 	private VehiculoDao vehiculoDao;
-
+	
+	private VentaVehiculoDao ventaVehiculoDao;
+	
 	public VehiculosController(VehiculosConOrdenDeTrabajoDao vehiculosDao, OrdenesDeTrabajoDao otDao,
 			FichaTecnicaVehiculoDao fichasDao, VehiculoDao vehiculoDao) {
 		assert vehiculosDao != null;
@@ -99,7 +102,12 @@ public class VehiculosController {
 		dto.setLinea(temp.getLinea());
 		dto.setPrecio(temp.getCaracteristicas().getPrecio());
 		dto.setCilindrada(temp.getCaracteristicas().getCilindrada());
+		dto.setColor(temp.getColorVehiculo());
 		vehiculos.add(dto);
 		return vehiculos;
+	}
+
+	public VehiculoParaVentaDTO readByCodigo(Integer codigoVehiculo) {
+		return new VehiculoParaVentaDTO().makeTestDTO();
 	}
 }

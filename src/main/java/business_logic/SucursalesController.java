@@ -21,4 +21,8 @@ public class SucursalesController {
 	public List<SucursalDTO> readAll() {
 		return sucursalDao.readAll();
 	}
+	
+	public List<String> readFinancierasByPais(String pais) {
+		return sucursalDao.readFinancierasByPais(pais);
+	}
 }
