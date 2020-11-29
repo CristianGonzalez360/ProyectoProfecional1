@@ -3,23 +3,21 @@ package presentacion.views.vendedor;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-import dto.VehiculoDTO;
-
 import java.awt.BorderLayout;
 import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class TablePanel extends JPanel {
+public abstract class TablePanel<T> extends JPanel {
 	
 	private static final long serialVersionUID = -6624934592820387877L;
 
-	private String [] nombreColumnas;
+	protected String [] nombreColumnas;
 	
-	private DefaultTableModel model;
+	protected DefaultTableModel model;
 	
-	private JTable table;
+	protected JTable table;
 	
 	public TablePanel(String [] nombreColumnas) {
 		this.nombreColumnas = nombreColumnas; 
@@ -32,10 +30,22 @@ public class TablePanel extends JPanel {
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
 	}
-
-	public void clearData() {
+	
+	public abstract void setData(List<T> data);
+	
+	public Integer getData() {
+		int row = table.getSelectedRow();
+		Integer id = null;
+		if (table.getSelectedRowCount() == 1) {
+			id = Integer.parseInt(table.getValueAt(row, 0).toString());
+			return id;
+		}
+		return null;
 	}
-
-	public void setData(List<VehiculoDTO> vehiculos) {
-	} 
+		
+	public void clearData() {
+		model.setRowCount(0);
+		model.setColumnCount(0);
+		model.setColumnIdentifiers(nombreColumnas);
+	}
 }
