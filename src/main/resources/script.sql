@@ -287,17 +287,17 @@ CREATE TABLE VentasVehiculos (
 
 DROP TABLE VehiculoReservado IF EXISTS;
 CREATE TABLE VehiculoReservado (
-  idVehiculoReservado INTEGER NOT NULL,
+  idVehiculoReservado INTEGER NOT NULL AUTO_INCREMENT, 
   idFichaTecnica INTEGER NOT NULL,
   idPedido INTEGER NOT NULL,
-  precioVenta INTEGER NOT NULL,
+  precioVenta DOUBLE NOT NULL,
   PRIMARY KEY (idVehiculoReservado),
   FOREIGN KEY (idFichaTecnica) REFERENCES FichaTecnicaVehiculo(idFichaTecnicaVehiculo)
 );
 
 DROP TABLE PedidoVehiculo IF EXISTS;
 CREATE TABLE PedidoVehiculo (
-  idPedidoVehiculo INTEGER NOT NULL,
+  idPedidoVehiculo INTEGER NOT NULL AUTO_INCREMENT,
   idVehiculoReservado INTEGER NOT NULL,
   fechaPedido DATE NOT NULL,
   fechaIngreso DATE NOT NULL,

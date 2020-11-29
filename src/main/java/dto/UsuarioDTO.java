@@ -21,6 +21,13 @@ public class UsuarioDTO {
 		this.datos = datos;
 	}
 
+	public UsuarioDTO makeTestDTO(CuentaDTO cuenta, DatosPersonalesDTO datos) {
+		UsuarioDTO usuario = new UsuarioDTO();
+		usuario.setCuenta(cuenta);
+		usuario.setDatos(datos);
+		return usuario;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
