@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import dto.DatosPersonalesDTO;
-import dto.RepuestoCompradoDTO;
+import dto.taller.RepuestoCompradoDTO;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 

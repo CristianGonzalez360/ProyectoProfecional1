@@ -6,16 +6,16 @@ import java.util.List;
 import dto.ClienteDTO;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
-import dto.FacturaDTO;
-import dto.FichaTecnicaVehiculoDTO;
-import dto.OrdenDeTrabajoDTO;
-import dto.PresupuestoDTO;
-import dto.RepuestoDTO;
-import dto.RepuestoPlanificadoDTO;
-import dto.TrabajoPresupuestadoDTO;
-import dto.TurnoDTO;
 import dto.UsuarioDTO;
-import dto.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.FacturaDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
+import dto.taller.PresupuestoDTO;
+import dto.taller.RepuestoDTO;
+import dto.taller.RepuestoPlanificadoDTO;
+import dto.taller.TrabajoPresupuestadoDTO;
+import dto.taller.TurnoDTO;
+import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 
 public class DatabaseGraph {
 

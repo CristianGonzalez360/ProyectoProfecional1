@@ -27,13 +27,14 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
-import dto.RepuestoPlanificadoDTO;
-import dto.TrabajoPresupuestadoDTO;
-import dto.EstadoPresupuesto;
-import dto.FichaTecnicaVehiculoDTO;
-import dto.OrdenDeTrabajoDTO;
-import dto.PresupuestoDTO;
-import dto.VehiculoConOrdenDeTrabajoDTO;
+
+import dto.taller.EstadoPresupuesto;
+import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
+import dto.taller.PresupuestoDTO;
+import dto.taller.RepuestoPlanificadoDTO;
+import dto.taller.TrabajoPresupuestadoDTO;
+import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 
 public class PanelGestionTrabajoView extends JPanel {
 

@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 
-import dto.OrdenDeTrabajoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
 
 public class SupervisorControlView extends JInternalFrame {
 

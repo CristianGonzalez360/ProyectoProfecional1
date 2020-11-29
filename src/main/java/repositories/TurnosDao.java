@@ -2,7 +2,7 @@ package repositories;
 
 import java.util.List;
 
-import dto.TurnoDTO;
+import dto.taller.TurnoDTO;
 
 public interface TurnosDao extends GenericDao<TurnoDTO, Integer> {
 

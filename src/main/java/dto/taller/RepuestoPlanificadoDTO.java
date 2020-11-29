@@ -1,5 +1,5 @@
 
-package dto;
+package dto.taller;
 
 public class RepuestoPlanificadoDTO {
 

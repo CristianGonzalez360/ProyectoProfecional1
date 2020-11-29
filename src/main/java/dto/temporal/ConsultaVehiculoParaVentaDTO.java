@@ -5,7 +5,7 @@ import java.util.List;
 
 import dto.validators.StringValidator;
 
-public class ConsultaVehiculoDTO {
+public class ConsultaVehiculoParaVentaDTO {
 	
 	private String tipo;
 	
@@ -17,7 +17,7 @@ public class ConsultaVehiculoDTO {
 	
 	private String Sucursal;
 	
-	public ConsultaVehiculoDTO() {
+	public ConsultaVehiculoParaVentaDTO() {
 	}
 
 	public String getTipo() {

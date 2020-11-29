@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
-import dto.TurnoDTO;
+import dto.taller.TurnoDTO;
 import repositories.TurnosDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;

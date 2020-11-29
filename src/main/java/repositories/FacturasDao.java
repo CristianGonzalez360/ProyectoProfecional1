@@ -3,7 +3,7 @@ package repositories;
 import java.util.Date;
 import java.util.List;
 
-import dto.FacturaDTO;
+import dto.taller.FacturaDTO;
 
 public interface FacturasDao extends GenericDao<FacturaDTO, Integer>{
 

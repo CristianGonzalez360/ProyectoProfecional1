@@ -11,11 +11,11 @@ import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.VehiculosController;
 import dto.ClienteDTO;
-import dto.EstadoPresupuesto;
-import dto.FichaTecnicaVehiculoDTO;
-import dto.OrdenDeTrabajoDTO;
-import dto.PresupuestoDTO;
-import dto.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.EstadoPresupuesto;
+import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
+import dto.taller.PresupuestoDTO;
+import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.tecnico.PanelGestionTrabajoView;
 

@@ -1,6 +1,6 @@
 package repositories;
 
-import dto.RepuestoPlanificadoDTO;
+import dto.taller.RepuestoPlanificadoDTO;
 
 public interface RepuestoPlanificadoDao extends GenericDao<RepuestoPlanificadoDTO, Integer> {
 

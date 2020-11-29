@@ -2,7 +2,7 @@ package business_logic;
 
 import java.util.List;
 
-import dto.RepuestoDTO;
+import dto.taller.RepuestoDTO;
 import repositories.RepuestosDao;
 
 public class RepuestosController {

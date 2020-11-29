@@ -3,7 +3,7 @@ package repositories.jdbc;
 import java.sql.Connection;
 import java.util.List;
 
-import dto.FichaTecnicaVehiculoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;

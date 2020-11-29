@@ -19,9 +19,9 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import dto.ClienteDTO;
-import dto.FichaTecnicaVehiculoDTO;
-import dto.OrdenDeTrabajoDTO;
-import dto.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
+import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 
 import javax.swing.BoxLayout;
 import javax.swing.border.TitledBorder;

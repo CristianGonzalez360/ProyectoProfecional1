@@ -2,7 +2,7 @@ package repositories;
 
 import java.util.List;
 
-import dto.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 
 public interface VehiculosConOrdenDeTrabajoDao extends GenericDao<VehiculoConOrdenDeTrabajoDTO, Integer> {
 

@@ -10,7 +10,7 @@ import javax.swing.JTabbedPane;
 
 import dto.ClienteDTO;
 import dto.VehiculoDTO;
-import dto.temporal.ConsultaVehiculoDTO;
+import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import presentacion.views.supervisor.ClientePanelView;
 
 import javax.swing.JPanel;
@@ -135,7 +135,7 @@ public class VendedorControlView extends JInternalFrame {
 		this.busquedaVehiculoPanel.setActionBuscar(listener);
 	}
 
-	public ConsultaVehiculoDTO getDataConsultaVehiculo() {
+	public ConsultaVehiculoParaVentaDTO getDataConsultaVehiculo() {
 		return this.busquedaVehiculoPanel.getData();
 	}
 

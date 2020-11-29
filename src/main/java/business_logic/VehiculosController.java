@@ -4,12 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import business_logic.exceptions.ConflictException;
-import dto.FichaTecnicaVehiculoDTO;
-import dto.OrdenDeTrabajoDTO;
-import dto.VehiculoConOrdenDeTrabajoDTO;
 import dto.VehiculoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.taller.OrdenDeTrabajoDTO;
+import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 import dto.temporal.AltaDeVehiculoDTO;
-import dto.temporal.ConsultaVehiculoDTO;
+import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.VehiculoDao;
@@ -87,7 +87,7 @@ public class VehiculosController {
 		return ret;
 	}
 
-	public List<VehiculoDTO> readByCriteria(ConsultaVehiculoDTO consulta) {
+	public List<VehiculoDTO> readByCriteria(ConsultaVehiculoParaVentaDTO consulta) {
 		List<VehiculoDTO> vehiculos = new LinkedList<VehiculoDTO>();
 		return vehiculos;
 	}

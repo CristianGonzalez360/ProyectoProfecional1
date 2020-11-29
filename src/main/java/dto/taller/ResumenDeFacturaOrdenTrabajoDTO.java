@@ -1,11 +1,11 @@
-package dto;
+package dto.taller;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ResumenDeFacturaDTO {
+public class ResumenDeFacturaOrdenTrabajoDTO {
 
 	private OrdenDeTrabajoDTO ordenDeTrabajo;
 	
@@ -15,7 +15,7 @@ public class ResumenDeFacturaDTO {
 	
 	private List<TrabajoPresupuestadoDTO> trabajos;
 
-	public ResumenDeFacturaDTO() {
+	public ResumenDeFacturaOrdenTrabajoDTO() {
 		this.trabajos = new ArrayList<>();
 		this.repuestos = new ArrayList<>();
 	}
