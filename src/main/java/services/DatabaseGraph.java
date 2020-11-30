@@ -7,6 +7,7 @@ import dto.ClienteDTO;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
 import dto.UsuarioDTO;
+import dto.VentaVehiculoDTO;
 import dto.taller.FacturaDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
@@ -44,6 +45,8 @@ public class DatabaseGraph {
 	private List<RepuestoPlanificadoDTO> repuestosPlanificados;
 	
 	private List<FacturaDTO> facturas;
+	
+	private List<VentaVehiculoDTO> ventaVehiculo;
 
 	public DatabaseGraph() {
 		cuentas = new LinkedList<>();
@@ -57,6 +60,7 @@ public class DatabaseGraph {
 		presupuestos = new LinkedList<>();
 		trabajos = new LinkedList<>();
 		repuestosPlanificados = new LinkedList<>();
+		ventaVehiculo = new LinkedList<>();
 	}
 
 	public List<CuentaDTO> getCuentas() {
@@ -161,5 +165,13 @@ public class DatabaseGraph {
 
 	public void setFacturas(List<FacturaDTO> facturas) {
 		this.facturas = facturas;
+	}
+	
+	public List<VentaVehiculoDTO> getVentaVehiculo() {
+		return ventaVehiculo;
+	}
+
+	public void setVentaVehiculo(List<VentaVehiculoDTO> ventaVehiculo) {
+		this.ventaVehiculo = ventaVehiculo;
 	}
 }
