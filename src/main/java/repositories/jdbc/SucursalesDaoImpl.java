@@ -70,6 +70,19 @@ public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements Su
 	
 	@Override
 	protected Mapper<SucursalDTO> getMapper() {
-		return null;
+		return new Mapper<SucursalDTO>() {
+
+			@Override
+			public SucursalDTO map(Object[] obj) {
+				SucursalDTO ret = new SucursalDTO();
+				ret.setIdSucursal((Integer)obj[0]);
+				ret.setPais((String)obj[1]);
+				ret.setCalle((String)obj[2]);
+				ret.setAltura((Integer)obj[3]);
+				ret.setLocalidad((String)obj[4]);
+				ret.setIdMoneda((Integer)obj[5]);
+				return ret;
+			}
+		};
 	}
 }

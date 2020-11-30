@@ -6,6 +6,7 @@ import java.util.List;
 import dto.CaracteristicaVehiculoDTO;
 import dto.SucursalDTO;
 import dto.VehiculoDTO;
+import dto.VentaVehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import repositories.DaosFactory;
@@ -17,6 +18,7 @@ public class VentasVehiculosController {
 	private static final String pais = "Argentina";
 	
 	public VentasVehiculosController(DaosFactory daos) {
+		assert daos != null;
 		this.daos = daos;
 	}
 
@@ -31,15 +33,19 @@ public class VentasVehiculosController {
 		return nombresSucursales;
 	}
 	
+
+	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles(){
+		List<VentaVehiculoDTO> ret = daos.makeVentaVehiculoDao().readVentasVehiculosNoDisponibles();
+		return ret;
+	}
+
+
 	public List<String> readNombreMarcasVehiculos() {
 		return daos.makeVehiculoDao().readAllMarcasVehiculos();
 	}
 	
 	public List<OutputConsultaVehiculoEnVentaDTO> readByCriteria(ConsultaVehiculoParaVentaDTO consulta) {
-		Integer idSucursal = daos.makeSucursalesDao().readByName(consulta.getSucursal()).getIdSucursal();
-		List<VehiculoDTO> temp = daos
-				.makeVehiculoDao()
-				.readByCriteria(consulta.getTipo().equals("Nuevo") ? false : true, consulta.getMarca(), consulta.getFamilia() ,consulta.getLinea(), idSucursal);
+		List<VehiculoDTO> temp = daos.makeVehiculoDao().readByCriteria(consulta.getMarca(), new Boolean(consulta.getTipo().equals("Usado")));	
 		List<OutputConsultaVehiculoEnVentaDTO> ret = new LinkedList<>();
 		for(VehiculoDTO dto : temp) {
 			OutputConsultaVehiculoEnVentaDTO aux = new OutputConsultaVehiculoEnVentaDTO();
@@ -49,10 +55,15 @@ public class VentasVehiculosController {
 			aux.setPrecio(dto.getPrecioVenta().toString());
 			aux.setCodigo(dto.getIdVehiculo().toString());
 			aux.setColor(dto.getColor());
-			CaracteristicaVehiculoDTO car = daos.makeCaracteristicasVehiculoDao().readByID(dto.getIdCaracteristicas());	
-			aux.setCilindrada(car.getCilindrada());
+			aux.setSucursal(dto.getIdSucursal() == null ? "NONE" : dto.getIdSucursal().toString());
 			ret.add(aux);
 		}
 		return ret;
 	}
+
+	public CaracteristicaVehiculoDTO readCaracteristicaVehiculoByIdVehiculo(Integer codigoVehiculo) {
+		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(codigoVehiculo);
+		return daos.makeCaracteristicasVehiculoDao().readByID(vehiculo.getIdCaracteristicas());
+	}
 }
+

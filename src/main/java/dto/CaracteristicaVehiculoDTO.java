@@ -116,6 +116,14 @@ public class CaracteristicaVehiculoDTO {
 	public void setPrecio(String precio) {
 		this.precio = precio;
 	}
+	
+	public Integer getIdCaracteristica() {
+		return idCaracteristica;
+	}
+
+	public void setIdCaracteristica(Integer idCaracteristica) {
+		this.idCaracteristica = idCaracteristica;
+	}
 
 	public CaracteristicaVehiculoDTO makeTestDTO() {
 		CaracteristicaVehiculoDTO dto = new CaracteristicaVehiculoDTO();

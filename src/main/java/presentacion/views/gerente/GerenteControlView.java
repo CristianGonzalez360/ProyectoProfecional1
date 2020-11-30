@@ -42,8 +42,13 @@ public class GerenteControlView extends JInternalFrame {
 		pedidosPanelView = new PedidosPanelView();
 		pedidosPanel.add(pedidosPanelView);
 		
+
 		autosNuevosView = GerenteNuevosCar.getInstance();
 		tabbedPane.addTab("Autos nuevos", autosNuevosView);
+
+
+		PanelRegistroPedido panelPedidos = PanelRegistroPedido.getInstance();
+		tabbedPane.addTab("Registro de Pedidos",panelPedidos );
 
 	}
 
