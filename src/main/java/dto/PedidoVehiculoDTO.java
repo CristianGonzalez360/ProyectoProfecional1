@@ -9,16 +9,19 @@ public class PedidoVehiculoDTO {
 	private Date fechaIngreso;
 	private Integer idUsuPedido;
 	private Integer idUsuIngreso;
+	private Integer idVentaVehiculo;
 
 	public PedidoVehiculoDTO() {
 	}
 
-	public PedidoVehiculoDTO(Date fechaPedido, Date fechaIngreso, Integer idUsuPedido, Integer idUsuIngreso) {
+	public PedidoVehiculoDTO(Date fechaPedido, Date fechaIngreso, Integer idUsuPedido, Integer idUsuIngreso,
+			Integer idVentaVehiculo) {
 		super();
 		this.fechaPedido = fechaPedido;
 		this.fechaIngreso = fechaIngreso;
 		this.idUsuPedido = idUsuPedido;
 		this.idUsuIngreso = idUsuIngreso;
+		this.idVentaVehiculo = idVentaVehiculo;
 	}
 
 	public PedidoVehiculoDTO makeTestDTO() {
@@ -68,11 +71,19 @@ public class PedidoVehiculoDTO {
 		this.idUsuIngreso = idUsuIngreso;
 	}
 
+	public Integer getIdVentaVehiculo() {
+		return idVentaVehiculo;
+	}
+
+	public void setIdVentaVehiculo(Integer idVentaVehiculo) {
+		this.idVentaVehiculo = idVentaVehiculo;
+	}
+
 	@Override
 	public String toString() {
 		return "PedidoVehiculoDTO [idPedidoVehiculo=" + idPedidoVehiculo + ", fechaPedido=" + fechaPedido
 				+ ", fechaIngreso=" + fechaIngreso + ", idUsuPedido=" + idUsuPedido + ", idUsuIngreso=" + idUsuIngreso
-				+ "]";
+				+ ", idVentaVehiculo=" + idVentaVehiculo + "]";
 	}
 
 }

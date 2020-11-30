@@ -13,7 +13,7 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	private static final String readAll = "SELECT * FROM PedidoVehiculo";
 
-	private static final String insert = "INSERT INTO PedidoVehiculo (fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso) VALUES (?,?,?,?)";
+	private static final String insert = "INSERT INTO PedidoVehiculo (fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso, idVentaVehiculo) VALUES (?,?,?,?,?)";
 
 	public PedidoVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -31,7 +31,8 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 				.param(entity.getFechaPedido() == null ? new NullObject() : entity.getFechaPedido())
 				.param(entity.getFechaIngreso() == null ? new NullObject() : entity.getFechaIngreso())
 				.param(entity.getIdUsuPedido() == null ? new NullObject() : entity.getIdUsuPedido())
-				.param(entity.getIdUsuIngreso() == null ? new NullObject() : entity.getIdUsuIngreso()).excecute();
+				.param(entity.getIdUsuIngreso() == null ? new NullObject() : entity.getIdUsuIngreso())
+				.param(entity.getIdVentaVehiculo()).excecute();
 	}
 
 	@Override
@@ -65,10 +66,11 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 			public PedidoVehiculoDTO map(Object[] obj) {
 				PedidoVehiculoDTO pedido = new PedidoVehiculoDTO();
 				pedido.setIdPedidoVehiculo((Integer) obj[0]);
-				pedido.setFechaPedido((Date) obj[1] == null ? null : (Date) obj[2]);
+				pedido.setFechaPedido((Date) obj[1] == null ? null : (Date) obj[1]);
 				pedido.setFechaIngreso((Date) obj[2]);
 				pedido.setIdUsuPedido((Integer) obj[3]);
 				pedido.setIdUsuIngreso((Integer) obj[4]);
+				pedido.setIdVentaVehiculo((Integer) obj[5]);
 				return pedido;
 			}
 		};

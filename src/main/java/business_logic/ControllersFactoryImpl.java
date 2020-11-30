@@ -112,7 +112,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public PedidosController makePedidosController() {
 		if(pedidosController == null) {
-			pedidosController = new PedidosController(daos.makeClienteDao(), daos.makeDatosPersonalesDao(), daos.makeFichaTecnicaVehiculoDao(), daos.makePedidoVehiculoDao());
+			pedidosController = new PedidosController(daos.makeClienteDao(), daos.makeDatosPersonalesDao(), daos.makeUsuariosDao(), daos.makeVehiculosParaVentaDao(), daos.makePedidoVehiculoDao());
 		}
 		return pedidosController;
 	}
