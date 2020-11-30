@@ -8,6 +8,7 @@ import javax.swing.event.ListSelectionEvent;
 import business_logic.ClientesController;
 import business_logic.PedidosController;
 import business_logic.VentasVehiculosController;
+import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.PedidoVehiculoDTO;
 import dto.VehiculoDTO;
@@ -51,7 +52,7 @@ public class RegistroPedidoPresenter {
 
 	private void onSeleccionarVenta(ListSelectionEvent a) {
 		this.ventaSeleccionada = view.getFilaSeleciconada();
-		VehiculoDTO vehiculo = ventasVehiculosController.readByCodigo(ventas.get(ventaSeleccionada).getIdVehiculo());
+		CaracteristicaVehiculoDTO vehiculo = ventasVehiculosController.readCaracteristicaVehiculoByIdVehiculo(ventas.get(ventaSeleccionada).getIdVehiculo());
 		this.view.setdata(vehiculo);
 		ClienteDTO cliente = clientesController.readById(ventas.get(ventaSeleccionada).getIdCliente());
 		this.view.setData(cliente);

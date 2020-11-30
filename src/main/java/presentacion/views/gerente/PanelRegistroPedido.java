@@ -16,6 +16,7 @@ import java.util.List;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionListener;
 
+import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
@@ -104,7 +105,7 @@ public class PanelRegistroPedido extends JPanel{
 		this.panelCliente.setData(cliente);
 	}
 	
-	public void setdata(VehiculoDTO vehiculo) {
+	public void setdata(CaracteristicaVehiculoDTO vehiculo) {
 		this.panelVehiculo.setData(vehiculo);
 	}
 	

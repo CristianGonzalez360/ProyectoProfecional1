@@ -8,8 +8,8 @@ import javax.swing.event.ListSelectionEvent;
 import business_logic.ClientesController;
 import business_logic.SucursalesController;
 import business_logic.VentasVehiculosController;
+import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
-import dto.VehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import dto.validators.StringValidator;
@@ -23,22 +23,25 @@ public class VendedorControlPresenter {
 	private ClientesController clientesController;
 	
 	private VentasVehiculosController ventasController;
-	
-	private SucursalesController sucursalesController;
-	
+		
 	public VendedorControlPresenter(ClientesController clientesController,SucursalesController sucController, VentasVehiculosController vehiculosController) {
 		this.clientesController = clientesController;
 		this.ventasController = vehiculosController;
-		this.sucursalesController = sucController;
+		setActions();
+		setOpcionesBusqueda();
+	}
+	
+	private void setOpcionesBusqueda() {
+		this.view.addTiposBusqueda(new String [] {"Nuevo", "Usado"});
+		this.view.addMarcasBusqueda(ventasController.readNombreMarcasVehiculos());
+	}
+	
+	private void setActions() {
 		this.view.setActionConsultarCliente((a) -> onConsultarCliente(a));
 		this.view.setActionConsultarVehiculo((a) -> onConsultarVehiculo(a));
 		this.view.setActionRegistrarCliente((a)->onDisplayClienteFormView(a));
 		this.view.setActionSelectVehiculo((a)->onSelectVehiculo(a));
-		this.view.setActionSelectVentaEnEfectivo((a)->onSelectVentaEnEfectivo(a));
-		this.view.addTiposBusqueda(new String [] {"NUEVO", "USADO"});
-		this.view.addSucursalesBusqueda(sucursalesController.readAll());
-		this.view.addFinancieras(sucursalesController.readFinancierasByPais("ARG"));
-		this.view.setDataIVA("21");
+		this.view.setActionSelectVentaEnEfectivo((a)->onSelectVentaEnEfectivo(a));		
 	}
 	
 	private void onDisplayClienteFormView(ActionEvent e) {
@@ -58,8 +61,8 @@ public class VendedorControlPresenter {
 	private void onSelectVehiculo(ListSelectionEvent a) {
 		if(view.getDataCodigoDeVehiculo() != null) {
 			Integer codigoVehiculo = Integer.parseInt(view.getDataCodigoDeVehiculo().getCodigo());
-			VehiculoDTO dto = ventasController.readByCodigo(codigoVehiculo);
-			view.setData(dto);	
+			CaracteristicaVehiculoDTO caracteristicas = ventasController.readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo);
+			view.setData(caracteristicas);	
 		}
 	}
 

@@ -9,4 +9,6 @@ public interface SucursalesDao extends GenericDao<SucursalDTO, Integer> {
 	SucursalDTO readByName(String name);
 
 	List<String> readFinancierasByPais(String pais);
+
+	List<SucursalDTO> readByPais(String pais);
 }

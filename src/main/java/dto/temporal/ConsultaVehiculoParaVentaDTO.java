@@ -10,13 +10,7 @@ public class ConsultaVehiculoParaVentaDTO {
 	private String tipo;
 	
 	private String marca;
-	
-	private String linea;
-	
-	private String cilindrada;
-	
-	private String Sucursal;
-	
+		
 	public ConsultaVehiculoParaVentaDTO() {
 	}
 
@@ -36,35 +30,15 @@ public class ConsultaVehiculoParaVentaDTO {
 		this.marca = marca;
 	}
 
-	public String getLinea() {
-		return linea;
-	}
-
-	public void setLinea(String linea) {
-		this.linea = linea;
-	}
-
-	public String getCilindrada() {
-		return cilindrada;
-	}
-
-	public void setCilindrada(String cilindrada) {
-		this.cilindrada = cilindrada;
-	}
-
-	public String getSucursal() {
-		return Sucursal;
-	}
-
-	public void setSucursal(String sucursal) {
-		Sucursal = sucursal;
-	}
-
 	public List<String> validate() {
 		LinkedList<String> errors = new LinkedList<>();
 		errors.addAll(new StringValidator(this.marca).notBlank("").validate());
-		errors.addAll(new StringValidator(this.linea).notBlank("").validate());
 		errors.addAll(new StringValidator(this.tipo).notBlank("").validate());
 		return errors;
+	}
+
+	@Override
+	public String toString() {
+		return "ConsultaVehiculoParaVentaDTO [tipo=" + tipo + ", marca=" + marca + "]";
 	}
 }

@@ -396,40 +396,76 @@ monedas:
     cotizacionDolar: 200
 
 sucursales:
-  - pais: ARG
+  - pais: Argentina
     calle: ff
     altura: 1233
     localidad: Avellaneda
     idMoneda: 1
-  - pais: ARG
+  - pais: Argentina
     calle: ff
     altura: 1233
     localidad: Martinez
     idMoneda: 1
-  - pais: ARG
+  - pais: Argentina
     calle: ff
     altura: 1233
     localidad: Quilmes
     idMoneda: 1
-  - pais: ARG
+  - pais: Argentina
     calle: ff
     altura: 1233
     localidad: Munro
     idMoneda: 1
 
 vehiculos:
-  - precioVenta: 123
+  - precioVenta: 1300000
     idFichaTecnica: 1
-    marca: cc
-    familia: cc
-    linea: cc
+    marca: Ford
+    familia: Focus
+    linea: vip
+    color: rojo
+    fechaIngreso: 2017-10-11
+    disponible: false
+    usado: false
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 1
+  - precioVenta: 1300555
+    idFichaTecnica: 1
+    marca: wolkswagen
+    familia: polo
+    linea: trend
+    color: negro
     fechaIngreso:
     disponible: false
     usado: false
     idCompra:
     idCaracteristicas: 1
-    idSucursal:
-    fichaTecnica:
+    idSucursal: 2
+  - precioVenta: 1300999
+    idFichaTecnica: 1
+    marca: Ford
+    familia: Focus
+    linea: vip
+    color: azul
+    fechaIngreso: 2017-10-11
+    disponible: false
+    usado: true
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 3
+  - precioVenta: 800000
+    idFichaTecnica: 1
+    marca: Ford
+    familia: Fiesta
+    linea: vip
+    color: amarillo
+    fechaIngreso: 2017-10-11
+    disponible: false
+    usado: true
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 4
 
 ventaVehiculo:
   - idVentaVehiculo: 1

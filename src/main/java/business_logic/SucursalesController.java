@@ -7,6 +7,8 @@ import repositories.SucursalesDao;
 
 public class SucursalesController {
 
+	private static final String pais = "Argentina";
+	
 	private SucursalesDao sucursalDao;
 	
 	public SucursalesController(SucursalesDao sucDao) {
@@ -19,7 +21,7 @@ public class SucursalesController {
 	}
 	
 	public List<SucursalDTO> readAll() {
-		return sucursalDao.readAll();
+		return sucursalDao.readByPais(pais);
 	}
 	
 	public List<String> readFinancierasByPais(String pais) {
