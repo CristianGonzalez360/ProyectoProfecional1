@@ -341,27 +341,3 @@ CREATE TABLE PedidoVehiculo (
   FOREIGN KEY (idUsuPedido) REFERENCES Usuarios(idUsuario),
   FOREIGN KEY (idUsuIngreso) REFERENCES Usuarios(idUsuario)
 );
-
-DROP TABLE Moneda IF EXISTS;
-CREATE TABLE Moneda (
-  idMoneda INTEGER NOT NULL,
-  nombre VARCHAR NOT NULL,
-  simbolo VARCHAR NOT NULL,
-  cotizacionDolar DOUBLE NOT NULL,
-  PRIMARY KEY (idMoneda)
-);
-
-DROP TABLE Sucursal IF EXISTS;
-CREATE TABLE Sucursal (
-  idSucursal INTEGER NOT NULL,
-  pais VARCHAR NOT NULL,
-  calle VARCHAR NOT NULL,
-  altura INTEGER NOT NULL,
-  localidad VARCHAR NOT NULL,
-  idMoneda Integer NOT NULL,
-  PRIMARY KEY (idSucursal),
-  FOREIGN KEY (idMoneda) REFERENCES Moneda(idMoneda)
-);
-);
-);
-);
