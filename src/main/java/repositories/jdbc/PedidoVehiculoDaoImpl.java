@@ -13,7 +13,7 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	private static final String readAll = "SELECT * FROM PedidoVehiculo";
 
-	private static final String insert = "INSERT INTO PedidoVehiculo (fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso) VALUES (?,?,?,?)";
+	private static final String insert = "INSERT INTO PedidoVehiculo (fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso, idVentaVehiculo) VALUES (?,?,?,?,?)";
 
 	public PedidoVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -31,7 +31,8 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 				.param(entity.getFechaPedido() == null ? new NullObject() : entity.getFechaPedido())
 				.param(entity.getFechaIngreso() == null ? new NullObject() : entity.getFechaIngreso())
 				.param(entity.getIdUsuPedido() == null ? new NullObject() : entity.getIdUsuPedido())
-				.param(entity.getIdUsuIngreso() == null ? new NullObject() : entity.getIdUsuIngreso()).excecute();
+				.param(entity.getIdUsuIngreso() == null ? new NullObject() : entity.getIdUsuIngreso())
+				.param(entity.getIdVentaVehiculo() == null? new NullObject() : entity.getIdVentaVehiculo()).excecute();
 	}
 
 	@Override
