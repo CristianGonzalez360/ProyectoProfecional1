@@ -13,6 +13,9 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	private static final String readAll = "SELECT * FROM PedidoVehiculo";
 
+	private static final String readAllPedidosDeVenta = "SELECT pv.idPedidoVehiculo, pv.fechaPedido, pv.fechaIngreso, pv.idUsuPedido, pv.idUsuIngreso, pv.idVentaVehiculo "
+			+ "FROM pedidovehiculo pv INNER JOIN ventasvehiculos vv " + "ON pv.idVentaVehiculo = vv.idVentaVehiculo;";
+
 	private static final String insert = "INSERT INTO PedidoVehiculo (fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso, idVentaVehiculo) VALUES (?,?,?,?,?)";
 
 	public PedidoVehiculoDaoImpl(Connection connection) {
@@ -32,7 +35,7 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 				.param(entity.getFechaIngreso() == null ? new NullObject() : entity.getFechaIngreso())
 				.param(entity.getIdUsuPedido() == null ? new NullObject() : entity.getIdUsuPedido())
 				.param(entity.getIdUsuIngreso() == null ? new NullObject() : entity.getIdUsuIngreso())
-				.param(entity.getIdVentaVehiculo() == null? new NullObject() : entity.getIdVentaVehiculo()).excecute();
+				.param(entity.getIdVentaVehiculo() == null ? new NullObject() : entity.getIdVentaVehiculo()).excecute();
 	}
 
 	@Override
@@ -50,6 +53,11 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 	@Override
 	public List<PedidoVehiculoDTO> readAll() {
 		return getTemplate().query(readAll).excecute(getMapper());
+	}
+
+	@Override
+	public List<PedidoVehiculoDTO> readAllPedidosDeVenta() {
+		return getTemplate().query(readAllPedidosDeVenta).excecute(getMapper());
 	}
 
 	@Override

@@ -41,8 +41,9 @@ public class PedidosController {
 	public List<PedidoDTO> readAllPedidos() {
 		List<PedidoDTO> pedidos = new ArrayList<>();
 
-		for (PedidoVehiculoDTO pedido : pedidosDao.readAll()) {
-			System.out.println(pedido.toString());
+		pedidosDao.insert(new PedidoVehiculoDTO(new Date(), new Date(), 5, 5, 1));
+		
+		for (PedidoVehiculoDTO pedido : pedidosDao.readAllPedidosDeVenta()) {
 			pedidos.add(armarPedidoCompleto(pedido));
 		}
 		System.out.println("--");
@@ -50,7 +51,10 @@ public class PedidosController {
 	}
 
 	private PedidoDTO armarPedidoCompleto(PedidoVehiculoDTO pedido) {
+		System.out.println(pedido.toString());
 		VentaVehiculoDTO datosDeVenta = datosDeVenta(pedido.getIdVentaVehiculo());
+		System.out.println(datosDeVenta.toString());
+		
 		DatosPersonalesDTO datosCliente = datosDeCliente(datosDeVenta.getIdCliente());
 		VehiculoDTO datosVehiculo = datosVehiculo(datosDeVenta.getIdVehiculo());
 		UsuarioDTO datosUsuario = datosDeUsuario(pedido.getIdUsuPedido());
