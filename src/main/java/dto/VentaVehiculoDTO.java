@@ -34,7 +34,9 @@ public class VentaVehiculoDTO {
 	
 	private Integer idCliente ;
 	
-	private Integer idUsuEntrega ;
+	private Integer idUsuEntrega;
+	
+	private Integer idSucursalVenta;
 	
 	public VentaVehiculoDTO() {
 	}
@@ -142,6 +144,14 @@ public class VentaVehiculoDTO {
 		this.montoCuota = montoCuota;
 	}
 
+	public Integer getIdSucursalVenta() {
+		return idSucursalVenta;
+	}
+
+	public void setIdSucursalVenta(Integer idSucursalVenta) {
+		this.idSucursalVenta = idSucursalVenta;
+	}
+
 	@Override
 	public String toString() {
 		return "VentaVehiculoDTO [idVentaVehiculo=" + idVentaVehiculo + ", idUsuVentaVN=" + idUsuVentaVN
@@ -149,6 +159,7 @@ public class VentaVehiculoDTO {
 				+ ", fechaVentaVN=" + fechaVentaVN + ", fechaEntregaReal=" + fechaEntregaReal + ", fabricante="
 				+ fabricante + ", comisionCobrada=" + comisionCobrada + ", precioVenta=" + precioVenta + ", financiera="
 				+ financiera + ", nroCuotas=" + nroCuotas + ", montoCuota=" + montoCuota + ", idVehiculo=" + idVehiculo
-				+ ", idCliente=" + idCliente + ", idUsuEntrega=" + idUsuEntrega + "]";
+				+ ", idCliente=" + idCliente + ", idUsuEntrega=" + idUsuEntrega + ", idSucursalVenta=" + idSucursalVenta
+				+ "]";
 	}
 }

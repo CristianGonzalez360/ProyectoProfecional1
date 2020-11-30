@@ -468,8 +468,7 @@ vehiculos:
     idSucursal: 4
 
 ventaVehiculo:
-  - idVentaVehiculo: 1
-    idUsuVentaVN: 1
+  - idUsuVentaVN: 1
     idUsuPedido: 1
     idUsuLlegada: 1
     idPagoVentaVN: 1
@@ -481,3 +480,4 @@ ventaVehiculo:
     idVehiculo: 1
     idCliente: 1
     idUsuEntrega: 1
+    idSucursal: 1

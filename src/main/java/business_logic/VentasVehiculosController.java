@@ -1,5 +1,6 @@
 package business_logic;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import repositories.DaosFactory;
+import services.SessionServiceImpl;
 
 public class VentasVehiculosController {
 		
@@ -35,6 +37,13 @@ public class VentasVehiculosController {
 		return nombresSucursales;
 	}
 	
+
+	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles(){
+		List<VentaVehiculoDTO> ret = daos.makeVentaVehiculoDao().readVentasVehiculosNoDisponibles();
+		return ret;
+	}
+
+
 	public List<String> readNombreMarcasVehiculos() {
 		return daos.makeVehiculoDao().readAllMarcasVehiculos();
 	}
@@ -66,6 +75,18 @@ public class VentasVehiculosController {
 	public void registrarVenta(ClienteDTO cliente, OutputConsultaVehiculoEnVentaDTO vehiculo,
 			ModalidadVentaVehiculoDTO modalidadVenta) {
 		VentaVehiculoDTO venta = new VentaVehiculoDTO();
-		
+		venta.setFechaVentaVN(new Date());
+		venta.setIdCliente(cliente.getIdCliente());
+		venta.setIdVehiculo(Integer.parseInt(vehiculo.getCodigo()));
+		venta.setIdUsuVentaVN(SessionServiceImpl.getInstance().getActiveSession().getIdUsuario());
+		venta.setIdSucursalVenta(SessionServiceImpl.getInstance().getActiveSession().getIdSucursal());
+		if(!modalidadVenta.isEfectivo()) {
+			venta.setFinanciera(modalidadVenta.getFinanciera());
+			venta.setNroCuotas(Integer.parseInt(modalidadVenta.getNroCuotas()));
+			venta.setMontoCuota(Double.parseDouble(modalidadVenta.getMontoCuota()));
+		}
+		venta.setComisionCobrada(Double.parseDouble(modalidadVenta.getComision()));
+		venta.setPrecioVenta(Double.parseDouble(modalidadVenta.getPrecioFinal()));
+		daos.makeVentaVehiculoDao().insert(venta);
 	}
 }

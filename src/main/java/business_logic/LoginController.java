@@ -1,9 +1,11 @@
 package business_logic;
 
 import business_logic.exceptions.ForbiddenException;
+import dto.SucursalDTO;
 import dto.UserCrendentialsDTO;
 import dto.UsuarioDTO;
 import dto.temporal.SessionDTO;
+import repositories.SucursalesDao;
 import repositories.UsuariosDao;
 import services.SessionService;
 
@@ -13,11 +15,14 @@ public class LoginController {
 
 	private UsuariosDao dao;
 
+	private SucursalesDao sucursalesDao;
+	
 	private SessionService service;
-
-	public LoginController(UsuariosDao dao, SessionService service) {
+	
+	public LoginController(UsuariosDao dao, SessionService service, SucursalesDao sucDao) {
 		this.dao = dao;
 		this.service = service;
+		this.sucursalesDao = sucDao;	
 	}
 
 	public SessionDTO logUser(UserCrendentialsDTO credentials) {
@@ -29,7 +34,10 @@ public class LoginController {
 			throw new ForbiddenException(FORBIDDEN);
 		if (service.getActiveSession() != null)
 			throw new ForbiddenException(FORBIDDEN);
-		service.openSession(usuario);
+		
+		SucursalDTO sucursal = sucursalesDao.readByID(0);
+		
+		service.openSession(usuario, sucursal);
 		return service.getActiveSession();
 	}
 
