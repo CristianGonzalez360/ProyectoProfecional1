@@ -10,6 +10,7 @@ public class PedidoDTO {
 	private String dniCliente;
 	private String marcaAuto;
 	private String modeloAuto;
+	private String colorAuto;
 	private String conbustionAuto;
 	private String nombreUsuario;
 	private Date fechaPedido;
@@ -19,7 +20,8 @@ public class PedidoDTO {
 	}
 
 	public PedidoDTO(Integer idPedido, String nombreCliente, String apellidoCliente, String dniCliente,
-			String marcaAuto, String modeloAuto, String conbustionAuto, String nombreUsuario, Date fechaPedido) {
+			String marcaAuto, String modeloAuto, String colorAuto, String conbustionAuto, String nombreUsuario,
+			Date fechaPedido) {
 		super();
 		this.idPedido = idPedido;
 		this.nombreCliente = nombreCliente;
@@ -27,6 +29,7 @@ public class PedidoDTO {
 		this.dniCliente = dniCliente;
 		this.marcaAuto = marcaAuto;
 		this.modeloAuto = modeloAuto;
+		this.colorAuto = colorAuto;
 		this.conbustionAuto = conbustionAuto;
 		this.nombreUsuario = nombreUsuario;
 		this.fechaPedido = fechaPedido;
@@ -80,6 +83,14 @@ public class PedidoDTO {
 		this.modeloAuto = modeloAuto;
 	}
 
+	public String getColorAuto() {
+		return colorAuto;
+	}
+
+	public void setColorAuto(String colorAuto) {
+		this.colorAuto = colorAuto;
+	}
+
 	public String getConbustionAuto() {
 		return conbustionAuto;
 	}
@@ -102,6 +113,14 @@ public class PedidoDTO {
 
 	public void setFechaPedido(Date fechaPedido) {
 		this.fechaPedido = fechaPedido;
+	}
+
+	@Override
+	public String toString() {
+		return "PedidoDTO [idPedido=" + idPedido + ", nombreCliente=" + nombreCliente + ", apellidoCliente="
+				+ apellidoCliente + ", dniCliente=" + dniCliente + ", marcaAuto=" + marcaAuto + ", modeloAuto="
+				+ modeloAuto + ", colorAuto=" + colorAuto + ", conbustionAuto=" + conbustionAuto + ", nombreUsuario="
+				+ nombreUsuario + ", fechaPedido=" + fechaPedido + "]";
 	}
 
 }
