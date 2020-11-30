@@ -21,7 +21,6 @@ cuentas:
     password: pu005
     role: vendedor
 
-
 datosPersonales:
   - nombreCompleto: u001
     apellido: ap001
@@ -355,6 +354,41 @@ facturas:
     estado: PAGA
     idCliente: 1
     dni: 33390343
+
+caracteristicaVehiculo:
+  - cilindrada: 1.58
+    motor: 1.56 MSI nafta
+    transmision: Manual 5 velocidades
+    direccion: electrica asistida
+    potencia: 100 CV
+    frenosDelanteros: Discos ventilados
+    frenosTraseros: A tambor
+    torqueMaximo: 155/4000
+    volumenBaul: 300 cc
+    cantidadPuertas: 4
+    precio: 1000000
+  - cilindrada: 1.58
+    motor: 2.0 MSI nafta
+    transmision: Manual 5 velocidades
+    direccion: electrica asistida
+    potencia: 150 CV
+    frenosDelanteros: Discos ventilados
+    frenosTraseros: A tambor
+    torqueMaximo: 155/4000
+    volumenBaul: 350 cc
+    cantidadPuertas: 3
+    precio: 1500000
+  - cilindrada: 1.58
+    motor: 1.56 MSI nafta
+    transmision: Automatica 5 velocidades
+    direccion: electrica
+    potencia: 100 CV
+    frenosDelanteros: Discos ventilados
+    frenosTraseros: A tambor
+    torqueMaximo: 155/4000
+    volumenBaul: 300 cc
+    cantidadPuertas: 3
+    precio: 1000500
 
 ventaVehiculo:
   - idVentaVehiculo: 1

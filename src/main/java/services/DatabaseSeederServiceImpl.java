@@ -5,6 +5,7 @@ import org.apache.log4j.LogManager;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
+import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
@@ -85,6 +86,10 @@ public class DatabaseSeederServiceImpl {
 		}
 		for (FacturaDTO target : graph.getFacturas()) {
 			daos.makeFacturasDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for (CaracteristicaVehiculoDTO target: graph.getCaracteristicaVehiculo()) {
+			daos.makeCaracteristicasVehiculoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 		for (VentaVehiculoDTO target : graph.getVentaVehiculo()) {

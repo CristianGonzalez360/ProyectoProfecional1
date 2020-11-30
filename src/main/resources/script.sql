@@ -251,14 +251,15 @@ CREATE TABLE CaracteristicasVehiculo(
 	idCaracteristica INTEGER NOT NULL AUTO_INCREMENT,
 	cilindrada VARCHAR(20),
 	motor VARCHAR(20),
-	direccion VARCHAR(20),
+	direccion VARCHAR(26),
 	potencia VARCHAR(20),
 	frenosDelanteros VARCHAR(20),
-	transmision VARCHAR(20),
+	transmision VARCHAR(30),
 	frenosTraseros VARCHAR(20),
 	torqueMaximo VARCHAR(20),
 	volumenDeBaul VARCHAR(20),
 	nroDePuertas VARCHAR(20),
+	precio VARCHAR(20),
 	PRIMARY KEY (idCaracteristica)
 );
 

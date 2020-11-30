@@ -3,6 +3,7 @@ package services;
 import java.util.LinkedList;
 import java.util.List;
 
+import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
@@ -47,6 +48,8 @@ public class DatabaseGraph {
 	private List<FacturaDTO> facturas;
 	
 	private List<VentaVehiculoDTO> ventaVehiculo;
+	
+	private List<CaracteristicaVehiculoDTO> caracteristicaVehiculo;
 
 	public DatabaseGraph() {
 		cuentas = new LinkedList<>();
@@ -61,6 +64,7 @@ public class DatabaseGraph {
 		trabajos = new LinkedList<>();
 		repuestosPlanificados = new LinkedList<>();
 		ventaVehiculo = new LinkedList<>();
+		caracteristicaVehiculo = new LinkedList<>();
 	}
 
 	public List<CuentaDTO> getCuentas() {
@@ -173,5 +177,13 @@ public class DatabaseGraph {
 
 	public void setVentaVehiculo(List<VentaVehiculoDTO> ventaVehiculo) {
 		this.ventaVehiculo = ventaVehiculo;
+	}
+
+	public List<CaracteristicaVehiculoDTO> getCaracteristicaVehiculo() {
+		return caracteristicaVehiculo;
+	}
+
+	public void setCaracteristicaVehiculo(List<CaracteristicaVehiculoDTO> caracteristicaVehiculo) {
+		this.caracteristicaVehiculo = caracteristicaVehiculo;
 	}
 }
