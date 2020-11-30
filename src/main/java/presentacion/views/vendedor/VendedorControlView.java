@@ -1,11 +1,15 @@
 package presentacion.views.vendedor;
 
-import javax.swing.JInternalFrame;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.util.List;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ListSelectionListener;
 
@@ -14,13 +18,7 @@ import dto.SucursalDTO;
 import dto.VehiculoParaVentaDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
-import presentacion.views.cajero.PanelCobroCajeroView;
 import presentacion.views.supervisor.ClientePanelView;
-
-import javax.swing.JPanel;
-import javax.swing.BoxLayout;
-import javax.swing.JSplitPane;
-import javax.swing.JButton;
 
 public class VendedorControlView extends JInternalFrame {
 	  	
