@@ -9,8 +9,10 @@ public class PedidoVehiculoDTO {
 	private Date fechaIngreso;
 	private Integer idUsuPedido;
 	private Integer idUsuIngreso;
+	private Integer idVentaVehiculo;
 
 	public PedidoVehiculoDTO() {
+		setFechaPedido(new Date());
 	}
 
 	public PedidoVehiculoDTO(Date fechaPedido, Date fechaIngreso, Integer idUsuPedido, Integer idUsuIngreso) {
@@ -73,6 +75,14 @@ public class PedidoVehiculoDTO {
 		return "PedidoVehiculoDTO [idPedidoVehiculo=" + idPedidoVehiculo + ", fechaPedido=" + fechaPedido
 				+ ", fechaIngreso=" + fechaIngreso + ", idUsuPedido=" + idUsuPedido + ", idUsuIngreso=" + idUsuIngreso
 				+ "]";
+	}
+
+	public Integer getIdVentaVehiculo() {
+		return idVentaVehiculo;
+	}
+
+	public void setIdVentaVehiculo(Integer idVentaVehiculo) {
+		this.idVentaVehiculo = idVentaVehiculo;
 	}
 
 }

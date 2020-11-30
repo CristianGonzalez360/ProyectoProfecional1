@@ -334,9 +334,10 @@ DROP TABLE PedidoVehiculo IF EXISTS;
 CREATE TABLE PedidoVehiculo (
   idPedidoVehiculo INTEGER NOT NULL AUTO_INCREMENT,
   fechaPedido DATE NOT NULL,
-  fechaIngreso DATE NOT NULL,
+  fechaIngreso DATE,
   idUsuPedido INTEGER NOT NULL,
-  idUsuIngreso INTEGER NOT NULL,
+  idUsuIngreso INTEGER,
+  idVentaVehiculo INTEGER NOT NULL,
   PRIMARY KEY (idPedidoVehiculo),
   FOREIGN KEY (idUsuPedido) REFERENCES Usuarios(idUsuario),
   FOREIGN KEY (idUsuIngreso) REFERENCES Usuarios(idUsuario)

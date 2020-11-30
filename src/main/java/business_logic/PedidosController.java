@@ -9,6 +9,7 @@ import repositories.ClientesDao;
 import repositories.DatosPersonalesDao;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.PedidoVehiculoDao;
+import services.SessionServiceImpl;
 
 public class PedidosController {
 
@@ -48,4 +49,11 @@ public class PedidosController {
 
 		return pedidos;
 	}
+
+	public void save(PedidoVehiculoDTO pedido) {
+		pedido.setIdUsuPedido(SessionServiceImpl.getInstance().getActiveSession().getIdUsuario());
+		pedidosDao.insert(pedido);
+	}
+	
+	
 }
