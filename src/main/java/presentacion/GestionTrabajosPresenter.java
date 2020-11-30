@@ -9,7 +9,7 @@ import javax.swing.event.ListSelectionEvent;
 import business_logic.ClientesController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
-import business_logic.VehiculosController;
+import business_logic.VehiculosConOrdenDeTrabajoController;
 import dto.ClienteDTO;
 import dto.taller.EstadoPresupuesto;
 import dto.taller.FichaTecnicaVehiculoDTO;
@@ -24,12 +24,12 @@ public class GestionTrabajosPresenter {
 	private PanelGestionTrabajoView view;
 	private PresupuestosController presupuestosController;
 	private ClientesController clienteController;
-	private VehiculosController vehiculosController;
+	private VehiculosConOrdenDeTrabajoController vehiculosController;
 	private OrdenesTrabajoController ordenDeTrabajoController;
 	private PresupuestoDTO nuevoPresupuesto;
 
 	public GestionTrabajosPresenter(PresupuestosController presupuestoController, ClientesController clienteController,
-			VehiculosController vehiculosController,OrdenesTrabajoController ordenDeTrabajoController, PresupuestosController presupuestosController) {
+			VehiculosConOrdenDeTrabajoController vehiculosController,OrdenesTrabajoController ordenDeTrabajoController, PresupuestosController presupuestosController) {
 		
 		this.presupuestosController = presupuestoController;
 		this.clienteController = clienteController;

@@ -39,4 +39,10 @@ public class MonedaDTO {
 	public void setCotizacionDolar(Double cotizacionDolar) {
 		this.cotizacionDolar = cotizacionDolar;
 	}
+
+	@Override
+	public String toString() {
+		return "MonedaDTO [idMoneda=" + idMoneda + ", nombre=" + nombre + ", simbolo=" + simbolo + ", cotizacionDolar="
+				+ cotizacionDolar + "]";
+	}
 }

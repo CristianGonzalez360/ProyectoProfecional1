@@ -7,7 +7,10 @@ import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
+import dto.MonedaDTO;
+import dto.SucursalDTO;
 import dto.UsuarioDTO;
+import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
 import dto.taller.FacturaDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
@@ -51,6 +54,12 @@ public class DatabaseGraph {
 	
 	private List<CaracteristicaVehiculoDTO> caracteristicaVehiculo;
 
+	private List<VehiculoDTO> vehiculos;
+	
+	private List<MonedaDTO> monedas;
+	
+	private List<SucursalDTO> sucursales;
+	
 	public DatabaseGraph() {
 		cuentas = new LinkedList<>();
 		datosPersonales = new LinkedList<>();
@@ -65,6 +74,9 @@ public class DatabaseGraph {
 		repuestosPlanificados = new LinkedList<>();
 		ventaVehiculo = new LinkedList<>();
 		caracteristicaVehiculo = new LinkedList<>();
+		vehiculos = new LinkedList<>();
+		monedas = new LinkedList<>();
+		sucursales = new LinkedList<>();
 	}
 
 	public List<CuentaDTO> getCuentas() {
@@ -185,5 +197,29 @@ public class DatabaseGraph {
 
 	public void setCaracteristicaVehiculo(List<CaracteristicaVehiculoDTO> caracteristicaVehiculo) {
 		this.caracteristicaVehiculo = caracteristicaVehiculo;
+	}
+
+	public List<VehiculoDTO> getVehiculos() {
+		return vehiculos;
+	}
+
+	public void setVehiculos(List<VehiculoDTO> vehiculos) {
+		this.vehiculos = vehiculos;
+	}
+
+	public List<MonedaDTO> getMonedas() {
+		return monedas;
+	}
+
+	public void setMonedas(List<MonedaDTO> monedas) {
+		this.monedas = monedas;
+	}
+
+	public List<SucursalDTO> getSucursales() {
+		return sucursales;
+	}
+
+	public void setSucursales(List<SucursalDTO> sucursales) {
+		this.sucursales = sucursales;
 	}
 }

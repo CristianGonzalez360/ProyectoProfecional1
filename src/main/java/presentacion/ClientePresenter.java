@@ -8,7 +8,7 @@ import javax.swing.event.ListSelectionListener;
 
 import business_logic.ClientesController;
 import business_logic.OrdenesTrabajoController;
-import business_logic.VehiculosController;
+import business_logic.VehiculosConOrdenDeTrabajoController;
 import business_logic.exceptions.ConflictException;
 import business_logic.exceptions.ForbiddenException;
 import dto.ClienteDTO;
@@ -33,12 +33,12 @@ public class ClientePresenter {
 
 	private ClientesController clienteController;
 
-	private VehiculosController vehiculosController;
+	private VehiculosConOrdenDeTrabajoController vehiculosController;
 
 	private OrdenesTrabajoController ordenDeTrabajoController;
 
 	public ClientePresenter(PanelClientesView view, ClientesController controller,
-			VehiculosController vehiculoController, OrdenesTrabajoController otController) {
+			VehiculosConOrdenDeTrabajoController vehiculoController, OrdenesTrabajoController otController) {
 		this.view = view;
 		clienteController = controller;
 		this.vehiculosController = vehiculoController;

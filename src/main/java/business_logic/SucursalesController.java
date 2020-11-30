@@ -3,13 +3,13 @@ package business_logic;
 import java.util.List;
 
 import dto.SucursalDTO;
-import repositories.SucursalDao;
+import repositories.SucursalesDao;
 
 public class SucursalesController {
 
-	private SucursalDao sucursalDao;
+	private SucursalesDao sucursalDao;
 	
-	public SucursalesController(SucursalDao sucDao) {
+	public SucursalesController(SucursalesDao sucDao) {
 		assert sucDao != null;
 		sucursalDao = sucDao;
 	}

@@ -53,4 +53,10 @@ public class SucursalDTO {
 	public void setIdMoneda(Integer idMoneda) {
 		this.idMoneda = idMoneda;
 	}
+
+	@Override
+	public String toString() {
+		return "SucursalDTO [idSucursal=" + idSucursal + ", pais=" + pais + ", calle=" + calle + ", altura=" + altura
+				+ ", localidad=" + localidad + ", idMoneda=" + idMoneda + "]";
+	}
 }

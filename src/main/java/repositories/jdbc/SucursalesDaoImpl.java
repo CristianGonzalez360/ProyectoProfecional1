@@ -5,37 +5,40 @@ import java.util.LinkedList;
 import java.util.List;
 
 import dto.SucursalDTO;
-import repositories.SucursalDao;
+import repositories.SucursalesDao;
 import repositories.jdbc.utils.Mapper;
 
-public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements SucursalDao{
+public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements SucursalesDao{
 
+	private static final String insert = "INSERT INTO sucursal(pais, calle, altura, localidad, idMoneda) VALUES(?,?,?,?,?)";
+	
 	public SucursalesDaoImpl(Connection connection) {
 		super(connection);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean update(SucursalDTO entity) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean insert(SucursalDTO entity) {
-		// TODO Auto-generated method stub
-		return false;
+		return getTemplate().query(insert)
+				.param(entity.getPais())
+				.param(entity.getCalle())
+				.param(entity.getAltura())
+				.param(entity.getLocalidad())
+				.param(entity.getIdMoneda())
+				.excecute();
 	}
 
 	@Override
 	public boolean deleteById(Integer id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public SucursalDTO readByID(Integer id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -50,13 +53,11 @@ public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements Su
 
 	@Override
 	protected Mapper<SucursalDTO> getMapper() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public SucursalDTO readByName(String name) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -68,5 +69,4 @@ public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements Su
 		mock.add("CityGroup");
 		return mock;
 	}
-
 }

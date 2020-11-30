@@ -9,14 +9,12 @@ import repositories.ClientesDao;
 import repositories.DatosPersonalesDao;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.PedidoVehiculoDao;
-import repositories.VehiculoReservadoDao;
 
 public class PedidosController {
 
 	private ClientesDao clienteDao;
 	private DatosPersonalesDao datosPersonalesDao;
 	private FichaTecnicaVehiculoDao fichaTecnicaDao;
-	private VehiculoReservadoDao vehiculoReservadoDao;
 	private PedidoVehiculoDao pedidosDao;
 
 	public PedidosController(ClientesDao clientesDao, DatosPersonalesDao datosPersonalesDao,
