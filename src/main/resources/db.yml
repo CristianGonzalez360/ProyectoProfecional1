@@ -390,6 +390,47 @@ caracteristicaVehiculo:
     cantidadPuertas: 3
     precio: 1000500
 
+monedas:
+  - nombre: peso
+    simbolo: $
+    cotizacionDolar: 200
+
+sucursales:
+  - pais: ARG
+    calle: ff
+    altura: 1233
+    localidad: Avellaneda
+    idMoneda: 1
+  - pais: ARG
+    calle: ff
+    altura: 1233
+    localidad: Martinez
+    idMoneda: 1
+  - pais: ARG
+    calle: ff
+    altura: 1233
+    localidad: Quilmes
+    idMoneda: 1
+  - pais: ARG
+    calle: ff
+    altura: 1233
+    localidad: Munro
+    idMoneda: 1
+
+vehiculos:
+  - precioVenta: 123
+    idFichaTecnica: 1
+    marca: cc
+    familia: cc
+    linea: cc
+    fechaIngreso:
+    disponible: false
+    usado: false
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal:
+    fichaTecnica:
+
 ventaVehiculo:
   - idVentaVehiculo: 1
     idUsuVentaVN: 1

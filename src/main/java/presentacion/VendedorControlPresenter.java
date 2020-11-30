@@ -7,9 +7,9 @@ import javax.swing.event.ListSelectionEvent;
 
 import business_logic.ClientesController;
 import business_logic.SucursalesController;
-import business_logic.VehiculosController;
+import business_logic.VentasVehiculosController;
 import dto.ClienteDTO;
-import dto.VehiculoParaVentaDTO;
+import dto.VehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import dto.validators.StringValidator;
@@ -22,15 +22,13 @@ public class VendedorControlPresenter {
 	
 	private ClientesController clientesController;
 	
-	private VehiculosController vehiculosController;
+	private VentasVehiculosController ventasController;
 	
 	private SucursalesController sucursalesController;
 	
-	public VendedorControlPresenter(ClientesController clientesController, VehiculosController vehiculosController, SucursalesController sucController) {
-		assert clientesController != null;
-		assert vehiculosController != null;
+	public VendedorControlPresenter(ClientesController clientesController,SucursalesController sucController, VentasVehiculosController vehiculosController) {
 		this.clientesController = clientesController;
-		this.vehiculosController = vehiculosController;
+		this.ventasController = vehiculosController;
 		this.sucursalesController = sucController;
 		this.view.setActionConsultarCliente((a) -> onConsultarCliente(a));
 		this.view.setActionConsultarVehiculo((a) -> onConsultarVehiculo(a));
@@ -60,7 +58,7 @@ public class VendedorControlPresenter {
 	private void onSelectVehiculo(ListSelectionEvent a) {
 		if(view.getDataCodigoDeVehiculo() != null) {
 			Integer codigoVehiculo = Integer.parseInt(view.getDataCodigoDeVehiculo().getCodigo());
-			VehiculoParaVentaDTO dto = vehiculosController.readByCodigo(codigoVehiculo);
+			VehiculoDTO dto = ventasController.readByCodigo(codigoVehiculo);
 			view.setData(dto);	
 		}
 	}
@@ -84,7 +82,7 @@ public class VendedorControlPresenter {
 		ConsultaVehiculoParaVentaDTO consulta = view.getDataConsultaVehiculo();
 		view.clearDataVehiculos();
 		if(consulta.validate().isEmpty()) {
-			List<OutputConsultaVehiculoEnVentaDTO> vehiculos = vehiculosController.readByCriteria(consulta);
+			List<OutputConsultaVehiculoEnVentaDTO> vehiculos = ventasController.readByCriteria(consulta);
 			view.setData(vehiculos);
 		}
 	}

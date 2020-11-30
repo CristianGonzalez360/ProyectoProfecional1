@@ -111,4 +111,13 @@ public class VentaVehiculoDTO {
 	public void setIdUsuEntrega(Integer idUsuEntrega) {
 		this.idUsuEntrega = idUsuEntrega;
 	}
+
+	@Override
+	public String toString() {
+		return "VentaVehiculoDTO [idVentaVehiculo=" + idVentaVehiculo + ", idUsuVentaVN=" + idUsuVentaVN
+				+ ", idUsuPedido=" + idUsuPedido + ", idUsuLlegada=" + idUsuLlegada + ", idPagoVentaVN=" + idPagoVentaVN
+				+ ", fechaVentaVN=" + fechaVentaVN + ", fechaEntregaReal=" + fechaEntregaReal + ", fabricante="
+				+ fabricante + ", comisionCobrada=" + comisionCobrada + ", precioVenta=" + precioVenta + ", idVehiculo="
+				+ idVehiculo + ", idCliente=" + idCliente + ", idUsuEntrega=" + idUsuEntrega + "]";
+	}
 }

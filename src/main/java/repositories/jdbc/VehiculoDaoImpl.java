@@ -5,54 +5,57 @@ import java.util.Date;
 import java.util.List;
 
 import dto.VehiculoDTO;
-import repositories.VehiculoDao;
+import repositories.VehiculosDao;
 import repositories.jdbc.utils.Mapper;
+import repositories.jdbc.utils.NullObject;
 
-public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements VehiculoDao {
+public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements VehiculosDao {
 
-	private static final String readAll = "SELECT * FROM vehiculos";
+	private static final String insert = 
+	"INSERT INTO Vehiculos(precioVenta,idFichaTecnica,marca,familia,linea,idCaracteristica,fechaIngreso,disponible,usado,idCompra,idSucursal) "
+	+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
-	private static final String readNuevosDisponibles = readAll + " " + "WHERE usado = false AND disponible = true";
-
 	public VehiculoDaoImpl(Connection connection) {
 		super(connection);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean update(VehiculoDTO entity) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean insert(VehiculoDTO entity) {
-		// TODO Auto-generated method stub
-		return false;
+		return getTemplate()
+				.query(insert)
+				.param(entity.getPrecioVenta())
+				.param(entity.getIdFichaTecnica() == null ? new NullObject() : entity.getIdFichaTecnica())
+				.param(entity.getMarca())
+				.param(entity.getFamilia())
+				.param(entity.getLinea())
+				.param(entity.getIdCaracteristicas())
+				.param(entity.getFechaIngreso() == null ? new NullObject(): entity.getFechaIngreso())
+				.param(new Boolean(entity.isDisponible()))
+				.param(new Boolean(entity.isUsado()))
+				.param(entity.getIdCompra() == null ? new NullObject() : entity.getIdCompra())
+				.param(entity.getIdSucursal() == null ? new NullObject() : entity.getIdSucursal())
+				.excecute();
 	}
 
 	@Override
 	public boolean deleteById(Integer id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public VehiculoDTO readByID(Integer id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<VehiculoDTO> readAll() {
-		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public List<VehiculoDTO> readNuevosDisponibles() {
-		// TODO Auto-generated method stub
-		return getTemplate().query(readNuevosDisponibles).excecute(getMapper());
 	}
 
 	@Override
@@ -71,26 +74,4 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 			}
 		};
 	}
-
-	/*
-	 private Integer idVehiculo;
-	private Double precioVenta;
-	private Integer  idFichaTecnica;
-	private Date fechaIngreso;
-	private boolean disponible;
-	private Boolean  usado;
-	private Integer idCompra;
-	 */
-	@Override
-	public List<VehiculoDTO> readUsados() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<VehiculoDTO> readUsadosYNuevosDisponibles() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
