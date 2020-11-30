@@ -121,7 +121,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 
 	@Override
 	public VentasVehiculosController makeVentasVehiculosController() {
-		if(ventasController == null) ventasController = new VentasVehiculosController();
+		if(ventasController == null) ventasController = new VentasVehiculosController(daos);
 		return ventasController;
 	}
 }

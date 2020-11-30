@@ -292,6 +292,7 @@ CREATE TABLE Vehiculos (
   marca VARCHAR(20) NOT NULL,
   familia VARCHAR(20) NOT NULL,
   linea VARCHAR(20) NOT NULL,
+  color VARCHAR(20) NOT NULL,
   idCaracteristica INTEGER NOT NULL,
   fechaIngreso DATE,
   disponible BOOLEAN NOT NULL,

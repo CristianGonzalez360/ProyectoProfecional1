@@ -420,16 +420,52 @@ sucursales:
 vehiculos:
   - precioVenta: 123
     idFichaTecnica: 1
-    marca: cc
-    familia: cc
-    linea: cc
-    fechaIngreso:
+    marca: Ford
+    familia: Focus
+    linea: vip
+    color: rojo
+    fechaIngreso: 2017-10-11
     disponible: false
     usado: false
     idCompra:
     idCaracteristicas: 1
+    idSucursal: 1
+  - precioVenta: 123
+    idFichaTecnica: 1
+    marca: wolkswagen
+    familia: polo
+    linea: trend
+    color: negro
+    fechaIngreso:
+    disponible: true
+    usado: false
+    idCompra:
+    idCaracteristicas: 1
     idSucursal:
-    fichaTecnica:
+  - precioVenta: 123
+    idFichaTecnica: 1
+    marca: Ford
+    familia: Focus
+    linea: vip
+    color: azul
+    fechaIngreso: 2017-10-11
+    disponible: false
+    usado: true
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 1
+  - precioVenta: 123
+    idFichaTecnica: 1
+    marca: Ford
+    familia: Focus
+    linea: vip
+    color: amarillo
+    fechaIngreso: 2017-10-11
+    disponible: false
+    usado: true
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 1
 
 ventaVehiculo:
   - idVentaVehiculo: 1
