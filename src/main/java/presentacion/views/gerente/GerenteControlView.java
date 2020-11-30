@@ -58,4 +58,12 @@ public class GerenteControlView extends JInternalFrame {
 		pedidosPanelView.clear();
 	}
 
+	public PedidosPanelView getPedidosPanelView() {
+		return pedidosPanelView;
+	}
+
+	public void setPedidosPanelView(PedidosPanelView pedidosPanelView) {
+		this.pedidosPanelView = pedidosPanelView;
+	}
+
 }

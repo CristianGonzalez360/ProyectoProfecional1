@@ -5,26 +5,20 @@ import java.util.Date;
 public class PedidoVehiculoDTO {
 
 	private Integer idPedidoVehiculo;
-	private Integer idVehiculoReservado;
 	private Date fechaPedido;
 	private Date fechaIngreso;
 	private Integer idUsuPedido;
 	private Integer idUsuIngreso;
-	private Integer idCliente;
 
 	public PedidoVehiculoDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public PedidoVehiculoDTO(Integer idVehiculoReservado, Date fechaPedido, Date fechaIngreso,
-			Integer idUsuPedido, Integer idUsuIngreso, Integer idCliente) {
+	public PedidoVehiculoDTO(Date fechaPedido, Date fechaIngreso, Integer idUsuPedido, Integer idUsuIngreso) {
 		super();
-		this.idVehiculoReservado = idVehiculoReservado;
 		this.fechaPedido = fechaPedido;
 		this.fechaIngreso = fechaIngreso;
 		this.idUsuPedido = idUsuPedido;
 		this.idUsuIngreso = idUsuIngreso;
-		this.idCliente = idCliente;
 	}
 
 	public PedidoVehiculoDTO makeTestDTO() {
@@ -40,14 +34,6 @@ public class PedidoVehiculoDTO {
 
 	public void setIdPedidoVehiculo(Integer idPedidoVehiculo) {
 		this.idPedidoVehiculo = idPedidoVehiculo;
-	}
-
-	public Integer getIdVehiculoReservado() {
-		return idVehiculoReservado;
-	}
-
-	public void setIdVehiculoReservado(Integer idVehiculoReservado) {
-		this.idVehiculoReservado = idVehiculoReservado;
 	}
 
 	public Date getFechaPedido() {
@@ -82,19 +68,11 @@ public class PedidoVehiculoDTO {
 		this.idUsuIngreso = idUsuIngreso;
 	}
 
-	public Integer getIdCliente() {
-		return idCliente;
-	}
-
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
-	}
-
 	@Override
 	public String toString() {
-		return "PedidoVehiculoDTO [idPedidoVehiculo=" + idPedidoVehiculo + ", idVehiculoReservado="
-				+ idVehiculoReservado + ", fechaPedido=" + fechaPedido + ", fechaIngreso=" + fechaIngreso
-				+ ", idUsuPedido=" + idUsuPedido + ", idUsuIngreso=" + idUsuIngreso + ", idCliente=" + idCliente + "]";
+		return "PedidoVehiculoDTO [idPedidoVehiculo=" + idPedidoVehiculo + ", fechaPedido=" + fechaPedido
+				+ ", fechaIngreso=" + fechaIngreso + ", idUsuPedido=" + idUsuPedido + ", idUsuIngreso=" + idUsuIngreso
+				+ "]";
 	}
 
 }
