@@ -11,16 +11,16 @@ import business_logic.VentasVehiculosController;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.PedidoVehiculoDTO;
-import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
 import presentacion.views.gerente.PanelRegistroPedido;
+import presentacion.views.utils.MessageDialog;
 
 public class RegistroPedidoPresenter {
 
 	private PanelRegistroPedido view;
 	
 	private List<VentaVehiculoDTO> ventas;
-	private int ventaSeleccionada;
+	private Integer ventaSeleccionada;
 	
 	private VentasVehiculosController ventasVehiculosController;
 	private ClientesController clientesController;
@@ -40,12 +40,17 @@ public class RegistroPedidoPresenter {
 	}
 
 	private void onRegistrar(ActionEvent a) {
-		PedidoVehiculoDTO pedido = new PedidoVehiculoDTO();
-		pedido.setIdVentaVehiculo(ventas.get(ventaSeleccionada).getIdVentaVehiculo());
-		pedidosController.save(pedido);
+		if(ventaSeleccionada != null) { 
+			PedidoVehiculoDTO pedido = new PedidoVehiculoDTO();
+			pedido.setIdVentaVehiculo(ventas.get(ventaSeleccionada).getIdVentaVehiculo());
+			pedidosController.save(pedido);
+		} else {
+			new MessageDialog().showMessages("Debe seleccionar un venta");
+		}
 	}
 
 	private void onRefrescar(ActionEvent a) {
+		this.ventaSeleccionada = null;
 		this.view.clearData();
 		mostrarVentas();
 	}

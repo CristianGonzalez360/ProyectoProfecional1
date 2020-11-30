@@ -11,14 +11,15 @@ import repositories.jdbc.utils.NullObject;
 
 public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> implements VentaVehiculoDao {
 	
+
+	public static final String readAll = "SELECT * FROM VentasVehiculos";
+
 	public static final String insert = 
 			"INSERT INTO VentasVehiculos(idUsuVentaVN,idUsuPedido,idUsuLlegada,idPagoVentaVN,fechaVentaVN"
 			+ ",fechaEntregaReal,fabricante,comisionCobrada,precioVenta,financiera,nroCuotas,montoCuota"
 			+ ",idVehiculo,idCliente,idUsuEntrega,idSucursal) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
-	public static final String readAll = "SELECT * from VentasVehiculos";
-	
-	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo AND disponible = false";
+	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo AND disponible = false"; //AND idSucursal = ?"; 
 
 	public VentaVehiculoDaoImpl(Connection connection) {
 		super(connection);
