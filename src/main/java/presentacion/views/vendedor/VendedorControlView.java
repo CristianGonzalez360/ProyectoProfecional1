@@ -240,4 +240,12 @@ public class VendedorControlView extends JInternalFrame {
 	public ModalidadVentaVehiculoDTO getDataModalidadVenta() {
 		return this.datosVentaVehiculoPanel.getData();
 	}
+
+	public void setDataVentaPrecioVehiculoSeleccionado(String precio) {
+		datosVentaVehiculoPanel.setMontoFinanciado(precio);
+	}
+
+	public void setDataComisionVendedor(Double comision) {
+		datosVentaVehiculoPanel.setComisionVendedor(comision.toString());
+	}
 }

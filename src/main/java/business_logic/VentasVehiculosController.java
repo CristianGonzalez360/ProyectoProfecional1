@@ -19,6 +19,8 @@ public class VentasVehiculosController {
 		
 	private DaosFactory daos;
 	
+	private final int porcentajeComision = 1;
+	
 	private static final String pais = "Argentina";
 	
 	public VentasVehiculosController(DaosFactory daos) {
@@ -88,5 +90,9 @@ public class VentasVehiculosController {
 		venta.setComisionCobrada(Double.parseDouble(modalidadVenta.getComision()));
 		venta.setPrecioVenta(Double.parseDouble(modalidadVenta.getPrecioFinal()));
 		daos.makeVentaVehiculoDao().insert(venta);
+	}
+
+	public Double calcularComision(String precio) {
+		return Double.parseDouble(precio)*porcentajeComision / 100;
 	}
 }

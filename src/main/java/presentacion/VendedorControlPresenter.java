@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.event.ListSelectionEvent;
@@ -36,6 +37,7 @@ public class VendedorControlPresenter {
 	
 	private void setOpcionesBusqueda() {
 		this.view.addTiposBusqueda(new String [] {"Nuevo", "Usado"});
+		this.view.addFinancieras(Arrays.asList(new String [] {"Santander", "ICBC", "HSBC", "City Bank"}));
 		this.view.addMarcasBusqueda(ventasController.readNombreMarcasVehiculos());
 	}
 	
@@ -77,9 +79,12 @@ public class VendedorControlPresenter {
 	
 	private void onSelectVehiculo(ListSelectionEvent a) {
 		if(view.getDataVehiculoEnVenta() != null) {
-			Integer codigoVehiculo = Integer.parseInt(view.getDataVehiculoEnVenta().getCodigo());
+			OutputConsultaVehiculoEnVentaDTO out = view.getDataVehiculoEnVenta();
+			Integer codigoVehiculo = Integer.parseInt(out.getCodigo());
 			CaracteristicaVehiculoDTO caracteristicas = ventasController.readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo);
-			view.setData(caracteristicas);	
+			view.setData(caracteristicas);
+			view.setDataVentaPrecioVehiculoSeleccionado(out.getPrecio());
+			view.setDataComisionVendedor(ventasController.calcularComision(out.getPrecio()));
 		}
 	}
 

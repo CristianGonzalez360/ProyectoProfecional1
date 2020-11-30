@@ -165,4 +165,12 @@ public class DatosVentaVehiculo extends JPanel {
 		this.textFieldComisionVenta.setText("");
 		this.textFieldMontoCuota.setText("");
 	}
+
+	public void setMontoFinanciado(String precio) {
+		this.textFieldMontoFinanciado.setText(precio);
+	}
+
+	public void setComisionVendedor(String string) {
+		this.textFieldComisionVenta.setText(string);
+	}
 }
