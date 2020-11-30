@@ -8,6 +8,7 @@ import javax.swing.event.ListSelectionEvent;
 import business_logic.ClientesController;
 import business_logic.SucursalesController;
 import business_logic.VentasVehiculosController;
+import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.VehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
@@ -60,11 +61,10 @@ public class VendedorControlPresenter {
 	}
 	
 	private void onSelectVehiculo(ListSelectionEvent a) {
-		System.out.println(view.getDataCodigoDeVehiculo().toString());
 		if(view.getDataCodigoDeVehiculo() != null) {
 			Integer codigoVehiculo = Integer.parseInt(view.getDataCodigoDeVehiculo().getCodigo());
-			VehiculoDTO dto = ventasController.readByCodigo(codigoVehiculo);
-			view.setData(dto);	
+			CaracteristicaVehiculoDTO caracteristicas = ventasController.readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo);
+			view.setData(caracteristicas);	
 		}
 	}
 

@@ -49,11 +49,14 @@ public class VentasVehiculosController {
 			aux.setPrecio(dto.getPrecioVenta().toString());
 			aux.setCodigo(dto.getIdVehiculo().toString());
 			aux.setColor(dto.getColor());
-			
-			CaracteristicaVehiculoDTO car = daos.makeCaracteristicasVehiculoDao().readByID(dto.getIdCaracteristicas());
-			if(car != null)aux.setCilindrada(car.getCilindrada());
+			aux.setSucursal(dto.getIdSucursal() == null ? " " : dto.getIdSucursal().toString());
 			ret.add(aux);
 		}
 		return ret;
+	}
+
+	public CaracteristicaVehiculoDTO readCaracteristicaVehiculoByIdVehiculo(Integer codigoVehiculo) {
+		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(codigoVehiculo);
+		return daos.makeCaracteristicasVehiculoDao().readByID(vehiculo.getIdCaracteristicas());
 	}
 }
