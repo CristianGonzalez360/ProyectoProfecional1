@@ -10,9 +10,9 @@ import repositories.jdbc.utils.Mapper;
 
 public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> implements VentaVehiculoDao {
 	
-	public static final String readAll = "SELECT * from VentasVehiculos";
+	public static final String readAll = "SELECT * FROM VentasVehiculos";
 	
-	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo AND disponible = false";
+	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo AND disponible = false"; //AND idSucursal = ?"; 
 
 	public VentaVehiculoDaoImpl(Connection connection) {
 		super(connection);
