@@ -2,6 +2,7 @@ package dto.temporal;
 
 import java.util.Date;
 
+import dto.SucursalDTO;
 import dto.UsuarioDTO;
 
 public class SessionDTO {
@@ -10,6 +11,8 @@ public class SessionDTO {
 
 	private UsuarioDTO user;
 
+	private SucursalDTO sucursal;
+	
 	public SessionDTO() {
 	}
 
@@ -39,5 +42,13 @@ public class SessionDTO {
 
 	public void setUser(UsuarioDTO user) {
 		this.user = user;
+	}
+
+	public Integer getIdSucursal() {
+		return sucursal.getIdSucursal();
+	}
+
+	public void setSucursal(SucursalDTO sucursal) {
+		this.sucursal = sucursal;
 	}
 }

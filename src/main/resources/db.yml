@@ -425,7 +425,7 @@ vehiculos:
     linea: vip
     color: rojo
     fechaIngreso: 2017-10-11
-    disponible: false
+    disponible: true
     usado: false
     idCompra:
     idCaracteristicas: 1
@@ -437,7 +437,7 @@ vehiculos:
     linea: trend
     color: negro
     fechaIngreso:
-    disponible: false
+    disponible: true
     usado: false
     idCompra:
     idCaracteristicas: 1
@@ -449,7 +449,7 @@ vehiculos:
     linea: vip
     color: azul
     fechaIngreso: 2017-10-11
-    disponible: false
+    disponible: true
     usado: true
     idCompra:
     idCaracteristicas: 1
@@ -461,23 +461,23 @@ vehiculos:
     linea: vip
     color: amarillo
     fechaIngreso: 2017-10-11
-    disponible: false
+    disponible: true
     usado: true
     idCompra:
     idCaracteristicas: 1
     idSucursal: 4
 
 ventaVehiculo:
-  - idVentaVehiculo: 1
-    idUsuVentaVN: 1
-    idUsuPedido: 1
-    idUsuLlegada: 1
-    idPagoVentaVN: 1
+  - idUsuVentaVN: 1
+    idUsuPedido: 
+    idUsuLlegada: 
+    idPagoVentaVN: 
     fechaVentaVN: 2020-10-11
     fechaEntregaReal: 2020-10-11
-    fabricante: 1
-    comisionCobrada: 1
-    precioVenta: 1
+    fabricante: Ford
+    comisionCobrada: 10000
+    precioVenta: 1200444
     idVehiculo: 1
     idCliente: 1
-    idUsuEntrega: 1
+    idUsuEntrega: 
+    idSucursalVenta: 1

@@ -8,6 +8,7 @@ import business_logic.exceptions.ForbiddenException;
 import dto.UserCrendentialsDTO;
 import dto.UsuarioDTO;
 import dto.temporal.SessionDTO;
+import repositories.SucursalesDao;
 import repositories.UsuariosDao;
 import services.SessionService;
 
@@ -15,7 +16,8 @@ class LoginControllerTest {
 
 	private SessionService service = Mockito.mock(SessionService.class);
 	private UsuariosDao dao = Mockito.mock(UsuariosDao.class);
-	private LoginController controller = new LoginController(dao, service);
+	private SucursalesDao sucDao = Mockito.mock(SucursalesDao.class);
+	private LoginController controller = new LoginController(dao, service, sucDao);
 
 	UsuarioDTO target = new UsuarioDTO().makeTestDTO();
 	String nombreDeUsuario = target.getCuenta().getNombreUsuario();
