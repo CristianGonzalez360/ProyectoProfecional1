@@ -27,6 +27,8 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	
 	private SucursalesController sucursalesController;
 	
+	private PedidosController pedidosController;
+	
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
 	}
@@ -105,5 +107,13 @@ public class ControllersFactoryImpl extends ControllersFactory {
 			sucursalesController = new SucursalesController(daos.makeSucursalesDao());
 		}
 		return sucursalesController;
+	}
+	
+	@Override
+	public PedidosController makePedidosController() {
+		if(pedidosController == null) {
+			pedidosController = new PedidosController(daos.makeClienteDao(), daos.makeDatosPersonalesDao(), daos.makeFichaTecnicaVehiculoDao(), daos.makePedidoVehiculoDao());
+		}
+		return pedidosController;
 	}
 }

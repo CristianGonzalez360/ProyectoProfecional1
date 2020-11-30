@@ -3,7 +3,6 @@ package presentacion;
 import java.awt.event.ActionEvent;
 
 import business_logic.PedidosController;
-import dto.validators.StringValidator;
 import presentacion.views.gerente.PedidosPanelView;
 
 public class PedidosPresenter {
@@ -25,17 +24,18 @@ public class PedidosPresenter {
 
 	private void onBuscar(ActionEvent a) {
 		String dniBuscado = view.getDniBusqueda();
-		if (dniBuscado.trim().isEmpty()) {
-			view.clear();
-			view.setData(controller.readAllPedidos());
-		} else {
-			boolean esDniConFormatoCorrecto = new StringValidator(dniBuscado).number("").validate().isEmpty();
-			if (esDniConFormatoCorrecto) {
-				Integer dniCliente = Integer.parseInt(dniBuscado);
-				view.clear();
-				view.setData(controller.readAllByDniCliente(dniCliente));
-			}
-		}
+//		if (dniBuscado.trim().isEmpty()) {
+//			view.clear();
+//			view.setData(controller.readAllPedidos());
+//		} else {
+//			boolean esDniConFormatoCorrecto = new StringValidator(dniBuscado).number("").validate().isEmpty();
+//			if (esDniConFormatoCorrecto) {
+//				Integer dniCliente = Integer.parseInt(dniBuscado);
+//				view.clear();
+//				view.setData(controller.readAllByDniCliente(dniCliente));
+//			}
+//		}
+		System.out.println("buscar");
 	}
 
 	private Object onCancelar(ActionEvent a) {

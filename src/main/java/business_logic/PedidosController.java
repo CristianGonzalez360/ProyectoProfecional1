@@ -20,12 +20,10 @@ public class PedidosController {
 	private PedidoVehiculoDao pedidosDao;
 
 	public PedidosController(ClientesDao clientesDao, DatosPersonalesDao datosPersonalesDao,
-			FichaTecnicaVehiculoDao fichaTecnicaDao, VehiculoReservadoDao vehiculoReservadoDao,
-			PedidoVehiculoDao pedidosDao) {
+			FichaTecnicaVehiculoDao fichaTecnicaDao, PedidoVehiculoDao pedidosDao) {
 		this.clienteDao = clientesDao;
 		this.datosPersonalesDao = datosPersonalesDao;
 		this.fichaTecnicaDao = fichaTecnicaDao;
-		this.vehiculoReservadoDao = vehiculoReservadoDao;
 		this.pedidosDao = pedidosDao;
 	}
 

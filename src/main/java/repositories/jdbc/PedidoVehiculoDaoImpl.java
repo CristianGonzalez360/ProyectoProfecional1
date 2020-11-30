@@ -13,7 +13,7 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	private static final String readAll = "SELECT * FROM PedidoVehiculo";
 
-	private static final String insert = "INSERT INTO PedidoVehiculo (idVehiculoReservado, fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso, idCliente) VALUES (?,?,?,?,?,?)";
+	private static final String insert = "INSERT INTO PedidoVehiculo (fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso) VALUES (?,?,?,?)";
 
 	public PedidoVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -28,12 +28,10 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 	@Override
 	public boolean insert(PedidoVehiculoDTO entity) {
 		return getTemplate().query(insert)
-				.param(entity.getIdVehiculoReservado() == null ? new NullObject() : entity.getIdVehiculoReservado())
 				.param(entity.getFechaPedido() == null ? new NullObject() : entity.getFechaPedido())
 				.param(entity.getFechaIngreso() == null ? new NullObject() : entity.getFechaIngreso())
 				.param(entity.getIdUsuPedido() == null ? new NullObject() : entity.getIdUsuPedido())
-				.param(entity.getIdUsuIngreso() == null ? new NullObject() : entity.getIdUsuIngreso())
-				.param(entity.getIdCliente() == null ? new NullObject() : entity.getIdCliente()).excecute();
+				.param(entity.getIdUsuIngreso() == null ? new NullObject() : entity.getIdUsuIngreso()).excecute();
 	}
 
 	@Override
@@ -67,12 +65,10 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 			public PedidoVehiculoDTO map(Object[] obj) {
 				PedidoVehiculoDTO pedido = new PedidoVehiculoDTO();
 				pedido.setIdPedidoVehiculo((Integer) obj[0]);
-				pedido.setIdVehiculoReservado((Integer) obj[1] != null ? (Integer) obj[1] : null);
-				pedido.setFechaPedido((Date) obj[2] == null ? null : (Date) obj[2]);
-				pedido.setFechaIngreso((Date) obj[3]);
-				pedido.setIdUsuPedido((Integer) obj[4]);
-				pedido.setIdUsuIngreso((Integer) obj[5]);
-				pedido.setIdCliente((Integer) obj[6]);
+				pedido.setFechaPedido((Date) obj[1] == null ? null : (Date) obj[2]);
+				pedido.setFechaIngreso((Date) obj[2]);
+				pedido.setIdUsuPedido((Integer) obj[3]);
+				pedido.setIdUsuIngreso((Integer) obj[4]);
 				return pedido;
 			}
 		};
