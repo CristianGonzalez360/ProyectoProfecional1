@@ -17,6 +17,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import dto.VentaVehiculoDTO;
 import dto.taller.FacturaDTO;
 
 import com.jgoodies.forms.layout.FormSpecs;
@@ -32,18 +33,18 @@ public class HistorialVentasView extends JPanel {
 	
 	private static HistorialVentasView instance;
 	
-	//private final String[] columnasListadoDeFacturas = new String[] { "Nro. Factura" ,"DNI" ,"Fecha de pago","Total", "Estado" };
-	private final String[] columnasListadoDeFacturas = new String[] { "Id venta" ,"DNI" ,"Fecha de venta","Vehiculo", "Estado" };
+
+	private final String[] columnasListadoDeVentas = new String[] { "Id venta" ,"Id usario" ,"Id usuario pedido","Id usuario llegada" };
 	
-	private DefaultTableModel listadoDeFacturasModel;
+	private DefaultTableModel listadoDeVentasModel;
 	
 	private JPanel panel;
-	private JScrollPane scrollPaneFacturas;
-	private JTable tableFacturas;
+	private JScrollPane scrollPaneVentas;
+	private JTable tableVentas;
 	private JPanel panel_1;
 	private JPanel panel_3;
-	private JButton btnCargarFacturas;
-	private JTextField textFactura;
+	private JButton btnCargarVentas;
+	private JTextField textVentas;
 
 	public static HistorialVentasView getInstance() {
 		if (instance == null) {
@@ -62,22 +63,22 @@ public class HistorialVentasView extends JPanel {
 		Label label = new Label("ID");
 		panel_3.add(label);
 		
-		textFactura = new JTextField();
-		panel_3.add(textFactura);
-		textFactura.setColumns(10);
+		textVentas = new JTextField();
+		panel_3.add(textVentas);
+		textVentas.setColumns(10);
 		
-		btnCargarFacturas = new JButton("Cargar");
-		panel_3.add(btnCargarFacturas);
+		btnCargarVentas = new JButton("Cargar");
+		panel_3.add(btnCargarVentas);
 		
 		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Listado Ventas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		add(panel);
 		
-		this.listadoDeFacturasModel = new DefaultTableModel(null, this.columnasListadoDeFacturas);;
+		this.listadoDeVentasModel = new DefaultTableModel(null, this.columnasListadoDeVentas);;
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		scrollPaneFacturas = new JScrollPane();
-		panel.add(scrollPaneFacturas);
-		tableFacturas = new JTable(listadoDeFacturasModel){//tabla no editable
+		scrollPaneVentas = new JScrollPane();
+		panel.add(scrollPaneVentas);
+		tableVentas = new JTable(listadoDeVentasModel){//tabla no editable
 			
 			/**
 			 * 
@@ -89,7 +90,7 @@ public class HistorialVentasView extends JPanel {
 				return false;
 			}
 		};
-		scrollPaneFacturas.setViewportView(tableFacturas);
+		scrollPaneVentas.setViewportView(tableVentas);
 		
 		panel_1 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
@@ -98,76 +99,49 @@ public class HistorialVentasView extends JPanel {
 	
 	}
 
-	public void cargarTabla(List<FacturaDTO> presupuestos) {
-		for (FacturaDTO presupuesto : presupuestos) {
+
+	
+
+	
+	public void cargarTabla(List<VentaVehiculoDTO> ventas) {
+		for (VentaVehiculoDTO venta : ventas) {
 			
 			
 			
-				Object[] row = { presupuesto.getIdFactura().toString(),  presupuesto.getDni(), presupuesto.getFechaDeCierrePorPago(),
-						presupuesto.getTotal(), presupuesto.getEstado() };
-				listadoDeFacturasModel.addRow(row);
+				Object[] row = { venta.getIdVentaVehiculo()  , 
+								 venta.getIdUsuVentaVN(),
+								 venta.getIdUsuPedido(),
+								 venta.getIdUsuLlegada()
+ };
+				listadoDeVentasModel.addRow(row);
 			
 			
 		}
 		
 	}
 	
-	public void cargarTabla(FacturaDTO presupuesto) {
-		if(presupuesto != null) {
-			Object[] row = { presupuesto.getIdFactura().toString(),  presupuesto.getDni(), presupuesto.getFechaDeCierrePorPago(),
-					presupuesto.getTotal(), presupuesto.getEstado() };
-			listadoDeFacturasModel.addRow(row);
-			
-		}
-	}
+	
 
-	public String getFactura() {
-		return (String) textFactura.getText();
+	public String getVenta() {
+		return (String) textVentas.getText();
 	}
 		
-	public boolean iPersupuestoAprobado(int row, int column, JTable table) {
-		return table.getValueAt(row, column) != null;
-	}
+	
 
 	public void setActionOnBuscar(ActionListener listener) {
-		this.btnCargarFacturas.addActionListener(listener);
+		this.btnCargarVentas.addActionListener(listener);
 		
 	}
 		
 	public void clear() {
-		listadoDeFacturasModel.setRowCount(0);
-		listadoDeFacturasModel.setColumnCount(0);
-		listadoDeFacturasModel.setColumnIdentifiers(columnasListadoDeFacturas);
+		listadoDeVentasModel.setRowCount(0);
+		listadoDeVentasModel.setColumnCount(0);
+		listadoDeVentasModel.setColumnIdentifiers(columnasListadoDeVentas);
 	}
 	
-	public int getIdPresupuestoSeleccionada(){
-		int idSeleccionada=-1;
-		int row = tableFacturas.getSelectedRow();
-		if(row!=-1) {
-			idSeleccionada= Integer.valueOf((String) tableFacturas.getValueAt(row, 0));
-		}
-		return idSeleccionada;
-	}
+
 	
 	
-	public String getEstadoSeleccionada(){
-		String idSeleccionada = null;
-		int row = tableFacturas.getSelectedRow();
-		if(row!=-1) {
-			idSeleccionada= (String) tableFacturas.getValueAt(row, 4);
-		}
-		return idSeleccionada;
-	}
-	
-	
-	public Double getTotalSeleccionada(){
-		Double idSeleccionada = null;
-		int row = tableFacturas.getSelectedRow();
-		if(row!=-1) {
-			idSeleccionada= (Double) tableFacturas.getValueAt(row, 3);
-		}
-		return idSeleccionada;
-	}
 	
 	
 }
