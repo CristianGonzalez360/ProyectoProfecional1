@@ -396,22 +396,22 @@ monedas:
     cotizacionDolar: 200
 
 sucursales:
-  - pais: ARG
+  - pais: Argentina
     calle: ff
     altura: 1233
     localidad: Avellaneda
     idMoneda: 1
-  - pais: ARG
+  - pais: Argentina
     calle: ff
     altura: 1233
     localidad: Martinez
     idMoneda: 1
-  - pais: ARG
+  - pais: Argentina
     calle: ff
     altura: 1233
     localidad: Quilmes
     idMoneda: 1
-  - pais: ARG
+  - pais: Argentina
     calle: ff
     altura: 1233
     localidad: Munro
@@ -437,11 +437,11 @@ vehiculos:
     linea: trend
     color: negro
     fechaIngreso:
-    disponible: true
+    disponible: false
     usado: false
     idCompra:
     idCaracteristicas: 1
-    idSucursal:
+    idSucursal: 2
   - precioVenta: 123
     idFichaTecnica: 1
     marca: Ford
@@ -453,7 +453,7 @@ vehiculos:
     usado: true
     idCompra:
     idCaracteristicas: 1
-    idSucursal: 1
+    idSucursal: 3
   - precioVenta: 123
     idFichaTecnica: 1
     marca: Ford
@@ -465,7 +465,7 @@ vehiculos:
     usado: true
     idCompra:
     idCaracteristicas: 1
-    idSucursal: 1
+    idSucursal: 4
 
 ventaVehiculo:
   - idVentaVehiculo: 1
