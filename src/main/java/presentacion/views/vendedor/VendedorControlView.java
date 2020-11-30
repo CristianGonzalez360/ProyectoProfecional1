@@ -13,18 +13,15 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ListSelectionListener;
 
+import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
-import dto.SucursalDTO;
-import dto.VehiculoParaVentaDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
+import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import presentacion.views.supervisor.ClientePanelView;
 
 public class VendedorControlView extends JInternalFrame {
 	  	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1308877516578945407L;
 
 	private static VendedorControlView instance;
@@ -99,19 +96,13 @@ public class VendedorControlView extends JInternalFrame {
 		this.panelHistorial = HistorialVentasView.getInstance();
 		tabbedPane.add("Historial Ventas", this.panelHistorial);	
 		
-		tableView = new TablePanel<OutputConsultaVehiculoEnVentaDTO>(new String [] {"Código", "Marca", "Familia", "Linea", "Cilindrada", "Color", "Precio"}) {
-		
-			
-			
-			/**
-			 * 
-			 */
+		tableView = new TablePanel<OutputConsultaVehiculoEnVentaDTO>(new String [] {"Código", "Marca", "Familia", "Linea", "Color","Sucursal", "Precio"}) {
 			private static final long serialVersionUID = -6912872259496249346L;
 
 			@Override
 			public void setData(List<OutputConsultaVehiculoEnVentaDTO> data) {
 				for(OutputConsultaVehiculoEnVentaDTO dto : data) {
-					Object [] row = { dto.getCodigo(), dto.getMarca(), dto.getFamilia(), dto.getLinea(), dto.getCilindrada(), dto.getColor(), dto.getPrecio() };
+					Object [] row = { dto.getCodigo(), dto.getMarca(), dto.getFamilia(), dto.getLinea(),dto.getColor(), dto.getSucursal(), dto.getPrecio() };
 					model.addRow(row);	
 				}
 			}
@@ -126,8 +117,8 @@ public class VendedorControlView extends JInternalFrame {
 					ret.setMarca(model.getValueAt(row, 1).toString());
 					ret.setFamilia(model.getValueAt(row, 2).toString());
 					ret.setLinea(model.getValueAt(row, 3).toString());
-					ret.setCilindrada(model.getValueAt(row, 4).toString());
-					ret.setColor(model.getValueAt(row, 5).toString());
+					ret.setColor(model.getValueAt(row, 4).toString());
+					ret.setSucursal(model.getValueAt(row, 5).toString());
 					ret.setPrecio(model.getValueAt(row, 6).toString());
 				}
 				return ret;
@@ -153,7 +144,12 @@ public class VendedorControlView extends JInternalFrame {
 	}
 
 	public void clearData() {
-		
+		busquedaPanel.clearData();
+		clientePanel.clearData();
+		busquedaVehiculoPanel.clearData();
+		caracteristicaVehiculoPanel.clearData();
+		datosVentaVehiculoPanel.clearData();
+		tableView.clearData();
 	}
 
 	public void setActionConsultarCliente(ActionListener listener) {
@@ -192,19 +188,15 @@ public class VendedorControlView extends JInternalFrame {
 		this.busquedaVehiculoPanel.addTipos(tipos);
 	}
 
-	public void addSucursalesBusqueda(List<SucursalDTO> list) {
-		this.busquedaVehiculoPanel.addSucursales(list);
-	}
-
 	public void setActionSelectVehiculo(ListSelectionListener listener) {
 		this.tableView.setActionSelect(listener);
 	}
 
-	public OutputConsultaVehiculoEnVentaDTO getDataCodigoDeVehiculo() {
+	public OutputConsultaVehiculoEnVentaDTO getDataVehiculoEnVenta() {
 		return this.tableView.getData();
 	}
 
-	public void setData(VehiculoParaVentaDTO dto) {
+	public void setData(CaracteristicaVehiculoDTO dto) {
 		this.caracteristicaVehiculoPanel.setData(dto);
 	}
 
@@ -232,7 +224,19 @@ public class VendedorControlView extends JInternalFrame {
 		this.btnRegistrarCliente.addActionListener(listener);
 	}
 
-	public void setDataIVA(String iva) {
-		this.datosVentaVehiculoPanel.setIVA(iva);
+	public void addMarcasBusqueda(List<String> readNombreMarcasVehiculos) {
+		this.busquedaVehiculoPanel.addMarcas(readNombreMarcasVehiculos);
+	}
+
+	public void setActionRegistrarVenta(ActionListener listener) {
+		this.datosVentaVehiculoPanel.setActionRegistrarVenta(listener);
+	}
+
+	public ClienteDTO getDataCliente() {
+		return this.clientePanel.getData();
+	}
+
+	public ModalidadVentaVehiculoDTO getDataModalidadVenta() {
+		return this.datosVentaVehiculoPanel.getData();
 	}
 }

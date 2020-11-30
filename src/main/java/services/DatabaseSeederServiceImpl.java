@@ -5,10 +5,14 @@ import org.apache.log4j.LogManager;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
+import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
+import dto.MonedaDTO;
+import dto.SucursalDTO;
 import dto.UsuarioDTO;
+import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
 import dto.taller.FacturaDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
@@ -87,12 +91,28 @@ public class DatabaseSeederServiceImpl {
 			daos.makeFacturasDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
+		for (CaracteristicaVehiculoDTO target: graph.getCaracteristicaVehiculo()) {
+			daos.makeCaracteristicasVehiculoDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for(MonedaDTO target: graph.getMonedas()) {
+			daos.makeMonedasDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for(SucursalDTO target: graph.getSucursales()) {
+			daos.makeSucursalesDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for(VehiculoDTO target: graph.getVehiculos()) {
+			daos.makeVehiculoDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}		
 		for (VentaVehiculoDTO target : graph.getVentaVehiculo()) {
 			daos.makeVentaVehiculoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 	}
-
+	
 	private DatabaseGraph loadDatabaseGraph() {
 		DatabaseGraph graph = null;
 		try {

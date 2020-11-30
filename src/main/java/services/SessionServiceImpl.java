@@ -3,6 +3,7 @@ package services;
 import java.util.Date;
 
 import business_logic.exceptions.ForbiddenException;
+import dto.SucursalDTO;
 import dto.UsuarioDTO;
 import dto.temporal.SessionDTO;
 
@@ -24,13 +25,14 @@ public class SessionServiceImpl implements SessionService {
 	}
 
 	@Override
-	public void openSession(UsuarioDTO user) throws ForbiddenException {
+	public void openSession(UsuarioDTO user, SucursalDTO sucursal) throws ForbiddenException {
 		assert user != null;
 		if (session != null)
 			throw new ForbiddenException(FORBIDDEN);
 		session = new SessionDTO();
 		session.setInitSession(new Date());
 		session.setUser(user);
+		session.setSucursal(sucursal);
 	}
 
 	@Override

@@ -13,7 +13,7 @@ import business_logic.ClientesController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.RepuestosController;
-import business_logic.VehiculosController;
+import business_logic.VehiculosConOrdenDeTrabajoController;
 import dto.ClienteDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
@@ -36,14 +36,14 @@ public class PresupuestosPresenter {
 	private PlanificarRepuestosFormView planRepuestosView;
 	private PlanificarTrabajosFormView planTrabajosView;
 	private PresupuestoDTO nuevoPresupuesto;
-	private VehiculosController vehiculosController;
+	private VehiculosConOrdenDeTrabajoController vehiculosController;
 	private PresupuestosController presupuestosController;
 	private RepuestosController repuestosController;
 	private OrdenesTrabajoController ordenDeTrabajoController;
 	private ClientesController clienteController;
 
 	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController,
-			OrdenesTrabajoController ordenDetranajoController, VehiculosController vehiculoController,
+			OrdenesTrabajoController ordenDetranajoController, VehiculosConOrdenDeTrabajoController vehiculoController,
 			ClientesController clienteController) {
 
 		this.clienteController = clienteController;

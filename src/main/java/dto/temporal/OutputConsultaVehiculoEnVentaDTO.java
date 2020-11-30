@@ -10,7 +10,7 @@ public class OutputConsultaVehiculoEnVentaDTO {
 	
 	private String linea;
 	
-	private String cilindrada;
+	private String sucursal;
 	
 	private String color;
 	
@@ -51,14 +51,6 @@ public class OutputConsultaVehiculoEnVentaDTO {
 		this.linea = linea;
 	}
 
-	public String getCilindrada() {
-		return cilindrada;
-	}
-
-	public void setCilindrada(String cilindrada) {
-		this.cilindrada = cilindrada;
-	}
-
 	public String getColor() {
 		return color;
 	}
@@ -73,5 +65,19 @@ public class OutputConsultaVehiculoEnVentaDTO {
 
 	public void setPrecio(String precio) {
 		this.precio = precio;
+	}
+
+	public String getSucursal() {
+		return sucursal;
+	}
+
+	public void setSucursal(String sucursal) {
+		this.sucursal = sucursal;
+	}
+
+	@Override
+	public String toString() {
+		return "OutputConsultaVehiculoEnVentaDTO [codigo=" + codigo + ", marca=" + marca + ", familia=" + familia
+				+ ", linea=" + linea + ", sucursal=" + sucursal + ", color=" + color + ", precio=" + precio + "]";
 	}
 }

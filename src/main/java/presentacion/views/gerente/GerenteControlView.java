@@ -15,6 +15,8 @@ public class GerenteControlView extends JInternalFrame {
 	private static GerenteControlView instance;
 
 	private PedidosPanelView pedidosPanelView;
+	
+	private GerenteNuevosCar autosNuevosView;
 
 	public static GerenteControlView getInstance() {
 		if (instance == null)
@@ -39,6 +41,15 @@ public class GerenteControlView extends JInternalFrame {
 
 		pedidosPanelView = new PedidosPanelView();
 		pedidosPanel.add(pedidosPanelView);
+		
+
+		autosNuevosView = GerenteNuevosCar.getInstance();
+		tabbedPane.addTab("Autos nuevos", autosNuevosView);
+
+
+		PanelRegistroPedido panelPedidos = PanelRegistroPedido.getInstance();
+		tabbedPane.addTab("Registro de Pedidos",panelPedidos );
+
 	}
 
 	public void display() {
@@ -64,6 +75,10 @@ public class GerenteControlView extends JInternalFrame {
 
 	public void setPedidosPanelView(PedidosPanelView pedidosPanelView) {
 		this.pedidosPanelView = pedidosPanelView;
+	}
+	
+	public GerenteNuevosCar getAutosNuevosPanelView () {
+		return autosNuevosView;
 	}
 
 }

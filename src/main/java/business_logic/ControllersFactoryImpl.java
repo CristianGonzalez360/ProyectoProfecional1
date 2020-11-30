@@ -13,7 +13,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 
 	private ClientesController clientesController;
 
-	private VehiculosController vehiculosController;
+	private VehiculosConOrdenDeTrabajoController vehiculosController;
 
 	private OrdenesTrabajoController ordenesDeTrabajoController;
 
@@ -29,6 +29,8 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	
 	private PedidosController pedidosController;
 	
+	private VentasVehiculosController ventasController;
+	
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
 	}
@@ -36,7 +38,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public LoginController makeLoginController() {
 		if (loginController == null)
-			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance());
+			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance(), daos.makeSucursalesDao());
 		return loginController;
 	}
 
@@ -55,10 +57,10 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	}
 
 	@Override
-	public VehiculosController makeVehiculosController() {
+	public VehiculosConOrdenDeTrabajoController makeVehiculosController() {
 		if (vehiculosController == null) {
-			this.vehiculosController = new VehiculosController(daos.makeVehiculoConOrdeDeTrabajoDao(),
-					daos.makeOrdenDeTrabajoDao(), daos.makeFichaTecnicaVehiculoDao(), daos.makeVehiculosParaVentaDao());
+			this.vehiculosController = new VehiculosConOrdenDeTrabajoController(daos.makeVehiculoConOrdeDeTrabajoDao(),
+					daos.makeOrdenDeTrabajoDao(), daos.makeFichaTecnicaVehiculoDao());
 		}
 		return this.vehiculosController;
 	}
@@ -112,8 +114,14 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public PedidosController makePedidosController() {
 		if(pedidosController == null) {
-			pedidosController = new PedidosController(daos.makeClienteDao(), daos.makeDatosPersonalesDao(), daos.makeFichaTecnicaVehiculoDao(), daos.makePedidoVehiculoDao());
+			pedidosController = new PedidosController(daos.makeClienteDao(), daos.makeDatosPersonalesDao(), daos.makeUsuariosDao(), daos.makeVentaVehiculoDao(), daos.makePedidoVehiculoDao());
 		}
 		return pedidosController;
+	}
+
+	@Override
+	public VentasVehiculosController makeVentasVehiculosController() {
+		if(ventasController == null) ventasController = new VentasVehiculosController(daos);
+		return ventasController;
 	}
 }

@@ -21,7 +21,6 @@ cuentas:
     password: pu005
     role: vendedor
 
-
 datosPersonales:
   - nombreCompleto: u001
     apellido: ap001
@@ -356,17 +355,129 @@ facturas:
     idCliente: 1
     dni: 33390343
 
+caracteristicaVehiculo:
+  - cilindrada: 1.58
+    motor: 1.56 MSI nafta
+    transmision: Manual 5 velocidades
+    direccion: electrica asistida
+    potencia: 100 CV
+    frenosDelanteros: Discos ventilados
+    frenosTraseros: A tambor
+    torqueMaximo: 155/4000
+    volumenBaul: 300 cc
+    cantidadPuertas: 4
+    precio: 1000000
+  - cilindrada: 1.58
+    motor: 2.0 MSI nafta
+    transmision: Manual 5 velocidades
+    direccion: electrica asistida
+    potencia: 150 CV
+    frenosDelanteros: Discos ventilados
+    frenosTraseros: A tambor
+    torqueMaximo: 155/4000
+    volumenBaul: 350 cc
+    cantidadPuertas: 3
+    precio: 1500000
+  - cilindrada: 1.58
+    motor: 1.56 MSI nafta
+    transmision: Automatica 5 velocidades
+    direccion: electrica
+    potencia: 100 CV
+    frenosDelanteros: Discos ventilados
+    frenosTraseros: A tambor
+    torqueMaximo: 155/4000
+    volumenBaul: 300 cc
+    cantidadPuertas: 3
+    precio: 1000500
+
+monedas:
+  - nombre: peso
+    simbolo: $
+    cotizacionDolar: 200
+
+sucursales:
+  - pais: Argentina
+    calle: ff
+    altura: 1233
+    localidad: Avellaneda
+    idMoneda: 1
+  - pais: Argentina
+    calle: ff
+    altura: 1233
+    localidad: Martinez
+    idMoneda: 1
+  - pais: Argentina
+    calle: ff
+    altura: 1233
+    localidad: Quilmes
+    idMoneda: 1
+  - pais: Argentina
+    calle: ff
+    altura: 1233
+    localidad: Munro
+    idMoneda: 1
+
+vehiculos:
+  - precioVenta: 1300000
+    idFichaTecnica: 1
+    marca: Ford
+    familia: Focus
+    linea: vip
+    color: rojo
+    fechaIngreso: 2017-10-11
+    disponible: true
+    usado: false
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 1
+  - precioVenta: 1300555
+    idFichaTecnica: 1
+    marca: wolkswagen
+    familia: polo
+    linea: trend
+    color: negro
+    fechaIngreso:
+    disponible: true
+    usado: false
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 2
+  - precioVenta: 1300999
+    idFichaTecnica: 1
+    marca: Ford
+    familia: Focus
+    linea: vip
+    color: azul
+    fechaIngreso: 2017-10-11
+    disponible: true
+    usado: true
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 3
+  - precioVenta: 800000
+    idFichaTecnica: 1
+    marca: Ford
+    familia: Fiesta
+    linea: vip
+    color: amarillo
+    fechaIngreso: 2017-10-11
+    disponible: true
+    usado: true
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 4
+
 ventaVehiculo:
-  - idVentaVehiculo: 1
-    idUsuVentaVN: 1
-    idUsuPedido: 1
-    idUsuLlegada: 1
-    idPagoVentaVN: 1
+  - idUsuVentaVN: 1
+    idUsuPedido: 
+    idUsuLlegada: 
+    idPagoVentaVN: 
     fechaVentaVN: 2020-10-11
     fechaEntregaReal: 2020-10-11
-    fabricante: 1
-    comisionCobrada: 1
-    precioVenta: 1
+    fabricante: Ford
+    comisionCobrada: 10000
+    precioVenta: 1200444
     idVehiculo: 1
     idCliente: 1
-    idUsuEntrega: 1
+    idUsuEntrega: 
+    idSucursalVenta: 1
