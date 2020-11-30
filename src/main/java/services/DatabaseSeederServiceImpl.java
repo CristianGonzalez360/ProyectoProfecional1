@@ -9,6 +9,7 @@ import dto.ClienteDTO;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
 import dto.UsuarioDTO;
+import dto.VentaVehiculoDTO;
 import dto.taller.FacturaDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
@@ -84,6 +85,10 @@ public class DatabaseSeederServiceImpl {
 		}
 		for (FacturaDTO target : graph.getFacturas()) {
 			daos.makeFacturasDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for (VentaVehiculoDTO target : graph.getVentaVehiculo()) {
+			daos.makeVentaVehiculoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 	}
