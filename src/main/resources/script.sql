@@ -331,4 +331,3 @@ CREATE TABLE Sucursal (
   PRIMARY KEY (idSucursal),
   FOREIGN KEY (idMoneda) REFERENCES Moneda(idMoneda)
 );
-
