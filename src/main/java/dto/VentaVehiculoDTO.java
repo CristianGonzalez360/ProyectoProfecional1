@@ -24,6 +24,12 @@ public class VentaVehiculoDTO {
 	
 	private Double precioVenta;
 	
+	private String financiera;
+	
+	private Integer nroCuotas;
+	
+	private Double montoCuota;
+	
 	private Integer idVehiculo;
 	
 	private Integer idCliente ;
@@ -112,12 +118,37 @@ public class VentaVehiculoDTO {
 		this.idUsuEntrega = idUsuEntrega;
 	}
 
+	public String getFinanciera() {
+		return financiera;
+	}
+
+	public void setFinanciera(String financiera) {
+		this.financiera = financiera;
+	}
+
+	public Integer getNroCuotas() {
+		return nroCuotas;
+	}
+
+	public void setNroCuotas(Integer nroCuotas) {
+		this.nroCuotas = nroCuotas;
+	}
+
+	public Double getMontoCuota() {
+		return montoCuota;
+	}
+
+	public void setMontoCuota(Double montoCuota) {
+		this.montoCuota = montoCuota;
+	}
+
 	@Override
 	public String toString() {
 		return "VentaVehiculoDTO [idVentaVehiculo=" + idVentaVehiculo + ", idUsuVentaVN=" + idUsuVentaVN
 				+ ", idUsuPedido=" + idUsuPedido + ", idUsuLlegada=" + idUsuLlegada + ", idPagoVentaVN=" + idPagoVentaVN
 				+ ", fechaVentaVN=" + fechaVentaVN + ", fechaEntregaReal=" + fechaEntregaReal + ", fabricante="
-				+ fabricante + ", comisionCobrada=" + comisionCobrada + ", precioVenta=" + precioVenta + ", idVehiculo="
-				+ idVehiculo + ", idCliente=" + idCliente + ", idUsuEntrega=" + idUsuEntrega + "]";
+				+ fabricante + ", comisionCobrada=" + comisionCobrada + ", precioVenta=" + precioVenta + ", financiera="
+				+ financiera + ", nroCuotas=" + nroCuotas + ", montoCuota=" + montoCuota + ", idVehiculo=" + idVehiculo
+				+ ", idCliente=" + idCliente + ", idUsuEntrega=" + idUsuEntrega + "]";
 	}
 }

@@ -425,7 +425,7 @@ vehiculos:
     linea: vip
     color: rojo
     fechaIngreso: 2017-10-11
-    disponible: false
+    disponible: true
     usado: false
     idCompra:
     idCaracteristicas: 1
@@ -437,7 +437,7 @@ vehiculos:
     linea: trend
     color: negro
     fechaIngreso:
-    disponible: false
+    disponible: true
     usado: false
     idCompra:
     idCaracteristicas: 1
@@ -449,7 +449,7 @@ vehiculos:
     linea: vip
     color: azul
     fechaIngreso: 2017-10-11
-    disponible: false
+    disponible: true
     usado: true
     idCompra:
     idCaracteristicas: 1
@@ -461,7 +461,7 @@ vehiculos:
     linea: vip
     color: amarillo
     fechaIngreso: 2017-10-11
-    disponible: false
+    disponible: true
     usado: true
     idCompra:
     idCaracteristicas: 1

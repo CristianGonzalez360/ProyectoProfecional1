@@ -12,6 +12,7 @@ import javax.swing.event.ListSelectionListener;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
+import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import presentacion.views.supervisor.ClientePanelView;
 
@@ -144,7 +145,12 @@ public class VendedorControlView extends JInternalFrame {
 	}
 
 	public void clearData() {
-		
+		busquedaPanel.clearData();
+		clientePanel.clearData();
+		busquedaVehiculoPanel.clearData();
+		caracteristicaVehiculoPanel.clearData();
+		datosVentaVehiculoPanel.clearData();
+		tableView.clearData();
 	}
 
 	public void setActionConsultarCliente(ActionListener listener) {
@@ -187,7 +193,7 @@ public class VendedorControlView extends JInternalFrame {
 		this.tableView.setActionSelect(listener);
 	}
 
-	public OutputConsultaVehiculoEnVentaDTO getDataCodigoDeVehiculo() {
+	public OutputConsultaVehiculoEnVentaDTO getDataVehiculoEnVenta() {
 		return this.tableView.getData();
 	}
 
@@ -219,11 +225,19 @@ public class VendedorControlView extends JInternalFrame {
 		this.btnRegistrarCliente.addActionListener(listener);
 	}
 
-	public void setDataIVA(String iva) {
-		this.datosVentaVehiculoPanel.setIVA(iva);
-	}
-
 	public void addMarcasBusqueda(List<String> readNombreMarcasVehiculos) {
 		this.busquedaVehiculoPanel.addMarcas(readNombreMarcasVehiculos);
+	}
+
+	public void setActionRegistrarVenta(ActionListener listener) {
+		this.datosVentaVehiculoPanel.setActionRegistrarVenta(listener);
+	}
+
+	public ClienteDTO getDataCliente() {
+		return this.clientePanel.getData();
+	}
+
+	public ModalidadVentaVehiculoDTO getDataModalidadVenta() {
+		return this.datosVentaVehiculoPanel.getData();
 	}
 }
