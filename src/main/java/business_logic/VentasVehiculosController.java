@@ -37,9 +37,7 @@ public class VentasVehiculosController {
 	}
 	
 	public List<OutputConsultaVehiculoEnVentaDTO> readByCriteria(ConsultaVehiculoParaVentaDTO consulta) {
-		List<VehiculoDTO> temp = daos
-				.makeVehiculoDao()
-				.readByCriteria(consulta.getTipo().equals("Nuevo") ? false : true, consulta.getMarca(), consulta.getFamilia() ,consulta.getLinea());
+		List<VehiculoDTO> temp = daos.makeVehiculoDao().readByCriteria(consulta.getMarca(), new Boolean(consulta.getTipo().equals("Usado")));	
 		List<OutputConsultaVehiculoEnVentaDTO> ret = new LinkedList<>();
 		for(VehiculoDTO dto : temp) {
 			OutputConsultaVehiculoEnVentaDTO aux = new OutputConsultaVehiculoEnVentaDTO();
@@ -49,7 +47,7 @@ public class VentasVehiculosController {
 			aux.setPrecio(dto.getPrecioVenta().toString());
 			aux.setCodigo(dto.getIdVehiculo().toString());
 			aux.setColor(dto.getColor());
-			aux.setSucursal(dto.getIdSucursal() == null ? " " : dto.getIdSucursal().toString());
+			aux.setSucursal(dto.getIdSucursal() == null ? "NONE" : dto.getIdSucursal().toString());
 			ret.add(aux);
 		}
 		return ret;
