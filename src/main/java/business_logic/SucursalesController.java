@@ -3,13 +3,15 @@ package business_logic;
 import java.util.List;
 
 import dto.SucursalDTO;
-import repositories.SucursalDao;
+import repositories.SucursalesDao;
 
 public class SucursalesController {
 
-	private SucursalDao sucursalDao;
+	private static final String pais = "Argentina";
 	
-	public SucursalesController(SucursalDao sucDao) {
+	private SucursalesDao sucursalDao;
+	
+	public SucursalesController(SucursalesDao sucDao) {
 		assert sucDao != null;
 		sucursalDao = sucDao;
 	}
@@ -19,7 +21,7 @@ public class SucursalesController {
 	}
 	
 	public List<SucursalDTO> readAll() {
-		return sucursalDao.readAll();
+		return sucursalDao.readByPais(pais);
 	}
 	
 	public List<String> readFinancierasByPais(String pais) {

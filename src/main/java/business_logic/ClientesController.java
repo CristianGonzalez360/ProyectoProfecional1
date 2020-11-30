@@ -51,4 +51,8 @@ public class ClientesController {
 		assert cliente != null;
 		this.datosPersonalesDao.update(cliente.getDatosPersonalesDTO());
 	}
+
+	public ClienteDTO readById(Integer idCliente) {
+		return this.clientesDao.readByID(idCliente);
+	}
 }

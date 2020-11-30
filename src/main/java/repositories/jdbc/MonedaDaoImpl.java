@@ -9,21 +9,25 @@ import repositories.jdbc.utils.Mapper;
 
 public class MonedaDaoImpl extends GenericJdbcDao<MonedaDTO> implements MonedaDao {
 
+	private static final String insert = "INSERT INTO moneda(nombre, simbolo, cotizacionDolar) VALUES(?,?,?)";
+	
 	public MonedaDaoImpl(Connection connection) {
 		super(connection);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean update(MonedaDTO entity) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean insert(MonedaDTO entity) {
-		// TODO Auto-generated method stub
-		return false;
+		return getTemplate()
+				.query(insert)
+				.param(entity.getNombre())
+				.param(entity.getSimbolo())
+				.param(entity.getCotizacionDolar())
+				.excecute();
 	}
 
 	@Override

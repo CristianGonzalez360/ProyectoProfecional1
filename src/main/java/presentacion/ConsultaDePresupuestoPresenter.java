@@ -13,7 +13,7 @@ import business_logic.ClientesController;
 import business_logic.FacturasController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
-import business_logic.VehiculosController;
+import business_logic.VehiculosConOrdenDeTrabajoController;
 import dto.ClienteDTO;
 import dto.taller.EstadoPresupuesto;
 import dto.taller.FacturaDTO;
@@ -31,7 +31,7 @@ public class ConsultaDePresupuestoPresenter {
 
 	private ConsultaDePresupuestosSupervisorView view = ConsultaDePresupuestosSupervisorView.getInstance();
 
-	private VehiculosController vehiculoController;
+	private VehiculosConOrdenDeTrabajoController vehiculoController;
 
 	private ClientesController clientesController;
 
@@ -43,7 +43,7 @@ public class ConsultaDePresupuestoPresenter {
 
 	private ClienteDTO cliente;
 	
-	public ConsultaDePresupuestoPresenter(VehiculosController controller
+	public ConsultaDePresupuestoPresenter(VehiculosConOrdenDeTrabajoController controller
 			, ClientesController clienteController,
 			OrdenesTrabajoController otController,
 			PresupuestosController presController,

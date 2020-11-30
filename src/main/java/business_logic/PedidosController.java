@@ -7,28 +7,32 @@ import java.util.List;
 import dto.DatosPersonalesDTO;
 import dto.PedidoVehiculoDTO;
 import dto.UsuarioDTO;
-import dto.VehiculoParaVentaDTO;
+import dto.VentaVehiculoDTO;
 import dto.temporal.PedidoDTO;
 import repositories.ClientesDao;
 import repositories.DatosPersonalesDao;
+import repositories.FichaTecnicaVehiculoDao;
 import repositories.PedidoVehiculoDao;
+
 import repositories.UsuariosDao;
-import repositories.VehiculosEnVentaDao;
+import repositories.VentaVehiculoDao;
+import services.SessionServiceImpl;
 
 public class PedidosController {
 
 	private ClientesDao clientesDao;
 	private DatosPersonalesDao datosPersonalesDao;
 	private UsuariosDao usuariosDao;
-	private VehiculosEnVentaDao vehiculosEnVentaDao;
+	private VentaVehiculoDao ventaVehiculoDao;
+	private FichaTecnicaVehiculoDao fichaTecnicaDao;
 	private PedidoVehiculoDao pedidosDao;
 
 	public PedidosController(ClientesDao clientesDao, DatosPersonalesDao datosPersonalesDao, UsuariosDao usuariosDao,
-			VehiculosEnVentaDao vehiculosEnVentaDao, PedidoVehiculoDao pedidosDao) {
+			VentaVehiculoDao ventaVehiculoDao, PedidoVehiculoDao pedidosDao) {
 		this.clientesDao = clientesDao;
 		this.datosPersonalesDao = datosPersonalesDao;
 		this.usuariosDao = usuariosDao;
-		this.vehiculosEnVentaDao = vehiculosEnVentaDao;
+		this.ventaVehiculoDao = ventaVehiculoDao;
 		this.pedidosDao = pedidosDao;
 	}
 
@@ -43,6 +47,7 @@ public class PedidosController {
 			pedidos.add(armarPedidoCompleto(pedido));
 		}
 
+		System.out.println("buscargg");
 		return pedidos;
 	}
 
@@ -53,10 +58,10 @@ public class PedidosController {
 		String nombreCliente = "";
 		String apellidoCliente = "";
 		String dniCliente = "";
-		String marcaAuto = datosDeVehiculo(pedido.getIdVentaVehiculo()).getMarca();
-		String modeloAuto = datosDeVehiculo(pedido.getIdVentaVehiculo()).getFamilia();
-		String colorAuto = datosDeVehiculo(pedido.getIdVentaVehiculo()).getColorVehiculo();
-		String conbustionAuto = datosDeVehiculo(pedido.getIdVentaVehiculo()).getFichaTecnica().getCombustion();
+		String marcaAuto = datosDeVehiculo(pedido.getIdVentaVehiculo()).getFabricante();
+		String modeloAuto = "";
+		String colorAuto = "";
+		String conbustionAuto = "";
 		String nombreUsuario = datosDeUsuario(pedido.getIdUsuPedido()).getDatos().getNombreCompleto();
 		Date fechaPedido = pedido.getFechaPedido();
 
@@ -78,12 +83,17 @@ public class PedidosController {
 		return datosPersonalesDao.readByID(id);
 	}
 
-	private VehiculoParaVentaDTO datosDeVehiculo(Integer id) {
-		return vehiculosEnVentaDao.readByID(id);
+	private VentaVehiculoDTO datosDeVehiculo(Integer id) {
+		return ventaVehiculoDao.readByID(id);
 	}
 
 	private UsuarioDTO datosDeUsuario(Integer id) {
 		return usuariosDao.readByID(id);
+	}
+
+	public void save(PedidoVehiculoDTO pedido) {
+		pedido.setIdUsuPedido(SessionServiceImpl.getInstance().getActiveSession().getIdUsuario());
+		pedidosDao.insert(pedido);
 	}
 
 }

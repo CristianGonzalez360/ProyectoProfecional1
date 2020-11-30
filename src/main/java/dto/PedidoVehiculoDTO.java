@@ -12,6 +12,7 @@ public class PedidoVehiculoDTO {
 	private Integer idVentaVehiculo;
 
 	public PedidoVehiculoDTO() {
+		setFechaPedido(new Date());
 	}
 
 	public PedidoVehiculoDTO(Date fechaPedido, Date fechaIngreso, Integer idUsuPedido, Integer idUsuIngreso,

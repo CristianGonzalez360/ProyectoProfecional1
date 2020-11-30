@@ -2,6 +2,8 @@ package dto;
 
 public class CaracteristicaVehiculoDTO {
 	
+	private Integer idCaracteristica;
+	
 	private String cilindrada;
 	
 	private String motor;
@@ -114,6 +116,14 @@ public class CaracteristicaVehiculoDTO {
 	public void setPrecio(String precio) {
 		this.precio = precio;
 	}
+	
+	public Integer getIdCaracteristica() {
+		return idCaracteristica;
+	}
+
+	public void setIdCaracteristica(Integer idCaracteristica) {
+		this.idCaracteristica = idCaracteristica;
+	}
 
 	public CaracteristicaVehiculoDTO makeTestDTO() {
 		CaracteristicaVehiculoDTO dto = new CaracteristicaVehiculoDTO();
@@ -129,5 +139,14 @@ public class CaracteristicaVehiculoDTO {
 		dto.setCantidadPuertas("3");
 		dto.setPrecio("1000000");
 		return dto;
+	}
+
+	@Override
+	public String toString() {
+		return "CaracteristicaVehiculoDTO [idCaracteristica=" + idCaracteristica + ", cilindrada=" + cilindrada
+				+ ", motor=" + motor + ", transmision=" + transmision + ", direccion=" + direccion + ", potencia="
+				+ potencia + ", frenosDelanteros=" + frenosDelanteros + ", frenosTraseros=" + frenosTraseros
+				+ ", torqueMaximo=" + torqueMaximo + ", volumenBaul=" + volumenBaul + ", cantidadPuertas="
+				+ cantidadPuertas + ", precio=" + precio + "]";
 	}
 }

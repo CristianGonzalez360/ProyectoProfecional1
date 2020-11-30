@@ -32,7 +32,7 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 				.param(entity.getFechaIngreso() == null ? new NullObject() : entity.getFechaIngreso())
 				.param(entity.getIdUsuPedido() == null ? new NullObject() : entity.getIdUsuPedido())
 				.param(entity.getIdUsuIngreso() == null ? new NullObject() : entity.getIdUsuIngreso())
-				.param(entity.getIdVentaVehiculo()).excecute();
+				.param(entity.getIdVentaVehiculo() == null? new NullObject() : entity.getIdVentaVehiculo()).excecute();
 	}
 
 	@Override
