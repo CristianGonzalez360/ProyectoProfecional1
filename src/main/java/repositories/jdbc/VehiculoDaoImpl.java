@@ -24,7 +24,6 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean insert(VehiculoDTO entity) {
 		return getTemplate()
