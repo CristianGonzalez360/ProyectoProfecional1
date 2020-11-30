@@ -10,7 +10,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ListSelectionListener;
 
 import dto.ClienteDTO;
-import dto.SucursalDTO;
 import dto.VehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
@@ -118,7 +117,8 @@ public class VendedorControlView extends JInternalFrame {
 					ret.setMarca(model.getValueAt(row, 1).toString());
 					ret.setFamilia(model.getValueAt(row, 2).toString());
 					ret.setLinea(model.getValueAt(row, 3).toString());
-					ret.setCilindrada(model.getValueAt(row, 4).toString());
+					
+					ret.setCilindrada(model.getValueAt(row, 4) == null ? null : model.getValueAt(row, 4).toString());
 					ret.setColor(model.getValueAt(row, 5).toString());
 					ret.setPrecio(model.getValueAt(row, 6).toString());
 				}
@@ -184,10 +184,6 @@ public class VendedorControlView extends JInternalFrame {
 		this.busquedaVehiculoPanel.addTipos(tipos);
 	}
 
-	public void addSucursalesBusqueda(List<SucursalDTO> list) {
-		this.busquedaVehiculoPanel.addSucursales(list);
-	}
-
 	public void setActionSelectVehiculo(ListSelectionListener listener) {
 		this.tableView.setActionSelect(listener);
 	}
@@ -226,5 +222,9 @@ public class VendedorControlView extends JInternalFrame {
 
 	public void setDataIVA(String iva) {
 		this.datosVentaVehiculoPanel.setIVA(iva);
+	}
+
+	public void addMarcasBusqueda(List<String> readNombreMarcasVehiculos) {
+		this.busquedaVehiculoPanel.addMarcas(readNombreMarcasVehiculos);
 	}
 }

@@ -17,6 +17,7 @@ public class VentasVehiculosController {
 	private static final String pais = "Argentina";
 	
 	public VentasVehiculosController(DaosFactory daos) {
+		assert daos != null;
 		this.daos = daos;
 	}
 
@@ -36,10 +37,9 @@ public class VentasVehiculosController {
 	}
 	
 	public List<OutputConsultaVehiculoEnVentaDTO> readByCriteria(ConsultaVehiculoParaVentaDTO consulta) {
-		Integer idSucursal = daos.makeSucursalesDao().readByName(consulta.getSucursal()).getIdSucursal();
 		List<VehiculoDTO> temp = daos
 				.makeVehiculoDao()
-				.readByCriteria(consulta.getTipo().equals("Nuevo") ? false : true, consulta.getMarca(), consulta.getFamilia() ,consulta.getLinea(), idSucursal);
+				.readByCriteria(consulta.getTipo().equals("Nuevo") ? false : true, consulta.getMarca(), consulta.getFamilia() ,consulta.getLinea());
 		List<OutputConsultaVehiculoEnVentaDTO> ret = new LinkedList<>();
 		for(VehiculoDTO dto : temp) {
 			OutputConsultaVehiculoEnVentaDTO aux = new OutputConsultaVehiculoEnVentaDTO();
@@ -49,8 +49,9 @@ public class VentasVehiculosController {
 			aux.setPrecio(dto.getPrecioVenta().toString());
 			aux.setCodigo(dto.getIdVehiculo().toString());
 			aux.setColor(dto.getColor());
-			CaracteristicaVehiculoDTO car = daos.makeCaracteristicasVehiculoDao().readByID(dto.getIdCaracteristicas());	
-			aux.setCilindrada(car.getCilindrada());
+			
+			CaracteristicaVehiculoDTO car = daos.makeCaracteristicasVehiculoDao().readByID(dto.getIdCaracteristicas());
+			if(car != null)aux.setCilindrada(car.getCilindrada());
 			ret.add(aux);
 		}
 		return ret;

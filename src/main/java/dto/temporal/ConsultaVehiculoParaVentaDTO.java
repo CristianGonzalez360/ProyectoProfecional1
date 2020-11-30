@@ -15,8 +15,6 @@ public class ConsultaVehiculoParaVentaDTO {
 	
 	private String linea;
 	
-	private String Sucursal;
-	
 	public ConsultaVehiculoParaVentaDTO() {
 	}
 
@@ -43,14 +41,6 @@ public class ConsultaVehiculoParaVentaDTO {
 	public void setLinea(String linea) {
 		this.linea = linea;
 	}
-
-	public String getSucursal() {
-		return Sucursal;
-	}
-
-	public void setSucursal(String sucursal) {
-		Sucursal = sucursal;
-	}
 	
 	public String getFamilia() {
 		return familia;
@@ -66,5 +56,11 @@ public class ConsultaVehiculoParaVentaDTO {
 		errors.addAll(new StringValidator(this.linea).notBlank("").validate());
 		errors.addAll(new StringValidator(this.tipo).notBlank("").validate());
 		return errors;
+	}
+
+	@Override
+	public String toString() {
+		return "ConsultaVehiculoParaVentaDTO [tipo=" + tipo + ", marca=" + marca + ", familia=" + familia + ", linea="
+				+ linea + "]";
 	}
 }
