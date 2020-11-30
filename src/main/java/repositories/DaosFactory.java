@@ -1,5 +1,7 @@
 package repositories;
 
+import dto.CuentaDTO;
+
 public abstract class DaosFactory {
 
 	private static DaosFactory concreteFactory;
@@ -51,4 +53,6 @@ public abstract class DaosFactory {
 	public abstract PedidoVehiculoDao makePedidoVehiculoDao();
 	
 	public abstract VentaVehiculoDao makeVentaVehiculoDao();
+
+	public abstract CaracteristicasVehiculoDao makeCaracteristicasVehiculoDao();
 }
