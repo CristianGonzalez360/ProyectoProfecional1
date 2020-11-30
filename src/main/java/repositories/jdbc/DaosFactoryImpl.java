@@ -21,6 +21,7 @@ import repositories.UsuariosDao;
 import repositories.VehiculoDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
 import repositories.VehiculosEnVentaDao;
+import repositories.VentaVehiculoDao;
 import repositories.jdbc.utils.DataSource;
 
 public class DaosFactoryImpl extends DaosFactory {
@@ -60,6 +61,8 @@ public class DaosFactoryImpl extends DaosFactory {
 	private VehiculosEnVentaDao vehiculosParaVentaDao;
 	
 	private PedidoVehiculoDao pedidoVehiculoDao;
+	
+	private VentaVehiculoDao ventaVehiculoDao;
 	
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
@@ -187,5 +190,12 @@ public class DaosFactoryImpl extends DaosFactory {
 			this.pedidoVehiculoDao = new PedidoVehiculoDaoImpl(ds.getConnection());
 		}
 		return pedidoVehiculoDao;
+	}
+	
+	@Override
+	public VentaVehiculoDao makeVentaVehiculoDao() {
+		if (ventaVehiculoDao == null) 
+			ventaVehiculoDao = new VentaVehiculoDaoImpl(ds.getConnection());
+		return ventaVehiculoDao;
 	}
 }

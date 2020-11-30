@@ -49,4 +49,6 @@ public abstract class DaosFactory {
 	public abstract VehiculosEnVentaDao makeVehiculosParaVentaDao();
 
 	public abstract PedidoVehiculoDao makePedidoVehiculoDao();
+	
+	public abstract VentaVehiculoDao makeVentaVehiculoDao();
 }
