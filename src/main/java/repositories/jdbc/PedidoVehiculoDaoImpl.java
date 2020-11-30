@@ -66,10 +66,11 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 			public PedidoVehiculoDTO map(Object[] obj) {
 				PedidoVehiculoDTO pedido = new PedidoVehiculoDTO();
 				pedido.setIdPedidoVehiculo((Integer) obj[0]);
-				pedido.setFechaPedido((Date) obj[1] == null ? null : (Date) obj[2]);
+				pedido.setFechaPedido((Date) obj[1] == null ? null : (Date) obj[1]);
 				pedido.setFechaIngreso((Date) obj[2]);
 				pedido.setIdUsuPedido((Integer) obj[3]);
 				pedido.setIdUsuIngreso((Integer) obj[4]);
+				pedido.setIdVentaVehiculo((Integer) obj[5]);
 				return pedido;
 			}
 		};
