@@ -12,6 +12,8 @@ public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements Su
 
 	private static final String insert = "INSERT INTO sucursal(pais, calle, altura, localidad, idMoneda) VALUES(?,?,?,?,?)";
 	
+	private static final String readByPais = "SELECT * FROM sucursal WHERE pais = ?";
+		
 	public SucursalesDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -44,23 +46,14 @@ public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements Su
 
 	@Override
 	public List<SucursalDTO> readAll() {
-		LinkedList<SucursalDTO> mock = new LinkedList<>();
-		SucursalDTO ret = new SucursalDTO();
-		ret.setLocalidad("Avellaneda");
-		mock.add(ret);
-		return mock;
+		return new LinkedList<>();
 	}
 
 	@Override
-	protected Mapper<SucursalDTO> getMapper() {
-		return null;
+	public List<SucursalDTO> readByPais(String pais) {
+		return getTemplate().query(readByPais).param(pais).excecute(getMapper());
 	}
-
-	@Override
-	public SucursalDTO readByName(String name) {
-		return null;
-	}
-
+	
 	@Override
 	public List<String> readFinancierasByPais(String pais) {
 		LinkedList<String> mock = new LinkedList<>();
@@ -68,5 +61,15 @@ public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements Su
 		mock.add("Santander");
 		mock.add("CityGroup");
 		return mock;
+	}
+	
+	@Override
+	public SucursalDTO readByName(String name) {
+		return null;
+	}
+	
+	@Override
+	protected Mapper<SucursalDTO> getMapper() {
+		return null;
 	}
 }

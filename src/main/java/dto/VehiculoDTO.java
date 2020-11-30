@@ -18,6 +18,8 @@ public class VehiculoDTO {
 	
 	private String linea;
 	
+	private String color;
+	
 	private Date fechaIngreso;
 	
 	private boolean disponible;
@@ -138,13 +140,21 @@ public class VehiculoDTO {
 	public void setUsado(boolean usado) {
 		this.usado = usado;
 	}
+	
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
 
 	@Override
 	public String toString() {
 		return "VehiculoDTO [idVehiculo=" + idVehiculo + ", precioVenta=" + precioVenta + ", idFichaTecnica="
-				+ idFichaTecnica + ", marca=" + marca + ", familia=" + familia + ", linea=" + linea + ", fechaIngreso="
-				+ fechaIngreso + ", disponible=" + disponible + ", usado=" + usado + ", idCompra=" + idCompra
-				+ ", idCaracteristicas=" + idCaracteristicas + ", idSucursal=" + idSucursal + ", fichaTecnica="
-				+ fichaTecnica + "]";
+				+ idFichaTecnica + ", marca=" + marca + ", familia=" + familia + ", linea=" + linea + ", color=" + color
+				+ ", fechaIngreso=" + fechaIngreso + ", disponible=" + disponible + ", usado=" + usado + ", idCompra="
+				+ idCompra + ", idCaracteristicas=" + idCaracteristicas + ", idSucursal=" + idSucursal
+				+ ", fichaTecnica=" + fichaTecnica + "]";
 	}
 }

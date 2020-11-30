@@ -11,9 +11,9 @@ public class ConsultaVehiculoParaVentaDTO {
 	
 	private String marca;
 	
-	private String linea;
+	private String familia;
 	
-	private String cilindrada;
+	private String linea;
 	
 	private String Sucursal;
 	
@@ -44,20 +44,20 @@ public class ConsultaVehiculoParaVentaDTO {
 		this.linea = linea;
 	}
 
-	public String getCilindrada() {
-		return cilindrada;
-	}
-
-	public void setCilindrada(String cilindrada) {
-		this.cilindrada = cilindrada;
-	}
-
 	public String getSucursal() {
 		return Sucursal;
 	}
 
 	public void setSucursal(String sucursal) {
 		Sucursal = sucursal;
+	}
+	
+	public String getFamilia() {
+		return familia;
+	}
+
+	public void setFamilia(String familia) {
+		this.familia = familia;
 	}
 
 	public List<String> validate() {
