@@ -55,4 +55,5 @@ public abstract class DaosFactory {
 	public abstract CaracteristicasVehiculoDao makeCaracteristicasVehiculoDao();
 
 	public abstract MonedaDao makeMonedasDao();
+
 }

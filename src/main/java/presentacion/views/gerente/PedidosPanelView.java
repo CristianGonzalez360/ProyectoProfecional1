@@ -106,9 +106,9 @@ public class PedidosPanelView extends JPanel {
 	public void setData(List<PedidoDTO> pedidos) {
 		for (PedidoDTO pedido : pedidos) {
 			String nombreCompleto = String.format("%s %s", pedido.getNombreCliente(), pedido.getApellidoCliente());
-			Object[] row = { pedido.getIdPedido().toString(), nombreCompleto, pedido.getDniCliente().toString(),
-					pedido.getMarcaAuto(), pedido.getModeloAuto(), pedido.getConbustionAuto(),
-					pedido.getNombreUsuario(), parse(pedido.getFechaPedido().toString()) };
+			Object[] row = { pedido.getIdPedido().toString(), nombreCompleto, pedido.getDniCliente(),
+					pedido.getMarcaAuto(), pedido.getModeloAuto(), pedido.getColorAuto(), pedido.getConbustionAuto(),
+					pedido.getNombreUsuario(), pedido.getFechaPedido().toString() };
 			tableModelPedidos.addRow(row);
 		}
 	}
