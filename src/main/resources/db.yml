@@ -469,15 +469,15 @@ vehiculos:
 
 ventaVehiculo:
   - idUsuVentaVN: 1
-    idUsuPedido: 1
-    idUsuLlegada: 1
-    idPagoVentaVN: 1
+    idUsuPedido: 
+    idUsuLlegada: 
+    idPagoVentaVN: 
     fechaVentaVN: 2020-10-11
     fechaEntregaReal: 2020-10-11
-    fabricante: 1
-    comisionCobrada: 1
-    precioVenta: 1
+    fabricante: Ford
+    comisionCobrada: 10000
+    precioVenta: 1200444
     idVehiculo: 1
     idCliente: 1
-    idUsuEntrega: 1
-    idSucursal: 1
+    idUsuEntrega: 
+    idSucursalVenta: 1
