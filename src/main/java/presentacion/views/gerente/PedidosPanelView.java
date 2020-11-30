@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,6 +18,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
+
+import dto.temporal.PedidoDTO;
 
 public class PedidosPanelView extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -95,4 +98,19 @@ public class PedidosPanelView extends JPanel {
 	public void setActionCancelarPedido(ActionListener listener) {
 		this.btnCancelarPedido.addActionListener(listener);
 	}
+
+	public String getDniBusqueda() {
+		return this.textDNI.getText();
+	}
+
+	public void setData(List<PedidoDTO> pedidos) {
+		for (PedidoDTO pedido : pedidos) {
+			String nombreCompleto = String.format("%s %s", pedido.getNombreCliente(), pedido.getApellidoCliente());
+			Object[] row = { pedido.getIdPedido().toString(), nombreCompleto, pedido.getDniCliente().toString(),
+					pedido.getMarcaAuto(), pedido.getModeloAuto(), pedido.getConbustionAuto(),
+					pedido.getNombreUsuario(), parse(pedido.getFechaPedido().toString()) };
+			tableModelPedidos.addRow(row);
+		}
+	}
+
 }

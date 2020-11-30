@@ -8,8 +8,8 @@ import presentacion.views.gerente.PedidosPanelView;
 
 public class PedidosPresenter {
 
-	private static final String CONFIRMATION = "¿Está seguro que desea cancelar el turno?";
-	private static final String MENSAGE_NUEVO_PEDIDO = "Se registró Turno.";
+	private static final String CONFIRMATION = "¿Está seguro que desea cancelar el pedido?";
+	private static final String MENSAGE_NUEVO_PEDIDO = "Se registró un nuevo pedido.";
 
 	private PedidosPanelView view;
 	private PedidosController controller;
@@ -23,20 +23,19 @@ public class PedidosPresenter {
 		view.setActionCancelarPedido((a) -> onCancelar(a));
 	}
 
-	private Object onBuscar(ActionEvent a) {
-//		String dniBuscado = view.getDniBusqueda();
-//		if (dniBuscado.trim().isEmpty()) {
-//			view.clear();
-//			view.setData(controller.readAll());
-//		} else {
-//			boolean esDniConFormatoCorrecto = new StringValidator(dniBuscado).number("").validate().isEmpty();
-//			if (esDniConFormatoCorrecto) {
-//				Integer dniCliente = Integer.parseInt(dniBuscado);
-//				view.clear();
-//				view.setData(controller.readByDniCliente(dniCliente));
-//			}	
-//		}
-		return null;
+	private void onBuscar(ActionEvent a) {
+		String dniBuscado = view.getDniBusqueda();
+		if (dniBuscado.trim().isEmpty()) {
+			view.clear();
+			view.setData(controller.readAllPedidos());
+		} else {
+			boolean esDniConFormatoCorrecto = new StringValidator(dniBuscado).number("").validate().isEmpty();
+			if (esDniConFormatoCorrecto) {
+				Integer dniCliente = Integer.parseInt(dniBuscado);
+				view.clear();
+				view.setData(controller.readAllByDniCliente(dniCliente));
+			}
+		}
 	}
 
 	private Object onCancelar(ActionEvent a) {
