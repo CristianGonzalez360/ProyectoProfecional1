@@ -6,7 +6,7 @@ import dto.VehiculoDTO;
 
 public interface VehiculosDao extends GenericDao<VehiculoDTO, Integer> {
 
-	List<VehiculoDTO> readByCriteria(boolean tipo, String marca, String familia, String linea);
+	List<VehiculoDTO> readByCriteria(String marca, Boolean usado);
 	
 	List<String> readAllMarcasVehiculos();
 }

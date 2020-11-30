@@ -131,6 +131,9 @@ public class CaracteristicaDeVehiculoPanel extends JPanel {
 	}
 
 	public void setData(CaracteristicaVehiculoDTO dto) {
+		
+		System.out.println(dto.toString());
+		
 		textCilindrada.setText(dto.getCilindrada());
 		textMotor.setText(dto.getMotor());
 		textFrenosDelanteros.setText(dto.getFrenosDelanteros());

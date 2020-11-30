@@ -59,21 +59,23 @@ public class CaracteristicasVehiculoDaoImpl extends GenericJdbcDao<Caracteristic
 	@Override
 	protected Mapper<CaracteristicaVehiculoDTO> getMapper() {
 		return new Mapper<CaracteristicaVehiculoDTO>() {
-
+		
 			@Override
 			public CaracteristicaVehiculoDTO map(Object[] obj) {
 				CaracteristicaVehiculoDTO ret = new CaracteristicaVehiculoDTO();
+				
 				ret.setIdCaracteristica((Integer)obj[0]);
-				ret.setMotor((String)obj[1]);
-				ret.setDireccion((String)obj[2]);
-				ret.setPotencia((String)obj[3]);
-				ret.setFrenosDelanteros((String)obj[4]);
-				ret.setTransmision((String)obj[5]);
-				ret.setFrenosTraseros((String)obj[6]);
-				ret.setTorqueMaximo((String)obj[7]);
-				ret.setVolumenBaul((String)obj[8]);
-				ret.setCantidadPuertas((String)obj[9]);
-				ret.setPrecio((String)obj[10]);
+				ret.setCilindrada((String)obj[1]);
+				ret.setMotor((String)obj[2]);
+				ret.setDireccion((String)obj[3]);
+				ret.setPotencia((String)obj[4]);
+				ret.setFrenosDelanteros((String)obj[5]);
+				ret.setTransmision((String)obj[6]);
+				ret.setFrenosTraseros((String)obj[7]);
+				ret.setTorqueMaximo((String)obj[8]);
+				ret.setVolumenBaul((String)obj[9]);
+				ret.setCantidadPuertas((String)obj[10]);
+				ret.setPrecio((String)obj[11]);
 				return ret;
 			}			
 		};

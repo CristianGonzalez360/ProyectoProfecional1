@@ -10,7 +10,6 @@ import business_logic.SucursalesController;
 import business_logic.VentasVehiculosController;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
-import dto.VehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import dto.validators.StringValidator;
@@ -28,7 +27,6 @@ public class VendedorControlPresenter {
 	public VendedorControlPresenter(ClientesController clientesController,SucursalesController sucController, VentasVehiculosController vehiculosController) {
 		this.clientesController = clientesController;
 		this.ventasController = vehiculosController;
-
 		setActions();
 		setOpcionesBusqueda();
 	}
