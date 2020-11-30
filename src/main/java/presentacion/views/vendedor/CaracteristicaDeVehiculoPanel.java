@@ -5,7 +5,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
-import dto.VehiculoDTO;
+import dto.CaracteristicaVehiculoDTO;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -130,17 +130,17 @@ public class CaracteristicaDeVehiculoPanel extends JPanel {
 		textNroPuertas.setColumns(10);
 	}
 
-	public void setData(VehiculoDTO dto) {
-//		textCilindrada.setText(dto.getCaracteristicas().getCilindrada());
-//		textMotor.setText(dto.getCaracteristicas().getMotor());
-//		textFrenosDelanteros.setText(dto.getCaracteristicas().getFrenosDelanteros());
-//		textPotencia.setText(dto.getCaracteristicas().getPotencia());
-//		textDireccion.setText(dto.getCaracteristicas().getDireccion());
-//		textTransmision.setText(dto.getCaracteristicas().getTransmision());
-//		textFrenosTraseros.setText(dto.getCaracteristicas().getFrenosTraseros());
-//		textTorqueMaximo.setText(dto.getCaracteristicas().getTorqueMaximo());
-//		textBaul.setText(dto.getCaracteristicas().getVolumenBaul());
-//		textNroPuertas.setText(dto.getCaracteristicas().getCantidadPuertas());
+	public void setData(CaracteristicaVehiculoDTO dto) {
+		textCilindrada.setText(dto.getCilindrada());
+		textMotor.setText(dto.getMotor());
+		textFrenosDelanteros.setText(dto.getFrenosDelanteros());
+		textPotencia.setText(dto.getPotencia());
+		textDireccion.setText(dto.getDireccion());
+		textTransmision.setText(dto.getTransmision());
+		textFrenosTraseros.setText(dto.getFrenosTraseros());
+		textTorqueMaximo.setText(dto.getTorqueMaximo());
+		textBaul.setText(dto.getVolumenBaul());
+		textNroPuertas.setText(dto.getCantidadPuertas());
 	}
 
 	public void clearData() {

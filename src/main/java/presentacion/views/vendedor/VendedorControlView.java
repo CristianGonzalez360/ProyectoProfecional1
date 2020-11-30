@@ -9,8 +9,8 @@ import java.util.List;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ListSelectionListener;
 
+import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
-import dto.VehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import presentacion.views.supervisor.ClientePanelView;
@@ -96,13 +96,13 @@ public class VendedorControlView extends JInternalFrame {
 		this.panelHistorial = HistorialVentasView.getInstance();
 		tabbedPane.add("Historial Ventas", this.panelHistorial);	
 		
-		tableView = new TablePanel<OutputConsultaVehiculoEnVentaDTO>(new String [] {"Código", "Marca", "Familia", "Linea", "Cilindrada", "Color", "Precio"}) {
+		tableView = new TablePanel<OutputConsultaVehiculoEnVentaDTO>(new String [] {"Código", "Marca", "Familia", "Linea", "Color","Sucursal", "Precio"}) {
 			private static final long serialVersionUID = -6912872259496249346L;
 
 			@Override
 			public void setData(List<OutputConsultaVehiculoEnVentaDTO> data) {
 				for(OutputConsultaVehiculoEnVentaDTO dto : data) {
-					Object [] row = { dto.getCodigo(), dto.getMarca(), dto.getFamilia(), dto.getLinea(), dto.getCilindrada(), dto.getColor(), dto.getPrecio() };
+					Object [] row = { dto.getCodigo(), dto.getMarca(), dto.getFamilia(), dto.getLinea(),dto.getColor(), dto.getSucursal(), dto.getPrecio() };
 					model.addRow(row);	
 				}
 			}
@@ -117,9 +117,8 @@ public class VendedorControlView extends JInternalFrame {
 					ret.setMarca(model.getValueAt(row, 1).toString());
 					ret.setFamilia(model.getValueAt(row, 2).toString());
 					ret.setLinea(model.getValueAt(row, 3).toString());
-					
-					ret.setCilindrada(model.getValueAt(row, 4) == null ? null : model.getValueAt(row, 4).toString());
-					ret.setColor(model.getValueAt(row, 5).toString());
+					ret.setColor(model.getValueAt(row, 4).toString());
+					ret.setSucursal(model.getValueAt(row, 5).toString());
 					ret.setPrecio(model.getValueAt(row, 6).toString());
 				}
 				return ret;
@@ -192,7 +191,7 @@ public class VendedorControlView extends JInternalFrame {
 		return this.tableView.getData();
 	}
 
-	public void setData(VehiculoDTO dto) {
+	public void setData(CaracteristicaVehiculoDTO dto) {
 		this.caracteristicaVehiculoPanel.setData(dto);
 	}
 
