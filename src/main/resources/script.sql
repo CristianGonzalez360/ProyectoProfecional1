@@ -236,7 +236,7 @@ CREATE TABLE RepuestosComprados (
 
 DROP TABLE CompraVehiculo IF EXISTS;
 CREATE TABLE CompraVehiculo (
-  idCompraVehiculo INTEGER NOT NULL,
+  idCompraVehiculo INTEGER NOT NULL AUTO_INCREMENT,
   idVehiculo INTEGER NOT NULL,
   PrecioCompra DOUBLE NOT NULL,
   precioVenta DOUBLE NOT NULL,
@@ -246,18 +246,36 @@ CREATE TABLE CompraVehiculo (
   FOREIGN KEY (idUsuCompra) REFERENCES Usuarios(idUsuario),
 );
 
+DROP TABLE CaracteristicasVehiculo IF exists;
+CREATE TABLE CaracteristicasVehiculo(
+	idCaracteristica INTEGER NOT NULL AUTO_INCREMENT,
+	cilindrada VARCHAR(20),
+	motor VARCHAR(20),
+	direccion VARCHAR(20),
+	potencia VARCHAR(20),
+	frenosDelanteros VARCHAR(20),
+	transmision VARCHAR(20),
+	frenosTraseros VARCHAR(20),
+	torqueMaximo VARCHAR(20),
+	volumenDeBaul VARCHAR(20),
+	nroDePuertas VARCHAR(20),
+	PRIMARY KEY (idCaracteristica)
+);
+
 DROP TABLE Vehiculos IF EXISTS;
 CREATE TABLE Vehiculos (
-  idVehiculo INTEGER NOT NULL,
+  idVehiculo INTEGER NOT NULL AUTO_INCREMENT,
   precioVenta DOUBLE NOT NULL,
   idFichaTecnica INTEGER NOT NULL,
+  idCaracteristica INTEGER NOT NULL,
   fechaIngreso DATE NOT NULL,
   disponible BOOLEAN NOT NULL,
   usado BOOLEAN NOT NULL,
   idCompra INTEGER,
   PRIMARY KEY (idVehiculo),
   FOREIGN KEY (idFichaTecnica) REFERENCES FichaTecnicaVehiculo(idFichaTecnicaVehiculo),
-  FOREIGN KEY (idCompra) REFERENCES CompraVehiculo(idCompraVehiculo)
+  FOREIGN KEY (idCompra) REFERENCES CompraVehiculo(idCompraVehiculo),
+  FOREIGN KEY (idCaracteristica) REFERENCES CaracteristicasVehiculo(idCaracteristica)
 );
 
 DROP TABLE VentasVehiculos IF EXISTS;
