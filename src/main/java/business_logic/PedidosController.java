@@ -1,5 +1,7 @@
 package business_logic;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +37,13 @@ public class PedidosController {
 	}
 
 	public List<PedidoDTO> readAllByDniCliente(Integer dniCliente, Integer idSucursal) {
-		return null;
+		List<PedidoDTO> pedidos = new ArrayList<>();
+
+		for (PedidoDTO pedido : readAllPedidos(idSucursal)) {
+			if (pedido != null && pedido.getDniCliente().equals(dniCliente.toString()))
+				pedidos.add(pedido);
+		}
+		return pedidos;
 	}
 
 	public List<PedidoDTO> readAllPedidos(Integer idSucursal) {
@@ -49,38 +57,34 @@ public class PedidosController {
 	}
 
 	private PedidoDTO armarPedidoCompleto(PedidoVehiculoDTO pedido) {
-		VentaVehiculoDTO datosDeVenta = datosDeVenta(pedido.getIdVentaVehiculo());
-		DatosPersonalesDTO datosCliente = datosDeCliente(datosDeVenta.getIdCliente());
-		VehiculoDTO datosVehiculo = datosVehiculo(datosDeVenta.getIdVehiculo());
-		UsuarioDTO datosUsuario = datosDeUsuario(pedido.getIdUsuPedido());
+		VentaVehiculoDTO datosDeVenta = getDatosDeVenta(pedido.getIdVentaVehiculo());
+		DatosPersonalesDTO datosCliente = getDatosDeCliente(datosDeVenta.getIdCliente());
+		VehiculoDTO datosVehiculo = getDatosVehiculo(datosDeVenta.getIdVehiculo());
+		UsuarioDTO datosUsuario = getDatosDeUsuario(pedido.getIdUsuPedido());
 
-		String nombreCliente = datosCliente.getNombreCompleto();
-		String apellidoCliente = datosCliente.getApellido();
 		String dniCliente = String.valueOf(datosCliente.getDni());
-		String marcaAuto = datosVehiculo.getMarca();
 		String modeloAuto = datosVehiculo.getFamilia() + " - " + datosVehiculo.getLinea();
-		String colorAuto = datosVehiculo.getColor();
 		String conbustionAuto = "";
 		String nombreUsuario = datosUsuario.getDatos().getNombreCompleto();
-		Date fechaPedido = pedido.getFechaPedido();
 
-		return new PedidoDTO(pedido.getIdPedidoVehiculo(), nombreCliente, apellidoCliente, dniCliente, marcaAuto,
-				modeloAuto, colorAuto, conbustionAuto, nombreUsuario, fechaPedido);
+		return new PedidoDTO(pedido.getIdPedidoVehiculo(), datosCliente.getNombreCompleto(), datosCliente.getApellido(),
+				dniCliente, datosVehiculo.getMarca(), modeloAuto, datosVehiculo.getColor(), conbustionAuto,
+				nombreUsuario, pedido.getFechaPedido());
 	}
 
-	private VentaVehiculoDTO datosDeVenta(Integer idVentaVehiculo) {
+	private VentaVehiculoDTO getDatosDeVenta(Integer idVentaVehiculo) {
 		return ventaVehiculoDao.readByID(idVentaVehiculo);
 	}
 
-	private DatosPersonalesDTO datosDeCliente(Integer id) {
+	private DatosPersonalesDTO getDatosDeCliente(Integer id) {
 		return datosPersonalesDao.readByID(id);
 	}
 
-	private VehiculoDTO datosVehiculo(Integer idVehiculo) {
+	private VehiculoDTO getDatosVehiculo(Integer idVehiculo) {
 		return vehiculosDao.readByID(idVehiculo);
 	}
 
-	private UsuarioDTO datosDeUsuario(Integer id) {
+	private UsuarioDTO getDatosDeUsuario(Integer id) {
 		return usuariosDao.readByID(id);
 	}
 

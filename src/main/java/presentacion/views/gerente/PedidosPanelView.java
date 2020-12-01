@@ -78,15 +78,6 @@ public class PedidosPanelView extends JPanel {
 		tableModelPedidos.setColumnIdentifiers(COLUMNAS_PEDIDOS);
 	}
 
-	private Date parse(String str) {
-		try {
-			return new SimpleDateFormat("yyyy-mm-dd").parse(str);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	public void setActionBuscar(ActionListener listener) {
 		this.btnBuscar.addActionListener(listener);
 	}
