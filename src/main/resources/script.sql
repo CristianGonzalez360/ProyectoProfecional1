@@ -310,17 +310,21 @@ DROP TABLE VentasVehiculos IF EXISTS;
 CREATE TABLE VentasVehiculos (
   idVentaVehiculo INTEGER NOT NULL AUTO_INCREMENT,
   idUsuVentaVN INTEGER NOT NULL,
-  idUsuPedido INTEGER NOT NULL,
-  idUsuLlegada INTEGER NOT NULL,
-  idPagoVentaVN INTEGER NOT NULL,
+  idUsuPedido INTEGER,
+  idUsuLlegada INTEGER,
+  idPagoVentaVN INTEGER,
   fechaVentaVN DATE NOT NULL,
-  fechaEntregaReal DATE NOT NULL,
+  fechaEntregaReal DATE,
   fabricante VARCHAR NOT NULL,
   comisionCobrada DOUBLE NOT NULL,
   precioVenta DOUBLE NOT NULL,
+  financiera VARCHAR(50),
+  nroCuotas INT,
+  montoCuota DOUBLE,
   idVehiculo INTEGER NOT NULL,
   idCliente INTEGER NOT NULL,
-  idUsuEntrega INTEGER NOT NULL,
+  idUsuEntrega INTEGER,
+  idSucursal INTEGER NOT NULL,
   PRIMARY KEY (idVentaVehiculo),
   FOREIGN KEY (idUsuVentaVN) REFERENCES Usuarios(idUsuario),
   FOREIGN KEY (idCliente) REFERENCES Clientes(idCliente),
@@ -328,7 +332,8 @@ CREATE TABLE VentasVehiculos (
   FOREIGN KEY (idVehiculo) REFERENCES Vehiculos(idVehiculo),
   FOREIGN KEY (idUsuPedido) REFERENCES Usuarios(idUsuario),
   FOREIGN KEY (idUsuLlegada) REFERENCES Usuarios(idUsuario),
-  FOREIGN KEY (idUsuEntrega) REFERENCES Usuarios(idUsuario)
+  FOREIGN KEY (idUsuEntrega) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (idSucursal) REFERENCES Sucursal(idSucursal)
 );
 
 DROP TABLE PedidoVehiculo IF EXISTS;
@@ -341,5 +346,6 @@ CREATE TABLE PedidoVehiculo (
   idVentaVehiculo INTEGER NOT NULL,
   PRIMARY KEY (idPedidoVehiculo),
   FOREIGN KEY (idUsuPedido) REFERENCES Usuarios(idUsuario),
-  FOREIGN KEY (idUsuIngreso) REFERENCES Usuarios(idUsuario)
+  FOREIGN KEY (idUsuIngreso) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (idVentaVehiculo) REFERENCES VentasVehiculos(idVentaVehiculo),
 );

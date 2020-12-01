@@ -38,7 +38,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public LoginController makeLoginController() {
 		if (loginController == null)
-			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance());
+			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance(), daos.makeSucursalesDao());
 		return loginController;
 	}
 
