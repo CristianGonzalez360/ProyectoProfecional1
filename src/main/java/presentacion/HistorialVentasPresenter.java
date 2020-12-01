@@ -43,9 +43,9 @@ public class HistorialVentasPresenter {
 
 	private void onCargar(ActionEvent a) {
 	
-			
-		//		 this.view.cargarTabla(this.ventasVehiculosController.readAll());
-		 this.view.cargarTabla(this.ventasVehiculosController.readFechas(null,null));
+		this.view.clear();
+		
+		 this.view.cargarTabla(this.ventasVehiculosController.readFechas(view.getVentaDesde(),view.getVentaHasta()));
 	
 	}
 
