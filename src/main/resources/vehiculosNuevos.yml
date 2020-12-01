@@ -1,0 +1,94 @@
+vehiculos:
+  - precioVenta: 20000
+    idFichaTecnica: 1
+    marca: Ford
+    familia: Focus
+    linea: vip
+    color: azul
+    fechaIngreso: 2017-10-11
+    disponible: true
+    usado: false
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 1
+  - precioVenta: 30000
+    idFichaTecnica: 1
+    marca: wolkswagen
+    familia: polo
+    linea: trend
+    color: negro
+    fechaIngreso:
+    disponible: true
+    usado: false
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 2
+  - precioVenta: 40000
+    idFichaTecnica: 1
+    marca: Chevrolet
+    familia: Spin
+    linea: vip
+    color: azul
+    fechaIngreso: 2017-10-11
+    disponible: true
+    usado: false
+    idCompra:
+    idCaracteristicas: 2
+    idSucursal: 3
+  - precioVenta: 50000
+    idFichaTecnica: 1
+    marca: VolksWagen
+    familia: Golf
+    linea: vip
+    color: blanco
+    fechaIngreso: 2017-10-11
+    disponible: true
+    usado: false
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 4
+caracteristicas:
+  - cilindrada: 1.58
+    motor: 1.56 MSI nafta
+    transmision: Manual 5 velocidades
+    direccion: electrica asistida
+    potencia: 100 CV
+    frenosDelanteros: Discos ventilados
+    frenosTraseros: A tambor
+    torqueMaximo: 170/4000
+    volumenBaul: 300 cc
+    cantidadPuertas: 5
+    precio: 100000
+  - cilindrada: 2.58
+    motor: 2.56 MSI nafta
+    transmision: Manual 5 velocidades
+    direccion: electrica asistida
+    potencia: 200 CV
+    frenosDelanteros: Discos ventilados
+    frenosTraseros: A tambor
+    torqueMaximo: 180/4000
+    volumenBaul: 400 cc
+    cantidadPuertas: 4
+    precio: 200000
+  - cilindrada: 3.58
+    motor: 3.56 MSI nafta
+    transmision: Automatica
+    direccion: electrica asistida
+    potencia: 300 CV
+    frenosDelanteros: Discos ventilados
+    frenosTraseros: A tambor
+    torqueMaximo: 190/4000
+    volumenBaul: 500 cc
+    cantidadPuertas: 3
+    precio: 300000
+  - cilindrada: 4.58
+    motor: 4.56 MSI nafta
+    transmision: Automatica
+    direccion: electrica asistida
+    potencia: 400 CV
+    frenosDelanteros: Discos ventilados
+    frenosTraseros: A tambor
+    torqueMaximo: 200/4000
+    volumenBaul: 600 cc
+    cantidadPuertas: 4
+    precio: 400000
