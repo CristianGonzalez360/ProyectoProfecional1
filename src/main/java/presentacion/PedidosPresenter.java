@@ -10,7 +10,6 @@ import services.SessionServiceImpl;
 public class PedidosPresenter {
 
 	private static final String CONFIRMATION = "¿Está seguro que desea cancelar el pedido?";
-	private static final String MENSAGE_NUEVO_PEDIDO = "Se registró un nuevo pedido.";
 
 	private PedidosPanelView view;
 	private PedidosController controller;
