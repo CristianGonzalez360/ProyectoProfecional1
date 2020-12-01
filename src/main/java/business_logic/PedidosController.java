@@ -93,13 +93,15 @@ public class PedidosController {
 		pedidosDao.insert(pedido);
 	}
 
-	public void registrarIngresoPedidoById(Integer idPedido, Integer idUsuario) {
+	public boolean registrarIngresoPedidoById(Integer idPedido, Integer idUsuario) {
 		if (idPedido == null)
-			return;
+			return false;
+
 		PedidoVehiculoDTO pedido = pedidosDao.readByID(idPedido);
 		pedido.setFechaIngreso(new Date());
 		pedido.setIdUsuIngreso(idUsuario);
-		pedidosDao.updateIngreso(pedido);
+
+		return pedidosDao.updateIngreso(pedido);
 	}
 
 }

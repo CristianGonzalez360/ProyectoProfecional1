@@ -6,6 +6,7 @@ import business_logic.PedidosController;
 import dto.validators.StringValidator;
 import presentacion.views.gerente.PedidosPanelView;
 import presentacion.views.utils.ConfirmationDialog;
+import presentacion.views.utils.MessageDialog;
 import services.SessionServiceImpl;
 
 public class PedidosPresenter {
@@ -43,20 +44,23 @@ public class PedidosPresenter {
 	private void onRegistrar(ActionEvent event) {
 		Integer idFila = view.getIdSelectedRow(); // ID de la fila seleccionada
 		Integer idUsuario = SessionServiceImpl.getInstance().getActiveSession().getIdUsuario();
-		
-		if (hayFilaSeleccionada(idFila)) {
-			if (new ConfirmationDialog(CONFIRMATION).open() == 0) {
-				Integer idPedido = view.getIdSelectedPedido();
 
-				controller.registrarIngresoPedidoById(idPedido, idUsuario);
-				view.clear();
-			}
+		if (puedoRegistrarIngreso(idFila)) {
+			Integer idPedido = view.getIdSelectedPedido();
+
+			if (controller.registrarIngresoPedidoById(idPedido, idUsuario))
+				new MessageDialog().showMessages("Vehiculo Registrado");
+			else
+				new MessageDialog().showMessages("No se puedo registrar el ingreso del Vehiculo");
+			view.clear();
 		}
 	}
 
+	private boolean puedoRegistrarIngreso(Integer idFila) {
+		return hayFilaSeleccionada(idFila) && new ConfirmationDialog(CONFIRMATION).open() == 0;
+	}
+
 	private boolean hayFilaSeleccionada(Integer idFila) {
-		if (idFila == -1 || idFila == null)
-			return false;
-		return true;
+		return (idFila != -1);
 	}
 }
