@@ -7,7 +7,6 @@ import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 
 import business_logic.ClientesController;
-import business_logic.PedidosController;
 import business_logic.VentasVehiculosController;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
@@ -24,7 +23,7 @@ public class EntregaVehiculosVentaPresenter {
 	
 	private VentasVehiculosController ventasVehiculosController;
 	private ClientesController clientesController;
-	private PedidosController pedidosController;
+//	private PedidosController pedidosController;
 	
 	public EntregaVehiculosVentaPresenter(VentasVehiculosController ventasVehiculosController, ClientesController clientesController) {
 		this.view = PanelRegistroPedido.getInstance();
@@ -50,7 +49,7 @@ public class EntregaVehiculosVentaPresenter {
 		}
 		
 		if(errors.isEmpty()) { 
-			pedidosController.save(ventas.get(ventaSeleccionada).getIdVentaVehiculo());
+//			pedidosController.save(ventas.get(ventaSeleccionada).getIdVentaVehiculo());
 			onRefrescar(a);
 			new MessageDialog().showMessages("Pedido Registrado");
 		} else {

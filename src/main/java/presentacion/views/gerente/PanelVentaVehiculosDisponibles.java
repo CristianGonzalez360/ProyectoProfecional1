@@ -15,7 +15,7 @@ public class PanelVentaVehiculosDisponibles extends JPanel{
 	
 	private JTable tablaVentas;
 	private DefaultTableModel modelo;
-	private static final String[] columnas= {"Nro.", "Fecha", "Precio", "Estado"};
+	private static final String[] columnas= {"Nro.", "Fecha", "Precio", "Maradona"};//quiza convenga pasarme de presenter, consultar con la almohada
 	
 	public PanelVentaVehiculosDisponibles() {
 		setLayout(new BorderLayout(0, 0));
