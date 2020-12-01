@@ -477,6 +477,8 @@ ventaVehiculo:
     fabricante: Ford
     comisionCobrada: 10000
     precioVenta: 1200444
+    financiera:
+    nroCuotas:
     idVehiculo: 1
     idCliente: 1
     idUsuEntrega: 

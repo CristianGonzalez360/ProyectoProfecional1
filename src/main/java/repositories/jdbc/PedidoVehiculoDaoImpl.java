@@ -13,9 +13,7 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	private static final String readAll = "SELECT * FROM PedidoVehiculo";
 
-	private static final String readAllPedidosDeVenta = "SELECT pv.idPedidoVehiculo, pv.fechaPedido, pv.fechaIngreso, pv.idUsuPedido, pv.idUsuIngreso, pv.idVentaVehiculo "
-			+ "FROM pedidovehiculo pv INNER JOIN VentasVehiculos vv " + "ON pv.idVentaVehiculo = vv.idVentaVehiculo"
-					+ "WHERE vv.idSucursal = ?";
+	private static final String readAllPedidosDeVenta = "SELECT pv.idPedidoVehiculo, pv.fechaPedido, pv.fechaIngreso, pv.idUsuPedido, pv.idUsuIngreso, pv.idVentaVehiculo, vv.idSucursal FROM pedidovehiculo pv INNER JOIN ventasvehiculos vv ON pv.idVentaVehiculo = vv.idVentaVehiculo WHERE vv.idSucursal = ?";
 
 	private static final String insert = "INSERT INTO PedidoVehiculo (fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso, idVentaVehiculo) VALUES (?,?,?,?,?)";
 
