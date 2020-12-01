@@ -3,8 +3,6 @@ package main;
 
 import presentacion.ViewsFactory;
 import presentacion.ViewsFactoryImpl;
-import presentacion.views.admin.AdminControlView;
-
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -50,7 +48,5 @@ public class Application {
 		DataSourceFactory.setFactory(new DataSourceFactoryImpl());
 		DataSource ds = DataSourceFactory.getFactory().makeDataSource(DataSourceType.IN_MEMORY);
 		new Application().setUpLookAndFeel().onInit(ds);
-		
-		AdminControlView.getInstance().setVisible(true);
 	}
 }

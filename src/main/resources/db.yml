@@ -20,6 +20,10 @@ cuentas:
     nombreUsuario: u005
     password: pu005
     role: vendedor
+  - fechaDeAlta: 2011-05-12
+    nombreUsuario: u006
+    password: pu006
+    role: admin
 
 datosPersonales:
   - nombreCompleto: u001
@@ -102,7 +106,16 @@ datosPersonales:
     piso: 11
     dpto: B1
     localidad: localidad1
-    
+  - nombreCompleto: cc002
+    apellido: ap3004
+    dni: 33311344
+    telefono: 614411
+    email: c0012@mail.com
+    calle: calle1221
+    altura: 1661
+    piso: 11
+    dpto: B11
+    localidad: localidad213 
 
 usuarios:
   - cuenta:
@@ -125,6 +138,10 @@ usuarios:
       idCuenta: 5
     datos:
       id: 5
+  - cuenta:
+      idCuenta: 6
+    datos:
+      id: 6
       
 turnos:
   - idCliente: 1

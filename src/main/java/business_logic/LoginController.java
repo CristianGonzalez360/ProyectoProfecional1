@@ -26,14 +26,13 @@ public class LoginController {
 
 	public SessionDTO logUser(UserCrendentialsDTO credentials) {
 		assert credentials != null;
-		UsuarioDTO usuario = dao.readByCredentials(credentials.getName(), credentials.getPassword());
+		UsuarioDTO usuario = dao.readByCredentials(credentials.getName(), credentials.getPassword());		
 		if (usuario == null)
 			throw new ForbiddenException(FORBIDDEN);
 		if (usuario.getCuenta().getFechaDeBaja() != null)
 			throw new ForbiddenException(FORBIDDEN);
 		if (service.getActiveSession() != null)
-			throw new ForbiddenException(FORBIDDEN);
-		
+			throw new ForbiddenException(FORBIDDEN);		
 		service.openSession(usuario, readActiveSucursal());
 		return service.getActiveSession();
 	}
