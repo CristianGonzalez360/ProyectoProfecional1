@@ -82,7 +82,7 @@ public class PanelEntregaDeVehiculos extends JPanel{
 		PanelInferior = new JPanel();
 		add(PanelInferior, BorderLayout.SOUTH);
 		
-		btnRegistrarPedido = new JButton("Registrar Pedido");
+		btnRegistrarPedido = new JButton("Registrar Entrega");
 		PanelInferior.add(btnRegistrarPedido);
 	}
 

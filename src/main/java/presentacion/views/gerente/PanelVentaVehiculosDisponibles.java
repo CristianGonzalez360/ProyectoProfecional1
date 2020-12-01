@@ -35,7 +35,7 @@ public class PanelVentaVehiculosDisponibles extends JPanel{
 		modelo.setRowCount(0);
 		for (VentaVehiculoDTO venta : ventas) {
 			Object[] row = {venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getPrecioVenta(), 
-				venta.isPedido()? "PORRO" : "FALOPA" };
+				venta.isPedido()? "ENTREGADO" : "NO ENTREGADO" };
 			modelo.addRow(row);
 		}		
 	}
