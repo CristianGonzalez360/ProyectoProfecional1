@@ -13,6 +13,9 @@ import javax.swing.event.ListSelectionListener;
 import dto.MonedaDTO;
 import dto.SucursalDTO;
 import presentacion.views.vendedor.TablePanel;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import java.awt.FlowLayout;
 
 public class AdminControlView extends JInternalFrame {
 
@@ -25,6 +28,8 @@ public class AdminControlView extends JInternalFrame {
 	private PanelDatosMoneda panelDatosMoneda;
 	
 	private TablePanel<SucursalDTO> tablePanel;
+	private JPanel panel;
+	private JButton btnEscogerComoTerminal;
 	
 	public static AdminControlView getInstance() {
 		if(instance == null) instance = new AdminControlView();
@@ -35,7 +40,7 @@ public class AdminControlView extends JInternalFrame {
 		setMaximizable(true);
 		setIconifiable(true);
 		setTitle("Admin control view");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 633, 424);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		panelBusqueda = new PanelBusquedaSucursal();
@@ -71,13 +76,21 @@ public class AdminControlView extends JInternalFrame {
 		
 		JPanel panelCenter = new JPanel();
 		getContentPane().add(panelCenter, BorderLayout.CENTER);
-		panelCenter.setLayout(new BorderLayout(0, 0));
+		panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
 
-		panelCenter.add(tablePanel, BorderLayout.CENTER);
+		panelCenter.add(tablePanel);
 				
 		panelDatosMoneda = new PanelDatosMoneda();
 		panelDatosMoneda.setNonEditable();
-		panelCenter.add(panelDatosMoneda, BorderLayout.SOUTH);
+		panelCenter.add(panelDatosMoneda);
+		
+		panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setAlignment(FlowLayout.RIGHT);
+		panelCenter.add(panel);
+		
+		btnEscogerComoTerminal = new JButton("Escoger como terminal");
+		panel.add(btnEscogerComoTerminal);
 	}
 	
 	public void display() {
@@ -123,5 +136,9 @@ public class AdminControlView extends JInternalFrame {
 
 	public void clearDataMoneda() {
 		this.panelDatosMoneda.clearData();
+	}
+	
+	public void setActionEscogerTerminal(ActionListener listener) {
+		this.btnEscogerComoTerminal.addActionListener(listener);
 	}
 }
