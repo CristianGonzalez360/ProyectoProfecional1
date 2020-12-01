@@ -12,7 +12,11 @@ import repositories.jdbc.utils.NullObject;
 public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> implements PedidoVehiculoDao {
 
 	private static final String readAll = "SELECT * FROM PedidoVehiculo";
-
+	
+	private static final String readById = readAll + " WHERE idPedidoVehiculo = ?";
+	
+	private static final String readByIdVenta = readAll + " WHERE idVentaVehiculo = ?";
+	
 	private static final String insert = "INSERT INTO PedidoVehiculo (fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso, idVentaVehiculo) VALUES (?,?,?,?,?)";
 
 	public PedidoVehiculoDaoImpl(Connection connection) {
@@ -43,8 +47,8 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	@Override
 	public PedidoVehiculoDTO readByID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<PedidoVehiculoDTO> ret = getTemplate().query(readById).param(id).excecute(getMapper());
+		return ret.isEmpty()? null : ret.get(0);
 	}
 
 	@Override
@@ -74,6 +78,11 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 				return pedido;
 			}
 		};
+	}
+
+	@Override
+	public boolean estaPedido(Integer idVentaVehiculo) {
+		return !getTemplate().query(readByIdVenta).param(idVentaVehiculo).excecute(getMapper()).isEmpty();
 	}
 
 }

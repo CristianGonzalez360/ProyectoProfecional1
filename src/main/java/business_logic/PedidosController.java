@@ -91,7 +91,9 @@ public class PedidosController {
 		return usuariosDao.readByID(id);
 	}
 
-	public void save(PedidoVehiculoDTO pedido) {
+	public void save(Integer idVenta) {
+		PedidoVehiculoDTO pedido = new PedidoVehiculoDTO();
+		pedido.setIdVentaVehiculo(idVenta);
 		pedido.setIdUsuPedido(SessionServiceImpl.getInstance().getActiveSession().getIdUsuario());
 		pedidosDao.insert(pedido);
 	}
