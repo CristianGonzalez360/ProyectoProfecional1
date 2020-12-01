@@ -17,25 +17,20 @@ import javax.swing.event.ListSelectionListener;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.VentaVehiculoDTO;
-import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import presentacion.views.supervisor.ClientePanelView;
 import presentacion.views.vendedor.CaracteristicaDeVehiculoPanel;
-import presentacion.views.vendedor.TablePanel;
 
 public class PanelEntregaDeVehiculos extends JPanel{
 
 	private ClientePanelView panelCliente;
 	private CaracteristicaDeVehiculoPanel panelVehiculo;
-//	private PanelVentas panelVentas;  CAMBIAR POR UN PANE DONDE SE MUESTRE UNA TABLA  CON VENTAS
+	private PanelVentaVehiculosDisponibles panelVentas;  //CAMBIAR POR UN PANE DONDE SE MUESTRE UNA TABLA  distinta a PnelVentas
 	
 	private static PanelEntregaDeVehiculos instance;
 	private JPanel panelSuperior;
 	private JPanel PanelInferior;
 	private JButton btnRefrescar;
 	private JButton btnRegistrarPedido;
-	private TablePanel<OutputConsultaVehiculoEnVentaDTO> tableView;
-
-	
 	
 	private PanelEntregaDeVehiculos() {
 		setLayout(new BorderLayout(0, 0));
@@ -50,7 +45,7 @@ public class PanelEntregaDeVehiculos extends JPanel{
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		principal.setLayout(gridBagLayout);
 		//sapbee
-		panelVentas = new PanelVentas();
+		panelVentas = new PanelVentaVehiculosDisponibles();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 5, 5);
 		gbc_panel.fill = GridBagConstraints.BOTH;

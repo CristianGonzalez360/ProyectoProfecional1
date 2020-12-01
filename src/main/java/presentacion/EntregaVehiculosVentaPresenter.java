@@ -15,7 +15,7 @@ import dto.VentaVehiculoDTO;
 import presentacion.views.gerente.PanelRegistroPedido;
 import presentacion.views.utils.MessageDialog;
 
-public class RegistroPedidoPresenter {
+public class EntregaVehiculosVentaPresenter {
 
 	private PanelRegistroPedido view;
 	
@@ -26,7 +26,7 @@ public class RegistroPedidoPresenter {
 	private ClientesController clientesController;
 	private PedidosController pedidosController;
 	
-	public RegistroPedidoPresenter(VentasVehiculosController ventasVehiculosController, ClientesController clientesController, PedidosController pedidosController) {
+	public EntregaVehiculosVentaPresenter(VentasVehiculosController ventasVehiculosController, ClientesController clientesController) {
 		this.view = PanelRegistroPedido.getInstance();
 		this.view.setActionOnSeleccionarVenta(a -> onSeleccionarVenta(a));
 		this.view.setActionOnRefrescar(a -> onRefrescar(a));
@@ -34,7 +34,7 @@ public class RegistroPedidoPresenter {
 
 		this.ventasVehiculosController = ventasVehiculosController;
 		this.clientesController = clientesController;
-		this.pedidosController = pedidosController;
+//		this.pedidosController = pedidosController;
 		
 		this.ventaSeleccionada = -1;
 		mostrarVentas();
