@@ -27,6 +27,7 @@ public class SessionServiceImpl implements SessionService {
 	@Override
 	public void openSession(UsuarioDTO user, SucursalDTO sucursal) throws ForbiddenException {
 		assert user != null;
+		assert sucursal != null;
 		if (session != null)
 			throw new ForbiddenException(FORBIDDEN);
 		session = new SessionDTO();
