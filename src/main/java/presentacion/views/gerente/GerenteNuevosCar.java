@@ -14,14 +14,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
+import dto.CaracteristicaVehiculoDTO;
+import dto.VehiculoDTO;
 
 @SuppressWarnings("serial")
 public class GerenteNuevosCar extends JPanel {
@@ -33,15 +35,14 @@ public class GerenteNuevosCar extends JPanel {
 	private JPanel panelSuperior = new JPanel();
 	private JPanel panelInterior = new JPanel();
 	private JComboBox<String> comboMarcas;
-	private JLabel lblDescripcion;
-	private JTextField textDescipcion;
+//	private JLabel lblDescripcion;
+//	private JTextField textDescipcion;
 	private JButton btnBuscar;
 	private JScrollPane scrollPaneRepuestos;
 	private DefaultTableModel modelAutosNuevos;
 	private JTable tablaAutosNuevos;
 	private static GerenteNuevosCar vista;
 	private JPanel panel_1;
-	private List<Integer> idRepuestos;
 	private CaracteristicaNuevoCarView panelCaracteristicas;
 	private JSplitPane splitPane;
 	private JPanel panelBotonesVehiculos;
@@ -49,7 +50,7 @@ public class GerenteNuevosCar extends JPanel {
 	private JLabel lblMarca;
 
 	private GerenteNuevosCar() {
-		setBounds(100, 100, 712, 600);
+		setBounds(100, 100, 812, 616);
 		setLayout(new BorderLayout());	
 		
 		modelAutosNuevos = new DefaultTableModel(null, nombreColumnasAuto) {
@@ -89,34 +90,34 @@ public class GerenteNuevosCar extends JPanel {
 				ColumnSpec.decode("10px"),
 				ColumnSpec.decode("max(34dlu;default)"),
 				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("132px"),
+				ColumnSpec.decode("157px"),
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("right:75px"),
+				ColumnSpec.decode("right:154px"),
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("78px:grow"),
+				ColumnSpec.decode("137px"),
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("85px"),},
+				ColumnSpec.decode("260px"),},
 			new RowSpec[] {
 				FormSpecs.LINE_GAP_ROWSPEC,
 				RowSpec.decode("23px"),}));
+				
+				lblMarca = new JLabel("Marca");
+				panel_1.add(lblMarca, "4, 2, right, default");
 		
-		lblMarca = new JLabel("Marca");
-		panel_1.add(lblMarca, "2, 2, right, default");
-
-		comboMarcas = new JComboBox<>();
-		panel_1.add(comboMarcas, "4, 2, default, center");
-
-		lblDescripcion = new JLabel();
-		panel_1.add(lblDescripcion, "6, 2, right, center");
-		lblDescripcion.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDescripcion.setText("Descripción");
-
-		textDescipcion = new JTextField();
-		panel_1.add(textDescipcion, "8, 2, default, center");
-		textDescipcion.setColumns(10);
-
-		btnBuscar = new JButton("Buscar");
-		panel_1.add(btnBuscar, "10, 2, fill, top");
+				comboMarcas = new JComboBox<>();
+				panel_1.add(comboMarcas, "6, 2, default, center");
+		
+		//		lblDescripcion = new JLabel();
+		//		panel_1.add(lblDescripcion, "6, 2, right, center");
+		//		lblDescripcion.setHorizontalAlignment(SwingConstants.CENTER);
+		//		lblDescripcion.setText("Descripción");
+		
+		//		textDescipcion = new JTextField();
+		//		panel_1.add(textDescipcion, "8, 2, default, center");
+		//		textDescipcion.setColumns(10);
+		
+				btnBuscar = new JButton("Buscar");
+				panel_1.add(btnBuscar, "8, 2, fill, top");
 
 		panelInterior = new JPanel();
 		panelInterior.setBackground(SystemColor.menu);
@@ -141,6 +142,10 @@ public class GerenteNuevosCar extends JPanel {
 			vista = new GerenteNuevosCar();
 		return vista;
 	}
+	
+	public void setActionSelectVehiculo(ListSelectionListener listSelectionListener) {
+		this.tablaAutosNuevos.getSelectionModel().addListSelectionListener(listSelectionListener);
+	}
 
 	public void clearDataVehiculos() {
 		modelAutosNuevos.setRowCount(0);
@@ -149,22 +154,27 @@ public class GerenteNuevosCar extends JPanel {
 	public void display() {
 		setVisible(true);
 	}
+	
+	public void cargarTabla(List<VehiculoDTO> vehiculos) {
+		for (VehiculoDTO vehiculo : vehiculos) {
+			Object[] row = {
+					vehiculo.getIdVehiculo(),
+					vehiculo.getMarca(),
+					vehiculo.getFamilia(),
+					vehiculo.getLinea(),
+					vehiculo.getColor(),
+					vehiculo.getPrecioVenta()
+			};
+			modelAutosNuevos.addRow(row);
+		}
+	}
 
-//	public void setDataVehiculos(List<RepuestoDTO> repuestos) {
-//		modelAutosNuevos.setRowCount(0);
-//		idRepuestos.clear();
-//		for (RepuestoDTO r : repuestos) {
-//			idRepuestos.add(r.getIdRepuesto());
-//			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(), r.getFabricante(),
-//					r.getStockRepuesto(), r.getPrecioRepuesto() };
-//			modelAutosNuevos.addRow(row);
-//		}
-//	}
-
-	public String getIdRepuesto() {
-		String ret = -1 + "";
-		if (tablaAutosNuevos.getSelectedRow() >= 0) {
-			ret = "" + idRepuestos.get(tablaAutosNuevos.getSelectedRow());
+	public Integer getIdVehiculo() {
+		Integer ret = -1;
+		int rows = this.tablaAutosNuevos.getSelectedRowCount();
+		if (rows==1) {
+			int row=tablaAutosNuevos.getSelectedRow();
+			ret = (Integer) tablaAutosNuevos.getValueAt(row, 0);
 		}
 		return ret;
 	}
@@ -185,9 +195,9 @@ public class GerenteNuevosCar extends JPanel {
 		return (String) comboMarcas.getSelectedItem();
 	}
 
-	public String getDescripcion() {
-		return textDescipcion.getText();
-	}
+//	public String getDescripcion() {
+//		return textDescipcion.getText();
+//	}
 
 	public void setDataMarcas(List<String> marcas) {
 		DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
@@ -196,15 +206,18 @@ public class GerenteNuevosCar extends JPanel {
 		}
 		comboMarcas.setModel(modelo);
 	}
-
-
+	
+	public void cargarCaracteristica (CaracteristicaVehiculoDTO caracteristicas) {
+		panelCaracteristicas.setData(caracteristicas);
+	}
+	
 	public void clearCaracteristicaData() {
 		panelCaracteristicas.clearData();
 	}
 	
 	public void clear() {
-//	this.modelRepuestosInferior.setRowCount(0);
 	this.panelCaracteristicas.clearData();
+	this.clearDataVehiculos();
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import dto.CaracteristicaVehiculoDTO;
+import dto.PedidoVehiculoDTO;
 import dto.SucursalDTO;
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
@@ -64,6 +65,23 @@ public class VentasVehiculosController {
 	public CaracteristicaVehiculoDTO readCaracteristicaVehiculoByIdVehiculo(Integer codigoVehiculo) {
 		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(codigoVehiculo);
 		return daos.makeCaracteristicasVehiculoDao().readByID(vehiculo.getIdCaracteristicas());
+	}
+	
+	public List<VehiculoDTO> readAllVehiculoNuevos() {
+		List<VehiculoDTO> vehiculos = daos.makeVehiculoDao().readAll();
+		List<VehiculoDTO> vehiculosNuevos = new LinkedList<VehiculoDTO>();
+		for (VehiculoDTO vehiculo : vehiculos) {
+			if(vehiculo.isUsado()==false) {
+				vehiculosNuevos.add(vehiculo);
+			}
+		}
+		return vehiculosNuevos;
+	}
+	
+	public void saveVehiculosNuevos(List<VehiculoDTO> vehiculosNuevos) {
+		for (VehiculoDTO vehiculo : vehiculosNuevos) {
+			daos.makeVehiculoDao().insert(vehiculo);
+		}
 	}
 }
 

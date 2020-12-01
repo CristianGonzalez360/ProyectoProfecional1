@@ -20,6 +20,8 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 
 	private static final String readAllMarcas = "SELECT DISTINCT marca FROM Vehiculos";
 	
+	private static final String readAll = "SELECT * FROM Vehiculos";
+	
 	public VehiculoDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -54,7 +56,7 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 
 	@Override
 	public List<VehiculoDTO> readAll() {
-		return null;
+		return getTemplate().query(readAll).excecute(getMapper());
 	}
 
 	@Override
