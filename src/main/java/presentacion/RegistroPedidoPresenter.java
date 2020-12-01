@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.event.ListSelectionEvent;
@@ -20,7 +21,7 @@ public class RegistroPedidoPresenter {
 	private PanelRegistroPedido view;
 	
 	private List<VentaVehiculoDTO> ventas;
-	private Integer ventaSeleccionada;
+	private int ventaSeleccionada;
 	
 	private VentasVehiculosController ventasVehiculosController;
 	private ClientesController clientesController;
@@ -31,36 +32,47 @@ public class RegistroPedidoPresenter {
 		this.view.setActionOnSeleccionarVenta(a -> onSeleccionarVenta(a));
 		this.view.setActionOnRefrescar(a -> onRefrescar(a));
 		this.view.setActionOnRegistrar(a -> onRegistrar(a));
-		
+
 		this.ventasVehiculosController = ventasVehiculosController;
 		this.clientesController = clientesController;
 		this.pedidosController = pedidosController;
 		
+		this.ventaSeleccionada = -1;
 		mostrarVentas();
 	}
 
 	private void onRegistrar(ActionEvent a) {
-		if(ventaSeleccionada != null) { 
-			PedidoVehiculoDTO pedido = new PedidoVehiculoDTO();
-			pedido.setIdVentaVehiculo(ventas.get(ventaSeleccionada).getIdVentaVehiculo());
-			pedidosController.save(pedido);
+		List<String> errors = new LinkedList<>();
+		if(ventaSeleccionada == -1) { 
+			errors.add("Debe seleccionar una venta.");
+		}
+		else if(ventas.get(ventaSeleccionada).isPedido()) {
+			errors.add("El vehículo ya fue pedido");
+		}
+		
+		if(errors.isEmpty()) { 
+			pedidosController.save(ventas.get(ventaSeleccionada).getIdVentaVehiculo());
+			onRefrescar(a);
+			new MessageDialog().showMessages("Pedido Registrado");
 		} else {
-			new MessageDialog().showMessages("Debe seleccionar un venta");
+			new MessageDialog().showMessages(errors);
 		}
 	}
 
 	private void onRefrescar(ActionEvent a) {
-		this.ventaSeleccionada = null;
+		this.ventaSeleccionada = -1;
 		this.view.clearData();
 		mostrarVentas();
 	}
 
 	private void onSeleccionarVenta(ListSelectionEvent a) {
 		this.ventaSeleccionada = view.getFilaSeleciconada();
-		CaracteristicaVehiculoDTO vehiculo = ventasVehiculosController.readCaracteristicaVehiculoByIdVehiculo(ventas.get(ventaSeleccionada).getIdVehiculo());
-		this.view.setdata(vehiculo);
-		ClienteDTO cliente = clientesController.readById(ventas.get(ventaSeleccionada).getIdCliente());
-		this.view.setData(cliente);
+		if(ventaSeleccionada != -1) { 
+			CaracteristicaVehiculoDTO vehiculo = ventasVehiculosController.readCaracteristicaVehiculoByIdVehiculo(ventas.get(ventaSeleccionada).getIdVehiculo());
+			this.view.setdata(vehiculo);
+			ClienteDTO cliente = clientesController.readById(ventas.get(ventaSeleccionada).getIdCliente());
+			this.view.setData(cliente);
+		}
 	}
 	
 	private void mostrarVentas() {
