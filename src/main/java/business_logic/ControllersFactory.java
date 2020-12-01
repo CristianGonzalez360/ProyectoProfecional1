@@ -39,7 +39,5 @@ public abstract class ControllersFactory {
 
 	public abstract VentasVehiculosController makeVentasVehiculosController();
 
-	public ConfiguradorTerminalController makeConfiguradorTerminalController() {
-		return new ConfiguradorTerminalController();
-	}
+	public abstract ConfiguradorTerminalController makeConfiguradorTerminalController();
 }

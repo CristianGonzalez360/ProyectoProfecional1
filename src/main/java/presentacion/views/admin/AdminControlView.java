@@ -99,6 +99,7 @@ public class AdminControlView extends JInternalFrame {
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
+		setVisible(true);
 	}
 
 	public String getDataNombrePais() {
@@ -140,5 +141,9 @@ public class AdminControlView extends JInternalFrame {
 	
 	public void setActionEscogerTerminal(ActionListener listener) {
 		this.btnEscogerComoTerminal.addActionListener(listener);
+	}
+
+	public void close() {
+		setVisible(false);
 	}
 }

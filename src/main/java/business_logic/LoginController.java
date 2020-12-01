@@ -5,7 +5,6 @@ import dto.SucursalDTO;
 import dto.UserCrendentialsDTO;
 import dto.UsuarioDTO;
 import dto.temporal.SessionDTO;
-import repositories.SucursalesDao;
 import repositories.UsuariosDao;
 import services.SessionService;
 
@@ -14,34 +13,32 @@ public class LoginController {
 	private static final String FORBIDDEN = "Operación no permitida";
 
 	private UsuariosDao dao;
-
-	private SucursalesDao sucursalesDao;
 	
 	private SessionService service;
 	
-	public LoginController(UsuariosDao dao, SessionService service, SucursalesDao sucDao) {
+	private SucursalPredeterminadaReader reader;
+	
+	public LoginController(UsuariosDao dao, SessionService service, SucursalPredeterminadaReader reader) {
 		this.dao = dao;
 		this.service = service;
-		this.sucursalesDao = sucDao;	
+		this.reader = reader;	
 	}
 
 	public SessionDTO logUser(UserCrendentialsDTO credentials) {
 		assert credentials != null;
-		UsuarioDTO usuario = dao.readByCredentials(credentials.getName(), credentials.getPassword());
+		UsuarioDTO usuario = dao.readByCredentials(credentials.getName(), credentials.getPassword());		
 		if (usuario == null)
 			throw new ForbiddenException(FORBIDDEN);
 		if (usuario.getCuenta().getFechaDeBaja() != null)
 			throw new ForbiddenException(FORBIDDEN);
 		if (service.getActiveSession() != null)
-			throw new ForbiddenException(FORBIDDEN);
-		
+			throw new ForbiddenException(FORBIDDEN);		
 		service.openSession(usuario, readActiveSucursal());
 		return service.getActiveSession();
 	}
 
 	public SucursalDTO readActiveSucursal() {
-		SucursalDTO sucursal = new SucursalDTO();
-		sucursal.setIdSucursal(1);
+		SucursalDTO sucursal = reader.readSucursalPredeterminada();
 		return sucursal;
 	}
 	

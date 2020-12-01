@@ -3,6 +3,7 @@ package presentacion;
 import java.awt.event.ActionEvent;
 import business_logic.LoginController;
 import business_logic.exceptions.ForbiddenException;
+import presentacion.views.admin.AdminControlView;
 import presentacion.views.cajero.CajeroControlView;
 import presentacion.views.gerente.GerenteControlView;
 import presentacion.views.supervisor.SupervisorControlView;
@@ -62,6 +63,11 @@ public class WorkbenchPresenter implements Presenter {
 					VendedorControlView.getInstance().clearData();
 					VendedorControlView.getInstance().display();
 				}
+				if (session.getRole().equals("admin")) {
+					AdminControlView.getInstance().clearData();
+					AdminControlView.getInstance().display();
+				}
+				
 				workbenchView.disableLoginButton();
 				LoginView.getInstance().clearData();
 				LoginView.getInstance().close();
@@ -90,6 +96,8 @@ public class WorkbenchPresenter implements Presenter {
 		GerenteControlView.getInstance().close();
 		VendedorControlView.getInstance().clearData();
 		VendedorControlView.getInstance().close();
+		AdminControlView.getInstance().clearData();
+		AdminControlView.getInstance().close();
 		workbenchView.enableLoginButton();
 		workbenchView.clearData();
 	}
