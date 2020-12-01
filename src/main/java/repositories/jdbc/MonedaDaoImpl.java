@@ -11,6 +11,8 @@ public class MonedaDaoImpl extends GenericJdbcDao<MonedaDTO> implements MonedaDa
 
 	private static final String insert = "INSERT INTO moneda(nombre, simbolo, cotizacionDolar) VALUES(?,?,?)";
 	
+	private static final String readById = "SELECT * FROM moneda WHERE idMoneda = ?";
+	
 	public MonedaDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -38,8 +40,8 @@ public class MonedaDaoImpl extends GenericJdbcDao<MonedaDTO> implements MonedaDa
 
 	@Override
 	public MonedaDTO readByID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<MonedaDTO> dtos = getTemplate().query(readById).param(id).excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
 	@Override
@@ -50,8 +52,17 @@ public class MonedaDaoImpl extends GenericJdbcDao<MonedaDTO> implements MonedaDa
 
 	@Override
 	protected Mapper<MonedaDTO> getMapper() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		return new Mapper<MonedaDTO>() {
 
+			@Override
+			public MonedaDTO map(Object[] obj) {
+				MonedaDTO dto = new MonedaDTO();
+				dto.setIdMoneda((Integer)obj[0]);
+				dto.setNombre((String)obj[1]);
+				dto.setSimbolo((String)obj[2]);
+				dto.setCotizacionDolar((Double)obj[3]);
+				return dto;
+			}			
+		};
+	}
 }

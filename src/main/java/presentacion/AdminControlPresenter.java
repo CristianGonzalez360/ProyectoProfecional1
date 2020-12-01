@@ -26,11 +26,12 @@ public class AdminControlPresenter {
 	
 	private void onSelectSucursal(ListSelectionEvent a) {
 		SucursalDTO sucursal = view.getData();
-		System.out.println(sucursal.toString());
-		MonedaDTO moneda = controller.readMonedaByPais(sucursal.getPais());
-		if(moneda != null) {
-			view.clearDataMoneda();
-			view.setData(moneda);
+		if(sucursal != null) {
+			MonedaDTO moneda = controller.readMonedaByPais(sucursal.getPais());
+			if(moneda != null) {
+				view.clearDataMoneda();
+				view.setData(moneda);
+			}	
 		}
 	}
 
@@ -38,6 +39,8 @@ public class AdminControlPresenter {
 		String nombrePais = view.getDataNombrePais();
 		List<SucursalDTO> sucursales = controller.readByPais(nombrePais);
 		view.clearData();
-		view.setData(sucursales);
+		if(!sucursales.isEmpty()) {
+			view.setData(sucursales);
+		}
 	}
 }
