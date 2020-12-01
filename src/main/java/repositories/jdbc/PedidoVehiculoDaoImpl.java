@@ -18,7 +18,7 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 	private static final String readById = readAll + " WHERE idPedidoVehiculo = ?";
 	
 	private static final String readByIdVenta = readAll + " WHERE idVentaVehiculo = ?";
-	
+
 	private static final String insert = "INSERT INTO PedidoVehiculo (fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso, idVentaVehiculo) VALUES (?,?,?,?,?)";
 
 	public PedidoVehiculoDaoImpl(Connection connection) {

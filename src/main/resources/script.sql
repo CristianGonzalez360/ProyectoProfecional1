@@ -347,5 +347,5 @@ CREATE TABLE PedidoVehiculo (
   PRIMARY KEY (idPedidoVehiculo),
   FOREIGN KEY (idUsuPedido) REFERENCES Usuarios(idUsuario),
   FOREIGN KEY (idUsuIngreso) REFERENCES Usuarios(idUsuario),
-  FOREIGN KEY (idVentaVehiculo) REFERENCES VentasVehiculos(idVentaVehiculo),
+  FOREIGN KEY (idVentaVehiculo) REFERENCES VentasVehiculos(idVentaVehiculo)
 );

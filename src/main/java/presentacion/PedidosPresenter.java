@@ -1,13 +1,10 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
-import java.util.Date;
 
 import business_logic.PedidosController;
-import dto.PedidoVehiculoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.gerente.PedidosPanelView;
-import repositories.PedidoVehiculoDao;
 
 public class PedidosPresenter {
 
