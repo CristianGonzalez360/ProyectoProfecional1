@@ -106,7 +106,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public SucursalesController makeSucursalesController() {
 		if(sucursalesController == null) {
-			sucursalesController = new SucursalesController(daos.makeSucursalesDao());
+			sucursalesController = new SucursalesController(daos);
 		}
 		return sucursalesController;
 	}

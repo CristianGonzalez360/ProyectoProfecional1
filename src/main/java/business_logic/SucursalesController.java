@@ -2,29 +2,34 @@ package business_logic;
 
 import java.util.List;
 
+import dto.MonedaDTO;
 import dto.SucursalDTO;
-import repositories.SucursalesDao;
+import repositories.DaosFactory;
 
 public class SucursalesController {
+	
+	private DaosFactory daos;
+	
+	public SucursalesController(DaosFactory factory) {
+		assert factory != null;
+		daos = factory;
+	}
 
-	private static final String pais = "Argentina";
-	
-	private SucursalesDao sucursalDao;
-	
-	public SucursalesController(SucursalesDao sucDao) {
-		assert sucDao != null;
-		sucursalDao = sucDao;
-	}
-	
-	public SucursalDTO readByName(String name) {
-		return sucursalDao.readByName(name);		
-	}
-	
-	public List<SucursalDTO> readAll() {
-		return sucursalDao.readByPais(pais);
+	public List<SucursalDTO> readByPais(String pais) {
+		return daos.makeSucursalesDao().readByPais(pais);
 	}
 	
 	public List<String> readFinancierasByPais(String pais) {
-		return sucursalDao.readFinancierasByPais(pais);
+		return daos.makeSucursalesDao().readFinancierasByPais(pais);
+	}
+
+	public MonedaDTO readMonedaByPais(String pais) {
+		SucursalDTO sucursal = readByPais(pais).get(0);
+		MonedaDTO moneda = null;
+		if(sucursal != null) {
+			Integer idMoneda = sucursal.getIdMoneda();
+			moneda = daos.makeMonedasDao().readByID(idMoneda);
+		}
+		return moneda;
 	}
 }
