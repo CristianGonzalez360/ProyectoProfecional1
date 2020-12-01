@@ -7,87 +7,82 @@ import java.util.List;
 import dto.DatosPersonalesDTO;
 import dto.PedidoVehiculoDTO;
 import dto.UsuarioDTO;
+import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
 import dto.temporal.PedidoDTO;
-import repositories.ClientesDao;
 import repositories.DatosPersonalesDao;
-import repositories.FichaTecnicaVehiculoDao;
 import repositories.PedidoVehiculoDao;
-
 import repositories.UsuariosDao;
+import repositories.VehiculosDao;
 import repositories.VentaVehiculoDao;
 import services.SessionServiceImpl;
 
 public class PedidosController {
 
-	private ClientesDao clientesDao;
 	private DatosPersonalesDao datosPersonalesDao;
 	private UsuariosDao usuariosDao;
 	private VentaVehiculoDao ventaVehiculoDao;
-	private FichaTecnicaVehiculoDao fichaTecnicaDao;
+	private VehiculosDao vehiculosDao;
 	private PedidoVehiculoDao pedidosDao;
 
-	public PedidosController(ClientesDao clientesDao, DatosPersonalesDao datosPersonalesDao, UsuariosDao usuariosDao,
-			VentaVehiculoDao ventaVehiculoDao, PedidoVehiculoDao pedidosDao) {
-		this.clientesDao = clientesDao;
+	public PedidosController(DatosPersonalesDao datosPersonalesDao, UsuariosDao usuariosDao,
+			VentaVehiculoDao ventaVehiculoDao, VehiculosDao vehiculosDao, PedidoVehiculoDao pedidosDao) {
 		this.datosPersonalesDao = datosPersonalesDao;
 		this.usuariosDao = usuariosDao;
 		this.ventaVehiculoDao = ventaVehiculoDao;
+		this.vehiculosDao = vehiculosDao;
 		this.pedidosDao = pedidosDao;
 	}
 
-	public List<PedidoDTO> readAllByDniCliente(Integer dniCliente) {
-		return null;
-	}
-
-	public List<PedidoDTO> readAllPedidos() {
+	public List<PedidoDTO> readAllByDniCliente(Integer dniCliente, Integer idSucursal) {
 		List<PedidoDTO> pedidos = new ArrayList<>();
 
-		for (PedidoVehiculoDTO pedido : pedidosDao.readAll()) {
-			pedidos.add(armarPedidoCompleto(pedido));
+		for (PedidoDTO pedido : readAllPedidos(idSucursal)) {
+			if (pedido != null && pedido.getDniCliente().equals(dniCliente.toString()))
+				pedidos.add(pedido);
 		}
+		return pedidos;
+	}
 
-		System.out.println("buscargg");
+	public List<PedidoDTO> readAllPedidos(Integer idSucursal) {
+		List<PedidoDTO> pedidos = new ArrayList<>();
+
+		for (PedidoVehiculoDTO pedido : pedidosDao.readAllPedidosDeVenta(idSucursal)) {
+			if (pedido != null)
+				pedidos.add(armarPedidoCompleto(pedido));
+		}
 		return pedidos;
 	}
 
 	private PedidoDTO armarPedidoCompleto(PedidoVehiculoDTO pedido) {
-		PedidoDTO nuevoPedido = new PedidoDTO();
+		VentaVehiculoDTO datosDeVenta = getDatosDeVenta(pedido.getIdVentaVehiculo());
+		DatosPersonalesDTO datosCliente = getDatosDeCliente(datosDeVenta.getIdCliente());
+		VehiculoDTO datosVehiculo = getDatosVehiculo(datosDeVenta.getIdVehiculo());
+		UsuarioDTO datosUsuario = getDatosDeUsuario(pedido.getIdUsuPedido());
 
-		Integer idPedido = nuevoPedido.getIdPedido();
-		String nombreCliente = "";
-		String apellidoCliente = "";
-		String dniCliente = "";
-		String marcaAuto = datosDeVehiculo(pedido.getIdVentaVehiculo()).getFabricante();
-		String modeloAuto = "";
-		String colorAuto = "";
+		String dniCliente = String.valueOf(datosCliente.getDni());
+		String modeloAuto = datosVehiculo.getFamilia() + " - " + datosVehiculo.getLinea();
 		String conbustionAuto = "";
-		String nombreUsuario = datosDeUsuario(pedido.getIdUsuPedido()).getDatos().getNombreCompleto();
-		Date fechaPedido = pedido.getFechaPedido();
+		String nombreUsuario = datosUsuario.getDatos().getNombreCompleto();
 
-		nuevoPedido.setIdPedido(idPedido);
-		nuevoPedido.setNombreCliente(nombreCliente);
-		nuevoPedido.setApellidoCliente(apellidoCliente);
-		nuevoPedido.setDniCliente(dniCliente);
-		nuevoPedido.setMarcaAuto(marcaAuto);
-		nuevoPedido.setModeloAuto(modeloAuto);
-		nuevoPedido.setColorAuto(colorAuto);
-		nuevoPedido.setConbustionAuto(conbustionAuto);
-		nuevoPedido.setNombreUsuario(nombreUsuario);
-		nuevoPedido.setFechaPedido(fechaPedido);
-
-		return nuevoPedido;
+		return new PedidoDTO(pedido.getIdPedidoVehiculo(), datosCliente.getNombreCompleto(), datosCliente.getApellido(),
+				dniCliente, datosVehiculo.getMarca(), modeloAuto, datosVehiculo.getColor(), conbustionAuto,
+				nombreUsuario, pedido.getFechaPedido());
 	}
 
-	private DatosPersonalesDTO datosDeCliente(Integer id) {
+	private VentaVehiculoDTO getDatosDeVenta(Integer idVentaVehiculo) {
+		return ventaVehiculoDao.readByID(idVentaVehiculo);
+	}
+
+	private DatosPersonalesDTO getDatosDeCliente(Integer id) {
 		return datosPersonalesDao.readByID(id);
 	}
 
-	private VentaVehiculoDTO datosDeVehiculo(Integer id) {
-		return ventaVehiculoDao.readByID(id);
+	private VehiculoDTO getDatosVehiculo(Integer idVehiculo) {
+		return vehiculosDao.readByID(idVehiculo);
 	}
 
-	private UsuarioDTO datosDeUsuario(Integer id) {
+	private UsuarioDTO getDatosDeUsuario(Integer id) {
 		return usuariosDao.readByID(id);
 	}
 
@@ -96,6 +91,17 @@ public class PedidosController {
 		pedido.setIdVentaVehiculo(idVenta);
 		pedido.setIdUsuPedido(SessionServiceImpl.getInstance().getActiveSession().getIdUsuario());
 		pedidosDao.insert(pedido);
+	}
+
+	public boolean registrarIngresoPedidoById(Integer idPedido, Integer idUsuario) {
+		if (idPedido == null)
+			return false;
+
+		PedidoVehiculoDTO pedido = pedidosDao.readByID(idPedido);
+		pedido.setFechaIngreso(new Date());
+		pedido.setIdUsuIngreso(idUsuario);
+
+		return pedidosDao.updateIngreso(pedido);
 	}
 
 }

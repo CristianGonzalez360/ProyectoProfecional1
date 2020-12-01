@@ -3,9 +3,6 @@ package presentacion.views.gerente;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -35,7 +32,6 @@ public class PedidosPanelView extends JPanel {
 	private JTable tablePedidos;
 
 	private JButton btnRegistrarPedido;
-	private JButton btnCancelarPedido;
 
 	public PedidosPanelView() {
 		setLayout(new BorderLayout(0, 0));
@@ -59,11 +55,8 @@ public class PedidosPanelView extends JPanel {
 		JPanel panelSur = new JPanel();
 		add(panelSur, BorderLayout.SOUTH);
 
-		btnRegistrarPedido = new JButton("Registrar Pedido");
+		btnRegistrarPedido = new JButton("Registrar Ingreso");
 		panelSur.add(btnRegistrarPedido);
-
-		btnCancelarPedido = new JButton("Cancelar Pedido");
-		panelSur.add(btnCancelarPedido);
 
 		JScrollPane scrollPanelPedidos = new JScrollPane();
 		add(scrollPanelPedidos, BorderLayout.CENTER);
@@ -78,25 +71,12 @@ public class PedidosPanelView extends JPanel {
 		tableModelPedidos.setColumnIdentifiers(COLUMNAS_PEDIDOS);
 	}
 
-	private Date parse(String str) {
-		try {
-			return new SimpleDateFormat("yyyy-mm-dd").parse(str);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	public void setActionBuscar(ActionListener listener) {
 		this.btnBuscar.addActionListener(listener);
 	}
 
-	public void setActionRegistrarPedido(ActionListener listener) {
+	public void setActionRegistrarIngreso(ActionListener listener) {
 		this.btnRegistrarPedido.addActionListener(listener);
-	}
-
-	public void setActionCancelarPedido(ActionListener listener) {
-		this.btnCancelarPedido.addActionListener(listener);
 	}
 
 	public String getDniBusqueda() {
@@ -111,6 +91,21 @@ public class PedidosPanelView extends JPanel {
 					pedido.getNombreUsuario(), pedido.getFechaPedido().toString() };
 			tableModelPedidos.addRow(row);
 		}
+	}
+
+	public Integer getIdSelectedRow() {
+		int row = tablePedidos.getSelectedRow();
+		return row;
+	}
+
+	public Integer getIdSelectedPedido() {
+		int row = tablePedidos.getSelectedRow();
+		int id;
+		if (tablePedidos.getSelectedRow() != -1) {
+			id = Integer.parseInt(tablePedidos.getValueAt(row, 0).toString());
+			return id;
+		}
+		return null;
 	}
 
 }

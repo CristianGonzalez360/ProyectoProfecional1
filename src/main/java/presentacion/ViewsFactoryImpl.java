@@ -1,6 +1,7 @@
 package presentacion;
 
 import business_logic.ControllersFactory;
+import presentacion.views.admin.AdminControlView;
 import presentacion.views.cajero.CajeroControlView;
 import presentacion.views.gerente.GerenteControlView;
 import presentacion.views.supervisor.SupervisorControlView;
@@ -18,7 +19,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 		WorkbenchView.getInstance().addFrames(CajeroControlView.getInstance());
 		WorkbenchView.getInstance().addFrames(GerenteControlView.getInstance());
 		WorkbenchView.getInstance().addFrames(VendedorControlView.getInstance());
-
+		WorkbenchView.getInstance().addFrames(AdminControlView.getInstance());
 	}
 
 	@Override
@@ -37,10 +38,10 @@ public class ViewsFactoryImpl extends ViewsFactory {
 		new HistorialVentasPresenter(controllers.makeVentasVehiculosController());
 		new VendedorControlPresenter(controllers.makeClientesController(), controllers.makeSucursalesController(), controllers.makeVentasVehiculosController());
 		new PedidosPresenter(GerenteControlView.getInstance().getPedidosPanelView(), controllers.makePedidosController());
-		new NuevosCarPresenter(GerenteControlView.getInstance().getAutosNuevosPanelView());
+		new NuevosCarPresenter(GerenteControlView.getInstance().getAutosNuevosPanelView(), controllers.makeVentasVehiculosController());
 		new CarritoPresenter(controllers.makeRepuestosController(), controllers.makeClientesController(), controllers.makeFacturasController());
 		new RegistroPedidoPresenter(controllers.makeVentasVehiculosController(),controllers.makeClientesController() , controllers.makePedidosController());
-
+		new AdminControlPresenter(controllers.makeSucursalesController(), controllers.makeConfiguradorTerminalController());		
 		return new WorkbenchPresenter(controllers.makeLoginController());
 	}
 }
