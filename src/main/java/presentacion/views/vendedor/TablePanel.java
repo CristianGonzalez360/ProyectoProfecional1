@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.border.TitledBorder;
 
 public abstract class TablePanel<T> extends JPanel {
 	
