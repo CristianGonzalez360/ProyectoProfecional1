@@ -21,6 +21,8 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	private static final String readAllMarcas = "SELECT DISTINCT marca FROM Vehiculos";
 	
 	private static final String readAll = "SELECT * FROM Vehiculos";
+
+	private static final String updateDisponibilidad = "UPDATE Vehiculos SET disponible = ? WHERE idVehiculo = ?";
 	
 	public VehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -29,6 +31,11 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	@Override
 	public boolean update(VehiculoDTO entity) {
 		return false;
+	}
+	
+	@Override
+	public boolean updateDisponibilidadVehiculo(Integer id, Boolean boolean1) {
+		return getTemplate().query(updateDisponibilidad).param(boolean1).param(id).excecute();
 	}
 
 	@Override
