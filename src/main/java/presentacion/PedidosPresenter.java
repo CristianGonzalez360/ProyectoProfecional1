@@ -19,8 +19,7 @@ public class PedidosPresenter {
 		this.controller = controller;
 
 		view.setActionBuscar((a) -> onBuscar(a));
-		view.setActionRegistrarPedido((a) -> onRegistrar(a));
-		view.setActionCancelarPedido((a) -> onCancelar(a));
+		view.setActionRegistrarIngreso((a) -> onRegistrar(a));
 	}
 
 	private void onBuscar(ActionEvent a) {
@@ -40,14 +39,8 @@ public class PedidosPresenter {
 		}
 	}
 
-	private Object onCancelar(ActionEvent a) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private Object onRegistrar(ActionEvent a) {
-		// TODO Auto-generated method stub
-		return null;
+	private void onRegistrar(ActionEvent a) {
+		System.out.println("registra ingreso");
 	}
 
 }
