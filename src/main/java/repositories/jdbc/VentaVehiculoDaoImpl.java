@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import dto.VentaVehiculoDTO;
+import dto.taller.TrabajoPresupuestadoDTO;
 import repositories.VentaVehiculoDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
@@ -21,6 +22,8 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	
 	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo AND disponible = false"; //AND idSucursal = ?"; 
 
+	private static final String readById = "SELECT * FROM VentasVehiculos WHERE idVentaVehiculo = ?";
+	
 	public VentaVehiculoDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -61,8 +64,8 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 
 	@Override
 	public VentaVehiculoDTO readByID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<VentaVehiculoDTO> dtos = getTemplate().query(readById).param(id).excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
 	@Override
@@ -85,17 +88,22 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 			public VentaVehiculoDTO map(Object[] obj) {
 				VentaVehiculoDTO ret = new VentaVehiculoDTO();
 				ret.setIdVentaVehiculo((Integer) obj[0]);
-				ret.setIdUsuPedido((Integer) obj[1]);
-				ret.setIdUsuLlegada((Integer) obj[2]);
+				ret.setIdUsuVentaVN((Integer) obj[1]);
+				ret.setIdUsuPedido((Integer) obj[2]);
+				ret.setIdUsuLlegada((Integer) obj[3]);
 				ret.setIdPagoVentaVN((Integer) obj[4]);
 				ret.setFechaVentaVN((Date) obj[5]);
 				ret.setFechaEntregaReal((Date) obj[6]);
 				ret.setFabricante((String) obj[7]);
 				ret.setComisionCobrada((Double) obj[8]);
 				ret.setPrecioVenta((Double) obj[9]);
-				ret.setIdVehiculo((Integer) obj[10]);
-				ret.setIdCliente((Integer) obj[11]);
-				ret.setIdUsuEntrega((Integer) obj[12]);
+				ret.setFinanciera((String) obj[10]);
+				ret.setNroCuotas((Integer) obj[11]);
+				ret.setMontoCuota((Double) obj[12]);
+				ret.setIdVehiculo((Integer) obj[13]);
+				ret.setIdCliente((Integer) obj[14]);
+				ret.setIdUsuEntrega((Integer) obj[15]);
+				ret.setIdSucursalVenta((Integer) obj[16]);
 				return ret;
 			}
 		};

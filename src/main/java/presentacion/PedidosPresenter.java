@@ -1,10 +1,13 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.Date;
 
 import business_logic.PedidosController;
+import dto.PedidoVehiculoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.gerente.PedidosPanelView;
+import repositories.PedidoVehiculoDao;
 
 public class PedidosPresenter {
 
@@ -17,7 +20,7 @@ public class PedidosPresenter {
 	public PedidosPresenter(PedidosPanelView view, PedidosController controller) {
 		this.view = view;
 		this.controller = controller;
-
+		
 		view.setActionBuscar((a) -> onBuscar(a));
 		view.setActionRegistrarPedido((a) -> onRegistrar(a));
 		view.setActionCancelarPedido((a) -> onCancelar(a));

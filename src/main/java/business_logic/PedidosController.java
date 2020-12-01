@@ -41,10 +41,12 @@ public class PedidosController {
 	public List<PedidoDTO> readAllPedidos() {
 		List<PedidoDTO> pedidos = new ArrayList<>();
 
-		for (PedidoVehiculoDTO pedido : pedidosDao.readAllPedidosDeVenta(1))
+		pedidosDao.insert(new PedidoVehiculoDTO(new Date(), new Date(), 5, 5, 1));
+
+		for (PedidoVehiculoDTO pedido : pedidosDao.readAllPedidosDeVenta(1)) {
 			if (pedido != null)
 				pedidos.add(armarPedidoCompleto(pedido));
-
+		}
 		return pedidos;
 	}
 
@@ -53,6 +55,7 @@ public class PedidosController {
 		DatosPersonalesDTO datosCliente = datosDeCliente(datosDeVenta.getIdCliente());
 		VehiculoDTO datosVehiculo = datosVehiculo(datosDeVenta.getIdVehiculo());
 		UsuarioDTO datosUsuario = datosDeUsuario(pedido.getIdUsuPedido());
+
 
 		String nombreCliente = datosCliente.getNombreCompleto();
 		String apellidoCliente = datosCliente.getApellido();
