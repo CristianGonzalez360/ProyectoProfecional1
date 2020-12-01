@@ -479,6 +479,7 @@ ventaVehiculo:
     precioVenta: 1200444
     financiera:
     nroCuotas:
+    montoCuota:
     idVehiculo: 1
     idCliente: 1
     idUsuEntrega: 
