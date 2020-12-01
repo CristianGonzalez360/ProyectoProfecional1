@@ -12,4 +12,6 @@ public interface PedidoVehiculoDao extends GenericDao<PedidoVehiculoDTO, Integer
 
 	public boolean estaPedido(Integer idVentaVehiculo);
 
+	public boolean updateIngreso(PedidoVehiculoDTO pedido);
+
 }

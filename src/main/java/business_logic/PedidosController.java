@@ -1,7 +1,5 @@
 package business_logic;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -93,6 +91,17 @@ public class PedidosController {
 		pedido.setIdVentaVehiculo(idVenta);
 		pedido.setIdUsuPedido(SessionServiceImpl.getInstance().getActiveSession().getIdUsuario());
 		pedidosDao.insert(pedido);
+	}
+
+	public boolean registrarIngresoPedidoById(Integer idPedido, Integer idUsuario) {
+		if (idPedido == null)
+			return false;
+
+		PedidoVehiculoDTO pedido = pedidosDao.readByID(idPedido);
+		pedido.setFechaIngreso(new Date());
+		pedido.setIdUsuIngreso(idUsuario);
+
+		return pedidosDao.updateIngreso(pedido);
 	}
 
 }

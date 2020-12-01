@@ -21,6 +21,8 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	private static final String insert = "INSERT INTO PedidoVehiculo (fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso, idVentaVehiculo) VALUES (?,?,?,?,?)";
 
+	private static final String updateIngreso = "UPDATE PedidoVehiculo SET fechaIngreso = ?, idUsuIngreso = ? WHERE idPedidoVehiculo = ?";
+	
 	public PedidoVehiculoDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -29,6 +31,14 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 	public boolean update(PedidoVehiculoDTO entity) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public boolean updateIngreso(PedidoVehiculoDTO pedido) {
+		return getTemplate().query(updateIngreso)
+				.param(pedido.getFechaIngreso())
+				.param(pedido.getIdUsuIngreso())
+				.param(pedido.getIdPedidoVehiculo()).excecute();
 	}
 
 	@Override
