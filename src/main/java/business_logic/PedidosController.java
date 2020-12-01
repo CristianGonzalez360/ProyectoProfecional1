@@ -41,7 +41,7 @@ public class PedidosController {
 	public List<PedidoDTO> readAllPedidos() {
 		List<PedidoDTO> pedidos = new ArrayList<>();
 
-//		pedidosDao.insert(new PedidoVehiculoDTO(new Date(), new Date(), 5, 5, 1));
+		//pedidosDao.insert(new PedidoVehiculoDTO(new Date(), new Date(), 5, 5, 1));
 
 		for (PedidoVehiculoDTO pedido : pedidosDao.readAllPedidosDeVenta(1)) {
 			if (pedido != null)
