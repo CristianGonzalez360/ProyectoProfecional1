@@ -7,6 +7,7 @@ import java.beans.PropertyVetoException;
 import java.util.List;
 
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionListener;
 
 import dto.CaracteristicaVehiculoDTO;
@@ -90,6 +91,7 @@ public class VendedorControlView extends JInternalFrame {
 		
 		datosVentaVehiculoPanel = new DatosVentaVehiculo();
 		panel_2.add(datosVentaVehiculoPanel, BorderLayout.SOUTH);
+		datosVentaVehiculoPanel.setNoEditable();
 		
 		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
 		panel_2.add(tabbedPane_1, BorderLayout.CENTER);
@@ -233,8 +235,8 @@ public class VendedorControlView extends JInternalFrame {
 		this.datosVentaVehiculoPanel.setActionRegistrarVenta(listener);
 	}
 
-	public ClienteDTO getDataCliente() {
-		return this.clientePanel.getData();
+	public Integer getDataCliente() {
+		return this.clientePanel.getIdCliente();
 	}
 
 	public ModalidadVentaVehiculoDTO getDataModalidadVenta() {
@@ -247,5 +249,21 @@ public class VendedorControlView extends JInternalFrame {
 
 	public void setDataComisionVendedor(Double comision) {
 		datosVentaVehiculoPanel.setComisionVendedor(comision.toString());
+	}
+
+	public void setDataPrecioFinal(Double precioFinalVenta) {
+		datosVentaVehiculoPanel.setPrecioFinalVenta(precioFinalVenta.toString());
+	}
+	
+	public void setActionUpdateNroCuotas(ChangeListener listener) {
+		datosVentaVehiculoPanel.setActionUpdtNroDeCuotas(listener);
+	}
+
+	public void setMontoCuota(String montoCuota) {
+		datosVentaVehiculoPanel.setMontoCuota(montoCuota);
+	}
+
+	public void clearDataModalidadVenta() {
+		datosVentaVehiculoPanel.clearData();
 	}
 }

@@ -2,6 +2,8 @@ package presentacion.views.vendedor;
 
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeListener;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -11,6 +13,8 @@ import dto.temporal.ModalidadVentaVehiculoDTO;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 
@@ -86,7 +90,8 @@ public class DatosVentaVehiculo extends JPanel {
 		JLabel lblNewLabel_3 = new JLabel("Nro. de cuotas");
 		add(lblNewLabel_3, "6, 4, left, default");
 		
-		spinner = new JSpinner();
+		SpinnerModel sm = new SpinnerNumberModel(1, 1, 500, 1);
+		spinner = new JSpinner(sm);
 		add(spinner, "8, 4");
 		
 		JLabel lblNewLabel_4 = new JLabel("Monto cuota");
@@ -112,13 +117,9 @@ public class DatosVentaVehiculo extends JPanel {
 		
 		btnRegistrarVenta = new JButton("Registrar venta");
 		add(btnRegistrarVenta, "8, 10, right, default");
-		disableTextIva();
 		clearData();
 	}
 
-	public void disableTextIva() {
-	}
-	
 	public void setData(List<String> list) {
 		for(String item : list) this.comboBoxFinanciera.addItem(item);
 	}
@@ -131,11 +132,21 @@ public class DatosVentaVehiculo extends JPanel {
 		return this.chckbxNewCheckBox.isSelected();
 	}
 
+	public void setNoEditable() {
+		this.textFieldMontoCuota.setEditable(false);
+		this.textFieldMontoFinanciado.setEditable(false);
+		this.comboBoxFinanciera.setEditable(false);
+		this.textFieldComisionVenta.setEditable(false);
+		this.textFieldMontoCuota.setEditable(false);
+		this.textFieldPrecioFinal.setEditable(false);
+	}
+	
 	public void disableFinanciamiento() {
 		this.textFieldMontoCuota.setEnabled(false);
 		this.textFieldMontoFinanciado.setEnabled(false);
 		this.comboBoxFinanciera.setEnabled(false);
 		this.spinner.setEnabled(false);
+		this.textFieldMontoFinanciado.setEnabled(false);
 	}
 	
 	public void enableFinanciamiento() {
@@ -145,10 +156,6 @@ public class DatosVentaVehiculo extends JPanel {
 		this.spinner.setEnabled(true);
 	}
 
-	public void setActionRegistrarVenta(ActionListener listener) {
-		this.btnRegistrarVenta.addActionListener(listener);
-	}
-
 	public ModalidadVentaVehiculoDTO getData() {
 		ModalidadVentaVehiculoDTO dto = new ModalidadVentaVehiculoDTO();
 		dto.setEfectivo(this.chckbxNewCheckBox.isSelected());
@@ -156,14 +163,18 @@ public class DatosVentaVehiculo extends JPanel {
 		dto.setNroCuotas(this.spinner.getValue().toString());
 		dto.setMontoCuota(this.textFieldMontoCuota.getText());
 		dto.setComision(this.textFieldComisionVenta.getText());
+		dto.setMontoFinanciado(this.textFieldMontoFinanciado.getText());
 		return dto;
 	}
 
 	public void clearData() {
 		this.chckbxNewCheckBox.setSelected(false);
-		this.spinner.setValue(0);
+		this.spinner.setValue(1);
 		this.textFieldComisionVenta.setText("");
 		this.textFieldMontoCuota.setText("");
+		this.textFieldPrecioFinal.setText("");
+		this.textFieldComisionVenta.setText("");
+		this.textFieldMontoFinanciado.setText("");
 	}
 
 	public void setMontoFinanciado(String precio) {
@@ -172,5 +183,21 @@ public class DatosVentaVehiculo extends JPanel {
 
 	public void setComisionVendedor(String string) {
 		this.textFieldComisionVenta.setText(string);
+	}
+
+	public void setPrecioFinalVenta(String string) {
+		this.textFieldPrecioFinal.setText(string);
+	}
+	
+	public void setActionRegistrarVenta(ActionListener listener) {
+		this.btnRegistrarVenta.addActionListener(listener);
+	}
+	
+	public void setActionUpdtNroDeCuotas(ChangeListener listener) {
+		this.spinner.addChangeListener(listener);
+	}
+
+	public void setMontoCuota(String montoCuota) {
+		this.textFieldMontoCuota.setText(montoCuota);
 	}
 }
