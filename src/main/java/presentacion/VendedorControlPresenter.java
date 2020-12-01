@@ -1,8 +1,10 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 
 import business_logic.ClientesController;
@@ -36,6 +38,7 @@ public class VendedorControlPresenter {
 	
 	private void setOpcionesBusqueda() {
 		this.view.addTiposBusqueda(new String [] {"Nuevo", "Usado"});
+		this.view.addFinancieras(Arrays.asList(new String [] {"Santander", "ICBC", "HSBC", "City Bank"}));
 		this.view.addMarcasBusqueda(ventasController.readNombreMarcasVehiculos());
 	}
 	
@@ -46,14 +49,25 @@ public class VendedorControlPresenter {
 		this.view.setActionSelectVehiculo((a)->onSelectVehiculo(a));
 		this.view.setActionSelectVentaEnEfectivo((a)->onSelectVentaEnEfectivo(a));
 		this.view.setActionRegistrarVenta((a)->onRegistrarVenta(a));
+		this.view.setActionUpdateNroCuotas((a)->onUpdateNroCuotas(a));
 	}
 	
+	private void onUpdateNroCuotas(ChangeEvent a) {
+		updateMontoCuota();
+	}
+	
+	private void updateMontoCuota() {
+		ModalidadVentaVehiculoDTO modalidad = view.getDataModalidadVenta();
+		String montoCuota = ventasController.calcularMontoCuota(modalidad.getMontoFinanciado(), modalidad.getNroCuotas());
+		view.setMontoCuota(montoCuota);
+	}
+
 	private void onRegistrarVenta(ActionEvent a) {
-		ClienteDTO cliente = view.getDataCliente();
+		Integer idCliente = view.getDataCliente();
 		OutputConsultaVehiculoEnVentaDTO vehiculo = view.getDataVehiculoEnVenta();
 		ModalidadVentaVehiculoDTO modalidadVenta = view.getDataModalidadVenta();
 		try {
-			ventasController.registrarVenta(cliente, vehiculo, modalidadVenta);
+			ventasController.registrarVenta(idCliente, vehiculo, modalidadVenta, vehiculo.getMarca());
 			new MessageDialog().showMessages("Se efectuó la venta del vehículo.");
 			view.clearData();
 		} catch (ForbiddenException e) {
@@ -77,9 +91,15 @@ public class VendedorControlPresenter {
 	
 	private void onSelectVehiculo(ListSelectionEvent a) {
 		if(view.getDataVehiculoEnVenta() != null) {
-			Integer codigoVehiculo = Integer.parseInt(view.getDataVehiculoEnVenta().getCodigo());
+			OutputConsultaVehiculoEnVentaDTO out = view.getDataVehiculoEnVenta();
+			Integer codigoVehiculo = Integer.parseInt(out.getCodigo());
 			CaracteristicaVehiculoDTO caracteristicas = ventasController.readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo);
-			view.setData(caracteristicas);	
+			view.clearDataModalidadVenta();
+			view.setData(caracteristicas);
+			view.setDataVentaPrecioVehiculoSeleccionado(out.getPrecio());
+			view.setDataComisionVendedor(ventasController.calcularComision(out.getPrecio()));
+			view.setDataPrecioFinal(ventasController.getPrecioFinalVenta(out.getPrecio()));
+			updateMontoCuota();
 		}
 	}
 

@@ -13,6 +13,8 @@ import repositories.jdbc.utils.NullObject;
 public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> implements VentaVehiculoDao {
 	
 
+	public static final String readFechas = "SELECT * FROM VentasVehiculos where fechaVentaVN BETWEEN ? and ?";
+	
 	public static final String readAll = "SELECT * FROM VentasVehiculos";
 
 	public static final String insert = 
@@ -74,11 +76,19 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	}
 
 	@Override
+	public List<VentaVehiculoDTO> readFechas(Date desde, Date hasta) {
+		return getTemplate().query(readFechas)
+				.param(desde)
+				.param(hasta)
+				.excecute(getMapper());
+	}
+
+	
 	public List<VentaVehiculoDTO> readByVendedor(int idUsuario) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	protected Mapper<VentaVehiculoDTO> getMapper() {
 		return new Mapper<VentaVehiculoDTO>() {
@@ -107,7 +117,7 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 			}
 		};
 	}
-
+	
 	@Override
 	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles() {
 		return getTemplate().query(readVentasVehiculosNoDisponibles).excecute(getMapper());

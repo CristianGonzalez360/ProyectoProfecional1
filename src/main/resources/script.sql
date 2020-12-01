@@ -321,7 +321,7 @@ CREATE TABLE VentasVehiculos (
   financiera VARCHAR(50),
   nroCuotas INT,
   montoCuota DOUBLE,
-  idVehiculo INTEGER NOT NULL,
+  idVehiculo INTEGER NOT NULL UNIQUE,
   idCliente INTEGER NOT NULL,
   idUsuEntrega INTEGER,
   idSucursal INTEGER NOT NULL,
@@ -340,12 +340,12 @@ DROP TABLE PedidoVehiculo IF EXISTS;
 CREATE TABLE PedidoVehiculo (
   idPedidoVehiculo INTEGER NOT NULL AUTO_INCREMENT,
   fechaPedido DATE NOT NULL,
-  fechaIngreso DATE NOT NULL,
+  fechaIngreso DATE,
   idUsuPedido INTEGER NOT NULL,
   idUsuIngreso INTEGER NOT NULL,
   idVentaVehiculo INTEGER NOT NULL,
   PRIMARY KEY (idPedidoVehiculo),
   FOREIGN KEY (idUsuPedido) REFERENCES Usuarios(idUsuario),
   FOREIGN KEY (idUsuIngreso) REFERENCES Usuarios(idUsuario),
-  FOREIGN KEY (idVentaVehiculo) REFERENCES VentasVehiculos(idSucursal)
+  FOREIGN KEY (idVentaVehiculo) REFERENCES VentasVehiculos(idVentaVehiculo),
 );

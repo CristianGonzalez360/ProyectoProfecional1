@@ -38,6 +38,8 @@ public class VentaVehiculoDTO {
 	
 	private Integer idSucursalVenta;
 	
+	private boolean pedido;
+	
 	public VentaVehiculoDTO() {
 	}
 	
@@ -161,5 +163,13 @@ public class VentaVehiculoDTO {
 				+ financiera + ", nroCuotas=" + nroCuotas + ", montoCuota=" + montoCuota + ", idVehiculo=" + idVehiculo
 				+ ", idCliente=" + idCliente + ", idUsuEntrega=" + idUsuEntrega + ", idSucursalVenta=" + idSucursalVenta
 				+ "]";
+	}
+
+	public boolean isPedido() {
+		return pedido;
+	}
+
+	public void setPedido(boolean pedido) {
+		this.pedido = pedido;
 	}
 }

@@ -14,7 +14,11 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 	private static final String readAll = "SELECT * FROM PedidoVehiculo";
 
 	private static final String readAllPedidosDeVenta = "SELECT pv.idPedidoVehiculo, pv.fechaPedido, pv.fechaIngreso, pv.idUsuPedido, pv.idUsuIngreso, pv.idVentaVehiculo, vv.idSucursal FROM pedidovehiculo pv INNER JOIN ventasvehiculos vv ON pv.idVentaVehiculo = vv.idVentaVehiculo WHERE vv.idSucursal = ?";
-
+	
+	private static final String readById = readAll + " WHERE idPedidoVehiculo = ?";
+	
+	private static final String readByIdVenta = readAll + " WHERE idVentaVehiculo = ?";
+	
 	private static final String insert = "INSERT INTO PedidoVehiculo (fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso, idVentaVehiculo) VALUES (?,?,?,?,?)";
 
 	public PedidoVehiculoDaoImpl(Connection connection) {
@@ -45,8 +49,8 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	@Override
 	public PedidoVehiculoDTO readByID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<PedidoVehiculoDTO> ret = getTemplate().query(readById).param(id).excecute(getMapper());
+		return ret.isEmpty()? null : ret.get(0);
 	}
 
 	@Override
@@ -81,6 +85,11 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 				return pedido;
 			}
 		};
+	}
+
+	@Override
+	public boolean estaPedido(Integer idVentaVehiculo) {
+		return !getTemplate().query(readByIdVenta).param(idVentaVehiculo).excecute(getMapper()).isEmpty();
 	}
 
 }
