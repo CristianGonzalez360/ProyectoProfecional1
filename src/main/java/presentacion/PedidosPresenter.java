@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import business_logic.PedidosController;
 import dto.validators.StringValidator;
 import presentacion.views.gerente.PedidosPanelView;
+import services.SessionServiceImpl;
 
 public class PedidosPresenter {
 
@@ -17,7 +18,7 @@ public class PedidosPresenter {
 	public PedidosPresenter(PedidosPanelView view, PedidosController controller) {
 		this.view = view;
 		this.controller = controller;
-		
+
 		view.setActionBuscar((a) -> onBuscar(a));
 		view.setActionRegistrarPedido((a) -> onRegistrar(a));
 		view.setActionCancelarPedido((a) -> onCancelar(a));
@@ -25,15 +26,17 @@ public class PedidosPresenter {
 
 	private void onBuscar(ActionEvent a) {
 		String dniBuscado = view.getDniBusqueda();
+		Integer idSucursal = SessionServiceImpl.getInstance().getActiveSession().getIdSucursal();
+
 		if (dniBuscado.trim().isEmpty()) {
 			view.clear();
-			view.setData(controller.readAllPedidos());
+			view.setData(controller.readAllPedidos(idSucursal));
 		} else {
 			boolean esDniConFormatoCorrecto = new StringValidator(dniBuscado).number("").validate().isEmpty();
 			if (esDniConFormatoCorrecto) {
 				Integer dniCliente = Integer.parseInt(dniBuscado);
 				view.clear();
-				view.setData(controller.readAllByDniCliente(dniCliente));
+				view.setData(controller.readAllByDniCliente(dniCliente, idSucursal));
 			}
 		}
 	}

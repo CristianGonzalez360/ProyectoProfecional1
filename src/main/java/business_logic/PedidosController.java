@@ -34,16 +34,14 @@ public class PedidosController {
 		this.pedidosDao = pedidosDao;
 	}
 
-	public List<PedidoDTO> readAllByDniCliente(Integer dniCliente) {
+	public List<PedidoDTO> readAllByDniCliente(Integer dniCliente, Integer idSucursal) {
 		return null;
 	}
 
-	public List<PedidoDTO> readAllPedidos() {
+	public List<PedidoDTO> readAllPedidos(Integer idSucursal) {
 		List<PedidoDTO> pedidos = new ArrayList<>();
 
-		//pedidosDao.insert(new PedidoVehiculoDTO(new Date(), new Date(), 5, 5, 1));
-
-		for (PedidoVehiculoDTO pedido : pedidosDao.readAllPedidosDeVenta(1)) {
+		for (PedidoVehiculoDTO pedido : pedidosDao.readAllPedidosDeVenta(idSucursal)) {
 			if (pedido != null)
 				pedidos.add(armarPedidoCompleto(pedido));
 		}
@@ -55,7 +53,7 @@ public class PedidosController {
 		DatosPersonalesDTO datosCliente = datosDeCliente(datosDeVenta.getIdCliente());
 		VehiculoDTO datosVehiculo = datosVehiculo(datosDeVenta.getIdVehiculo());
 		UsuarioDTO datosUsuario = datosDeUsuario(pedido.getIdUsuPedido());
-		
+
 		String nombreCliente = datosCliente.getNombreCompleto();
 		String apellidoCliente = datosCliente.getApellido();
 		String dniCliente = String.valueOf(datosCliente.getDni());
