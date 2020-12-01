@@ -41,20 +41,15 @@ public class PedidosController {
 	public List<PedidoDTO> readAllPedidos() {
 		List<PedidoDTO> pedidos = new ArrayList<>();
 
-		pedidosDao.insert(new PedidoVehiculoDTO(new Date(), new Date(), 5, 5, 1));
-		
-		for (PedidoVehiculoDTO pedido : pedidosDao.readAllPedidosDeVenta()) {
-			pedidos.add(armarPedidoCompleto(pedido));
-		}
-		System.out.println("--");
+		for (PedidoVehiculoDTO pedido : pedidosDao.readAllPedidosDeVenta(1))
+			if (pedido != null)
+				pedidos.add(armarPedidoCompleto(pedido));
+
 		return pedidos;
 	}
 
 	private PedidoDTO armarPedidoCompleto(PedidoVehiculoDTO pedido) {
-		System.out.println(pedido.toString());
 		VentaVehiculoDTO datosDeVenta = datosDeVenta(pedido.getIdVentaVehiculo());
-		System.out.println(datosDeVenta.toString());
-		
 		DatosPersonalesDTO datosCliente = datosDeCliente(datosDeVenta.getIdCliente());
 		VehiculoDTO datosVehiculo = datosVehiculo(datosDeVenta.getIdVehiculo());
 		UsuarioDTO datosUsuario = datosDeUsuario(pedido.getIdUsuPedido());
@@ -62,29 +57,15 @@ public class PedidosController {
 		String nombreCliente = datosCliente.getNombreCompleto();
 		String apellidoCliente = datosCliente.getApellido();
 		String dniCliente = String.valueOf(datosCliente.getDni());
-
 		String marcaAuto = datosVehiculo.getMarca();
 		String modeloAuto = datosVehiculo.getFamilia() + " - " + datosVehiculo.getLinea();
 		String colorAuto = datosVehiculo.getColor();
 		String conbustionAuto = "";
-
 		String nombreUsuario = datosUsuario.getDatos().getNombreCompleto();
 		Date fechaPedido = pedido.getFechaPedido();
 
-		PedidoDTO nuevoPedido = new PedidoDTO();
-
-		nuevoPedido.setNombreCliente(nombreCliente);
-		nuevoPedido.setApellidoCliente(apellidoCliente);
-		nuevoPedido.setDniCliente(dniCliente);
-		nuevoPedido.setMarcaAuto(marcaAuto);
-		nuevoPedido.setModeloAuto(modeloAuto);
-		nuevoPedido.setColorAuto(colorAuto);
-		nuevoPedido.setConbustionAuto(conbustionAuto);
-		nuevoPedido.setNombreUsuario(nombreUsuario);
-		nuevoPedido.setFechaPedido(fechaPedido);
-
-		System.out.println("Nuevo - > " + nuevoPedido);
-		return nuevoPedido;
+		return new PedidoDTO(pedido.getIdPedidoVehiculo(), nombreCliente, apellidoCliente, dniCliente, marcaAuto,
+				modeloAuto, colorAuto, conbustionAuto, nombreUsuario, fechaPedido);
 	}
 
 	private VentaVehiculoDTO datosDeVenta(Integer idVentaVehiculo) {
