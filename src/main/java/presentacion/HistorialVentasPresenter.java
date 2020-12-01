@@ -2,7 +2,10 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -40,7 +43,9 @@ public class HistorialVentasPresenter {
 
 	private void onCargar(ActionEvent a) {
 	
-				 this.view.cargarTabla(this.ventasVehiculosController.readAll());
+			
+		//		 this.view.cargarTabla(this.ventasVehiculosController.readAll());
+		 this.view.cargarTabla(this.ventasVehiculosController.readFechas(null,null));
 	
 	}
 

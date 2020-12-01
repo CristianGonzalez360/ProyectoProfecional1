@@ -44,7 +44,9 @@ public class HistorialVentasView extends JPanel {
 	private JPanel panel_1;
 	private JPanel panel_3;
 	private JButton btnCargarVentas;
-	private JTextField textVentas;
+	private JTextField textVentasDesde;
+	private JLabel lblNewLabel;
+	private JTextField textVentasHasta;
 
 	public static HistorialVentasView getInstance() {
 		if (instance == null) {
@@ -60,12 +62,20 @@ public class HistorialVentasView extends JPanel {
 		add(panel_3);
 		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		Label label = new Label("ID");
+		Label label = new Label("Ventas desde:");
 		panel_3.add(label);
 		
-		textVentas = new JTextField();
-		panel_3.add(textVentas);
-		textVentas.setColumns(10);
+		
+		textVentasDesde = new JTextField();
+		panel_3.add(textVentasDesde);
+		textVentasDesde.setColumns(10);
+		
+		lblNewLabel = new JLabel("Hasta:");
+		panel_3.add(lblNewLabel);
+		
+		textVentasHasta = new JTextField();
+		panel_3.add(textVentasHasta);
+		textVentasHasta.setColumns(10);
 		
 		btnCargarVentas = new JButton("Cargar");
 		panel_3.add(btnCargarVentas);
@@ -122,11 +132,13 @@ public class HistorialVentasView extends JPanel {
 	
 	
 
-	public String getVenta() {
-		return (String) textVentas.getText();
+	public String getVentaDesde() {
+		return (String) textVentasDesde.getText();
 	}
 		
-	
+	public String getVentaHasta() {
+		return (String) textVentasHasta.getText();
+	}
 
 	public void setActionOnBuscar(ActionListener listener) {
 		this.btnCargarVentas.addActionListener(listener);

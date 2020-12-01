@@ -52,6 +52,9 @@ public class VentasVehiculosController {
 		return daos.makeVentaVehiculoDao().readAll();
 	}
 	
+	public List<VentaVehiculoDTO> readFechas(Date desde,Date hasta) {
+		return daos.makeVentaVehiculoDao().readFechas(desde, hasta);
+	}
 	
 	public List<OutputConsultaVehiculoEnVentaDTO> readDisponiblesByCriteria(ConsultaVehiculoParaVentaDTO consulta) {
 		List<VehiculoDTO> temp = daos.makeVehiculoDao().readDisponiblesByCriteria(consulta.getMarca(), new Boolean(consulta.getTipo().equals("Usado")));	
