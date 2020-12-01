@@ -6,7 +6,6 @@ import dto.UserCrendentialsDTO;
 import dto.UsuarioDTO;
 import dto.temporal.SessionDTO;
 import repositories.UsuariosDao;
-import services.PropertiesServiceImpl;
 import services.SessionService;
 
 public class LoginController {
