@@ -468,16 +468,16 @@ vehiculos:
     idSucursal: 4
 
 ventaVehiculo:
-  - idVentaVehiculo: 1
-    idUsuVentaVN: 1
-    idUsuPedido: 1
-    idUsuLlegada: 1
-    idPagoVentaVN: 1
-    fechaVentaVN: 2020-10-11
+  - idUsuVentaVN: 1
+    idUsuPedido:
+    idUsuLlegada:
+    idPagoVentaVN: 
+    fechaVentaVN: 2018-10-10
     fechaEntregaReal: 2020-10-11
-    fabricante: 1
-    comisionCobrada: 1
-    precioVenta: 1
+    fabricante: Ford
+    comisionCobrada: 5000
+    precioVenta: 1288444
     idVehiculo: 1
     idCliente: 1
-    idUsuEntrega: 1
+    idUsuEntrega:
+    idSucursalVenta: 1
