@@ -31,15 +31,10 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	
 	private VentasVehiculosController ventasController;
 	
+	private ConfiguradorTerminalController configurador;
+	
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
-	}
-
-	@Override
-	public LoginController makeLoginController() {
-		if (loginController == null)
-			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance(), daos.makeSucursalesDao());
-		return loginController;
 	}
 
 	@Override
@@ -123,5 +118,18 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	public VentasVehiculosController makeVentasVehiculosController() {
 		if(ventasController == null) ventasController = new VentasVehiculosController(daos);
 		return ventasController;
+	}
+	
+	@Override
+	public ConfiguradorTerminalController makeConfiguradorTerminalController() {
+		if(configurador == null) configurador = new ConfiguradorTerminalController();
+		return new ConfiguradorTerminalController();
+	}
+	
+	@Override
+	public LoginController makeLoginController() {
+		if (loginController == null)
+			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance(), configurador);
+		return loginController;
 	}
 }

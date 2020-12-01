@@ -5,8 +5,8 @@ import dto.SucursalDTO;
 import dto.UserCrendentialsDTO;
 import dto.UsuarioDTO;
 import dto.temporal.SessionDTO;
-import repositories.SucursalesDao;
 import repositories.UsuariosDao;
+import services.PropertiesServiceImpl;
 import services.SessionService;
 
 public class LoginController {
@@ -14,15 +14,15 @@ public class LoginController {
 	private static final String FORBIDDEN = "Operación no permitida";
 
 	private UsuariosDao dao;
-
-	private SucursalesDao sucursalesDao;
 	
 	private SessionService service;
 	
-	public LoginController(UsuariosDao dao, SessionService service, SucursalesDao sucDao) {
+	private SucursalPredeterminadaReader reader;
+	
+	public LoginController(UsuariosDao dao, SessionService service, SucursalPredeterminadaReader reader) {
 		this.dao = dao;
 		this.service = service;
-		this.sucursalesDao = sucDao;	
+		this.reader = reader;	
 	}
 
 	public SessionDTO logUser(UserCrendentialsDTO credentials) {
@@ -40,8 +40,7 @@ public class LoginController {
 	}
 
 	public SucursalDTO readActiveSucursal() {
-		SucursalDTO sucursal = new SucursalDTO();
-		sucursal.setIdSucursal(1);
+		SucursalDTO sucursal = reader.readSucursalPredeterminada();
 		return sucursal;
 	}
 	

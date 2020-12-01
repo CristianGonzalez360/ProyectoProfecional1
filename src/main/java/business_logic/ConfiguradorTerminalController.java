@@ -7,7 +7,7 @@ import java.util.Map;
 import dto.SucursalDTO;
 import services.PropertiesServiceImpl;
 
-public class ConfiguradorTerminalController {
+public class ConfiguradorTerminalController implements SucursalPredeterminadaReader {
 	
 	private final String archivoConfiguracion = "conf/terminal.properties";
 	
@@ -28,6 +28,7 @@ public class ConfiguradorTerminalController {
 		}
 	}
 	
+	@Override
 	public SucursalDTO readSucursalPredeterminada() {
 		SucursalDTO suc = new SucursalDTO();
 		PropertiesServiceImpl service = new PropertiesServiceImpl(archivoConfiguracion);
