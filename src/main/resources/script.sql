@@ -342,7 +342,7 @@ CREATE TABLE PedidoVehiculo (
   fechaPedido DATE NOT NULL,
   fechaIngreso DATE,
   idUsuPedido INTEGER NOT NULL,
-  idUsuIngreso INTEGER NOT NULL,
+  idUsuIngreso INTEGER,
   idVentaVehiculo INTEGER NOT NULL,
   PRIMARY KEY (idPedidoVehiculo),
   FOREIGN KEY (idUsuPedido) REFERENCES Usuarios(idUsuario),
