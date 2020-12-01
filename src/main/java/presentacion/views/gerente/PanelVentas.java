@@ -15,7 +15,7 @@ public class PanelVentas extends JPanel{
 	
 	private JTable tablaVentas;
 	private DefaultTableModel modelo;
-	private static final String[] columnas= {"Nro.", "Fecha", "Precio", "Vehículo", "Estado"};
+	private static final String[] columnas= {"Nro.", "Fecha", "Precio", "Estado"};
 	
 	public PanelVentas() {
 		setLayout(new BorderLayout(0, 0));
@@ -28,13 +28,14 @@ public class PanelVentas extends JPanel{
 		
 		modelo = new DefaultTableModel();
 		modelo.setColumnIdentifiers(columnas);
+		tablaVentas.setModel(modelo);
 	}
 	
 	public void setData(List<VentaVehiculoDTO> ventas) {
 		modelo.setRowCount(0);
 		for (VentaVehiculoDTO venta : ventas) {
 			Object[] row = {venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getPrecioVenta(), 
-				venta.getIdPagoVentaVN()==null? "PAGO PENDIENTE":"PAGADO"};
+				venta.isPedido()? "PEDIDO" : "PENDIENTE" };
 			modelo.addRow(row);
 		}		
 	}

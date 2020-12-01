@@ -93,14 +93,17 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 				ret.setFabricante((String) obj[7]);
 				ret.setComisionCobrada((Double) obj[8]);
 				ret.setPrecioVenta((Double) obj[9]);
-				ret.setIdVehiculo((Integer) obj[10]);
-				ret.setIdCliente((Integer) obj[11]);
-				ret.setIdUsuEntrega((Integer) obj[12]);
+				ret.setFinanciera((String) obj[10]);
+				ret.setNroCuotas((Integer) obj[11]);
+				ret.setNroCuotas((Integer) obj[12]);
+				ret.setIdVehiculo((Integer) obj[13]);
+				ret.setIdCliente((Integer) obj[14]);
+				ret.setIdUsuEntrega((Integer) obj[15]);
 				return ret;
 			}
 		};
 	}
-
+	
 	@Override
 	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles() {
 		return getTemplate().query(readVentasVehiculosNoDisponibles).excecute(getMapper());
