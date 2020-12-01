@@ -14,6 +14,8 @@ public class ModalidadVentaVehiculoDTO {
 	
 	private String comision;
 	
+	private String montoFinanciado;
+	
 	public ModalidadVentaVehiculoDTO() {
 	}
 
@@ -64,10 +66,19 @@ public class ModalidadVentaVehiculoDTO {
 	public void setComision(String comision) {
 		this.comision = comision;
 	}
+	
+	public String getMontoFinanciado() {
+		return montoFinanciado;
+	}
+
+	public void setMontoFinanciado(String montoFinanciado) {
+		this.montoFinanciado = montoFinanciado;
+	}
 
 	@Override
 	public String toString() {
 		return "ModalidadVentaVehiculoDTO [efectivo=" + efectivo + ", financiera=" + financiera + ", nroCuotas="
-				+ nroCuotas + ", montoCuota=" + montoCuota + ", precioFinal=" + precioFinal + "]";
+				+ nroCuotas + ", montoCuota=" + montoCuota + ", precioFinal=" + precioFinal + ", comision=" + comision
+				+ ", montoFinanciado=" + montoFinanciado + "]";
 	}
 }
