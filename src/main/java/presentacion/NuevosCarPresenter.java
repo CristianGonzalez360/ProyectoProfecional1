@@ -34,8 +34,8 @@ public class NuevosCarPresenter {
 		this.nuevosVehiculos = NuevosVehiculosFormView.getInstance();
 		
 		this.view.setActionOnCargarArchivo((a) -> onCargarArchivo(a));
-		this.nuevosVehiculos.setActionOnCancelarCarga(a -> onCancelarCarga(a));
-		this.nuevosVehiculos.setActionOnValidadCarga(a -> onValidarCarga(a));
+		this.nuevosVehiculos.setActionOnCancelarCarga((a)->onCancelarCarga(a));
+		this.nuevosVehiculos.setActionOnValidadCarga((a)->onValidarCarga(a));
 		
 		this.view.setActionSelectVehiculo((a)->onSelectVehiculo(a));
 		this.view.setActionOnBuscar((a)->onBuscar(a));
@@ -57,8 +57,6 @@ public class NuevosCarPresenter {
 				Yaml yaml = new Yaml(new Constructor(DatabaseGraphVehiculoNuevo.class));
 				InputStream inputStream = new FileInputStream(chooser.getSelectedFile().getAbsolutePath());//FileInputStream cambio
 				vehiculosGraph = yaml.load(inputStream);
-				System.out.println(vehiculosGraph.getVehiculos());
-				System.out.println(vehiculosGraph.getCaracteristicas());
 				this.nuevosVehiculos.cargarTabla(vehiculosGraph.getVehiculos());
 				this.nuevosVehiculos.mostrar();
 				
