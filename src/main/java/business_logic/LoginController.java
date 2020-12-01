@@ -35,12 +35,16 @@ public class LoginController {
 		if (service.getActiveSession() != null)
 			throw new ForbiddenException(FORBIDDEN);
 		
-		SucursalDTO sucursal = sucursalesDao.readByID(0);
-		
-		service.openSession(usuario, sucursal);
+		service.openSession(usuario, readActiveSucursal());
 		return service.getActiveSession();
 	}
 
+	public SucursalDTO readActiveSucursal() {
+		SucursalDTO sucursal = new SucursalDTO();
+		sucursal.setIdSucursal(1);
+		return sucursal;
+	}
+	
 	public void logout() {
 		service.closeSession();
 	}

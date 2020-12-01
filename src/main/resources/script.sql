@@ -321,7 +321,7 @@ CREATE TABLE VentasVehiculos (
   financiera VARCHAR(50),
   nroCuotas INT,
   montoCuota DOUBLE,
-  idVehiculo INTEGER NOT NULL,
+  idVehiculo INTEGER NOT NULL UNIQUE,
   idCliente INTEGER NOT NULL,
   idUsuEntrega INTEGER,
   idSucursal INTEGER NOT NULL,
