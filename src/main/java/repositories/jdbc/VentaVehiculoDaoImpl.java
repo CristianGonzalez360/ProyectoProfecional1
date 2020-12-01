@@ -11,14 +11,17 @@ import repositories.jdbc.utils.NullObject;
 
 public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> implements VentaVehiculoDao {
 	
+
+	public static final String readFechas = "SELECT * FROM VentasVehiculos where fechaVentaVN BETWEEN ? and ?";
+	
+	public static final String readAll = "SELECT * FROM VentasVehiculos";
+
 	public static final String insert = 
 			"INSERT INTO VentasVehiculos(idUsuVentaVN,idUsuPedido,idUsuLlegada,idPagoVentaVN,fechaVentaVN"
 			+ ",fechaEntregaReal,fabricante,comisionCobrada,precioVenta,financiera,nroCuotas,montoCuota"
 			+ ",idVehiculo,idCliente,idUsuEntrega,idSucursal) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
-	public static final String readAll = "SELECT * from VentasVehiculos";
-	
-	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo AND disponible = false";
+	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo AND disponible = false"; //AND idSucursal = ?"; 
 
 	public VentaVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -66,16 +69,23 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 
 	@Override
 	public List<VentaVehiculoDTO> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return getTemplate().query(readAll).excecute(getMapper());
 	}
 
 	@Override
+	public List<VentaVehiculoDTO> readFechas(Date desde, Date hasta) {
+		return getTemplate().query(readFechas)
+				.param(desde)
+				.param(hasta)
+				.excecute(getMapper());
+	}
+
+	
 	public List<VentaVehiculoDTO> readByVendedor(int idUsuario) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	protected Mapper<VentaVehiculoDTO> getMapper() {
 		return new Mapper<VentaVehiculoDTO>() {
@@ -92,14 +102,17 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 				ret.setFabricante((String) obj[7]);
 				ret.setComisionCobrada((Double) obj[8]);
 				ret.setPrecioVenta((Double) obj[9]);
-				ret.setIdVehiculo((Integer) obj[10]);
-				ret.setIdCliente((Integer) obj[11]);
-				ret.setIdUsuEntrega((Integer) obj[12]);
+				ret.setFinanciera((String) obj[10]);
+				ret.setNroCuotas((Integer) obj[11]);
+				ret.setNroCuotas((Integer) obj[12]);
+				ret.setIdVehiculo((Integer) obj[13]);
+				ret.setIdCliente((Integer) obj[14]);
+				ret.setIdUsuEntrega((Integer) obj[15]);
 				return ret;
 			}
 		};
 	}
-
+	
 	@Override
 	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles() {
 		return getTemplate().query(readVentasVehiculosNoDisponibles).excecute(getMapper());

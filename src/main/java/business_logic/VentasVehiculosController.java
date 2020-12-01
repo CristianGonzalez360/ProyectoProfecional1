@@ -1,6 +1,7 @@
 package business_logic;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,12 +43,23 @@ public class VentasVehiculosController {
 
 	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles(){
 		List<VentaVehiculoDTO> ret = daos.makeVentaVehiculoDao().readVentasVehiculosNoDisponibles();
+		for (VentaVehiculoDTO venta : ret) {
+			venta.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
+		}
 		return ret;
 	}
 
 
 	public List<String> readNombreMarcasVehiculos() {
 		return daos.makeVehiculoDao().readAllMarcasVehiculos();
+	}
+	
+	public List<VentaVehiculoDTO> readAll() {
+		return daos.makeVentaVehiculoDao().readAll();
+	}
+	
+	public List<VentaVehiculoDTO> readFechas(Date desde,Date hasta) {
+		return daos.makeVentaVehiculoDao().readFechas(desde, hasta);
 	}
 	
 	public List<OutputConsultaVehiculoEnVentaDTO> readDisponiblesByCriteria(ConsultaVehiculoParaVentaDTO consulta) {
