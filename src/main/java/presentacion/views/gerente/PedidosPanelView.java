@@ -93,4 +93,19 @@ public class PedidosPanelView extends JPanel {
 		}
 	}
 
+	public Integer getIdSelectedRow() {
+		int row = tablePedidos.getSelectedRow();
+		return row;
+	}
+
+	public Integer getIdSelectedPedido() {
+		int row = tablePedidos.getSelectedRow();
+		int id;
+		if (tablePedidos.getSelectedRow() != -1) {
+			id = Integer.parseInt(tablePedidos.getValueAt(row, 0).toString());
+			return id;
+		}
+		return null;
+	}
+
 }
