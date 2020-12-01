@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JTextField;
 import java.awt.Label;
@@ -16,6 +17,7 @@ import javax.swing.JLabel;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+import com.toedter.calendar.JDateChooser;
 
 import dto.VentaVehiculoDTO;
 import dto.taller.FacturaDTO;
@@ -34,7 +36,8 @@ public class HistorialVentasView extends JPanel {
 	private static HistorialVentasView instance;
 	
 
-	private final String[] columnasListadoDeVentas = new String[] { "Id venta" ,"Id usario" ,"Id usuario pedido","Id usuario llegada" };
+	//private final String[] columnasListadoDeVentas = new String[] { "Id venta" ,"Id usario" ,"Id usuario pedido","Id usuario llegada" };
+	private final String[] columnasListadoDeVentas = new String[] { "Id venta" ,"Fecha Venta" ,"Fecha entrega","Id Vehiculo" ,"Id Cliente"};
 	
 	private DefaultTableModel listadoDeVentasModel;
 	
@@ -44,7 +47,11 @@ public class HistorialVentasView extends JPanel {
 	private JPanel panel_1;
 	private JPanel panel_3;
 	private JButton btnCargarVentas;
-	private JTextField textVentas;
+	
+	private JLabel lblNewLabel;
+	
+	private JDateChooser textVentasDesde;
+	private JDateChooser textVentasHasta;
 
 	public static HistorialVentasView getInstance() {
 		if (instance == null) {
@@ -60,12 +67,21 @@ public class HistorialVentasView extends JPanel {
 		add(panel_3);
 		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		Label label = new Label("ID");
+		Label label = new Label("Ventas desde:");
 		panel_3.add(label);
 		
-		textVentas = new JTextField();
-		panel_3.add(textVentas);
-		textVentas.setColumns(10);
+		
+		
+		textVentasDesde = new JDateChooser();
+		panel_3.add(textVentasDesde);
+		
+		
+		lblNewLabel = new JLabel("Hasta:");
+		panel_3.add(lblNewLabel);
+		
+		textVentasHasta = new JDateChooser();
+		panel_3.add(textVentasHasta);
+		
 		
 		btnCargarVentas = new JButton("Cargar");
 		panel_3.add(btnCargarVentas);
@@ -109,9 +125,10 @@ public class HistorialVentasView extends JPanel {
 			
 			
 				Object[] row = { venta.getIdVentaVehiculo()  , 
-								 venta.getIdUsuVentaVN(),
-								 venta.getIdUsuPedido(),
-								 venta.getIdUsuLlegada()
+								 venta.getFechaVentaVN(),
+								 venta.getFechaEntregaReal(),
+								 venta.getIdVehiculo(),
+								 venta.getIdCliente()
  };
 				listadoDeVentasModel.addRow(row);
 			
@@ -122,13 +139,16 @@ public class HistorialVentasView extends JPanel {
 	
 	
 
-	public String getVenta() {
-		return (String) textVentas.getText();
+	public  Date getVentaDesde() {
+		return  textVentasDesde.getDate();
 	}
 		
-	
+	public Date getVentaHasta() {
+		return  textVentasHasta.getDate();
+	}
 
 	public void setActionOnBuscar(ActionListener listener) {
+		
 		this.btnCargarVentas.addActionListener(listener);
 		
 	}
