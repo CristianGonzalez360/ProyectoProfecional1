@@ -106,10 +106,4 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 			}
 		};
 	}
-
-	@Override
-	public boolean updateDisponibilidadVehiculo(Integer id, Boolean boolean1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }
