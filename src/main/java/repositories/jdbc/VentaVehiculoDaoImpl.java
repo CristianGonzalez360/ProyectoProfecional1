@@ -9,6 +9,7 @@ import dto.taller.TrabajoPresupuestadoDTO;
 import repositories.VentaVehiculoDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
+import services.SessionServiceImpl;
 
 public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> implements VentaVehiculoDao {
 	
@@ -22,7 +23,9 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 			+ ",fechaEntregaReal,fabricante,comisionCobrada,precioVenta,financiera,nroCuotas,montoCuota"
 			+ ",idVehiculo,idCliente,idUsuEntrega,idSucursal) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
-	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo AND disponible = false"; //AND idSucursal = ?"; 
+	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos "
+			+ "WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo "
+			+ "AND Vehiculos.idSucursal IS null AND VentasVehiculos.idSucursal = ?"; 
 
 	private static final String readById = "SELECT * FROM VentasVehiculos WHERE idVentaVehiculo = ?";
 	
@@ -120,7 +123,8 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	
 	@Override
 	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles() {
-		return getTemplate().query(readVentasVehiculosNoDisponibles).excecute(getMapper());
+		return getTemplate().query(readVentasVehiculosNoDisponibles)
+				.param(SessionServiceImpl.getInstance().getActiveSession().getIdSucursal()).excecute(getMapper());
 	}
 
 }

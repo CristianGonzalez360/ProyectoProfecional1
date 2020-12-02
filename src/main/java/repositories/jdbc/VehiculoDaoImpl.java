@@ -47,7 +47,8 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 				.param(entity.getFechaIngreso() == null ? new NullObject() : entity.getFechaIngreso())
 				.param(new Boolean(entity.isDisponible())).param(new Boolean(entity.isUsado()))
 				.param(entity.getIdCompra() == null ? new NullObject() : entity.getIdCompra())
-				.param(entity.getIdSucursal() == null ? new NullObject() : entity.getIdSucursal()).excecute();
+				.param(entity.getIdSucursal() == null ? new NullObject() : entity.getIdSucursal())
+				.excecute();
 	}
 
 	@Override

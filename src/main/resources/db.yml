@@ -458,7 +458,7 @@ vehiculos:
     usado: false
     idCompra:
     idCaracteristicas: 1
-    idSucursal: 2
+    idSucursal: 
   - precioVenta: 1300999
     idFichaTecnica: 1
     marca: Ford
