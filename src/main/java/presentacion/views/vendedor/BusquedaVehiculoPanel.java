@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
@@ -68,5 +69,13 @@ public class BusquedaVehiculoPanel extends JPanel {
 	public void addTipos(String[] tipos) {
 		assert tipos != null;
 		for(String str : tipos) this.comboBoxTipo.addItem(str);
+	}
+	
+	public void setDataMarcas(List<String> marcas) {
+		DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+		for (String marca : marcas) {
+			modelo.addElement(marca);
+		}
+		comboBoxMarca.setModel(modelo);
 	}
 }

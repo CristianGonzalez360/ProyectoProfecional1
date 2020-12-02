@@ -40,14 +40,20 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 
 	@Override
 	public boolean insert(VehiculoDTO entity) {
-		return getTemplate().query(insert).param(entity.getPrecioVenta())
+		return getTemplate().query(insert)
+				.param(entity.getPrecioVenta())
 				.param(entity.getIdFichaTecnica() == null ? new NullObject() : entity.getIdFichaTecnica())
-				.param(entity.getMarca()).param(entity.getFamilia()).param(entity.getLinea()).param(entity.getColor())
+				.param(entity.getMarca())
+				.param(entity.getFamilia())
+				.param(entity.getLinea())
+				.param(entity.getColor())
 				.param(entity.getIdCaracteristicas())
 				.param(entity.getFechaIngreso() == null ? new NullObject() : entity.getFechaIngreso())
-				.param(new Boolean(entity.isDisponible())).param(new Boolean(entity.isUsado()))
+				.param(new Boolean(entity.isDisponible()))
+				.param(new Boolean(entity.isUsado()))
 				.param(entity.getIdCompra() == null ? new NullObject() : entity.getIdCompra())
-				.param(entity.getIdSucursal() == null ? new NullObject() : entity.getIdSucursal()).excecute();
+				.param(entity.getIdSucursal() == null ? new NullObject() : entity.getIdSucursal())
+				.excecute();
 	}
 
 	@Override

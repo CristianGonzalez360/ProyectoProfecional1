@@ -6,12 +6,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
@@ -24,8 +21,6 @@ public class PedidosPanelView extends JPanel {
 	private static final String[] COLUMNAS_PEDIDOS = new String[] { "NRO. PEDIDO", "NOMBRE DE CLIENTE", "DNI",
 			"MARCA DE AUTO", "MODELO", "COLOR", "COMBUSTION", "USUARIO DE PEDIDO", "FECHA DE PEDIDO" };
 
-	private JTextField textDNI;
-	private JLabel lblDNI;
 	private JButton btnBuscar;
 
 	private DefaultTableModel tableModelPedidos;
@@ -41,21 +36,13 @@ public class PedidosPanelView extends JPanel {
 		flowLayout.setHgap(20);
 		add(panelNorte, BorderLayout.NORTH);
 
-		lblDNI = new JLabel("DNI");
-		panelNorte.add(lblDNI);
-
-		textDNI = new JTextField("");
-		textDNI.setHorizontalAlignment(SwingConstants.CENTER);
-		panelNorte.add(textDNI);
-		textDNI.setColumns(20);
-
-		btnBuscar = new JButton("Buscar");
+		btnBuscar = new JButton("Refrescar Pedidos");
 		panelNorte.add(btnBuscar);
 
 		JPanel panelSur = new JPanel();
 		add(panelSur, BorderLayout.SOUTH);
 
-		btnRegistrarPedido = new JButton("Registrar Ingreso");
+		btnRegistrarPedido = new JButton("Registrar Ingreso de Unidad");
 		panelSur.add(btnRegistrarPedido);
 
 		JScrollPane scrollPanelPedidos = new JScrollPane();
@@ -79,9 +66,9 @@ public class PedidosPanelView extends JPanel {
 		this.btnRegistrarPedido.addActionListener(listener);
 	}
 
-	public String getDniBusqueda() {
-		return this.textDNI.getText();
-	}
+//	public String getDniBusqueda() {
+//		return this.textDNI.getText();
+//	}
 
 	public void setData(List<PedidoDTO> pedidos) {
 		for (PedidoDTO pedido : pedidos) {

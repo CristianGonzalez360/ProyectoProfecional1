@@ -117,13 +117,11 @@ public class NuevosVehiculosFormView extends JDialog {
 	
 	public List<Integer> getIdVehiculosNoAceptados() {
 		List<Integer> vehiculosId = new LinkedList<Integer>();
-		int rows = this.modelo.getRowCount();		
-		Integer vehiculoId;		
+		int rows = this.modelo.getRowCount();
 		for (int index = 0; index < rows; index++) {
-			vehiculoId = Integer.parseInt(modelo.getValueAt(index, 0).toString());
-			Boolean isOk = (Boolean) modelo.getValueAt(index, 6);
+			Boolean isOk = (Boolean) modelo.getValueAt(index, 5);
 			if(isOk!=null && isOk!=false) {//igual true quitar
-				vehiculosId.add(vehiculoId);
+				vehiculosId.add(index);
 			}
 		}
 		return vehiculosId;

@@ -19,20 +19,20 @@ import presentacion.views.cajero.MercadoPagoFormView;
 import presentacion.views.cajero.PanelCobroCajeroView;
 import presentacion.views.cajero.TarjetaCreditoFormView;
 import presentacion.views.cajero.TarjetaDebitoFormView;
+import presentacion.views.gerente.HistorialVentasGerenteView;
 import presentacion.views.utils.MessageDialog;
 import presentacion.views.vendedor.HistorialVentasView;
-import services.SessionServiceImpl;
 
-public class HistorialVentasPresenter {
+public class HistorialVentasGerentePresenter {
 
-	private HistorialVentasView view;
+	private HistorialVentasGerenteView view;
 	private VentasVehiculosController ventasVehiculosController;
 	
 
-	public HistorialVentasPresenter(VentasVehiculosController ventasVehiculosController) {
+	public HistorialVentasGerentePresenter(VentasVehiculosController ventasVehiculosController) {
 
 		this.ventasVehiculosController = ventasVehiculosController;
-		this.view = HistorialVentasView.getInstance();
+		this.view = HistorialVentasGerenteView.getInstance();
 		
 
 		this.view.setActionOnBuscar(a -> onCargar(a));
@@ -46,9 +46,10 @@ public class HistorialVentasPresenter {
 	
 		this.view.clear();
 		
-		Integer userID = SessionServiceImpl.getInstance().getActiveSession().getIdUsuario();
+		 this.view.cargarTabla(this.ventasVehiculosController.readFechas(view.getVentaDesde(),view.getVentaHasta()));
 		 
-		 this.view.cargarTabla(this.ventasVehiculosController.readByIdVendedor(userID,view.getVentaDesde(),view.getVentaHasta()));
+		
+		 
 	
 	}
 
