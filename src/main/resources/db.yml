@@ -485,7 +485,7 @@ vehiculos:
     idSucursal: 4
 
 ventaVehiculo:
-  - idUsuVentaVN: 1
+  - idUsuVentaVN: 5
     idUsuPedido:
     idUsuLlegada:
     idPagoVentaVN: 

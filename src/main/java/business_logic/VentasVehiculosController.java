@@ -69,11 +69,15 @@ public class VentasVehiculosController {
 		return daos.makeVentaVehiculoDao().readFechas(desde, hasta);
 	}
 	
+	public List<VentaVehiculoDTO> readByIdVendedor(Integer id,Date desde, Date hasta) {
+		return daos.makeVentaVehiculoDao().readByIdVendedor(id,desde,hasta);
+	}
+	
 	public List<OutputConsultaVehiculoEnVentaDTO> readDisponiblesByCriteria(ConsultaVehiculoParaVentaDTO consulta) {
 		List<VehiculoDTO> temp = daos.makeVehiculoDao().readDisponiblesByCriteria(consulta.getMarca(), new Boolean(consulta.getTipo().equals("Usado")));	
 		List<OutputConsultaVehiculoEnVentaDTO> ret = new LinkedList<>();
 		for(VehiculoDTO dto : temp) {
-			if(dto.isDisponible()) {
+			if(dto.isDisponible() /*TODO && QUE NO ESTE VENDIDO!!!*/) {
 				OutputConsultaVehiculoEnVentaDTO aux = new OutputConsultaVehiculoEnVentaDTO();
 				aux.setMarca(dto.getMarca());
 				aux.setFamilia(dto.getFamilia());
@@ -131,6 +135,7 @@ public class VentasVehiculosController {
 		venta.setPrecioVenta(getPrecioFinalVenta(modalidadVenta.getMontoFinanciado()));
 		venta.setFabricante(fabricante);
 		daos.makeVentaVehiculoDao().insert(venta);
+		//TODO SI EL VEHICULO NO ESTÁ EN UNA SUCURSAL NO HAY QUE CAMBIAR EL ESTADO A NO DISPONIBLE!! 
 		daos.makeVehiculoDao().updateDisponibilidadVehiculo(Integer.parseInt(vehiculo.getCodigo()), new Boolean(false));
 	}
 
