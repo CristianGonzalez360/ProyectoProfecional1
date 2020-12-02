@@ -3,7 +3,6 @@ package presentacion;
 import java.awt.event.ActionEvent;
 
 import business_logic.PedidosController;
-import dto.validators.StringValidator;
 import presentacion.views.gerente.PedidosPanelView;
 import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.MessageDialog;
@@ -25,33 +24,23 @@ public class PedidosPresenter {
 	}
 
 	private void onBuscar(ActionEvent a) {
-		String dniBuscado = view.getDniBusqueda();
 		Integer idSucursal = SessionServiceImpl.getInstance().getActiveSession().getIdSucursal();
 
-		if (dniBuscado.trim().isEmpty()) {
-			view.clear();
-			view.setData(controller.readAllPedidos(idSucursal));
-		} else {
-			boolean esDniConFormatoCorrecto = new StringValidator(dniBuscado).number("").validate().isEmpty();
-			if (esDniConFormatoCorrecto) {
-				Integer dniCliente = Integer.parseInt(dniBuscado);
-				view.clear();
-				view.setData(controller.readAllByDniCliente(dniCliente, idSucursal));
-			}
-		}
+		view.clear();
+		view.setData(controller.readAllPedidos(idSucursal));
 	}
 
 	private void onRegistrar(ActionEvent event) {
-		Integer idFila = view.getIdSelectedRow(); // ID de la fila seleccionada
+		Integer idFila = view.getIdSelectedRow();
 		Integer idUsuario = SessionServiceImpl.getInstance().getActiveSession().getIdUsuario();
 
 		if (puedoRegistrarIngreso(idFila)) {
 			Integer idPedido = view.getIdSelectedPedido();
 
 			if (controller.registrarIngresoPedidoById(idPedido, idUsuario))
-				new MessageDialog().showMessages("Vehiculo Registrado");
+				new MessageDialog().showMessages("Vehiculo Registrado!");
 			else
-				new MessageDialog().showMessages("No se puedo registrar el ingreso del Vehiculo");
+				new MessageDialog().showMessages("No se puedo registrar el ingreso del Vehiculo!");
 			view.clear();
 		}
 	}

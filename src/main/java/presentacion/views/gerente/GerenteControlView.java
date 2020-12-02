@@ -36,7 +36,7 @@ public class GerenteControlView extends JInternalFrame {
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
 		JPanel pedidosPanel = new JPanel();
-		tabbedPane.addTab("Gestión de Pedidos", null, pedidosPanel, null);
+		tabbedPane.addTab("Registro de Ingreso de Unidad", null, pedidosPanel, null);
 		pedidosPanel.setLayout(new BorderLayout(0, 0));
 
 		pedidosPanelView = new PedidosPanelView();
