@@ -17,6 +17,8 @@ public class GerenteControlView extends JInternalFrame {
 	private PedidosPanelView pedidosPanelView;
 	
 	private GerenteNuevosCar autosNuevosView;
+	
+	private HistorialVentasGerenteView historialVentasView;
 
 	public static GerenteControlView getInstance() {
 		if (instance == null)
@@ -49,6 +51,11 @@ public class GerenteControlView extends JInternalFrame {
 
 		PanelRegistroPedido panelPedidos = PanelRegistroPedido.getInstance();
 		tabbedPane.addTab("Registro de Pedidos",panelPedidos );
+		
+		
+		historialVentasView =  HistorialVentasGerenteView.getInstance();
+		tabbedPane.addTab("Historial Ventas", historialVentasView);
+		
 
 	}
 

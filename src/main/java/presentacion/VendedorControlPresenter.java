@@ -7,8 +7,8 @@ import java.util.List;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 
+import business_logic.CalculadoraMontoFinalVentaService;
 import business_logic.ClientesController;
-import business_logic.SucursalesController;
 import business_logic.VentasVehiculosController;
 import business_logic.exceptions.ForbiddenException;
 import dto.CaracteristicaVehiculoDTO;
@@ -23,13 +23,15 @@ import presentacion.views.vendedor.VendedorControlView;
 
 public class VendedorControlPresenter {
 	
+	private static final String VENTA_MSG = "Se efectuó la venta del vehículo.";
+
 	private final VendedorControlView view = VendedorControlView.getInstance();
 	
 	private ClientesController clientesController;
 	
 	private VentasVehiculosController ventasController;
-		
-	public VendedorControlPresenter(ClientesController clientesController,SucursalesController sucController, VentasVehiculosController vehiculosController) {
+	
+	public VendedorControlPresenter(ClientesController clientesController, VentasVehiculosController vehiculosController) {
 		this.clientesController = clientesController;
 		this.ventasController = vehiculosController;
 		setActions();
@@ -58,7 +60,7 @@ public class VendedorControlPresenter {
 	
 	private void updateMontoCuota() {
 		ModalidadVentaVehiculoDTO modalidad = view.getDataModalidadVenta();
-		String montoCuota = ventasController.calcularMontoCuota(modalidad.getMontoFinanciado(), modalidad.getNroCuotas());
+		String montoCuota = new CalculadoraMontoFinalVentaService(modalidad).calcularMontoCuota();
 		view.setMontoCuota(montoCuota);
 	}
 
@@ -67,8 +69,8 @@ public class VendedorControlPresenter {
 		OutputConsultaVehiculoEnVentaDTO vehiculo = view.getDataVehiculoEnVenta();
 		ModalidadVentaVehiculoDTO modalidadVenta = view.getDataModalidadVenta();
 		try {
-			ventasController.registrarVenta(idCliente, vehiculo, modalidadVenta, vehiculo.getMarca());
-			new MessageDialog().showMessages("Se efectuó la venta del vehículo.");
+			ventasController.registrarVenta(idCliente, vehiculo, modalidadVenta);
+			new MessageDialog().showMessages(VENTA_MSG);
 			view.clearData();
 		} catch (ForbiddenException e) {
 			new MessageDialog().showMessages(e.getMessage());
@@ -97,8 +99,9 @@ public class VendedorControlPresenter {
 			view.clearDataModalidadVenta();
 			view.setData(caracteristicas);
 			view.setDataVentaPrecioVehiculoSeleccionado(out.getPrecio());
-			view.setDataComisionVendedor(ventasController.calcularComision(out.getPrecio()));
-			view.setDataPrecioFinal(ventasController.getPrecioFinalVenta(out.getPrecio()));
+			CalculadoraMontoFinalVentaService calc = new CalculadoraMontoFinalVentaService(view.getDataModalidadVenta());
+			view.setDataComisionVendedor(calc.calcularComision());
+			view.setDataPrecioFinal(calc.getPrecioFinalVenta());
 			updateMontoCuota();
 		}
 	}

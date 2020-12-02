@@ -9,6 +9,7 @@ import dto.taller.TrabajoPresupuestadoDTO;
 import repositories.VentaVehiculoDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
+import services.SessionServiceImpl;
 
 public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> implements VentaVehiculoDao {
 	
@@ -17,14 +18,20 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	
 	public static final String readAll = "SELECT * FROM VentasVehiculos";
 
+	public static final String readByIdVehiculoVendido = "SELECT * FROM VentasVehiculos WHERE idVehiculo = ?";
+	
 	public static final String insert = 
 			"INSERT INTO VentasVehiculos(idUsuVentaVN,idUsuPedido,idUsuLlegada,idPagoVentaVN,fechaVentaVN"
 			+ ",fechaEntregaReal,fabricante,comisionCobrada,precioVenta,financiera,nroCuotas,montoCuota"
 			+ ",idVehiculo,idCliente,idUsuEntrega,idSucursal) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
-	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo AND disponible = false"; //AND idSucursal = ?"; 
+	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos "
+			+ "WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo "
+			+ "AND Vehiculos.idSucursal IS null AND VentasVehiculos.idSucursal = ?"; 
 
 	private static final String readById = "SELECT * FROM VentasVehiculos WHERE idVentaVehiculo = ?";
+	
+	private static final String readByIdVendedor = "SELECT * FROM VentasVehiculos WHERE idUsuVentaVN = ? and fechaVentaVN BETWEEN ? and ?";
 	
 	public VentaVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -84,9 +91,30 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	}
 
 	
+	@Override
+	public List<VentaVehiculoDTO> readByIdVendedor(Integer id,Date desde, Date hasta) {
+		return getTemplate().query(readByIdVendedor)
+				.param(id)
+				.param(desde)
+				.param(hasta)
+				.excecute(getMapper());
+	}
+	
 	public List<VentaVehiculoDTO> readByVendedor(int idUsuario) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles() {
+		return getTemplate().query(readVentasVehiculosNoDisponibles)
+				.param(SessionServiceImpl.getInstance().getActiveSession().getIdSucursal()).excecute(getMapper());
+	}
+
+	@Override
+	public VentaVehiculoDTO readByIdVehiculoVendido(Integer idVehiculo) {
+		List<VentaVehiculoDTO> ventas = getTemplate().query(readByIdVehiculoVendido).param(idVehiculo).excecute(getMapper());
+		return ventas.isEmpty() ? null : ventas.get(0);
 	}
 	
 	@Override
@@ -117,10 +145,4 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 			}
 		};
 	}
-	
-	@Override
-	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles() {
-		return getTemplate().query(readVentasVehiculosNoDisponibles).excecute(getMapper());
-	}
-
 }

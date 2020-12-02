@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.swing.JFileChooser;
 import javax.swing.event.ListSelectionEvent;
@@ -18,6 +19,7 @@ import dto.VehiculoDTO;
 import presentacion.views.gerente.GerenteNuevosCar;
 import presentacion.views.gerente.NuevosVehiculosFormView;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.vendedor.VendedorControlView;
 import services.DatabaseGraphVehiculoNuevo;
 
 public class NuevosCarPresenter {
@@ -68,13 +70,31 @@ public class NuevosCarPresenter {
 	}
 	
 	private void onValidarCarga(ActionEvent a) {
+		List<Integer> idRepuestosNoAceptados = this.nuevosVehiculos.getIdVehiculosNoAceptados();
+		int j=0;
+		int k=0;
 		List<VehiculoDTO> vehiculosNuevos = vehiculosGraph.getVehiculos();
+		ListIterator<VehiculoDTO> it = vehiculosNuevos.listIterator();
+		
+		while(it.hasNext()&&j<idRepuestosNoAceptados.size() ) {//quito los que selecciono
+			it.next();
+			if(idRepuestosNoAceptados.get(j)==k) {		
+				it.remove();
+				j++;
+			}
+			k++;
+		}
+		
 		this.ventasVehiculosController.saveVehiculosNuevos(vehiculosNuevos);
 		this.view.clear();
 		this.cargarTodosVehiculos();
 		this.cargarMarcas();
 		this.nuevosVehiculos.cerrar();
 		this.nuevosVehiculos.clear();
+		List<String> marcas = new ArrayList<String>();
+		marcas.addAll(ventasVehiculosController.readNombreMarcasVehiculos());
+		VendedorControlView.getInstance().clearData();
+		VendedorControlView.getInstance().setMarcas(marcas);
 	}
 
 	private void onCancelarCarga(ActionEvent a) {

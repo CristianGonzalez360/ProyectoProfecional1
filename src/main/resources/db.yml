@@ -446,24 +446,12 @@ vehiculos:
     usado: false
     idCompra:
     idCaracteristicas: 1
-    idSucursal: 1
-  - precioVenta: 1300555
-    idFichaTecnica: 1
-    marca: wolkswagen
-    familia: polo
-    linea: trend
-    color: negro
-    fechaIngreso:
-    disponible: false
-    usado: false
-    idCompra:
-    idCaracteristicas: 1
-    idSucursal: 2
+    idSucursal: 1 
   - precioVenta: 1300999
     idFichaTecnica: 1
     marca: Ford
-    familia: Focus
-    linea: vip
+    familia: Fiesta
+    linea: Max
     color: azul
     fechaIngreso: 2017-10-11
     disponible: true
@@ -471,6 +459,7 @@ vehiculos:
     idCompra:
     idCaracteristicas: 1
     idSucursal: 3
+#CATALOGO DE VEHICULOS NUEVOS SIN STOCK
   - precioVenta: 800000
     idFichaTecnica: 1
     marca: Ford
@@ -482,10 +471,34 @@ vehiculos:
     usado: true
     idCompra:
     idCaracteristicas: 1
-    idSucursal: 4
+    idSucursal: 2
+  - precioVenta: 800000
+    idFichaTecnica: 
+    marca: Fiat
+    familia: Siena
+    linea: full TS
+    color: amarillo
+    fechaIngreso: 2017-10-11
+    disponible: false
+    usado: false
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 
+  - precioVenta: 800000
+    idFichaTecnica: 
+    marca: Fiat
+    familia: Linea
+    linea: AS sport
+    color: dark red
+    fechaIngreso: 2017-10-11
+    disponible: false
+    usado: false
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 
 
 ventaVehiculo:
-  - idUsuVentaVN: 1
+  - idUsuVentaVN: 5
     idUsuPedido:
     idUsuLlegada:
     idPagoVentaVN: 
