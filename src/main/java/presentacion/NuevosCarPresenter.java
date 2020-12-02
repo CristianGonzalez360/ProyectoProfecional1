@@ -18,6 +18,7 @@ import dto.VehiculoDTO;
 import presentacion.views.gerente.GerenteNuevosCar;
 import presentacion.views.gerente.NuevosVehiculosFormView;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.vendedor.VendedorControlView;
 import services.DatabaseGraphVehiculoNuevo;
 
 public class NuevosCarPresenter {
@@ -75,6 +76,10 @@ public class NuevosCarPresenter {
 		this.cargarMarcas();
 		this.nuevosVehiculos.cerrar();
 		this.nuevosVehiculos.clear();
+		List<String> marcas = new ArrayList<String>();
+		marcas.addAll(ventasVehiculosController.readNombreMarcasVehiculos());
+		VendedorControlView.getInstance().clearData();
+		VendedorControlView.getInstance().setMarcas(marcas);
 	}
 
 	private void onCancelarCarga(ActionEvent a) {

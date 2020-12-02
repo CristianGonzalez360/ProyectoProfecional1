@@ -266,4 +266,9 @@ public class VendedorControlView extends JInternalFrame {
 	public void clearDataModalidadVenta() {
 		datosVentaVehiculoPanel.clearData();
 	}
+	
+	public void setMarcas(List<String> marcas) {
+		this.busquedaVehiculoPanel.setDataMarcas(marcas);
+		
+	}
 }
