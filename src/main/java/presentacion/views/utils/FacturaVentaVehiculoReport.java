@@ -12,7 +12,7 @@ import dto.taller.FichaTecnicaVehiculoDTO;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
-public class FacturaVentaVehiculo {
+public class FacturaVentaVehiculoReport {
 
 	public static String FINANCIADO = "FINANCIADO";
 	public static String EFECTIVO = "EFECTIVO";
@@ -97,8 +97,10 @@ public class FacturaVentaVehiculo {
 	public void setCaracteristicaVehiculo(CaracteristicaVehiculoDTO caracteristicaVehiculo) {
 		this.caracteristicaVehiculo = caracteristicaVehiculo;
 	}
-	public FichaTecnicaVehiculoDTO getFichaTecnicaVehiculo() {
-		return fichaTecnicaVehiculo;
+	public JRDataSource getFichaTecnicaVehiculo() {
+		List<FichaTecnicaVehiculoDTO> fichaTecnicaVehiculo = new ArrayList<>();
+		fichaTecnicaVehiculo.add(this.fichaTecnicaVehiculo);
+		return new JRBeanCollectionDataSource(fichaTecnicaVehiculo);
 	}
 	public void setFichaTecnicaVehiculo(FichaTecnicaVehiculoDTO fichaTecnicaVehiculo) {
 		this.fichaTecnicaVehiculo = fichaTecnicaVehiculo;

@@ -15,7 +15,7 @@ import dto.VentaVehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
-import presentacion.views.utils.FacturaVentaVehiculo;
+import presentacion.views.utils.FacturaVentaVehiculoReport;
 import repositories.DaosFactory;
 import services.SessionServiceImpl;
 
@@ -151,8 +151,8 @@ public class VentasVehiculosController {
 		return montoCuota.toString();
 	}
 	
-	public FacturaVentaVehiculo makeFacturaVentaVehiculo(VentaVehiculoDTO venta) {
-		FacturaVentaVehiculo ret = new FacturaVentaVehiculo();
+	public FacturaVentaVehiculoReport makeFacturaVentaVehiculo(VentaVehiculoDTO venta) {
+		FacturaVentaVehiculoReport ret = new FacturaVentaVehiculoReport();
 		ret.setSucursal(SessionServiceImpl.getInstance().getActiveSession().getSucursal());
 		DatosPersonalesDTO datosCliente = daos.makeClienteDao().readByID(venta.getIdCliente()).getDatosPersonalesDTO();
 		ret.setCliente(datosCliente);
@@ -163,13 +163,13 @@ public class VentasVehiculosController {
 		ret.setTotal(vehiculo.getPrecioVenta());
 		ret.setFecha(venta.getFechaVentaVN());
 		if(venta.getFinanciera() != null) {
-			ret.setFormaPago(FacturaVentaVehiculo.FINANCIADO);
+			ret.setFormaPago(FacturaVentaVehiculoReport.FINANCIADO);
 			ret.setNroCuotas(venta.getNroCuotas());
 			ret.setMontoCuota(venta.getMontoCuota());
 			ret.setFinanciera(venta.getFinanciera());
 		}
 		else {
-			ret.setFormaPago(FacturaVentaVehiculo.EFECTIVO);
+			ret.setFormaPago(FacturaVentaVehiculoReport.EFECTIVO);
 		}
 		
 		return ret;
