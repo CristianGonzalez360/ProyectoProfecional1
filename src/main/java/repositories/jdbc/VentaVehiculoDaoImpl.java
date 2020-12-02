@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import dto.VentaVehiculoDTO;
-import dto.taller.TrabajoPresupuestadoDTO;
 import repositories.VentaVehiculoDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
@@ -25,6 +24,9 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo AND disponible = false"; //AND idSucursal = ?"; 
 
 	private static final String readById = "SELECT * FROM VentasVehiculos WHERE idVentaVehiculo = ?";
+	
+//	private static final String updateEntregaVehiculo = "UPDATE OrdenesDeTrabajo SET fechaEntregadoVehiculo = ? WHERE idOT = ?";
+// TODO verificar si puedo usar el UPDATE actual o tengo que hacer uno nuevo para setear fechaReal de entrega en caso de que ese sea el atributo a setear.
 	
 	public VentaVehiculoDaoImpl(Connection connection) {
 		super(connection);

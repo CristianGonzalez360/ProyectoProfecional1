@@ -22,6 +22,10 @@ import presentacion.views.vendedor.CaracteristicaDeVehiculoPanel;
 
 public class PanelEntregaDeVehiculos extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5610520087472443466L;
 	private ClientePanelView panelCliente;
 	private CaracteristicaDeVehiculoPanel panelVehiculo;
 	private PanelVentaVehiculosDisponibles panelVentas;  //CAMBIAR POR UN PANE DONDE SE MUESTRE UNA TABLA  distinta a PnelVentas
@@ -30,7 +34,7 @@ public class PanelEntregaDeVehiculos extends JPanel{
 	private JPanel panelSuperior;
 	private JPanel PanelInferior;
 	private JButton btnRefrescar;
-	private JButton btnRegistrarPedido;
+	private JButton btnRegistrarEntrega;
 	
 	private PanelEntregaDeVehiculos() {
 		setLayout(new BorderLayout(0, 0));
@@ -44,7 +48,7 @@ public class PanelEntregaDeVehiculos extends JPanel{
 		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		principal.setLayout(gridBagLayout);
-		//sapbee
+		
 		panelVentas = new PanelVentaVehiculosDisponibles();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 5, 5);
@@ -82,8 +86,8 @@ public class PanelEntregaDeVehiculos extends JPanel{
 		PanelInferior = new JPanel();
 		add(PanelInferior, BorderLayout.SOUTH);
 		
-		btnRegistrarPedido = new JButton("Registrar Entrega");
-		PanelInferior.add(btnRegistrarPedido);
+		btnRegistrarEntrega = new JButton("Registrar Entrega");
+		PanelInferior.add(btnRegistrarEntrega);
 	}
 
 
@@ -120,7 +124,7 @@ public class PanelEntregaDeVehiculos extends JPanel{
 	}
 	
 	public void setActionOnRegistrar(ActionListener listener) {
-		this.btnRegistrarPedido.addActionListener(listener);
+		this.btnRegistrarEntrega.addActionListener(listener);
 	}
 
 	public void clearData() {

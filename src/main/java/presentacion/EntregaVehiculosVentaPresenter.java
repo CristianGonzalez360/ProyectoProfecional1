@@ -11,29 +11,28 @@ import business_logic.VentasVehiculosController;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.VentaVehiculoDTO;
-import presentacion.views.gerente.PanelRegistroPedido;
+import presentacion.views.gerente.PanelEntregaDeVehiculos;
 import presentacion.views.utils.MessageDialog;
 
 public class EntregaVehiculosVentaPresenter {
 
-	private PanelRegistroPedido view;
+	private PanelEntregaDeVehiculos view;
 	
 	private List<VentaVehiculoDTO> ventas;
 	private int ventaSeleccionada;
 	
 	private VentasVehiculosController ventasVehiculosController;
 	private ClientesController clientesController;
-//	private PedidosController pedidosController;
 	
 	public EntregaVehiculosVentaPresenter(VentasVehiculosController ventasVehiculosController, ClientesController clientesController) {
-		this.view = PanelRegistroPedido.getInstance();
+		this.view = PanelEntregaDeVehiculos.getInstance();
+		
 		this.view.setActionOnSeleccionarVenta(a -> onSeleccionarVenta(a));
 		this.view.setActionOnRefrescar(a -> onRefrescar(a));
 		this.view.setActionOnRegistrar(a -> onRegistrar(a));
 
 		this.ventasVehiculosController = ventasVehiculosController;
 		this.clientesController = clientesController;
-//		this.pedidosController = pedidosController;
 		
 		this.ventaSeleccionada = -1;
 		mostrarVentas();
@@ -45,13 +44,14 @@ public class EntregaVehiculosVentaPresenter {
 			errors.add("Debe seleccionar una venta.");
 		}
 		else if(ventas.get(ventaSeleccionada).isPedido()) {
-			errors.add("El vehículo ya fue pedido");
+			errors.add("El vehículo ya fue entregado");
 		}
 		
 		if(errors.isEmpty()) { 
-//			pedidosController.save(ventas.get(ventaSeleccionada).getIdVentaVehiculo());
+			//TODO se llama a registrarEntrega en el controller
+			ventasVehiculosController.registrarEntrega(ventas.get(ventaSeleccionada).getIdVentaVehiculo());
 			onRefrescar(a);
-			new MessageDialog().showMessages("Pedido Registrado");
+			new MessageDialog().showMessages("Entrega de vehiculo Registrada");
 		} else {
 			new MessageDialog().showMessages(errors);
 		}
@@ -73,7 +73,7 @@ public class EntregaVehiculosVentaPresenter {
 		}
 	}
 	
-	private void mostrarVentas() {
+	private void mostrarVentas() { //TODO traer ventas con fechaEntrega real en null, en caso  de que fechaEntrega real sea el atributo que estoy buscando
 		this.ventas = ventasVehiculosController.readVentasVehiculosNoDisponibles();
 		this.view.setData(ventas);
 	}

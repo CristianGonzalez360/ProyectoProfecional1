@@ -3,9 +3,7 @@ package business_logic;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import dto.CaracteristicaVehiculoDTO;
-import dto.PedidoVehiculoDTO;
-import dto.ClienteDTO;
+
 import business_logic.exceptions.ForbiddenException;
 import dto.CaracteristicaVehiculoDTO;
 import dto.SucursalDTO;
@@ -30,6 +28,8 @@ public class VentasVehiculosController {
 	private static final int IVA = 21;
 	
 	private static final String PAIS_SUCURSALES = "Argentina";
+	
+	private static final String FORBIDDEN_VENTA = "Para entregar una venta es necesario seleccionarla.";
 	
 	private DaosFactory daos;
 	
@@ -147,5 +147,14 @@ public class VentasVehiculosController {
 	public String calcularMontoCuota(String montoFinanciado, String nroDeCuotas) {
 		Double montoCuota = Double.parseDouble(montoFinanciado) / Integer.parseInt(nroDeCuotas);
 		return montoCuota.toString();
+	}
+	//TODO validacion no del todo necesaria porque no se da el caso donde ventaVehiculo llegue null
+	public void registrarEntrega(Integer idVentaVehiculo) {
+		if(idVentaVehiculo == null) {
+			throw new ForbiddenException(FORBIDDEN_VENTA);
+		}else{
+		VentaVehiculoDTO venta = daos.makeVentaVehiculoDao().readByID(idVentaVehiculo);
+		venta.setFechaEntregaReal(new Date());//JERE TODO verificar si aca trae la fecha actual y la setea.
+		daos.makeVentaVehiculoDao().update(venta);}//TODO consultar nuevamente si estoy seteando el parametro correcto con cristian
 	}
 }

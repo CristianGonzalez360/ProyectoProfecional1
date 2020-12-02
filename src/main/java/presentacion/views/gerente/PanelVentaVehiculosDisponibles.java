@@ -1,9 +1,9 @@
 package presentacion.views.gerente;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.util.List;
 
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionListener;
@@ -15,7 +15,7 @@ public class PanelVentaVehiculosDisponibles extends JPanel{
 	
 	private JTable tablaVentas;
 	private DefaultTableModel modelo;
-	private static final String[] columnas= {"Nro.", "Fecha", "Precio", "Maradona"};//quiza convenga pasarme de presenter, consultar con la almohada
+	private static final String[] columnas= {"Nro.", "Fecha de venta", "Fecha de entrega", "Estado "};//quiza convenga pasarme de presenter, consultar con la almohada
 	
 	public PanelVentaVehiculosDisponibles() {
 		setLayout(new BorderLayout(0, 0));
@@ -34,8 +34,8 @@ public class PanelVentaVehiculosDisponibles extends JPanel{
 	public void setData(List<VentaVehiculoDTO> ventas) {
 		modelo.setRowCount(0);
 		for (VentaVehiculoDTO venta : ventas) {
-			Object[] row = {venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getPrecioVenta(), 
-				venta.isPedido()? "ENTREGADO" : "NO ENTREGADO" };
+			Object[] row = {venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getFechaEntregaReal(), 
+				venta.getFechaEntregaReal()!=null ? "ENTREGADO" : "NO ENTREGADO" };
 			modelo.addRow(row);
 		}		
 	}
