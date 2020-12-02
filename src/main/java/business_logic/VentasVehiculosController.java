@@ -52,9 +52,7 @@ public class VentasVehiculosController {
 	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles(){
 		List<VentaVehiculoDTO> ret = daos.makeVentaVehiculoDao().readVentasVehiculosNoDisponibles();
 		for (VentaVehiculoDTO venta : ret) {
-			//Cambiar por llamado a la BD que traiga VentasVehyiculo con fechaEntregaReal = null
-//			venta.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
-			venta.setPedido(daos.makeVentaVehiculoDao().noEstaEntregado(venta.getIdVentaVehiculo()));
+			venta.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
 		}
 		return ret;
 	}
@@ -159,4 +157,23 @@ public class VentasVehiculosController {
 		venta.setFechaEntregaReal(new Date());//JERE TODO verificar si aca trae la fecha actual y la setea.
 		daos.makeVentaVehiculoDao().update(venta);}//TODO consultar nuevamente si estoy seteando el parametro correcto con cristian
 	}
+	
+	public List<VentaVehiculoDTO> readVentasVehiculosParaEntregar(){
+		List<VentaVehiculoDTO> ret = daos.makeVentaVehiculoDao().readVentasVehiculosParaEntregar();
+		for (VentaVehiculoDTO venta : ret) {
+			//Cambiar por llamado a la BD que traiga VentasVehyiculo con fechaEntregaReal = null
+//			venta.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
+			venta.setIngresado(daos.makePedidoVehiculoDao().estaIngresado(venta.getIdVentaVehiculo()));
+		}
+		return ret;
+	}
+	
+//	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles(){
+//		List<VentaVehiculoDTO> ret = daos.makeVentaVehiculoDao().readVentasVehiculosNoDisponibles();
+//		for (VentaVehiculoDTO venta : ret) {
+//			venta.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
+//		}
+//		return ret;
+//	}
+	
 }

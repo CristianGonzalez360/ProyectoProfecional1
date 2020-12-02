@@ -25,11 +25,13 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 
 	private static final String readById = "SELECT * FROM VentasVehiculos WHERE idVentaVehiculo = ?";
 	
-	private static final String readByIdVenta = readAll + " WHERE idVentaVehiculo = ? AND fechaEntregaReal is not null";
+	private static final String readByIdVenta = readAll + " WHERE idVentaVehiculo = ? AND fechaEntregaReal is null";
+	
+	private static final String updateEntregaVehiculo = "UPDATE VentasVehiculos SET fechaEntregaReal = ? WHERE idVentaVehiculo = ?";
+
+	public static final String readVentaParaEntregar = "SELECT * FROM VentasVehiculos where fechaEntregaReal is null";
 
 	
-//	private static final String updateEntregaVehiculo = "UPDATE OrdenesDeTrabajo SET fechaEntregadoVehiculo = ? WHERE idOT = ?";
-// TODO verificar si puedo usar el UPDATE actual o tengo que hacer uno nuevo para setear fechaReal de entrega en caso de que ese sea el atributo a setear.
 	
 	public VentaVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -37,7 +39,9 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 
 	@Override
 	public boolean update(VentaVehiculoDTO entity) {
-		return false;
+		return getTemplate().query(updateEntregaVehiculo)
+				.param(entity.getFechaEntregaReal())
+				.param(entity.getIdVentaVehiculo()).excecute();
 	}
 
 	@Override
@@ -131,6 +135,12 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	@Override
 	public boolean noEstaEntregado(Integer idVentaVehiculo) {
 		return !getTemplate().query(readByIdVenta).param(idVentaVehiculo).excecute(getMapper()).isEmpty();
+	}
+
+	@Override
+	public List<VentaVehiculoDTO> readVentasVehiculosParaEntregar() {
+		// TODO Auto-generated method stub
+		return getTemplate().query(readVentaParaEntregar).excecute(getMapper());
 	}
 
 }

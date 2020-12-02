@@ -23,6 +23,9 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	private static final String updateIngreso = "UPDATE PedidoVehiculo SET fechaIngreso = ?, idUsuIngreso = ? WHERE idPedidoVehiculo = ?";
 	
+	
+	private static final String readByIdVentaIngreso = readAll + " WHERE idVentaVehiculo = ? and fechaIngreso is not null";
+
 	public PedidoVehiculoDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -100,6 +103,11 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 	@Override
 	public boolean estaPedido(Integer idVentaVehiculo) {
 		return !getTemplate().query(readByIdVenta).param(idVentaVehiculo).excecute(getMapper()).isEmpty();
+	}
+
+	@Override
+	public boolean estaIngresado(Integer idVentaVehiculo) {
+		return getTemplate().query(readByIdVentaIngreso).param(idVentaVehiculo).excecute(getMapper()).isEmpty();
 	}
 	
 }

@@ -35,7 +35,7 @@ public class PanelVentaVehiculosDisponibles extends JPanel{
 		modelo.setRowCount(0);
 		for (VentaVehiculoDTO venta : ventas) {
 			Object[] row = {venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getFechaEntregaReal(), 
-				venta.getFechaEntregaReal()!=null ? "ENTREGADO" : "NO ENTREGADO" };
+				venta.isIngresado() ? "INGRESADO" : "NO INGRESADO" };
 			modelo.addRow(row);
 		}		
 	}

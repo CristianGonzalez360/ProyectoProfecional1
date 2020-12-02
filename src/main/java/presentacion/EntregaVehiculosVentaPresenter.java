@@ -74,13 +74,9 @@ public class EntregaVehiculosVentaPresenter {
 	}
 	
 	private void mostrarVentas() { //TODO traer ventas con fechaEntrega real en null, en caso  de que fechaEntrega real sea el atributo que estoy buscando
-		this.ventas = ventasVehiculosController.readVentasVehiculosNoDisponibles();
+		this.ventas = ventasVehiculosController.readVentasVehiculosParaEntregar();
 		this.view.setData(ventas);
 	}
 	
-//	private void mostrarVentas() { //TODO traer ventas con fechaEntrega real en null, en caso  de que fechaEntrega real sea el atributo que estoy buscando
-//		this.ventas = ventasVehiculosController.readVentasVehiculosNoDisponibles();
-//		this.view.setData(ventas);
-//	}
-	
+
 }

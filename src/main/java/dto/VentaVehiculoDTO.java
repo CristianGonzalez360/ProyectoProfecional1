@@ -40,6 +40,16 @@ public class VentaVehiculoDTO {
 	
 	private boolean pedido;
 	
+	private boolean ingresado;
+	
+	public boolean isIngresado() {
+		return ingresado;
+	}
+
+	public void setIngresado(boolean ingresado) {
+		this.ingresado = ingresado;
+	}
+
 	public VentaVehiculoDTO() {
 	}
 	

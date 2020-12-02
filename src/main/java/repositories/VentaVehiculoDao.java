@@ -16,4 +16,6 @@ public interface VentaVehiculoDao extends GenericDao<VentaVehiculoDTO, Integer> 
 	public List<VentaVehiculoDTO> readFechas(Date desde, Date hasta);
 
 	public boolean noEstaEntregado(Integer idVentaVehiculo);
+
+	public List<VentaVehiculoDTO> readVentasVehiculosParaEntregar();
 }
