@@ -32,7 +32,7 @@ public class VentaVehiculoDTO {
 	
 	private Integer idVehiculo;
 	
-	private Integer idCliente ;
+	private Integer idCliente;
 	
 	private Integer idUsuEntrega;
 	

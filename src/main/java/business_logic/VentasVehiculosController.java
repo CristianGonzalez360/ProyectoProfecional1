@@ -6,6 +6,7 @@ import java.util.List;
 import dto.CaracteristicaVehiculoDTO;
 import dto.PedidoVehiculoDTO;
 import dto.ClienteDTO;
+import dto.DatosPersonalesDTO;
 import business_logic.exceptions.ForbiddenException;
 import dto.CaracteristicaVehiculoDTO;
 import dto.SucursalDTO;
@@ -14,6 +15,7 @@ import dto.VentaVehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
+import presentacion.views.utils.FacturaVentaVehiculo;
 import repositories.DaosFactory;
 import services.SessionServiceImpl;
 
@@ -147,5 +149,29 @@ public class VentasVehiculosController {
 	public String calcularMontoCuota(String montoFinanciado, String nroDeCuotas) {
 		Double montoCuota = Double.parseDouble(montoFinanciado) / Integer.parseInt(nroDeCuotas);
 		return montoCuota.toString();
+	}
+	
+	public FacturaVentaVehiculo makeFacturaVentaVehiculo(VentaVehiculoDTO venta) {
+		FacturaVentaVehiculo ret = new FacturaVentaVehiculo();
+		ret.setSucursal(SessionServiceImpl.getInstance().getActiveSession().getSucursal());
+		DatosPersonalesDTO datosCliente = daos.makeClienteDao().readByID(venta.getIdCliente()).getDatosPersonalesDTO();
+		ret.setCliente(datosCliente);
+		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(venta.getIdVehiculo());
+		ret.setVehiculo(vehiculo);
+		ret.setCaracteristicaVehiculo(daos.makeCaracteristicasVehiculoDao().readByID(vehiculo.getIdCaracteristicas()));
+		ret.setFichaTecnicaVehiculo(daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica()));
+		ret.setTotal(vehiculo.getPrecioVenta());
+		ret.setFecha(venta.getFechaVentaVN());
+		if(venta.getFinanciera() != null) {
+			ret.setFormaPago(FacturaVentaVehiculo.FINANCIADO);
+			ret.setNroCuotas(venta.getNroCuotas());
+			ret.setMontoCuota(venta.getMontoCuota());
+			ret.setFinanciera(venta.getFinanciera());
+		}
+		else {
+			ret.setFormaPago(FacturaVentaVehiculo.EFECTIVO);
+		}
+		
+		return ret;
 	}
 }

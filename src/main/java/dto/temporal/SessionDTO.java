@@ -51,4 +51,8 @@ public class SessionDTO {
 	public void setSucursal(SucursalDTO sucursal) {
 		this.sucursal = sucursal;
 	}
+	
+	public SucursalDTO getSucursal() {
+		return this.sucursal;
+	}
 }
