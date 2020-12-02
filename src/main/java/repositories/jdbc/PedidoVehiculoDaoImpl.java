@@ -101,5 +101,5 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 	public boolean estaPedido(Integer idVentaVehiculo) {
 		return !getTemplate().query(readByIdVenta).param(idVentaVehiculo).excecute(getMapper()).isEmpty();
 	}
-
+	
 }

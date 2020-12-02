@@ -25,6 +25,9 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 
 	private static final String readById = "SELECT * FROM VentasVehiculos WHERE idVentaVehiculo = ?";
 	
+	private static final String readByIdVenta = readAll + " WHERE idVentaVehiculo = ? AND fechaEntregaReal is not null";
+
+	
 //	private static final String updateEntregaVehiculo = "UPDATE OrdenesDeTrabajo SET fechaEntregadoVehiculo = ? WHERE idOT = ?";
 // TODO verificar si puedo usar el UPDATE actual o tengo que hacer uno nuevo para setear fechaReal de entrega en caso de que ese sea el atributo a setear.
 	
@@ -123,6 +126,11 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	@Override
 	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles() {
 		return getTemplate().query(readVentasVehiculosNoDisponibles).excecute(getMapper());
+	}
+
+	@Override
+	public boolean noEstaEntregado(Integer idVentaVehiculo) {
+		return !getTemplate().query(readByIdVenta).param(idVentaVehiculo).excecute(getMapper()).isEmpty();
 	}
 
 }

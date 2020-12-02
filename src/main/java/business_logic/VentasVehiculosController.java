@@ -52,7 +52,9 @@ public class VentasVehiculosController {
 	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles(){
 		List<VentaVehiculoDTO> ret = daos.makeVentaVehiculoDao().readVentasVehiculosNoDisponibles();
 		for (VentaVehiculoDTO venta : ret) {
-			venta.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
+			//Cambiar por llamado a la BD que traiga VentasVehyiculo con fechaEntregaReal = null
+//			venta.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
+			venta.setPedido(daos.makeVentaVehiculoDao().noEstaEntregado(venta.getIdVentaVehiculo()));
 		}
 		return ret;
 	}
