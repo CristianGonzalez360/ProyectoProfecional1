@@ -26,6 +26,8 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 
 	private static final String readById = "SELECT * FROM VentasVehiculos WHERE idVentaVehiculo = ?";
 	
+	private static final String readByIdVendedor = "SELECT * FROM VentasVehiculos WHERE idUsuVentaVN = ? and fechaVentaVN BETWEEN ? and ?";
+	
 	public VentaVehiculoDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -83,6 +85,15 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 				.excecute(getMapper());
 	}
 
+	
+	@Override
+	public List<VentaVehiculoDTO> readByIdVendedor(Integer id,Date desde, Date hasta) {
+		return getTemplate().query(readByIdVendedor)
+				.param(id)
+				.param(desde)
+				.param(hasta)
+				.excecute(getMapper());
+	}
 	
 	public List<VentaVehiculoDTO> readByVendedor(int idUsuario) {
 		// TODO Auto-generated method stub

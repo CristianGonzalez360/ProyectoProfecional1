@@ -21,6 +21,7 @@ import presentacion.views.cajero.TarjetaCreditoFormView;
 import presentacion.views.cajero.TarjetaDebitoFormView;
 import presentacion.views.utils.MessageDialog;
 import presentacion.views.vendedor.HistorialVentasView;
+import services.SessionServiceImpl;
 
 public class HistorialVentasPresenter {
 
@@ -45,7 +46,9 @@ public class HistorialVentasPresenter {
 	
 		this.view.clear();
 		
-		 this.view.cargarTabla(this.ventasVehiculosController.readFechas(view.getVentaDesde(),view.getVentaHasta()));
+		Integer userID = SessionServiceImpl.getInstance().getActiveSession().getIdUsuario();
+		 
+		 this.view.cargarTabla(this.ventasVehiculosController.readByIdVendedor(userID,view.getVentaDesde(),view.getVentaHasta()));
 	
 	}
 
