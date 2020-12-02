@@ -18,6 +18,8 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	
 	public static final String readAll = "SELECT * FROM VentasVehiculos";
 
+	public static final String readByIdVehiculoVendido = "SELECT * FROM VentasVehiculos WHERE idVehiculo = ?";
+	
 	public static final String insert = 
 			"INSERT INTO VentasVehiculos(idUsuVentaVN,idUsuPedido,idUsuLlegada,idPagoVentaVN,fechaVentaVN"
 			+ ",fechaEntregaReal,fabricante,comisionCobrada,precioVenta,financiera,nroCuotas,montoCuota"
@@ -104,6 +106,18 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	}
 	
 	@Override
+	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles() {
+		return getTemplate().query(readVentasVehiculosNoDisponibles)
+				.param(SessionServiceImpl.getInstance().getActiveSession().getIdSucursal()).excecute(getMapper());
+	}
+
+	@Override
+	public VentaVehiculoDTO readByIdVehiculoVendido(Integer idVehiculo) {
+		List<VentaVehiculoDTO> ventas = getTemplate().query(readByIdVehiculoVendido).param(idVehiculo).excecute(getMapper());
+		return ventas.isEmpty() ? null : ventas.get(0);
+	}
+	
+	@Override
 	protected Mapper<VentaVehiculoDTO> getMapper() {
 		return new Mapper<VentaVehiculoDTO>() {
 
@@ -131,11 +145,4 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 			}
 		};
 	}
-	
-	@Override
-	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles() {
-		return getTemplate().query(readVentasVehiculosNoDisponibles)
-				.param(SessionServiceImpl.getInstance().getActiveSession().getIdSucursal()).excecute(getMapper());
-	}
-
 }
