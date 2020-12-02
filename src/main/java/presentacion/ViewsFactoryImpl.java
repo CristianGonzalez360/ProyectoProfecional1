@@ -36,6 +36,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 				,controllers.makePresupuestosController(), controllers.makeFacturasController());
 		new CobroCajeroPresenter(controllers.makeFacturasController());
 		new HistorialVentasPresenter(controllers.makeVentasVehiculosController());
+		new HistorialVentasGerentePresenter(controllers.makeVentasVehiculosController());
 		new VendedorControlPresenter(controllers.makeClientesController(), controllers.makeSucursalesController(), controllers.makeVentasVehiculosController());
 		new PedidosPresenter(GerenteControlView.getInstance().getPedidosPanelView(), controllers.makePedidosController());
 		new NuevosCarPresenter(GerenteControlView.getInstance().getAutosNuevosPanelView(), controllers.makeVentasVehiculosController());

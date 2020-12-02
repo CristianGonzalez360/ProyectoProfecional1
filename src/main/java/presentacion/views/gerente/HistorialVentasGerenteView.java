@@ -1,5 +1,5 @@
 
-package presentacion.views.vendedor;
+package presentacion.views.gerente;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -26,15 +26,16 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.BoxLayout;
 import java.awt.event.ActionEvent;
 
-public class HistorialVentasView extends JPanel {
+public class HistorialVentasGerenteView extends JPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3152338359660079392L;
 	
-	private static HistorialVentasView instance;
+	private static HistorialVentasGerenteView instance;
 	
+
 	private final String[] columnasListadoDeVentas = new String[] { "Id venta" ,"Fecha Venta" ,"Fecha entrega","Id Vehiculo" ,"Id Cliente"};
 	
 	private DefaultTableModel listadoDeVentasModel;
@@ -51,14 +52,14 @@ public class HistorialVentasView extends JPanel {
 	private JDateChooser textVentasDesde;
 	private JDateChooser textVentasHasta;
 
-	public static HistorialVentasView getInstance() {
+	public static HistorialVentasGerenteView getInstance() {
 		if (instance == null) {
-			instance = new HistorialVentasView();
+			instance = new HistorialVentasGerenteView();
 		}
 		return instance;
 	}
 
-	public HistorialVentasView() {
+	public HistorialVentasGerenteView() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		panel_3 = new JPanel();
