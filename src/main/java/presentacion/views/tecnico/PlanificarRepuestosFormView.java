@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -16,20 +18,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-import com.jgoodies.forms.layout.FormLayout;
+
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import dto.taller.RepuestoDTO;
 import dto.taller.RepuestoPlanificadoDTO;
-
-import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.border.BevelBorder;
-import javax.swing.UIManager;
 
 public class PlanificarRepuestosFormView extends JPanel {
 
@@ -79,13 +78,13 @@ public class PlanificarRepuestosFormView extends JPanel {
 		setBounds(100, 100, 500, 600);
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
+
 		idRepuestos = new ArrayList<>();
 
 		panelSuperior = new JPanel();
 		panelSuperior.setForeground(SystemColor.menu);
-		panelSuperior.setBorder(
-				new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Repuestos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelSuperior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Repuestos disponibles",
+				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelSuperior.setBackground(SystemColor.menu);
 		add(panelSuperior);
 		panelSuperior.setLayout(new BorderLayout(0, 0));
@@ -99,22 +98,15 @@ public class PlanificarRepuestosFormView extends JPanel {
 
 		panel_1 = new JPanel();
 		panelSuperior.add(panel_1, BorderLayout.NORTH);
-		FormLayout fl_panel_1 = new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("10px"),
-				ColumnSpec.decode("max(30dlu;default)"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("132px"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("right:75px"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("86px:grow"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("81px"),},
-			new RowSpec[] {
-				FormSpecs.LINE_GAP_ROWSPEC,
-				RowSpec.decode("fill:default:grow"),});
+		FormLayout fl_panel_1 = new FormLayout(
+				new ColumnSpec[] { ColumnSpec.decode("10px"), ColumnSpec.decode("max(30dlu;default)"),
+						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("132px"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("right:75px"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("86px:grow"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("81px"), },
+				new RowSpec[] { FormSpecs.LINE_GAP_ROWSPEC, RowSpec.decode("fill:default:grow"), });
 		panel_1.setLayout(fl_panel_1);
-		
+
 		lblMarca = new JLabel("Marca:");
 		panel_1.add(lblMarca, "2, 2, right, default");
 
@@ -156,7 +148,8 @@ public class PlanificarRepuestosFormView extends JPanel {
 		panel_2.add(btnAgregar);
 
 		panelInferior = new JPanel();
-		panelInferior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Repuestos planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelInferior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Repuestos planificados",
+				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelInferior.setBackground(SystemColor.menu);
 		add(panelInferior);
 		panelInferior.setLayout(new BorderLayout(0, 0));
@@ -258,7 +251,7 @@ public class PlanificarRepuestosFormView extends JPanel {
 		}
 		comboMarcas.setModel(modelo);
 	}
-	
+
 	public void setActionOnQuitar(ActionListener Listener) {
 		this.btnQuitar.addActionListener(Listener);
 	}

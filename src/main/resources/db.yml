@@ -460,36 +460,36 @@ vehiculos:
     idCaracteristicas: 1
     idSucursal: 
 #CATALOGO DE VEHICULOS NUEVOS SIN STOCK
-  - precioVenta: 800000
+  - precioVenta: 2100000
     idFichaTecnica: 1
     marca: Ford
     familia: Fiesta
-    linea: vip
-    color: amarillo
+    linea: Vip
+    color: Amarillo
     fechaIngreso: 2017-10-11
     disponible: true
     usado: true
     idCompra:
     idCaracteristicas: 1
     idSucursal: 2
-  - precioVenta: 800000
+  - precioVenta: 2500000
     idFichaTecnica: 
     marca: Fiat
     familia: Siena
-    linea: full TS
-    color: amarillo
+    linea: Full TS
+    color: Gris
     fechaIngreso: 2017-10-11
     disponible: false
     usado: false
     idCompra:
     idCaracteristicas: 1
     idSucursal: 
-  - precioVenta: 800000
+  - precioVenta: 4000000
     idFichaTecnica: 
     marca: Fiat
     familia: Linea
     linea: AS sport
-    color: dark red
+    color: Dark Red
     fechaIngreso: 2017-10-11
     disponible: false
     usado: false

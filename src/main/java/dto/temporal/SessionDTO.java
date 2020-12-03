@@ -1,5 +1,6 @@
 package dto.temporal;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import dto.SucursalDTO;
@@ -16,6 +17,12 @@ public class SessionDTO {
 	public SessionDTO() {
 	}
 
+	public String getFecha() {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = formatter.format(initSession);
+		return formattedDate;
+	}
+	
 	public Date getInitSession() {
 		return initSession;
 	}

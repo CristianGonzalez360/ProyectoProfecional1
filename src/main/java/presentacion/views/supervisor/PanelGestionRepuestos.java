@@ -25,15 +25,18 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.BevelBorder;
 
-public class PanelGestionRepuestos extends JPanel{
+public class PanelGestionRepuestos extends JPanel {
+	private static final long serialVersionUID = 1L;
+
 	private JTextField txtDescripcion;
 	private JTable tablaRepuestos;
 	private DefaultTableModel modelo;
 	private ArrayList<Integer> idRepuestos;
-	
+
 	private static PanelGestionRepuestos instance;
-	
-	private static final String[] nombreColumnas = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock", "Minimo", "Precio" };
+
+	private static final String[] nombreColumnas = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock", "Minimo",
+			"Precio" };
 	private JComboBox<String> comboMarcas;
 	private JButton btnBuscar;
 	private JButton btnIngresarStock;
@@ -45,87 +48,88 @@ public class PanelGestionRepuestos extends JPanel{
 	private JButton btnEditarStock;
 	private JSeparator separator_2;
 	private JButton btnBajoStock;
-	
-	
+
 	private PanelGestionRepuestos() {
-		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new BorderLayout(0, 0));
-		
+
 		this.idRepuestos = new ArrayList<>();
-		
+
 		JPanel panelBuscador = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelBuscador.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		add(panelBuscador, BorderLayout.NORTH);
-		
+
 		lblMarca = new JLabel("Marca:");
 		panelBuscador.add(lblMarca);
-		
+
 		comboMarcas = new JComboBox<>();
 		panelBuscador.add(comboMarcas);
-		
+
 		JLabel lblDescripcion = new JLabel("Descripcion:");
 		panelBuscador.add(lblDescripcion);
-		
+
 		txtDescripcion = new JTextField();
 		panelBuscador.add(txtDescripcion);
 		txtDescripcion.setColumns(10);
-		
+
 		btnBuscar = new JButton("Buscar");
 		panelBuscador.add(btnBuscar);
-		
+
 		btnBajoStock = new JButton("Bajo Stock");
 		panelBuscador.add(btnBajoStock);
-		
+
 		modelo = new DefaultTableModel();
 		modelo.setColumnIdentifiers(nombreColumnas);
 		tablaRepuestos = new JTable(modelo);
 		tablaRepuestos.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		JScrollPane scrollPane = new JScrollPane(tablaRepuestos);
 		add(scrollPane, BorderLayout.CENTER);
-		
+
 		JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
-		
+
 		JPanel panel = new JPanel();
 		FlowLayout fl_panel = new FlowLayout(FlowLayout.LEFT, 5, 5);
 		fl_panel.setAlignOnBaseline(true);
 		panel.setLayout(fl_panel);
 		panel.add(toolBar);
 		add(panel, BorderLayout.SOUTH);
-		
+
 		btnIngresarStock = new JButton("Agregar Stock");
 		toolBar.add(btnIngresarStock);
-		
+
 		separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		toolBar.add(separator);
-		
+
 		btnEditarStock = new JButton("Editar Stock");
 		toolBar.add(btnEditarStock);
-		
+
 		separator_2 = new JSeparator();
 		separator_2.setOrientation(SwingConstants.VERTICAL);
 		toolBar.add(separator_2);
-		
+
 		btnConfigurarMnimo = new JButton("Configurar Mínimo");
 		toolBar.add(btnConfigurarMnimo);
-		
+
 		separator_1 = new JSeparator();
 		separator_1.setOrientation(SwingConstants.VERTICAL);
 		toolBar.add(separator_1);
-		
+
 		btnCargarArchivo = new JButton("Cargar Archivo");
 		toolBar.add(btnCargarArchivo);
 	}
-	
+
 	public static PanelGestionRepuestos getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new PanelGestionRepuestos();
 		}
 		return instance;
 	}
+
 	public void setData(List<RepuestoDTO> repuestos) {
 		modelo.setRowCount(0);
 		idRepuestos.clear();
@@ -136,7 +140,7 @@ public class PanelGestionRepuestos extends JPanel{
 			modelo.addRow(row);
 		}
 	}
-	
+
 	public String getMarca() {
 		return (String) comboMarcas.getSelectedItem();
 	}
@@ -152,10 +156,10 @@ public class PanelGestionRepuestos extends JPanel{
 		}
 		comboMarcas.setModel(modelo);
 	}
-	
+
 	public int getIdRepuesto() {
 		int ret = -1;
-		if(tablaRepuestos.getSelectedRow()>=0) {
+		if (tablaRepuestos.getSelectedRow() >= 0) {
 			ret = idRepuestos.get(tablaRepuestos.getSelectedRow());
 		}
 		return ret;
@@ -180,12 +184,12 @@ public class PanelGestionRepuestos extends JPanel{
 	public void setActionOnEditarStock(ActionListener listener) {
 		this.btnEditarStock.addActionListener(listener);
 	}
-	
+
 	public void resetBuscador() {
 		this.comboMarcas.setSelectedIndex(0);
 		this.txtDescripcion.setText("");
 	}
-	
+
 	public void setActionBajoStock(ActionListener listener) {
 		this.btnBajoStock.addActionListener(listener);
 	}

@@ -11,33 +11,34 @@ import javax.swing.table.DefaultTableModel;
 
 import dto.VentaVehiculoDTO;
 
-public class PanelVentas extends JPanel{
-	
+public class PanelVentas extends JPanel {
+	private static final long serialVersionUID = 1L;
+
 	private JTable tablaVentas;
 	private DefaultTableModel modelo;
-	private static final String[] columnas= {"Nro.", "Fecha", "Precio", "Estado"};
-	
+	private static final String[] columnas = { "Nro.", "Fecha", "Precio", "Estado" };
+
 	public PanelVentas() {
 		setLayout(new BorderLayout(0, 0));
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
-		
+
 		tablaVentas = new JTable();
 		scrollPane.setViewportView(tablaVentas);
-		
+
 		modelo = new DefaultTableModel();
 		modelo.setColumnIdentifiers(columnas);
 		tablaVentas.setModel(modelo);
 	}
-	
+
 	public void setData(List<VentaVehiculoDTO> ventas) {
 		modelo.setRowCount(0);
 		for (VentaVehiculoDTO venta : ventas) {
-			Object[] row = {venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getPrecioVenta(), 
-				venta.isPedido()? "PEDIDO" : "PENDIENTE" };
+			Object[] row = { venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getPrecioVenta(),
+					venta.isPedido() ? "PEDIDO" : "PENDIENTE" };
 			modelo.addRow(row);
-		}		
+		}
 	}
 
 	public void setActionOnSeleccionarVenta(ListSelectionListener listener) {
@@ -51,5 +52,5 @@ public class PanelVentas extends JPanel{
 	public void clearData() {
 		modelo.setRowCount(0);
 	}
-	
+
 }
