@@ -458,7 +458,7 @@ vehiculos:
     usado: true
     idCompra:
     idCaracteristicas: 1
-    idSucursal: 3
+    idSucursal: 
 #CATALOGO DE VEHICULOS NUEVOS SIN STOCK
   - precioVenta: 800000
     idFichaTecnica: 1
@@ -503,7 +503,7 @@ ventaVehiculo:
     idUsuLlegada:
     idPagoVentaVN: 
     fechaVentaVN: 2018-10-10
-    fechaEntregaReal: 2020-10-11
+    fechaEntregaReal: 
     fabricante: Ford
     comisionCobrada: 5000
     precioVenta: 1288444
@@ -516,7 +516,7 @@ ventaVehiculo:
     idUsuLlegada:
     idPagoVentaVN: 
     fechaVentaVN: 2018-10-10
-    fechaEntregaReal: 2020-10-11
+    fechaEntregaReal: 
     fabricante: Ford
     comisionCobrada: 5000
     precioVenta: 1288444

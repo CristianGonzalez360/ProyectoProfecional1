@@ -28,7 +28,7 @@ public class PanelEntregaDeVehiculos extends JPanel{
 	private static final long serialVersionUID = -5610520087472443466L;
 	private ClientePanelView panelCliente;
 	private CaracteristicaDeVehiculoPanel panelVehiculo;
-	private PanelVentaVehiculosDisponibles panelVentas;  //CAMBIAR POR UN PANE DONDE SE MUESTRE UNA TABLA  distinta a PnelVentas
+	private PanelVentaVehiculosDisponibles panelVentas;  
 	
 	private static PanelEntregaDeVehiculos instance;
 	private JPanel panelSuperior;
@@ -131,5 +131,9 @@ public class PanelEntregaDeVehiculos extends JPanel{
 		panelCliente.clearData();
 		panelVehiculo.clearData();
 		panelVentas.clearData();
+	}
+	
+	public boolean papelesEnRegla(int idFila) {
+		return (boolean) panelVentas.papelesEnRegla(idFila);
 	}
 }

@@ -15,7 +15,7 @@ public class PanelVentaVehiculosDisponibles extends JPanel{
 	
 	private JTable tablaVentas;
 	private DefaultTableModel modelo;
-	private static final String[] columnas= {"Nro.", "Fecha de venta", "Fecha de entrega", "Estado "};//quiza convenga pasarme de presenter, consultar con la almohada
+	private static final String[] columnas= {"Nro.", "Fecha de venta", "Estado del pedido", "Estado ","Documentacion"};
 	
 	public PanelVentaVehiculosDisponibles() {
 		setLayout(new BorderLayout(0, 0));
@@ -23,7 +23,15 @@ public class PanelVentaVehiculosDisponibles extends JPanel{
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 		
-		tablaVentas = new JTable();
+		tablaVentas = new JTable() {
+			@Override
+			public Class<?> getColumnClass(int column) {
+			if (column == 4 ) {
+				return Boolean.class;
+			}
+				return super.getColumnClass(column);
+			}
+		};
 		scrollPane.setViewportView(tablaVentas);
 		
 		modelo = new DefaultTableModel();
@@ -31,11 +39,15 @@ public class PanelVentaVehiculosDisponibles extends JPanel{
 		tablaVentas.setModel(modelo);
 	}
 	
+	public boolean papelesEnRegla(int idFila) {
+		return (boolean) tablaVentas.getValueAt(idFila, 4);
+	}
+	
 	public void setData(List<VentaVehiculoDTO> ventas) {
 		modelo.setRowCount(0);
 		for (VentaVehiculoDTO venta : ventas) {
-			Object[] row = {venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getFechaEntregaReal(), 
-				venta.isIngresado() ? "INGRESADO" : "NO INGRESADO" };
+			Object[] row = {venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.isPedido()? "PEDIDO" : "PENDIENTE", 
+				venta.isIngresado() ? "INGRESADO" : "NO INGRESADO", false };
 			modelo.addRow(row);
 		}		
 	}

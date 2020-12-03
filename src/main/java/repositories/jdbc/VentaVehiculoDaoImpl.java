@@ -161,7 +161,6 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 
 	@Override
 	public List<VentaVehiculoDTO> readVentasVehiculosParaEntregar() {
-		// TODO Auto-generated method stub
 		return getTemplate().query(readVentaParaEntregar).excecute(getMapper());
 	}
 

@@ -43,12 +43,13 @@ public class EntregaVehiculosVentaPresenter {
 		if(ventaSeleccionada == -1) { 
 			errors.add("Debe seleccionar una venta.");
 		}
-		else if(ventas.get(ventaSeleccionada).isPedido()) {
-			errors.add("El vehículo ya fue entregado");
+		else if(!ventas.get(ventaSeleccionada).isPedido()) {
+			errors.add("El vehículo no fue ingresado a la concesionaria. ");
+		}else if(!view.papelesEnRegla(ventaSeleccionada)){
+			errors.add("Entregue los papeles. ");
 		}
 		
 		if(errors.isEmpty()) { 
-			//TODO se llama a registrarEntrega en el controller
 			ventasVehiculosController.registrarEntrega(ventas.get(ventaSeleccionada).getIdVentaVehiculo());
 			onRefrescar(a);
 			new MessageDialog().showMessages("Entrega de vehiculo Registrada");

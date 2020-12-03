@@ -107,7 +107,7 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	@Override
 	public boolean estaIngresado(Integer idVentaVehiculo) {
-		return getTemplate().query(readByIdVentaIngreso).param(idVentaVehiculo).excecute(getMapper()).isEmpty();
+		return !getTemplate().query(readByIdVentaIngreso).param(idVentaVehiculo).excecute(getMapper()).isEmpty();
 	}
 	
 }

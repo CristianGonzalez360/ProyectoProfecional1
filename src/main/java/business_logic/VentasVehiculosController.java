@@ -108,32 +108,23 @@ public class VentasVehiculosController {
 		SucursalDTO sucursal = daos.makeSucursalesDao().readByID(idSucursal);
 		return sucursal.getPais();
 	}
-	//TODO validacion no del todo necesaria porque no se da el caso donde ventaVehiculo llegue null
+
 	public void registrarEntrega(Integer idVentaVehiculo) {
 		if(idVentaVehiculo == null) {
 			throw new ForbiddenException(FORBIDDEN_VENTA);
 		}else{
 		VentaVehiculoDTO venta = daos.makeVentaVehiculoDao().readByID(idVentaVehiculo);
-		venta.setFechaEntregaReal(new Date());//JERE TODO verificar si aca trae la fecha actual y la setea.
-		daos.makeVentaVehiculoDao().update(venta);}//TODO consultar nuevamente si estoy seteando el parametro correcto con cristian
+		venta.setFechaEntregaReal(new Date());
+		daos.makeVentaVehiculoDao().update(venta);}
 	}
 	
 	public List<VentaVehiculoDTO> readVentasVehiculosParaEntregar(){
 		List<VentaVehiculoDTO> ret = daos.makeVentaVehiculoDao().readVentasVehiculosParaEntregar();
 		for (VentaVehiculoDTO venta : ret) {
-			//Cambiar por llamado a la BD que traiga VentasVehyiculo con fechaEntregaReal = null
-//			venta.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
+			venta.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
 			venta.setIngresado(daos.makePedidoVehiculoDao().estaIngresado(venta.getIdVentaVehiculo()));
 		}
 		return ret;
 	}
-	
-//	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles(){
-//		List<VentaVehiculoDTO> ret = daos.makeVentaVehiculoDao().readVentasVehiculosNoDisponibles();
-//		for (VentaVehiculoDTO venta : ret) {
-//			venta.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
-//		}
-//		return ret;
-//	}
-	
+
 }
