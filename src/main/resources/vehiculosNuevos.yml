@@ -1,46 +1,46 @@
 vehiculos:
-  - precioVenta: 20000
+  - precioVenta: 3500000
     idFichaTecnica: 1
     marca: Ford
     familia: Focus
-    linea: vip
-    color: azul
+    linea: Vip
+    color: Azul
     fechaIngreso: 2017-10-11
     disponible: true
     usado: false
     idCompra:
     idCaracteristicas: 1
     idSucursal: 1
-  - precioVenta: 30000
+  - precioVenta: 3000000
     idFichaTecnica: 1
-    marca: wolkswagen
-    familia: polo
-    linea: trend
-    color: negro
+    marca: Volkswagen
+    familia: Polo
+    linea: Trend
+    color: Negro
     fechaIngreso:
     disponible: true
     usado: false
     idCompra:
     idCaracteristicas: 1
     idSucursal: 2
-  - precioVenta: 40000
+  - precioVenta: 3800000
     idFichaTecnica: 1
     marca: Chevrolet
     familia: Spin
-    linea: vip
-    color: azul
+    linea: Vip
+    color: Azul
     fechaIngreso: 2017-10-11
     disponible: true
     usado: false
     idCompra:
     idCaracteristicas: 2
     idSucursal: 3
-  - precioVenta: 50000
+  - precioVenta: 5200000
     idFichaTecnica: 1
-    marca: VolksWagen
+    marca: Volkswagen
     familia: Golf
-    linea: vip
-    color: blanco
+    linea: Vip
+    color: Blanco
     fechaIngreso: 2017-10-11
     disponible: true
     usado: false
