@@ -1,7 +1,5 @@
 package repositories;
 
-import dto.CuentaDTO;
-
 public abstract class DaosFactory {
 
 	private static DaosFactory concreteFactory;
