@@ -42,7 +42,9 @@ public class WorkbenchPresenter implements Presenter {
 		if (credentials != null) {
 			try {
 				SessionDTO session = loginController.logUser(credentials);
-				workbenchView.setData(session.getInitSession().toString() + " - " + session.getNombreUsuario() + " - " + session.getIdSucursal());
+				String datosDeSession = String.format("%s - Sucursal: %s - Usuario: %s", session.getFecha(),
+						session.getIdSucursal(), session.getNombreUsuario());
+				workbenchView.setData(datosDeSession);
 				if (session.getRole().equals("tecnico")) {
 					TecnicoControlView.getInstance().clearData();
 					TecnicoControlView.getInstance().display();
@@ -67,7 +69,7 @@ public class WorkbenchPresenter implements Presenter {
 					AdminControlView.getInstance().clearData();
 					AdminControlView.getInstance().display();
 				}
-				
+
 				workbenchView.disableLoginButton();
 				LoginView.getInstance().clearData();
 				LoginView.getInstance().close();
