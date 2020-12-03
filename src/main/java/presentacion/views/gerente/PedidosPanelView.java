@@ -1,6 +1,7 @@
 package presentacion.views.gerente;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
@@ -10,14 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.SoftBevelBorder;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import dto.temporal.PedidoDTO;
-import javax.swing.UIManager;
-import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class PedidosPanelView extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -42,10 +41,12 @@ public class PedidosPanelView extends JPanel {
 		JPanel panelNorte = new JPanel();
 //		setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		FlowLayout flowLayout = (FlowLayout) panelNorte.getLayout();
-		flowLayout.setHgap(20);
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		//flowLayout.setHgap(20);
 		add(panelNorte, BorderLayout.NORTH);
 
 		btnBuscar = new JButton("Refrescar");
+		//btnBuscar.setHorizontalAlignment(SwingConstants.LEFT);
 		panelNorte.add(btnBuscar);
 
 		JPanel panelSur = new JPanel();
