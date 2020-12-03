@@ -19,6 +19,7 @@ public class ConfiguradorTerminalController implements SucursalPredeterminadaRea
 		map.put("idSucursal", dto.getIdSucursal().toString());
 		map.put("pais", dto.getPais());
 		map.put("calle", dto.getCalle());
+		map.put("localidad", dto.getLocalidad());
 		map.put("altura", dto.getAltura().toString());
 		PropertiesServiceImpl service = new PropertiesServiceImpl(archivoConfiguracion);
 		try {
@@ -37,6 +38,7 @@ public class ConfiguradorTerminalController implements SucursalPredeterminadaRea
 			suc.setIdSucursal(Integer.parseInt(map.get("idSucursal")));
 			suc.setPais(map.get("pais"));
 			suc.setCalle(map.get("calle"));
+			suc.setLocalidad(map.get("localidad"));
 			suc.setAltura(Integer.parseInt(map.get("altura")));
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -19,6 +19,7 @@ import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ClienteFormView;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.utils.ReporteViewImpl;
 import presentacion.views.vendedor.VendedorControlView;
 
 public class VendedorControlPresenter {
@@ -68,6 +69,9 @@ public class VendedorControlPresenter {
 		ModalidadVentaVehiculoDTO modalidadVenta = view.getDataModalidadVenta();
 		try {
 			ventasController.registrarVenta(idCliente, vehiculo, modalidadVenta, vehiculo.getMarca());
+			ReporteViewImpl ventanaReporte = new ReporteViewImpl();
+			ventanaReporte.setData(ventasController.makeFacturaVentaVehiculo(ventasController.readByIdVehiculo(Integer.parseInt(vehiculo.getCodigo()))));
+			ventanaReporte.open();
 			new MessageDialog().showMessages("Se efectuó la venta del vehículo.");
 			view.clearData();
 		} catch (ForbiddenException e) {

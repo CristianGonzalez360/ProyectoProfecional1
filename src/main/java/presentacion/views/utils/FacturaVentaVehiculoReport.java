@@ -17,6 +17,7 @@ public class FacturaVentaVehiculoReport {
 	public static String FINANCIADO = "FINANCIADO";
 	public static String EFECTIVO = "EFECTIVO";
 	
+	private Integer numero;
 	private SucursalDTO sucursal;
 	private DatosPersonalesDTO cliente;
 	private VehiculoDTO vehiculo;
@@ -29,6 +30,9 @@ public class FacturaVentaVehiculoReport {
 	private Integer nroCuotas;	
 	private Double montoCuota;
 	
+	public FacturaVentaVehiculoReport() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getFormaPago() {
 		return formaPago;
 	}
@@ -104,5 +108,11 @@ public class FacturaVentaVehiculoReport {
 	}
 	public void setFichaTecnicaVehiculo(FichaTecnicaVehiculoDTO fichaTecnicaVehiculo) {
 		this.fichaTecnicaVehiculo = fichaTecnicaVehiculo;
+	}
+	public Integer getNumero() {
+		return numero;
+	}
+	public void setNumero(Integer numero) {
+		this.numero = numero;
 	}
 }

@@ -25,6 +25,8 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo AND disponible = false"; //AND idSucursal = ?"; 
 
 	private static final String readById = "SELECT * FROM VentasVehiculos WHERE idVentaVehiculo = ?";
+
+	private static final String readByIdVehículo = readAll + " WHERE idVehiculo = ?";
 	
 	public VentaVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -121,6 +123,12 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	@Override
 	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles() {
 		return getTemplate().query(readVentasVehiculosNoDisponibles).excecute(getMapper());
+	}
+
+	@Override
+	public VentaVehiculoDTO readByIdVehiculo(Integer idVehiculo) {
+		List<VentaVehiculoDTO> dtos = getTemplate().query(readByIdVehículo).param(idVehiculo).excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
 }

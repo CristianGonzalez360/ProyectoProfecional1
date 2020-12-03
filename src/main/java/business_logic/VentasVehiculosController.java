@@ -12,6 +12,7 @@ import dto.CaracteristicaVehiculoDTO;
 import dto.SucursalDTO;
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
+import dto.taller.FacturaDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
@@ -135,7 +136,7 @@ public class VentasVehiculosController {
 		daos.makeVentaVehiculoDao().insert(venta);
 		daos.makeVehiculoDao().updateDisponibilidadVehiculo(Integer.parseInt(vehiculo.getCodigo()), new Boolean(false));
 	}
-
+	
 	public Double calcularComision(String precio) {
 		return Double.parseDouble(precio)*PORCENTAJE_COMISION / 100;
 	}
@@ -153,6 +154,7 @@ public class VentasVehiculosController {
 	
 	public FacturaVentaVehiculoReport makeFacturaVentaVehiculo(VentaVehiculoDTO venta) {
 		FacturaVentaVehiculoReport ret = new FacturaVentaVehiculoReport();
+		ret.setNumero(venta.getIdVentaVehiculo());
 		ret.setSucursal(SessionServiceImpl.getInstance().getActiveSession().getSucursal());
 		DatosPersonalesDTO datosCliente = daos.makeClienteDao().readByID(venta.getIdCliente()).getDatosPersonalesDTO();
 		ret.setCliente(datosCliente);
@@ -173,5 +175,9 @@ public class VentasVehiculosController {
 		}
 		
 		return ret;
+	}
+	
+	public VentaVehiculoDTO readByIdVehiculo(Integer idVehiculo) {
+		return daos.makeVentaVehiculoDao().readByIdVehiculo(idVehiculo);
 	}
 }
