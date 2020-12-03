@@ -16,7 +16,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import dto.temporal.PedidoDTO;
-import javax.swing.SwingConstants;
 
 public class PedidosPanelView extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -39,14 +38,12 @@ public class PedidosPanelView extends JPanel {
 		setBackground(SystemColor.menu);
 
 		JPanel panelNorte = new JPanel();
-//		setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		FlowLayout flowLayout = (FlowLayout) panelNorte.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
-		//flowLayout.setHgap(20);
+
 		add(panelNorte, BorderLayout.NORTH);
 
 		btnBuscar = new JButton("Refrescar");
-		//btnBuscar.setHorizontalAlignment(SwingConstants.LEFT);
 		panelNorte.add(btnBuscar);
 
 		JPanel panelSur = new JPanel();
