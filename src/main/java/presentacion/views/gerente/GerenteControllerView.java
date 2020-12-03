@@ -32,7 +32,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class GerenteControllerView extends JInternalFrame {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7042212809173654026L;
 
 	private static final String[] COLUMNAS_TURNOS = new String[] { "NRO. TURNO", "NOMBRE DE CLIENTE", "DNI",
 			"FECHA DE ALTA", "FECHA PROGRAMADA", "TELEFONO", "EMAIL" };
@@ -245,7 +245,6 @@ public class GerenteControllerView extends JInternalFrame {
 		try {
 			return new SimpleDateFormat("yyyy-mm-dd").parse(str);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

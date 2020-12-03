@@ -26,6 +26,8 @@ public class PanelVentaVehiculosDisponibles extends JPanel {
 		add(scrollPane, BorderLayout.CENTER);
 
 		tablaVentas = new JTable() {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Class<?> getColumnClass(int column) {
 				if (column == 4) {
