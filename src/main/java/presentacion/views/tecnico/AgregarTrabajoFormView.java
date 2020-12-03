@@ -12,14 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
 
-public class AgregarTrabajoFormView extends JPanel
-{
-
-	/**
-	 * 
-	 */
+public class AgregarTrabajoFormView extends JPanel {
 	private static final long serialVersionUID = 5945189647492919676L;
-	private static AgregarTrabajoFormView instance;
+
 	private JPanel panelAgregarTrabajo = new JPanel();
 	private JTextField tfEsfuerzo;
 	private JTextField tfMonto;
@@ -85,28 +80,22 @@ public class AgregarTrabajoFormView extends JPanel
 		tfEsfuerzo.setColumns(10);
 	}
 
-	/*public static AgregarTrabajoFormView getInstance() {
-		if (instance == null)
-			instance = new AgregarTrabajoFormView();
-		return instance;
-	}
-
-	public void clearDataNuevoTrabajo() {
-		editorDescripcion.setText("");
-		tfMonto.setText("");
-		tfEsfuerzo.setText("");
-	}
-
-	public TrabajoPresupuestadoDTO getDataNuevoTrabajo() {
-		TrabajoPresupuestadoDTO ret = new TrabajoPresupuestadoDTO();
-		ret.setDescripcionTrabajo(editorDescripcion.getText());
-		ret.setPrecioTrabajo(Double.parseDouble(tfMonto.getText()));
-		ret.setTiempoEstTrabajo(Integer.parseInt(tfEsfuerzo.getText()));
-		return ret;
-	}
-
-	public void setActionOnAgregar(ActionListener listener) {
-		this.btnGuardar.addActionListener(listener);
-	}*/
+	/*
+	 * public static AgregarTrabajoFormView getInstance() { if (instance == null)
+	 * instance = new AgregarTrabajoFormView(); return instance; }
+	 * 
+	 * public void clearDataNuevoTrabajo() { editorDescripcion.setText("");
+	 * tfMonto.setText(""); tfEsfuerzo.setText(""); }
+	 * 
+	 * public TrabajoPresupuestadoDTO getDataNuevoTrabajo() {
+	 * TrabajoPresupuestadoDTO ret = new TrabajoPresupuestadoDTO();
+	 * ret.setDescripcionTrabajo(editorDescripcion.getText());
+	 * ret.setPrecioTrabajo(Double.parseDouble(tfMonto.getText()));
+	 * ret.setTiempoEstTrabajo(Integer.parseInt(tfEsfuerzo.getText())); return ret;
+	 * }
+	 * 
+	 * public void setActionOnAgregar(ActionListener listener) {
+	 * this.btnGuardar.addActionListener(listener); }
+	 */
 
 }
