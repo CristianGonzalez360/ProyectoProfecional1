@@ -36,7 +36,7 @@ public class PedidosPanelView extends JPanel {
 		flowLayout.setHgap(20);
 		add(panelNorte, BorderLayout.NORTH);
 
-		btnBuscar = new JButton("Refrescar Pedidos");
+		btnBuscar = new JButton("Refrescar");
 		panelNorte.add(btnBuscar);
 
 		JPanel panelSur = new JPanel();
@@ -65,10 +65,6 @@ public class PedidosPanelView extends JPanel {
 	public void setActionRegistrarIngreso(ActionListener listener) {
 		this.btnRegistrarPedido.addActionListener(listener);
 	}
-
-//	public String getDniBusqueda() {
-//		return this.textDNI.getText();
-//	}
 
 	public void setData(List<PedidoDTO> pedidos) {
 		for (PedidoDTO pedido : pedidos) {
