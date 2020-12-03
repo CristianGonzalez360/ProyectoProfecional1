@@ -147,28 +147,28 @@ turnos:
   - idCliente: 1
     dniCliente: 33333
     fechaAlta: 2020-11-05
-    fechaProgramada: 2020-11-20
+    fechaProgramada: 2021-11-20
     nombreCliente: c007
     telefonoCliente: "1136635555"
     emailCliente: "ejemplo0@dominio.com"
   - idCliente: 12
     dniCliente: 22222
     fechaAlta: 2020-11-05
-    fechaProgramada: 2020-11-24
+    fechaProgramada: 2021-11-24
     nombreCliente: c008
     telefonoCliente: "1133335555"
     emailCliente: "ejemplo1@dominio.com"
   - idCliente: 3
     dniCliente: 111111
     fechaAlta: 2020-11-05
-    fechaProgramada: 2020-11-22
+    fechaProgramada: 2021-11-22
     nombreCliente: c009
     telefonoCliente: "1122335555"
     emailCliente: "ejemplo2@dominio.com"
   - idCliente: 5
     dniCliente: 44444
     fechaAlta: 2020-11-05
-    fechaProgramada: 2020-11-19
+    fechaProgramada: 2021-11-19
     nombreCliente: c0010
     telefonoCliente: "1133335955"
     emailCliente: "ejemplo3@dominio.com"
@@ -446,51 +446,64 @@ vehiculos:
     usado: false
     idCompra:
     idCaracteristicas: 1
-    idSucursal: 1
-  - precioVenta: 1300555
-    idFichaTecnica: 1
-    marca: wolkswagen
-    familia: polo
-    linea: trend
-    color: negro
-    fechaIngreso:
-    disponible: false
-    usado: false
-    idCompra:
-    idCaracteristicas: 1
-    idSucursal: 2
+    idSucursal: 1 
   - precioVenta: 1300999
     idFichaTecnica: 1
     marca: Ford
-    familia: Focus
-    linea: vip
+    familia: Fiesta
+    linea: Max
     color: azul
     fechaIngreso: 2017-10-11
     disponible: true
     usado: true
     idCompra:
     idCaracteristicas: 1
-    idSucursal: 3
-  - precioVenta: 800000
+    idSucursal: 
+#CATALOGO DE VEHICULOS NUEVOS SIN STOCK
+  - precioVenta: 2100000
     idFichaTecnica: 1
     marca: Ford
     familia: Fiesta
-    linea: vip
-    color: amarillo
+    linea: Vip
+    color: Amarillo
     fechaIngreso: 2017-10-11
     disponible: true
     usado: true
     idCompra:
     idCaracteristicas: 1
-    idSucursal: 4
+    idSucursal: 2
+  - precioVenta: 2500000
+    idFichaTecnica: 
+    marca: Fiat
+    familia: Siena
+    linea: Full TS
+    color: Gris
+    fechaIngreso: 2017-10-11
+    disponible: false
+    usado: false
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 
+  - precioVenta: 4000000
+    idFichaTecnica: 
+    marca: Fiat
+    familia: Linea
+    linea: AS sport
+    color: Dark Red
+    fechaIngreso: 2017-10-11
+    disponible: false
+    usado: false
+    idCompra:
+    idCaracteristicas: 1
+    idSucursal: 
 
 ventaVehiculo:
-  - idUsuVentaVN: 1
+  - idUsuVentaVN: 5
     idUsuPedido:
     idUsuLlegada:
     idPagoVentaVN: 
     fechaVentaVN: 2018-10-10
-    fechaEntregaReal: 2020-10-11
+    fechaEntregaReal: 
     fabricante: Ford
     comisionCobrada: 5000
     precioVenta: 1288444
@@ -503,7 +516,7 @@ ventaVehiculo:
     idUsuLlegada:
     idPagoVentaVN: 
     fechaVentaVN: 2018-10-10
-    fechaEntregaReal: 2020-10-11
+    fechaEntregaReal: 
     fabricante: Ford
     comisionCobrada: 5000
     precioVenta: 1288444

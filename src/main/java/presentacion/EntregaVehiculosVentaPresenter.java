@@ -7,37 +7,35 @@ import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 
 import business_logic.ClientesController;
-import business_logic.PedidosController;
 import business_logic.VentasVehiculosController;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.VentaVehiculoDTO;
-import presentacion.views.gerente.PanelRegistroPedido;
+import presentacion.views.gerente.PanelEntregaDeVehiculos;
 import presentacion.views.utils.MessageDialog;
 
-public class RegistroPedidoPresenter {
+public class EntregaVehiculosVentaPresenter {
 
-	private PanelRegistroPedido view;
+	private PanelEntregaDeVehiculos view;
 	
 	private List<VentaVehiculoDTO> ventas;
 	private int ventaSeleccionada;
 	
 	private VentasVehiculosController ventasVehiculosController;
 	private ClientesController clientesController;
-	private PedidosController pedidosController;
 	
-	public RegistroPedidoPresenter(VentasVehiculosController ventasVehiculosController, ClientesController clientesController, PedidosController pedidosController) {
-		this.view = PanelRegistroPedido.getInstance();
+	public EntregaVehiculosVentaPresenter(VentasVehiculosController ventasVehiculosController, ClientesController clientesController) {
+		this.view = PanelEntregaDeVehiculos.getInstance();
+		
 		this.view.setActionOnSeleccionarVenta(a -> onSeleccionarVenta(a));
 		this.view.setActionOnRefrescar(a -> onRefrescar(a));
 		this.view.setActionOnRegistrar(a -> onRegistrar(a));
 
 		this.ventasVehiculosController = ventasVehiculosController;
 		this.clientesController = clientesController;
-		this.pedidosController = pedidosController;
 		
 		this.ventaSeleccionada = -1;
-		//mostrarVentas();
+		mostrarVentas();
 	}
 
 	private void onRegistrar(ActionEvent a) {
@@ -45,14 +43,16 @@ public class RegistroPedidoPresenter {
 		if(ventaSeleccionada == -1) { 
 			errors.add("Debe seleccionar una venta.");
 		}
-		else if(ventas.get(ventaSeleccionada).isPedido()) {
-			errors.add("El vehículo ya fue pedido");
+		else if(!ventas.get(ventaSeleccionada).isPedido()) {
+			errors.add("El vehículo no fue ingresado a la concesionaria. ");
+		}else if(!view.papelesEnRegla(ventaSeleccionada)){
+			errors.add("Entregue los papeles. ");
 		}
 		
 		if(errors.isEmpty()) { 
-			pedidosController.save(ventas.get(ventaSeleccionada).getIdVentaVehiculo());
+			ventasVehiculosController.registrarEntrega(ventas.get(ventaSeleccionada).getIdVentaVehiculo());
 			onRefrescar(a);
-			new MessageDialog().showMessages("Pedido Registrado");
+			new MessageDialog().showMessages("Entrega de vehiculo Registrada");
 		} else {
 			new MessageDialog().showMessages(errors);
 		}
@@ -74,9 +74,10 @@ public class RegistroPedidoPresenter {
 		}
 	}
 	
-	private void mostrarVentas() {
-		this.ventas = ventasVehiculosController.readVentasVehiculosNoDisponibles();
+	private void mostrarVentas() { //TODO traer ventas con fechaEntrega real en null, en caso  de que fechaEntrega real sea el atributo que estoy buscando
+		this.ventas = ventasVehiculosController.readVentasVehiculosParaEntregar();
 		this.view.setData(ventas);
 	}
 	
+
 }

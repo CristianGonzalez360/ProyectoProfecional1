@@ -14,12 +14,17 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 	private static final String readAll = "SELECT * FROM PedidoVehiculo";
 
 	private static final String readAllPedidosDeVenta = "SELECT pv.idPedidoVehiculo, pv.fechaPedido, pv.fechaIngreso, pv.idUsuPedido, pv.idUsuIngreso, pv.idVentaVehiculo, vv.idSucursal FROM pedidovehiculo pv INNER JOIN ventasvehiculos vv ON pv.idVentaVehiculo = vv.idVentaVehiculo WHERE vv.idSucursal = ? AND pv.fechaIngreso IS NULL";
-	
+
 	private static final String readById = readAll + " WHERE idPedidoVehiculo = ?";
-	
+
 	private static final String readByIdVenta = readAll + " WHERE idVentaVehiculo = ?";
 
 	private static final String insert = "INSERT INTO PedidoVehiculo (fechaPedido, fechaIngreso, idUsuPedido, idUsuIngreso, idVentaVehiculo) VALUES (?,?,?,?,?)";
+
+	private static final String updateIngreso = "UPDATE PedidoVehiculo SET fechaIngreso = ?, idUsuIngreso = ? WHERE idPedidoVehiculo = ?";
+	
+	
+	private static final String readByIdVentaIngreso = readAll + " WHERE idVentaVehiculo = ? and fechaIngreso is not null";
 
 	public PedidoVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -29,6 +34,14 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 	public boolean update(PedidoVehiculoDTO entity) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public boolean updateIngreso(PedidoVehiculoDTO pedido) {
+		return getTemplate().query(updateIngreso)
+				.param(pedido.getFechaIngreso())
+				.param(pedido.getIdUsuIngreso())
+				.param(pedido.getIdPedidoVehiculo()).excecute();
 	}
 
 	@Override
@@ -50,7 +63,7 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 	@Override
 	public PedidoVehiculoDTO readByID(Integer id) {
 		List<PedidoVehiculoDTO> ret = getTemplate().query(readById).param(id).excecute(getMapper());
-		return ret.isEmpty()? null : ret.get(0);
+		return ret.isEmpty() ? null : ret.get(0);
 	}
 
 	@Override
@@ -92,4 +105,9 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 		return !getTemplate().query(readByIdVenta).param(idVentaVehiculo).excecute(getMapper()).isEmpty();
 	}
 
+	@Override
+	public boolean estaIngresado(Integer idVentaVehiculo) {
+		return !getTemplate().query(readByIdVentaIngreso).param(idVentaVehiculo).excecute(getMapper()).isEmpty();
+	}
+	
 }

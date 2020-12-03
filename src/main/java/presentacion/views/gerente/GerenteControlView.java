@@ -15,8 +15,10 @@ public class GerenteControlView extends JInternalFrame {
 	private static GerenteControlView instance;
 
 	private PedidosPanelView pedidosPanelView;
-	
+
 	private GerenteNuevosCar autosNuevosView;
+
+	private HistorialVentasGerenteView historialVentasView;
 
 	public static GerenteControlView getInstance() {
 		if (instance == null)
@@ -35,21 +37,25 @@ public class GerenteControlView extends JInternalFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
+		PanelRegistroPedido panelPedidos = PanelRegistroPedido.getInstance();
+		tabbedPane.addTab("Registro de Pedidos", panelPedidos);
+
 		JPanel pedidosPanel = new JPanel();
-		tabbedPane.addTab("Gestión de Pedidos", null, pedidosPanel, null);
+
+		tabbedPane.addTab("Registro de Ingreso de Unidad", null, pedidosPanel, null);
 		pedidosPanel.setLayout(new BorderLayout(0, 0));
 
 		pedidosPanelView = new PedidosPanelView();
 		pedidosPanel.add(pedidosPanelView);
-		
+
+		PanelEntregaDeVehiculos panelEntregaDeVehiculos = PanelEntregaDeVehiculos.getInstance();
+		tabbedPane.addTab("Entrega de Unidad", panelEntregaDeVehiculos);
 
 		autosNuevosView = GerenteNuevosCar.getInstance();
-		tabbedPane.addTab("Autos nuevos", autosNuevosView);
-
-
-		PanelRegistroPedido panelPedidos = PanelRegistroPedido.getInstance();
-		tabbedPane.addTab("Registro de Pedidos",panelPedidos );
-
+		tabbedPane.addTab("Registro de Nuevas Unidades", autosNuevosView);
+		
+		historialVentasView = HistorialVentasGerenteView.getInstance();
+		tabbedPane.addTab("Historial de Ventas", historialVentasView);
 	}
 
 	public void display() {
@@ -76,8 +82,8 @@ public class GerenteControlView extends JInternalFrame {
 	public void setPedidosPanelView(PedidosPanelView pedidosPanelView) {
 		this.pedidosPanelView = pedidosPanelView;
 	}
-	
-	public GerenteNuevosCar getAutosNuevosPanelView () {
+
+	public GerenteNuevosCar getAutosNuevosPanelView() {
 		return autosNuevosView;
 	}
 

@@ -7,6 +7,7 @@ import java.util.List;
 import dto.ClienteDTO;
 import dto.DatosPersonalesDTO;
 import dto.EntregaDeVehiculoDTO;
+import dto.VentaVehiculoDTO;
 import dto.taller.FacturaDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
@@ -19,6 +20,7 @@ import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.PresupuestosDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
+import repositories.VentaVehiculoDao;
 import services.EmailSenderService;
 
 public class EntregaDeVehiculoController {
@@ -30,7 +32,8 @@ public class EntregaDeVehiculoController {
 	private VehiculosConOrdenDeTrabajoDao vehiculosDao;
 	private FichaTecnicaVehiculoDao fichaTecnicaDao;
 	private FacturasDao facturaDao;
-
+	private VentaVehiculoDao ventaVehiculoDAO;
+	
 	private EmailSenderService servicio;
 
 	public EntregaDeVehiculoController(ClientesDao clienteDao, DatosPersonalesDao datosPersonalesDao,
@@ -46,6 +49,13 @@ public class EntregaDeVehiculoController {
 		this.facturaDao = facturaDao;
 
 		this.servicio = new EmailSenderService();
+	}
+	
+	public EntregaDeVehiculoController(ClientesDao clientesDao, VehiculosConOrdenDeTrabajoDao vehiculosDao,
+			VentaVehiculoDao ventaVehiculoDAO) {
+		this.clientesDao = clientesDao;
+		this.vehiculosDao = vehiculosDao;
+		this.ventaVehiculoDAO = ventaVehiculoDAO;
 	}
 
 	public List<EntregaDeVehiculoDTO> readByDniCliente(Integer dniCliente) {
@@ -126,4 +136,11 @@ public class EntregaDeVehiculoController {
 	public boolean enviarCorreoDeSatisfaccion(String correoDestinatario) {
 		return this.servicio.enviarMailDeSatisfaccion(correoDestinatario);
 	}
+	
+	public List <VentaVehiculoDTO>  cargarTablaVentaVehiculos() {
+		List <VentaVehiculoDTO> ventaVehiculoList = ventaVehiculoDAO.readAll();
+		return ventaVehiculoList;
+		
+	}
+	
 }

@@ -1,46 +1,39 @@
 package presentacion.views.tecnico;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-
-import java.awt.event.ActionEvent;
-import javax.swing.border.TitledBorder;
-import java.awt.Color;
-import javax.swing.BoxLayout;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.BevelBorder;
-import com.jgoodies.forms.layout.FormLayout;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import dto.taller.TrabajoPresupuestadoDTO;
 
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.ScrollPaneConstants;
-import java.awt.Component;
-
 public class PlanificarTrabajosFormView extends JPanel {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8919580357142104418L;
 
 	private final String[] columnas = new String[] { "DESCRIPCIÓN", "ESFUERZO", "PRECIO" };
 	private static PlanificarTrabajosFormView instance;
 	private final JPanel panelTrabajosPlanificados = new JPanel();
 	private JTable table;
-	
+
 	private DefaultTableModel modelo;
 	private JTextField tfEsfuerzo;
 	private JTextField tfMonto;
@@ -51,9 +44,10 @@ public class PlanificarTrabajosFormView extends JPanel {
 	private PlanificarTrabajosFormView() {
 		setBounds(100, 100, 500, 600);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
+
 		JPanel panelAgregarTrabajo = new JPanel();
-		panelAgregarTrabajo.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Nuevo Trabajo", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelAgregarTrabajo.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null),
+				"Nuevo Trabajo", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelAgregarTrabajo.setLayout(new BorderLayout(0, 0));
 
 		JPanel panelBotones = new JPanel();
@@ -66,36 +60,31 @@ public class PlanificarTrabajosFormView extends JPanel {
 
 		JPanel panelPrincipal = new JPanel();
 		panelAgregarTrabajo.add(panelPrincipal, BorderLayout.CENTER);
-		panelPrincipal.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("422px:grow"),},
-			new RowSpec[] {
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("fill:66px:grow"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("30px"),}));
-		
-				JLabel lblDescripcin = new JLabel("Descripción");
-				panelPrincipal.add(lblDescripcin, "1, 1, default, center");
-				
-				JScrollPane scrollPane_1 = new JScrollPane();
-				scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-				panelPrincipal.add(scrollPane_1, "1, 3, fill, fill");
-				
-				editorDescripcion = new JEditorPane();
-				scrollPane_1.setViewportView(editorDescripcion);
-		
-				JPanel panelCentralInferior = new JPanel();
-				panelPrincipal.add(panelCentralInferior, "1, 4, right, center");
-				FlowLayout fl_panelCentralInferior = (FlowLayout) panelCentralInferior.getLayout();
-				fl_panelCentralInferior.setAlignment(FlowLayout.RIGHT);
-				
-						JLabel lblMonto = new JLabel("Monto:    ");
-						panelCentralInferior.add(lblMonto);
-						
-								tfMonto = new JTextField();
-								panelCentralInferior.add(tfMonto);
-								tfMonto.setColumns(10);
+		panelPrincipal.setLayout(new FormLayout(new ColumnSpec[] { ColumnSpec.decode("422px:grow"), },
+				new RowSpec[] { FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("fill:66px:grow"), FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("30px"), }));
+
+		JLabel lblDescripcin = new JLabel("Descripción");
+		panelPrincipal.add(lblDescripcin, "1, 1, default, center");
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		panelPrincipal.add(scrollPane_1, "1, 3, fill, fill");
+
+		editorDescripcion = new JEditorPane();
+		scrollPane_1.setViewportView(editorDescripcion);
+
+		JPanel panelCentralInferior = new JPanel();
+		panelPrincipal.add(panelCentralInferior, "1, 4, right, center");
+		FlowLayout fl_panelCentralInferior = (FlowLayout) panelCentralInferior.getLayout();
+		fl_panelCentralInferior.setAlignment(FlowLayout.RIGHT);
+
+		JLabel lblMonto = new JLabel("Monto:    ");
+		panelCentralInferior.add(lblMonto);
+
+		tfMonto = new JTextField();
+		panelCentralInferior.add(tfMonto);
+		tfMonto.setColumns(10);
 
 		JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		panelPrincipal.add(panelInferior, "1, 5, fill, center");
@@ -106,13 +95,15 @@ public class PlanificarTrabajosFormView extends JPanel {
 		tfEsfuerzo = new JTextField();
 		panelInferior.add(tfEsfuerzo);
 		tfEsfuerzo.setColumns(10);
-		
+
 		add(panelAgregarTrabajo);
-		
-		panelTrabajosPlanificados.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Trabajos Planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+
+		panelTrabajosPlanificados
+				.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null),
+						"Trabajos Planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		add(panelTrabajosPlanificados);
 		panelTrabajosPlanificados.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel = new JPanel();
 		panelTrabajosPlanificados.add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
@@ -160,7 +151,7 @@ public class PlanificarTrabajosFormView extends JPanel {
 			modelo.addRow(row);
 		}
 	}
-	
+
 	public void clearDataNuevoTrabajo() {
 		editorDescripcion.setText("");
 		tfMonto.setText("");
@@ -178,7 +169,7 @@ public class PlanificarTrabajosFormView extends JPanel {
 	public void setActionOnAgregar(ActionListener listener) {
 		this.btnAgregar.addActionListener(listener);
 	}
-	
+
 	public void setActionOnQuitar(ActionListener listener) {
 		this.btnQuitar.addActionListener(listener);
 	}
@@ -186,15 +177,15 @@ public class PlanificarTrabajosFormView extends JPanel {
 	public Integer getSeleccionado() {
 		return table.getSelectedRow();
 	}
-	
+
 	public String getDescripcion() {
 		return this.editorDescripcion.getText();
 	}
-	
+
 	public String getMonto() {
 		return this.tfMonto.getText();
 	}
-	
+
 	public String getEsfuerzo() {
 		return this.tfEsfuerzo.getText();
 	}

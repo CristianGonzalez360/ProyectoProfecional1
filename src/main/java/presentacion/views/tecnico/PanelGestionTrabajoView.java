@@ -151,6 +151,8 @@ public class PanelGestionTrabajoView extends JPanel {
 
 		tableModelVehiculos = new DefaultTableModel(null, this.columnasTablaVehiculos);
 		tableVehiculos = new JTable(tableModelVehiculos) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -282,6 +284,8 @@ public class PanelGestionTrabajoView extends JPanel {
 		panel_8.setLayout(new BorderLayout(0, 0));
 		
 		tablePresupuestos = new JTable(listadoDePresupuestosModel){
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -321,6 +325,8 @@ public class PanelGestionTrabajoView extends JPanel {
 
 		this.listadoDeRepuestosModel = new DefaultTableModel(null, this.columnasListadoDeRepuestos);
 		tableRepuestos = new JTable(listadoDeRepuestosModel){
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -337,6 +343,8 @@ public class PanelGestionTrabajoView extends JPanel {
 
 		this.listadoDeTrabajosModel = new DefaultTableModel(null, this.columnasListadoDeTrabajos);
 		tableTrabajos = new JTable(listadoDeTrabajosModel){
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;

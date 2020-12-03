@@ -288,7 +288,7 @@ DROP TABLE Vehiculos IF EXISTS;
 CREATE TABLE Vehiculos (
   idVehiculo INTEGER NOT NULL AUTO_INCREMENT,
   precioVenta DOUBLE NOT NULL,
-  idFichaTecnica INTEGER NOT NULL,
+  idFichaTecnica INTEGER,
   marca VARCHAR(20) NOT NULL,
   familia VARCHAR(20) NOT NULL,
   linea VARCHAR(20) NOT NULL,

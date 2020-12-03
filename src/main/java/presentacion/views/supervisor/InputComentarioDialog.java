@@ -1,11 +1,20 @@
 package presentacion.views.supervisor;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.util.List;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import com.jgoodies.forms.layout.FormLayout;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.TitledBorder;
+
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
@@ -13,23 +22,9 @@ import dto.taller.PresupuestoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.utils.MessageDialog;
 
-import javax.swing.JEditorPane;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.util.List;
-
-import javax.swing.JTextField;
-import javax.swing.BoxLayout;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.BevelBorder;
-import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-
 public class InputComentarioDialog extends JDialog {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+
 	private JPanel contentPane;
 	private String title;
 	private JLabel lblNro;
@@ -41,28 +36,14 @@ public class InputComentarioDialog extends JDialog {
 	public InputComentarioDialog(PresupuestoDTO presupuesto) {
 		contentPane = new JPanel();
 		contentPane.setPreferredSize(new Dimension(420, 203));
-		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("76px"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("104px:grow"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("53px"),
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("100px:grow"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,},
-			new RowSpec[] {
-				FormSpecs.LINE_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.LINE_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("top:max(19dlu;default)"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("top:default:grow"),}));
+		contentPane.setLayout(new FormLayout(new ColumnSpec[] { FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("76px"), FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("104px:grow"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("53px"), FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("100px:grow"), FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, },
+				new RowSpec[] { FormSpecs.LINE_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.LINE_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("top:max(19dlu;default)"),
+						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("top:default:grow"), }));
 
 		lblNro = new JLabel("Nro:");
 		contentPane.add(lblNro, "2, 2, right, center");
@@ -125,7 +106,7 @@ public class InputComentarioDialog extends JDialog {
 		txtComentario = new JTextField();
 		txtComentario.setToolTipText("Ingrese un comentario.");
 		panelRechazo.add(txtComentario, BorderLayout.CENTER);
-		
+
 		JLabel lblNewLabel = new JLabel("Maximo 60 caracteres");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblNewLabel, "2, 10, 7, 1");

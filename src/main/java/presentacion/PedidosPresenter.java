@@ -3,14 +3,14 @@ package presentacion;
 import java.awt.event.ActionEvent;
 
 import business_logic.PedidosController;
-import dto.validators.StringValidator;
 import presentacion.views.gerente.PedidosPanelView;
+import presentacion.views.utils.ConfirmationDialog;
+import presentacion.views.utils.MessageDialog;
 import services.SessionServiceImpl;
 
 public class PedidosPresenter {
 
-	private static final String CONFIRMATION = "¿Está seguro que desea cancelar el pedido?";
-	private static final String MENSAGE_NUEVO_PEDIDO = "Se registró un nuevo pedido.";
+	private static final String CONFIRMATION = "¿Está seguro que desea registrar el pedido?";
 
 	private PedidosPanelView view;
 	private PedidosController controller;
@@ -20,35 +20,36 @@ public class PedidosPresenter {
 		this.controller = controller;
 
 		view.setActionBuscar((a) -> onBuscar(a));
-		view.setActionRegistrarPedido((a) -> onRegistrar(a));
-		view.setActionCancelarPedido((a) -> onCancelar(a));
+		view.setActionRegistrarIngreso((a) -> onRegistrar(a));
 	}
 
 	private void onBuscar(ActionEvent a) {
-		String dniBuscado = view.getDniBusqueda();
 		Integer idSucursal = SessionServiceImpl.getInstance().getActiveSession().getIdSucursal();
 
-		if (dniBuscado.trim().isEmpty()) {
+		view.clear();
+		view.setData(controller.readAllPedidos(idSucursal));
+	}
+
+	private void onRegistrar(ActionEvent event) {
+		Integer idFila = view.getIdSelectedRow();
+		Integer idUsuario = SessionServiceImpl.getInstance().getActiveSession().getIdUsuario();
+
+		if (puedoRegistrarIngreso(idFila)) {
+			Integer idPedido = view.getIdSelectedPedido();
+
+			if (controller.registrarIngresoPedidoById(idPedido, idUsuario))
+				new MessageDialog().showMessages("Vehiculo Registrado!");
+			else
+				new MessageDialog().showMessages("No se puedo registrar el ingreso del Vehiculo!");
 			view.clear();
-			view.setData(controller.readAllPedidos(idSucursal));
-		} else {
-			boolean esDniConFormatoCorrecto = new StringValidator(dniBuscado).number("").validate().isEmpty();
-			if (esDniConFormatoCorrecto) {
-				Integer dniCliente = Integer.parseInt(dniBuscado);
-				view.clear();
-				view.setData(controller.readAllByDniCliente(dniCliente, idSucursal));
-			}
 		}
 	}
 
-	private Object onCancelar(ActionEvent a) {
-		// TODO Auto-generated method stub
-		return null;
+	private boolean puedoRegistrarIngreso(Integer idFila) {
+		return hayFilaSeleccionada(idFila) && new ConfirmationDialog(CONFIRMATION).open() == 0;
 	}
 
-	private Object onRegistrar(ActionEvent a) {
-		// TODO Auto-generated method stub
-		return null;
+	private boolean hayFilaSeleccionada(Integer idFila) {
+		return (idFila != -1);
 	}
-
 }

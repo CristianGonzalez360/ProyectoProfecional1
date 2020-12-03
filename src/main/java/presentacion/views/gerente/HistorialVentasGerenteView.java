@@ -1,5 +1,5 @@
 
-package presentacion.views.vendedor;
+package presentacion.views.gerente;
 
 import java.awt.FlowLayout;
 import java.awt.Label;
@@ -20,13 +20,13 @@ import com.toedter.calendar.JDateChooser;
 
 import dto.VentaVehiculoDTO;
 
-public class HistorialVentasView extends JPanel {
+public class HistorialVentasGerenteView extends JPanel {
 	private static final long serialVersionUID = -3152338359660079392L;
 
-	private static HistorialVentasView instance;
+	private static HistorialVentasGerenteView instance;
 
-	private final String[] columnasListadoDeVentas = new String[] { "Id venta", "Fecha Venta", "Fecha entrega",
-			"Id Vehiculo", "Id Cliente" };
+	private final String[] columnasListadoDeVentas = new String[] { "ID Venta", "Fecha de Venta", "Fecha de Entrega",
+			"ID Vehiculo", "ID Cliente" };
 
 	private DefaultTableModel listadoDeVentasModel;
 
@@ -42,21 +42,21 @@ public class HistorialVentasView extends JPanel {
 	private JDateChooser textVentasDesde;
 	private JDateChooser textVentasHasta;
 
-	public static HistorialVentasView getInstance() {
+	public static HistorialVentasGerenteView getInstance() {
 		if (instance == null) {
-			instance = new HistorialVentasView();
+			instance = new HistorialVentasGerenteView();
 		}
 		return instance;
 	}
 
-	public HistorialVentasView() {
+	public HistorialVentasGerenteView() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		panel_3 = new JPanel();
 		add(panel_3);
 		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		Label label = new Label("Ventas desde:");
+		Label label = new Label("Ventas Desde:");
 		panel_3.add(label);
 
 		textVentasDesde = new JDateChooser();
@@ -76,7 +76,7 @@ public class HistorialVentasView extends JPanel {
 		add(panel);
 
 		this.listadoDeVentasModel = new DefaultTableModel(null, this.columnasListadoDeVentas);
-		;
+		
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		scrollPaneVentas = new JScrollPane();
 		panel.add(scrollPaneVentas);
@@ -94,11 +94,11 @@ public class HistorialVentasView extends JPanel {
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
 		flowLayout.setVgap(15);
 		panel.add(panel_1);
+
 	}
 
 	public void cargarTabla(List<VentaVehiculoDTO> ventas) {
 		for (VentaVehiculoDTO venta : ventas) {
-
 			Object[] row = { venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getFechaEntregaReal(),
 					venta.getIdVehiculo(), venta.getIdCliente() };
 			listadoDeVentasModel.addRow(row);

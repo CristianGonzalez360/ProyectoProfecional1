@@ -22,7 +22,9 @@ public class NuevosVehiculosFormView extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable tablaVehiculos;
 	private DefaultTableModel modelo;
-	private static final String[] nombreColumnas = { "Marca", "Familia", "Linea", "Color", "Precio", "Quitar"};//columna checkbox editable
+	private static final String[] nombreColumnas = { "Marca", "Familia", "Linea", "Color", "Precio", "Quitar" };// columna
+																												// checkbox
+																												// editable
 	private JButton okButton;
 	private JButton cancelButton;
 	private static NuevosVehiculosFormView instance;
@@ -32,34 +34,36 @@ public class NuevosVehiculosFormView extends JDialog {
 			instance = new NuevosVehiculosFormView();
 		return instance;
 	}
-	
-	
+
 	public NuevosVehiculosFormView() {
-		setTitle("Nuevos vehiculos");
+		setTitle("Nuevos Vehiculos");
 		setBounds(100, 100, 800, 551);
-		setModal(true);//para hacer que la ventana se tenga que cerrar si o si
+		setModal(true);// para hacer que la ventana se tenga que cerrar si o si
 		getContentPane().setLayout(new BorderLayout());
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);//deshabilite el boton cerrar
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);// deshabilite el boton cerrar
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
-			modelo = new DefaultTableModel(null,nombreColumnas) {
+			modelo = new DefaultTableModel(null, nombreColumnas) {
 				public boolean isCellEditable(int row, int column) {
 					return column == 5;
 				}
-				
+
 				@SuppressWarnings({ "unchecked", "rawtypes" })
 				@Override
-			    public Class getColumnClass(int col) {
-					if(col == 5) return Boolean.class;
-					else return Object.class;
+				public Class getColumnClass(int col) {
+					if (col == 5)
+						return Boolean.class;
+					else
+						return Object.class;
 				}
 			};
-			
-			tablaVehiculos = new JTable(modelo);			
+
+			tablaVehiculos = new JTable(modelo);
 			JScrollPane scrollPane = new JScrollPane(tablaVehiculos);
-			contentPanel.add(scrollPane, BorderLayout.CENTER);}
+			contentPanel.add(scrollPane, BorderLayout.CENTER);
+		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -68,64 +72,58 @@ public class NuevosVehiculosFormView extends JDialog {
 				okButton = new JButton("Cargar vehiculos");
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);}
+				getRootPane().setDefaultButton(okButton);
+			}
 			{
-				cancelButton = new JButton("Cancelar carga");
+				cancelButton = new JButton("Cancelar");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
-	
+
 	public void cargarTabla(List<VehiculoDTO> vehiculos) {
 		for (VehiculoDTO vehiculo : vehiculos) {
-			Object[] row = {
-					vehiculo.getMarca(),
-					vehiculo.getFamilia(),
-					vehiculo.getLinea(),
-					vehiculo.getColor(),
-					vehiculo.getPrecioVenta()
-			};
+			Object[] row = { vehiculo.getMarca(), vehiculo.getFamilia(), vehiculo.getLinea(), vehiculo.getColor(),
+					vehiculo.getPrecioVenta() };
 			modelo.addRow(row);
 		}
 		TableColumn tc = tablaVehiculos.getColumnModel().getColumn(5);
 		tc.setCellEditor(tablaVehiculos.getDefaultEditor(Boolean.class));
 		tc.setCellRenderer(tablaVehiculos.getDefaultRenderer(Boolean.class));
 	}
-	
-	public void mostrar () {
+
+	public void mostrar() {
 		this.setVisible(true);
 	}
-	
-	public void cerrar () {
+
+	public void cerrar() {
 		this.setVisible(false);
 	}
-	
+
 	public void clear() {
 		modelo.setRowCount(0);
 		modelo.setColumnCount(0);
 		modelo.setColumnIdentifiers(nombreColumnas);
 	}
-	
+
 	public void setActionOnValidadCarga(ActionListener listener) {
 		this.okButton.addActionListener(listener);
 	}
-	
+
 	public void setActionOnCancelarCarga(ActionListener listener) {
 		this.cancelButton.addActionListener(listener);
 	}
-	
+
 	public List<Integer> getIdVehiculosNoAceptados() {
 		List<Integer> vehiculosId = new LinkedList<Integer>();
-		int rows = this.modelo.getRowCount();		
-		Integer vehiculoId;		
+		int rows = this.modelo.getRowCount();
 		for (int index = 0; index < rows; index++) {
-			vehiculoId = Integer.parseInt(modelo.getValueAt(index, 0).toString());
-			Boolean isOk = (Boolean) modelo.getValueAt(index, 6);
-			if(isOk!=null && isOk!=false) {//igual true quitar
-				vehiculosId.add(vehiculoId);
+			Boolean isOk = (Boolean) modelo.getValueAt(index, 5);
+			if (isOk != null && isOk != false) {// igual true quitar
+				vehiculosId.add(index);
 			}
 		}
 		return vehiculosId;
-	}	
+	}
 }
