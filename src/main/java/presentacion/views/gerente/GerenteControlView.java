@@ -55,7 +55,7 @@ public class GerenteControlView extends JInternalFrame {
 		tabbedPane.addTab("Entrega de Unidad", panelEntregaDeVehiculos);
 
 		historialVentasView = HistorialVentasGerenteView.getInstance();
-		tabbedPane.addTab("Historial Ventas", historialVentasView);
+		tabbedPane.addTab("Historial de Ventas", historialVentasView);
 	}
 
 	public void display() {

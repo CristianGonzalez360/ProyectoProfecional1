@@ -2,6 +2,7 @@ package presentacion.views.gerente;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.util.List;
 
@@ -11,9 +12,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import dto.temporal.PedidoDTO;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class PedidosPanelView extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -30,8 +34,13 @@ public class PedidosPanelView extends JPanel {
 
 	public PedidosPanelView() {
 		setLayout(new BorderLayout(0, 0));
+		setForeground(SystemColor.menu);
+		setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEFT, TitledBorder.TOP,
+				null, new Color(0, 0, 0)));
+		setBackground(SystemColor.menu);
+
 		JPanel panelNorte = new JPanel();
-		setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+//		setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		FlowLayout flowLayout = (FlowLayout) panelNorte.getLayout();
 		flowLayout.setHgap(20);
 		add(panelNorte, BorderLayout.NORTH);
