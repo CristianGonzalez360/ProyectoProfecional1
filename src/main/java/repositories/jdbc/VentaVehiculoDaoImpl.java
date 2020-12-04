@@ -12,7 +12,6 @@ import services.SessionServiceImpl;
 
 public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> implements VentaVehiculoDao {
 	
-
 	public static final String readFechas = "SELECT * FROM VentasVehiculos where fechaVentaVN BETWEEN ? and ?";
 	
 	public static final String readAll = "SELECT * FROM VentasVehiculos";
@@ -34,7 +33,7 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	
 	private static final String updateEntregaVehiculo = "UPDATE VentasVehiculos SET fechaEntregaReal = ? WHERE idVentaVehiculo = ?";
 
-	public static final String readVentaParaEntregar = "SELECT * FROM VentasVehiculos where fechaEntregaReal is null";
+	public static final String readVentaParaEntregar = "SELECT * FROM VentasVehiculos where fechaEntregaReal is null AND idSucursal = ?";
 
 	private static final String readByIdVendedor = "SELECT * FROM VentasVehiculos WHERE idUsuVentaVN = ? and fechaVentaVN BETWEEN ? and ?";
 	
@@ -163,7 +162,7 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 
 	@Override
 	public List<VentaVehiculoDTO> readVentasVehiculosParaEntregar() {
-		return getTemplate().query(readVentaParaEntregar).excecute(getMapper());
+		return getTemplate().query(readVentaParaEntregar).param(SessionServiceImpl.getInstance().getActiveSession().getIdSucursal()).excecute(getMapper());
 	}
 
 	@Override

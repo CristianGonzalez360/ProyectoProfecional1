@@ -35,7 +35,7 @@ public class EntregaVehiculosVentaPresenter {
 		this.clientesController = clientesController;
 		
 		this.ventaSeleccionada = -1;
-		mostrarVentas();
+		//mostrarVentas();
 	}
 
 	private void onRegistrar(ActionEvent a) {

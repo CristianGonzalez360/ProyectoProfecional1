@@ -103,7 +103,8 @@ public class FacturaVentaVehiculoReport {
 	}
 	public JRDataSource getFichaTecnicaVehiculo() {
 		List<FichaTecnicaVehiculoDTO> fichaTecnicaVehiculo = new ArrayList<>();
-		fichaTecnicaVehiculo.add(this.fichaTecnicaVehiculo);
+		if(this.fichaTecnicaVehiculo!= null)
+			fichaTecnicaVehiculo.add(this.fichaTecnicaVehiculo);
 		return new JRBeanCollectionDataSource(fichaTecnicaVehiculo);
 	}
 	public void setFichaTecnicaVehiculo(FichaTecnicaVehiculoDTO fichaTecnicaVehiculo) {
