@@ -18,15 +18,15 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
-import dto.VentaVehiculoDTO;
+import dto.temporal.VentaDTO;
 
 public class HistorialVentasGerenteView extends JPanel {
 	private static final long serialVersionUID = -3152338359660079392L;
 
 	private static HistorialVentasGerenteView instance;
 
-	private final String[] columnasListadoDeVentas = new String[] { "ID Venta", "Fecha de Venta", "Fecha de Entrega",
-			"ID Vehiculo", "ID Cliente" };
+	private final String[] columnasListadoDeVentas = new String[] { "ID. VENTA", "FECHA DE VENTA", "FECHA DE ENTREGA",
+			"MARCA", "MODELO", "NOMBRE DE CLIENTE", "PRECIO DE VENTA", "SUCURSAL" };
 
 	private DefaultTableModel listadoDeVentasModel;
 
@@ -76,7 +76,7 @@ public class HistorialVentasGerenteView extends JPanel {
 		add(panel);
 
 		this.listadoDeVentasModel = new DefaultTableModel(null, this.columnasListadoDeVentas);
-		
+
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		scrollPaneVentas = new JScrollPane();
 		panel.add(scrollPaneVentas);
@@ -97,10 +97,11 @@ public class HistorialVentasGerenteView extends JPanel {
 
 	}
 
-	public void cargarTabla(List<VentaVehiculoDTO> ventas) {
-		for (VentaVehiculoDTO venta : ventas) {
-			Object[] row = { venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getFechaEntregaReal(),
-					venta.getIdVehiculo(), venta.getIdCliente() };
+	public void cargarTabla(List<VentaDTO> ventas) {
+		for (VentaDTO venta : ventas) {
+			Object[] row = { venta.getIdVenta(), venta.getFechaDeVenta(), venta.getFechaDeEntrega(),
+					venta.getMarcaVehiculo(), venta.getModeloVehiculo(), venta.getNombreCliente(),
+					venta.getPrecioVenta().toString(), venta.getSucursal() };
 			listadoDeVentasModel.addRow(row);
 		}
 	}

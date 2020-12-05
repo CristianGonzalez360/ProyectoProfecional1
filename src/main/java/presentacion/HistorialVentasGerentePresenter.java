@@ -2,6 +2,7 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.Date;
 
 import business_logic.VentasVehiculosController;
 import presentacion.views.gerente.HistorialVentasGerenteView;
@@ -19,8 +20,14 @@ public class HistorialVentasGerentePresenter {
 	}
 
 	private void onCargar(ActionEvent a) {
+		Date desde = view.getVentaDesde();
+		Date hasta = view.getVentaHasta();
+		
+		if(desde == null || hasta == null)
+			return;
+		
 		this.view.clear();
-		this.view.cargarTabla(this.ventasVehiculosController.readFechas(view.getVentaDesde(), view.getVentaHasta()));
-
+		this.view.cargarTabla(ventasVehiculosController.readVentas(desde, hasta));
 	}
+
 }
