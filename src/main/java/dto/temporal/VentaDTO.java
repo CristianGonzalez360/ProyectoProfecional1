@@ -10,6 +10,7 @@ public class VentaDTO {
 	private String modeloVehiculo;
 	private String nombreCliente;
 	private Double precioVenta;
+	private Double comisionVenta;
 	private String sucursal;
 
 	VentaDTO() {
@@ -17,7 +18,7 @@ public class VentaDTO {
 	}
 
 	public VentaDTO(Integer idVenta, Date fechaDeVenta, Date fechaDeEntrega, String marcaVehiculo,
-			String modeloVehiculo, String nombreCliente, Double precioVenta, String sucursal) {
+			String modeloVehiculo, String nombreCliente, Double precioVenta, Double comisionVenta, String sucursal) {
 		super();
 		this.idVenta = idVenta;
 		this.fechaDeVenta = fechaDeVenta;
@@ -26,6 +27,7 @@ public class VentaDTO {
 		this.modeloVehiculo = modeloVehiculo;
 		this.nombreCliente = nombreCliente;
 		this.precioVenta = precioVenta;
+		this.comisionVenta = comisionVenta;
 		this.sucursal = sucursal;
 	}
 
@@ -83,6 +85,14 @@ public class VentaDTO {
 
 	public void setPrecioVenta(Double previoVenta) {
 		this.precioVenta = previoVenta;
+	}
+
+	public Double getComisionVenta() {
+		return comisionVenta;
+	}
+
+	public void setComisionVenta(Double comisionVenta) {
+		this.comisionVenta = comisionVenta;
 	}
 
 	public String getSucursal() {

@@ -97,14 +97,6 @@ public class HistorialVentasGerenteView extends JPanel {
 
 	}
 
-//	public void cargarTabla(List<VentaVehiculoDTO> ventas) {
-//		for (VentaVehiculoDTO venta : ventas) {
-//			Object[] row = { venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getFechaEntregaReal(),
-//					venta.getIdVehiculo(), venta.getIdCliente() };
-//			listadoDeVentasModel.addRow(row);
-//		}
-//	}
-
 	public void cargarTabla(List<VentaDTO> ventas) {
 		for (VentaDTO venta : ventas) {
 			Object[] row = { venta.getIdVenta(), venta.getFechaDeVenta(), venta.getFechaDeEntrega(),

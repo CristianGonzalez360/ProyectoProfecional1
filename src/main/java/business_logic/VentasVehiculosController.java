@@ -162,6 +162,16 @@ public class VentasVehiculosController {
 		return daos.makeVentaVehiculoDao().readByIdVehiculo(idVehiculo);
 	}
 
+	public List<VentaDTO> readVentas(Integer idUsuario, Date desde, Date hasta) {
+		List<VentaDTO> ventas = new LinkedList<>();
+
+		for (VentaVehiculoDTO venta : readByIdVendedor(idUsuario, desde, hasta)) {
+			if (venta != null)
+				ventas.add(armarVenta(venta));
+		}
+		return ventas;
+	}
+
 	public List<VentaDTO> readVentas(Date desde, Date hasta) {
 		List<VentaDTO> ventas = new LinkedList<>();
 
@@ -177,6 +187,7 @@ public class VentasVehiculosController {
 		Date fechaDeVenta = venta.getFechaVentaVN();
 		Date fechaDeEntrega = venta.getFechaEntregaReal();
 		Double precioVenta = venta.getPrecioVenta();
+		Double comisionVenta = venta.getComisionCobrada();
 
 		VehiculoDTO vehiculo = datosVehiculo(venta.getIdVehiculo());
 		ClienteDTO cliente = datosCliente(venta.getIdCliente());
@@ -188,7 +199,7 @@ public class VentasVehiculosController {
 		String calleSucursal = sucursal.getCalle() + " " + sucursal.getAltura();
 
 		return new VentaDTO(idVenta, fechaDeVenta, fechaDeEntrega, marcaVehiculo, modeloVehiculo, nombreCliente,
-				precioVenta, calleSucursal);
+				precioVenta, comisionVenta, calleSucursal);
 	}
 
 	private SucursalDTO datosSucursal(Integer idSucursal) {
