@@ -37,7 +37,6 @@ public class RegistroPedidoPresenter {
 		this.pedidosController = pedidosController;
 		
 		this.ventaSeleccionada = -1;
-		//mostrarVentas();
 	}
 
 	private void onRegistrar(ActionEvent a) {

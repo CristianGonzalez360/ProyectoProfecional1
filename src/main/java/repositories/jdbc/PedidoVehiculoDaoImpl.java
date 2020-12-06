@@ -23,7 +23,6 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 
 	private static final String updateIngreso = "UPDATE PedidoVehiculo SET fechaIngreso = ?, idUsuIngreso = ? WHERE idPedidoVehiculo = ?";
 	
-	
 	private static final String readByIdVentaIngreso = readAll + " WHERE idVentaVehiculo = ? and fechaIngreso is not null";
 
 	public PedidoVehiculoDaoImpl(Connection connection) {

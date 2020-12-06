@@ -15,25 +15,12 @@ import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import dto.temporal.VentaDTO;
+import dto.temporal.VehiculoParaEntregar;
 import presentacion.views.utils.FacturaVentaVehiculoReport;
 import repositories.DaosFactory;
 import services.SessionServiceImpl;
 
 public class VentasVehiculosController {
-
-	private static final String FORBIDDEN_MODALIDAD = "Para cerrar una venta es necesario escoger una modalidad de venta.";
-
-	private static final String FORBIDDEN_VEHICULO = "Para cerrar una venta es necesario indicar un vehículo.";
-
-	private static final String FORBIDDEN_CLIENTE = "Para cerrar una venta es necesario indicar el cliente.";
-
-	private static final int PORCENTAJE_COMISION = 3;
-
-	private static final int IVA = 21;
-
-	private static final String PAIS_SUCURSALES = "Argentina";
-
-	private static final String FORBIDDEN_VENTA = "Para entregar una venta es necesario seleccionarla.";
 
 	private DaosFactory daos;
 
@@ -115,22 +102,40 @@ public class VentasVehiculosController {
 		return sucursal.getPais();
 	}
 
-	public void registrarEntrega(Integer idVentaVehiculo) {
-		if (idVentaVehiculo == null) {
-			throw new ForbiddenException(FORBIDDEN_VENTA);
-		} else {
-			VentaVehiculoDTO venta = daos.makeVentaVehiculoDao().readByID(idVentaVehiculo);
-			venta.setFechaEntregaReal(new Date());
-			daos.makeVentaVehiculoDao().update(venta);
+	public void registrarEntrega(VehiculoParaEntregar ventaParaEntregar) throws ForbiddenException{
+		if(ventaParaEntregar == null) throw new ForbiddenException("Para entregar una venta es necesario seleccionarla.");
+		if(ventaParaEntregar.getVehiculo().getIdSucursal() == null) {
+			if(!ventaParaEntregar.isPedido()) throw new ForbiddenException("El vehículo no fue pedido.");
+			if(!ventaParaEntregar.isIngresado()) throw new ForbiddenException("El vehículo No fue ingresado a la consecionaria.");
 		}
+		else {
+			if (ventaParaEntregar.getSucursal().getIdSucursal() != SessionServiceImpl.getInstance().getActiveSession().getIdSucursal()) 
+				throw new ForbiddenException("El vehículo no esta en esta sucursal");
+		}
+		VentaVehiculoDTO venta = ventaParaEntregar.getVenta();
+		venta.setFechaEntregaReal(new Date());
+		daos.makeVentaVehiculoDao().update(venta);
+		
 	}
 
-	public List<VentaVehiculoDTO> readVentasVehiculosParaEntregar() {
-		List<VentaVehiculoDTO> ret = daos.makeVentaVehiculoDao().readVentasVehiculosParaEntregar();
-		for (VentaVehiculoDTO venta : ret) {
-			venta.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
-			venta.setIngresado(daos.makePedidoVehiculoDao().estaIngresado(venta.getIdVentaVehiculo()));
+	public List<VehiculoParaEntregar> readVentasVehiculosParaEntregar() {
+		List<VentaVehiculoDTO> ventas = daos.makeVentaVehiculoDao().readVentasVehiculosParaEntregar();
+		List<VehiculoParaEntregar> ret = new LinkedList<>();
+		for (VentaVehiculoDTO venta : ventas) {
+			ret.add(makeVentaParaEntregar(venta));
 		}
+		return ret;
+	}
+	
+	private VehiculoParaEntregar makeVentaParaEntregar(VentaVehiculoDTO venta) {
+		VehiculoParaEntregar ret =  new VehiculoParaEntregar();
+		ret.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
+		ret.setIngresado(daos.makePedidoVehiculoDao().estaIngresado(venta.getIdVentaVehiculo()));
+		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(venta.getIdVehiculo());
+		ret.setVehiculo(vehiculo);
+		if(vehiculo.getIdSucursal() != null)
+			ret.setSucursal(daos.makeSucursalesDao().readByID(vehiculo.getIdSucursal()));
+		ret.setVenta(venta);
 		return ret;
 	}
 

@@ -42,6 +42,8 @@ public class VentaVehiculoDTO {
 	
 	private boolean ingresado;
 	
+	private VehiculoDTO vehiculo;
+	
 	public boolean isIngresado() {
 		return ingresado;
 	}
@@ -181,5 +183,13 @@ public class VentaVehiculoDTO {
 
 	public void setPedido(boolean pedido) {
 		this.pedido = pedido;
+	}
+
+	public VehiculoDTO getVehiculo() {
+		return vehiculo;
+	}
+
+	public void setVehiculo(VehiculoDTO vehiculo) {
+		this.vehiculo = vehiculo;
 	}
 }
