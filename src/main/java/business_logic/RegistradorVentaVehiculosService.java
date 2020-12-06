@@ -30,6 +30,7 @@ public class RegistradorVentaVehiculosService {
 		VentaVehiculoDTO venta = makeVentaDTO(idCliente, vehiculo, modalidadVenta);
 		if(requiereRegistrarPrimero(vehiculo)) {
 			VehiculoDTO target = makeVehiculoNuevoParaRegistrar(vehiculo);
+			vehiculo.setCodigo(target.getIdVehiculo()+"");
 			venta.setIdVehiculo(target.getIdVehiculo());
 		}
 		daos.makeVentaVehiculoDao().insert(venta);
