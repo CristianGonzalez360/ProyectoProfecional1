@@ -1,5 +1,6 @@
 package business_logic;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,10 +34,11 @@ public class VentasVehiculosController {
 		return daos.makeVehiculoDao().readByID(codigoVehiculo);
 	}
 
-	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles() {
-		List<VentaVehiculoDTO> ret = daos.makeVentaVehiculoDao().readVentasVehiculosNoDisponibles();
-		for (VentaVehiculoDTO venta : ret) {
-			venta.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
+	public List<VehiculoParaEntregar> readVentasVehiculosNoDisponibles() {
+		List<VentaVehiculoDTO> aux = daos.makeVentaVehiculoDao().readVentasVehiculosNoDisponibles();
+		List<VehiculoParaEntregar> ret = new ArrayList<VehiculoParaEntregar>();
+		for (VentaVehiculoDTO venta : aux) {
+			ret.add(makeVentaParaEntregar(venta));
 		}
 		return ret;
 	}

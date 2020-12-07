@@ -10,6 +10,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import dto.VentaVehiculoDTO;
+import dto.temporal.VehiculoParaEntregar;
 
 public class PanelVentas extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -32,10 +33,10 @@ public class PanelVentas extends JPanel {
 		tablaVentas.setModel(modelo);
 	}
 
-	public void setData(List<VentaVehiculoDTO> ventas) {
+	public void setData(List<VehiculoParaEntregar> ventas) {
 		modelo.setRowCount(0);
-		for (VentaVehiculoDTO venta : ventas) {
-			Object[] row = { venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getPrecioVenta(),
+		for (VehiculoParaEntregar venta : ventas) {
+			Object[] row = { venta.getVenta().getIdVentaVehiculo(), venta.getVenta().getFechaVentaVN(), venta.getVenta().getPrecioVenta(),
 					venta.isPedido() ? "PEDIDO" : "PENDIENTE" };
 			modelo.addRow(row);
 		}

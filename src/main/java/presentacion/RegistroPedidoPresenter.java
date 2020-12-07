@@ -12,6 +12,7 @@ import business_logic.VentasVehiculosController;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.VentaVehiculoDTO;
+import dto.temporal.VehiculoParaEntregar;
 import presentacion.views.gerente.PanelRegistroPedido;
 import presentacion.views.utils.MessageDialog;
 
@@ -19,7 +20,7 @@ public class RegistroPedidoPresenter {
 
 	private PanelRegistroPedido view;
 	
-	private List<VentaVehiculoDTO> ventas;
+	private List<VehiculoParaEntregar> ventas;
 	private int ventaSeleccionada;
 	
 	private VentasVehiculosController ventasVehiculosController;
@@ -49,7 +50,7 @@ public class RegistroPedidoPresenter {
 		}
 		
 		if(errors.isEmpty()) { 
-			pedidosController.save(ventas.get(ventaSeleccionada).getIdVentaVehiculo());
+			pedidosController.save(ventas.get(ventaSeleccionada).getVenta().getIdVentaVehiculo());
 			onRefrescar(a);
 			new MessageDialog().showMessages("Pedido Registrado");
 		} else {
@@ -66,9 +67,9 @@ public class RegistroPedidoPresenter {
 	private void onSeleccionarVenta(ListSelectionEvent a) {
 		this.ventaSeleccionada = view.getFilaSeleciconada();
 		if(ventaSeleccionada != -1) { 
-			CaracteristicaVehiculoDTO vehiculo = ventasVehiculosController.readCaracteristicaVehiculoByIdVehiculo(ventas.get(ventaSeleccionada).getIdVehiculo());
+			CaracteristicaVehiculoDTO vehiculo = ventasVehiculosController.readCaracteristicaVehiculoByIdVehiculo(ventas.get(ventaSeleccionada).getVehiculo().getIdVehiculo());
 			this.view.setdata(vehiculo);
-			ClienteDTO cliente = clientesController.readById(ventas.get(ventaSeleccionada).getIdCliente());
+			ClienteDTO cliente = clientesController.readById(ventas.get(ventaSeleccionada).getVenta().getIdCliente());
 			this.view.setData(cliente);
 		}
 	}

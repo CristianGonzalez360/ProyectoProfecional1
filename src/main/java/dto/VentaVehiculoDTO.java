@@ -38,20 +38,6 @@ public class VentaVehiculoDTO {
 	
 	private Integer idSucursalVenta;
 	
-	private boolean pedido;
-	
-	private boolean ingresado;
-	
-	private VehiculoDTO vehiculo;
-	
-	public boolean isIngresado() {
-		return ingresado;
-	}
-
-	public void setIngresado(boolean ingresado) {
-		this.ingresado = ingresado;
-	}
-
 	public VentaVehiculoDTO() {
 	}
 	
@@ -175,21 +161,5 @@ public class VentaVehiculoDTO {
 				+ financiera + ", nroCuotas=" + nroCuotas + ", montoCuota=" + montoCuota + ", idVehiculo=" + idVehiculo
 				+ ", idCliente=" + idCliente + ", idUsuEntrega=" + idUsuEntrega + ", idSucursalVenta=" + idSucursalVenta
 				+ "]";
-	}
-
-	public boolean isPedido() {
-		return pedido;
-	}
-
-	public void setPedido(boolean pedido) {
-		this.pedido = pedido;
-	}
-
-	public VehiculoDTO getVehiculo() {
-		return vehiculo;
-	}
-
-	public void setVehiculo(VehiculoDTO vehiculo) {
-		this.vehiculo = vehiculo;
 	}
 }
