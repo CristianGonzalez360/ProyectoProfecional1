@@ -16,7 +16,6 @@ import javax.swing.event.ListSelectionListener;
 
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
-import dto.VentaVehiculoDTO;
 import dto.temporal.VehiculoParaEntregar;
 import presentacion.views.supervisor.ClientePanelView;
 import presentacion.views.vendedor.CaracteristicaDeVehiculoPanel;

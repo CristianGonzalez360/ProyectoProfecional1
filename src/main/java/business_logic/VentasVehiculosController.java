@@ -132,6 +132,7 @@ public class VentasVehiculosController {
 	private VehiculoParaEntregar makeVentaParaEntregar(VentaVehiculoDTO venta) {
 		VehiculoParaEntregar ret =  new VehiculoParaEntregar();
 		ret.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
+		ret.setPedido(daos.makePedidoVehiculoDao().readByIdVenta(venta.getIdVentaVehiculo()));
 		ret.setIngresado(daos.makePedidoVehiculoDao().estaIngresado(venta.getIdVentaVehiculo()));
 		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(venta.getIdVehiculo());
 		ret.setVehiculo(vehiculo);

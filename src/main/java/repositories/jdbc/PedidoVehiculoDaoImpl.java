@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import dto.PedidoVehiculoDTO;
+import dto.temporal.PedidoDTO;
 import repositories.PedidoVehiculoDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
@@ -97,6 +98,12 @@ public class PedidoVehiculoDaoImpl extends GenericJdbcDao<PedidoVehiculoDTO> imp
 				return pedido;
 			}
 		};
+	}
+	
+	@Override
+	public PedidoVehiculoDTO readByIdVenta(Integer idVentaVehiculo) {
+		List<PedidoVehiculoDTO> ret = getTemplate().query(readByIdVenta).param(idVentaVehiculo).excecute(getMapper());
+		return ret.isEmpty() ? null : ret.get(0);
 	}
 
 	@Override

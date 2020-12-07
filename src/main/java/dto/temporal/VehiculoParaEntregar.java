@@ -1,5 +1,6 @@
 package dto.temporal;
 
+import dto.PedidoVehiculoDTO;
 import dto.SucursalDTO;
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
@@ -8,9 +9,10 @@ public class VehiculoParaEntregar {
 
 	private VehiculoDTO vehiculo;
 	private SucursalDTO sucursal;
-	private boolean pedido;
+	private boolean estaPedido;
 	private boolean ingresado;
 	private VentaVehiculoDTO venta;
+	private PedidoVehiculoDTO pedido;
 	
 	public VehiculoParaEntregar() {
 		// TODO Auto-generated constructor stub
@@ -29,10 +31,10 @@ public class VehiculoParaEntregar {
 		this.sucursal = sucursal;
 	}
 	public boolean isPedido() {
-		return pedido;
+		return estaPedido;
 	}
 	public void setPedido(boolean pedido) {
-		this.pedido = pedido;
+		this.estaPedido = pedido;
 	}
 	public boolean isIngresado() {
 		return ingresado;
@@ -45,5 +47,13 @@ public class VehiculoParaEntregar {
 	}
 	public void setVenta(VentaVehiculoDTO venta) {
 		this.venta = venta;
+	}
+
+	public PedidoVehiculoDTO getPedido() {
+		return this.pedido;
+	}
+
+	public void setPedido(PedidoVehiculoDTO pedido) {
+		this.pedido = pedido;
 	}
 }
