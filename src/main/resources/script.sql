@@ -53,8 +53,9 @@ CREATE TABLE Turnos (
    fechaAltaTurno DATE NOT NULL,
    fechProgramadaTurno DATE NOT NULL,
    nombreCliente VARCHAR (40) NOT NULL,
+   apellidoCliente VARCHAR (40) NOT NULL,
    dniCliente INT NOT NULL,
-    telefonoCliente VARCHAR(40),
+   telefonoCliente VARCHAR(40),
    emailCliente VARCHAR(40),
    PRIMARY KEY (idTurno)
 );

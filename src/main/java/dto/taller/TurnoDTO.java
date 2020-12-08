@@ -22,9 +22,11 @@ public class TurnoDTO {
 	private Date fechaProgramada;
 
 	private String nombreCliente;
-	
+
+	private String apellidoCliente;
+
 	private String telefonoCliente;
-	
+
 	private String emailCliente;
 
 	public TurnoDTO() {
@@ -32,7 +34,7 @@ public class TurnoDTO {
 	}
 
 	public TurnoDTO(Integer dniCliente, Date fechaAlta, Date fechaCancelado, Date fechaProgramada, String nombreCliente,
-			String telefonoCliente, String emailCliente) {
+			String apellidoCliente, String telefonoCliente, String emailCliente) {
 		super();
 		this.idCliente = 0;
 		this.idTurno = 0;
@@ -41,6 +43,7 @@ public class TurnoDTO {
 		this.fechaCancelado = fechaCancelado;
 		this.fechaProgramada = fechaProgramada;
 		this.nombreCliente = nombreCliente;
+		this.apellidoCliente = apellidoCliente;
 		this.telefonoCliente = telefonoCliente;
 		this.emailCliente = emailCliente;
 	}
@@ -51,7 +54,8 @@ public class TurnoDTO {
 		ret.setDniCliente(13231);
 		ret.setFechaAlta(new Date());
 		ret.setFechaProgramada(new Date());
-		ret.setNombreCliente("Susan Doe");
+		ret.setNombreCliente("Susan");
+		ret.setApellidoCliente("Doe");
 		ret.setTelefonoCliente("1155556666");
 		ret.setEmailCliente("ejemplo.a1@gmail.com");
 		return ret;
@@ -64,7 +68,8 @@ public class TurnoDTO {
 		ret.setDniCliente(13231);
 		ret.setFechaAlta(new Date());
 		ret.setFechaProgramada(new Date());
-		ret.setNombreCliente("Susan Doe");
+		ret.setNombreCliente("Susan");
+		ret.setApellidoCliente("Doe");
 		ret.setTelefonoCliente("1155556666");
 		ret.setEmailCliente("ejemplo.a1@gmail.com");
 		return ret;
@@ -73,6 +78,8 @@ public class TurnoDTO {
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
 		errors.addAll(new StringValidator(nombreCliente).notBlank("El Nombre es obligatorio.")
+				.max(40, "Max 40 caracteres para el Nombre.").validate());
+		errors.addAll(new StringValidator(nombreCliente).notBlank("El Apellido es obligatorio.")
 				.max(40, "Max 40 caracteres para el Nombre.").validate());
 		errors.addAll(new StringValidator(String.valueOf(dniCliente)).notBlank("El DNI es obligatorio.")
 				.regex("Debe ser un DNI correcto", Patterns.DNI).validate());
@@ -127,12 +134,20 @@ public class TurnoDTO {
 		this.nombreCliente = nombreCliente;
 	}
 
+	public String getApellidoCliente() {
+		return apellidoCliente;
+	}
+
+	public void setApellidoCliente(String apellidoCliente) {
+		this.apellidoCliente = apellidoCliente;
+	}
+
 	@Override
 	public String toString() {
 		return "TurnoDTO [idTurno=" + idTurno + ", idCliente=" + idCliente + ", dniCliente=" + dniCliente
 				+ ", fechaAlta=" + fechaAlta + ", fechaCancelado=" + fechaCancelado + ", fechaProgramada="
-				+ fechaProgramada + ", nombreCliente=" + nombreCliente + ", telefonoCliente=" + telefonoCliente
-				+ ", emailCliente=" + emailCliente + "]";
+				+ fechaProgramada + ", nombreCliente=" + nombreCliente + ", apellidoCliente=" + apellidoCliente
+				+ ", telefonoCliente=" + telefonoCliente + ", emailCliente=" + emailCliente + "]";
 	}
 
 	public void setDniCliente(Integer dni) {

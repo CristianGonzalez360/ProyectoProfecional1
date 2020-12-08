@@ -25,7 +25,7 @@ public class TurnosPanelView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final String[] COLUMNAS_TURNOS = new String[] { "NRO. TURNO", "NOMBRE DE CLIENTE", "DNI",
+	private static final String[] COLUMNAS_TURNOS = new String[] { "NRO. TURNO", "NOMBRE", "APELLIDO", "DNI",
 			"FECHA DE ALTA", "FECHA PROGRAMADA", "TELEFONO", "EMAIL" };
 
 	private JTextField textFieldDni;
@@ -79,7 +79,7 @@ public class TurnosPanelView extends JPanel {
 
 	public void setData(List<TurnoDTO> turnos) {
 		for (TurnoDTO turno : turnos) {
-			Object[] row = { turno.getIdTurno().toString(), turno.getNombreCliente(), turno.getDniCliente(),
+			Object[] row = { turno.getIdTurno().toString(), turno.getNombreCliente(), turno.getApellidoCliente(), turno.getDniCliente(),
 					turno.getFechaAlta().toString(), turno.getFechaProgramada().toString(), turno.getTelefonoCliente(),
 					turno.getEmailCliente() };
 			tableModelTurnos.addRow(row);
@@ -92,9 +92,10 @@ public class TurnosPanelView extends JPanel {
 			TurnoDTO ret = new TurnoDTO();
 			ret.setIdTurno(Integer.parseInt(tableModelTurnos.getValueAt(row, 0).toString()));
 			ret.setNombreCliente(tableModelTurnos.getValueAt(row, 1).toString());
-			ret.setDniCliente(Integer.parseInt(tableModelTurnos.getValueAt(row, 2).toString()));
-			ret.setFechaAlta(parse(tableModelTurnos.getValueAt(row, 3).toString()));
-			ret.setFechaProgramada(parse(tableModelTurnos.getValueAt(row, 4).toString()));
+			ret.setApellidoCliente(tableModelTurnos.getValueAt(row, 2).toString());
+			ret.setDniCliente(Integer.parseInt(tableModelTurnos.getValueAt(row, 3).toString()));
+			ret.setFechaAlta(parse(tableModelTurnos.getValueAt(row, 4).toString()));
+			ret.setFechaProgramada(parse(tableModelTurnos.getValueAt(row, 5).toString()));
 			return ret;
 		}
 		return null;

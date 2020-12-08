@@ -23,7 +23,7 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 
 	private static final String readAllByDNI = "SELECT * FROM Turnos t WHERE ((t.fechProgramadaTurno >= CURRENT_DATE()) AND (t.fechaCanceladoTurno IS NULL)) AND t.dniCliente = ?";
 
-	private static final String insert = "INSERT INTO Turnos (idCliente, fechaCanceladoTurno, fechaAltaTurno, fechProgramadaTurno, nombreCliente, dniCliente, telefonoCliente, emailCliente) VALUES (?,?,?,?,?,?,?,?)";
+	private static final String insert = "INSERT INTO Turnos (idCliente, fechaCanceladoTurno, fechaAltaTurno, fechProgramadaTurno, nombreCliente, apellidoCliente, dniCliente, telefonoCliente, emailCliente) VALUES (?,?,?,?,?,?,?,?,?)";
 
 	public TurnosDaoImpl(Connection connection) {
 		super(connection);
@@ -39,11 +39,16 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 
 	@Override
 	public boolean insert(TurnoDTO entity) {
-		return getTemplate().query(insert).param(entity.getIdCliente())
+		return getTemplate().query(insert)
+				.param(entity.getIdCliente())
 				.param(entity.getFechaCancelado() == null ? new NullObject() : entity.getFechaCancelado())
-				.param(entity.getFechaAlta()).param(entity.getFechaProgramada()).param(entity.getNombreCliente())
-				.param(entity.getDniCliente()).param(entity.getTelefonoCliente()).param(entity.getEmailCliente())
-				.excecute();
+				.param(entity.getFechaAlta())
+				.param(entity.getFechaProgramada())
+				.param(entity.getNombreCliente())
+				.param(entity.getApellidoCliente())
+				.param(entity.getDniCliente())
+				.param(entity.getTelefonoCliente())
+				.param(entity.getEmailCliente()).excecute();
 	}
 
 	@Override
@@ -78,7 +83,7 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 	public List<TurnoDTO> readAllByDNI(Integer dni) {
 		return getTemplate().query(readAllByDNI).param(dni).excecute(getMapper());
 	}
-	
+
 	@Override
 	protected Mapper<TurnoDTO> getMapper() {
 		return new Mapper<TurnoDTO>() {
@@ -92,9 +97,10 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 				turno.setFechaAlta((Date) obj[3]);
 				turno.setFechaProgramada((Date) obj[4]);
 				turno.setNombreCliente((String) obj[5]);
-				turno.setDniCliente((Integer) obj[6]);
-				turno.setTelefonoCliente((String) obj[7]);
-				turno.setEmailCliente((String) obj[8]);
+				turno.setApellidoCliente((String) obj[6]);
+				turno.setDniCliente((Integer) obj[7]);
+				turno.setTelefonoCliente((String) obj[8]);
+				turno.setEmailCliente((String) obj[9]);
 				return turno;
 			}
 		};

@@ -18,7 +18,6 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
-import dto.VentaVehiculoDTO;
 import dto.temporal.VentaDTO;
 
 public class HistorialVentasView extends JPanel {
