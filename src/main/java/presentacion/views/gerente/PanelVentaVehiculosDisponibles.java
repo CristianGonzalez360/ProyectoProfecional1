@@ -10,14 +10,16 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import dto.VentaVehiculoDTO;
+import dto.temporal.VehiculoParaEntregar;
 
 public class PanelVentaVehiculosDisponibles extends JPanel {
 	private static final long serialVersionUID = 1L;
-
+	private static final int PAPELES = 5;
+	
 	private JTable tablaVentas;
 	private DefaultTableModel modelo;
 	private static final String[] columnas = { "Nro.", "Fecha de venta", "Estado del pedido", "Estado del vehículo",
-			"Documentacion" };
+			"Sucursal", "Documentacion" };
 
 	public PanelVentaVehiculosDisponibles() {
 		setLayout(new BorderLayout(0, 0));
@@ -30,7 +32,7 @@ public class PanelVentaVehiculosDisponibles extends JPanel {
 
 			@Override
 			public Class<?> getColumnClass(int column) {
-				if (column == 4) {
+				if (column == PAPELES) {
 					return Boolean.class;
 				}
 				return super.getColumnClass(column);
@@ -44,15 +46,17 @@ public class PanelVentaVehiculosDisponibles extends JPanel {
 	}
 
 	public boolean papelesEnRegla(int idFila) {
-		return (boolean) tablaVentas.getValueAt(idFila, 4);
+		return (boolean) tablaVentas.getValueAt(idFila, PAPELES);
 	}
 
-	public void setData(List<VentaVehiculoDTO> ventas) {
+	public void setData(List<VehiculoParaEntregar> ventas) {
 		modelo.setRowCount(0);
-		for (VentaVehiculoDTO venta : ventas) {
-			Object[] row = { venta.getIdVentaVehiculo(), venta.getFechaVentaVN(),
-					venta.isPedido() ? "PEDIDO" : "PENDIENTE", venta.isIngresado() ? "INGRESADO" : "NO INGRESADO",
-					false };
+		for (VehiculoParaEntregar venta : ventas) {
+			Object[] row = { venta.getVenta().getIdVentaVehiculo(), venta.getVenta().getFechaVentaVN(),
+					venta.getSucursal() == null? (venta.isPedido() ? "PEDIDO" : "PENDIENTE") : "-", 
+							venta.getSucursal() == null? (venta.isIngresado() ? "DISPONIBLE" : "NO INGRESADO" ): "DISPONIBLE",
+							venta.getSucursal() != null? venta.getSucursal().getIdSucursal() + " " + venta.getSucursal().getLocalidad() : "",
+							false };
 			modelo.addRow(row);
 		}
 	}

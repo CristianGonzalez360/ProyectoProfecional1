@@ -12,18 +12,18 @@ import services.SessionServiceImpl;
 
 public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> implements VentaVehiculoDao {
 	
-	public static final String readFechas = "SELECT * FROM VentasVehiculos where fechaVentaVN BETWEEN ? and ?";
+	private static final String readFechas = "SELECT * FROM VentasVehiculos where fechaVentaVN BETWEEN ? and ?";
 	
-	public static final String readAll = "SELECT * FROM VentasVehiculos";
+	private static final String readAll = "SELECT * FROM VentasVehiculos";
 
-	public static final String readByIdVehiculoVendido = "SELECT * FROM VentasVehiculos WHERE idVehiculo = ?";
+	private static final String readByIdVehiculoVendido = "SELECT * FROM VentasVehiculos WHERE idVehiculo = ?";
 	
-	public static final String insert = 
+	private static final String insert = 
 			"INSERT INTO VentasVehiculos(idUsuVentaVN,idUsuPedido,idUsuLlegada,idPagoVentaVN,fechaVentaVN"
 			+ ",fechaEntregaReal,fabricante,comisionCobrada,precioVenta,financiera,nroCuotas,montoCuota"
 			+ ",idVehiculo,idCliente,idUsuEntrega,idSucursal) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
-	public static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos "
+	private static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos "
 			+ "WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo "
 			+ "AND Vehiculos.idSucursal IS null AND VentasVehiculos.idSucursal = ?"; 
 
@@ -33,7 +33,7 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	
 	private static final String updateEntregaVehiculo = "UPDATE VentasVehiculos SET fechaEntregaReal = ? WHERE idVentaVehiculo = ?";
 
-	public static final String readVentaParaEntregar = "SELECT * FROM VentasVehiculos where fechaEntregaReal is null AND idSucursal = ?";
+	private static final String readVentaParaEntregar = "SELECT * FROM VentasVehiculos where fechaEntregaReal is null AND idSucursal = ?";
 
 	private static final String readByIdVendedor = "SELECT * FROM VentasVehiculos WHERE idUsuVentaVN = ? and fechaVentaVN BETWEEN ? and ?";
 	

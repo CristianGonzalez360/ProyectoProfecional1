@@ -6,17 +6,20 @@ import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.BasicTreeUI.SelectionModelPropertyChangeHandler;
 import javax.swing.table.DefaultTableModel;
 
 import dto.VentaVehiculoDTO;
+import dto.temporal.VehiculoParaEntregar;
 
 public class PanelVentas extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private JTable tablaVentas;
 	private DefaultTableModel modelo;
-	private static final String[] columnas = { "Nro.", "Fecha", "Precio", "Estado" };
+	private static final String[] columnas = { "Nro.", "Vehículo", "Fecha", "Precio", "Estado del pedido", "Fecha del pedido" };
 
 	public PanelVentas() {
 		setLayout(new BorderLayout(0, 0));
@@ -24,7 +27,14 @@ public class PanelVentas extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 
-		tablaVentas = new JTable();
+		tablaVentas = new JTable() {
+			private static final long serialVersionUID = 6338578460850975220L;
+			@Override
+			public boolean isCellEditable(int arg0, int arg1) {
+				return false;
+			}
+		};
+		tablaVentas.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(tablaVentas);
 
 		modelo = new DefaultTableModel();
@@ -32,11 +42,14 @@ public class PanelVentas extends JPanel {
 		tablaVentas.setModel(modelo);
 	}
 
-	public void setData(List<VentaVehiculoDTO> ventas) {
+	public void setData(List<VehiculoParaEntregar> ventas) {
 		modelo.setRowCount(0);
-		for (VentaVehiculoDTO venta : ventas) {
-			Object[] row = { venta.getIdVentaVehiculo(), venta.getFechaVentaVN(), venta.getPrecioVenta(),
-					venta.isPedido() ? "PEDIDO" : "PENDIENTE" };
+		for (VehiculoParaEntregar venta : ventas) {
+			Object[] row = { venta.getVenta().getIdVentaVehiculo(),
+					venta.getVehiculo().getMarca() + " " + venta.getVehiculo().getFamilia() + " " + venta.getVehiculo().getLinea(),
+					venta.getVenta().getFechaVentaVN(), venta.getVenta().getPrecioVenta(),
+					venta.isPedido() ? "PEDIDO" : "PENDIENTE" ,
+					venta.isPedido() ? venta.getPedido().getFechaPedido():"-"};
 			modelo.addRow(row);
 		}
 	}

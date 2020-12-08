@@ -3,6 +3,7 @@ package repositories;
 import java.util.List;
 
 import dto.PedidoVehiculoDTO;
+import dto.temporal.PedidoDTO;
 
 public interface PedidoVehiculoDao extends GenericDao<PedidoVehiculoDTO, Integer> {
 	
@@ -15,5 +16,7 @@ public interface PedidoVehiculoDao extends GenericDao<PedidoVehiculoDTO, Integer
 	public boolean updateIngreso(PedidoVehiculoDTO pedido);
 
 	public boolean estaIngresado(Integer idVentaVehiculo);
+
+	public PedidoVehiculoDTO readByIdVenta(Integer idVentaVehiculo);
 
 }

@@ -462,7 +462,7 @@ vehiculos:
     usado: true
     idCompra:
     idCaracteristicas: 1
-    idSucursal: 
+    idSucursal: 1
 #CATALOGO DE VEHICULOS NUEVOS SIN STOCK
   - precioVenta: 2100000
     idFichaTecnica: 1
