@@ -27,15 +27,15 @@ public class TurnosController {
 	public void save(AltaDeTurnoDTO turno) {
 		Integer dniCliente = Integer.parseInt(turno.getDniCliente());
 		TurnoDTO nuevoTurno = new TurnoDTO(dniCliente, turno.getFechaAlta(), turno.getFechaCancelado(),
-				turno.getFechaProgramada(), turno.getNombreCliente(), turno.getTelefonoCliente(),
-				turno.getEmailCliente());
-		dao.insert(nuevoTurno);		
+				turno.getFechaProgramada(), turno.getNombreCliente(), turno.getApellidoCliente(),
+				turno.getTelefonoCliente(), turno.getEmailCliente());
+		dao.insert(nuevoTurno);
 	}
 
 	public void cancelById(Integer idTurno) {
 		assert idTurno != null;
 		TurnoDTO turnoSeleccionado = dao.readByID(idTurno);
 		turnoSeleccionado.setFechaCancelado(new Date());
-		dao.update(turnoSeleccionado);		
+		dao.update(turnoSeleccionado);
 	}
 }
