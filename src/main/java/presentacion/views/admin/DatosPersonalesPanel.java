@@ -1,8 +1,11 @@
-package presentacion.views.supervisor;
+package presentacion.views.admin;
+
+import java.awt.Color;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -10,20 +13,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-import dto.ClienteDTO;
-import javax.swing.border.BevelBorder;
-import java.awt.Color;
+import dto.DatosPersonalesDTO;
 
-public class ClientePanelView extends JPanel {
+public class DatosPersonalesPanel extends JPanel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8951435029326569045L;
-
-	private Integer idCliente;
-
-	private Integer idDatosPersonalesDelCliente;
+	private static final long serialVersionUID = -6238113605388598822L;
 
 	private JTextField textDni;
 
@@ -47,9 +41,7 @@ public class ClientePanelView extends JPanel {
 
 	private JTextField tfApellido;
 
-	public ClientePanelView() {
-		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Datos del cliente",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+	public DatosPersonalesPanel() {
 		setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("right:72px"),
 						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("122px:grow"), },
@@ -158,8 +150,6 @@ public class ClientePanelView extends JPanel {
 	}
 
 	public void clearData() {
-		this.idCliente = null;
-		this.idDatosPersonalesDelCliente = null;
 		this.textNombre.setText("");
 		this.textDni.setText("");
 		this.textTelefono.setText("");
@@ -172,44 +162,36 @@ public class ClientePanelView extends JPanel {
 		this.tfApellido.setText("");
 	}
 
-	public void setData(ClienteDTO cliente) {
-		this.idDatosPersonalesDelCliente = cliente.getDatosPersonalesDTO().getId();
-		this.idCliente = cliente.getIdCliente();
-		this.textNombre.setText(cliente.getDatosPersonalesDTO().getNombreCompleto());
-		this.tfApellido.setText(cliente.getDatosPersonalesDTO().getApellido());
-		this.textDni.setText(cliente.getDatosPersonalesDTO().getDni().toString());
-		this.textTelefono.setText(cliente.getDatosPersonalesDTO().getTelefono());
-		this.textEmail.setText(cliente.getDatosPersonalesDTO().getEmail());
-		this.textCalle.setText(cliente.getDatosPersonalesDTO().getCalle());
-		this.textAltura.setText(cliente.getDatosPersonalesDTO().getAltura().toString());
-		this.textPiso.setText(cliente.getDatosPersonalesDTO().getPiso().toString());
-		this.textDpto.setText(cliente.getDatosPersonalesDTO().getDpto());
-		this.textLocalidad.setText(cliente.getDatosPersonalesDTO().getLocalidad());
+	public void setData(DatosPersonalesDTO dto) {
+		this.textNombre.setText(dto.getNombreCompleto());
+		this.tfApellido.setText(dto.getApellido());
+		this.textDni.setText(dto.getDni().toString());
+		this.textTelefono.setText(dto.getTelefono());
+		this.textEmail.setText(dto.getEmail());
+		this.textCalle.setText(dto.getCalle());
+		this.textAltura.setText(dto.getAltura().toString());
+		this.textPiso.setText(dto.getPiso().toString());
+		this.textDpto.setText(dto.getDpto());
+		this.textLocalidad.setText(dto.getLocalidad());
 	}
 
-	public Integer getIdCliente() {
-		return this.idCliente;
+	public DatosPersonalesDTO getData() {
+		DatosPersonalesDTO dto = new DatosPersonalesDTO();
+		dto.setNombreCompleto(this.textNombre.getText());
+		dto.setDni(textDni.getText().trim().isEmpty() ? null : Integer.parseInt(textDni.getText()));
+		dto.setTelefono(textTelefono.getText());
+		dto.setTelefono(textTelefono.getText());
+		dto.setEmail(textEmail.getText());
+		dto.setCalle(textCalle.getText());
+		dto.setAltura(textAltura.getSelectedText());
+		dto.setPiso(textPiso.getText());
+		dto.setDpto(textDpto.getText());
+		dto.setLocalidad(textLocalidad.getText());
+		return dto;
 	}
-
-	public Integer getIdDatosPersonalesCliente() {
-		return this.idDatosPersonalesDelCliente;
-	}
-
-	public ClienteDTO getData() {
-		ClienteDTO cliente = new ClienteDTO();
-		cliente.setIdCliente(idCliente);
-		cliente.setIdDatosPersonales(idDatosPersonalesDelCliente);
-		cliente.getDatosPersonalesDTO().setNombreCompleto(this.textNombre.getText());
-		cliente.getDatosPersonalesDTO()
-				.setDni(textDni.getText().trim().isEmpty() ? null : Integer.parseInt(textDni.getText()));
-		cliente.getDatosPersonalesDTO().setTelefono(textTelefono.getText());
-		cliente.getDatosPersonalesDTO().setTelefono(textTelefono.getText());
-		cliente.getDatosPersonalesDTO().setEmail(textEmail.getText());
-		cliente.getDatosPersonalesDTO().setCalle(textCalle.getText());
-		cliente.getDatosPersonalesDTO().setAltura(textAltura.getSelectedText());
-		cliente.getDatosPersonalesDTO().setPiso(textPiso.getText());
-		cliente.getDatosPersonalesDTO().setDpto(textDpto.getText());
-		cliente.getDatosPersonalesDTO().setLocalidad(textLocalidad.getText());
-		return cliente;
+	
+	public void setBorderTitle(String title) {
+		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), title,
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 	}
 }

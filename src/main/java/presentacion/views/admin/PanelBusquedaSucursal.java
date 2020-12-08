@@ -18,11 +18,13 @@ public class PanelBusquedaSucursal extends JPanel {
 	
 	private JButton btnBuscar;
 
+	private JLabel searchLabel;
+
 	public PanelBusquedaSucursal() {
 		setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		JLabel lblNewLabel = new JLabel("Pais");
-		add(lblNewLabel);
+		searchLabel = new JLabel("Pais");
+		add(searchLabel);
 		
 		comboBoxPais = new JComboBox<String>();
 		add(comboBoxPais);
@@ -31,6 +33,10 @@ public class PanelBusquedaSucursal extends JPanel {
 		add(btnBuscar);
 	}
 
+	public void setSearchLabelName(String title) {
+		this.searchLabel.setText(title);
+	}
+	
 	public String getData() {
 		if(comboBoxPais.getSelectedItem() != null) {
 			return this.comboBoxPais.getSelectedItem().toString();

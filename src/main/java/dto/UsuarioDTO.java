@@ -10,6 +10,8 @@ public class UsuarioDTO {
 
 	private DatosPersonalesDTO datos;
 
+	private SucursalDTO sucursal;
+	
 	public UsuarioDTO() {
 
 	}
@@ -24,7 +26,7 @@ public class UsuarioDTO {
 	public UsuarioDTO makeTestDTO(CuentaDTO cuenta, DatosPersonalesDTO datos) {
 		UsuarioDTO usuario = new UsuarioDTO();
 		usuario.setCuenta(cuenta);
-		usuario.setDatos(datos);
+		usuario.setDatosPersonales(datos);
 		return usuario;
 	}
 	
@@ -48,8 +50,20 @@ public class UsuarioDTO {
 		return datos;
 	}
 
+	public void setDatosPersonales(DatosPersonalesDTO datos) {
+		this.datos = datos;
+	}
+
 	public void setDatos(DatosPersonalesDTO datos) {
 		this.datos = datos;
+	}
+
+	public SucursalDTO getSucursal() {
+		return sucursal;
+	}
+
+	public void setSucursal(SucursalDTO sucursal) {
+		this.sucursal = sucursal;
 	}
 
 	public UsuarioDTO makeTestDTO() {

@@ -33,6 +33,8 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	
 	private ConfiguradorTerminalController configurador;
 	
+	private UsuariosController usuariosController;
+	
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
 	}
@@ -131,5 +133,11 @@ public class ControllersFactoryImpl extends ControllersFactory {
 		if (loginController == null)
 			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance(), configurador);
 		return loginController;
+	}
+
+	@Override
+	public UsuariosController makeUsuariosController() {
+		if(usuariosController == null) usuariosController = new UsuariosController(daos);
+		return usuariosController;
 	}
 }
