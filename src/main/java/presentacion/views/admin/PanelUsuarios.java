@@ -33,14 +33,14 @@ public class PanelUsuarios extends JPanel {
 		usuarioDataPanel = new UsuarioDataPAnel();
 		panel_1.add(usuarioDataPanel, BorderLayout.WEST);
 		
-		tableUsuarios = new TablePanel<UsuarioDTO>(new String [] {"Legajo", "Nombre", "DNI", "Pais"}) {
+		tableUsuarios = new TablePanel<UsuarioDTO>(new String [] {"Legajo", "Nombre", "DNI"}) {
 
 			private static final long serialVersionUID = -5492436929768181798L;
 
 			@Override
 			public void setData(List<UsuarioDTO> data) {
 				for(UsuarioDTO dto : data) {
-					Object [] row = {dto.getId().toString(), dto.getDatos().getNombreCompleto(), dto.getDatos().getDni().toString(), dto.getSucursal().getPais() };
+					Object [] row = {dto.getId().toString(), dto.getDatos().getNombreCompleto(), dto.getDatos().getDni().toString() };
 					model.addRow(row);
 				}
 			}
@@ -62,5 +62,21 @@ public class PanelUsuarios extends JPanel {
 	
 	public void setActionSelectUsuario(ListSelectionListener listener) {
 		tableUsuarios.setActionSelect(listener);
+	}
+
+	public Integer getData() {
+		return tableUsuarios.getData().getId();
+	}
+
+	public void setData(List<UsuarioDTO> target) {
+		this.tableUsuarios.setData(target);
+	}
+	
+	public void setData(UsuarioDTO target) {
+		usuarioDataPanel.setData(target);
+	}
+
+	public void clearUsuarioData() {
+		usuarioDataPanel.clearData();
 	}
 }

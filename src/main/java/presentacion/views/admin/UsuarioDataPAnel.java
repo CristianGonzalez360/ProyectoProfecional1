@@ -3,15 +3,13 @@ package presentacion.views.admin;
 import javax.swing.JPanel;
 
 import dto.UsuarioDTO;
-import presentacion.views.supervisor.ClientePanelView;
-
 import javax.swing.BoxLayout;
 
 public class UsuarioDataPAnel extends JPanel {
 
 	private static final long serialVersionUID = -1126134422008154549L;
 
-	private ClientePanelView usuarioPanelData;
+	private DatosPersonalesPanel usuarioPanelData;
 	
 	private CuentaUsuarioPanel cuentaUsuarioPanel;
 	
@@ -22,8 +20,8 @@ public class UsuarioDataPAnel extends JPanel {
 		add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		usuarioPanelData = new ClientePanelView();
-		usuarioPanelData.setTitledBorder("Datos del usuario");
+		usuarioPanelData = new DatosPersonalesPanel();
+		usuarioPanelData.setBorderTitle("Datos del usuario");
 		panel.add(usuarioPanelData);
 		
 		cuentaUsuarioPanel = new CuentaUsuarioPanel();
@@ -32,13 +30,13 @@ public class UsuarioDataPAnel extends JPanel {
 	
 	public UsuarioDTO getData() {
 		UsuarioDTO ret = new UsuarioDTO();
-		ret.setDatosPersonales(usuarioPanelData.getDataDatosPersonales());
+		ret.setDatosPersonales(usuarioPanelData.getData());
 		ret.setCuenta(cuentaUsuarioPanel.getData());
 		return ret;
 	}
 	
 	public void setData(UsuarioDTO usuario) {
-		usuarioPanelData.setDatosPersonales(usuario.getDatos());
+		usuarioPanelData.setData(usuario.getDatos());
 		cuentaUsuarioPanel.setData(usuario.getCuenta());
 	}
 	

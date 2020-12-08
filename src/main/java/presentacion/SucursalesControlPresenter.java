@@ -11,7 +11,7 @@ import dto.MonedaDTO;
 import dto.SucursalDTO;
 import presentacion.views.admin.AdminControlView;
 
-public class AdminControlPresenter {
+public class SucursalesControlPresenter {
 	
 	private AdminControlView view = AdminControlView.getInstance();
 	
@@ -19,7 +19,7 @@ public class AdminControlPresenter {
 	
 	private ConfiguradorTerminalController confController;
 	
-	public AdminControlPresenter(SucursalesController controller, ConfiguradorTerminalController confController) {
+	public SucursalesControlPresenter(SucursalesController controller, ConfiguradorTerminalController confController) {
 		assert controller != null;
 		this.controller = controller;
 		this.confController = confController;

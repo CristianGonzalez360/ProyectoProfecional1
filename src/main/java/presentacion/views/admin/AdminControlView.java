@@ -112,4 +112,8 @@ public class AdminControlView extends JInternalFrame {
 	public void close() {
 		setVisible(false);
 	}
+
+	public PanelUsuarios getUsuariosView() {
+		return this.panelUsuarios;
+	}
 }
