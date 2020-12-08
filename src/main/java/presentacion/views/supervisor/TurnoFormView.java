@@ -44,7 +44,7 @@ public class TurnoFormView extends JDialog {
 	}
 
 	private TurnoFormView() {
-		setBounds(100, 100, 350, 320);
+		setBounds(100, 100, 350, 350);
 		setTitle("Formulario de alta de turno");
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,7 +53,7 @@ public class TurnoFormView extends JDialog {
 
 		JPanel panelForm = new JPanel();
 		panelForm.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelForm.setBounds(10, 11, 314, 226);
+		panelForm.setBounds(10, 11, 314, 256);
 		contentPanel.add(panelForm);
 		panelForm.setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
