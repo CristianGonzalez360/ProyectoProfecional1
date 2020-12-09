@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.awt.event.ActionEvent;
 import java.util.List;
 
 import javax.swing.event.ListSelectionEvent;
@@ -18,9 +19,14 @@ public class GestionUsuariosPresenter {
 	public GestionUsuariosPresenter(UsuariosController controller) {
 		this.controller = controller;
 		this.view.setActionSelectUsuario((a)->onSelectUsuario(a));
+		this.view.setActionRegistrarUsuario((a)->onRegistrarUsuario(a));
 		onInit();
 	}
 	
+	private void onRegistrarUsuario(ActionEvent a) {
+		
+	}
+
 	private void onInit() {
 		List<UsuarioDTO> usuarios = controller.readAll();
 		this.view.setData(usuarios);
