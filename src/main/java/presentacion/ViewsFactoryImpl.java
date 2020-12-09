@@ -26,13 +26,13 @@ public class ViewsFactoryImpl extends ViewsFactory {
 	public Presenter makePresenter() {
 		new TurnosPresenter(SupervisorControlView.getInstance().getTurnosView(),controllers.makeTurnosController());
 		new ClientePresenter(SupervisorControlView.getInstance().getClientesView(),
-		controllers.makeClientesController(), controllers.makeVehiculosController(),
+		controllers.makeClientesController(), controllers.makeVehiculosConOrdenDeTrabajoController(),
 		controllers.makeOrdenesDeTrabajoController());
 		new OrdenDeTrabajoPresenter(controllers.makeOrdenesDeTrabajoController());
 		new PresupuestosPresenter(controllers.makePresupuestosController(), controllers.makeRepuestosController(),
-				controllers.makeOrdenesDeTrabajoController(), controllers.makeVehiculosController(),
+				controllers.makeOrdenesDeTrabajoController(), controllers.makeVehiculosConOrdenDeTrabajoController(),
 				controllers.makeClientesController());
-		new ConsultaDePresupuestoPresenter(controllers.makeVehiculosController(), controllers.makeClientesController(), controllers.makeOrdenesDeTrabajoController()
+		new ConsultaDePresupuestoPresenter(controllers.makeVehiculosConOrdenDeTrabajoController(), controllers.makeClientesController(), controllers.makeOrdenesDeTrabajoController()
 				,controllers.makePresupuestosController(), controllers.makeFacturasController());
 		new CobroCajeroPresenter(controllers.makeFacturasController());
 		new HistorialVentasPresenter(controllers.makeVentasVehiculosController());
@@ -46,7 +46,8 @@ public class ViewsFactoryImpl extends ViewsFactory {
 		new AdminControlPresenter(controllers.makeSucursalesController(), controllers.makeConfiguradorTerminalController());	
 		new RepuestosPresenter(controllers.makeRepuestosController());
 		new EntregaDeVehiculoPresenter(SupervisorControlView.getInstance().getEntregasView(),controllers.makeEntregasController());
-		new GestionTrabajosPresenter(controllers.makePresupuestosController(),controllers.makeClientesController(),controllers.makeVehiculosController(),controllers.makeOrdenesDeTrabajoController(),controllers.makePresupuestosController());
+		new GestionTrabajosPresenter(controllers.makePresupuestosController(),controllers.makeClientesController(),controllers.makeVehiculosConOrdenDeTrabajoController(),controllers.makeOrdenesDeTrabajoController(),controllers.makePresupuestosController());
+		new VehiculosUsadosPresenter(controllers.makeVehiculosController());
 		return new WorkbenchPresenter(controllers.makeLoginController());
 	}
 }

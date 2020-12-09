@@ -21,7 +21,7 @@ public abstract class ControllersFactory {
 
 	public abstract ClientesController makeClientesController();
 
-	public abstract VehiculosConOrdenDeTrabajoController makeVehiculosController();
+	public abstract VehiculosConOrdenDeTrabajoController makeVehiculosConOrdenDeTrabajoController();
 
 	public abstract OrdenesTrabajoController makeOrdenesDeTrabajoController();
 
@@ -40,4 +40,6 @@ public abstract class ControllersFactory {
 	public abstract VentasVehiculosController makeVentasVehiculosController();
 
 	public abstract ConfiguradorTerminalController makeConfiguradorTerminalController();
+	
+	public abstract VehiculosController makeVehiculosController();
 }

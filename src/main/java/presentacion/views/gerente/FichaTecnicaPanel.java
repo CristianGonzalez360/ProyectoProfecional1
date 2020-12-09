@@ -10,6 +10,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import dto.VehiculoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.temporal.CompraVehiculoUsadoDTO;
 
 public class FichaTecnicaPanel extends JPanel {
@@ -54,10 +56,6 @@ public class FichaTecnicaPanel extends JPanel {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -114,41 +112,44 @@ public class FichaTecnicaPanel extends JPanel {
 		contentPanel.add(lblNewLabel_7, "2, 10");
 		textCombustion = new JTextField();
 		contentPanel.add(textCombustion, "4, 10, fill, default");
-		lblNewLabel_8 = new JLabel("Asegurador");
-		contentPanel.add(lblNewLabel_8, "6, 10");
-		textAsegurador = new JTextField();
-		contentPanel.add(textAsegurador, "8, 10, fill, default");
-		lblNewLabel_9 = new JLabel("Nro. poliza");
-		contentPanel.add(lblNewLabel_9, "2, 12");
-		textNroPoliza = new JTextField();
-		contentPanel.add(textNroPoliza, "4, 12, fill, default");
-		lblNewLabel_10 = new JLabel("Garantia");
-		contentPanel.add(lblNewLabel_10, "6, 12");
-		textGarantia = new JTextField();
-		contentPanel.add(textGarantia, "8, 12, fill, default");
 		lblNewLabel_2 = new JLabel("Patente");
-		contentPanel.add(lblNewLabel_2, "2, 14, left, default");
+		contentPanel.add(lblNewLabel_2, "6, 10, left, default");
 		textPatente = new JTextField();
-		contentPanel.add(textPatente, "4, 14, fill, default");
+		contentPanel.add(textPatente, "8, 10, fill, default");
 	}
 
 	
 	public CompraVehiculoUsadoDTO getData() {
 		CompraVehiculoUsadoDTO compra = new CompraVehiculoUsadoDTO();
 		compra.setNroMotor(this.textNroDeMotor.getText());
-		compra.setNroMotor(this.textNroDeMotor.getText());
+		compra.setNroChasis(this.textNroChasis.getText());
 		compra.setPatente(this.textPatente.getText());
 		compra.setKilometraje(this.textKilometraje.getText());
 		compra.setMarca(this.textMarca.getText());
 		compra.setModelo(this.textModelo.getText());
 		compra.setColor(this.textColor.getText());
 		compra.setCombustion(this.textCombustion.getText());
-		compra.setAsegurador(this.textAsegurador.getText());
-		compra.setNroPolizaSeguro(this.textNroPoliza.getText());
-		compra.setKilometrajeGarantia(this.textGarantia.getText());
 		compra.setFamilia(this.txtFamilia.getText());
 		compra.setLinea(this.txtLinea.getText());
 		return compra;
 		
+	}
+
+
+	public void setdata(FichaTecnicaVehiculoDTO ficha) {
+		this.textNroDeMotor.setText(ficha.getNroMotor() + "");
+		this.textNroChasis.setText(ficha.getNroChasis() + "");
+		this.textPatente.setText(ficha.getPatente());
+		this.textKilometraje.setText(ficha.getKilometraje() + "");;
+		this.textMarca.setText(ficha.getMarca());
+		this.textModelo.setText(ficha.getModelo() + "");
+		this.textColor.setText(ficha.getColor());
+		this.textCombustion.setText(ficha.getCombustion());		
+	}
+
+
+	public void setdata(VehiculoDTO vehiculo) {
+		this.txtFamilia.setText(vehiculo.getFamilia());
+		this.txtLinea.setText(vehiculo.getLinea());
 	}
 }

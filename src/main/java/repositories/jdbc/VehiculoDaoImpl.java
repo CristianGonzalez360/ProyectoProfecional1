@@ -24,6 +24,8 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 
 	private static final String updateDisponibilidad = "UPDATE Vehiculos SET disponible = ? WHERE idVehiculo = ?";
 	
+	private static final String readVehiculosUsados = readAll + " WHERE usado = true";
+	
 	public VehiculoDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -113,5 +115,10 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 				return ret;
 			}
 		};
+	}
+
+	@Override
+	public List<VehiculoDTO> readVehiculosUsados() {
+		return getTemplate().query(readVehiculosUsados).excecute(getMapper());
 	}
 }

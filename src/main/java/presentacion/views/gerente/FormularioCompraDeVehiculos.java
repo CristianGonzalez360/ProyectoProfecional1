@@ -16,14 +16,14 @@ import com.jgoodies.forms.layout.RowSpec;
 import dto.CaracteristicaVehiculoDTO;
 import dto.temporal.CompraVehiculoUsadoDTO;
 
-public class RegistroCompraDeVehiculos extends JPanel {
+public class FormularioCompraDeVehiculos extends JPanel {
 	
 	private  CaracteristicaDeVehiculoPanel caracteristicas;
 	private FichaTecnicaPanel fichaTecnica;
 	private JTextField txtPrecioCompra;
 	private JTextField txtPrecioVenta;
 	
-	public RegistroCompraDeVehiculos() {
+	public FormularioCompraDeVehiculos() {
 		setLayout(new BorderLayout());
 		
 		JPanel panelCentral = new JPanel();

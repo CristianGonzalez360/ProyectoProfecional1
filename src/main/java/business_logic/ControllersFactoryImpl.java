@@ -33,6 +33,8 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	
 	private ConfiguradorTerminalController configurador;
 	
+	private VehiculosController vehiculosController2;
+	
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
 	}
@@ -52,7 +54,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	}
 
 	@Override
-	public VehiculosConOrdenDeTrabajoController makeVehiculosController() {
+	public VehiculosConOrdenDeTrabajoController makeVehiculosConOrdenDeTrabajoController() {
 		if (vehiculosController == null) {
 			this.vehiculosController = new VehiculosConOrdenDeTrabajoController(daos.makeVehiculoConOrdeDeTrabajoDao(),
 					daos.makeOrdenDeTrabajoDao(), daos.makeFichaTecnicaVehiculoDao());
@@ -123,7 +125,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	@Override
 	public ConfiguradorTerminalController makeConfiguradorTerminalController() {
 		if(configurador == null) configurador = new ConfiguradorTerminalController();
-		return new ConfiguradorTerminalController();
+		return configurador;
 	}
 	
 	@Override
@@ -131,5 +133,11 @@ public class ControllersFactoryImpl extends ControllersFactory {
 		if (loginController == null)
 			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance(), configurador);
 		return loginController;
+	}
+
+	@Override
+	public VehiculosController makeVehiculosController() {
+		if(vehiculosController2 == null) vehiculosController2 = new VehiculosController(daos);
+		return vehiculosController2;
 	}
 }
