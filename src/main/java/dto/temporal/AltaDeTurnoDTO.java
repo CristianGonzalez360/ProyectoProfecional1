@@ -16,6 +16,7 @@ public class AltaDeTurnoDTO {
 	private Date fechaCancelado;
 	private Date fechaProgramada;
 	private String nombreCliente;
+	private String apellidoCliente;
 	private String telefonoCliente;
 	private String emailCliente;
 
@@ -28,7 +29,8 @@ public class AltaDeTurnoDTO {
 		ret.setDniCliente("12345678");
 		ret.setFechaAlta(new Date());
 		ret.setFechaProgramada(new Date());
-		ret.setNombreCliente("Susan Doe");
+		ret.setNombreCliente("Susan");
+		ret.setApellidoCliente("Doe");
 		ret.setTelefonoCliente("96385274");
 		ret.setEmailCliente("ejemplo@dominio.com");
 		return ret;
@@ -36,14 +38,18 @@ public class AltaDeTurnoDTO {
 
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
-		errors.addAll(new StringValidator(nombreCliente).regex("El Nombre debe ser un nombre válido.", "[a-zA-Záéíóú ]+")
-				.max(40, "Max 40 caracteres para el Nombre.").validate());
-		errors.addAll(new StringValidator(dniCliente).max(8, "Max 8 caracteres para el DNI.").number("El DNI debe ser un dni.")
-				.validate());
-		errors.addAll(new StringValidator(telefonoCliente).number("El Teléfono debe ser un nro telefónico.")
-				.validate());
+		errors.addAll(
+				new StringValidator(nombreCliente).regex("El Nombre debe ser un nombre válido.", "[a-zA-Záéíóú ]+")
+						.max(40, "Max 40 caracteres para el Nombre.").validate());
+		errors.addAll(
+				new StringValidator(apellidoCliente).regex("El Apellido debe ser un nombre válido.", "[a-zA-Záéíóú ]+")
+						.max(40, "Max 40 caracteres para el Apellido.").validate());
+		errors.addAll(new StringValidator(dniCliente).max(8, "Max 8 caracteres para el DNI.")
+				.number("El DNI debe ser un dni.").validate());
+		errors.addAll(
+				new StringValidator(telefonoCliente).number("El Teléfono debe ser un nro telefónico.").validate());
 		errors.addAll(new StringValidator(emailCliente).email("El Email debe ser un email.").validate());
-		if(fechaProgramada != null) {
+		if (fechaProgramada != null) {
 			errors.addAll(new NotDateBefore("La fecha debe ser posterior a la actual").validate(fechaProgramada));
 		} else {
 			errors.add("Programar una fecha es obligatorio");
@@ -107,6 +113,14 @@ public class AltaDeTurnoDTO {
 		this.nombreCliente = nombreCliente;
 	}
 
+	public String getApellidoCliente() {
+		return apellidoCliente;
+	}
+
+	public void setApellidoCliente(String apellidoCliente) {
+		this.apellidoCliente = apellidoCliente;
+	}
+
 	public String getTelefonoCliente() {
 		return telefonoCliente;
 	}
@@ -127,8 +141,8 @@ public class AltaDeTurnoDTO {
 	public String toString() {
 		return "AltaDeTurnoDTO [idTurno=" + idTurno + ", idCliente=" + idCliente + ", dniCliente=" + dniCliente
 				+ ", fechaAlta=" + fechaAlta + ", fechaCancelado=" + fechaCancelado + ", fechaProgramada="
-				+ fechaProgramada + ", nombreCliente=" + nombreCliente + ", telefonoCliente=" + telefonoCliente
-				+ ", emailCliente=" + emailCliente + "]";
+				+ fechaProgramada + ", nombreCliente=" + nombreCliente + ", apellidoCliente=" + apellidoCliente
+				+ ", telefonoCliente=" + telefonoCliente + ", emailCliente=" + emailCliente + "]";
 	}
 
 }

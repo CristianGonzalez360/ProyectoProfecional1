@@ -149,6 +149,7 @@ turnos:
     fechaAlta: 2020-11-05
     fechaProgramada: 2021-11-20
     nombreCliente: c007
+    apellidoCliente: ap007
     telefonoCliente: "1136635555"
     emailCliente: "ejemplo0@dominio.com"
   - idCliente: 12
@@ -156,6 +157,7 @@ turnos:
     fechaAlta: 2020-11-05
     fechaProgramada: 2021-11-24
     nombreCliente: c008
+    apellidoCliente: ap008
     telefonoCliente: "1133335555"
     emailCliente: "ejemplo1@dominio.com"
   - idCliente: 3
@@ -163,6 +165,7 @@ turnos:
     fechaAlta: 2020-11-05
     fechaProgramada: 2021-11-22
     nombreCliente: c009
+    apellidoCliente: ap009
     telefonoCliente: "1122335555"
     emailCliente: "ejemplo2@dominio.com"
   - idCliente: 5
@@ -170,6 +173,7 @@ turnos:
     fechaAlta: 2020-11-05
     fechaProgramada: 2021-11-19
     nombreCliente: c0010
+    apellidoCliente: ap0010
     telefonoCliente: "1133335955"
     emailCliente: "ejemplo3@dominio.com"
     

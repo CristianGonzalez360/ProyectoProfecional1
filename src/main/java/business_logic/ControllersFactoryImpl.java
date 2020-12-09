@@ -34,6 +34,9 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	private ConfiguradorTerminalController configurador;
 	
 	private VehiculosController vehiculosController2;
+
+	private UsuariosController usuariosController;
+
 	
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
@@ -139,5 +142,11 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	public VehiculosController makeVehiculosController() {
 		if(vehiculosController2 == null) vehiculosController2 = new VehiculosController(daos);
 		return vehiculosController2;
+	}
+	
+	@Override
+	public UsuariosController makeUsuariosController() {
+		if(usuariosController == null) usuariosController = new UsuariosController(daos);
+		return usuariosController;
 	}
 }

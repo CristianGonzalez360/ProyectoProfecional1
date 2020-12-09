@@ -6,30 +6,26 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.util.List;
 
-import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionListener;
 
 import dto.MonedaDTO;
 import dto.SucursalDTO;
-import presentacion.views.vendedor.TablePanel;
-import javax.swing.BoxLayout;
+import presentacion.PanelSucursales;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
 
 public class AdminControlView extends JInternalFrame {
 
 	private static final long serialVersionUID = -8187193486426314619L;
 
 	private static AdminControlView instance;
+		
+	private PanelSucursales panelSucursales;
 	
-	private PanelBusquedaSucursal panelBusqueda;
-	
-	private PanelDatosMoneda panelDatosMoneda;
-	
-	private TablePanel<SucursalDTO> tablePanel;
-	private JPanel panel;
-	private JButton btnEscogerComoTerminal;
+	private PanelUsuarios panelUsuarios;
+		
+	private JButton btnRegistrarUsuario;
 	
 	public static AdminControlView getInstance() {
 		if(instance == null) instance = new AdminControlView();
@@ -43,54 +39,20 @@ public class AdminControlView extends JInternalFrame {
 		setBounds(100, 100, 633, 424);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		panelBusqueda = new PanelBusquedaSucursal();
-		getContentPane().add(panelBusqueda, BorderLayout.NORTH);
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		tablePanel = new TablePanel<SucursalDTO>(new String [] {"Nro. de sucursal", "Pais", "Calle", "Altura", "Localidad"}) {
-			private static final long serialVersionUID = -8335676016788818853L;
-			@Override
-			public void setData(List<SucursalDTO> data) {
-				for(SucursalDTO suc: data) {
-					Object [] row = { suc.getIdSucursal().toString(), suc.getPais(), suc.getCalle(), suc.getAltura(), suc.getLocalidad() };
-					model.addRow(row);
-				}
-			}
-
-			@Override
-			public SucursalDTO getData() {
-				SucursalDTO ret = null;
-				if(table.getSelectedRowCount() == 1) {
-					int row = table.getSelectedRow();
-					ret = new SucursalDTO();
-					ret.setIdSucursal(Integer.parseInt(model.getValueAt(row, 0).toString()));
-					ret.setPais(model.getValueAt(row, 1).toString());
-					ret.setCalle(model.getValueAt(row, 2).toString());
-					ret.setAltura(Integer.parseInt(model.getValueAt(row, 3).toString()));
-					ret.setLocalidad(model.getValueAt(row, 4).toString());
-					ret.setIdMoneda(0);
-				}
-				return ret;
-			}
-		};
-		tablePanel.setBorder(new TitledBorder(null, "Listado de sucursales", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelSucursales = new PanelSucursales();
+		tabbedPane.addTab("Consulta de sucursales", null, panelSucursales, null);
 		
-		JPanel panelCenter = new JPanel();
-		getContentPane().add(panelCenter, BorderLayout.CENTER);
-		panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
-
-		panelCenter.add(tablePanel);
-				
-		panelDatosMoneda = new PanelDatosMoneda();
-		panelDatosMoneda.setNonEditable();
-		panelCenter.add(panelDatosMoneda);
+		panelUsuarios = new PanelUsuarios();
+		tabbedPane.addTab("Gestion de usuarios", null,panelUsuarios, null);
 		
-		panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		flowLayout.setAlignment(FlowLayout.RIGHT);
-		panelCenter.add(panel);
+		JPanel panel = new JPanel();
+		panelUsuarios.add(panel, BorderLayout.SOUTH);
 		
-		btnEscogerComoTerminal = new JButton("Escoger como terminal");
-		panel.add(btnEscogerComoTerminal);
+		btnRegistrarUsuario = new JButton("Registrar usuario");
+		panel.add(btnRegistrarUsuario);
 	}
 	
 	public void display() {
@@ -103,47 +65,55 @@ public class AdminControlView extends JInternalFrame {
 	}
 
 	public String getDataNombrePais() {
-		return this.panelBusqueda.getData();
+		return panelSucursales.getDataNombrePais();
 	}
 
 	public void setActionBuscarSucursal(ActionListener listener) {
-		this.panelBusqueda.setActionBuscar(listener);
+		panelSucursales.setActionBuscarSucursal(listener);
 	}
 
 	public void addPaisesDeBusqueda(String[] strings) {
-		this.panelBusqueda.addPaises(strings);
+		panelSucursales.addPaisesDeBusqueda(strings);
 	}
 
 	public void clearData() {
-		this.tablePanel.clearData();
-		this.panelDatosMoneda.clearData();
+		panelSucursales.clearData();
+		panelSucursales.clearDataMoneda();
 	}
 	
 	public void setData(List<SucursalDTO> sucursales) {
-		this.tablePanel.setData(sucursales);
+		panelSucursales.setData(sucursales);
 	}
 	
 	public void setActionSeleccionSucursal(ListSelectionListener listener) {
-		this.tablePanel.setActionSelect(listener);
+		panelSucursales.setActionSeleccionSucursal(listener);
 	}
 
 	public SucursalDTO getData() {
-		return tablePanel.getData();
+		return panelSucursales.getData();
 	}
 
 	public void setData(MonedaDTO moneda) {
-		this.panelDatosMoneda.setData(moneda);
+		panelSucursales.setData(moneda);
 	}
 
 	public void clearDataMoneda() {
-		this.panelDatosMoneda.clearData();
+		panelSucursales.clearDataMoneda();
 	}
 	
 	public void setActionEscogerTerminal(ActionListener listener) {
-		this.btnEscogerComoTerminal.addActionListener(listener);
+		panelSucursales.setActionEscogerTerminal(listener);
 	}
 
+	public void setActionRegistrarUsuario(ActionListener listener) {
+		this.btnRegistrarUsuario.addActionListener(listener);
+	}
+	
 	public void close() {
 		setVisible(false);
+	}
+
+	public PanelUsuarios getUsuariosView() {
+		return this.panelUsuarios;
 	}
 }

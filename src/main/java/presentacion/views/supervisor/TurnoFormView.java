@@ -35,6 +35,7 @@ public class TurnoFormView extends JDialog {
 
 	private JButton btnConfirmar;
 	private JButton btnCancelar;
+	private JTextField textApellido;
 
 	public static TurnoFormView getInstance() {
 		if (instance == null)
@@ -43,7 +44,7 @@ public class TurnoFormView extends JDialog {
 	}
 
 	private TurnoFormView() {
-		setBounds(100, 100, 350, 320);
+		setBounds(100, 100, 350, 350);
 		setTitle("Formulario de alta de turno");
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -52,7 +53,7 @@ public class TurnoFormView extends JDialog {
 
 		JPanel panelForm = new JPanel();
 		panelForm.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelForm.setBounds(10, 11, 314, 226);
+		panelForm.setBounds(10, 11, 314, 256);
 		contentPanel.add(panelForm);
 		panelForm.setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
@@ -62,41 +63,49 @@ public class TurnoFormView extends JDialog {
 				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
 						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
 
-		JLabel lblNombreApellido = new JLabel("Nombre y Apellido");
-		panelForm.add(lblNombreApellido, "4, 4");
+		JLabel lblNombre = new JLabel("Nombre");
+		panelForm.add(lblNombre, "4, 4");
 
 		textNombre = new JTextField();
 		panelForm.add(textNombre, "10, 4, fill, default");
 		textNombre.setColumns(10);
 
+		JLabel lblApellido = new JLabel("Apellido");
+		panelForm.add(lblApellido, "4, 6");
+
+		textApellido = new JTextField();
+		panelForm.add(textApellido, "10, 6, fill, default");
+		textApellido.setColumns(10);
+
 		JLabel lblDNI = new JLabel("DNI");
-		panelForm.add(lblDNI, "4, 6");
+		panelForm.add(lblDNI, "4, 8");
 
 		textDNI = new JTextField();
-		panelForm.add(textDNI, "10, 6, fill, default");
+		panelForm.add(textDNI, "10, 8, fill, default");
 		textDNI.setColumns(10);
 
 		JLabel lblTelefono = new JLabel("Teléfono");
-		panelForm.add(lblTelefono, "4, 8");
+		panelForm.add(lblTelefono, "4, 10");
 
 		textTelefono = new JTextField();
-		panelForm.add(textTelefono, "10, 8, fill, default");
+		panelForm.add(textTelefono, "10, 10, fill, default");
 		textTelefono.setColumns(10);
 
 		JLabel lblEmail = new JLabel("Email");
-		panelForm.add(lblEmail, "4, 10");
+		panelForm.add(lblEmail, "4, 12");
 
 		textEmail = new JTextField();
-		panelForm.add(textEmail, "10, 10, fill, default");
+		panelForm.add(textEmail, "10, 12, fill, default");
 		textEmail.setColumns(10);
 
 		JLabel lblFecha = new JLabel("Fecha del turno");
-		panelForm.add(lblFecha, "4, 12");
+		panelForm.add(lblFecha, "4, 14");
 
 		fechaTurno = new JDateChooser();
-		panelForm.add(fechaTurno, "10, 12, fill, default");
+		panelForm.add(fechaTurno, "10, 14, fill, default");
 
 		{
 			JPanel panelButton = new JPanel();
@@ -125,6 +134,7 @@ public class TurnoFormView extends JDialog {
 	public AltaDeTurnoDTO getData() {
 		AltaDeTurnoDTO nuevoTurno = new AltaDeTurnoDTO();
 		nuevoTurno.setNombreCliente(getNombre());
+		nuevoTurno.setApellidoCliente(getApellido());
 		nuevoTurno.setDniCliente(getDNI());
 		nuevoTurno.setTelefonoCliente(getTelefono());
 		nuevoTurno.setEmailCliente(getEmail());
@@ -139,6 +149,7 @@ public class TurnoFormView extends JDialog {
 
 	public void clearData() {
 		textNombre.setText(null);
+		textApellido.setText(null);
 		textDNI.setText(null);
 		textTelefono.setText(null);
 		textEmail.setText(null);
@@ -164,6 +175,10 @@ public class TurnoFormView extends JDialog {
 		return textNombre.getText();
 	}
 
+	public String getApellido() {
+		return textApellido.getText();
+	}
+	
 	public String getDNI() {
 		return textDNI.getText();
 	}
@@ -179,5 +194,4 @@ public class TurnoFormView extends JDialog {
 	public Date getFechaTurno() {
 		return fechaTurno.getDate();
 	}
-
 }

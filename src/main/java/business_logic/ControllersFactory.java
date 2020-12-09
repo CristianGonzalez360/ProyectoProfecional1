@@ -1,5 +1,7 @@
 package business_logic;
 
+import presentacion.views.admin.PanelUsuarios;
+
 public abstract class ControllersFactory {
 
 	private static ControllersFactory concreteFactory;
@@ -42,4 +44,7 @@ public abstract class ControllersFactory {
 	public abstract ConfiguradorTerminalController makeConfiguradorTerminalController();
 	
 	public abstract VehiculosController makeVehiculosController();
+
+	public abstract UsuariosController makeUsuariosController();
+
 }
