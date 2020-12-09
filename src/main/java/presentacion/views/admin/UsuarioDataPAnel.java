@@ -3,6 +3,7 @@ package presentacion.views.admin;
 import javax.swing.JPanel;
 
 import dto.UsuarioDTO;
+
 import javax.swing.BoxLayout;
 
 public class UsuarioDataPAnel extends JPanel {

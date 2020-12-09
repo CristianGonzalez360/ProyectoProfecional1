@@ -1,6 +1,7 @@
 package dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class UsuarioDTO {
 
@@ -64,6 +65,12 @@ public class UsuarioDTO {
 
 	public void setSucursal(SucursalDTO sucursal) {
 		this.sucursal = sucursal;
+	}
+	
+	public List<String> validate() {
+		List<String> lst = datos.validate();
+		lst.addAll(cuenta.validate());
+		return lst;
 	}
 
 	public UsuarioDTO makeTestDTO() {

@@ -13,7 +13,6 @@ import dto.SucursalDTO;
 import presentacion.PanelSucursales;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 
 public class AdminControlView extends JInternalFrame {
 
@@ -24,9 +23,7 @@ public class AdminControlView extends JInternalFrame {
 	private PanelSucursales panelSucursales;
 	
 	private PanelUsuarios panelUsuarios;
-		
-	private JButton btnRegistrarUsuario;
-	
+			
 	public static AdminControlView getInstance() {
 		if(instance == null) instance = new AdminControlView();
 		return instance;
@@ -50,9 +47,6 @@ public class AdminControlView extends JInternalFrame {
 		
 		JPanel panel = new JPanel();
 		panelUsuarios.add(panel, BorderLayout.SOUTH);
-		
-		btnRegistrarUsuario = new JButton("Registrar usuario");
-		panel.add(btnRegistrarUsuario);
 	}
 	
 	public void display() {
@@ -103,10 +97,6 @@ public class AdminControlView extends JInternalFrame {
 	
 	public void setActionEscogerTerminal(ActionListener listener) {
 		panelSucursales.setActionEscogerTerminal(listener);
-	}
-
-	public void setActionRegistrarUsuario(ActionListener listener) {
-		this.btnRegistrarUsuario.addActionListener(listener);
 	}
 	
 	public void close() {

@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.JButton;
 
 public class PanelUsuarios extends JPanel {
 
@@ -20,6 +21,8 @@ public class PanelUsuarios extends JPanel {
 	private TablePanel<UsuarioDTO> tableUsuarios;
 	
 	private UsuarioDataPAnel usuarioDataPanel;
+
+	private JButton btnRegistrarUsuario;
 		
 	public PanelUsuarios() {
 		setLayout(new BorderLayout(0, 0));
@@ -30,6 +33,9 @@ public class PanelUsuarios extends JPanel {
 		
 		JPanel panelSouth = new JPanel();
 		panel_1.add(panelSouth, BorderLayout.SOUTH);
+		
+		btnRegistrarUsuario = new JButton("Registrar usuario");
+		panelSouth.add(btnRegistrarUsuario);
 		
 		usuarioDataPanel = new UsuarioDataPAnel();
 		panel_1.add(usuarioDataPanel, BorderLayout.WEST);
@@ -82,6 +88,6 @@ public class PanelUsuarios extends JPanel {
 	}
 
 	public void setActionRegistrarUsuario(ActionListener listener) {
-
+		this.btnRegistrarUsuario.addActionListener(listener);
 	}
 }

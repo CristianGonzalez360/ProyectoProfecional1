@@ -8,6 +8,7 @@ import javax.swing.event.ListSelectionEvent;
 import business_logic.UsuariosController;
 import dto.UsuarioDTO;
 import presentacion.views.admin.AdminControlView;
+import presentacion.views.admin.FormAltaUsuarioView;
 import presentacion.views.admin.PanelUsuarios;
 
 public class GestionUsuariosPresenter {
@@ -24,7 +25,7 @@ public class GestionUsuariosPresenter {
 	}
 	
 	private void onRegistrarUsuario(ActionEvent a) {
-		
+		FormAltaUsuarioView.getInstance().open();
 	}
 
 	private void onInit() {
