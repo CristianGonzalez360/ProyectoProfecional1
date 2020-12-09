@@ -9,7 +9,6 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import dto.VentaVehiculoDTO;
 import dto.temporal.VehiculoParaEntregar;
 
 public class PanelVentaVehiculosDisponibles extends JPanel {

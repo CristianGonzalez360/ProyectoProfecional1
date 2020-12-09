@@ -42,11 +42,11 @@ public class CaracteristicaDeVehiculoPanel extends JPanel {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(91dlu;default):grow"),
+				ColumnSpec.decode("default:grow"),
 				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(83dlu;default)"),
+				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(175dlu;default):grow"),},
+				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
@@ -130,10 +130,7 @@ public class CaracteristicaDeVehiculoPanel extends JPanel {
 		textNroPuertas.setColumns(10);
 	}
 
-	public void setData(CaracteristicaVehiculoDTO dto) {
-		
-		System.out.println(dto.toString());
-		
+	public void setData(CaracteristicaVehiculoDTO dto) {		
 		textCilindrada.setText(dto.getCilindrada());
 		textMotor.setText(dto.getMotor());
 		textFrenosDelanteros.setText(dto.getFrenosDelanteros());
@@ -157,5 +154,20 @@ public class CaracteristicaDeVehiculoPanel extends JPanel {
 		textTorqueMaximo.setText("");
 		textBaul.setText("");
 		textNroPuertas.setText("");
+	}
+	
+	public CaracteristicaVehiculoDTO getData(){
+		CaracteristicaVehiculoDTO ret = new CaracteristicaVehiculoDTO();
+		ret.setCilindrada(textCilindrada.getText());
+		ret.setMotor(textMotor.getText());
+		ret.setFrenosDelanteros(textFrenosDelanteros.getText());
+		ret.setPotencia(textPotencia.getText());
+		ret.setDireccion(textDireccion.getText());
+		ret.setTransmision(textTransmision.getText());
+		ret.setFrenosTraseros(textFrenosTraseros.getText());
+		ret.setTorqueMaximo(textTorqueMaximo.getText());
+		ret.setVolumenBaul(textBaul.getText());
+		ret.setCantidadPuertas(textNroPuertas.getText());
+		return ret;
 	}
 }

@@ -11,4 +11,6 @@ public interface VehiculosDao extends GenericDao<VehiculoDTO, Integer> {
 	List<String> readAllMarcasVehiculos();
 
 	boolean updateDisponibilidadVehiculo(Integer id, Boolean boolean1);
+
+	List<VehiculoDTO> readVehiculosUsados();
 }

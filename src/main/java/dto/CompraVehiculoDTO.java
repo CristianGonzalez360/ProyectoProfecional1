@@ -7,7 +7,6 @@ public class CompraVehiculoDTO {
 	private Integer idCompraVehiculo;
 	private Integer idVehiculo ;
 	private Double PrecioCompra;
-	private Double precioVenta;
 	private Date fechaCompra;
 	private Integer idUsuCompra;
 	
@@ -32,12 +31,6 @@ public class CompraVehiculoDTO {
 	}
 	public void setPrecioCompra(Double precioCompra) {
 		PrecioCompra = precioCompra;
-	}
-	public Double getPrecioVenta() {
-		return precioVenta;
-	}
-	public void setPrecioVenta(Double precioVenta) {
-		this.precioVenta = precioVenta;
 	}
 	public Date getFechaCompra() {
 		return fechaCompra;
