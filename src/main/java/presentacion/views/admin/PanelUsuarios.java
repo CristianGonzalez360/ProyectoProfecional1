@@ -10,6 +10,7 @@ import presentacion.views.vendedor.TablePanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PanelUsuarios extends JPanel {
@@ -78,5 +79,9 @@ public class PanelUsuarios extends JPanel {
 
 	public void clearUsuarioData() {
 		usuarioDataPanel.clearData();
+	}
+
+	public void setActionRegistrarUsuario(ActionListener listener) {
+
 	}
 }
