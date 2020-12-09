@@ -1,11 +1,13 @@
 package presentacion.views.gerente;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
 import presentacion.views.vendedor.CaracteristicaDeVehiculoPanel;
 import javax.swing.BoxLayout;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import com.jgoodies.forms.layout.FormLayout;
@@ -15,19 +17,26 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import dto.CaracteristicaVehiculoDTO;
 import dto.temporal.CompraVehiculoUsadoDTO;
+import javax.swing.JButton;
 
-public class FormularioCompraDeVehiculos extends JPanel {
+public class FormularioCompraDeVehiculos extends JDialog {
 	
 	private  CaracteristicaDeVehiculoPanel caracteristicas;
 	private FichaTecnicaPanel fichaTecnica;
 	private JTextField txtPrecioCompra;
 	private JTextField txtPrecioVenta;
 	
-	public FormularioCompraDeVehiculos() {
-		setLayout(new BorderLayout());
+	private static FormularioCompraDeVehiculos instance;
+	private JPanel panel;
+	private JButton btnRegistrar;
+	
+	private FormularioCompraDeVehiculos() {
+		setBounds(100,100,650,456);
+		setResizable(false);
+		getContentPane().setLayout(new BorderLayout());
 		
 		JPanel panelCentral = new JPanel();
-		add(panelCentral,BorderLayout.CENTER);
+		getContentPane().add(panelCentral,BorderLayout.CENTER);
 		this.caracteristicas = new CaracteristicaDeVehiculoPanel();
 		panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
 		this.fichaTecnica = new FichaTecnicaPanel();
@@ -62,6 +71,19 @@ public class FormularioCompraDeVehiculos extends JPanel {
 		txtPrecioVenta.setColumns(10);
 		panelCentral.add(fichaTecnica);
 		panelCentral.add(caracteristicas);
+		
+		panel = new JPanel();
+		getContentPane().add(panel, BorderLayout.SOUTH);
+		
+		btnRegistrar = new JButton("Registrar");
+		panel.add(btnRegistrar);
+		
+		close();
+	}
+	
+	public static FormularioCompraDeVehiculos getInstance() {
+		if(instance == null) instance = new FormularioCompraDeVehiculos();
+		return instance;
 	}
 
 	public CompraVehiculoUsadoDTO getData() {
@@ -81,4 +103,25 @@ public class FormularioCompraDeVehiculos extends JPanel {
 		ret.setPrecioVenta(this.txtPrecioVenta.getText());
 		return ret;
 	}
+	
+	public void clearData() {
+		caracteristicas.clearData();
+		fichaTecnica.cleardata();
+		this.txtPrecioVenta.setText("");
+		this.txtPrecioCompra.setText("");
+	}
+	
+	public void display() {
+		setVisible(true);
+	}
+	
+	public void close() {
+		setVisible(false);
+		clearData();
+	}
+	
+	public void setActionOnRegistrar(ActionListener listener) {
+		this.btnRegistrar.addActionListener(listener);
+	}
+	
 }

@@ -1,6 +1,7 @@
 package presentacion.views.gerente;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -12,6 +13,7 @@ import dto.VehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import presentacion.views.vendedor.CaracteristicaDeVehiculoPanel;
 import presentacion.views.vendedor.TablePanel;
+import javax.swing.JButton;
 
 public class PanelVehiculosUsados extends JPanel {
 
@@ -21,6 +23,8 @@ public class PanelVehiculosUsados extends JPanel {
 	private TablePanel<VehiculoDTO> tabla;
 	private static final String[] columnas = {"NRO", "Marca", "Familia", "Linea"};
 	private static PanelVehiculosUsados instance;
+	private JPanel panel;
+	private JButton btnRegistrar;
 	
 	private PanelVehiculosUsados() {
 		setLayout(new BorderLayout());
@@ -58,6 +62,12 @@ public class PanelVehiculosUsados extends JPanel {
 		panelCentral.add(tabla);
 		panelCentral.add(fichaTecnica);
 		panelCentral.add(caracteristicas);
+		
+		panel = new JPanel();
+		add(panel, BorderLayout.SOUTH);
+		
+		btnRegistrar = new JButton("Registrar");
+		panel.add(btnRegistrar);
 	}
 	
 	public static PanelVehiculosUsados getInstance() {
@@ -88,8 +98,15 @@ public class PanelVehiculosUsados extends JPanel {
 
 	public void setData(VehiculoDTO vehiculo) {
 		this.fichaTecnica.setdata(vehiculo);
-		
 	}
 	
-	
+	public void setActionOnRegistrar(ActionListener listener) {
+		this.btnRegistrar.addActionListener(listener);
+	}
+
+	public void clearData() {
+		this.caracteristicas.clearData();
+		this.fichaTecnica.cleardata();
+		this.tabla.clearData();
+	}
 }

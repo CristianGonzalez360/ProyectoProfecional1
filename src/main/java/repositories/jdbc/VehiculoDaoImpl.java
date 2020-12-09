@@ -11,8 +11,8 @@ import repositories.jdbc.utils.NullObject;
 
 public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements VehiculosDao {
 
-	private static final String insert = "INSERT INTO Vehiculos(precioVenta,idFichaTecnica,marca,familia,linea,color,idCaracteristica,fechaIngreso,disponible,usado,idCompra,idSucursal) "
-			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String insert = "INSERT INTO Vehiculos(precioVenta,idFichaTecnica,marca,familia,linea,color,idCaracteristica,fechaIngreso,disponible,usado,idSucursal) "
+			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 	private static final String readDisponiblesByCriteria = "SELECT * FROM Vehiculos WHERE marca = ? AND usado = ?";
 	
@@ -24,7 +24,9 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 
 	private static final String updateDisponibilidad = "UPDATE Vehiculos SET disponible = ? WHERE idVehiculo = ?";
 	
-	private static final String readVehiculosUsados = readAll + " WHERE usado = true";
+	private static final String readVehiculosUsados = readAll + " WHERE usado = true AND idVehiculo NOT IN (SELECT idVehiculo FROM VentasVehiculos)";
+
+	private static final String maximoId = "SELECT MAX(idVehiculo) FROM Vehiculos";
 	
 	public VehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -53,7 +55,6 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 				.param(entity.getFechaIngreso() == null ? new NullObject() : entity.getFechaIngreso())
 				.param(new Boolean(entity.isDisponible()))
 				.param(new Boolean(entity.isUsado()))
-				.param(entity.getIdCompra() == null ? new NullObject() : entity.getIdCompra())
 				.param(entity.getIdSucursal() == null ? new NullObject() : entity.getIdSucursal())
 				.excecute();
 	}
@@ -110,7 +111,6 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 				ret.setFechaIngreso(obj[8] == null ? null : (Date) obj[8]);
 				ret.setDisponible(((Boolean) obj[9]).booleanValue());
 				ret.setUsado(((Boolean) obj[10]).booleanValue());
-				ret.setIdCompra(obj[11] == null ? null : (Integer) obj[11]);
 				ret.setIdSucursal(obj[12] == null ? null : (Integer) obj[12]);
 				return ret;
 			}
@@ -120,5 +120,16 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	@Override
 	public List<VehiculoDTO> readVehiculosUsados() {
 		return getTemplate().query(readVehiculosUsados).excecute(getMapper());
+	}
+
+	@Override
+	public Integer getIdMaximo() {
+		return getTemplate().query(maximoId).excecute(new Mapper<Integer>() {
+
+			@Override
+			public Integer map(Object[] obj) {
+				return (Integer) obj[0];
+			}
+		}).get(0);
 	}
 }

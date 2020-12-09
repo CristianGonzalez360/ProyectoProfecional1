@@ -152,4 +152,16 @@ public class FichaTecnicaPanel extends JPanel {
 		this.txtFamilia.setText(vehiculo.getFamilia());
 		this.txtLinea.setText(vehiculo.getLinea());
 	}
+
+
+	public void cleardata() {
+		this.textNroDeMotor.setText("");
+		this.textNroChasis.setText("");
+		this.textPatente.setText("");
+		this.textKilometraje.setText("");;
+		this.textMarca.setText("");
+		this.textModelo.setText("");
+		this.textColor.setText("");
+		this.textCombustion.setText("");		
+	}
 }
