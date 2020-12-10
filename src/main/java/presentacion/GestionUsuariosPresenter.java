@@ -47,7 +47,6 @@ public class GestionUsuariosPresenter {
 	}
 
 	private void onDisplayFormAltaDeUsuario(ActionEvent a) {
-		FormAltaUsuarioView.getInstance().clearData();
 		FormAltaUsuarioView.getInstance().open();
 	}
 
