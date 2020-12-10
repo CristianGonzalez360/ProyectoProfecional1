@@ -10,6 +10,7 @@ import dto.CuentaDTO;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 public class CuentaUsuarioPanel extends JPanel {
 	
@@ -22,6 +23,7 @@ public class CuentaUsuarioPanel extends JPanel {
 	private JTextField textRole;
 
 	public CuentaUsuarioPanel() {
+		setBorder(new TitledBorder(null, "Datos de la cuenta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
@@ -55,6 +57,7 @@ public class CuentaUsuarioPanel extends JPanel {
 		textRole = new JTextField();
 		add(textRole, "4, 6, fill, default");
 		textRole.setColumns(10);
+		clearData();
 	}
 
 	public void setData(CuentaDTO cuenta) {
@@ -68,7 +71,7 @@ public class CuentaUsuarioPanel extends JPanel {
 		ret.setNombreUsuario(this.textNombreUsuario.getText());
 		ret.setRole(this.textRole.getText());
 		ret.setPassword(this.textPassword.getText());
-		return new CuentaDTO();
+		return ret;
 	}
 	
 	public void clearData() {

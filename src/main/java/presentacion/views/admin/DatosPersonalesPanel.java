@@ -1,197 +1,188 @@
 package presentacion.views.admin;
 
-import java.awt.Color;
-
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.TitledBorder;
-
-import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import dto.DatosPersonalesDTO;
 
+import com.jgoodies.forms.layout.FormSpecs;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+
 public class DatosPersonalesPanel extends JPanel {
-
-	private static final long serialVersionUID = -6238113605388598822L;
-
-	private JTextField textDni;
+	
+	private static final long serialVersionUID = 1506820789976519507L;
 
 	private JTextField textNombre;
-
+		
+	private JTextField textApellido;
+	
+	private JTextField textDni;
+	
 	private JTextField textTelefono;
-
+	
 	private JTextField textEmail;
-
+	
 	private JTextField textCalle;
-
+	
 	private JTextField textAltura;
-
+		
 	private JTextField textPiso;
-
+	
 	private JTextField textDpto;
-
+	
 	private JTextField textLocalidad;
 
-	private JLabel lblApellido;
-
-	private JTextField tfApellido;
-
 	public DatosPersonalesPanel() {
-		setLayout(new FormLayout(
-				new ColumnSpec[] { FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("right:72px"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("122px:grow"), },
-				new RowSpec[] { FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
-
-		JLabel lblNewLabel_1 = new JLabel("Nombre");
-		add(lblNewLabel_1, "2, 2, right, center");
-
+		setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblNewLabel = new JLabel("Nombre");
+		add(lblNewLabel, "2, 2, left, default");
+		
 		textNombre = new JTextField();
-		textNombre.setFocusable(false);
-		add(textNombre, "4, 2, fill, top");
+		add(textNombre, "4, 2, fill, default");
 		textNombre.setColumns(10);
-
-		lblApellido = new JLabel("Apellido");
-		add(lblApellido, "2, 4, right, default");
-
-		tfApellido = new JTextField();
-		tfApellido.setFocusable(false);
-		tfApellido.setEditable(false);
-		add(tfApellido, "4, 4, fill, top");
-		tfApellido.setColumns(10);
-
-		JLabel lblNewLabel = new JLabel("Dni");
-		add(lblNewLabel, "2, 6, right, center");
-
+		
+		JLabel lblNewLabel_1 = new JLabel("Apellido");
+		add(lblNewLabel_1, "2, 4, left, default");
+		
+		textApellido = new JTextField();
+		add(textApellido, "4, 4, fill, default");
+		textApellido.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("DNI");
+		add(lblNewLabel_2, "2, 6, left, default");
+		
 		textDni = new JTextField();
-		textDni.setFocusable(false);
-		add(textDni, "4, 6, fill, top");
+		add(textDni, "4, 6, fill, default");
 		textDni.setColumns(10);
-
-		JLabel lblNewLabel_2 = new JLabel("Telefono");
-		add(lblNewLabel_2, "2, 8, right, center");
-
+		
+		JLabel lblNewLabel_3 = new JLabel("Teléfono");
+		add(lblNewLabel_3, "2, 8, right, default");
+		
 		textTelefono = new JTextField();
-		textTelefono.setFocusable(false);
-		add(textTelefono, "4, 8, fill, top");
+		add(textTelefono, "4, 8, fill, default");
 		textTelefono.setColumns(10);
-
-		JLabel lblNewLabel_3 = new JLabel("Email");
-		add(lblNewLabel_3, "2, 10, right, center");
-
+		
+		JLabel lblNewLabel_4 = new JLabel("Email");
+		add(lblNewLabel_4, "2, 10, left, default");
+		
 		textEmail = new JTextField();
-		textEmail.setFocusable(false);
-		add(textEmail, "4, 10, fill, top");
+		add(textEmail, "4, 10, fill, default");
 		textEmail.setColumns(10);
-
-		JLabel Calle = new JLabel("calle");
-		add(Calle, "2, 12, right, center");
-
+		
+		JLabel lblNewLabel_5 = new JLabel("Calle");
+		add(lblNewLabel_5, "2, 12, left, default");
+		
 		textCalle = new JTextField();
-		textCalle.setFocusable(false);
-		add(textCalle, "4, 12, fill, top");
+		add(textCalle, "4, 12, fill, default");
 		textCalle.setColumns(10);
-
-		JLabel lblNewLabel_4 = new JLabel("Altura");
-		add(lblNewLabel_4, "2, 14, right, center");
-
+		
+		JLabel lblNewLabel_6 = new JLabel("Altura");
+		add(lblNewLabel_6, "2, 14, left, default");
+		
 		textAltura = new JTextField();
-		textAltura.setFocusable(false);
-		add(textAltura, "4, 14, fill, top");
+		add(textAltura, "4, 14, fill, default");
 		textAltura.setColumns(10);
-
-		JLabel lblNewLabel_5 = new JLabel("Piso");
-		add(lblNewLabel_5, "2, 16, right, center");
-
+		
+		JLabel lblNewLabel_7 = new JLabel("Piso");
+		add(lblNewLabel_7, "2, 16, left, default");
+		
 		textPiso = new JTextField();
-		textPiso.setFocusable(false);
-		add(textPiso, "4, 16, fill, top");
+		add(textPiso, "4, 16, fill, default");
 		textPiso.setColumns(10);
-
-		JLabel lblNewLabel_6 = new JLabel("Dpto");
-		add(lblNewLabel_6, "2, 18, right, center");
-
+		
+		JLabel lblNewLabel_8 = new JLabel("Dpto");
+		add(lblNewLabel_8, "2, 18, left, default");
+		
 		textDpto = new JTextField();
-		textDpto.setFocusable(false);
-		add(textDpto, "4, 18, fill, top");
+		add(textDpto, "4, 18, fill, default");
 		textDpto.setColumns(10);
-
-		JLabel lblNewLabel_7 = new JLabel("Localidad");
-		add(lblNewLabel_7, "2, 20, right, center");
-
+		
+		JLabel lblNewLabel_9 = new JLabel("Localidad");
+		add(lblNewLabel_9, "2, 20, left, default");
+		
 		textLocalidad = new JTextField();
-		textLocalidad.setFocusable(false);
-		add(textLocalidad, "4, 20, fill, top");
+		add(textLocalidad, "4, 20, fill, default");
 		textLocalidad.setColumns(10);
-
-		this.disableAllClienteInputs();
+		clearData();
 	}
 
-	private void disableAllClienteInputs() {
-		this.textNombre.setEditable(false);
-		this.textDni.setEditable(false);
-		this.textTelefono.setEditable(false);
-		this.textEmail.setEditable(false);
-		this.textCalle.setEditable(false);
-		this.textAltura.setEditable(false);
-		this.textPiso.setEditable(false);
-		this.textDpto.setEditable(false);
-		this.textLocalidad.setEditable(false);
+	public void setBorderTitle(String string) {
+		setBorder(new TitledBorder(null, string, TitledBorder.LEADING, TitledBorder.TOP, null, null));
+	}
+
+	public void setData(DatosPersonalesDTO datos) {
+		textNombre.setText(datos.getNombreCompleto());
+		textApellido.setText(datos.getApellido());
+		textDni.setText(datos.getDni().toString());
+		textTelefono.setText(datos.getTelefono());
+		textEmail.setText(datos.getEmail());
+		textCalle.setText(datos.getCalle());
+		textAltura.setText(datos.getAltura());
+		textPiso.setText(datos.getPiso());
+		textDpto.setText(datos.getDpto());
+		textLocalidad.setText(datos.getLocalidad());
 	}
 
 	public void clearData() {
-		this.textNombre.setText("");
-		this.textDni.setText("");
-		this.textTelefono.setText("");
-		this.textEmail.setText("");
-		this.textCalle.setText("");
-		this.textAltura.setText("");
-		this.textPiso.setText("");
-		this.textDpto.setText("");
-		this.textLocalidad.setText("");
-		this.tfApellido.setText("");
-	}
-
-	public void setData(DatosPersonalesDTO dto) {
-		this.textNombre.setText(dto.getNombreCompleto());
-		this.tfApellido.setText(dto.getApellido());
-		this.textDni.setText(dto.getDni().toString());
-		this.textTelefono.setText(dto.getTelefono());
-		this.textEmail.setText(dto.getEmail());
-		this.textCalle.setText(dto.getCalle());
-		this.textAltura.setText(dto.getAltura().toString());
-		this.textPiso.setText(dto.getPiso().toString());
-		this.textDpto.setText(dto.getDpto());
-		this.textLocalidad.setText(dto.getLocalidad());
+		textNombre.setText("");
+		textApellido.setText("");
+		textDni.setText("");
+		textTelefono.setText("");
+		textEmail.setText("");
+		textCalle.setText("");
+		textAltura.setText("");
+		textPiso.setText("");
+		textDpto.setText("");
+		textLocalidad.setText("");
 	}
 
 	public DatosPersonalesDTO getData() {
 		DatosPersonalesDTO dto = new DatosPersonalesDTO();
-		dto.setNombreCompleto(this.textNombre.getText());
-		dto.setDni(textDni.getText().trim().isEmpty() ? null : Integer.parseInt(textDni.getText()));
-		dto.setTelefono(textTelefono.getText());
+		dto.setNombreCompleto(textNombre.getText());
+		dto.setApellido(textApellido.getText());
+		try {
+			Integer.parseInt(textDni.getText());		
+			dto.setDni(Integer.parseInt(textDni.getText()));
+		} catch(NumberFormatException e) {
+			dto.setDni(null);
+		}
 		dto.setTelefono(textTelefono.getText());
 		dto.setEmail(textEmail.getText());
 		dto.setCalle(textCalle.getText());
-		dto.setAltura(textAltura.getSelectedText());
+		dto.setAltura(textAltura.getText());
 		dto.setPiso(textPiso.getText());
 		dto.setDpto(textDpto.getText());
 		dto.setLocalidad(textLocalidad.getText());
 		return dto;
-	}
-	
-	public void setBorderTitle(String title) {
-		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), title,
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 	}
 }

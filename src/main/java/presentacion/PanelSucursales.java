@@ -14,7 +14,7 @@ import javax.swing.event.ListSelectionListener;
 import dto.MonedaDTO;
 import dto.SucursalDTO;
 import presentacion.views.admin.PanelBusquedaSucursal;
-import presentacion.views.admin.PanelDatosMoneda;
+import presentacion.views.admin.PanelDataMoneda;
 import presentacion.views.vendedor.TablePanel;
 
 public class PanelSucursales extends JPanel {
@@ -23,7 +23,7 @@ public class PanelSucursales extends JPanel {
 	
 	private PanelBusquedaSucursal panelBusqueda;
 	
-	private PanelDatosMoneda panelDatosMoneda;
+	private PanelDataMoneda panelDatosMoneda;
 	
 	private TablePanel<SucursalDTO> tablePanel;
 	
@@ -72,7 +72,7 @@ public class PanelSucursales extends JPanel {
 
 		panelCenter.add(tablePanel);
 				
-		panelDatosMoneda = new PanelDatosMoneda();
+		panelDatosMoneda = new PanelDataMoneda();
 		panelDatosMoneda.setNonEditable();
 		panelCenter.add(panelDatosMoneda);
 		
