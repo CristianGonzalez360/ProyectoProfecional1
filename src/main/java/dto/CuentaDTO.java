@@ -1,6 +1,10 @@
 package dto;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
+import dto.validators.StringValidator;
 
 public class CuentaDTO {
 
@@ -77,6 +81,17 @@ public class CuentaDTO {
 		this.role = role;
 	}
 
+	public List<String> validate() {
+		List<String> errors = new LinkedList<>();
+		errors.addAll(new StringValidator(this.nombreUsuario).notBlank("El nombre es obligatorio")
+				.max(20, "Maximo una longitud de 8 caracteres para el nombre").validate());
+		errors.addAll(new StringValidator(this.password).notBlank("El password es obligatorio")
+				.max(20, "Maximo una longitud de 8 caracteres para el password").validate());
+		errors.addAll(new StringValidator(this.role).notBlank("El rol es obligatorio")
+				.max(20, "Maximo una longitud de 12 caracteres para el rol").validate());		
+		return errors;
+	}
+	
 	@Override
 	public String toString() {
 		return "CuentaDTO [idCuenta=" + idCuenta + ", fechaDeAlta=" + fechaDeAlta + ", fechaDeBaja=" + fechaDeBaja

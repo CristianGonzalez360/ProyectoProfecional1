@@ -6,4 +6,7 @@ public interface DatosPersonalesDao extends GenericDao<DatosPersonalesDTO, Integ
 
 	DatosPersonalesDTO readByDni(Integer dni);
 
+	DatosPersonalesDTO readByTelefono(String telefono);
+
+	DatosPersonalesDTO readByEmail(String email);
 }

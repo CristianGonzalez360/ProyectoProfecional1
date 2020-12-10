@@ -10,17 +10,24 @@ import presentacion.views.vendedor.TablePanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.BoxLayout;
 
-public class PanelUsuarios extends JPanel {
+public class PanelGestionUsuariosView extends JPanel {
 
 	private static final long serialVersionUID = 3976756890877745568L;
 	
 	private TablePanel<UsuarioDTO> tableUsuarios;
+
+	private DatosPersonalesPanel datosPanel;
 	
-	private UsuarioDataPAnel usuarioDataPanel;
+	private CuentaUsuarioPanel cuentaPanel;
+	
+	private JButton btnRegistrarUsuario;
 		
-	public PanelUsuarios() {
+	public PanelGestionUsuariosView() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_1 = new JPanel();
@@ -30,8 +37,8 @@ public class PanelUsuarios extends JPanel {
 		JPanel panelSouth = new JPanel();
 		panel_1.add(panelSouth, BorderLayout.SOUTH);
 		
-		usuarioDataPanel = new UsuarioDataPAnel();
-		panel_1.add(usuarioDataPanel, BorderLayout.WEST);
+		btnRegistrarUsuario = new JButton("Registrar usuario");
+		panelSouth.add(btnRegistrarUsuario);
 		
 		tableUsuarios = new TablePanel<UsuarioDTO>(new String [] {"Legajo", "Nombre", "DNI"}) {
 
@@ -58,6 +65,14 @@ public class PanelUsuarios extends JPanel {
 		panel_1.add(tableUsuarios, BorderLayout.CENTER);
 		tableUsuarios.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Listado de usuarios",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		
+		JPanel panel = new JPanel();
+		cuentaPanel = new CuentaUsuarioPanel();
+		datosPanel = new DatosPersonalesPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(datosPanel);
+		panel.add(cuentaPanel);
+		panel_1.add(panel, BorderLayout.WEST);
 	}
 	
 	public void setActionSelectUsuario(ListSelectionListener listener) {
@@ -73,10 +88,21 @@ public class PanelUsuarios extends JPanel {
 	}
 	
 	public void setData(UsuarioDTO target) {
-		usuarioDataPanel.setData(target);
+		datosPanel.setData(target.getDatos());
+		cuentaPanel.setData(target.getCuenta());
 	}
 
 	public void clearUsuarioData() {
-		usuarioDataPanel.clearData();
+		datosPanel.clearData();
+		cuentaPanel.clearData();
+	}
+
+	public void setActionRegistrarUsuario(ActionListener listener) {
+		this.btnRegistrarUsuario.addActionListener(listener);
+	}
+
+	public void clearData() {
+		this.datosPanel.clearData();
+		this.tableUsuarios.clearData();
 	}
 }

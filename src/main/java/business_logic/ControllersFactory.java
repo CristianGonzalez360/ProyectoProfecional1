@@ -1,7 +1,5 @@
 package business_logic;
 
-import presentacion.views.admin.PanelUsuarios;
-
 public abstract class ControllersFactory {
 
 	private static ControllersFactory concreteFactory;
