@@ -18,6 +18,10 @@ import com.jgoodies.forms.layout.RowSpec;
 import dto.CaracteristicaVehiculoDTO;
 import dto.temporal.CompraVehiculoUsadoDTO;
 import javax.swing.JButton;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
+import javax.swing.UIManager;
 
 public class FormularioCompraDeVehiculos extends JDialog {
 	
@@ -31,17 +35,22 @@ public class FormularioCompraDeVehiculos extends JDialog {
 	private JButton btnRegistrar;
 	
 	private FormularioCompraDeVehiculos() {
-		setBounds(100,100,650,456);
+		setTitle("Registro de Vehiculo Usado");
+		setBounds(100,100,650,540);
 		setResizable(false);
+		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
 		
 		JPanel panelCentral = new JPanel();
 		getContentPane().add(panelCentral,BorderLayout.CENTER);
 		this.caracteristicas = new CaracteristicaDeVehiculoPanel();
+		caracteristicas.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos T\u00E9cnicos del Veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
 		this.fichaTecnica = new FichaTecnicaPanel();
+		fichaTecnica.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n del Vehiculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		
 		JPanel precios = new JPanel();
+		precios.setBorder(UIManager.getBorder("TitledBorder.border"));
 		
 		panelCentral.add(precios);
 		precios.setLayout(new FormLayout(new ColumnSpec[] {
@@ -54,13 +63,13 @@ public class FormularioCompraDeVehiculos extends JDialog {
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
 				FormSpecs.LINE_GAP_ROWSPEC,
-				RowSpec.decode("20px"),}));
+				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		JLabel lblPrecioDeCompra = new JLabel("Precio de Compra");
 		precios.add(lblPrecioDeCompra, "1, 2, left, center");
 		
 		txtPrecioCompra = new JTextField();
-		precios.add(txtPrecioCompra, "3, 2, fill, top");
+		precios.add(txtPrecioCompra, "3, 2, fill, default");
 		txtPrecioCompra.setColumns(10);
 		
 		JLabel lblPrecioDeVenta = new JLabel("Precio de venta");

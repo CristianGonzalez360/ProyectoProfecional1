@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 import javax.swing.event.ListSelectionEvent;
 
@@ -11,6 +12,7 @@ import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.temporal.CompraVehiculoUsadoDTO;
 import presentacion.views.gerente.FormularioCompraDeVehiculos;
 import presentacion.views.gerente.PanelVehiculosUsados;
+import presentacion.views.utils.MessageDialog;
 
 public class VehiculosUsadosPresenter {
 
@@ -29,13 +31,20 @@ public class VehiculosUsadosPresenter {
 
 	private void registrar(ActionEvent a) {
 		CompraVehiculoUsadoDTO compra = FormularioCompraDeVehiculos.getInstance().getData();
-		this.controller.saveVehiculoUsado(compra);
-		FormularioCompraDeVehiculos.getInstance().close();
-		this.view.clearData();
-		this.view.setData(controller.readVehiculosUsados());
+		List<String> errors = compra.validate();
+		if(errors.isEmpty()) {
+			this.controller.saveVehiculoUsado(compra);
+			FormularioCompraDeVehiculos.getInstance().close();
+			this.view.clearData();
+			this.view.setData(controller.readVehiculosUsados());
+		}
+		else {
+			new MessageDialog().showMessages(errors);
+		}
 	}
 
 	private void MostrarFormulario(ActionEvent a) {
+		FormularioCompraDeVehiculos.getInstance().clearData();
 		FormularioCompraDeVehiculos.getInstance().display();
 	}
 

@@ -11,6 +11,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import dto.CaracteristicaVehiculoDTO;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
+import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class CaracteristicaNuevoCarView extends JPanel {
@@ -32,7 +33,7 @@ public class CaracteristicaNuevoCarView extends JPanel {
 	
 	
 	public CaracteristicaNuevoCarView() {
-		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Caracteristicas del vehiculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Caracteristicas del vehiculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("right:123px"),
