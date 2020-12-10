@@ -6,7 +6,7 @@ import dto.UsuarioDTO;
 
 import javax.swing.BoxLayout;
 
-public class UsuarioDataPAnel extends JPanel {
+public class PanelDataUsuarios extends JPanel {
 
 	private static final long serialVersionUID = -1126134422008154549L;
 
@@ -14,7 +14,7 @@ public class UsuarioDataPAnel extends JPanel {
 	
 	private CuentaUsuarioPanel cuentaUsuarioPanel;
 	
-	public UsuarioDataPAnel() {
+	public PanelDataUsuarios() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		JPanel panel = new JPanel();
@@ -28,7 +28,7 @@ public class UsuarioDataPAnel extends JPanel {
 		cuentaUsuarioPanel = new CuentaUsuarioPanel();
 		panel.add(cuentaUsuarioPanel);
 	}
-	
+		
 	public UsuarioDTO getData() {
 		UsuarioDTO ret = new UsuarioDTO();
 		ret.setDatosPersonales(usuarioPanelData.getData());

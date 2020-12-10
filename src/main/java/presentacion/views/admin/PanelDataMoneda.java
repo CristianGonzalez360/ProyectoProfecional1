@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-public class PanelDatosMoneda extends JPanel {
+public class PanelDataMoneda extends JPanel {
 	
 	private static final long serialVersionUID = 1981816220276090041L;
 
@@ -24,7 +24,7 @@ public class PanelDatosMoneda extends JPanel {
 	
 	private JTextField textSimbolo;
 
-	public PanelDatosMoneda() {
+	public PanelDataMoneda() {
 		setBorder(new TitledBorder(null, "Datos de la moneda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,

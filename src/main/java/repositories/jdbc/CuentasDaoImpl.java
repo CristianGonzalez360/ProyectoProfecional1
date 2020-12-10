@@ -15,9 +15,12 @@ public class CuentasDaoImpl extends GenericJdbcDao<CuentaDTO> implements Cuentas
 
 	private static final String readAll = "SELECT * FROM Cuentas";
 
-	private static final String readByCredentials = readAll
-			+ " WHERE Cuentas.nombreUsuCuenta = ? AND Cuentas.passUsuCuenta = ?";
+	private static final String readByCredentials = readAll	+ " WHERE Cuentas.nombreUsuCuenta = ? AND Cuentas.passUsuCuenta = ?";
 
+	private static final String readByNombreUsuario = "SELECT * FROM Cuentas WHERE Cuentas.nombreUsuCuenta = ?";
+	
+	private static final String readById = "SELECT * FROM Cuentas WHERE Cuentas.idCuenta = ?";
+	
 	public CuentasDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -32,20 +35,18 @@ public class CuentasDaoImpl extends GenericJdbcDao<CuentaDTO> implements Cuentas
 
 	@Override
 	public boolean update(CuentaDTO entity) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean deleteById(Integer id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public CuentaDTO readByID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<CuentaDTO> dto = getTemplate().query(readById).param(id).excecute(getMapper());
+		return dto.isEmpty() ? null : dto.get(0);
 	}
 
 	@Override
@@ -53,6 +54,12 @@ public class CuentasDaoImpl extends GenericJdbcDao<CuentaDTO> implements Cuentas
 		return getTemplate().query(readAll).excecute(getMapper());
 	}
 
+	@Override
+	public CuentaDTO readByNombreUsuario(String nombre) {
+		List<CuentaDTO> dto = getTemplate().query(readByNombreUsuario).param(nombre).excecute(getMapper());
+		return dto.isEmpty() ? null : dto.get(0);
+	}
+	
 	@Override
 	public CuentaDTO readByCredentials(String email, String pass) {
 		List<CuentaDTO> dto = getTemplate().query(readByCredentials).param(email).param(pass).excecute(getMapper());
@@ -66,12 +73,13 @@ public class CuentasDaoImpl extends GenericJdbcDao<CuentaDTO> implements Cuentas
 			@Override
 			public CuentaDTO map(Object[] obj) {
 				CuentaDTO ret = new CuentaDTO();
-				ret.setIdCuenta((Integer) obj[0]);
-				ret.setFechaDeAlta(obj[1] == null ? null : (Date) obj[1]);
-				ret.setFechaDeBaja(obj[2] == null ? null : (Date) obj[2]);
-				ret.setNombreUsuario((String) obj[3]);
-				ret.setPassword((String) obj[4]);
-				ret.setRole((String) obj[5]);
+				ret.setIdCuenta((Integer)obj[0]);
+				ret.setFechaDeAlta(obj[1] == null ? null : (Date)obj[1]);
+				ret.setFechaDeBaja(obj[2] == null ? null : (Date)obj[2]);
+				//ret.esActiva(?)
+				ret.setNombreUsuario((String)obj[4]);
+				ret.setPassword((String)obj[5]);
+				ret.setRole((String)obj[6]);
 				return ret;
 			}
 		};

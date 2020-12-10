@@ -16,6 +16,8 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 
 	private static final String readAll = "SELECT * FROM DatosPersonales";
 
+	private static final String readByTelefono = "SELECT * FROM DatosPersonales WHERE DatosPersonales.telefono = ?";
+	
 	private static final String readByDni = readAll + " wHERE DatosPersonales.dni = ?";
 	
 	private static final String readAllId = readAll + " WHERE DatosPersonales.idDatosPersonales = ?";
@@ -46,6 +48,24 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 		return false;
 	}
 
+	@Override
+	public DatosPersonalesDTO readByTelefono(String telefono) {
+		List<DatosPersonalesDTO> dtos = getTemplate()
+				.query(readByTelefono)
+				.param(telefono)
+				.excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
+	}
+
+	@Override
+	public DatosPersonalesDTO readByEmail(String email) {
+		List<DatosPersonalesDTO> dtos = getTemplate()
+				.query(readAll + " WHERE email = ?")
+				.param(email)
+				.excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
+	}
+	
 	@Override
 	public DatosPersonalesDTO readByID(Integer id) {
 		List<DatosPersonalesDTO> dtos = getTemplate().query(readAllId).param(id).excecute(getMapper());

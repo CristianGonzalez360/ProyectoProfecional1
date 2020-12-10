@@ -29,7 +29,9 @@ public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements Usuar
 
 	@Override
 	public boolean insert(UsuarioDTO entity) {
-		return getTemplate().query(insert).param(entity.getCuenta().getIdCuenta()).param(entity.getDatos().getId())
+		return getTemplate().query(insert)
+				.param(entity.getCuenta().getIdCuenta())
+				.param(entity.getDatos().getId())
 				.excecute();
 	}
 
@@ -74,7 +76,7 @@ public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements Usuar
 				cuenta.setNombreUsuario((String) obj[5]);
 				cuenta.setPassword((String) obj[6]);
 				cuenta.setRole((String) obj[7]);
-
+				
 				DatosPersonalesDTO dper = new DatosPersonalesDTO();
 				dper.setId((Integer) obj[2]);
 				dper.setNombreCompleto((String) obj[8]);
