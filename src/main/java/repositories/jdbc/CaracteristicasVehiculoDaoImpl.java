@@ -13,6 +13,8 @@ public class CaracteristicasVehiculoDaoImpl extends GenericJdbcDao<Caracteristic
 			"INSERT INTO CaracteristicasVehiculo(cilindrada, motor,direccion,potencia,frenosDelanteros,transmision,frenosTraseros,torqueMaximo,volumenDeBaul,nroDePuertas, precio) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
 	private static final String readById = "SELECT * FROM CaracteristicasVehiculo WHERE idCaracteristica = ?";
+
+	private static final String maximoId = "SELECT MAX(idCaracteristica) FROM CaracteristicasVehiculo";
 	
 	public CaracteristicasVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -79,5 +81,16 @@ public class CaracteristicasVehiculoDaoImpl extends GenericJdbcDao<Caracteristic
 				return ret;
 			}			
 		};
+	}
+	
+	@Override
+	public Integer getIdMaximo() {
+		return getTemplate().query(maximoId).excecute(new Mapper<Integer>() {
+
+			@Override
+			public Integer map(Object[] obj) {
+				return (Integer) obj[0];
+			}
+		}).get(0);
 	}
 }

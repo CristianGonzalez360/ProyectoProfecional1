@@ -8,6 +8,8 @@ import repositories.CompraVehiculoDao;
 import repositories.jdbc.utils.Mapper;
 
 public class CompraVehiculoDaoImpl extends GenericJdbcDao<CompraVehiculoDTO> implements CompraVehiculoDao {
+	
+	private static final String INSERT = "INSERT INTO CompraVehiculo(idVehiculo, precioCompra, fechaCompra, idUsuCompra) VALUES (?,?,?,?)";
 
 	public CompraVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -22,8 +24,7 @@ public class CompraVehiculoDaoImpl extends GenericJdbcDao<CompraVehiculoDTO> imp
 
 	@Override
 	public boolean insert(CompraVehiculoDTO entity) {
-		// TODO Auto-generated method stub
-		return false;
+		return getTemplate().query(INSERT).param(entity.getIdVehiculo()).param(entity.getPrecioCompra()).param(entity.getFechaCompra()).param(entity.getIdUsuCompra()).excecute();
 	}
 
 	@Override

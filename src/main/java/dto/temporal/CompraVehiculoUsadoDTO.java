@@ -1,9 +1,7 @@
 package dto.temporal;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-
 import dto.validators.StringValidator;
 
 public class CompraVehiculoUsadoDTO {
@@ -16,9 +14,6 @@ public class CompraVehiculoUsadoDTO {
 	private String patente;
 	private String color;
 	private String combustion;
-	private String asegurador;
-	private String nroPolizaSeguro;
-	private String kilometrajeGarantia;
 	private String cilindrada;
 	private String motor;
 	private String transmision;
@@ -45,10 +40,20 @@ public class CompraVehiculoUsadoDTO {
 		errors.addAll(new StringValidator(this.patente).notBlank("La patente es obligatoria").validate());
 		errors.addAll(new StringValidator(this.color).notBlank("El color es obligatorio.").validate());
 		errors.addAll(new StringValidator(this.combustion).notBlank("El tipo de combustión es obligatoria.").validate());
-		errors.addAll(new StringValidator(this.asegurador).notBlank("El asegurador es obligatorio").validate());
-		errors.addAll(new StringValidator(this.nroPolizaSeguro).number("El nro. de la poliza debe ser un número").validate());
-		errors.addAll(new StringValidator(this.kilometrajeGarantia).number("El kilometraje en garantía debe ser un número").validate());
-		//TODO
+		errors.addAll(new StringValidator(this.cilindrada).notBlank("Debe ingresar cilindrada.").max(20,"Cilindrada no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.motor).notBlank("Debe ingresar motor.").max(20,"Motor no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.transmision).notBlank("Debe ingresar transmision.").max(30,"Transmision no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.direccion).notBlank("Debe ingresar direccion.").max(26,"Direccion no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.potencia).notBlank("Debe ingresar potencia.").max(20,"Potencia no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.frenosDelanteros).notBlank("Debe ingresar frenosDelanteros.").max(20,"Frenos Delanteros no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.frenosTraseros).notBlank("Debe ingresar frenosTraseros.").max(20,"Frenos Traseros no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.torqueMaximo).notBlank("Debe ingresar torqueMaximo.").max(20,"Torque maximo no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.volumenBaul).notBlank("Debe ingresar volumenBaul.").max(20,"Volumen de baúl no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.cantidadPuertas).number("Cantidad de Puertas debe ser un número.").notBlank("Debe ingresar cantidadPuertas.").max(20,"Cantidad de puertas no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.familia).notBlank("Debe ingresar familia.").max(20,"Familia no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.linea).notBlank("Debe ingresar linea.").max(20,"Linea no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.precio).notBlank("Debe ingresar el Precio de Compra.").positiveDouble("Precio de Compra debe ser un número").max(20,"Precio de Compra no puede tener mas de 20 caracteres").validate());
+		errors.addAll(new StringValidator(this.precioVenta).notBlank("Debe ingresar Precio de Venta.").positiveDouble("Precio de Venta debe ser un número").max(20,"Precio de Venta no puede tener mas de 20 caracteres").validate());
 		return errors;
 	}
 	
@@ -99,24 +104,6 @@ public class CompraVehiculoUsadoDTO {
 	}
 	public void setCombustion(String combustion) {
 		this.combustion = combustion;
-	}
-	public String getAsegurador() {
-		return asegurador;
-	}
-	public void setAsegurador(String asegurador) {
-		this.asegurador = asegurador;
-	}
-	public String getNroPolizaSeguro() {
-		return nroPolizaSeguro;
-	}
-	public void setNroPolizaSeguro(String nroPolizaSeguro) {
-		this.nroPolizaSeguro = nroPolizaSeguro;
-	}
-	public String getKilometrajeGarantia() {
-		return kilometrajeGarantia;
-	}
-	public void setKilometrajeGarantia(String kilometrajeGarantia) {
-		this.kilometrajeGarantia = kilometrajeGarantia;
 	}
 	public String getCilindrada() {
 		return cilindrada;

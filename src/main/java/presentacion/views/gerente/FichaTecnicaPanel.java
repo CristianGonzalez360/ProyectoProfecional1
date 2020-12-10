@@ -31,12 +31,6 @@ public class FichaTecnicaPanel extends JPanel {
 	private JTextField textColor = new JTextField();
 	private JLabel lblNewLabel_7 = new JLabel("Combustion");
 	private JTextField textCombustion = new JTextField();
-	private JLabel lblNewLabel_8 = new JLabel("Asegurador");
-	private JTextField textAsegurador = new JTextField();
-	private JLabel lblNewLabel_9 = new JLabel("Nro. poliza");
-	private JTextField textNroPoliza = new JTextField();
-	private JLabel lblNewLabel_10 = new JLabel("Garantia");
-	private JTextField textGarantia = new JTextField();
 	private JTextField txtFamilia;
 	private JTextField txtLinea;
 	
@@ -151,5 +145,17 @@ public class FichaTecnicaPanel extends JPanel {
 	public void setdata(VehiculoDTO vehiculo) {
 		this.txtFamilia.setText(vehiculo.getFamilia());
 		this.txtLinea.setText(vehiculo.getLinea());
+	}
+
+
+	public void cleardata() {
+		this.textNroDeMotor.setText("");
+		this.textNroChasis.setText("");
+		this.textPatente.setText("");
+		this.textKilometraje.setText("");;
+		this.textMarca.setText("");
+		this.textModelo.setText("");
+		this.textColor.setText("");
+		this.textCombustion.setText("");		
 	}
 }
