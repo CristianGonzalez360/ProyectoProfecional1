@@ -24,13 +24,11 @@ public class FacturaDTO {
 	
 	private Integer dni;
 
-
 	private ClienteDTO cliente;
 
 	private List<RepuestoCompradoDTO> repuestos;
 	
 	private int idCliente;
-
 
 	public FacturaDTO() {
 		this.estado = "IMPAGA";

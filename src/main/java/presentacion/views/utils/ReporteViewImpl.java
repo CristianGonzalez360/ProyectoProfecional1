@@ -23,6 +23,7 @@ public class ReporteViewImpl {
 	private static final String URLFacturaTaller = "FacturaTaller.jasper";
 	private static final String URLFacturaRepuestos = "FacturaRepuestos.jasper";
 	private static final String URLFacturaVentaVehiculo = "FacturaVentaVehiculo/FacturaVehiculo.jasper";
+	private static final String URLTicket = "Ticket.jasper";
 	
 	private JasperReport reporte;
 	private JasperViewer reporteViewer;
@@ -76,6 +77,12 @@ public class ReporteViewImpl {
 		List<FacturaVentaVehiculoReport> report  = new ArrayList<>();
 		report.add(factura);
 		setData(report);
-
+	}
+	
+	public void setData(TicketReport ticket) {
+		this.file = URLTicket;
+		List<TicketReport> report  = new ArrayList<>();
+		report.add(ticket);
+		setData(report);
 	}
 }

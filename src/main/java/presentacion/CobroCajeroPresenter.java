@@ -16,6 +16,8 @@ import presentacion.views.cajero.PanelCobroCajeroView;
 import presentacion.views.cajero.TarjetaCreditoFormView;
 import presentacion.views.cajero.TarjetaDebitoFormView;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.utils.ReporteViewImpl;
+import presentacion.views.utils.TicketReport;
 
 public class CobroCajeroPresenter {
 
@@ -108,6 +110,7 @@ public class CobroCajeroPresenter {
 					} else if (resp == 0) {
 						facturasController.updatePorPago(idPresupuesto);
 						this.onCargar(a);
+						mostrarTicket(idPresupuesto, "Tarjeta de Crédito");
 						JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
 								JOptionPane.INFORMATION_MESSAGE);
 						this.viewCredito.setVisible(false);
@@ -146,6 +149,7 @@ public class CobroCajeroPresenter {
 					} else if (resp == 0) {
 						facturasController.updatePorPago(idPresupuesto);
 						this.onCargar(a);
+						mostrarTicket(idPresupuesto, "Tarjeta de Debito");
 						JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
 								JOptionPane.INFORMATION_MESSAGE);
 						this.viewDebito.setVisible(false);
@@ -177,6 +181,7 @@ public class CobroCajeroPresenter {
 			} else if (resp == 0) {
 				facturasController.updatePorPago(idPresupuesto);
 				this.onCargar(a);
+				mostrarTicket(idPresupuesto, "MercadoPago");
 				JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
 						JOptionPane.INFORMATION_MESSAGE);
 				this.viewMercadoPago.setVisible(false);
@@ -200,6 +205,7 @@ public class CobroCajeroPresenter {
 			} else if (resp == 0) {
 				facturasController.updatePorPago(idPresupuesto);
 				this.onCargar(a);
+				mostrarTicket(idPresupuesto, "BitCoin");
 				JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
 						JOptionPane.INFORMATION_MESSAGE);
 				this.viewBitcoin.setVisible(false);
@@ -222,11 +228,20 @@ public class CobroCajeroPresenter {
 			} else if (resp == 0) {
 				facturasController.updatePorPago(idPresupuesto);
 				this.onCargar(a);
+				mostrarTicket(idPresupuesto, "Efectivo");
 				JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		} else {
 			JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	private void mostrarTicket(Integer idFactura, String medioPago) {
+		ReporteViewImpl report = new ReporteViewImpl();
+		TicketReport ticket = new TicketReport(facturasController.readByFactura(idFactura));
+		ticket.setMedioDePago(medioPago);
+		report.setData(ticket);
+		report.open();
 	}
 }
