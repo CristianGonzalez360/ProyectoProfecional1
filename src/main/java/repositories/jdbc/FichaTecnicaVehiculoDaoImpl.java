@@ -19,6 +19,8 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 	private static final String readByNroMotor = readAll + " " + "WHERE nroMotor = ?";
 
 	private static final String readById = readAll + " " + "WHERE idFichaTecnicaVehiculo = ?";
+	
+	private static final String maximoId = "SELECT MAX(idFichaTecnicaVehiculo) FROM FichaTecnicaVehiculo";
 
 	public FichaTecnicaVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -84,5 +86,16 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 				return dto;
 			}
 		};
+	}
+
+	@Override
+	public Integer getIdMaximo() {
+		return getTemplate().query(maximoId).excecute(new Mapper<Integer>() {
+
+			@Override
+			public Integer map(Object[] obj) {
+				return (Integer) obj[0];
+			}
+		}).get(0);
 	}
 }

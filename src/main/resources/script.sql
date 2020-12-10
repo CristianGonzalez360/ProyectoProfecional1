@@ -235,18 +235,6 @@ CREATE TABLE RepuestosComprados (
   FOREIGN KEY (idRepuesto) REFERENCES Repuestos (idRepuesto)
 );
 
-DROP TABLE CompraVehiculo IF EXISTS;
-CREATE TABLE CompraVehiculo (
-  idCompraVehiculo INTEGER NOT NULL AUTO_INCREMENT,
-  idVehiculo INTEGER NOT NULL,
-  PrecioCompra DOUBLE NOT NULL,
-  precioVenta DOUBLE NOT NULL,
-  fechaCompra DATE NOT NULL,
-  idUsuCompra INTEGER NOT NULL,
-  PRIMARY KEY (idCompraVehiculo),
-  FOREIGN KEY (idUsuCompra) REFERENCES Usuarios(idUsuario),
-);
-
 DROP TABLE Moneda IF EXISTS;
 CREATE TABLE Moneda (
   idMoneda INTEGER NOT NULL AUTO_INCREMENT,
@@ -305,6 +293,18 @@ CREATE TABLE Vehiculos (
   FOREIGN KEY (idCompra) REFERENCES CompraVehiculo(idCompraVehiculo),
   FOREIGN KEY (idCaracteristica) REFERENCES CaracteristicasVehiculo(idCaracteristica),
   FOREIGN KEY (idSucursal) REFERENCES Sucursal(idSucursal)
+);
+
+DROP TABLE CompraVehiculo IF EXISTS;
+CREATE TABLE CompraVehiculo (
+  idCompraVehiculo INTEGER NOT NULL AUTO_INCREMENT,
+  idVehiculo INTEGER NOT NULL,
+  PrecioCompra DOUBLE NOT NULL,
+  fechaCompra DATE NOT NULL,
+  idUsuCompra INTEGER NOT NULL,
+  PRIMARY KEY (idCompraVehiculo),
+  FOREIGN KEY (idUsuCompra) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (idVehiculo) REFERENCES Vehiculos(idVehiculo)
 );
 
 DROP TABLE VentasVehiculos IF EXISTS;

@@ -448,7 +448,6 @@ vehiculos:
     fechaIngreso: 2017-10-11
     disponible: true
     usado: false
-    idCompra:
     idCaracteristicas: 1
     idSucursal: 1 
   - precioVenta: 1300999
@@ -460,7 +459,6 @@ vehiculos:
     fechaIngreso: 2017-10-11
     disponible: true
     usado: true
-    idCompra:
     idCaracteristicas: 1
     idSucursal: 1
 #CATALOGO DE VEHICULOS NUEVOS SIN STOCK
@@ -473,7 +471,6 @@ vehiculos:
     fechaIngreso: 2017-10-11
     disponible: true
     usado: true
-    idCompra:
     idCaracteristicas: 1
     idSucursal: 2
   - precioVenta: 2500000
@@ -485,7 +482,6 @@ vehiculos:
     fechaIngreso: 2017-10-11
     disponible: false
     usado: false
-    idCompra:
     idCaracteristicas: 1
     idSucursal: 
   - precioVenta: 4000000
@@ -497,7 +493,6 @@ vehiculos:
     fechaIngreso: 2017-10-11
     disponible: false
     usado: false
-    idCompra:
     idCaracteristicas: 1
     idSucursal: 
 

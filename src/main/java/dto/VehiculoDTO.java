@@ -25,8 +25,6 @@ public class VehiculoDTO {
 	private boolean disponible;
 	
 	private boolean  usado;
-	
-	private Integer idCompra;
 		
 	private Integer idCaracteristicas;
 	
@@ -77,14 +75,6 @@ public class VehiculoDTO {
 		this.disponible = disponible;
 	}
 	
-	public Integer getIdCompra() {
-		return idCompra;
-	}
-	
-	public void setIdCompra(Integer idCompra) {
-		this.idCompra = idCompra;
-	}
-
 	public FichaTecnicaVehiculoDTO getFichaTecnica() {
 		return fichaTecnica;
 	}
@@ -153,8 +143,8 @@ public class VehiculoDTO {
 	public String toString() {
 		return "VehiculoDTO [idVehiculo=" + idVehiculo + ", precioVenta=" + precioVenta + ", idFichaTecnica="
 				+ idFichaTecnica + ", marca=" + marca + ", familia=" + familia + ", linea=" + linea + ", color=" + color
-				+ ", fechaIngreso=" + fechaIngreso + ", disponible=" + disponible + ", usado=" + usado + ", idCompra="
-				+ idCompra + ", idCaracteristicas=" + idCaracteristicas + ", idSucursal=" + idSucursal
+				+ ", fechaIngreso=" + fechaIngreso + ", disponible=" + disponible + ", usado=" + usado 
+				+ ", idCaracteristicas=" + idCaracteristicas + ", idSucursal=" + idSucursal
 				+ ", fichaTecnica=" + fichaTecnica + "]";
 	}
 }
