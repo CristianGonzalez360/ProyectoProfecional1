@@ -38,4 +38,8 @@ public class TurnosController {
 		turnoSeleccionado.setFechaCancelado(new Date());
 		dao.update(turnoSeleccionado);
 	}
+
+	public  List<TurnoDTO> readCantidadDeTurnos(Date fechaProgramada) {
+		return dao.readAllByFechaProgramada(fechaProgramada);
+	}
 }
