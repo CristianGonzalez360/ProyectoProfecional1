@@ -1,0 +1,100 @@
+package presentacion.views.admin;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
+
+import dto.temporal.ConfigDatabaseDTO;
+
+import javax.swing.JCheckBox;
+
+public class FormConfigurationDBView extends JDialog {
+
+	private static final long serialVersionUID = -4088765082266597046L;
+	
+	private PanelConfiguracionDB panelConfiguracion;
+	
+	private JButton okButton;
+	
+	private JCheckBox chckbxIsLocalhost;
+	
+	private static FormConfigurationDBView instance;
+	
+	public static FormConfigurationDBView getInstance() {
+		if(instance == null) instance = new FormConfigurationDBView();
+		return instance;
+	}	
+	
+	private FormConfigurationDBView() {
+		setTitle("Parametros de configuración db");
+		setResizable(false);
+		setBounds(100, 100, 362, 264);
+		getContentPane().setLayout(new BorderLayout());
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			
+			chckbxIsLocalhost = new JCheckBox("Is localhost");
+			buttonPane.add(chckbxIsLocalhost);
+			{
+				okButton = new JButton("OK");
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				getRootPane().setDefaultButton(okButton);
+			}
+		}
+		{
+			panelConfiguracion = new PanelConfiguracionDB();
+			getContentPane().add(panelConfiguracion, BorderLayout.CENTER);
+		}
+		
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				int confirm = JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres salir de la Agenda?",
+						"Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+				if (confirm == 0) {
+					System.exit(0);
+				}
+			}
+		});
+		
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		setModal(true);
+	}
+	
+	public void open() {
+		setVisible(true);
+	}
+	
+	public void close() {
+		this.dispose();
+	}			
+		
+	public void setActionSave(ActionListener listener) {
+		assert listener != null;
+		okButton.addActionListener(listener);
+	}
+		
+	public void setActionLocalhost(ActionListener listener) {
+		assert listener != null;
+		this.chckbxIsLocalhost.addActionListener(listener);
+	}
+
+	public void clearData() {
+		this.panelConfiguracion.clearData();
+	}
+
+	public ConfigDatabaseDTO getData() {
+		return panelConfiguracion.getData();
+	}
+}
