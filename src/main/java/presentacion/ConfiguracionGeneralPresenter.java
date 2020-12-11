@@ -29,9 +29,21 @@ public class ConfiguracionGeneralPresenter {
 		view.setData(configDbController.read());
 		view.setData(configSmtpController.read());		
 		FormConfigurationDBView.getInstance().setActionSave((a)->onRegistrarConfiguracionDB(a));
+		FormConfigurationDBView.getInstance().setActionCancel((a)->{FormConfigurationDBView.getInstance().close();});
+		FormConfigurationDBView.getInstance().setActionLocalhost((a)->onSelectCheckboxLocalhost(a));
 		FormConfiguracionSmtpView.getInstance().setActionOk((a)->onRegistrarConfiguracioSmtp(a));
+		FormConfiguracionSmtpView.getInstance().setActionCancel((a)->{FormConfiguracionSmtpView.getInstance().close();});
 	}
 	
+	private void onSelectCheckboxLocalhost(ActionEvent a) {
+		boolean isLocalhost = FormConfigurationDBView.getInstance().isLocalhost();
+		if(isLocalhost) {
+			FormConfigurationDBView.getInstance().disableInputIP("localhost");
+		} else {
+			FormConfigurationDBView.getInstance().enableInputIP("");
+		}
+	}
+
 	private void onRegistrarConfiguracioSmtp(ActionEvent a) {
 		ConfigSmtpServerDTO dto = FormConfiguracionSmtpView.getInstance().getData();
 		List<String> errors = dto.validate();

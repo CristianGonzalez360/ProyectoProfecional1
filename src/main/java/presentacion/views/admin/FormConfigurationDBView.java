@@ -28,6 +28,8 @@ public class FormConfigurationDBView extends JDialog {
 	
 	private static FormConfigurationDBView instance;
 	
+	private JButton btnCancel;
+	
 	public static FormConfigurationDBView getInstance() {
 		if(instance == null) instance = new FormConfigurationDBView();
 		return instance;
@@ -50,6 +52,10 @@ public class FormConfigurationDBView extends JDialog {
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
+			}
+			{
+				btnCancel = new JButton("Cancel");
+				buttonPane.add(btnCancel);
 			}
 		}
 		{
@@ -96,5 +102,21 @@ public class FormConfigurationDBView extends JDialog {
 
 	public ConfigDatabaseDTO getData() {
 		return panelConfiguracion.getData();
+	}
+
+	public void setActionCancel(ActionListener listener) {
+		this.btnCancel.addActionListener(listener);
+	}
+
+	public boolean isLocalhost() {
+		return this.chckbxIsLocalhost.isSelected();
+	}
+
+	public void disableInputIP(String txt) {
+		this.panelConfiguracion.disableInputIP(txt);
+	}
+
+	public void enableInputIP(String txt) {
+		this.panelConfiguracion.enableInputIP(txt);
 	}
 }
