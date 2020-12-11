@@ -111,7 +111,7 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 				ret.setFechaIngreso(obj[8] == null ? null : (Date) obj[8]);
 				ret.setDisponible(((Boolean) obj[9]).booleanValue());
 				ret.setUsado(((Boolean) obj[10]).booleanValue());
-				ret.setIdSucursal(obj[12] == null ? null : (Integer) obj[12]);
+				ret.setIdSucursal(obj[11] == null ? null : (Integer) obj[11]);
 				return ret;
 			}
 		};
