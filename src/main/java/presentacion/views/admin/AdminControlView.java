@@ -23,6 +23,8 @@ public class AdminControlView extends JInternalFrame {
 	private PanelSucursales panelSucursales;
 	
 	private PanelGestionUsuariosView panelUsuarios;
+	
+	private PanelConfiguracionGeneral panelConfiguracion;
 			
 	public static AdminControlView getInstance() {
 		if(instance == null) instance = new AdminControlView();
@@ -44,6 +46,9 @@ public class AdminControlView extends JInternalFrame {
 		
 		panelUsuarios = new PanelGestionUsuariosView();
 		tabbedPane.addTab("Gestion de usuarios", null,panelUsuarios, null);
+		
+		panelConfiguracion = new PanelConfiguracionGeneral();
+		tabbedPane.addTab("Configuracion general", null, panelConfiguracion, null);
 		
 		JPanel panel = new JPanel();
 		panelUsuarios.add(panel, BorderLayout.SOUTH);
@@ -105,5 +110,9 @@ public class AdminControlView extends JInternalFrame {
 
 	public PanelGestionUsuariosView getUsuariosView() {
 		return this.panelUsuarios;
+	}
+	
+	public PanelConfiguracionGeneral getPanelConfiguracion() {
+		return this.panelConfiguracion;
 	}
 }
