@@ -1,5 +1,8 @@
 package dto.temporal;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class ConfigSmtpServerDTO {
 	
 	private String correoRemitente;
@@ -49,5 +52,10 @@ public class ConfigSmtpServerDTO {
 	public String toString() {
 		return "ConfigSmtpServerDTO [correoRemitente=" + correoRemitente + ", passwordRemitente=" + passwordRemitente
 				+ ", port=" + port + ", host=" + host + "]";
+	}
+
+	public List<String> validate() {
+		List<String> errors = new LinkedList<>();
+		return errors;
 	}	
 }

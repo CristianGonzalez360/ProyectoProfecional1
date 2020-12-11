@@ -70,6 +70,13 @@ public class PanelConfiguracionDB extends JPanel {
 		textPort.setColumns(10);
 	}
 
+	public void disableAllInputs() {
+		textUser.setEditable(false);
+		textPassword.setEditable(false);
+		textPort.setEditable(false);
+		textIP.setEditable(false);
+	}
+	
 	public void clearData() {
 		textUser.setText("");
 		textPassword.setText("");

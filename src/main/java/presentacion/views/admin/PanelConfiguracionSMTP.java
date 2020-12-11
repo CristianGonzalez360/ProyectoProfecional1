@@ -71,6 +71,13 @@ public class PanelConfiguracionSMTP extends JPanel {
 
 	}
 
+	public void disableAllInputs() {
+		this.textEmail.setEditable(false);
+		this.textHost.setEditable(false);
+		this.textPassword.setEditable(false);
+		this.textPort.setEditable(false);
+	}
+	
 	public void clearData() {
 		this.textEmail.setText("");
 		this.textHost.setText("");

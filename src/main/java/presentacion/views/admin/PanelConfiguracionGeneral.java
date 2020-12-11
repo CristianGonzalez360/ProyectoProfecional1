@@ -3,6 +3,7 @@ package presentacion.views.admin;
 import javax.swing.JPanel;
 
 import dto.temporal.ConfigDatabaseDTO;
+import dto.temporal.ConfigSmtpServerDTO;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -37,6 +38,9 @@ public class PanelConfiguracionGeneral extends JPanel {
 		
 		btnNewButton_1 = new JButton("Configurar SMTP");
 		panelOpciones.add(btnNewButton_1);
+		
+		this.panelConfiguracion.disableAllInputs();
+		this.panelSmtp.disableAllInputs();
 	}
 
 	public void setActionConfigurarDb(ActionListener listener) {
@@ -49,5 +53,9 @@ public class PanelConfiguracionGeneral extends JPanel {
 
 	public void setData(ConfigDatabaseDTO dto) {
 		this.panelConfiguracion.setData(dto);
+	}
+
+	public void setData(ConfigSmtpServerDTO dto) {
+		this.panelSmtp.setData(dto);
 	}
 }

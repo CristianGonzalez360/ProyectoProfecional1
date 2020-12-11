@@ -47,4 +47,6 @@ public abstract class ControllersFactory {
 
 	public abstract ConfiguradorBaseDeDatosController makeConfiguradorBaseDeDatosController();
 
+	public abstract ConfiguradorSmtpController makeConfiguradorSmtpController();
+
 }
