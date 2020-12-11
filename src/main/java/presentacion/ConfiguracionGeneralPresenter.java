@@ -59,7 +59,7 @@ public class ConfiguracionGeneralPresenter {
 	private void onRegistrarConfiguracionDB(ActionEvent a) {
 		ConfigDatabaseDTO dto = FormConfigurationDBView.getInstance().getData();
 		List<String> errors = dto.validate();
-		if(!errors.isEmpty()) {
+		if(errors.isEmpty()) {
 			configDbController.save(dto);
 			FormConfigurationDBView.getInstance().close();
 			view.setData(dto);
