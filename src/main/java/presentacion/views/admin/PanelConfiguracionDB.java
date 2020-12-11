@@ -99,4 +99,14 @@ public class PanelConfiguracionDB extends JPanel {
 		dto.setPort(textPort.getText());
 		return dto;
 	}
+
+	public void disableInputIP(String txt) {
+		this.textIP.setText(txt);
+		this.textIP.setEnabled(false);
+	}
+	
+	public void enableInputIP(String txt) {
+		this.textIP.setText(txt);
+		this.textIP.setEnabled(true);
+	}
 }

@@ -28,7 +28,9 @@ public class FormConfiguracionSmtpView extends JDialog {
 	}
 	
 	private FormConfiguracionSmtpView() {
-		setBounds(100, 100, 450, 221);
+		setTitle("Parametros de configuracion smtp");
+		setResizable(false);
+		setBounds(100, 100, 450, 248);
 		getContentPane().setLayout(new BorderLayout());
 		{
 			JPanel buttonPane = new JPanel();
