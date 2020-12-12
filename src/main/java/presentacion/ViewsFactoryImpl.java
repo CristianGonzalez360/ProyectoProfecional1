@@ -24,7 +24,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 
 	@Override
 	public Presenter makePresenter() {
-		new TurnosPresenter(SupervisorControlView.getInstance().getTurnosView(),controllers.makeTurnosController());
+		new TurnosPresenter(SupervisorControlView.getInstance().getTurnosView(),controllers.makeTurnosController(), controllers.makeConfiguradorCapacidadTurnosController());
 		new ClientePresenter(SupervisorControlView.getInstance().getClientesView(),
 		controllers.makeClientesController(), controllers.makeVehiculosConOrdenDeTrabajoController(),
 		controllers.makeOrdenesDeTrabajoController());

@@ -41,6 +41,7 @@ public class TurnosPanelView extends JPanel {
 	private JButton btnCancelarTurno;
 
 	private JLabel lblNewLabel;
+	private JButton btnConfiguracion;
 
 	public TurnosPanelView() {
 		setLayout(new BorderLayout(0, 0));
@@ -69,6 +70,9 @@ public class TurnosPanelView extends JPanel {
 
 		btnCancelarTurno = new JButton("Cancelar turno");
 		panel_2.add(btnCancelarTurno);
+		
+		btnConfiguracion = new JButton("Configuracion");
+		panel_2.add(btnConfiguracion);
 
 		JScrollPane scrollPaneTurnos = new JScrollPane();
 		add(scrollPaneTurnos, BorderLayout.CENTER);
@@ -136,6 +140,10 @@ public class TurnosPanelView extends JPanel {
 
 	public void setActionCancelarTurno(ActionListener listener) {
 		this.btnCancelarTurno.addActionListener(listener);
+	}
+	
+	public void setActionConfiguracion(ActionListener listener) {
+		this.btnConfiguracion.addActionListener(listener);
 	}
 
 	public String getDniBusqueda() {

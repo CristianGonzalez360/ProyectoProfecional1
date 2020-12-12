@@ -41,6 +41,8 @@ public abstract class ControllersFactory {
 
 	public abstract ConfiguradorTerminalController makeConfiguradorTerminalController();
 	
+	public abstract ConfiguradorCapacidadTurnosController makeConfiguradorCapacidadTurnosController();
+	
 	public abstract VehiculosController makeVehiculosController();
 
 	public abstract UsuariosController makeUsuariosController();
