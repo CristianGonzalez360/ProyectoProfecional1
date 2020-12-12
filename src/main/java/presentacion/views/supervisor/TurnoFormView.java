@@ -45,7 +45,7 @@ public class TurnoFormView extends JDialog {
 
 	private TurnoFormView() {
 		setBounds(100, 100, 350, 350);
-		setTitle("Formulario de alta de turno");
+		setTitle("Nuevo Turno");
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

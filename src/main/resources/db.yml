@@ -147,7 +147,7 @@ turnos:
   - idCliente: 1
     dniCliente: 33333
     fechaAlta: 2020-11-05
-    fechaProgramada: 2021-12-20
+    fechaProgramada: 2020-12-20
     nombreCliente: c007
     apellidoCliente: ap007
     telefonoCliente: "1136635555"

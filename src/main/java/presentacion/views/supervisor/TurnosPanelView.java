@@ -70,8 +70,8 @@ public class TurnosPanelView extends JPanel {
 
 		btnCancelarTurno = new JButton("Cancelar turno");
 		panel_2.add(btnCancelarTurno);
-		
-		btnConfiguracion = new JButton("Configuracion");
+
+		btnConfiguracion = new JButton("Configuración");
 		panel_2.add(btnConfiguracion);
 
 		JScrollPane scrollPaneTurnos = new JScrollPane();
@@ -83,9 +83,9 @@ public class TurnosPanelView extends JPanel {
 
 	public void setData(List<TurnoDTO> turnos) {
 		for (TurnoDTO turno : turnos) {
-			Object[] row = { turno.getIdTurno().toString(), turno.getNombreCliente(), turno.getApellidoCliente(), turno.getDniCliente(),
-					turno.getFechaAlta().toString(), turno.getFechaProgramada().toString(), turno.getTelefonoCliente(),
-					turno.getEmailCliente() };
+			Object[] row = { turno.getIdTurno().toString(), turno.getNombreCliente(), turno.getApellidoCliente(),
+					turno.getDniCliente(), turno.getFechaAlta().toString(), turno.getFechaProgramada().toString(),
+					turno.getTelefonoCliente(), turno.getEmailCliente() };
 			tableModelTurnos.addRow(row);
 		}
 	}
@@ -141,7 +141,7 @@ public class TurnosPanelView extends JPanel {
 	public void setActionCancelarTurno(ActionListener listener) {
 		this.btnCancelarTurno.addActionListener(listener);
 	}
-	
+
 	public void setActionConfiguracion(ActionListener listener) {
 		this.btnConfiguracion.addActionListener(listener);
 	}

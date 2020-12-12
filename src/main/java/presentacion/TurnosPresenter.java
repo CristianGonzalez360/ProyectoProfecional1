@@ -6,6 +6,7 @@ import java.util.List;
 
 import business_logic.ConfiguradorCapacidadTurnosController;
 import business_logic.TurnosController;
+import dto.taller.TurnoDTO;
 import dto.temporal.AltaDeTurnoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ConfiguracionView;
@@ -13,7 +14,6 @@ import presentacion.views.supervisor.TurnoFormView;
 import presentacion.views.supervisor.TurnosPanelView;
 import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.MessageDialog;
-import services.TurnosConfig;
 
 public class TurnosPresenter {
 
@@ -113,6 +113,9 @@ public class TurnosPresenter {
 	}
 
 	private boolean hayEspacioEnTaller(Date fechaProgramada) {
-		return controller.readCantidadDeTurnos(fechaProgramada).size() != TurnosConfig.getTurnosPorDia();
+		int cantidadDeTurnos = controller.readCantidadDeTurnos(fechaProgramada).size();
+		int capacidadDeTurnos = configurador.readCapacidadDeTurnos();
+
+		return cantidadDeTurnos != capacidadDeTurnos;
 	}
 }
