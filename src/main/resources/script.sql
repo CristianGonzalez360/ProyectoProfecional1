@@ -367,7 +367,7 @@ CREATE TABLE RepuestosMantenimiento(
   cantidad INT NOT NULL,
   PRIMARY KEY (idRepuestoMantenimiento),
   FOREIGN KEY (idRepuesto) REFERENCES Repuestos(idRepuesto),
-  FOREIGN KEY (idMantenimiento) REFERENCES Mantenimientos(idMantenimiento),
+  FOREIGN KEY (idMantenimiento) REFERENCES Mantenimientos(idMantenimiento)
 );
 
 DROP TABLE TrabajosMantenimiento IF EXISTS;
@@ -378,5 +378,5 @@ CREATE TABLE TrabajosMantenimiento(
   precio DOUBLE NOT NULL,
   tiempoEstTrabajo INTEGER NOT NULL,
   PRIMARY KEY (idTrabajoMantenimiento),
-  FOREIGN KEY (idMantenimiento) REFERENCES Mantenimientos(idMantenimiento),
+  FOREIGN KEY (idMantenimiento) REFERENCES Mantenimientos(idMantenimiento)
 );
