@@ -59,6 +59,9 @@ public class GerenteControlView extends JInternalFrame {
 		
 		PanelVehiculosUsados panelVehiculosUsados = PanelVehiculosUsados.getInstance();
 		tabbedPane.addTab("Vehiculos Usados", panelVehiculosUsados);
+		
+		PanelReportes panelReportes = PanelReportes.getInstance();
+		tabbedPane.addTab("Reportes", panelReportes);
 	}
 
 	public void display() {

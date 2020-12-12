@@ -17,13 +17,11 @@ public class ConfiguracionGeneralPresenter {
 	
 	private PanelConfiguracionGeneral view = AdminControlView.getInstance().getPanelConfiguracion();
 	
-	private ConfiguradorBaseDeDatosController configDbController;
+	private ConfiguradorBaseDeDatosController configDbController = new  ConfiguradorBaseDeDatosController();
 	
-	private ConfiguradorSmtpController configSmtpController;
+	private ConfiguradorSmtpController configSmtpController = new ConfiguradorSmtpController();
 	
-	public ConfiguracionGeneralPresenter(ConfiguradorBaseDeDatosController configDbController, ConfiguradorSmtpController configSmtpController) {
-		this.configDbController = configDbController;
-		this.configSmtpController = configSmtpController;
+	public ConfiguracionGeneralPresenter() {
 		view.setActionConfigurarDb((a)->onDisplayFormConfiguracionDB(a));
 		view.setActionConfigurarSmtp((a)->onDisplayFormConfiguracionSmtp(a));
 		view.setData(configDbController.read());

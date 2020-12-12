@@ -4,14 +4,16 @@ import java.awt.event.ActionEvent;
 import java.util.Date;
 import java.util.List;
 
+import business_logic.ConfiguradorCapacidadTurnosController;
 import business_logic.TurnosController;
+import dto.taller.TurnoDTO;
 import dto.temporal.AltaDeTurnoDTO;
 import dto.validators.StringValidator;
+import presentacion.views.supervisor.ConfiguracionView;
 import presentacion.views.supervisor.TurnoFormView;
 import presentacion.views.supervisor.TurnosPanelView;
 import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.MessageDialog;
-import services.TurnosConfig;
 
 public class TurnosPresenter {
 
@@ -24,24 +26,38 @@ public class TurnosPresenter {
 	private TurnosPanelView view;
 
 	private TurnoFormView turnoForm = TurnoFormView.getInstance();
+	private ConfiguracionView configuracionForm = ConfiguracionView.getInstance();
 
 	private TurnosController controller;
+	private ConfiguradorCapacidadTurnosController configurador;
 
-	public TurnosPresenter(TurnosPanelView view, TurnosController controller) {
+	public TurnosPresenter(TurnosPanelView view, TurnosController controller,
+			ConfiguradorCapacidadTurnosController configController) {
 		this.view = view;
 		this.controller = controller;
+		this.configurador = configController;
 		view.setActionBuscar((a) -> onBuscar(a));
 		view.setActionRegistrarTurno((a) -> onDisplayTurnosFormView(a));
+		view.setActionConfiguracion((a) -> onDisplayConfiguracionFormView(a));
 		view.setActionCancelarTurno((a) -> onCancelar(a));
 		turnoForm.setActionSave(a -> onSave(a));
 		turnoForm.setActionCancel(a -> {
 			turnoForm.dispose();
+		});
+		configuracionForm.setActionSave(a -> onSaveConfiguracion(a));
+		configuracionForm.setActionCancel(a -> {
+			configuracionForm.dispose();
 		});
 	}
 
 	private void onDisplayTurnosFormView(ActionEvent e) {
 		TurnoFormView.getInstance().clearData();
 		TurnoFormView.getInstance().display();
+	}
+
+	private void onDisplayConfiguracionFormView(ActionEvent e) {
+		ConfiguracionView.getInstance().clearData();
+		ConfiguracionView.getInstance().display();
 	}
 
 	private void onBuscar(ActionEvent e) {
@@ -90,7 +106,16 @@ public class TurnosPresenter {
 		}
 	}
 
+	private void onSaveConfiguracion(ActionEvent a) {
+		String capacidadTurnos = configuracionForm.getCapacidadTurnos();
+		configurador.establecerCapacidadDeTurnos(capacidadTurnos);
+		configuracionForm.dispose();
+	}
+
 	private boolean hayEspacioEnTaller(Date fechaProgramada) {
-		return controller.readCantidadDeTurnos(fechaProgramada).size() != TurnosConfig.getTurnosPorDia();
+		int cantidadDeTurnos = controller.readCantidadDeTurnos(fechaProgramada).size();
+		int capacidadDeTurnos = configurador.readCapacidadDeTurnos();
+
+		return cantidadDeTurnos != capacidadDeTurnos;
 	}
 }
