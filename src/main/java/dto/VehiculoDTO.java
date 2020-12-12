@@ -31,7 +31,7 @@ public class VehiculoDTO {
 	private Integer idSucursal;
 	
 	private FichaTecnicaVehiculoDTO fichaTecnica;
-	
+		
 	public VehiculoDTO() {
 	}
 	

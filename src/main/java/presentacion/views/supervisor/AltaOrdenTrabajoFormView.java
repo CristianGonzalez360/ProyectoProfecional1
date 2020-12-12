@@ -28,7 +28,7 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 	private ButtonGroup grupo;
 	private JButton botonGuardar;
 	private JButton botonCancelar;
-	private JRadioButton rdbtnService;
+	private JRadioButton rdbtnGarantia;
 	private JRadioButton rdbtnTaller;
 
 	private static AltaOrdenTrabajoFormView instance;
@@ -40,6 +40,7 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 	}
 
 	private AltaOrdenTrabajoFormView() {
+		setTitle("Form alta de orden de trabajo");
 		setResizable(false);
 		setModal(true);
 		setBounds(100, 100, 450, 300);
@@ -83,15 +84,15 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 		JPanel panelRadios = new JPanel();
 		contentPanel.add(panelRadios, BorderLayout.SOUTH);
 
-		rdbtnService = new JRadioButton("Service");
-		panelRadios.add(rdbtnService);
+		rdbtnGarantia = new JRadioButton("Garantia");
+		panelRadios.add(rdbtnGarantia);
 
 		rdbtnTaller = new JRadioButton("Taller");
 		panelRadios.add(rdbtnTaller);
 
 		grupo = new ButtonGroup();
 		grupo.add(rdbtnTaller);
-		grupo.add(rdbtnService);
+		grupo.add(rdbtnGarantia);
 
 		JPanel panelBotones = new JPanel();
 		panelBotones.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -106,7 +107,7 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 		botonCancelar.setActionCommand("Cancel");
 		panelBotones.add(botonCancelar);
 
-		this.rdbtnService.setSelected(true);
+		this.rdbtnGarantia.setSelected(true);
 		this.rdbtnTaller.setSelected(false);
 		setModal(true);
 	}
@@ -123,7 +124,7 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 		if (this.rdbtnTaller.isSelected()) {
 			dto.setTipoDeTrabajo("Taller");
 		} else {
-			dto.setTipoDeTrabajo("Service");
+			dto.setTipoDeTrabajo("Garantia");
 		}
 		return dto;
 	}

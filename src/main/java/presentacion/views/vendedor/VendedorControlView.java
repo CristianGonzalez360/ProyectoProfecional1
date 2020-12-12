@@ -39,6 +39,8 @@ public class VendedorControlView extends JInternalFrame {
 	
 	private CaracteristicaDeVehiculoPanel caracteristicaVehiculoPanel;
 	
+	private PanelCaracteristicasDeLaGarantia garantiaPanel;
+	
 	private HistorialVentasView panelHistorial;
 	
 	private JButton btnRegistrarCliente;
@@ -130,6 +132,9 @@ public class VendedorControlView extends JInternalFrame {
 		tabbedPane_1.addTab("Listado de vehículos", null, tableView, null);
 		caracteristicaVehiculoPanel = new CaracteristicaDeVehiculoPanel();
 		tabbedPane_1.addTab("Caracteristica del Vehículo", null, caracteristicaVehiculoPanel, null);
+		
+		garantiaPanel = new PanelCaracteristicasDeLaGarantia();
+		tabbedPane_1.addTab("Caracteristicas de la garantia", null, garantiaPanel, null);
 	}
 
 	public void display() {
@@ -268,6 +273,9 @@ public class VendedorControlView extends JInternalFrame {
 	
 	public void setMarcas(List<String> marcas) {
 		this.busquedaVehiculoPanel.setDataMarcas(marcas);
-		
+	}
+	
+	public PanelCaracteristicasDeLaGarantia getCaracteristicasDeLaGarantiaView() {
+		return this.garantiaPanel;
 	}
 }
