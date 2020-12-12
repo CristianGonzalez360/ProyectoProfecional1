@@ -1,20 +1,24 @@
 package dto;
 
+import java.util.Date;
+
 public class GarantiaVehiculoDTO {
 	
 	private Integer id;
 	
-	private String aniosDeGarantia;
+	private Integer idVehiculo;
 	
-	private String kilometrajeInicialDelVehiculo;
+	private Integer aniosDeGarantia;
 	
-	private String kilometrajeGarantizado;
+	private Integer kilometrajeInicialDelVehiculo;
 	
-	private String fechaInicioDeLaGarantia;
+	private Integer kilometrajeGarantizado;
 	
-	private String fechaDeCaducidadDeLaGarantia;
+	private Date fechaInicioDeLaGarantia;
 	
-	private String costoFinalConIVA;
+	private Date fechaDeCaducidadDeLaGarantia;
+	
+	private Double costoFinalConIVA;
 
 	public GarantiaVehiculoDTO() {}
 	
@@ -26,51 +30,62 @@ public class GarantiaVehiculoDTO {
 		this.id = id;
 	}
 
-	public String getAniosDeGarantia() {
-		return aniosDeGarantia;
+	
+	public Integer getIdVehiculo() {
+		return idVehiculo;
 	}
 
-	public void setAniosDeGarantia(String aniosDeGarantia) {
-		this.aniosDeGarantia = aniosDeGarantia;
+	public void setIdVehiculo(Integer idVehiculo) {
+		this.idVehiculo = idVehiculo;
 	}
 
-	public String getKilometrajeInicialDelVehiculo() {
-		return kilometrajeInicialDelVehiculo;
-	}
-
-	public void setKilometrajeInicialDelVehiculo(String kilometrajeInicialDelVehiculo) {
-		this.kilometrajeInicialDelVehiculo = kilometrajeInicialDelVehiculo;
-	}
-
-	public String getKilometrajeGarantizado() {
-		return kilometrajeGarantizado;
-	}
-
-	public void setKilometrajeGarantizado(String kilometrajeGarantizado) {
-		this.kilometrajeGarantizado = kilometrajeGarantizado;
-	}
-
-	public String getFechaInicioDeLaGarantia() {
+	public Date getFechaInicioDeLaGarantia() {
 		return fechaInicioDeLaGarantia;
 	}
 
-	public void setFechaInicioDeLaGarantia(String fechaInicioDeLaGarantia) {
+	public void setFechaInicioDeLaGarantia(Date fechaInicioDeLaGarantia) {
 		this.fechaInicioDeLaGarantia = fechaInicioDeLaGarantia;
 	}
 
-	public String getFechaDeCaducidadDeLaGarantia() {
+	public Date getFechaDeCaducidadDeLaGarantia() {
 		return fechaDeCaducidadDeLaGarantia;
 	}
 
-	public void setFechaDeCaducidadDeLaGarantia(String fechaDeCaducidadDeLaGarantia) {
+	public void setFechaDeCaducidadDeLaGarantia(Date fechaDeCaducidadDeLaGarantia) {
 		this.fechaDeCaducidadDeLaGarantia = fechaDeCaducidadDeLaGarantia;
 	}
 
-	public String getCostoFinalConIVA() {
+	public Double getCostoFinalConIVA() {
 		return costoFinalConIVA;
 	}
 
-	public void setCostoFinalConIVA(String costoFinalConIVA) {
+	public void setCostoFinalConIVA(Double costoFinalConIVA) {
 		this.costoFinalConIVA = costoFinalConIVA;
 	}
+
+	public Integer getAniosDeGarantia() {
+		return aniosDeGarantia;
+	}
+
+	public void setAniosDeGarantia(Integer aniosDeGarantia) {
+		this.aniosDeGarantia = aniosDeGarantia;
+	}
+
+	public Integer getKilometrajeInicialDelVehiculo() {
+		return kilometrajeInicialDelVehiculo;
+	}
+
+	public void setKilometrajeInicialDelVehiculo(Integer kilometrajeInicialDelVehiculo) {
+		this.kilometrajeInicialDelVehiculo = kilometrajeInicialDelVehiculo;
+	}
+
+	public Integer getKilometrajeGarantizado() {
+		return kilometrajeGarantizado;
+	}
+
+	public void setKilometrajeGarantizado(Integer kilometrajeGarantizado) {
+		this.kilometrajeGarantizado = kilometrajeGarantizado;
+	}
+	
+	
 }
