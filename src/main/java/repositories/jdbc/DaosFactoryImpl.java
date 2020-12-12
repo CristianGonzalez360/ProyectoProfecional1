@@ -10,7 +10,11 @@ import repositories.DaosFactory;
 import repositories.DatosPersonalesDao;
 import repositories.FacturasDao;
 import repositories.FichaTecnicaVehiculoDao;
+<<<<<<< HEAD
 import repositories.MantenimientoDao;
+=======
+import repositories.GarantiasDao;
+>>>>>>> refs/heads/issue#xxx
 import repositories.MonedaDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.PedidoVehiculoDao;
@@ -69,6 +73,8 @@ public class DaosFactoryImpl extends DaosFactory {
 	private VentaVehiculoDao ventaVehiculoDao;
 	
 	private CaracteristicasVehiculoDao caracteristicasDao;
+
+	private GarantiasDaoImpl garantiasDao;
 	
 	private MantenimientoDao  mantenimientoDao;
 
@@ -234,5 +240,10 @@ public class DaosFactoryImpl extends DaosFactory {
 	public TrabajoMantenimientoDao makeTrabajoMantenimientoDao() {
 		if(trabajoMantenimientoDao == null) trabajoMantenimientoDao = new TrabajoMantenimientoDaoImpl(ds.getConnection());
 		return trabajoMantenimientoDao;
+	}
+	
+	public GarantiasDao makeGarantiasVehiculosDao() {
+		if(garantiasDao == null) garantiasDao = new GarantiasDaoImpl(ds.getConnection());
+		return garantiasDao;
 	}
 }

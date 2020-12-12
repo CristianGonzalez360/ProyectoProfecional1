@@ -7,6 +7,7 @@ import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
+import dto.GarantiaVehiculoDTO;
 import dto.MonedaDTO;
 import dto.SucursalDTO;
 import dto.UsuarioDTO;
@@ -60,6 +61,8 @@ public class DatabaseGraph {
 	
 	private List<SucursalDTO> sucursales;
 	
+	private List<GarantiaVehiculoDTO> garantias;
+	
 	public DatabaseGraph() {
 		cuentas = new LinkedList<>();
 		datosPersonales = new LinkedList<>();
@@ -77,6 +80,7 @@ public class DatabaseGraph {
 		vehiculos = new LinkedList<>();
 		monedas = new LinkedList<>();
 		sucursales = new LinkedList<>();
+		garantias = new LinkedList<>();
 	}
 
 	public List<CuentaDTO> getCuentas() {
@@ -221,5 +225,13 @@ public class DatabaseGraph {
 
 	public void setSucursales(List<SucursalDTO> sucursales) {
 		this.sucursales = sucursales;
+	}
+
+	public List<GarantiaVehiculoDTO> getGarantias() {
+		return garantias;
+	}
+
+	public void setGarantias(List<GarantiaVehiculoDTO> garantias) {
+		this.garantias = garantias;
 	}
 }

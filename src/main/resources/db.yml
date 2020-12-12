@@ -523,3 +523,40 @@ ventaVehiculo:
     idCliente: 1
     idUsuEntrega:
     idSucursalVenta: 1
+
+garantias:
+  - idVehiculo: 1
+    aniosDeGarantia: 3
+    kilometrajeInicialDelVehiculo: 0
+    kilometrajeGarantizado: 150000
+    fechaInicioDeLaGarantia: 2020-10-10
+    fechaDeCaducidadDeLaGarantia: 2023-10-10
+    costoFinalConIVA: 32000
+  - idVehiculo: 2
+    aniosDeGarantia: 3
+    kilometrajeInicialDelVehiculo: 0
+    kilometrajeGarantizado: 90000
+    fechaInicioDeLaGarantia: 2020-10-10
+    fechaDeCaducidadDeLaGarantia: 2023-10-10
+    costoFinalConIVA: 32000
+  - idVehiculo: 3
+    aniosDeGarantia: 3
+    kilometrajeInicialDelVehiculo: 0
+    kilometrajeGarantizado: 150000
+    fechaInicioDeLaGarantia: 2020-10-10
+    fechaDeCaducidadDeLaGarantia: 2023-10-10
+    costoFinalConIVA: 32000
+  - idVehiculo: 4
+    aniosDeGarantia: 3
+    kilometrajeInicialDelVehiculo: 0
+    kilometrajeGarantizado: 150000
+    fechaInicioDeLaGarantia: 2020-10-10
+    fechaDeCaducidadDeLaGarantia: 2023-10-10
+    costoFinalConIVA: 32000
+  - idVehiculo: 5
+    aniosDeGarantia: 3
+    kilometrajeInicialDelVehiculo: 0
+    kilometrajeGarantizado: 150000
+    fechaInicioDeLaGarantia: 2020-10-10
+    fechaDeCaducidadDeLaGarantia: 2023-10-10
+    costoFinalConIVA: 32000

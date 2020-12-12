@@ -53,4 +53,5 @@ public abstract class ControllersFactory {
 
 	public abstract MantenimientosController makeMantenimientosController();
 
+	public abstract GarantiasController makeGarantiasController();
 }

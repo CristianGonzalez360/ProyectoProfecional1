@@ -351,6 +351,7 @@ CREATE TABLE PedidoVehiculo (
   FOREIGN KEY (idVentaVehiculo) REFERENCES VentasVehiculos(idVentaVehiculo)
 );
 
+<<<<<<< HEAD
 DROP TABLE Mantenimientos IF EXISTS;
 CREATE TABLE Mantenimientos (
   idMantenimiento INTEGER NOT NULL AUTO_INCREMENT,
@@ -379,4 +380,18 @@ CREATE TABLE TrabajosMantenimiento(
   tiempoEstTrabajo INTEGER NOT NULL,
   PRIMARY KEY (idTrabajoMantenimiento),
   FOREIGN KEY (idMantenimiento) REFERENCES Mantenimientos(idMantenimiento)
+);
+
+DROP TABLE GarantiasVehiculos IF EXISTS;
+CREATE TABLE GarantiasVehiculos(
+	idGarantia INT NOT NULL AUTO_INCREMENT,
+	idVehiculo INT NOT NULL,
+	aniosDeGarantia INT NOT NULL,
+	kilometrajeInicialDelVehiculo INT NOT NULL,
+	kilometrajeGarantizado INT NOT NULL,
+	fechaInicioDeLaGarantia DATE NOT NULL,
+	fechaDeCaducidadDeLaGarantia DATE NOT NULL,
+	costoFinalConIVA DOUBLE NOT NULL,
+	PRIMARY KEY(idGarantia),
+	FOREIGN KEY(idVehiculo) REFERENCES Vehiculos(idVehiculo)
 );
