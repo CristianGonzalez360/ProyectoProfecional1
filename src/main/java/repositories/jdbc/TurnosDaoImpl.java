@@ -25,7 +25,7 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 
 	private static final String insert = "INSERT INTO Turnos (idCliente, fechaCanceladoTurno, fechaAltaTurno, fechProgramadaTurno, nombreCliente, apellidoCliente, dniCliente, telefonoCliente, emailCliente) VALUES (?,?,?,?,?,?,?,?,?)";
 
-	private static final String readByFechaProgramada = "SELECT * FROM Turnos WHERE Turnos.fechProgramadaTurno = ?";
+	private static final String readByFechaProgramada = "SELECT * FROM Turnos t WHERE (t.fechProgramadaTurno >= CURRENT_DATE()) AND (t.fechaCanceladoTurno IS NULL) AND Turnos.fechProgramadaTurno = ?";
 	
 	public TurnosDaoImpl(Connection connection) {
 		super(connection);

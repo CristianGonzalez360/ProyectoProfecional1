@@ -13,7 +13,6 @@ import presentacion.views.supervisor.TurnoFormView;
 import presentacion.views.supervisor.TurnosPanelView;
 import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.MessageDialog;
-import services.TurnosConfig;
 
 public class TurnosPresenter {
 
@@ -113,6 +112,6 @@ public class TurnosPresenter {
 	}
 
 	private boolean hayEspacioEnTaller(Date fechaProgramada) {
-		return controller.readCantidadDeTurnos(fechaProgramada).size() != TurnosConfig.getTurnosPorDia();
+		return controller.readCantidadDeTurnos(fechaProgramada).size() != configurador.readCapacidadDeTurnos();
 	}
 }
