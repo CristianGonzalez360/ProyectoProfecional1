@@ -58,8 +58,8 @@ public class AltaPresupuestoFormView extends JDialog {
 		splitPane.setResizeWeight(0.5);
 	    getContentPane().add(splitPane, BorderLayout.CENTER);
 		
-		trabajos = PlanificarTrabajosFormView.getInstance();
-		repuestos = PlanificarRepuestosFormView.getInstance();
+		trabajos = new PlanificarTrabajosFormView();
+		repuestos = new  PlanificarRepuestosFormView();
 		
 		splitPane.setLeftComponent(trabajos);
 		splitPane.setRightComponent(repuestos);
@@ -124,10 +124,18 @@ public class AltaPresupuestoFormView extends JDialog {
 		setVisible(false);
 	}
 
+	public PlanificarRepuestosFormView getRepuestosPanel() {
+		return repuestos;
+	}
+
 	public static AltaPresupuestoFormView getInstance() {
 		if (instance == null)
 			instance = new AltaPresupuestoFormView();
 		return instance;
+	}
+
+	public PlanificarTrabajosFormView getTrabajosPanel() {
+		return trabajos;
 	}
 
 	public void setActionOnAceptar(ActionListener listener) {

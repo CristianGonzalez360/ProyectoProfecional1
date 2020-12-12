@@ -28,6 +28,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import dto.taller.RepuestoDTO;
+import dto.taller.RepuestoMantenimientoDTO;
 import dto.taller.RepuestoPlanificadoDTO;
 
 public class PlanificarRepuestosFormView extends JPanel {
@@ -54,8 +55,6 @@ public class PlanificarRepuestosFormView extends JPanel {
 	private DefaultTableModel modelRepuestosInferior;
 	private JTable tablaRepuestosInferior;
 
-	static PlanificarRepuestosFormView vista;
-
 	private JButton btnLimpiar;
 	private JButton btnQuitar;
 	private JButton btnAgregar;
@@ -67,14 +66,7 @@ public class PlanificarRepuestosFormView extends JPanel {
 	private List<Integer> idRepuestos;
 	private JLabel lblMarca;
 
-	public static PlanificarRepuestosFormView getInstance() {
-		if (vista == null)
-			vista = new PlanificarRepuestosFormView();
-		return vista;
-	}
-
-	@SuppressWarnings("serial")
-	private PlanificarRepuestosFormView() {
+	public PlanificarRepuestosFormView() {
 		setBounds(100, 100, 500, 600);
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -224,7 +216,7 @@ public class PlanificarRepuestosFormView extends JPanel {
 		return textCantidad.getText();
 	}
 
-	public void setActionOnAgregar(ActionListener listener) {
+	public void setActionOnAgregarRepuesto(ActionListener listener) {
 		this.btnAgregar.addActionListener(listener);
 	}
 
@@ -232,7 +224,7 @@ public class PlanificarRepuestosFormView extends JPanel {
 		setVisible(false);
 	}
 
-	public void setActionOnBuscar(ActionListener listener) {
+	public void setActionOnBuscarRepuesto(ActionListener listener) {
 		this.btnBuscar.addActionListener(listener);
 	}
 
@@ -252,11 +244,20 @@ public class PlanificarRepuestosFormView extends JPanel {
 		comboMarcas.setModel(modelo);
 	}
 
-	public void setActionOnQuitar(ActionListener Listener) {
+	public void setActionOnQuitarRepuesto(ActionListener Listener) {
 		this.btnQuitar.addActionListener(Listener);
 	}
 
 	public Integer getSeleccionado() {
 		return tablaRepuestosInferior.getSelectedRow();
+	}
+
+	public void setDataRepuestosMantenimiento(List<RepuestoMantenimientoDTO> repuestos) {
+		modelRepuestosInferior.setRowCount(0);
+		for (RepuestoMantenimientoDTO r : repuestos) {
+			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getDescripcionRepuesto(),
+					r.getRepuesto().getMarcaRepuesto(), r.getRepuesto().getFabricante(), r.getCantRequerida() };
+			modelRepuestosInferior.addRow(row);
+		}
 	}
 }

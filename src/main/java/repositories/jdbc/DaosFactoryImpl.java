@@ -10,13 +10,16 @@ import repositories.DaosFactory;
 import repositories.DatosPersonalesDao;
 import repositories.FacturasDao;
 import repositories.FichaTecnicaVehiculoDao;
+import repositories.MantenimientoDao;
 import repositories.MonedaDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.PedidoVehiculoDao;
 import repositories.PresupuestosDao;
+import repositories.RepuestoMantenimientoDao;
 import repositories.RepuestosDao;
 import repositories.RepuestosPlanificadosDao;
 import repositories.SucursalesDao;
+import repositories.TrabajoMantenimientoDao;
 import repositories.TrabajosPresupuestadosDao;
 import repositories.TurnosDao;
 import repositories.UsuariosDao;
@@ -66,6 +69,12 @@ public class DaosFactoryImpl extends DaosFactory {
 	private VentaVehiculoDao ventaVehiculoDao;
 	
 	private CaracteristicasVehiculoDao caracteristicasDao;
+	
+	private MantenimientoDao  mantenimientoDao;
+
+	private RepuestoMantenimientoDao repuestoMantenimientoDao;
+	
+	private TrabajoMantenimientoDao trabajoMantenimientoDao;
 	
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
@@ -207,5 +216,23 @@ public class DaosFactoryImpl extends DaosFactory {
 			monedasDao = new MonedaDaoImpl(ds.getConnection());
 		}
 		return monedasDao;
+	}
+
+	@Override
+	public MantenimientoDao makeMantenimientoDao() {
+		if(mantenimientoDao == null) mantenimientoDao = new MantenimientoDaoImpl(ds.getConnection());
+		return mantenimientoDao;
+	}
+
+	@Override
+	public RepuestoMantenimientoDao makeRepuestoMantenimientoDao() {
+		if(repuestoMantenimientoDao == null) repuestoMantenimientoDao = new RepuestoMantenimientoDaoImpl(ds.getConnection());
+		return repuestoMantenimientoDao;
+	}
+
+	@Override
+	public TrabajoMantenimientoDao makeTrabajoMantenimientoDao() {
+		if(trabajoMantenimientoDao == null) trabajoMantenimientoDao = new TrabajoMantenimientoDaoImpl(ds.getConnection());
+		return trabajoMantenimientoDao;
 	}
 }

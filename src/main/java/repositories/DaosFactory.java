@@ -54,4 +54,9 @@ public abstract class DaosFactory {
 
 	public abstract MonedaDao makeMonedasDao();
 
+	public abstract MantenimientoDao makeMantenimientoDao();
+	
+	public abstract RepuestoMantenimientoDao makeRepuestoMantenimientoDao();
+	
+	public abstract TrabajoMantenimientoDao makeTrabajoMantenimientoDao();
 }

@@ -24,6 +24,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import dto.taller.TrabajoMantenimientoDTO;
 import dto.taller.TrabajoPresupuestadoDTO;
 
 public class PlanificarTrabajosFormView extends JPanel {
@@ -41,7 +42,7 @@ public class PlanificarTrabajosFormView extends JPanel {
 	private JEditorPane editorDescripcion;
 	private JButton btnQuitar;
 
-	private PlanificarTrabajosFormView() {
+	public PlanificarTrabajosFormView() {
 		setBounds(100, 100, 500, 600);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -129,12 +130,6 @@ public class PlanificarTrabajosFormView extends JPanel {
 		panelBotones2.add(btnQuitarTodo);
 	}
 
-	public static PlanificarTrabajosFormView getInstance() {
-		if (instance == null)
-			instance = new PlanificarTrabajosFormView();
-		return instance;
-	}
-
 	public void clearData() {
 		clearDataNuevoTrabajo();
 		modelo.setRowCount(0);
@@ -166,11 +161,11 @@ public class PlanificarTrabajosFormView extends JPanel {
 		return ret;
 	}
 
-	public void setActionOnAgregar(ActionListener listener) {
+	public void setActionOnAgregarTrabajo(ActionListener listener) {
 		this.btnAgregar.addActionListener(listener);
 	}
 
-	public void setActionOnQuitar(ActionListener listener) {
+	public void setActionOnQuitarTrabajo(ActionListener listener) {
 		this.btnQuitar.addActionListener(listener);
 	}
 
@@ -188,6 +183,14 @@ public class PlanificarTrabajosFormView extends JPanel {
 
 	public String getEsfuerzo() {
 		return this.tfEsfuerzo.getText();
+	}
+
+	public void setDataTrabajosMantenimiento(List<TrabajoMantenimientoDTO> trabajos) {
+		modelo.setRowCount(0);
+		for (TrabajoMantenimientoDTO t : trabajos) {
+			Object[] row = { t.getDescripcionTrabajo(), t.getTiempoEstTrabajo(), t.getPrecioTrabajo() };
+			modelo.addRow(row);
+		}
 	}
 
 }

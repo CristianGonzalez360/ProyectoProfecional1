@@ -77,6 +77,9 @@ public class SupervisorControlView extends JInternalFrame {
 		
 		panelEntregaVehiculosView = new EntregaVehiculosPanelView();
 		entregasPanel.add(panelEntregaVehiculosView);
+		
+		MantenimientosPanel mantenimiento = MantenimientosPanel.getInstance();
+		tabbedPane.addTab("Mantenimientos", mantenimiento);
 	}
 
 	public void display() {

@@ -350,3 +350,33 @@ CREATE TABLE PedidoVehiculo (
   FOREIGN KEY (idUsuIngreso) REFERENCES Usuarios(idUsuario),
   FOREIGN KEY (idVentaVehiculo) REFERENCES VentasVehiculos(idVentaVehiculo)
 );
+
+DROP TABLE Mantenimientos IF EXISTS;
+CREATE TABLE Mantenimientos (
+  idMantenimiento INTEGER NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(30) NOT NULL,
+  comentario VARCHAR(60),
+  PRIMARY KEY (idMantenimiento)
+);
+
+DROP TABLE RepuestosMantenimiento IF EXISTS;
+CREATE TABLE RepuestosMantenimiento(
+  idRepuestoMantenimiento INT NOT NULL AUTO_INCREMENT,	
+  idRepuesto INT NOT NULL,
+  idMantenimiento INT NOT NULL,
+  cantidad INT NOT NULL,
+  PRIMARY KEY (idRepuestoMantenimiento),
+  FOREIGN KEY (idRepuesto) REFERENCES Repuestos(idRepuesto),
+  FOREIGN KEY (idMantenimiento) REFERENCES Mantenimientos(idMantenimiento),
+);
+
+DROP TABLE TrabajosMantenimiento IF EXISTS;
+CREATE TABLE TrabajosMantenimiento(
+  idTrabajoMantenimiento INT NOT NULL AUTO_INCREMENT,	
+  descripcionTrabajo VARCHAR (60),	
+  idMantenimiento INT NOT NULL,
+  precio DOUBLE NOT NULL,
+  tiempoEstTrabajo INTEGER NOT NULL,
+  PRIMARY KEY (idTrabajoMantenimiento),
+  FOREIGN KEY (idMantenimiento) REFERENCES Mantenimientos(idMantenimiento),
+);

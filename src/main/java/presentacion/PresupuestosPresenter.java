@@ -53,19 +53,19 @@ public class PresupuestosPresenter {
 		this.ordenDeTrabajoController = ordenDetranajoController;
 		this.view = PanelGestionPresupuestoView.getInstance();
 		this.altaPresupuesto = AltaPresupuestoFormView.getInstance();
-		this.planRepuestosView = PlanificarRepuestosFormView.getInstance();
-		this.planTrabajosView = PlanificarTrabajosFormView.getInstance();
+		this.planRepuestosView = altaPresupuesto.getRepuestosPanel();
+		this.planTrabajosView = altaPresupuesto.getTrabajosPanel();
 		
 		this.altaPresupuesto.setActionOnAceptar(a -> onRegistrar(a));
 		this.altaPresupuesto.setActionOnCancelar(a -> onCancelar(a));
 		
 		this.view.setActionOnSeleccionarPresupuesto(a -> onSelecionarPresupuesto(a));
 		this.view.setActionOnNuevoPresupuesto(a -> onNuevoPresupuesto(a));
-		this.planTrabajosView.setActionOnAgregar(a -> onAgregarTrabajos(a));
-		this.planTrabajosView.setActionOnQuitar(a -> onQuitarTrabajo(a));
-		this.planRepuestosView.setActionOnAgregar(a -> onAgregarRepuesto(a));
-		this.planRepuestosView.setActionOnQuitar(a -> onQuitarRepuesto(a));
-		this.planRepuestosView.setActionOnBuscar(a -> onBuscarRepuesto(a));
+		this.planTrabajosView.setActionOnAgregarTrabajo(a -> onAgregarTrabajos(a));
+		this.planTrabajosView.setActionOnQuitarTrabajo(a -> onQuitarTrabajo(a));
+		this.planRepuestosView.setActionOnAgregarRepuesto(a -> onAgregarRepuesto(a));
+		this.planRepuestosView.setActionOnQuitarRepuesto(a -> onQuitarRepuesto(a));
+		this.planRepuestosView.setActionOnBuscarRepuesto(a -> onBuscarRepuesto(a));
 
 		this.view.setActionOnBuscar(a -> onBuscar(a));
 		this.view.setActionSelectVehiculoCliente(a -> onSelectVehiculoDeCliente(a));
