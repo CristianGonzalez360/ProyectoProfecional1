@@ -10,6 +10,7 @@ import repositories.DaosFactory;
 import repositories.DatosPersonalesDao;
 import repositories.FacturasDao;
 import repositories.FichaTecnicaVehiculoDao;
+import repositories.GarantiasDao;
 import repositories.MonedaDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.PedidoVehiculoDao;
@@ -66,6 +67,8 @@ public class DaosFactoryImpl extends DaosFactory {
 	private VentaVehiculoDao ventaVehiculoDao;
 	
 	private CaracteristicasVehiculoDao caracteristicasDao;
+
+	private GarantiasDaoImpl garantiasDao;
 	
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
@@ -207,5 +210,11 @@ public class DaosFactoryImpl extends DaosFactory {
 			monedasDao = new MonedaDaoImpl(ds.getConnection());
 		}
 		return monedasDao;
+	}
+
+	@Override
+	public GarantiasDao makeGarantiasVehiculosDao() {
+		if(garantiasDao == null) garantiasDao = new GarantiasDaoImpl(ds.getConnection());
+		return garantiasDao;
 	}
 }

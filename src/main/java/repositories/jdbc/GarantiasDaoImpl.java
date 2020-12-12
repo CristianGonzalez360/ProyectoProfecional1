@@ -12,9 +12,9 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 
 	private static final String insert = "INSERT INTO  GarantiasVehiculos(idVehiculo, aniosDeGarantia,kilometrajeInicialDelVehiculo,kilometrajeGarantizado"
 			+ ",fechaInicioDeLaGarantia, fechaDeCaducidadDeLaGarantia,costoFinalConIVA) VALUES (?,?,?,?,?,?,?)";
-	
+
 	private static final String readByIdVehiculo = "SELECT * FROM GarantiasVehiculos WHERE GarantiasVehiculos.idVehiculo = ?";
-	
+
 	public GarantiasDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -26,16 +26,10 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 
 	@Override
 	public boolean insert(GarantiaVehiculoDTO entity) {
-		return getTemplate()
-				.query(insert)
-				.param(entity.getIdVehiculo())
-				.param(entity.getAniosDeGarantia())
-				.param(entity.getKilometrajeInicialDelVehiculo())
-				.param(entity.getKilometrajeGarantizado())
-				.param(entity.getFechaInicioDeLaGarantia())
-				.param(entity.getFechaDeCaducidadDeLaGarantia())
-				.param(entity.getCostoFinalConIVA())
-				.excecute();
+		return getTemplate().query(insert).param(entity.getIdVehiculo()).param(entity.getAniosDeGarantia())
+				.param(entity.getKilometrajeInicialDelVehiculo()).param(entity.getKilometrajeGarantizado())
+				.param(entity.getFechaInicioDeLaGarantia()).param(entity.getFechaDeCaducidadDeLaGarantia())
+				.param(entity.getCostoFinalConIVA()).excecute();
 	}
 
 	@Override
@@ -53,7 +47,7 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 		List<GarantiaVehiculoDTO> target = getTemplate().query(readByIdVehiculo).param(id).excecute(getMapper());
 		return target.isEmpty() ? null : target.get(0);
 	}
-	
+
 	@Override
 	public List<GarantiaVehiculoDTO> readAll() {
 
@@ -64,19 +58,20 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 	protected Mapper<GarantiaVehiculoDTO> getMapper() {
 
 		return new Mapper<GarantiaVehiculoDTO>() {
-			
+
 			@Override
 			public GarantiaVehiculoDTO map(Object[] obj) {
-				GarantiaVehiculoDTO ret =  new GarantiaVehiculoDTO();
-				ret.setId((Integer)obj[0]);
-				ret.setIdVehiculo((Integer)obj[1]);
-				ret.setAniosDeGarantia((Integer)obj[2]);
-				ret.setKilometrajeInicialDelVehiculo((Integer)obj[3]);
-				ret.setKilometrajeGarantizado((Integer)obj[4]);
-				ret.setFechaInicioDeLaGarantia((Date)obj[5]);
-				ret.setFechaDeCaducidadDeLaGarantia((Date)obj[6]);
-				ret.setCostoFinalConIVA((Double)obj[7]);
+				GarantiaVehiculoDTO ret = new GarantiaVehiculoDTO();
+				ret.setId((Integer) obj[0]);
+				ret.setIdVehiculo((Integer) obj[1]);
+				ret.setAniosDeGarantia((Integer) obj[2]);
+				ret.setKilometrajeInicialDelVehiculo((Integer) obj[3]);
+				ret.setKilometrajeGarantizado((Integer) obj[4]);
+				ret.setFechaInicioDeLaGarantia((Date) obj[5]);
+				ret.setFechaDeCaducidadDeLaGarantia((Date) obj[6]);
+				ret.setCostoFinalConIVA((Double) obj[7]);
 				return ret;
-			}};
+			}
+		};
 	}
 }

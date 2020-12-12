@@ -45,6 +45,7 @@ public class DatosVentaVehiculo extends JPanel {
 
 	private JSpinner spinner;
 	private JButton btnRegistrarVenta;
+	private JCheckBox chckbxExtenderGarantia;
 	
 	public DatosVentaVehiculo() {
 		setBorder(new TitledBorder(null, "Datos de la venta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -75,7 +76,10 @@ public class DatosVentaVehiculo extends JPanel {
 		add(lblNewLabel_1, "2, 2, left, default");
 		
 		comboBoxFinanciera = new JComboBox<String>();
-		add(comboBoxFinanciera, "4, 2, 3, 1, fill, default");
+		add(comboBoxFinanciera, "4, 2, fill, default");
+		
+		chckbxExtenderGarantia = new JCheckBox("Extender garantía");
+		add(chckbxExtenderGarantia, "6, 2");
 		
 		chckbxNewCheckBox = new JCheckBox("Es venta en efectivo");
 		add(chckbxNewCheckBox, "8, 2, 3, 1");
@@ -199,5 +203,13 @@ public class DatosVentaVehiculo extends JPanel {
 
 	public void setMontoCuota(String montoCuota) {
 		this.textFieldMontoCuota.setText(montoCuota);
+	}
+	
+	public boolean isExtenderGarantia() {
+		return this.chckbxExtenderGarantia.isSelected();
+	}
+
+	public void setActionExtenderGarantia(ActionListener listener) {
+		this.chckbxExtenderGarantia.addActionListener(listener);
 	}
 }

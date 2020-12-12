@@ -54,4 +54,5 @@ public abstract class DaosFactory {
 
 	public abstract MonedaDao makeMonedasDao();
 
+	public abstract GarantiasDao makeGarantiasVehiculosDao();
 }

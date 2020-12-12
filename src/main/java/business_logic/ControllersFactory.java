@@ -51,4 +51,5 @@ public abstract class ControllersFactory {
 
 	public abstract ConfiguradorSmtpController makeConfiguradorSmtpController();
 
+	public abstract GarantiasController makeGarantiasController();
 }

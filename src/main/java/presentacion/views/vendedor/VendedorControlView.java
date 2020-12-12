@@ -16,6 +16,7 @@ import javax.swing.event.ListSelectionListener;
 
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
+import dto.GarantiaVehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
@@ -277,5 +278,21 @@ public class VendedorControlView extends JInternalFrame {
 	
 	public PanelCaracteristicasDeLaGarantia getCaracteristicasDeLaGarantiaView() {
 		return this.garantiaPanel;
+	}
+
+	public void setData(GarantiaVehiculoDTO garantia) {
+		this.garantiaPanel.setData(garantia);
+	}
+
+	public GarantiaVehiculoDTO getDataGarantia() {
+		return this.garantiaPanel.getData();
+	}
+	
+	public void setActionSelectExtenderGarantia(ActionListener listener) {
+		this.datosVentaVehiculoPanel.setActionExtenderGarantia(listener);
+	}
+	
+	public boolean isExtenderGarantia() {
+		return this.datosVentaVehiculoPanel.isExtenderGarantia();
 	}
 }

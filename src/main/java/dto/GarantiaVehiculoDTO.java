@@ -86,6 +86,13 @@ public class GarantiaVehiculoDTO {
 	public void setKilometrajeGarantizado(Integer kilometrajeGarantizado) {
 		this.kilometrajeGarantizado = kilometrajeGarantizado;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "GarantiaVehiculoDTO [id=" + id + ", idVehiculo=" + idVehiculo + ", aniosDeGarantia=" + aniosDeGarantia
+				+ ", kilometrajeInicialDelVehiculo=" + kilometrajeInicialDelVehiculo + ", kilometrajeGarantizado="
+				+ kilometrajeGarantizado + ", fechaInicioDeLaGarantia=" + fechaInicioDeLaGarantia
+				+ ", fechaDeCaducidadDeLaGarantia=" + fechaDeCaducidadDeLaGarantia + ", costoFinalConIVA="
+				+ costoFinalConIVA + "]";
+	}
 }

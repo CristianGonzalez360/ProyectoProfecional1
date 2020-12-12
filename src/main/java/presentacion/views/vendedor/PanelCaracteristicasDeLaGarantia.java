@@ -8,6 +8,10 @@ import com.jgoodies.forms.layout.RowSpec;
 import dto.GarantiaVehiculoDTO;
 
 import com.jgoodies.forms.layout.FormSpecs;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -102,9 +106,9 @@ public class PanelCaracteristicasDeLaGarantia extends JPanel {
 	}
 	
 	public void setData(GarantiaVehiculoDTO dto) {
-		this.textAniosDeGarantia.setText(dto.getAniosDeGarantia());
-		this.textKilometrajeInicialDelVehiculo.setText(dto.getKilometrajeInicialDelVehiculo());
-		this.textKilometrajeGarantizado.setText(dto.getKilometrajeGarantizado());
+		this.textAniosDeGarantia.setText(dto.getAniosDeGarantia().toString());
+		this.textKilometrajeInicialDelVehiculo.setText(dto.getKilometrajeInicialDelVehiculo().toString());
+		this.textKilometrajeGarantizado.setText(dto.getKilometrajeGarantizado().toString());
 		this.textFechaInicioDeLaGarantia.setText(dto.getFechaInicioDeLaGarantia().toString());
 		this.textFechaDeCaducidadDeLaGarantia.setText(dto.getFechaDeCaducidadDeLaGarantia().toString());
 		this.textCostoFinalConIVA.setText(dto.getCostoFinalConIVA().toString());
@@ -121,12 +125,24 @@ public class PanelCaracteristicasDeLaGarantia extends JPanel {
 	
 	public GarantiaVehiculoDTO getData() {
 		GarantiaVehiculoDTO dto = new GarantiaVehiculoDTO();
-		dto.setAniosDeGarantia(textAniosDeGarantia.getText());
-		dto.setKilometrajeInicialDelVehiculo(textKilometrajeInicialDelVehiculo.getText());
-		dto.setKilometrajeGarantizado(textKilometrajeGarantizado.getText());
-		dto.setFechaInicioDeLaGarantia(textFechaInicioDeLaGarantia.getText());
-		dto.setFechaDeCaducidadDeLaGarantia(textFechaDeCaducidadDeLaGarantia.getText());
-		dto.setCostoFinalConIVA(textCostoFinalConIVA.getText());
+		dto.setAniosDeGarantia(Integer.parseInt(textAniosDeGarantia.getText()));
+		dto.setKilometrajeInicialDelVehiculo(Integer.parseInt(textKilometrajeInicialDelVehiculo.getText()));
+		dto.setKilometrajeGarantizado(Integer.parseInt(textKilometrajeGarantizado.getText()));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY/mm/dd");
+		
+		try {
+			dto.setFechaInicioDeLaGarantia(sdf.parse(textFechaInicioDeLaGarantia.getText()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			dto.setFechaDeCaducidadDeLaGarantia(sdf.parse(textFechaDeCaducidadDeLaGarantia.getText()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		dto.setCostoFinalConIVA(Double.parseDouble(textCostoFinalConIVA.getText()));
 		return dto;
 	}
 }

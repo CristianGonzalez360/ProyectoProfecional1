@@ -43,6 +43,8 @@ public class ControllersFactoryImpl extends ControllersFactory {
 
 	private ConfiguradorSmtpController configSmtpController;
 	
+	private GarantiasController garantiasController;
+	
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
 	}
@@ -171,5 +173,11 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	public ConfiguradorSmtpController makeConfiguradorSmtpController() {
 		if(configSmtpController == null) configSmtpController = new ConfiguradorSmtpController();
 		return configSmtpController;
+	}
+
+	@Override
+	public GarantiasController makeGarantiasController() {
+		if(garantiasController == null) garantiasController = new GarantiasController(daos);
+		return garantiasController;
 	}
 }
