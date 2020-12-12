@@ -66,7 +66,6 @@ public class ViewsFactoryImpl extends ViewsFactory {
 		new GestionUsuariosPresenter(controllers.makeUsuariosController());
 		new SucursalesControlPresenter(controllers.makeSucursalesController(),
 				controllers.makeConfiguradorTerminalController());
-		new ConfiguracionGeneralPresenter(controllers.makeConfiguradorBaseDeDatosController(),
-				controllers.makeConfiguradorSmtpController());
+		new ConfiguracionGeneralPresenter();
 	}
 }

@@ -73,7 +73,7 @@ public class UsuarioDTO {
 		return lst;
 	}
 
-	public UsuarioDTO makeTestDTO() {
+	public static UsuarioDTO makeTestDTO() {
 		DatosPersonalesDTO datos = new DatosPersonalesDTO();
 		datos.setId(2);
 		datos.setNombreCompleto("u001");
@@ -89,8 +89,8 @@ public class UsuarioDTO {
 		cuenta.setIdCuenta(1);
 		cuenta.setFechaDeAlta(new Date());
 		cuenta.setFechaDeBaja(new Date());
-		cuenta.setNombreUsuario("u001");
-		cuenta.setPassword("p001");
+		cuenta.setNombreUsuario("u006");
+		cuenta.setPassword("pu006");
 		cuenta.setRole("admin");
 		UsuarioDTO usuario = new UsuarioDTO(null, cuenta, datos);
 		return usuario;

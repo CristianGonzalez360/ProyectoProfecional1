@@ -1,6 +1,7 @@
 
 package main;
 
+import presentacion.AdminViewFactory;
 import presentacion.ViewsFactory;
 import presentacion.ViewsFactoryImpl;
 import javax.swing.UIManager;
@@ -37,10 +38,15 @@ public class Application {
 	}
 
 	public void onInit(DataSource ds) {
-		DaosFactory.setFactory(new DaosFactoryImpl(ds));
-		new DatabaseSeederServiceImpl(DaosFactory.getFactory()).seedDatabase();
-		ControllersFactory.setFactory(new ControllersFactoryImpl(DaosFactory.getFactory()));
-		ViewsFactory.setFactory(new ViewsFactoryImpl(ControllersFactory.getFactory()));
+		if (ds.getConnection() != null) {
+			DaosFactory.setFactory(new DaosFactoryImpl(ds));
+			new DatabaseSeederServiceImpl(DaosFactory.getFactory()).seedDatabase();
+			ControllersFactory.setFactory(new ControllersFactoryImpl(DaosFactory.getFactory()));
+			ViewsFactory.setFactory(new ViewsFactoryImpl(ControllersFactory.getFactory()));
+		} else {
+			ViewsFactory.setFactory(new AdminViewFactory());
+		}
+
 		ViewsFactory.getFactory().makePresenter().onInit();
 	}
 
