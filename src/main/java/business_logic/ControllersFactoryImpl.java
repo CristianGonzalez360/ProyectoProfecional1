@@ -33,6 +33,8 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	
 	private ConfiguradorTerminalController configurador;
 	
+	private ConfiguradorCapacidadTurnosController configuradorCapacidad;
+	
 	private VehiculosController vehiculosController2;
 
 	private UsuariosController usuariosController;
@@ -132,6 +134,12 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	public ConfiguradorTerminalController makeConfiguradorTerminalController() {
 		if(configurador == null) configurador = new ConfiguradorTerminalController();
 		return configurador;
+	}
+	
+	@Override
+	public ConfiguradorCapacidadTurnosController makeConfiguradorCapacidadTurnosController() {
+		if(configuradorCapacidad == null) configuradorCapacidad = new ConfiguradorCapacidadTurnosController();
+		return configuradorCapacidad;
 	}
 	
 	@Override
