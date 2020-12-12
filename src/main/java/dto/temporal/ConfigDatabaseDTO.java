@@ -14,56 +14,11 @@ public class ConfigDatabaseDTO {
 	private String port;
 	
 	private String ip;
-	
-	private boolean isLocalhost;
-	
-	public List<String>	validate() {
-		List<String> userErrors = new StringValidator(user).notBlank("El usuario es obligatorio").validate();
-		List<String> passwordErrors = new StringValidator(password).notBlank("El password es obligatorio").validate();
-		List<String> portErrors = new StringValidator(port)
-				.notBlank("El port es obligatorio")
-				.number("El port debe ser un numero.")
-				.validate();
-		List<String> ipErrors = new LinkedList<>();
-		if(!isLocalhost) {
-			ipErrors = new StringValidator(ip).notBlank("El ip es obligatorio").validate();	
-		}
-		userErrors.addAll(passwordErrors);
-		userErrors.addAll(portErrors);
-		userErrors.addAll(ipErrors);
-		return userErrors;
-	}
-	
+		
 	public ConfigDatabaseDTO() {
 		super();
-		isLocalhost = false;
 	}
-	
-	public ConfigDatabaseDTO isLocalhost(boolean value) {
-		isLocalhost = value;
-		return this;
-	}
-	
-	public ConfigDatabaseDTO user(String user) {
-		setUser(user);
-		return this;
-	}
-	
-	public ConfigDatabaseDTO password(String password) {
-		setPassword(password);
-		return this;
-	}
-	
-	public ConfigDatabaseDTO ip(String ip) {
-		setIp(ip);
-		return this;
-	}
-	
-	public ConfigDatabaseDTO port(String port) {
-		setPort(port);
-		return this;
-	}
-	
+			
 	public String getUser() {
 		return user;
 	}
@@ -96,17 +51,28 @@ public class ConfigDatabaseDTO {
 		this.ip = ip;
 	}
 
-	public boolean isLocalhost() {
-		return isLocalhost;
-	}
-
-	public void setLocalhost(boolean isLocalhost) {
-		this.isLocalhost = isLocalhost;
-	}
-
 	@Override
 	public String toString() {
-		return "ConfigDatabaseDTO [user=" + user + ", password=" + password + ", port=" + port + ", ip=" + ip
-				+ ", isLocalhost=" + isLocalhost + "]";
-	}		
+		return "ConfigDatabaseDTO [user=" + user + ", password=" + password + ", port=" + port + ", ip=" + ip + "]";
+	}
+	
+	public List<String>	validate() {
+		List<String> userErrors = new StringValidator(user).notBlank("El usuario es obligatorio").validate();
+		List<String> passwordErrors = new StringValidator(password).notBlank("El password es obligatorio").validate();
+		List<String> portErrors = new StringValidator(port)
+				.notBlank("El port es obligatorio")
+				.number("El port debe ser un numero.")
+				.validate();
+		List<String> ipErrors = new LinkedList<>();
+		if(ip.isEmpty()) {
+			ipErrors = new StringValidator(ip).notBlank("El ip es obligatorio").validate();
+		}
+		if(!ip.contains("localhost")) {
+			ipErrors = new StringValidator(ip).number("Si el ip no es localhost debe ser un numero natural").validate();	
+		}
+		userErrors.addAll(passwordErrors);
+		userErrors.addAll(portErrors);
+		userErrors.addAll(ipErrors);
+		return userErrors;
+	}
 }

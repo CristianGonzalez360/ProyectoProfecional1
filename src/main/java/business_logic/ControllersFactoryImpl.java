@@ -39,6 +39,9 @@ public class ControllersFactoryImpl extends ControllersFactory {
 
 	private UsuariosController usuariosController;
 
+	private ConfiguradorBaseDeDatosController configDbController;
+
+	private ConfiguradorSmtpController configSmtpController;
 	
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
@@ -156,5 +159,17 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	public UsuariosController makeUsuariosController() {
 		if(usuariosController == null) usuariosController = new UsuariosController(daos);
 		return usuariosController;
+	}
+
+	@Override
+	public ConfiguradorBaseDeDatosController makeConfiguradorBaseDeDatosController() {
+		if(configDbController == null) configDbController = new ConfiguradorBaseDeDatosController();
+		return configDbController;
+	}
+
+	@Override
+	public ConfiguradorSmtpController makeConfiguradorSmtpController() {
+		if(configSmtpController == null) configSmtpController = new ConfiguradorSmtpController();
+		return configSmtpController;
 	}
 }

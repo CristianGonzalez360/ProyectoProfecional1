@@ -15,13 +15,13 @@ CREATE TABLE Cuentas (
 CREATE TABLE DatosPersonales (
     idDatosPersonales int NOT NULL AUTO_INCREMENT,
     nombreCompleto VARCHAR(60) NOT NULL,
-	apellido VARCHAR(60) NOT NULL,
+  apellido VARCHAR(60) NOT NULL,
     dni INT,
     telefono VARCHAR(15),
     email VARCHAR(25),
     calle VARCHAR(25),
-    altura INT,
-    piso INT,
+    altura VARCHAR(5),
+    piso VARCHAR(2),
     dpto VARCHAR(4),
     localidad VARCHAR(25),
     PRIMARY KEY (idDatosPersonales)
@@ -68,6 +68,7 @@ CREATE TABLE FichaTecnicaVehiculo (
    color VARCHAR (15),
    combustion VARCHAR (15),
    descripcion VARCHAR (60),
+   patente VARCHAR (10),
    PRIMARY KEY (idFichaTecnicaVehiculo)
 );
 
@@ -101,7 +102,7 @@ CREATE TABLE OrdenesDeTrabajo (
   fechaEntregadoVehiculo DATE,
   PRIMARY KEY (idOT),
   FOREIGN KEY (idUsuAlta) REFERENCES Usuarios (idUsuario),
-  FOREIGN KEY (idVehiculoOt) REFERENCES FichaTecnicaVehiculo (idFichaTecnicaVehiculo)
+  FOREIGN KEY (idVehiculoOt) REFERENCES VehiculoConOrdenesDeTrabajo (idVehiculoConOT)
 );
 
 CREATE TABLE Emisores (
@@ -142,6 +143,7 @@ CREATE TABLE Pagos (
 CREATE TABLE Presupuestos (
   idPresupuesto INT NOT NULL AUTO_INCREMENT,
   idOT INT NOT NULL,
+  idFactura INT,
   idUsuAltaPresu INT NOT NULL,
   idUsuCierrePresu INT,
   idUsuRegPago INT,
@@ -149,9 +151,9 @@ CREATE TABLE Presupuestos (
   fechaAltaPresu DATE,
   comentarioAltaPresu VARCHAR (60),
   fechaCierrePresu DATE,
-  comentarioCierrePresu VARCHAR (60),
+  comentarioRechazo VARCHAR (60),
   fechaAprobacion DATE,
-  fechaRechazo DATE,
+  estado VARCHAR(20),
   PRIMARY KEY (idPresupuesto),
   FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo (idOT),
   FOREIGN KEY (idUsuAltaPresu) REFERENCES Usuarios (idUsuario),
@@ -189,5 +191,134 @@ CREATE TABLE RepuestosPlanificados (
   cantRequerida INT,
   PRIMARY KEY (idRepuestoPlanificado),
   FOREIGN KEY (idPresu) REFERENCES Presupuestos (idPresupuesto),
+  FOREIGN KEY (idRepuesto) REFERENCES Repuestos (idRepuesto)
+);
+
+CREATE TABLE Moneda (
+  idMoneda INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(15) NOT NULL,
+  simbolo VARCHAR(5) NOT NULL,
+  cotizacionDolar DOUBLE NOT NULL,
+  PRIMARY KEY (idMoneda)
+);
+
+CREATE TABLE Sucursal (
+  idSucursal INT NOT NULL AUTO_INCREMENT,
+  pais VARCHAR(20) NOT NULL,
+  calle VARCHAR(25) NOT NULL,
+  altura INT NOT NULL,
+  localidad VARCHAR(25) NOT NULL,
+  idMoneda INT NOT NULL,
+  PRIMARY KEY (idSucursal),
+  FOREIGN KEY (idMoneda) REFERENCES Moneda(idMoneda)
+);
+
+CREATE TABLE CaracteristicasVehiculo(
+	idCaracteristica INT NOT NULL AUTO_INCREMENT,
+	cilindrada VARCHAR(20),
+	motor VARCHAR(20),
+	direccion VARCHAR(26),
+	potencia VARCHAR(20),
+	frenosDelanteros VARCHAR(20),
+	transmision VARCHAR(30),
+	frenosTraseros VARCHAR(20),
+	torqueMaximo VARCHAR(20),
+	volumenDeBaul VARCHAR(20),
+	nroDePuertas VARCHAR(20),
+	precio VARCHAR(20),
+	PRIMARY KEY (idCaracteristica)
+);
+
+CREATE TABLE Vehiculos (
+  idVehiculo INT NOT NULL AUTO_INCREMENT,
+  precioVenta DOUBLE NOT NULL,
+  idFichaTecnica INT,
+  marca VARCHAR(20) NOT NULL,
+  familia VARCHAR(20) NOT NULL,
+  linea VARCHAR(20) NOT NULL,
+  color VARCHAR(20) NOT NULL,
+  idCaracteristica INT NOT NULL,
+  fechaIngreso DATE,
+  disponible BOOLEAN NOT NULL,
+  usado BOOLEAN NOT NULL,
+  idSucursal INT,
+  PRIMARY KEY (idVehiculo),
+  FOREIGN KEY (idFichaTecnica) REFERENCES FichaTecnicaVehiculo(idFichaTecnicaVehiculo),
+  FOREIGN KEY (idCaracteristica) REFERENCES CaracteristicasVehiculo(idCaracteristica),
+  FOREIGN KEY (idSucursal) REFERENCES Sucursal(idSucursal)
+);
+
+CREATE TABLE CompraVehiculo (
+  idCompraVehiculo INT NOT NULL AUTO_INCREMENT,
+  idVehiculo INT NOT NULL,
+  PrecioCompra DOUBLE NOT NULL,
+  fechaCompra DATE NOT NULL,
+  idUsuCompra INT NOT NULL,
+  PRIMARY KEY (idCompraVehiculo),
+  FOREIGN KEY (idUsuCompra) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (idVehiculo) REFERENCES Vehiculos(idVehiculo)
+);
+
+CREATE TABLE VentasVehiculos (
+  idVentaVehiculo INT NOT NULL AUTO_INCREMENT,
+  idUsuVentaVN INT NOT NULL,
+  idUsuPedido INT,
+  idUsuLlegada INT,
+  idPagoVentaVN INT,
+  fechaVentaVN DATE NOT NULL,
+  fechaEntregaReal DATE,
+  fabricante VARCHAR(30) NOT NULL,
+  comisionCobrada DOUBLE NOT NULL,
+  precioVenta DOUBLE NOT NULL,
+  financiera VARCHAR(50),
+  nroCuotas INT,
+  montoCuota DOUBLE,
+  idVehiculo INT NOT NULL UNIQUE,
+  idCliente INT NOT NULL,
+  idUsuEntrega INT,
+  idSucursal INT NOT NULL,
+  PRIMARY KEY (idVentaVehiculo),
+  FOREIGN KEY (idUsuVentaVN) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (idCliente) REFERENCES Clientes(idCliente),
+  FOREIGN KEY (idPagoVentaVN) REFERENCES Pagos(idPago),
+  FOREIGN KEY (idVehiculo) REFERENCES Vehiculos(idVehiculo),
+  FOREIGN KEY (idUsuPedido) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (idUsuLlegada) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (idUsuEntrega) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (idSucursal) REFERENCES Sucursal(idSucursal)
+);
+
+CREATE TABLE PedidoVehiculo (
+  idPedidoVehiculo INTEGER NOT NULL AUTO_INCREMENT,
+  fechaPedido DATE NOT NULL,
+  fechaIngreso DATE,
+  idUsuPedido INTEGER NOT NULL,
+  idUsuIngreso INTEGER,
+  idVentaVehiculo INTEGER NOT NULL,
+  PRIMARY KEY (idPedidoVehiculo),
+  FOREIGN KEY (idUsuPedido) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (idUsuIngreso) REFERENCES Usuarios(idUsuario),
+  FOREIGN KEY (idVentaVehiculo) REFERENCES VentasVehiculos(idVentaVehiculo)
+);
+
+CREATE TABLE Facturas (
+  idFactura INT NOT NULL AUTO_INCREMENT,
+  idOT INT,
+  fechaDeAlta DATE,
+  fechaDeCierrePorPago DATE,
+  total DOUBLE,
+  estado VARCHAR(10),
+  dni INT,
+  idCliente INT,
+  PRIMARY KEY(idFactura)
+);
+
+CREATE TABLE RepuestosComprados (
+  idRepuestoComprado INT NOT NULL AUTO_INCREMENT,
+  idFactura INT NOT NULL,
+  idRepuesto INT NOT NULL,
+  cantRequerida INT,
+  PRIMARY KEY (idRepuestoComprado),
+  FOREIGN KEY (idFactura) REFERENCES Facturas (idFactura),
   FOREIGN KEY (idRepuesto) REFERENCES Repuestos (idRepuesto)
 );
