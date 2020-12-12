@@ -10,7 +10,6 @@ import repositories.DaosFactory;
 import repositories.DatosPersonalesDao;
 import repositories.FacturasDao;
 import repositories.FichaTecnicaVehiculoDao;
-<<<<<<< HEAD
 import repositories.MantenimientoDao;
 import repositories.GarantiasDao;
 import repositories.MonedaDao;
