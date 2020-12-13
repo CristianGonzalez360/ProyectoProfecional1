@@ -129,7 +129,7 @@ public class PanelCaracteristicasDeLaGarantia extends JPanel {
 		dto.setKilometrajeInicialDelVehiculo(Integer.parseInt(textKilometrajeInicialDelVehiculo.getText()));
 		dto.setKilometrajeGarantizado(Integer.parseInt(textKilometrajeGarantizado.getText()));
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY/mm/dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-dd-mm");
 		
 		try {
 			dto.setFechaInicioDeLaGarantia(sdf.parse(textFechaInicioDeLaGarantia.getText()));

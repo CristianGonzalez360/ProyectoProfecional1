@@ -12,7 +12,6 @@ import business_logic.ClientesController;
 import business_logic.GarantiasController;
 import business_logic.VentasVehiculosController;
 import business_logic.exceptions.ForbiddenException;
-import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.GarantiaVehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
@@ -27,8 +26,6 @@ import presentacion.views.vendedor.VendedorControlView;
 public class VendedorControlPresenter {
 	
 	private static final String VENTA_MSG = "Se efectuó la venta del vehículo.";
-
-	private static final Double PORCENTAJE_EXTENSION_GARANTIA = (double) (2/3);
 
 	private final VendedorControlView view = VendedorControlView.getInstance();
 	
@@ -61,6 +58,7 @@ public class VendedorControlPresenter {
 		this.view.setActionSelectVentaEnEfectivo((a)->onSelectVentaEnEfectivo(a));
 		this.view.setActionRegistrarVenta((a)->onRegistrarVenta(a));
 		this.view.setActionUpdateNroCuotas((a)->onUpdateNroCuotas(a));
+		this.view.setActionSelectExtenderGarantia((a)->onSelectExtenderGarantia(a));
 	}
 	
 	private void onUpdateNroCuotas(ChangeEvent a) {
@@ -102,26 +100,39 @@ public class VendedorControlPresenter {
 			view.enableVentafinanciada();
 		}
 	}
+
+	private void onSelectExtenderGarantia(ActionEvent a) {
+		if(view.getDataVehiculoEnVenta() != null) {
+			ModalidadVentaVehiculoDTO mod = view.getDataModalidadVenta();
+			if(view.isExtenderGarantia()) {
+				Double precioGarantia = new CalculadoraMontoFinalVentaService(mod).calcularCostoGarantiaExtendida();
+				view.setDataCostoBaseGarantia(precioGarantia.toString());
+			} else {
+				view.setDataCostoBaseGarantia(view.getDataGarantia().getCostoFinalConIVA().toString());
+			}
+			view.setDataPrecioFinal(new CalculadoraMontoFinalVentaService(view.getDataModalidadVenta()).getPrecioFinalVenta());
+			view.setDataComisionVendedor(new CalculadoraMontoFinalVentaService(view.getDataModalidadVenta()).calcularComision());
+			this.updateMontoCuota();
+		}
+	}
 	
 	private void onSelectVehiculo(ListSelectionEvent a) {
-		if(view.getDataVehiculoEnVenta() != null) {
-			OutputConsultaVehiculoEnVentaDTO out = view.getDataVehiculoEnVenta();
-			Integer codigoVehiculo = Integer.parseInt(out.getCodigo());
-			CaracteristicaVehiculoDTO caracteristicas = ventasController.readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo);
-			GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(codigoVehiculo);
-			view.clearDataModalidadVenta();
-			view.setData(caracteristicas);
-			view.setDataVentaPrecioVehiculoSeleccionado(out.getPrecio());
-			view.setData(garantia);
-			ModalidadVentaVehiculoDTO modalidad = view.getDataModalidadVenta();
-			modalidad.setCostoExtensionGarantia(garantia.getCostoFinalConIVA() * (PORCENTAJE_EXTENSION_GARANTIA));
-			modalidad.setCostoGarantia(garantia.getCostoFinalConIVA());
-			if(view.isExtenderGarantia()) modalidad.setExtiendeGarantia(true);
-			CalculadoraMontoFinalVentaService calc = new CalculadoraMontoFinalVentaService(modalidad);
-			view.setDataComisionVendedor(calc.calcularComision());
-			view.setDataPrecioFinal(calc.getPrecioFinalVenta());
-			updateMontoCuota();
-		}
+		OutputConsultaVehiculoEnVentaDTO out = view.getDataVehiculoEnVenta();
+		Integer codigoVehiculo = Integer.parseInt(out.getCodigo());
+		view.setData(ventasController.readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo));
+		GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(codigoVehiculo);
+		view.setData(garantia);
+		view.clearDataModalidadVenta();
+		updatePanelVenta(out.getPrecio(), garantia.getCostoFinalConIVA().toString());
+		updateMontoCuota();
+	}
+		
+	private void updatePanelVenta(String precioUnidad, String precioGarantia) {
+		view.setMontoFinanciado(precioUnidad);
+		view.setDataCostoBaseGarantia(precioGarantia);
+		CalculadoraMontoFinalVentaService calc = new CalculadoraMontoFinalVentaService(view.getDataModalidadVenta());
+		view.setDataComisionVendedor(calc.calcularComision());
+		view.setDataPrecioFinal(calc.getPrecioFinalVenta());
 	}
 
 	private void onConsultarCliente(ActionEvent e) {

@@ -136,6 +136,7 @@ public class VendedorControlView extends JInternalFrame {
 		
 		garantiaPanel = new PanelCaracteristicasDeLaGarantia();
 		tabbedPane_1.addTab("Caracteristicas de la garantia", null, garantiaPanel, null);
+		garantiaPanel.disableAllInputs();
 	}
 
 	public void display() {
@@ -248,7 +249,7 @@ public class VendedorControlView extends JInternalFrame {
 		return this.datosVentaVehiculoPanel.getData();
 	}
 
-	public void setDataVentaPrecioVehiculoSeleccionado(String precio) {
+	public void setMontoFinanciado(String precio) {
 		datosVentaVehiculoPanel.setMontoFinanciado(precio);
 	}
 
@@ -294,5 +295,9 @@ public class VendedorControlView extends JInternalFrame {
 	
 	public boolean isExtenderGarantia() {
 		return this.datosVentaVehiculoPanel.isExtenderGarantia();
+	}
+
+	public void setDataCostoBaseGarantia(String costoFinalConIVA) {
+		datosVentaVehiculoPanel.setDataCostoGarantia(costoFinalConIVA);
 	}
 }
