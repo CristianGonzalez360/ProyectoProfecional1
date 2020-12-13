@@ -52,7 +52,7 @@ public class Application {
 
 	public static void main(String[] args) {
 		DataSourceFactory.setFactory(new DataSourceFactoryImpl());
-		DataSource ds = DataSourceFactory.getFactory().makeDataSource(DataSourceType.IN_MEMORY);
+		DataSource ds = DataSourceFactory.getFactory().makeDataSource(DataSourceType.PERSISTENT);
 		new Application().setUpLookAndFeel().onInit(ds);
 	}
 }
