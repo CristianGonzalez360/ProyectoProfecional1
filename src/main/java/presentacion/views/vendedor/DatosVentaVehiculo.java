@@ -46,6 +46,8 @@ public class DatosVentaVehiculo extends JPanel {
 	private JSpinner spinner;
 	private JButton btnRegistrarVenta;
 	private JCheckBox chckbxExtenderGarantia;
+	private JLabel lblNewLabel_2;
+	private JTextField textPrecioFinalGarantia;
 	
 	public DatosVentaVehiculo() {
 		setBorder(new TitledBorder(null, "Datos de la venta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -105,12 +107,12 @@ public class DatosVentaVehiculo extends JPanel {
 		add(textFieldMontoCuota, "4, 6, fill, default");
 		textFieldMontoCuota.setColumns(10);
 		
-		JLabel lblNewLabel_6 = new JLabel("Precio final");
-		add(lblNewLabel_6, "6, 6, left, default");
+		lblNewLabel_2 = new JLabel("Precio final garantía");
+		add(lblNewLabel_2, "6, 6, left, default");
 		
-		textFieldPrecioFinal = new JTextField();
-		add(textFieldPrecioFinal, "8, 6, fill, default");
-		textFieldPrecioFinal.setColumns(10);
+		textPrecioFinalGarantia = new JTextField();
+		add(textPrecioFinalGarantia, "8, 6, fill, default");
+		textPrecioFinalGarantia.setColumns(10);
 		
 		JLabel lblNewLabel_7 = new JLabel("Comisión por venta");
 		add(lblNewLabel_7, "2, 8, right, default");
@@ -118,6 +120,13 @@ public class DatosVentaVehiculo extends JPanel {
 		textFieldComisionVenta = new JTextField();
 		add(textFieldComisionVenta, "4, 8, fill, default");
 		textFieldComisionVenta.setColumns(10);
+		
+		JLabel lblNewLabel_6 = new JLabel("Precio final");
+		add(lblNewLabel_6, "6, 8, left, default");
+		
+		textFieldPrecioFinal = new JTextField();
+		add(textFieldPrecioFinal, "8, 8, fill, default");
+		textFieldPrecioFinal.setColumns(10);
 		
 		btnRegistrarVenta = new JButton("Registrar venta");
 		add(btnRegistrarVenta, "8, 10, right, default");
@@ -143,6 +152,7 @@ public class DatosVentaVehiculo extends JPanel {
 		this.textFieldComisionVenta.setEditable(false);
 		this.textFieldMontoCuota.setEditable(false);
 		this.textFieldPrecioFinal.setEditable(false);
+		this.textPrecioFinalGarantia.setEditable(false);
 	}
 	
 	public void disableFinanciamiento() {
@@ -168,17 +178,21 @@ public class DatosVentaVehiculo extends JPanel {
 		dto.setMontoCuota(this.textFieldMontoCuota.getText());
 		dto.setComision(this.textFieldComisionVenta.getText());
 		dto.setMontoFinanciado(this.textFieldMontoFinanciado.getText());
+		dto.setCostoGarantia(this.textPrecioFinalGarantia.getText());
+		dto.setExtiendeGarantia(this.chckbxExtenderGarantia.isSelected());
 		return dto;
 	}
 
 	public void clearData() {
 		this.chckbxNewCheckBox.setSelected(false);
+		this.chckbxExtenderGarantia.setSelected(false);
 		this.spinner.setValue(1);
 		this.textFieldComisionVenta.setText("");
 		this.textFieldMontoCuota.setText("");
 		this.textFieldPrecioFinal.setText("");
 		this.textFieldComisionVenta.setText("");
 		this.textFieldMontoFinanciado.setText("");
+		this.textPrecioFinalGarantia.setText("");
 	}
 
 	public void setMontoFinanciado(String precio) {
@@ -211,5 +225,9 @@ public class DatosVentaVehiculo extends JPanel {
 
 	public void setActionExtenderGarantia(ActionListener listener) {
 		this.chckbxExtenderGarantia.addActionListener(listener);
+	}
+
+	public void setDataCostoGarantia(String string) {
+		this.textPrecioFinalGarantia.setText(string);
 	}
 }
