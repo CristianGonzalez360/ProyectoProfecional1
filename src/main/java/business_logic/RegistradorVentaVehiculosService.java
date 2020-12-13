@@ -2,8 +2,11 @@ package business_logic;
 
 import java.util.Date;
 import business_logic.exceptions.ForbiddenException;
+import dto.GarantiaVehiculoDTO;
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import repositories.DaosFactory;
@@ -35,6 +38,7 @@ public class RegistradorVentaVehiculosService {
 		}
 		daos.makeVentaVehiculoDao().insert(venta);
 		daos.makeVehiculoDao().updateDisponibilidadVehiculo(venta.getIdVehiculo(), new Boolean(false));
+		makeVehiculoConOrdenDeTrabajo(venta.getIdVehiculo(), idCliente);
 	}
 	
 	private VehiculoDTO makeVehiculoNuevoParaRegistrar(OutputConsultaVehiculoEnVentaDTO vehiculo) {
@@ -68,5 +72,17 @@ public class RegistradorVentaVehiculosService {
 		venta.setComisionCobrada(Double.parseDouble(modalidadVenta.getComision()));
 		venta.setPrecioVenta(new CalculadoraMontoFinalVentaService(modalidadVenta).getPrecioFinalVenta());
 		return venta;
+	}
+	
+	private void makeVehiculoConOrdenDeTrabajo(Integer idVehiculo, Integer idCliente) {
+		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(idVehiculo);
+		VehiculoConOrdenDeTrabajoDTO v = new VehiculoConOrdenDeTrabajoDTO();
+		v.setIdFichaTecnica(vehiculo.getIdFichaTecnica());
+		v.setIdCliente(idCliente);
+		FichaTecnicaVehiculoDTO ficha = daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica());
+		v.setPatente(ficha.getPatente());
+		GarantiaVehiculoDTO garantia = daos.makeGarantiasVehiculosDao().readByIdVehiculo(vehiculo.getIdVehiculo());
+		v.setKilometrajeGarantia(garantia.getKilometrajeGarantizado());
+		v.setIdVehiculo(idVehiculo);
 	}
 }

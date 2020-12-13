@@ -17,6 +17,8 @@ public class VehiculoConOrdenDeTrabajoDTO {
 	private Integer nroPolizaSeguro;
 
 	private String patente;
+	
+	private Integer idVehiculo;
 
 	public VehiculoConOrdenDeTrabajoDTO() {
 	}
@@ -96,6 +98,14 @@ public class VehiculoConOrdenDeTrabajoDTO {
 
 	public void setPatente(String patente) {
 		this.patente = patente;
+	}
+
+	public Integer getIdVehiculo() {
+		return idVehiculo;
+	}
+
+	public void setIdVehiculo(Integer idVehiculo) {
+		this.idVehiculo = idVehiculo;
 	}
 
 	@Override

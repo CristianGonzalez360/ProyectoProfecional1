@@ -1,7 +1,6 @@
 package presentacion.views.gerente;
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -24,47 +23,31 @@ public class PanelReportes extends JPanel {
 	private JButton btnIngresosSemanales;
 	private JButton btnRepuestos;
 
+	private JButton btnAutosVendidos;
 
 	public PanelReportes() {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		JLabel lblNewLabel = new JLabel("Seleccione un reporte : ");
 		add(lblNewLabel);
-		
-		JButton btnIngresosDiarios = new JButton("Reporte Ingresos Diarios");
-		btnIngresosDiarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
+		btnIngresosDiarios = new JButton("Reporte Ingresos Diarios");
 		add(btnIngresosDiarios);
-		
-		JButton btnEgresosDiarios = new JButton("Reporte Egresos Diarios");
-		btnEgresosDiarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
+		btnEgresosDiarios = new JButton("Reporte Egresos Diarios");
 		add(btnEgresosDiarios);
-		
-		JButton btnIngresosMensuales = new JButton("Reporte Ingresos Mensuales");
-		btnEgresosDiarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
+		btnIngresosMensuales = new JButton("Reporte Ingresos Mensuales");
 		add(btnIngresosMensuales);
-		
-		JButton btnIngresosSemanales = new JButton("Reporte Ingresos Semanales");
-		btnEgresosDiarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
+		btnIngresosSemanales = new JButton("Reporte Ingresos Semanales");
 		add(btnIngresosSemanales);
-		
-		JButton btnRepuestos = new JButton("Reporte De Repuestos");
-		btnEgresosDiarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
+		btnRepuestos = new JButton("Reporte De Repuestos");
 		add(btnRepuestos);
+
+		btnAutosVendidos = new JButton("Reporte de Auto Vendidos");
+		add(btnAutosVendidos);
 	}
 
 	public void setActionDisplayIngresosDiarios(ActionListener listener) {
@@ -84,6 +67,11 @@ public class PanelReportes extends JPanel {
 	}
 
 	public void setActionDisplayreportes(ActionListener listener) {
-		this.btnRepuestos.addActionListener(listener);		
+		this.btnRepuestos.addActionListener(listener);
 	}
+
+	public void setActionDisplayReporteAutosVendidos(ActionListener listener) {
+		this.btnAutosVendidos.addActionListener(listener);
+	}
+	
 }

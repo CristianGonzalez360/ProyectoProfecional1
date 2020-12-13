@@ -18,9 +18,9 @@ public class ModalidadVentaVehiculoDTO {
 	
 	private boolean extiendeGarantia;
 	
-	private Double costoGarantia;
+	private String costoGarantia;
 	
-	private Double costoExtensionGarantia;
+	private String costoExtensionGarantia;
 		
 	public ModalidadVentaVehiculoDTO() {
 	}
@@ -88,20 +88,20 @@ public class ModalidadVentaVehiculoDTO {
 	public void setExtiendeGarantia(boolean extiendeGarantia) {
 		this.extiendeGarantia = extiendeGarantia;
 	}
-	
-	public Double getCostoGarantia() {
+
+	public String getCostoGarantia() {
 		return costoGarantia;
 	}
 
-	public void setCostoGarantia(Double costoGarantia) {
+	public void setCostoGarantia(String costoGarantia) {
 		this.costoGarantia = costoGarantia;
 	}
 
-	public Double getCostoExtensionGarantia() {
+	public String getCostoExtensionGarantia() {
 		return costoExtensionGarantia;
 	}
 
-	public void setCostoExtensionGarantia(Double costoExtensionGarantia) {
+	public void setCostoExtensionGarantia(String costoExtensionGarantia) {
 		this.costoExtensionGarantia = costoExtensionGarantia;
 	}
 
@@ -109,6 +109,7 @@ public class ModalidadVentaVehiculoDTO {
 	public String toString() {
 		return "ModalidadVentaVehiculoDTO [efectivo=" + efectivo + ", financiera=" + financiera + ", nroCuotas="
 				+ nroCuotas + ", montoCuota=" + montoCuota + ", precioFinal=" + precioFinal + ", comision=" + comision
-				+ ", montoFinanciado=" + montoFinanciado + ", extiendeGarantia=" + extiendeGarantia + "]";
+				+ ", montoFinanciado=" + montoFinanciado + ", extiendeGarantia=" + extiendeGarantia + ", costoGarantia="
+				+ costoGarantia + ", costoExtensionGarantia=" + costoExtensionGarantia + "]";
 	}
 }

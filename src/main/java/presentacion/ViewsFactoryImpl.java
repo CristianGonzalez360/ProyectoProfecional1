@@ -29,7 +29,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 				controllers.makeConfiguradorCapacidadTurnosController());
 		new ClientePresenter(SupervisorControlView.getInstance().getClientesView(),
 				controllers.makeClientesController(), controllers.makeVehiculosConOrdenDeTrabajoController(),
-				controllers.makeOrdenesDeTrabajoController());
+				controllers.makeOrdenesDeTrabajoController(), controllers.makeGarantiasController());
 		new OrdenDeTrabajoPresenter(controllers.makeOrdenesDeTrabajoController());
 		new PresupuestosPresenter(controllers.makePresupuestosController(), controllers.makeRepuestosController(),
 				controllers.makeOrdenesDeTrabajoController(), controllers.makeVehiculosConOrdenDeTrabajoController(),
@@ -62,6 +62,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 		makeAdminControllers();
 		new MantenimientosPresenter(controllers.makeMantenimientosController(), controllers.makeRepuestosController());
 		new RecordadorDeTurnos(controllers.makeTurnosController());
+		new ReportesPresenter(controllers.makeFacturasController(), controllers.makeReportesController());
 		return new WorkbenchPresenter(controllers.makeLoginController());
 	}
 
