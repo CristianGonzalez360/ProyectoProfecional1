@@ -260,4 +260,18 @@ public class PlanificarRepuestosFormView extends JPanel {
 			modelRepuestosInferior.addRow(row);
 		}
 	}
+
+	public void deshabilitarEdición() {
+		this.btnAgregar.setEnabled(false);
+		this.btnQuitar.setEnabled(false);
+		this.textCantidad.setEditable(false);
+		this.textCantidad.setFocusable(false);
+	}
+
+	public void habilitarEdición() {
+		this.btnAgregar.setEnabled(true);
+		this.btnQuitar.setEnabled(true);
+		this.textCantidad.setEditable(true);
+		this.textCantidad.setFocusable(true);
+	}
 }

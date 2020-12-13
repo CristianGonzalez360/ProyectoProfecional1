@@ -43,6 +43,21 @@ public class PresupuestoDTO {
 		this.fechaAltaPresu = new Date();
 	}
 
+	public PresupuestoDTO(MantenimientoDTO mantenimiento) {
+		estado = EstadoPresupuesto.PENDIENTE;
+		this.comentarioAltaPresu = mantenimiento.getComentario();
+		this.fechaAltaPresu = new Date();
+		this.trabajos = new ArrayList<>();
+		this.repuestos = new ArrayList<>();
+		for(RepuestoMantenimientoDTO repuesto : mantenimiento.getRepuestos()) {
+			agregarRepuestos(new RepuestoPlanificadoDTO(repuesto));
+		}
+		for(TrabajoMantenimientoDTO trabajo: mantenimiento.getTrabajos()) {
+			agregarTrabajo(new TrabajoPresupuestadoDTO(trabajo));
+		}
+		
+	}
+
 	public Integer getIdPresupuesto() {
 		return idPresupuesto;
 	}
