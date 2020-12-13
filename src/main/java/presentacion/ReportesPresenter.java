@@ -4,6 +4,7 @@ package presentacion;
 import java.awt.event.ActionEvent;
 
 import business_logic.FacturasController;
+import business_logic.ReportesController;
 import presentacion.views.cajero.BitcoinFormView;
 import presentacion.views.cajero.MercadoPagoFormView;
 import presentacion.views.cajero.TarjetaCreditoFormView;
@@ -16,26 +17,28 @@ public class ReportesPresenter {
 
 	private PanelReportes view;
 	private FacturasController facturasController;
+	private ReportesController reportesController;
+
 //	private TarjetaCreditoFormView viewCredito;
 //	private TarjetaDebitoFormView viewDebito;
 //	private MercadoPagoFormView viewMercadoPago;
 //	private BitcoinFormView viewBitcoin;
 
-	public ReportesPresenter(FacturasController facturasController) {
+	public ReportesPresenter(FacturasController facturasController, ReportesController reportesController) {
+		this.view = PanelReportes.getInstance();
 
 		this.facturasController = facturasController;
-		this.view = PanelReportes.getInstance();
+		this.reportesController = reportesController;
 //		this.viewCredito = TarjetaCreditoFormView.getInstance();
 //		this.viewDebito = TarjetaDebitoFormView.getInstance();
 //		this.viewMercadoPago = MercadoPagoFormView.getInstance();
 //		this.viewBitcoin = BitcoinFormView.getInstance();
 
-
-		this.view.setActionDisplayIngresosDiarios((a) -> onDisplayTarjetaCreditoFormView(a));
-		this.view.setActionDisplayEgresosDiarios((a) -> onDisplayTarjetaDebitoFormView(a));
-		this.view.setActionDisplayIngresoMensual((a) -> onDisplayMercadoPagoFormView(a));
-		this.view.setActionDisplayIngresoSemanal((a) -> onDisplayBitcoinsFormView(a));
-		this.view.setActionDisplayreportes((a) -> onDisplayBitcoinsFormView(a));
+//		this.view.setActionDisplayIngresosDiarios((a) -> onDisplayTarjetaCreditoFormView(a));
+//		this.view.setActionDisplayEgresosDiarios((a) -> onDisplayTarjetaDebitoFormView(a));
+//		this.view.setActionDisplayIngresoMensual((a) -> onDisplayMercadoPagoFormView(a));
+//		this.view.setActionDisplayIngresoSemanal((a) -> onDisplayBitcoinsFormView(a));
+//		this.view.setActionDisplayreportes((a) -> onDisplayBitcoinsFormView(a));
 
 //		this.viewCredito.setActionOnRegistrar(a -> onRegistrar(a));
 //		this.viewDebito.setActionOnRegistrar(a -> onRegistrarDebito(a));
@@ -210,7 +213,7 @@ public class ReportesPresenter {
 //			JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error", JOptionPane.ERROR_MESSAGE);
 //		}
 //	}
-	
+
 	private void mostrarTicket(Integer idFactura, String medioPago) {
 		ReporteViewImpl report = new ReporteViewImpl();
 		TicketReport ticket = new TicketReport(facturasController.readByFactura(idFactura));

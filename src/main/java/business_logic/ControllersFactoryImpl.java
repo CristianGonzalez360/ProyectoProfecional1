@@ -47,6 +47,8 @@ public class ControllersFactoryImpl extends ControllersFactory {
 
 	private GarantiasController garantiasController;
 	
+	private ReportesController reportesController;
+	
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
 	}
@@ -187,5 +189,11 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	public GarantiasController makeGarantiasController() {
 		if(garantiasController == null) garantiasController = new GarantiasController(daos);
 		return garantiasController;
+	}
+	
+	@Override
+	public ReportesController makeReportesController() {
+		if(reportesController == null) reportesController = new ReportesController(daos);
+		return reportesController;
 	}
 }
