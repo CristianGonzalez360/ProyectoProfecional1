@@ -6,6 +6,7 @@ import java.util.List;
 import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 import repositories.VehiculosConOrdenDeTrabajoDao;
 import repositories.jdbc.utils.Mapper;
+import repositories.jdbc.utils.NullObject;
 
 public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoConOrdenDeTrabajoDTO>
 		implements VehiculosConOrdenDeTrabajoDao {
@@ -33,7 +34,8 @@ public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoCo
 	public boolean insert(VehiculoConOrdenDeTrabajoDTO entity) {
 		return getTemplate().query(insert).param(entity.getIdFichaTecnica()).param(entity.getIdCliente())
 				.param(entity.getKilometrajeGarantia()).param(entity.getAseguradora())
-				.param(entity.getNroPolizaSeguro()).param(entity.getPatente()).param(entity.getIdVehiculo()).excecute();
+				.param(entity.getNroPolizaSeguro()).param(entity.getPatente())
+				.param(entity.getIdVehiculo() == null? new NullObject() : entity.getIdVehiculo()).excecute();
 	}
 
 	@Override
