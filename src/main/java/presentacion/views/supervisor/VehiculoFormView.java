@@ -1,6 +1,7 @@
 package presentacion.views.supervisor;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -111,7 +112,13 @@ public class VehiculoFormView extends JDialog {
 		contentPanel.add(panel, "2, 14, 7, 1, fill, bottom");
 		panel.add(btnSalvar);
 		panel.add(btnCancelar);
-		setModal(true);
+		
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				clearData();
+			}
+		});
 		clearData();
 	}
 

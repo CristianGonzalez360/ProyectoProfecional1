@@ -2,6 +2,7 @@ package presentacion.views.admin;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -57,6 +58,12 @@ public class FormAltaUsuarioView extends JDialog {
 			{
 				cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						setVisible(false);
+						clearData();
+					}
+				});
 				buttonPane.add(cancelButton);
 			}
 		}
@@ -81,6 +88,7 @@ public class FormAltaUsuarioView extends JDialog {
 	}
 	
 	public void open() {
+		clearData();
 		setVisible(true);
 	}
 	

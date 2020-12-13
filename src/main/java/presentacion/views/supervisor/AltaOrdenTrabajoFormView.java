@@ -134,7 +134,6 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 	}
 
 	public void close() {
-		System.out.println("Set visible false");
 		setVisible(false);
 	}
 
