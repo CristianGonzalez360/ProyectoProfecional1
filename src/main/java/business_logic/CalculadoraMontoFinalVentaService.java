@@ -5,9 +5,7 @@ import dto.temporal.ModalidadVentaVehiculoDTO;
 public class CalculadoraMontoFinalVentaService {
 	
 	private static final int PORCENTAJE_COMISION = 3;
-	
-	private static final int IVA = 21;
-	
+		
 	private final ModalidadVentaVehiculoDTO mod;
 	
 	public CalculadoraMontoFinalVentaService(ModalidadVentaVehiculoDTO modalidad) {
@@ -20,16 +18,17 @@ public class CalculadoraMontoFinalVentaService {
 
 	public Double getPrecioFinalVenta() {
 		Double precioFinal = Double.parseDouble(mod.getMontoFinanciado());
-		Double impuesto = (precioFinal * IVA)/100;		
-		return precioFinal + impuesto + mod.getCostoGarantia() + (mod.isExtiendeGarantia() ? mod.getCostoExtensionGarantia() : 0.0);
+		Double costoGarantia = Double.parseDouble(mod.getCostoGarantia());
+		return precioFinal + costoGarantia;
 	}
 	
 	public String calcularMontoCuota() {
-		Double montoCuota = Double.parseDouble(mod.getMontoFinanciado()) / Integer.parseInt(mod.getNroCuotas());
+		Double montoCuota = Double.parseDouble(mod.getMontoFinanciado()) + Double.parseDouble(mod.getCostoGarantia()) / Integer.parseInt(mod.getNroCuotas());
 		return montoCuota.toString();
 	}
 	
-	public Double calcularCostoAdhicionalDeExtenderGarantia(Double costo) {
-		return costo / 2;
+	public Double calcularCostoGarantiaExtendida() {
+		Double costo = Double.parseDouble(mod.getCostoGarantia());
+		return (costo*2)/3 + costo;
 	}
 }
