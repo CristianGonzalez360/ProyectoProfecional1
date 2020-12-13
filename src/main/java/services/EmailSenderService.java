@@ -26,6 +26,7 @@ public class EmailSenderService {
 	private Properties props;
 
 	public EmailSenderService() {
+
 		props = System.getProperties();
 		props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
 		props.put("mail.smtp.starttls.enable", "true"); // Para conectar de manera segura al servidor SMTP
@@ -130,8 +131,10 @@ public class EmailSenderService {
 		String fechaHoy = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
 		try {
-			map.put("email", propertyService.readProperty("email"));
-			map.put("password", propertyService.readProperty("password"));
+			map.put("correo_remitente", propertyService.readProperty("correo_remitente"));
+			map.put("host", propertyService.readProperty("host"));
+			map.put("password_remitente", propertyService.readProperty("password_remitente"));
+			map.put("port", propertyService.readProperty("port"));
 			map.put("fechaRecordatorio", fechaHoy);
 			propertyService.updateValues(map);
 		} catch (IOException e) {

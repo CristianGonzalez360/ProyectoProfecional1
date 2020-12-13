@@ -6,7 +6,6 @@ import java.util.List;
 
 import business_logic.ConfiguradorCapacidadTurnosController;
 import business_logic.TurnosController;
-import dto.taller.TurnoDTO;
 import dto.temporal.AltaDeTurnoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ConfiguracionView;

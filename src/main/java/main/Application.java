@@ -9,6 +9,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import business_logic.ControllersFactory;
 import business_logic.ControllersFactoryImpl;
+import business_logic.RecordadorDeTurnos;
 import repositories.DaosFactory;
 import repositories.jdbc.DaosFactoryImpl;
 import repositories.jdbc.utils.DataSource;
@@ -54,6 +55,5 @@ public class Application {
 		DataSourceFactory.setFactory(new DataSourceFactoryImpl());
 		DataSource ds = DataSourceFactory.getFactory().makeDataSource(DataSourceType.IN_MEMORY);
 		new Application().setUpLookAndFeel().onInit(ds);
-//		RecordadorDeTurnos.enviarRecordatorios();//donde va?
 	}
 }
