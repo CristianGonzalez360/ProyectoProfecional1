@@ -20,12 +20,16 @@ public class CalculadoraMontoFinalVentaService {
 
 	public Double getPrecioFinalVenta() {
 		Double precioFinal = Double.parseDouble(mod.getMontoFinanciado());
-		Double impuesto = (precioFinal * IVA)/100;
-		return precioFinal + impuesto;
+		Double impuesto = (precioFinal * IVA)/100;		
+		return precioFinal + impuesto + mod.getCostoGarantia() + (mod.isExtiendeGarantia() ? mod.getCostoExtensionGarantia() : 0.0);
 	}
-
+	
 	public String calcularMontoCuota() {
 		Double montoCuota = Double.parseDouble(mod.getMontoFinanciado()) / Integer.parseInt(mod.getNroCuotas());
 		return montoCuota.toString();
+	}
+	
+	public Double calcularCostoAdhicionalDeExtenderGarantia(Double costo) {
+		return costo / 2;
 	}
 }

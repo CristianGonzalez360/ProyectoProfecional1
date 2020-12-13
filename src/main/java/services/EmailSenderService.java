@@ -2,6 +2,10 @@ package services;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -17,6 +21,7 @@ public class EmailSenderService {
 
 	private String correoRemitente = "";
 	private String contraseñaRemitente = "";
+	private String fechaRecordatorio = "";
 
 	private Properties props;
 
@@ -29,7 +34,37 @@ public class EmailSenderService {
 	}
 
 	public boolean enviarMailRecordatorio(String correoDestinatario) {
-		return false;
+		if (!cargarArchivoDePropiedades())
+			return false;
+
+		if (!cargarDatosDeRemitente())
+			return false;
+		
+		Calendar hoy = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String fechaHoy = sdf.format(hoy.getTime());
+		
+		if(!(fechaRecordatorio.equals(fechaHoy)) || fechaRecordatorio.length()==0) {//fecha del archivo vacia
+			Session session = Session.getDefaultInstance(props);
+			MimeMessage message = new MimeMessage(session);
+			Transport transport;
+	
+			try {
+				message.setFrom(new InternetAddress(correoRemitente));
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoDestinatario));
+				message.setSubject(Recordatorio.asunto);
+				message.setContent(Recordatorio.recordatorioHYML, "text/html");
+	
+				transport = session.getTransport("smtp");
+				transport.connect(correoRemitente, contraseñaRemitente);
+				transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+				transport.close();
+				establecerFecha();
+			} catch (Exception me) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public boolean enviarMailDeSatisfaccion(String correoDestinatario) {
@@ -88,5 +123,19 @@ public class EmailSenderService {
 			return false;
 		}
 		return true;
+	}
+	
+	private void establecerFecha() {
+		Map<String, String> map = new HashMap<String, String>();
+		String fechaHoy = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+		
+		try {
+			map.put("email",propertyService.readProperty("email"));
+			map.put("password",propertyService.readProperty("password"));
+			map.put("fechaRecordatorio", fechaHoy);
+			propertyService.updateValues(map);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

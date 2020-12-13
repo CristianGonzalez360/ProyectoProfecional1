@@ -41,6 +41,7 @@ public class ClienteFormView extends JDialog {
 
 	private ClienteFormView() {
 		setBounds(100, 100, 506, 253);
+		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

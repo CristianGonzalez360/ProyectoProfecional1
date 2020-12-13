@@ -9,6 +9,7 @@ import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.CuentaDTO;
 import dto.DatosPersonalesDTO;
+import dto.GarantiaVehiculoDTO;
 import dto.MonedaDTO;
 import dto.SucursalDTO;
 import dto.UsuarioDTO;
@@ -109,6 +110,10 @@ public class DatabaseSeederServiceImpl {
 		}		
 		for (VentaVehiculoDTO target : graph.getVentaVehiculo()) {
 			daos.makeVentaVehiculoDao().insert(target);
+			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
+		}
+		for (GarantiaVehiculoDTO target : graph.getGarantias()) {
+			daos.makeGarantiasVehiculosDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 	}

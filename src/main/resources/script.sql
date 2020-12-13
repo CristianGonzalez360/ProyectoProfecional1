@@ -380,3 +380,17 @@ CREATE TABLE TrabajosMantenimiento(
   PRIMARY KEY (idTrabajoMantenimiento),
   FOREIGN KEY (idMantenimiento) REFERENCES Mantenimientos(idMantenimiento)
 );
+
+DROP TABLE GarantiasVehiculos IF EXISTS;
+CREATE TABLE GarantiasVehiculos(
+	idGarantia INT NOT NULL AUTO_INCREMENT,
+	idVehiculo INT NOT NULL,
+	aniosDeGarantia INT NOT NULL,
+	kilometrajeInicialDelVehiculo INT NOT NULL,
+	kilometrajeGarantizado INT NOT NULL,
+	fechaInicioDeLaGarantia DATE NOT NULL,
+	fechaDeCaducidadDeLaGarantia DATE NOT NULL,
+	costoFinalConIVA DOUBLE NOT NULL,
+	PRIMARY KEY(idGarantia),
+	FOREIGN KEY(idVehiculo) REFERENCES Vehiculos(idVehiculo)
+);

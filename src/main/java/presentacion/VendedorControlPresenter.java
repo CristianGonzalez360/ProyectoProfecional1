@@ -9,10 +9,12 @@ import javax.swing.event.ListSelectionEvent;
 
 import business_logic.CalculadoraMontoFinalVentaService;
 import business_logic.ClientesController;
+import business_logic.GarantiasController;
 import business_logic.VentasVehiculosController;
 import business_logic.exceptions.ForbiddenException;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
+import dto.GarantiaVehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
@@ -26,15 +28,21 @@ public class VendedorControlPresenter {
 	
 	private static final String VENTA_MSG = "Se efectuó la venta del vehículo.";
 
+	private static final Double PORCENTAJE_EXTENSION_GARANTIA = (double) (2/3);
+
 	private final VendedorControlView view = VendedorControlView.getInstance();
 	
 	private ClientesController clientesController;
 	
 	private VentasVehiculosController ventasController;
 	
-	public VendedorControlPresenter(ClientesController clientesController, VentasVehiculosController vehiculosController) {
+	private GarantiasController garantiasController;
+	
+	public VendedorControlPresenter(ClientesController clientesController, VentasVehiculosController vehiculosController
+			,GarantiasController garantiasController) {
 		this.clientesController = clientesController;
 		this.ventasController = vehiculosController;
+		this.garantiasController = garantiasController;
 		setActions();
 		setOpcionesBusqueda();
 	}
@@ -100,10 +108,16 @@ public class VendedorControlPresenter {
 			OutputConsultaVehiculoEnVentaDTO out = view.getDataVehiculoEnVenta();
 			Integer codigoVehiculo = Integer.parseInt(out.getCodigo());
 			CaracteristicaVehiculoDTO caracteristicas = ventasController.readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo);
+			GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(codigoVehiculo);
 			view.clearDataModalidadVenta();
 			view.setData(caracteristicas);
 			view.setDataVentaPrecioVehiculoSeleccionado(out.getPrecio());
-			CalculadoraMontoFinalVentaService calc = new CalculadoraMontoFinalVentaService(view.getDataModalidadVenta());
+			view.setData(garantia);
+			ModalidadVentaVehiculoDTO modalidad = view.getDataModalidadVenta();
+			modalidad.setCostoExtensionGarantia(garantia.getCostoFinalConIVA() * (PORCENTAJE_EXTENSION_GARANTIA));
+			modalidad.setCostoGarantia(garantia.getCostoFinalConIVA());
+			if(view.isExtenderGarantia()) modalidad.setExtiendeGarantia(true);
+			CalculadoraMontoFinalVentaService calc = new CalculadoraMontoFinalVentaService(modalidad);
 			view.setDataComisionVendedor(calc.calcularComision());
 			view.setDataPrecioFinal(calc.getPrecioFinalVenta());
 			updateMontoCuota();
@@ -133,5 +147,4 @@ public class VendedorControlPresenter {
 			view.setData(vehiculos);
 		}
 	}
-
 }
