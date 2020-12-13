@@ -23,7 +23,7 @@ public class PanelReportes extends JPanel {
 	private JButton btnIngresosSemanales;
 	private JButton btnRepuestos;
 
-	private JButton btnVentas;
+	private JButton btnAutosVendidos;
 
 	public PanelReportes() {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -46,8 +46,8 @@ public class PanelReportes extends JPanel {
 		btnRepuestos = new JButton("Reporte De Repuestos");
 		add(btnRepuestos);
 
-		btnVentas = new JButton("Reporte de Auto Vendidos");
-		add(btnVentas);
+		btnAutosVendidos = new JButton("Reporte de Auto Vendidos");
+		add(btnAutosVendidos);
 	}
 
 	public void setActionDisplayIngresosDiarios(ActionListener listener) {
@@ -70,7 +70,8 @@ public class PanelReportes extends JPanel {
 		this.btnRepuestos.addActionListener(listener);
 	}
 
-	public void setActionReporteAutosVendidos(ActionListener listener) {
-		this.btnVentas.addActionListener(listener);
+	public void setActionDisplayReporteAutosVendidos(ActionListener listener) {
+		this.btnAutosVendidos.addActionListener(listener);
 	}
+	
 }

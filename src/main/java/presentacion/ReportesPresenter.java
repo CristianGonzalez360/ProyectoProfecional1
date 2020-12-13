@@ -10,6 +10,7 @@ import presentacion.views.cajero.MercadoPagoFormView;
 import presentacion.views.cajero.TarjetaCreditoFormView;
 import presentacion.views.cajero.TarjetaDebitoFormView;
 import presentacion.views.gerente.PanelReportes;
+import presentacion.views.gerente.ReporteAutosVendidosFormView;
 import presentacion.views.utils.ReporteViewImpl;
 import presentacion.views.utils.TicketReport;
 
@@ -19,24 +20,28 @@ public class ReportesPresenter {
 	private FacturasController facturasController;
 	private ReportesController reportesController;
 
+	private ReporteAutosVendidosFormView autosVendidosView;
+
 	public ReportesPresenter(FacturasController facturasController, ReportesController reportesController) {
 		this.view = PanelReportes.getInstance();
-
 		this.facturasController = facturasController;
 		this.reportesController = reportesController;
 
-//		this.viewCredito = TarjetaCreditoFormView.getInstance();
-//		this.viewDebito = TarjetaDebitoFormView.getInstance();
-//		this.viewMercadoPago = MercadoPagoFormView.getInstance();
-//		this.viewBitcoin = BitcoinFormView.getInstance();
+		this.autosVendidosView = ReporteAutosVendidosFormView.getInstance();
 
-//		this.view.setActionDisplayIngresosDiarios((a) -> onDisplayTarjetaCreditoFormView(a));
-//		this.view.setActionDisplayEgresosDiarios((a) -> onDisplayTarjetaDebitoFormView(a));
-//		this.view.setActionDisplayIngresoMensual((a) -> onDisplayMercadoPagoFormView(a));
-//		this.view.setActionDisplayIngresoSemanal((a) -> onDisplayBitcoinsFormView(a));
-//		this.view.setActionDisplayreportes((a) -> onDisplayBitcoinsFormView(a));
+		this.view.setActionDisplayReporteAutosVendidos((a) -> onDisplayReporteAutosVendidos(a));
 
-		this.view.setActionReporteAutosVendidos((a) -> generarReporteAutosVendidos());
+		this.autosVendidosView.setActionGenerarReporte((a) -> generarReporteAutosVendidos());
+	}
+
+	private void onDisplayReporteAutosVendidos(ActionEvent e) {
+		ReporteAutosVendidosFormView.getInstance().clearData();
+		ReporteAutosVendidosFormView.getInstance().display();
+	}
+
+	private void generarReporteAutosVendidos() {
+		//reportesController
+		System.out.println("Generar Reporte");
 	}
 
 	private void onDisplayTarjetaCreditoFormView(ActionEvent e) {
@@ -57,12 +62,6 @@ public class ReportesPresenter {
 	private void onDisplayBitcoinsFormView(ActionEvent e) {
 		BitcoinFormView.getInstance().clearData();
 		BitcoinFormView.getInstance().display();
-	}
-
-	
-	
-	private void generarReporteAutosVendidos() {
-		System.out.println("Reporte de autos vendidos");
 	}
 
 	/*
