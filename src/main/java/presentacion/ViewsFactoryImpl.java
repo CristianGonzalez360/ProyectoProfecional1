@@ -1,6 +1,7 @@
 package presentacion;
 
 import business_logic.ControllersFactory;
+import business_logic.RecordadorDeTurnos;
 import presentacion.views.admin.AdminControlView;
 import presentacion.views.cajero.CajeroControlView;
 import presentacion.views.gerente.GerenteControlView;
@@ -60,6 +61,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 		new VehiculosUsadosPresenter(controllers.makeVehiculosController());
 		makeAdminControllers();
 		new MantenimientosPresenter(controllers.makeMantenimientosController(), controllers.makeRepuestosController());
+		new RecordadorDeTurnos(controllers.makeTurnosController());
 		return new WorkbenchPresenter(controllers.makeLoginController());
 	}
 
