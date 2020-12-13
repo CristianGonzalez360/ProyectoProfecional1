@@ -180,7 +180,7 @@ public class ClientePresenter {
 	private void onDisplayFormForUpdate(ActionEvent a) {
 		if (view.getIdCliente() != null) {
 			ClienteFormView.getInstance().clearData();
-			ClienteFormView.getInstance().setData(clienteController.readByDni(Integer.parseInt(view.getDniCliente())));
+			ClienteFormView.getInstance().setData(clienteController.readByDni(Integer.parseInt(view.dniClienteSeleccionado())));
 			ClienteFormView.getInstance().display();
 		}
 		else {

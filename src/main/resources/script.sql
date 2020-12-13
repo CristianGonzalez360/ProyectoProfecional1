@@ -351,7 +351,6 @@ CREATE TABLE PedidoVehiculo (
   FOREIGN KEY (idVentaVehiculo) REFERENCES VentasVehiculos(idVentaVehiculo)
 );
 
-<<<<<<< HEAD
 DROP TABLE Mantenimientos IF EXISTS;
 CREATE TABLE Mantenimientos (
   idMantenimiento INTEGER NOT NULL AUTO_INCREMENT,

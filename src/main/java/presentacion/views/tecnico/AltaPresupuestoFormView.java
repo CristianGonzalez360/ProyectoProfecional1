@@ -3,12 +3,15 @@ package presentacion.views.tecnico;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
+import java.util.List;
+
 import javax.swing.JSplitPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -17,9 +20,12 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import dto.taller.MantenimientoDTO;
 import dto.taller.PresupuestoDTO;
 
 import java.awt.Dimension;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 
 public class AltaPresupuestoFormView extends JDialog {
 
@@ -31,10 +37,11 @@ public class AltaPresupuestoFormView extends JDialog {
 	
 	private PlanificarTrabajosFormView trabajos;
 	private PlanificarRepuestosFormView repuestos;
-	private JTextField tftNumero;
 	private JTextField tfComentario;
 	private JTextField tfFechaAlta;
 	private JTextField tfPrecio;
+	private JComboBox<MantenimientoDTO> comboMantenimientos;
+	private JCheckBox checkBox;
 
 	private AltaPresupuestoFormView() {
 		setMinimumSize(new Dimension(1000, 600));
@@ -68,9 +75,11 @@ public class AltaPresupuestoFormView extends JDialog {
 		getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("57px"),
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("86px"),
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("94px"),
+				ColumnSpec.decode("94px:grow"),
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("84px"),
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
@@ -85,40 +94,41 @@ public class AltaPresupuestoFormView extends JDialog {
 				ColumnSpec.decode("86px"),},
 			new RowSpec[] {
 				FormSpecs.LINE_GAP_ROWSPEC,
-				RowSpec.decode("top:28px"),}));
+				RowSpec.decode("top:default"),}));
 		
-		JLabel lblNmero = new JLabel("Número:");
-		panel.add(lblNmero, "2, 2, right, center");
+		checkBox = new JCheckBox("");
+		panel.add(checkBox, "2, 2, center, center");
 		
-		tftNumero = new JTextField();
-		tftNumero.setFocusable(false);
-		tftNumero.setEditable(false);
-		panel.add(tftNumero, "4, 2, fill, fill");
-		tftNumero.setColumns(10);
+		JLabel lblMantenimiento = new JLabel("Mantenimiento:");
+		panel.add(lblMantenimiento, "4, 2, right, center");
+		
+		comboMantenimientos = new JComboBox<>();
+		comboMantenimientos.setEnabled(false);
+		panel.add(comboMantenimientos, "6, 2, fill, default");
 		
 		JLabel lblFechaDeAlta = new JLabel("Fecha de Alta:");
-		panel.add(lblFechaDeAlta, "6, 2, right, center");
+		panel.add(lblFechaDeAlta, "8, 2, right, center");
 		
 		tfFechaAlta = new JTextField();
 		tfFechaAlta.setFocusable(false);
 		tfFechaAlta.setEditable(false);
-		panel.add(tfFechaAlta, "8, 2, fill, fill");
+		panel.add(tfFechaAlta, "10, 2, fill, fill");
 		tfFechaAlta.setColumns(10);
 		
 		JLabel lblComentario = new JLabel("Comentario:");
-		panel.add(lblComentario, "10, 2, right, center");
+		panel.add(lblComentario, "12, 2, right, center");
 		
 		tfComentario = new JTextField();
-		panel.add(tfComentario, "12, 2, fill, fill");
+		panel.add(tfComentario, "14, 2, fill, fill");
 		tfComentario.setColumns(10);
 		
 		JLabel lblPrecio = new JLabel("Precio:");
-		panel.add(lblPrecio, "14, 2, right, center");
+		panel.add(lblPrecio, "16, 2, right, center");
 		
 		tfPrecio = new JTextField();
 		tfPrecio.setFocusable(false);
 		tfPrecio.setEditable(false);
-		panel.add(tfPrecio, "16, 2, fill, fill");
+		panel.add(tfPrecio, "18, 2, fill, fill");
 		tfPrecio.setColumns(10);
 		
 		setVisible(false);
@@ -150,9 +160,7 @@ public class AltaPresupuestoFormView extends JDialog {
 		this.trabajos.clearData();;
 		this.repuestos.clearDataRepuestosPlanificados();
 		this.tfComentario.setText("");
-		this.tfFechaAlta.setText("");
 		this.tfPrecio.setText("");
-		this.tftNumero.setText("");
 	}
 
 	public void display() {
@@ -164,7 +172,6 @@ public class AltaPresupuestoFormView extends JDialog {
 	}
 	
 	public void setData(PresupuestoDTO presupuesto) {
-		this.tftNumero.setText(presupuesto.getIdPresupuesto()+"");
 		this.tfFechaAlta.setText(presupuesto.getFechaAltaPresu().toString());
 		this.tfComentario.setText(presupuesto.getComentarioAltaPresu());
 		this.tfPrecio.setText(presupuesto.getPrecio()+"");
@@ -183,5 +190,46 @@ public class AltaPresupuestoFormView extends JDialog {
 	public void setPrecio(double precio) {
 		this.tfPrecio.setText(precio+"");
 	}
+
+	public void setActionOnMantenimiento(ActionListener listener) {
+		this.checkBox.addActionListener(listener);
+	}
 	
+	public void deshabilitarEdicion() {
+		this.tfComentario.setFocusable(false);
+		this.tfComentario.setEditable(false);
+		if (this.comboMantenimientos.getItemCount() != 0) {
+			this.comboMantenimientos.setEnabled(true);
+		}
+		this.trabajos.deshabilitarEdición();
+		this.repuestos.deshabilitarEdición();
+	}
+	
+	public void habilitarEdicion() {
+		this.tfComentario.setFocusable(true);
+		this.tfComentario.setEditable(true);
+		this.comboMantenimientos.setEnabled(false);
+		this.trabajos.habilitarEdición();
+		this.repuestos.habilitarEdición();
+	}
+
+	public boolean esMantenimiento() {
+		return this.checkBox.isSelected();
+	}
+
+	public void setDataMantenimientos(List<MantenimientoDTO> datos) {
+		DefaultComboBoxModel<MantenimientoDTO> model = new DefaultComboBoxModel<>();
+		for (MantenimientoDTO mantenimiento : datos) {
+			model.addElement(mantenimiento);
+		}		
+		this.comboMantenimientos.setModel(model);
+	}
+
+	public void setActionOnSeleccionar(ActionListener listener) {
+		this.comboMantenimientos.addActionListener(listener);
+	}
+
+	public Integer getMantenimiento() {
+		return comboMantenimientos.getModel().getElementAt(comboMantenimientos.getSelectedIndex()).getId();
+	}
 }

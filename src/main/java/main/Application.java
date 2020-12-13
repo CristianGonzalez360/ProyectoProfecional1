@@ -54,5 +54,6 @@ public class Application {
 		DataSourceFactory.setFactory(new DataSourceFactoryImpl());
 		DataSource ds = DataSourceFactory.getFactory().makeDataSource(DataSourceType.IN_MEMORY);
 		new Application().setUpLookAndFeel().onInit(ds);
+//		RecordadorDeTurnos.enviarRecordatorios();//donde va?
 	}
 }
