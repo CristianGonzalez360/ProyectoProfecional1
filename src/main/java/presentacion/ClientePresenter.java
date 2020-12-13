@@ -7,6 +7,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import business_logic.ClientesController;
+import business_logic.GarantiasController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.VehiculosConOrdenDeTrabajoController;
 import business_logic.exceptions.ConflictException;
@@ -36,14 +37,16 @@ public class ClientePresenter {
 	private VehiculosConOrdenDeTrabajoController vehiculosController;
 
 	private OrdenesTrabajoController ordenDeTrabajoController;
+	private GarantiasController garantiasController;
 
 	public ClientePresenter(PanelClientesView view, ClientesController controller,
-			VehiculosConOrdenDeTrabajoController vehiculoController, OrdenesTrabajoController otController) {
+			VehiculosConOrdenDeTrabajoController vehiculoController, OrdenesTrabajoController otController, GarantiasController garantiasController) {
 		this.view = view;
 		clienteController = controller;
 		this.vehiculosController = vehiculoController;
 		ordenDeTrabajoController = otController;
-
+		this.garantiasController = garantiasController;
+		
 		view.setActionBuscar((a) -> onBuscar(a));
 		view.setActionSelectVehiculoCliente(new ListSelectionListener() {
 			@Override
@@ -64,6 +67,11 @@ public class ClientePresenter {
 
 	private void onDisplayOrdenDeTrabajoForm(ActionEvent a) {
 		if (view.getidVehiculoSeleccionado() != null) {
+			if(!garantiasController.estaEnGarantia(view.getidVehiculoSeleccionado().getIdVehiculo())) {
+				AltaOrdenTrabajoFormView.getInstance().deshabilitarGarantia();
+			} else {
+				AltaOrdenTrabajoFormView.getInstance().habilitarGarantia();
+			}
 			AltaOrdenTrabajoFormView.getInstance().clearData();
 			AltaOrdenTrabajoFormView.getInstance().display();
 		}

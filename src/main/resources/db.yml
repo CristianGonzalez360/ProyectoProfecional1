@@ -221,24 +221,28 @@ vehiculosConOrdenDeTrabajo:
     aseguradora: la nueva
     nroPolizaSeguro: 4234
     patente: 6664
+    idVehiculo:
   - idFichaTecnica: 1
     idCliente: 2
     kilometrajeGarantia: 123
     aseguradora: la nueva
     nroPolizaSeguro: 4234
     patente: 6662
+    idVehiculo:
   - idFichaTecnica: 2
     idCliente: 2
     kilometrajeGarantia: 123
     aseguradora: la nueva
     nroPolizaSeguro: 4234
     patente: 6661
+    idVehiculo:
   - idFichaTecnica: 2
     idCliente: 3
     kilometrajeGarantia: 123
     aseguradora: la nueva
     nroPolizaSeguro: 4234
     patente: 66611
+    idVehiculo:
 
 ordenesDeTrabajo:
   - tipoOrdeTrabajo: service

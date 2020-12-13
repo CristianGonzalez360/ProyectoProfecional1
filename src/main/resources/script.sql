@@ -84,6 +84,7 @@ CREATE TABLE VehiculoConOrdenesDeTrabajo (
    aseguradora VARCHAR (20) NOT NULL,
    nroPolizaSeguro INT NOT NULL,
    patenteVehiculo VARCHAR (10),
+   idVehiculo INT,
    PRIMARY KEY (idVehiculoConOT),
    FOREIGN KEY (idFichaTecnicaVehiculo) REFERENCES FichaTecnicaVehiculo (idFichaTecnicaVehiculo),
    FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente)
