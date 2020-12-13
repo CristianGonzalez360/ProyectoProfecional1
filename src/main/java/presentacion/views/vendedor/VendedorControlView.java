@@ -136,6 +136,7 @@ public class VendedorControlView extends JInternalFrame {
 		
 		garantiaPanel = new PanelCaracteristicasDeLaGarantia();
 		tabbedPane_1.addTab("Caracteristicas de la garantia", null, garantiaPanel, null);
+		garantiaPanel.disableAllInputs();
 	}
 
 	public void display() {
