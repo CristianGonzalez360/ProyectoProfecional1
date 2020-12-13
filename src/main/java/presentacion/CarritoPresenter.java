@@ -67,8 +67,8 @@ public class CarritoPresenter {
 
 	private void onDisplayClienteForm(ActionEvent a) {
 		// TODO Auto-generated method stub
+		ClienteFormView.getInstance().clearData();
 		ClienteFormView.getInstance().display();
-		;
 	}
 
 	// Cuando se cancela, borra el presupuesto para que no quede vacio.

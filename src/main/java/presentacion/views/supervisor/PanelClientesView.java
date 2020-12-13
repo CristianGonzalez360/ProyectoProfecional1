@@ -499,6 +499,10 @@ public class PanelClientesView extends JPanel {
 		return null;
 	}
 
+	public String dniClienteSeleccionado() {
+		return this.textDni.getText();
+	}
+	
 	public Integer getIdCliente() {
 		return this.idCliente;
 	}

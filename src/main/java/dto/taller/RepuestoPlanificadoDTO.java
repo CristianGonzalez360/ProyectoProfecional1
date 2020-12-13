@@ -17,6 +17,12 @@ public class RepuestoPlanificadoDTO {
 
 	}
 
+	public RepuestoPlanificadoDTO(RepuestoMantenimientoDTO repuesto2) {
+		this.idRepuesto = repuesto2.getIdRepuesto();
+		this.cantRequerida = repuesto2.getCantRequerida();
+		this.repuesto = repuesto2.getRepuesto();
+	}
+
 	public Integer getIdPresu() {
 		return idPresu;
 	}

@@ -22,6 +22,13 @@ public class TrabajoPresupuestadoDTO {
 
 	}
 
+	public TrabajoPresupuestadoDTO(TrabajoMantenimientoDTO trabajo) {
+		this.descripcionTrabajo = trabajo.getDescripcionTrabajo();
+		this.precioTrabajo = trabajo.getPrecioTrabajo();
+		this.tiempoEstTrabajo = trabajo.getTiempoEstTrabajo();
+		this.fechaAlta = new Date();
+	}
+
 	public Integer getIdTrabajoPresu() {
 		return idTrabajoPresu;
 	}

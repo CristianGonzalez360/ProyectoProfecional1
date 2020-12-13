@@ -193,4 +193,26 @@ public class PlanificarTrabajosFormView extends JPanel {
 		}
 	}
 
+	public void deshabilitarEdición() {
+		this.editorDescripcion.setEditable(false);
+		this.editorDescripcion.setFocusable(false);
+		this.btnAgregar.setEnabled(false);
+		this.btnQuitar.setEnabled(false);
+		this.tfMonto.setEditable(false);
+		this.tfMonto.setFocusable(false);
+		this.tfEsfuerzo.setEditable(false);
+		this.tfEsfuerzo.setFocusable(false);
+	}
+
+	public void habilitarEdición() {
+		this.editorDescripcion.setEditable(true);
+		this.editorDescripcion.setFocusable(true);
+		this.btnAgregar.setEnabled(true);
+		this.btnQuitar.setEnabled(true);
+		this.tfMonto.setEditable(true);
+		this.tfMonto.setFocusable(true);
+		this.tfEsfuerzo.setEditable(true);
+		this.tfEsfuerzo.setFocusable(true);
+	}
+
 }

@@ -6,16 +6,16 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.swing.event.ListSelectionEvent;
-
 import business_logic.ClientesController;
+import business_logic.MantenimientosController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
 import business_logic.RepuestosController;
 import business_logic.VehiculosConOrdenDeTrabajoController;
 import dto.ClienteDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.taller.MantenimientoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
 import dto.taller.PresupuestoDTO;
 import dto.taller.RepuestoDTO;
@@ -41,11 +41,13 @@ public class PresupuestosPresenter {
 	private RepuestosController repuestosController;
 	private OrdenesTrabajoController ordenDeTrabajoController;
 	private ClientesController clienteController;
-
+	private MantenimientosController mantenimientosController;
+	
 	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController,
 			OrdenesTrabajoController ordenDetranajoController, VehiculosConOrdenDeTrabajoController vehiculoController,
-			ClientesController clienteController) {
+			ClientesController clienteController, MantenimientosController mantenimientosController) {
 
+		this.mantenimientosController = mantenimientosController;
 		this.clienteController = clienteController;
 		this.vehiculosController = vehiculoController;
 		this.presupuestosController = presupuestosController;
@@ -66,25 +68,68 @@ public class PresupuestosPresenter {
 		this.planRepuestosView.setActionOnAgregarRepuesto(a -> onAgregarRepuesto(a));
 		this.planRepuestosView.setActionOnQuitarRepuesto(a -> onQuitarRepuesto(a));
 		this.planRepuestosView.setActionOnBuscarRepuesto(a -> onBuscarRepuesto(a));
-
+		
+		this.altaPresupuesto.setActionOnMantenimiento(a -> onMantenimiento(a));
+		this.altaPresupuesto.setActionOnSeleccionar(a -> onSeleccionar(a));
 		this.view.setActionOnBuscar(a -> onBuscar(a));
 		this.view.setActionSelectVehiculoCliente(a -> onSelectVehiculoDeCliente(a));
 		this.altaPresupuesto.setActionOnClose(new WindowAdapter() {
-			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				nuevoPresupuesto = null;
-				altaPresupuesto.clearData();
+				reiniciar();
 				super.windowClosing(e);
 			}
 		});
 	}
 	
-	//Cuando se cancela, borra el presupuesto para que no quede vacio.
+	private void onSeleccionar(ActionEvent a) {
+		Integer id = altaPresupuesto.getMantenimiento();
+		MantenimientoDTO mantenimiento = mantenimientosController.readByID(id);
+		devolverStock();
+		nuevoPresupuesto = new PresupuestoDTO(mantenimiento);
+		Integer idOT = view.getIdOrdenDeTrabajo();
+		nuevoPresupuesto.setIdOT(idOT);
+		for(RepuestoPlanificadoDTO repuesto : nuevoPresupuesto.getRepuestos()) {
+			RepuestoDTO r = repuesto.getRepuesto();
+			r.setStockRepuesto(r.getStockRepuesto()-repuesto.getCantRequerida());
+			repuestosController.update(r);
+		}
+		onBuscarRepuesto(a);
+		this.altaPresupuesto.setData(nuevoPresupuesto);
+	}
+
+	private void onMantenimiento(ActionEvent a) {
+		if(this.altaPresupuesto.esMantenimiento()) {
+			this.altaPresupuesto.deshabilitarEdicion();
+		} else {
+			this.altaPresupuesto.habilitarEdicion();
+		}
+		reiniciar();
+	}
+
 	private void onCancelar(ActionEvent a) {
-		nuevoPresupuesto = null;
-		altaPresupuesto.clearData();
+		reiniciar();
 		altaPresupuesto.close();
+	}
+	
+	private void reiniciar() {
+		devolverStock();
+		this.nuevoPresupuesto = new PresupuestoDTO();
+		Integer idOT = view.getIdOrdenDeTrabajo();
+		nuevoPresupuesto.setIdOT(idOT);
+		this.altaPresupuesto.clearData();
+		this.planRepuestosView.clearDataRepuestosPlanificados();
+		this.planTrabajosView.clearData();
+	}
+	
+	private void devolverStock() {
+		if(nuevoPresupuesto != null) {
+			for (RepuestoPlanificadoDTO repuestoPlanificado : nuevoPresupuesto.getRepuestos()) {
+				RepuestoDTO repuesto = repuestoPlanificado.getRepuesto();
+				repuesto.setStockRepuesto(repuestoPlanificado.getCantRequerida() + repuesto.getStockRepuesto());
+				repuestosController.update(repuesto);
+			}
+		}
 	}
 
 	//Quita un repuesto del presupuesto
@@ -121,6 +166,7 @@ public class PresupuestosPresenter {
 			onDisplayForPlanRepuesto(a);
 			onDisplayForPlanTrabajos(a);
 			this.altaPresupuesto.setData(nuevoPresupuesto);
+			mostrarMantenimientos();
 			this.altaPresupuesto.display();
 		}
 	}
@@ -204,10 +250,9 @@ public class PresupuestosPresenter {
 			}
 		} else {
 			new MessageDialog().showMessages(errors);
-			;
 		}
 	}
-
+	
 	//Agrega trabajos al nuevo repuesto
 	private void onAgregarTrabajos(ActionEvent a) {
 		String descripcion = planTrabajosView.getDescripcion();
@@ -288,5 +333,10 @@ public class PresupuestosPresenter {
 				}
 			}
 		}
+	}
+	
+	private void mostrarMantenimientos() {
+		List<MantenimientoDTO> datos = mantenimientosController.readAll();
+		this.altaPresupuesto.setDataMantenimientos(datos);
 	}
 }
