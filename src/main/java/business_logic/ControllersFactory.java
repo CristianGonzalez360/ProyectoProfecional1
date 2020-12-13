@@ -28,9 +28,9 @@ public abstract class ControllersFactory {
 	public abstract PresupuestosController makePresupuestosController();
 
 	public abstract RepuestosController makeRepuestosController();
-	
+
 	public abstract FacturasController makeFacturasController();
-	
+
 	public abstract EntregaDeVehiculoController makeEntregasController();
 
 	public abstract SucursalesController makeSucursalesController();
@@ -40,9 +40,9 @@ public abstract class ControllersFactory {
 	public abstract VentasVehiculosController makeVentasVehiculosController();
 
 	public abstract ConfiguradorTerminalController makeConfiguradorTerminalController();
-	
+
 	public abstract ConfiguradorCapacidadTurnosController makeConfiguradorCapacidadTurnosController();
-	
+
 	public abstract VehiculosController makeVehiculosController();
 
 	public abstract UsuariosController makeUsuariosController();
@@ -54,4 +54,7 @@ public abstract class ControllersFactory {
 	public abstract MantenimientosController makeMantenimientosController();
 
 	public abstract GarantiasController makeGarantiasController();
+
+	public abstract ReportesController makeReportesController();
+
 }
