@@ -13,7 +13,7 @@ public class CalculadoraMontoFinalVentaService {
 	}
 	
 	public Double calcularComision() {
-		return Double.parseDouble(mod.getMontoFinanciado())*PORCENTAJE_COMISION / 100;
+		return getPrecioFinalVenta()*PORCENTAJE_COMISION / 100;
 	}
 
 	public Double getPrecioFinalVenta() {

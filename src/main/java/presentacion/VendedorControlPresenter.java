@@ -107,24 +107,21 @@ public class VendedorControlPresenter {
 			if(view.isExtenderGarantia()) {
 				Double precioGarantia = new CalculadoraMontoFinalVentaService(mod).calcularCostoGarantiaExtendida();
 				view.setDataCostoBaseGarantia(precioGarantia.toString());
-				this.updateMontoCuota();
 			} else {
 				view.setDataCostoBaseGarantia(view.getDataGarantia().getCostoFinalConIVA().toString());
-				this.updateMontoCuota();
 			}
-			
+			view.setDataPrecioFinal(new CalculadoraMontoFinalVentaService(view.getDataModalidadVenta()).getPrecioFinalVenta());
+			view.setDataComisionVendedor(new CalculadoraMontoFinalVentaService(view.getDataModalidadVenta()).calcularComision());
+			this.updateMontoCuota();
 		}
 	}
 	
 	private void onSelectVehiculo(ListSelectionEvent a) {
 		OutputConsultaVehiculoEnVentaDTO out = view.getDataVehiculoEnVenta();
 		Integer codigoVehiculo = Integer.parseInt(out.getCodigo());
-		//actualiza panel caracteristica y panel garantia
 		view.setData(ventasController.readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo));
 		GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(codigoVehiculo);
 		view.setData(garantia);
-		
-		//actualiza el panel de venta
 		view.clearDataModalidadVenta();
 		updatePanelVenta(out.getPrecio(), garantia.getCostoFinalConIVA().toString());
 		updateMontoCuota();
