@@ -16,16 +16,12 @@ import javax.swing.event.ListSelectionListener;
 
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
-import dto.VentaVehiculoDTO;
 import dto.temporal.VehiculoParaEntregar;
 import presentacion.views.supervisor.ClientePanelView;
 import presentacion.views.vendedor.CaracteristicaDeVehiculoPanel;
 
 public class PanelEntregaDeVehiculos extends JPanel{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5610520087472443466L;
 	private ClientePanelView panelCliente;
 	private CaracteristicaDeVehiculoPanel panelVehiculo;
