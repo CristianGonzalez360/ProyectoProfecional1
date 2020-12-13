@@ -306,7 +306,6 @@ public class PanelGestionTrabajoView extends JPanel {
 		btnRegistrarTrabajo = new JButton("Registrar trabajo");
 		toolBar.add(btnRegistrarTrabajo);
 		
-
 		panel_1 = new JPanel();
 		panel_1.setBorder(
 				new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -515,7 +514,6 @@ public class PanelGestionTrabajoView extends JPanel {
 			fila=tablePresupuestos.getSelectedRow();
 			id= (int) tablePresupuestos.getValueAt(fila, 0);
 		}
-		
 		return id;
 	}
 	

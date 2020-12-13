@@ -25,9 +25,6 @@ import java.awt.event.ActionEvent;
 
 public class PanelCobroCajeroView extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3152338359660079392L;
 	
 	private static PanelCobroCajeroView instance;
@@ -85,9 +82,6 @@ public class PanelCobroCajeroView extends JPanel {
 		panel.add(scrollPaneFacturas);
 		tableFacturas = new JTable(listadoDeFacturasModel){//tabla no editable
 			
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = -7694783590163789939L;
 
 			@Override
@@ -181,14 +175,9 @@ public class PanelCobroCajeroView extends JPanel {
 
 	public void cargarTabla(List<FacturaDTO> presupuestos) {
 		for (FacturaDTO presupuesto : presupuestos) {
-			
-			
-			
 				Object[] row = { presupuesto.getIdFactura().toString(),  presupuesto.getDni(), presupuesto.getFechaDeCierrePorPago(),
 						presupuesto.getTotal(), presupuesto.getEstado() };
 				listadoDeFacturasModel.addRow(row);
-			
-			
 		}
 		if(presupuestos.size()>=1) {
 			botonvisible();
@@ -231,7 +220,6 @@ public class PanelCobroCajeroView extends JPanel {
 		}
 		return idSeleccionada;
 	}
-	
 	
 	public String getEstadoSeleccionada(){
 		String idSeleccionada = null;
