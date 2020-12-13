@@ -19,7 +19,6 @@ public class ReportesPresenter {
 	private PanelReportes view;
 	private FacturasController facturasController;
 	private ReportesController reportesController;
-
 	private ReporteAutosVendidosFormView autosVendidosView;
 
 	public ReportesPresenter(FacturasController facturasController, ReportesController reportesController) {
@@ -44,6 +43,33 @@ public class ReportesPresenter {
 		System.out.println("Generar Reporte");
 	}
 
+//	private TarjetaCreditoFormView viewCredito;
+//	private TarjetaDebitoFormView viewDebito;
+//	private MercadoPagoFormView viewMercadoPago;
+//	private BitcoinFormView viewBitcoin;
+
+	public ReportesPresenter(FacturasController facturasController, ReportesController reportesController) {
+		this.view = PanelReportes.getInstance();
+
+		this.facturasController = facturasController;
+		this.reportesController = reportesController;
+//		this.viewCredito = TarjetaCreditoFormView.getInstance();
+//		this.viewDebito = TarjetaDebitoFormView.getInstance();
+//		this.viewMercadoPago = MercadoPagoFormView.getInstance();
+//		this.viewBitcoin = BitcoinFormView.getInstance();
+
+//		this.view.setActionDisplayIngresosDiarios((a) -> onDisplayTarjetaCreditoFormView(a));
+//		this.view.setActionDisplayEgresosDiarios((a) -> onDisplayTarjetaDebitoFormView(a));
+//		this.view.setActionDisplayIngresoMensual((a) -> onDisplayMercadoPagoFormView(a));
+//		this.view.setActionDisplayIngresoSemanal((a) -> onDisplayBitcoinsFormView(a));
+//		this.view.setActionDisplayreportes((a) -> onDisplayBitcoinsFormView(a));
+
+//		this.viewCredito.setActionOnRegistrar(a -> onRegistrar(a));
+//		this.viewDebito.setActionOnRegistrar(a -> onRegistrarDebito(a));
+//		this.viewMercadoPago.setActionOnRegistrar(a -> onRegistrarMercadoPago(a));
+//		this.viewBitcoin.setActionOnRegistrar(a -> onRegistrarBitcoin(a));
+	}
+
 	private void onDisplayTarjetaCreditoFormView(ActionEvent e) {
 		TarjetaCreditoFormView.getInstance().clearData();
 		TarjetaCreditoFormView.getInstance().display();
@@ -64,10 +90,6 @@ public class ReportesPresenter {
 		BitcoinFormView.getInstance().display();
 	}
 
-	/*
-	 * -----------------------------------------------------------------------------
-	 * ---------
-	 */
 	private void mostrarTicket(Integer idFactura, String medioPago) {
 		ReporteViewImpl report = new ReporteViewImpl();
 		TicketReport ticket = new TicketReport(facturasController.readByFactura(idFactura));
