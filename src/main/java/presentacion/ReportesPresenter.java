@@ -19,16 +19,12 @@ public class ReportesPresenter {
 	private FacturasController facturasController;
 	private ReportesController reportesController;
 
-//	private TarjetaCreditoFormView viewCredito;
-//	private TarjetaDebitoFormView viewDebito;
-//	private MercadoPagoFormView viewMercadoPago;
-//	private BitcoinFormView viewBitcoin;
-
 	public ReportesPresenter(FacturasController facturasController, ReportesController reportesController) {
 		this.view = PanelReportes.getInstance();
 
 		this.facturasController = facturasController;
 		this.reportesController = reportesController;
+
 //		this.viewCredito = TarjetaCreditoFormView.getInstance();
 //		this.viewDebito = TarjetaDebitoFormView.getInstance();
 //		this.viewMercadoPago = MercadoPagoFormView.getInstance();
@@ -40,10 +36,7 @@ public class ReportesPresenter {
 //		this.view.setActionDisplayIngresoSemanal((a) -> onDisplayBitcoinsFormView(a));
 //		this.view.setActionDisplayreportes((a) -> onDisplayBitcoinsFormView(a));
 
-//		this.viewCredito.setActionOnRegistrar(a -> onRegistrar(a));
-//		this.viewDebito.setActionOnRegistrar(a -> onRegistrarDebito(a));
-//		this.viewMercadoPago.setActionOnRegistrar(a -> onRegistrarMercadoPago(a));
-//		this.viewBitcoin.setActionOnRegistrar(a -> onRegistrarBitcoin(a));
+		this.view.setActionReporteAutosVendidos((a) -> generarReporteAutosVendidos());
 	}
 
 	private void onDisplayTarjetaCreditoFormView(ActionEvent e) {
@@ -66,154 +59,16 @@ public class ReportesPresenter {
 		BitcoinFormView.getInstance().display();
 	}
 
-//	private void onRegistrar(ActionEvent a) {
-//		TarjetaCreditoDTO tarjeta = TarjetaCreditoFormView.getInstance().getData();
-//		List<String> errors = tarjeta.validate();
-//		if (errors.isEmpty()) {
-//			try {
-//
-//				int idPresupuesto = this.view.getIdPresupuestoSeleccionada();
-//				String IdEstado = this.view.getEstadoSeleccionada();
-//				Double idTotal = this.view.getTotalSeleccionada();
-//
-//				if (idPresupuesto != -1) {
-//					int resp = JOptionPane.showOptionDialog(null,
-//							"¿Estás seguro que quieres pagar la factura seleccionada por un total de: " + idTotal
-//									+ " ?",
-//							"Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-//					if (resp == 0 && IdEstado.equals("PAGA")) {
-//						JOptionPane.showMessageDialog(null, "La factura ya esta paga!", "Error",
-//								JOptionPane.ERROR_MESSAGE);
-//					} else if (resp == 0) {
-//						facturasController.updatePorPago(idPresupuesto);
-//						this.onCargar(a);
-//						mostrarTicket(idPresupuesto, "Tarjeta de Crédito");
-//						JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
-//								JOptionPane.INFORMATION_MESSAGE);
-//						this.viewCredito.setVisible(false);
-//					}
-//				} else {
-//					JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error",
-//							JOptionPane.ERROR_MESSAGE);
-//				}
-//
-//			} catch (ConflictException e1) {
-//				new MessageDialog().showMessages(e1.getMessage());
-//			}
-//		} else {
-//			new MessageDialog().showMessages(errors);
-//		}
-//	}
-//
-//	private void onRegistrarDebito(ActionEvent a) {
-//		TarjetaDebitoDTO tarjeta = TarjetaDebitoFormView.getInstance().getData();
-//		List<String> errors = tarjeta.validate();
-//		if (errors.isEmpty()) {
-//			try {
-//
-//				int idPresupuesto = this.view.getIdPresupuestoSeleccionada();
-//				String IdEstado = this.view.getEstadoSeleccionada();
-//				Double idTotal = this.view.getTotalSeleccionada();
-//
-//				if (idPresupuesto != -1) {
-//					int resp = JOptionPane.showOptionDialog(null,
-//							"¿Estás seguro que quieres pagar la factura seleccionada por un total de: " + idTotal
-//									+ " ?",
-//							"Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-//					if (resp == 0 && IdEstado.equals("PAGA")) {
-//						JOptionPane.showMessageDialog(null, "La factura ya esta paga!", "Error",
-//								JOptionPane.ERROR_MESSAGE);
-//					} else if (resp == 0) {
-//						facturasController.updatePorPago(idPresupuesto);
-//						this.onCargar(a);
-//						mostrarTicket(idPresupuesto, "Tarjeta de Debito");
-//						JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
-//								JOptionPane.INFORMATION_MESSAGE);
-//						this.viewDebito.setVisible(false);
-//					}
-//				} else {
-//					JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error",
-//							JOptionPane.ERROR_MESSAGE);
-//				}
-//
-//			} catch (ConflictException e1) {
-//				new MessageDialog().showMessages(e1.getMessage());
-//			}
-//		} else {
-//			new MessageDialog().showMessages(errors);
-//		}
-//	}
-//
-//	private void onRegistrarMercadoPago(ActionEvent a) {
-//		int idPresupuesto = this.view.getIdPresupuestoSeleccionada();
-//		String IdEstado = this.view.getEstadoSeleccionada();
-//		Double idTotal = this.view.getTotalSeleccionada();
-//
-//		if (idPresupuesto != -1) {
-//			int resp = JOptionPane.showOptionDialog(null,
-//					"¿Desea confirmar la recepcion a traves de Mercado Pago de: " + idTotal + " ?", "Confirmación",
-//					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-//			if (resp == 0 && IdEstado.equals("PAGA")) {
-//				JOptionPane.showMessageDialog(null, "La factura ya esta paga!", "Error", JOptionPane.ERROR_MESSAGE);
-//			} else if (resp == 0) {
-//				facturasController.updatePorPago(idPresupuesto);
-//				this.onCargar(a);
-//				mostrarTicket(idPresupuesto, "MercadoPago");
-//				JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
-//						JOptionPane.INFORMATION_MESSAGE);
-//				this.viewMercadoPago.setVisible(false);
-//			}
-//		} else {
-//			JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error", JOptionPane.ERROR_MESSAGE);
-//		}
-//	}
-//
-//	private void onRegistrarBitcoin(ActionEvent a) {
-//		int idPresupuesto = this.view.getIdPresupuestoSeleccionada();
-//		String IdEstado = this.view.getEstadoSeleccionada();
-//		Double idTotal = this.view.getTotalSeleccionada();
-//
-//		if (idPresupuesto != -1) {
-//			int resp = JOptionPane.showOptionDialog(null,
-//					"¿Desea confirmar la recepcion a traves de Bitcoins de: " + idTotal + " ?", "Confirmación",
-//					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-//			if (resp == 0 && IdEstado.equals("PAGA")) {
-//				JOptionPane.showMessageDialog(null, "La factura ya esta paga!", "Error", JOptionPane.ERROR_MESSAGE);
-//			} else if (resp == 0) {
-//				facturasController.updatePorPago(idPresupuesto);
-//				this.onCargar(a);
-//				mostrarTicket(idPresupuesto, "BitCoin");
-//				JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
-//						JOptionPane.INFORMATION_MESSAGE);
-//				this.viewBitcoin.setVisible(false);
-//			}
-//		} else {
-//			JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error", JOptionPane.ERROR_MESSAGE);
-//		}
-//	}
-//
-//	private void onRegistrarEfectivo(ActionEvent a) {
-//		int idPresupuesto = this.view.getIdPresupuestoSeleccionada();
-//		String IdEstado = this.view.getEstadoSeleccionada();
-//		Double idTotal = this.view.getTotalSeleccionada();
-//
-//		if (idPresupuesto != -1) {
-//			int resp = JOptionPane.showOptionDialog(null, "¿Desea confirmar el pago de: " + idTotal + " ?",
-//					"Pago en Efectivo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-//			if (resp == 0 && IdEstado.equals("PAGA")) {
-//				JOptionPane.showMessageDialog(null, "La factura ya esta paga!", "Error", JOptionPane.ERROR_MESSAGE);
-//			} else if (resp == 0) {
-//				facturasController.updatePorPago(idPresupuesto);
-//				this.onCargar(a);
-//				mostrarTicket(idPresupuesto, "Efectivo");
-//				JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
-//						JOptionPane.INFORMATION_MESSAGE);
-//			}
-//		} else {
-//			JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error", JOptionPane.ERROR_MESSAGE);
-//		}
-//	}
+	
+	
+	private void generarReporteAutosVendidos() {
+		System.out.println("Reporte de autos vendidos");
+	}
 
+	/*
+	 * -----------------------------------------------------------------------------
+	 * ---------
+	 */
 	private void mostrarTicket(Integer idFactura, String medioPago) {
 		ReporteViewImpl report = new ReporteViewImpl();
 		TicketReport ticket = new TicketReport(facturasController.readByFactura(idFactura));
