@@ -76,8 +76,7 @@ public class PresupuestosPresenter {
 		this.altaPresupuesto.setActionOnClose(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				nuevoPresupuesto = null;
-				altaPresupuesto.clearData();
+				reiniciar();
 				super.windowClosing(e);
 			}
 		});
@@ -105,13 +104,22 @@ public class PresupuestosPresenter {
 		} else {
 			this.altaPresupuesto.habilitarEdicion();
 		}
+		reiniciar();
 	}
 
 	private void onCancelar(ActionEvent a) {
-		devolverStock();
-		nuevoPresupuesto = null;
-		altaPresupuesto.clearData();
+		reiniciar();
 		altaPresupuesto.close();
+	}
+	
+	private void reiniciar() {
+		devolverStock();
+		this.nuevoPresupuesto = new PresupuestoDTO();
+		Integer idOT = view.getIdOrdenDeTrabajo();
+		nuevoPresupuesto.setIdOT(idOT);
+		this.altaPresupuesto.clearData();
+		this.planRepuestosView.clearDataRepuestosPlanificados();
+		this.planTrabajosView.clearData();
 	}
 	
 	private void devolverStock() {

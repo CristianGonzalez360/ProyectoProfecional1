@@ -130,6 +130,7 @@ public class MantenimientosPanel extends JPanel {
 	public void setData(MantenimientoDTO m) {
 		this.tfNombre.setText(m.getNombre());
 		this.tfComentario.setText(m.getComentario());
+		this.tfPrecio.setText(m.getPrecio() + "");
 	}
 
 	public PlanificarRepuestosFormView getRepuestosPanel() {
@@ -159,6 +160,7 @@ public class MantenimientosPanel extends JPanel {
 	public void clearData() {
 		this.tfNombre.setText("");
 		this.tfComentario.setText("");
+		this.tfPrecio.setText("");
 		this.trabajos.clearData();
 		this.repuestos.clearDataRepuestosPlanificados();
 	}

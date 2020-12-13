@@ -97,14 +97,13 @@ public class AltaPresupuestoFormView extends JDialog {
 				RowSpec.decode("top:default"),}));
 		
 		checkBox = new JCheckBox("");
-		panel.add(checkBox, "2, 2");
+		panel.add(checkBox, "2, 2, center, center");
 		
 		JLabel lblMantenimiento = new JLabel("Mantenimiento:");
 		panel.add(lblMantenimiento, "4, 2, right, center");
 		
 		comboMantenimientos = new JComboBox<>();
 		comboMantenimientos.setEnabled(false);
-		comboMantenimientos.setEditable(true);
 		panel.add(comboMantenimientos, "6, 2, fill, default");
 		
 		JLabel lblFechaDeAlta = new JLabel("Fecha de Alta:");
@@ -161,7 +160,6 @@ public class AltaPresupuestoFormView extends JDialog {
 		this.trabajos.clearData();;
 		this.repuestos.clearDataRepuestosPlanificados();
 		this.tfComentario.setText("");
-		this.tfFechaAlta.setText("");
 		this.tfPrecio.setText("");
 	}
 
@@ -200,7 +198,9 @@ public class AltaPresupuestoFormView extends JDialog {
 	public void deshabilitarEdicion() {
 		this.tfComentario.setFocusable(false);
 		this.tfComentario.setEditable(false);
-		this.comboMantenimientos.setEnabled(true);
+		if (this.comboMantenimientos.getItemCount() != 0) {
+			this.comboMantenimientos.setEnabled(true);
+		}
 		this.trabajos.deshabilitarEdición();
 		this.repuestos.deshabilitarEdición();
 	}
@@ -219,17 +219,9 @@ public class AltaPresupuestoFormView extends JDialog {
 
 	public void setDataMantenimientos(List<MantenimientoDTO> datos) {
 		DefaultComboBoxModel<MantenimientoDTO> model = new DefaultComboBoxModel<>();
-		comboMantenimientos.setEnabled(true);
 		for (MantenimientoDTO mantenimiento : datos) {
 			model.addElement(mantenimiento);
-		}
-		if(datos.isEmpty()) {
-			MantenimientoDTO m = new MantenimientoDTO();
-			m.setNombre("VACIO");
-			model.addElement(m);
-			comboMantenimientos.setEnabled(false);
-		}
-		
+		}		
 		this.comboMantenimientos.setModel(model);
 	}
 
