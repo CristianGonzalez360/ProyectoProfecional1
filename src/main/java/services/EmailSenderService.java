@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMessage;
 public class EmailSenderService {
 
 	private PropertiesServiceImpl propertyService;
-	private final static String pathArchivoEncuestas = "conf/smtp.properties";
+	private final static String pathFile = "conf/config_smtp.properties";
 
 	private String correoRemitente = "";
 	private String contraseñaRemitente = "";
@@ -39,22 +39,22 @@ public class EmailSenderService {
 
 		if (!cargarDatosDeRemitente())
 			return false;
-		
+
 		Calendar hoy = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String fechaHoy = sdf.format(hoy.getTime());
-		
-		if(!(fechaRecordatorio.equals(fechaHoy)) || fechaRecordatorio.length()==0) {//fecha del archivo vacia
+
+		if (!(fechaRecordatorio.equals(fechaHoy)) || fechaRecordatorio.length() == 0) {// fecha del archivo vacia
 			Session session = Session.getDefaultInstance(props);
 			MimeMessage message = new MimeMessage(session);
 			Transport transport;
-	
+
 			try {
 				message.setFrom(new InternetAddress(correoRemitente));
 				message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoDestinatario));
 				message.setSubject(Recordatorio.asunto);
 				message.setContent(Recordatorio.recordatorioHYML, "text/html");
-	
+
 				transport = session.getTransport("smtp");
 				transport.connect(correoRemitente, contraseñaRemitente);
 				transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
@@ -105,7 +105,7 @@ public class EmailSenderService {
 	}
 
 	private String getAbsolutePath() {
-		File file = new File(pathArchivoEncuestas);
+		File file = new File(pathFile);
 		if (!file.exists())
 			try {
 				file.createNewFile();
@@ -117,21 +117,21 @@ public class EmailSenderService {
 
 	private boolean cargarDatosDeRemitente() {
 		try {
-			correoRemitente = propertyService.readProperty("email");
-			contraseñaRemitente = propertyService.readProperty("password");
+			correoRemitente = propertyService.readProperty("correo_remitente");
+			contraseñaRemitente = propertyService.readProperty("password_remitente");
 		} catch (IOException e) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	private void establecerFecha() {
 		Map<String, String> map = new HashMap<String, String>();
 		String fechaHoy = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
-		
+
 		try {
-			map.put("email",propertyService.readProperty("email"));
-			map.put("password",propertyService.readProperty("password"));
+			map.put("email", propertyService.readProperty("email"));
+			map.put("password", propertyService.readProperty("password"));
 			map.put("fechaRecordatorio", fechaHoy);
 			propertyService.updateValues(map);
 		} catch (IOException e) {
