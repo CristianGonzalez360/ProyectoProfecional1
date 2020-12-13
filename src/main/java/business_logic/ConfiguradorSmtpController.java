@@ -19,6 +19,7 @@ public class ConfiguradorSmtpController {
 		map.put("password_remitente", dto.getPasswordRemitente());
 		map.put("host", dto.getHost());
 		map.put("port", dto.getPort());
+		map.put("fechaRecordatorio", "");
 		PropertiesServiceImpl service = new PropertiesServiceImpl(file);
 		try {
 			service.updateValues(map);

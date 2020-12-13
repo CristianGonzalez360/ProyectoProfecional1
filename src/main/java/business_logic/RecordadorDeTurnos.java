@@ -13,6 +13,8 @@ public class RecordadorDeTurnos {
 	public RecordadorDeTurnos(TurnosController turnosController) {
 		RecordadorDeTurnos.turnosController = turnosController;
 		RecordadorDeTurnos.servicio = new EmailSenderService();
+		
+		enviarRecordatorios();
 	}
 	
 	public static void enviarRecordatorios() {

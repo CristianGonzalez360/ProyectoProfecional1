@@ -19,6 +19,8 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.toedter.calendar.JDateChooser;
 
 import dto.TarjetaDebitoDTO;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class TarjetaDebitoFormView extends JDialog {
 
@@ -34,6 +36,7 @@ public class TarjetaDebitoFormView extends JDialog {
 	private JTextField textDni;
 
 	private JDateChooser fechaExpiracion;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	private TarjetaDebitoFormView() {
 		setTitle("Pago con Tarjeta de Débito");
@@ -63,6 +66,14 @@ public class TarjetaDebitoFormView extends JDialog {
 		textNumeroTarjeta = new JTextField();
 		textNumeroTarjeta.setColumns(10);
 		panel.add(textNumeroTarjeta, "4, 2, fill, default");
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("VISA");
+		buttonGroup.add(rdbtnNewRadioButton);
+		panel.add(rdbtnNewRadioButton, "6, 2, center, default");
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("MasterCard");
+		buttonGroup.add(rdbtnNewRadioButton_1);
+		panel.add(rdbtnNewRadioButton_1, "8, 2, center, default");
 
 		JLabel lblNombreYApellido = new JLabel("Nombre y Apellido");
 		panel.add(lblNombreYApellido, "2, 4, right, default");
