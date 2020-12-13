@@ -19,7 +19,6 @@ public class ReportesPresenter {
 	private PanelReportes view;
 	private FacturasController facturasController;
 	private ReportesController reportesController;
-
 	private ReporteAutosVendidosFormView autosVendidosView;
 
 	public ReportesPresenter(FacturasController facturasController, ReportesController reportesController) {
@@ -64,10 +63,6 @@ public class ReportesPresenter {
 		BitcoinFormView.getInstance().display();
 	}
 
-	/*
-	 * -----------------------------------------------------------------------------
-	 * ---------
-	 */
 	private void mostrarTicket(Integer idFactura, String medioPago) {
 		ReporteViewImpl report = new ReporteViewImpl();
 		TicketReport ticket = new TicketReport(facturasController.readByFactura(idFactura));
