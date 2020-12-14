@@ -36,7 +36,7 @@ public class PanelGestionRepuestos extends JPanel {
 	private static PanelGestionRepuestos instance;
 
 	private static final String[] nombreColumnas = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock", "Minimo",
-			"Precio" };
+			"Precio Venta", "Precio Compra", "Garantia" };
 	private JComboBox<String> comboMarcas;
 	private JButton btnBuscar;
 	private JButton btnIngresarStock;
@@ -80,7 +80,19 @@ public class PanelGestionRepuestos extends JPanel {
 
 		modelo = new DefaultTableModel();
 		modelo.setColumnIdentifiers(nombreColumnas);
-		tablaRepuestos = new JTable(modelo);
+		tablaRepuestos = new JTable(modelo) {
+			private static final long serialVersionUID = -7788564446939732701L;
+
+			@Override
+			public Class<?> getColumnClass(int column) {
+				return column == 8? Boolean.class : super.getColumnClass(column);
+			}
+			
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		tablaRepuestos.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		JScrollPane scrollPane = new JScrollPane(tablaRepuestos);
@@ -127,7 +139,7 @@ public class PanelGestionRepuestos extends JPanel {
 		for (RepuestoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
 			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(), r.getFabricante(),
-					r.getStockRepuesto(), r.getStockMinimo(), r.getPrecioRepuesto() };
+					r.getStockRepuesto(), r.getStockMinimo(), r.getPrecioRepuesto(), r.getPrecioCompra(), r.isGarantia() };
 			modelo.addRow(row);
 		}
 	}
