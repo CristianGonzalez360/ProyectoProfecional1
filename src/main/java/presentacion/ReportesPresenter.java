@@ -78,8 +78,9 @@ public class ReportesPresenter {
 	}
 
 	private void generarReporteAutosVendidos() {
-		//reportesController
-		System.out.println("Generar Reporte");
+		ReporteViewImpl reporte = new ReporteViewImpl();
+		reporte.setData(reportesController.readAllVehiculos());
+		reporte.open();
 	}
 	
 	private void generarReporteIngresosDiarios() {

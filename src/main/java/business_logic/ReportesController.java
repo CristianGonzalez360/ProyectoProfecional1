@@ -3,6 +3,7 @@ package business_logic;
 import java.util.Date;
 import java.util.List;
 
+import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
 import repositories.DaosFactory;
 
@@ -21,6 +22,10 @@ public class ReportesController {
 	
 	public List<VentaVehiculoDTO> readAll(Date desde, Date hasta) {
 		return daos.makeVentaVehiculoDao().readFechas(desde, hasta);
+	}
+	
+	public List<VehiculoDTO> readAllVehiculos(){
+		return daos.makeVehiculoDao().readAll();
 	}
 	
 }
