@@ -174,7 +174,9 @@ public class PresupuestoDTO {
 	public Double getPrecio() {
 		Double ret = 0.0;
 		for (RepuestoPlanificadoDTO dto : repuestos) {
-			if(dto.getRepuesto().isGarantia()) {
+			if(!garantia) {
+				ret += dto.getRepuesto().getPrecioRepuesto() * dto.getCantRequerida();
+			}else if(!dto.getRepuesto().isGarantia()) {
 				ret += dto.getRepuesto().getPrecioRepuesto() * dto.getCantRequerida();
 			}
 		}

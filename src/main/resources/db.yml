@@ -276,7 +276,7 @@ repuestos:
     stockRepuesto: 337
     fabricante: fx
     stockMinimo: 13
-    garantia: false
+    garantia: true
     precioCompra: 90
   - codigoRepuesto: 111430
     precioRepuesto: 876
@@ -325,7 +325,7 @@ presupuestos:
     comentarioAltaPresu: El tren delantero esta destrozado
     comentarioRechazo:
     fechaAprobacion:
-    garantia: false
+    garantia: true
   - idOT: 1
     idUsuAltaPresu: 1
     idUsuCierrePresu:

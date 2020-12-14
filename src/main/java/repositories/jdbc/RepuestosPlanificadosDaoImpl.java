@@ -81,6 +81,8 @@ public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanifi
 				repuesto.setStockRepuesto((Integer) obj[9]);
 				repuesto.setFabricante((String) obj[10]);
 				repuesto.setStockMinimo((Integer) obj[11]);
+				repuesto.setGarantia((Boolean) obj[12]);
+				repuesto.setPrecioCompra((Double) obj[13]);
 				dto.setRepuesto(repuesto);
 				return dto;
 			}
