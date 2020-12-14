@@ -13,8 +13,8 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 
 	private static final String readById = "SELECT * FROM Repuestos WHERE Repuestos.idRepuesto = ?";
 
-	private static final String insert = "INSERT INTO Repuestos (codigoRepuesto, precioRepuesto, marcaRepuesto, descripcionRepuesto, stockRepuesto, fabricante, stockMinimo)"
-			+ " " + "VALUES (?,?,?,?,?,?,?)";
+	private static final String insert = "INSERT INTO Repuestos (codigoRepuesto, precioRepuesto, marcaRepuesto, descripcionRepuesto, stockRepuesto, fabricante, stockMinimo, precioCompra, garantia)"
+			+ " " + "VALUES (?,?,?,?,?,?,?,?,?)";
 
 	private static final String readByDescripcion = readAll + " " + "WHERE descripcionRepuesto = ?";
 
@@ -28,7 +28,8 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 	
 	private static final String updateByCodigo = "UPDATE Repuestos SET Repuestos.stockRepuesto = ? WHERE Repuestos.codigoRepuesto = ?";
 
-	private static final String update = "UPDATE repuestos SET stockRepuesto = ?, stockMinimo = ? WHERE idRepuesto = ?";
+	private static final String update = "UPDATE repuestos SET stockRepuesto = ?, stockMinimo = ? , codigoRepuesto = ?, precioRepuesto = ?,"
+			+ " marcaRepuesto = ?, descripcionRepuesto = ?, fabricante = ?, precioCompra = ?, garantia = ? WHERE idRepuesto = ?";
 	
 	private static final String readSinStock = readAll + " " + "WHERE stockRepuesto<stockMinimo";
 
@@ -40,7 +41,17 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 
 	@Override
 	public boolean update(RepuestoDTO entity) {
-		return getTemplate().query(update).param(entity.getStockRepuesto()).param(entity.getStockMinimo()).param(entity.getIdRepuesto()).excecute();
+		return getTemplate().query(update).param(entity.getStockRepuesto())
+				.param(entity.getStockMinimo())
+				.param(entity.getCodigoRepuesto())
+				.param(entity.getPrecioRepuesto())
+				.param(entity.getMarcaRepuesto())
+				.param(entity.getDescripcionRepuesto())
+				.param(entity.getFabricante())
+				.param(entity.getPrecioCompra())
+				.param(entity.isGarantia())
+				.param(entity.getIdRepuesto())
+				.excecute();
 	}
 
 	@Override
@@ -49,6 +60,7 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 		return getTemplate().query(insert).param(entity.getCodigoRepuesto()).param(entity.getPrecioRepuesto())
 				.param(entity.getMarcaRepuesto()).param(entity.getDescripcionRepuesto())
 				.param(entity.getStockRepuesto()).param(entity.getFabricante()).param(entity.getStockMinimo())
+				.param(entity.getPrecioCompra()).param(entity.isGarantia())
 				.excecute();
 	}
 
@@ -95,6 +107,9 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 				dto.setStockRepuesto((Integer) obj[5]);
 				dto.setFabricante((String) obj[6]);
 				dto.setStockMinimo((Integer) obj[7]);
+				dto.setGarantia((Boolean) obj[8]);
+				dto.setPrecioCompra((Double) obj[9]);
+				
 				return dto;
 			}
 		};

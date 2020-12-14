@@ -36,16 +36,14 @@ public class PanelGestionRepuestos extends JPanel {
 	private static PanelGestionRepuestos instance;
 
 	private static final String[] nombreColumnas = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock", "Minimo",
-			"Precio" };
+			"Precio Venta", "Precio Compra", "Garantia" };
 	private JComboBox<String> comboMarcas;
 	private JButton btnBuscar;
 	private JButton btnIngresarStock;
 	private JButton btnCargarArchivo;
 	private JSeparator separator;
-	private JButton btnConfigurarMnimo;
-	private JSeparator separator_1;
 	private JLabel lblMarca;
-	private JButton btnEditarStock;
+	private JButton btnEditar;
 	private JSeparator separator_2;
 	private JButton btnBajoStock;
 
@@ -82,7 +80,19 @@ public class PanelGestionRepuestos extends JPanel {
 
 		modelo = new DefaultTableModel();
 		modelo.setColumnIdentifiers(nombreColumnas);
-		tablaRepuestos = new JTable(modelo);
+		tablaRepuestos = new JTable(modelo) {
+			private static final long serialVersionUID = -7788564446939732701L;
+
+			@Override
+			public Class<?> getColumnClass(int column) {
+				return column == 8? Boolean.class : super.getColumnClass(column);
+			}
+			
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		tablaRepuestos.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		JScrollPane scrollPane = new JScrollPane(tablaRepuestos);
@@ -105,19 +115,12 @@ public class PanelGestionRepuestos extends JPanel {
 		separator.setOrientation(SwingConstants.VERTICAL);
 		toolBar.add(separator);
 
-		btnEditarStock = new JButton("Editar Stock");
-		toolBar.add(btnEditarStock);
+		btnEditar = new JButton("Editar Repuesto");
+		toolBar.add(btnEditar);
 
 		separator_2 = new JSeparator();
 		separator_2.setOrientation(SwingConstants.VERTICAL);
 		toolBar.add(separator_2);
-
-		btnConfigurarMnimo = new JButton("Configurar Mínimo");
-		toolBar.add(btnConfigurarMnimo);
-
-		separator_1 = new JSeparator();
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		toolBar.add(separator_1);
 
 		btnCargarArchivo = new JButton("Cargar Archivo");
 		toolBar.add(btnCargarArchivo);
@@ -136,7 +139,7 @@ public class PanelGestionRepuestos extends JPanel {
 		for (RepuestoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
 			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(), r.getFabricante(),
-					r.getStockRepuesto(), r.getStockMinimo(), r.getPrecioRepuesto() };
+					r.getStockRepuesto(), r.getStockMinimo(), r.getPrecioRepuesto(), r.getPrecioCompra(), r.isGarantia() };
 			modelo.addRow(row);
 		}
 	}
@@ -177,12 +180,8 @@ public class PanelGestionRepuestos extends JPanel {
 		this.btnCargarArchivo.addActionListener(listener);
 	}
 
-	public void serActionOnConfigurarMinimo(ActionListener listener) {
-		this.btnConfigurarMnimo.addActionListener(listener);
-	}
-
 	public void setActionOnEditarStock(ActionListener listener) {
-		this.btnEditarStock.addActionListener(listener);
+		this.btnEditar.addActionListener(listener);
 	}
 
 	public void resetBuscador() {

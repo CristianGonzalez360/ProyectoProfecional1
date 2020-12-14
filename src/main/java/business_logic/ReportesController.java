@@ -1,5 +1,6 @@
 package business_logic;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,17 +16,33 @@ public class ReportesController {
 		super();
 		this.daos = daos;
 	}
-	
+
 	public List<VentaVehiculoDTO> readAll() {
 		return daos.makeVentaVehiculoDao().readAll();
 	}
-	
+
 	public List<VentaVehiculoDTO> readAll(Date desde, Date hasta) {
 		return daos.makeVentaVehiculoDao().readFechas(desde, hasta);
 	}
-	
-	public List<VehiculoDTO> readAllVehiculos(){
+
+	public List<VehiculoDTO> readAllVehiculos() {
 		return daos.makeVehiculoDao().readAll();
 	}
-	
+
+	public List<VehiculoDTO> readAutosVendidos(Date desde, Date hasta) {
+		return null;
+
+	}
+
+	public List<VehiculoDTO> readAutosVendidos() {
+		List<VehiculoDTO> autosVendidos = new ArrayList<>();
+		for (VentaVehiculoDTO venta : daos.makeVentaVehiculoDao().readAllOrderByFabricante()) {
+			System.out.println(venta.toString());
+			Integer idVehiculo = venta.getIdVehiculo();
+			VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(idVehiculo);
+			System.out.println(vehiculo.toString());
+			autosVendidos.add(vehiculo);
+		}
+		return autosVendidos;
+	}
 }

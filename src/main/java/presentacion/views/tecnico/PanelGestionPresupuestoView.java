@@ -54,11 +54,11 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JTable tableVehiculos;
 
 	private final String[] columnasListadoDePresupuestos = new String[] { "NRO. Presupuesto", "FECHA ALTA",
-			"COMENTARIO ALTA", "PRECIO" };
+			"COMENTARIO ALTA", "PRECIO", "GARANTÍA" };
 	private DefaultTableModel listadoDePresupuestosModel;
 
 	private final String[] columnasListadoDeRepuestos = new String[] { "CODIGO", "MARCA", "DESCRIPCIÓN", "PRECIO",
-			"CANTIDAD" };
+			"CANTIDAD", "GARANTÍA" };
 	private DefaultTableModel listadoDeRepuestosModel;
 
 	private final String[] columnasListadoDeTrabajos = new String[] { "NRO", "FECHA ALTA", "DESCRIPCIÓN", "PRECIO",
@@ -280,7 +280,15 @@ public class PanelGestionPresupuestoView extends JPanel {
 		splitPane.setRightComponent(panelOeste);
 		panelOeste.setLayout(new BoxLayout(panelOeste, BoxLayout.Y_AXIS));
 
-		this.listadoDePresupuestosModel = new DefaultTableModel(null, this.columnasListadoDePresupuestos);
+		this.listadoDePresupuestosModel = new DefaultTableModel(null, this.columnasListadoDePresupuestos) {
+			
+			private static final long serialVersionUID = 3547862522448460634L;
+
+			@Override
+			public Class<?> getColumnClass(int columnIndex) {
+				return columnIndex  == 4? Boolean.class : super.getColumnClass(columnIndex) ;
+			}
+		};
 
 		panel_8 = new JPanel();
 		panel_8.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Presupuestos",
@@ -315,7 +323,12 @@ public class PanelGestionPresupuestoView extends JPanel {
 		scrollPaneRepuestos = new JScrollPane();
 		panel_3.add(scrollPaneRepuestos, BorderLayout.CENTER);
 
-		this.listadoDeRepuestosModel = new DefaultTableModel(null, this.columnasListadoDeRepuestos);
+		this.listadoDeRepuestosModel = new DefaultTableModel(null, this.columnasListadoDeRepuestos) {
+			@Override
+			public Class<?> getColumnClass(int columnIndex) {
+				return columnIndex  == 5? Boolean.class : super.getColumnClass(columnIndex) ;
+			}
+		};
 		tableRepuestos = new JTable(listadoDeRepuestosModel) {
 			private static final long serialVersionUID = 1L;
 
@@ -369,7 +382,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		for (RepuestoPlanificadoDTO r : repuestos) {
 			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getMarcaRepuesto(),
 					r.getRepuesto().getDescripcionRepuesto(), r.getRepuesto().getPrecioRepuesto(),
-					r.getCantRequerida() };
+					r.getCantRequerida(), r.getRepuesto().isGarantia() };
 			this.listadoDeRepuestosModel.addRow(row);
 		}
 	}
@@ -476,7 +489,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		clearDataPresupuestos();
 		for (PresupuestoDTO p : presupuestos) {
 			this.idsPresupuestos.add(p.getIdPresupuesto());
-			Object[] row = { p.getIdPresupuesto(), p.getFechaAltaPresu(), p.getComentarioAltaPresu(), p.getPrecio() };
+			Object[] row = { p.getIdPresupuesto(), p.getFechaAltaPresu(), p.getComentarioAltaPresu(), p.getPrecio(), p.isGarantia() };
 			this.listadoDePresupuestosModel.addRow(row);
 		}
 	}
