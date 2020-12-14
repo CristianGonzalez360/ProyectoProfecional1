@@ -13,6 +13,7 @@ import business_logic.VehiculosConOrdenDeTrabajoController;
 import business_logic.exceptions.ConflictException;
 import business_logic.exceptions.ForbiddenException;
 import dto.ClienteDTO;
+import dto.GarantiaVehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
 import dto.taller.VehiculoConOrdenDeTrabajoDTO;
@@ -127,6 +128,12 @@ public class ClientePresenter {
 				} else {
 					view.clearDataOrdenDeTrabajo();
 					view.unlockButtonRegistrarOrdenDeTrabajo();
+				}
+			}
+			if(idVehiculo.getIdVehiculo() != null) {
+				GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(idVehiculo.getIdVehiculo());
+				if(garantia != null) {
+					view.setDataGarantia(garantia);
 				}
 			}
 		}

@@ -5,6 +5,7 @@ import java.util.List;
 
 import dto.CaracteristicaVehiculoDTO;
 import dto.CompraVehiculoDTO;
+import dto.GarantiaVehiculoDTO;
 import dto.VehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.temporal.CompraVehiculoUsadoDTO;
@@ -54,6 +55,7 @@ public class VehiculosController {
 		vehiculo.setUsado(true);
 		daos.makeVehiculoDao().insert(vehiculo);
 		Integer idVehiculo = daos.makeVehiculoDao().getIdMaximo();
+		guardarGarantiaUsado(compra, idVehiculo);
 		guardarCompra(compra, idVehiculo);
 	}
 	
@@ -65,6 +67,13 @@ public class VehiculosController {
 		c.setPrecioCompra(Double.parseDouble(compra.getPrecio()));
 	}
 
+	private void guardarGarantiaUsado(CompraVehiculoUsadoDTO compra, int idVehiculo) {
+		GarantiaVehiculoDTO garantia = new GarantiaVehiculoDTO();
+		garantia.setIdVehiculo(idVehiculo);
+		garantia.setAniosDeGarantia(1);
+		garantia.setKilometrajeInicialDelVehiculo(Integer.parseInt(compra.getKilometraje()));
+	}
+	
 	private int guardarCaracteristicas(CompraVehiculoUsadoDTO compra) {
 		CaracteristicaVehiculoDTO carac = new CaracteristicaVehiculoDTO();
 		carac.setCantidadPuertas(compra.getCantidadPuertas());
