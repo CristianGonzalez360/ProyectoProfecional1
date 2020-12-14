@@ -7,6 +7,7 @@ import java.util.List;
 import dto.GarantiaVehiculoDTO;
 import repositories.GarantiasDao;
 import repositories.jdbc.utils.Mapper;
+import repositories.jdbc.utils.NullObject;
 
 public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implements GarantiasDao {
 
@@ -26,10 +27,14 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 
 	@Override
 	public boolean insert(GarantiaVehiculoDTO entity) {
-		return getTemplate().query(insert).param(entity.getIdVehiculo()).param(entity.getAniosDeGarantia())
-				.param(entity.getKilometrajeInicialDelVehiculo()).param(entity.getKilometrajeGarantizado())
-				.param(entity.getFechaInicioDeLaGarantia()).param(entity.getFechaDeCaducidadDeLaGarantia())
-				.param(entity.getCostoFinalConIVA()).excecute();
+		return getTemplate().query(insert).param(entity.getIdVehiculo())
+				.param(entity.getAniosDeGarantia())
+				.param(entity.getKilometrajeInicialDelVehiculo())
+				.param(entity.getKilometrajeGarantizado() == null? new NullObject() : entity.getKilometrajeGarantizado())
+				.param(entity.getFechaInicioDeLaGarantia() == null? new NullObject() : entity.getFechaInicioDeLaGarantia())
+				.param(entity.getFechaDeCaducidadDeLaGarantia() == null? new NullObject() : entity.getFechaDeCaducidadDeLaGarantia())
+				.param(entity.getCostoFinalConIVA() == null? new NullObject() : entity.getCostoFinalConIVA())
+				.excecute();
 	}
 
 	@Override

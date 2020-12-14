@@ -478,7 +478,7 @@ vehiculos:
     idCaracteristicas: 1
     idSucursal: 2
   - precioVenta: 2500000
-    idFichaTecnica: 
+    idFichaTecnica: 1
     marca: Fiat
     familia: Siena
     linea: Full TS
@@ -489,7 +489,7 @@ vehiculos:
     idCaracteristicas: 1
     idSucursal: 
   - precioVenta: 4000000
-    idFichaTecnica: 
+    idFichaTecnica: 1
     marca: Fiat
     familia: Linea
     linea: AS sport
