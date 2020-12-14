@@ -17,6 +17,10 @@ public class RepuestoDTO {
 	private String fabricante;
 
 	private Integer stockMinimo;
+	
+	private Boolean garantia;
+	
+	private Double precioCompra;
 
 	public RepuestoDTO() {
 
@@ -84,6 +88,22 @@ public class RepuestoDTO {
 
 	public void setStockMinimo(Integer stockMinimo) {
 		this.stockMinimo = stockMinimo;
+	}
+
+	public Boolean isGarantia() {
+		return garantia;
+	}
+
+	public void setGarantia(Boolean garantia) {
+		this.garantia = garantia;
+	}
+
+	public Double getPrecioCompra() {
+		return precioCompra;
+	}
+
+	public void setPrecioCompra(Double precioCompra) {
+		this.precioCompra = precioCompra;
 	}
 
 	@Override

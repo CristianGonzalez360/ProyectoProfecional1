@@ -276,6 +276,8 @@ repuestos:
     stockRepuesto: 337
     fabricante: fx
     stockMinimo: 13
+    garantia: false
+    precioCompra: 90
   - codigoRepuesto: 111430
     precioRepuesto: 876
     marcaRepuesto: dfv
@@ -283,6 +285,8 @@ repuestos:
     stockRepuesto: 78
     fabricante: sdfg
     stockMinimo: 99
+    garantia: false
+    precioCompra: 90
   - codigoRepuesto: 109986
     precioRepuesto: 1523
     marcaRepuesto: ghj
@@ -290,6 +294,8 @@ repuestos:
     stockRepuesto: 310
     fabricante: ghj
     stockMinimo: 8
+    garantia: false
+    precioCompra: 90
   - codigoRepuesto: 14230
     precioRepuesto: 102
     marcaRepuesto: gdfg
@@ -297,6 +303,8 @@ repuestos:
     stockRepuesto: 355
     fabricante: sgf
     stockMinimo: 7
+    garantia: false
+    precioCompra: 90
   - codigoRepuesto: 510230
     precioRepuesto: 1300
     marcaRepuesto: skf11
@@ -304,6 +312,8 @@ repuestos:
     stockRepuesto: 303
     fabricante: sgdfg
     stockMinimo: 2123
+    garantia: false
+    precioCompra: 90
 
 presupuestos:
   - idOT: 1
@@ -315,6 +325,7 @@ presupuestos:
     comentarioAltaPresu: El tren delantero esta destrozado
     comentarioRechazo:
     fechaAprobacion:
+    garantia: false
   - idOT: 1
     idUsuAltaPresu: 1
     idUsuCierrePresu:
@@ -324,7 +335,8 @@ presupuestos:
     comentarioAltaPresu: revisar bomba de nafta
     comentarioRechazo:
     fechaAprobacion:
-
+    garantia: false
+    
 trabajos: 
   - idPresupuesto: 1
     descripcionTrabajo: reparacion de la electricidad

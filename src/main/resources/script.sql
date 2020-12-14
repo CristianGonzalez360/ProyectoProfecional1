@@ -182,6 +182,7 @@ CREATE TABLE Presupuestos (
   comentarioRechazo VARCHAR (60),
   fechaAprobacion DATE,
   estado VARCHAR(20),
+  garantia BOOLEAN NOT NULL,
   PRIMARY KEY (idPresupuesto),
   FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo (idOT),
   FOREIGN KEY (idUsuAltaPresu) REFERENCES Usuarios (idUsuario),
@@ -211,6 +212,8 @@ CREATE TABLE Repuestos (
   stockRepuesto INT,
   fabricante VARCHAR (30),
   stockMinimo INT,
+  garantia BOOLEAN NOT NULL,
+  precioCompra DOUBLE NOT NULL,
   PRIMARY KEY (idRepuesto)
 );
 

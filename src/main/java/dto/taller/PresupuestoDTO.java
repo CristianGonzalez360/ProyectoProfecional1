@@ -35,6 +35,8 @@ public class PresupuestoDTO {
 	private List<TrabajoPresupuestadoDTO> trabajos;
 
 	private List<RepuestoPlanificadoDTO> repuestos;
+	
+	private Boolean garantia;
 
 	public PresupuestoDTO() {
 		estado = EstadoPresupuesto.PENDIENTE;
@@ -55,7 +57,6 @@ public class PresupuestoDTO {
 		for(TrabajoMantenimientoDTO trabajo: mantenimiento.getTrabajos()) {
 			agregarTrabajo(new TrabajoPresupuestadoDTO(trabajo));
 		}
-		
 	}
 
 	public Integer getIdPresupuesto() {
@@ -173,10 +174,14 @@ public class PresupuestoDTO {
 	public Double getPrecio() {
 		Double ret = 0.0;
 		for (RepuestoPlanificadoDTO dto : repuestos) {
-			ret += dto.getRepuesto().getPrecioRepuesto() * dto.getCantRequerida();
+			if(dto.getRepuesto().isGarantia()) {
+				ret += dto.getRepuesto().getPrecioRepuesto() * dto.getCantRequerida();
+			}
 		}
-		for (TrabajoPresupuestadoDTO dto : trabajos) {
-			ret += dto.getPrecioTrabajo();
+		if(!garantia) {
+			for (TrabajoPresupuestadoDTO dto : trabajos) {
+				ret += dto.getPrecioTrabajo();
+			}
 		}
 		return ret;
 	}
@@ -229,5 +234,13 @@ public class PresupuestoDTO {
 
 	public boolean estaPendiente() {
 		return estado.equals(EstadoPresupuesto.PENDIENTE);
+	}
+
+	public Boolean isGarantia() {
+		return garantia;
+	}
+
+	public void setGarantia(Boolean garantia) {
+		this.garantia = garantia;
 	}
 }
