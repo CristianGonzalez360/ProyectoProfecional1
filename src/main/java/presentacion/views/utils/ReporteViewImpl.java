@@ -87,5 +87,10 @@ public class ReporteViewImpl {
 		report.add(ticket);
 		setData(report);
 	}
+	
+	public void setDataVentas(List<VehiculoDTO> vehiculos) {
+		this.file = URLReporteVentas;
+		setData(vehiculos);
+	}
 
 }
