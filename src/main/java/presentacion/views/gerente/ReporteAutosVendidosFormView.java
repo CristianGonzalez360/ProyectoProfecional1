@@ -16,6 +16,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.JRadioButton;
 
 public class ReporteAutosVendidosFormView extends JDialog {
 
@@ -35,9 +36,6 @@ public class ReporteAutosVendidosFormView extends JDialog {
 
 	private JDateChooser fechaDesde;
 	private JDateChooser fechaHasta;
-	private JComboBox<String> comboMarca;
-	private JComboBox<String> comboModelo;
-	private JComboBox<String> comboAnio;
 
 	public ReporteAutosVendidosFormView() {
 		setTitle("Reporte Autos Vendidos");
@@ -72,23 +70,11 @@ public class ReporteAutosVendidosFormView extends JDialog {
 		fechaHasta = new JDateChooser();
 		panelCentral.add(fechaHasta, "10, 4");
 
-		JLabel lblMarca = new JLabel("Marca");
-		panelCentral.add(lblMarca, "4, 8");
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Marca");
+		panelCentral.add(rdbtnNewRadioButton, "4, 8");
 
-		comboMarca = new JComboBox<String>();
-		panelCentral.add(comboMarca, "10, 8, fill, default");
-
-		JLabel lblModelo = new JLabel("Modelo");
-		panelCentral.add(lblModelo, "4, 10");
-
-		comboModelo = new JComboBox<String>();
-		panelCentral.add(comboModelo, "10, 10, fill, default");
-
-		JLabel lblAnio = new JLabel("Año");
-		panelCentral.add(lblAnio, "4, 12");
-
-		comboAnio = new JComboBox<String>();
-		panelCentral.add(comboAnio, "10, 12, fill, default");
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Modelo");
+		panelCentral.add(rdbtnNewRadioButton_1, "4, 10");
 
 		JPanel panelInferior = new JPanel();
 		contentPanel.add(panelInferior, BorderLayout.SOUTH);
@@ -110,15 +96,6 @@ public class ReporteAutosVendidosFormView extends JDialog {
 		this.btnGenerarReporte.addActionListener(listener);
 	}
 
-	public void setData(String [] marcas) {
-		comboMarca.removeAllItems();
-		comboMarca.addItem("Todos");
-		for(String marca : marcas) {
-			comboMarca.addItem(marca);
-		}
-	}
-	
-	
 	public JButton getBtnGenerarReporte() {
 		return btnGenerarReporte;
 	}
@@ -143,27 +120,4 @@ public class ReporteAutosVendidosFormView extends JDialog {
 		this.fechaHasta = fechaHasta;
 	}
 
-	public JComboBox<String> getComboMarca() {
-		return comboMarca;
-	}
-
-	public void setComboMarca(JComboBox<String> comboMarca) {
-		this.comboMarca = comboMarca;
-	}
-
-	public JComboBox<String> getComboModelo() {
-		return comboModelo;
-	}
-
-	public void setComboModelo(JComboBox<String> comboModelo) {
-		this.comboModelo = comboModelo;
-	}
-
-	public JComboBox<String> getComboAnio() {
-		return comboAnio;
-	}
-
-	public void setComboAnio(JComboBox<String> comboAnio) {
-		this.comboAnio = comboAnio;
-	}
 }
