@@ -2,9 +2,13 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.Arrays;
+import java.util.List;
 
+import business_logic.ControllersFactory;
 import business_logic.FacturasController;
 import business_logic.ReportesController;
+import dto.VentaVehiculoDTO;
 import presentacion.views.cajero.BitcoinFormView;
 import presentacion.views.cajero.MercadoPagoFormView;
 import presentacion.views.cajero.TarjetaCreditoFormView;
@@ -39,8 +43,11 @@ public class ReportesPresenter {
 	}
 
 	private void generarReporteAutosVendidos() {
-		//reportesController
-		System.out.println("Generar Reporte");
+		List<VentaVehiculoDTO> target = reportesController.readAll();
+		System.out.println(target.toString());
+//		ReporteViewImpl reporte = new ReporteViewImpl();
+//		reporte.setData(target);
+//		reporte.open();
 	}
 
 	private void onDisplayTarjetaCreditoFormView(ActionEvent e) {
