@@ -14,7 +14,9 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import business_logic.RepuestosController;
 import dto.taller.RepuestoDTO;
+import dto.temporal.AltaRepuestoDTO;
 import dto.validators.StringValidator;
+import presentacion.views.supervisor.EditorRepuestosDialog;
 import presentacion.views.supervisor.NuevosRepuestosFormView;
 import presentacion.views.supervisor.PanelGestionRepuestos;
 import presentacion.views.utils.InputDialog;
@@ -41,31 +43,36 @@ public class RepuestosPresenter {
 		
 		this.nuevosRepuestosView.setActionOnValidadCarga(a -> onValidarCarga(a));
 		this.nuevosRepuestosView.setActionOnCancelarCarga(a -> onCancelarCarga(a));
-		this.gestionRepuestos.serActionOnConfigurarMinimo(a -> onConfigMinimo(a));
-		this.gestionRepuestos.setActionOnEditarStock(a -> onEditarSock(a));
+		this.gestionRepuestos.setActionOnEditarStock(a -> editarRepuesto(a));
 		this.gestionRepuestos.setActionBajoStock(a -> onMostrarRepuestosSinStock(a));
+		
+		EditorRepuestosDialog.getInstance().setActionOnAceptar(a ->guardarRepuesto(a));
 		cargarMarcas();
 	}
-
-	private void onEditarSock(ActionEvent a) {
+	
+	private void editarRepuesto(ActionEvent a) {
 		int id = this.gestionRepuestos.getIdRepuesto();
 		if (id >= 0) {
 			RepuestoDTO repuesto = repuestosController.readById(id);
-			String stock = new InputDialog().title("Editar Stock").setText(repuesto.getStockRepuesto()+"").setLabel("Cantidad").open();
-			if (stock != null) {
-				List<String> error = new StringValidator(stock).notBlank("Debe ingresar un valor")
-						.number("El valor debe ser numérico").validate();
-				if (error.isEmpty()) {
-					int cantidad = Integer.parseInt(stock);
-					repuesto.setStockRepuesto(cantidad);
-					repuestosController.update(repuesto);
-					refrescar();
-				} else {
-					new MessageDialog().showMessages(error);
-				}
-			}
+			EditorRepuestosDialog.getInstance().setData(repuesto);
+			EditorRepuestosDialog.getInstance().display();
 		} else {
 			new MessageDialog().showMessages("Seleccione un repuesto");
+		}
+	}
+	
+	private void guardarRepuesto(ActionEvent a) {
+		AltaRepuestoDTO altaRepuesto = EditorRepuestosDialog.getInstance().getData();
+		List<String> error = altaRepuesto.validate();
+		if (error.isEmpty()) {
+			int id = this.gestionRepuestos.getIdRepuesto();
+			RepuestoDTO repuesto = new RepuestoDTO(altaRepuesto);
+			repuesto.setIdRepuesto(id);
+			repuestosController.update(repuesto);
+			refrescar();
+			EditorRepuestosDialog.getInstance().close();
+		} else {
+			new MessageDialog().showMessages(error);
 		}
 	}
 
@@ -74,28 +81,6 @@ public class RepuestosPresenter {
 		this.nuevosRepuestosView.clear();//limpiar la vista tambn
 	}
 	
-	private void onConfigMinimo(ActionEvent a) {
-		int id = this.gestionRepuestos.getIdRepuesto();
-		if (id >= 0) {
-			RepuestoDTO repuesto = repuestosController.readById(id);
-			String stock = new InputDialog().title("Configurar mínimo").setLabel("Mínimo").setText(repuesto.getStockMinimo() + "").open();
-			if (stock != null) {
-				List<String> error = new StringValidator(stock).notBlank("Debe ingresar un valor")
-						.number("El valor debe ser numérico").validate();
-				if (error.isEmpty()) {
-					int minimo = Integer.parseInt(stock);
-					repuesto.setStockMinimo(minimo);
-					repuestosController.update(repuesto);
-					refrescar();
-				} else {
-					new MessageDialog().showMessages(error);
-				}
-			}
-		} else {
-			new MessageDialog().showMessages("Seleccione un repuesto");
-		}
-	}
-
 	private void onCargarArchivo(ActionEvent a) {
 		
 		JFileChooser chooser = new JFileChooser();

@@ -42,10 +42,8 @@ public class PanelGestionRepuestos extends JPanel {
 	private JButton btnIngresarStock;
 	private JButton btnCargarArchivo;
 	private JSeparator separator;
-	private JButton btnConfigurarMnimo;
-	private JSeparator separator_1;
 	private JLabel lblMarca;
-	private JButton btnEditarStock;
+	private JButton btnEditar;
 	private JSeparator separator_2;
 	private JButton btnBajoStock;
 
@@ -105,19 +103,12 @@ public class PanelGestionRepuestos extends JPanel {
 		separator.setOrientation(SwingConstants.VERTICAL);
 		toolBar.add(separator);
 
-		btnEditarStock = new JButton("Editar Stock");
-		toolBar.add(btnEditarStock);
+		btnEditar = new JButton("Editar Repuesto");
+		toolBar.add(btnEditar);
 
 		separator_2 = new JSeparator();
 		separator_2.setOrientation(SwingConstants.VERTICAL);
 		toolBar.add(separator_2);
-
-		btnConfigurarMnimo = new JButton("Configurar Mínimo");
-		toolBar.add(btnConfigurarMnimo);
-
-		separator_1 = new JSeparator();
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		toolBar.add(separator_1);
 
 		btnCargarArchivo = new JButton("Cargar Archivo");
 		toolBar.add(btnCargarArchivo);
@@ -177,12 +168,8 @@ public class PanelGestionRepuestos extends JPanel {
 		this.btnCargarArchivo.addActionListener(listener);
 	}
 
-	public void serActionOnConfigurarMinimo(ActionListener listener) {
-		this.btnConfigurarMnimo.addActionListener(listener);
-	}
-
 	public void setActionOnEditarStock(ActionListener listener) {
-		this.btnEditarStock.addActionListener(listener);
+		this.btnEditar.addActionListener(listener);
 	}
 
 	public void resetBuscador() {

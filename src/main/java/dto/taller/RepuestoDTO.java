@@ -1,5 +1,7 @@
 package dto.taller;
 
+import dto.temporal.AltaRepuestoDTO;
+
 public class RepuestoDTO {
 
 	private Integer idRepuesto;
@@ -24,6 +26,18 @@ public class RepuestoDTO {
 
 	public RepuestoDTO() {
 
+	}
+	
+	public RepuestoDTO(AltaRepuestoDTO repuesto) {
+		this.codigoRepuesto = Integer.parseInt(repuesto.getCodigoRepuesto());
+		this.descripcionRepuesto = repuesto.getDescripcionRepuesto();
+		this.fabricante = repuesto.getFabricante();
+		this.garantia = repuesto.getGarantia();
+		this.marcaRepuesto = repuesto.getMarcaRepuesto();
+		this.precioCompra = Double.parseDouble(repuesto.getPrecioCompra());
+		this.precioRepuesto = Double.parseDouble(repuesto.getPrecioRepuesto());
+		this.stockMinimo = Integer.parseInt(repuesto.getStockMinimo());
+		this.stockRepuesto = Integer.parseInt(repuesto.getStockRepuesto());
 	}
 
 	public Integer getIdRepuesto() {
