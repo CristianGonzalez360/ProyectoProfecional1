@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import dto.VehiculoDTO;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -24,7 +25,8 @@ public class ReporteViewImpl {
 	private static final String URLFacturaRepuestos = "FacturaRepuestos.jasper";
 	private static final String URLFacturaVentaVehiculo = "FacturaVentaVehiculo/FacturaVehiculo.jasper";
 	private static final String URLTicket = "Ticket.jasper";
-	
+	private static final String URLReporteVentas = "ReporteVentas.jasper";
+
 	private JasperReport reporte;
 	private JasperViewer reporteViewer;
 	private JasperPrint reporteLleno;
@@ -34,7 +36,7 @@ public class ReporteViewImpl {
 	public ReporteViewImpl(String file) {
 		this.file = file;
 	}
-	
+
 	public ReporteViewImpl() {
 
 	}
@@ -56,33 +58,34 @@ public class ReporteViewImpl {
 		this.reporteViewer = new JasperViewer(this.reporteLleno, false);
 		this.reporteViewer.setVisible(true);
 	}
-	
+
 	public void setData(FacturaTallerReport factura) {
 		this.file = URLFacturaTaller;
-		List<FacturaTallerReport> report  = new ArrayList<>();
+		List<FacturaTallerReport> report = new ArrayList<>();
 		report.add(factura);
 		setData(report);
 	}
-	
+
 	public void setData(FacturaRepuestosReport factura) {
 		this.file = URLFacturaRepuestos;
-		List<FacturaRepuestosReport> report  = new ArrayList<>();
+		List<FacturaRepuestosReport> report = new ArrayList<>();
 		report.add(factura);
 		setData(report);
 
 	}
-	
+
 	public void setData(FacturaVentaVehiculoReport factura) {
 		this.file = URLFacturaVentaVehiculo;
-		List<FacturaVentaVehiculoReport> report  = new ArrayList<>();
+		List<FacturaVentaVehiculoReport> report = new ArrayList<>();
 		report.add(factura);
 		setData(report);
 	}
-	
+
 	public void setData(TicketReport ticket) {
 		this.file = URLTicket;
-		List<TicketReport> report  = new ArrayList<>();
+		List<TicketReport> report = new ArrayList<>();
 		report.add(ticket);
 		setData(report);
 	}
+
 }
