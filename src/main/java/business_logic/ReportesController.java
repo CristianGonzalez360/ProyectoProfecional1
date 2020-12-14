@@ -37,10 +37,7 @@ public class ReportesController {
 	public List<VehiculoDTO> readAutosVendidos() {
 		List<VehiculoDTO> autosVendidos = new ArrayList<>();
 		for (VentaVehiculoDTO venta : daos.makeVentaVehiculoDao().readAllOrderByFabricante()) {
-			System.out.println(venta.toString());
-			Integer idVehiculo = venta.getIdVehiculo();
-			VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(idVehiculo);
-			System.out.println(vehiculo.toString());
+			VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(venta.getIdVehiculo());
 			autosVendidos.add(vehiculo);
 		}
 		return autosVendidos;
