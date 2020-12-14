@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreportVehiculo" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="15257b8a-e71f-4ed3-8976-ffb9f85fe759">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="marca" class="java.lang.String"/>
+	<field name="modelo" class="java.lang.Integer"/>
+	<field name="nroChasis" class="java.lang.Integer"/>
+	<field name="nroMotor" class="java.lang.Integer"/>
+	<field name="patente" class="java.lang.String"/>
+	<field name="kilometraje" class="java.lang.Integer"/>
+	<field name="combustion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="37" height="20" uuid="12c9272a-3eb6-4b9c-8677-de2c69a6e3fb"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Modelo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="0" width="34" height="20" uuid="8ea38d45-0f02-4898-a442-775975ac10c6"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Chasis:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="30" height="20" uuid="e7ceee1d-ec81-46d5-8868-b8057d0b8203"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Motor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="20" width="40" height="20" uuid="a55a7085-fec6-41c1-aaea-71b80cc4f8eb"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Patente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="37" y="0" width="163" height="20" uuid="063d96e5-aa8f-43b2-ae33-04919b0f8bbe"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="384" y="0" width="96" height="20" uuid="6e17d098-d372-44f3-a34a-5e06f78c1f68"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroChasis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="0" width="120" height="20" uuid="73261658-0595-46c9-8c85-77adce99ac09"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nroMotor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="20" width="115" height="20" uuid="bbf88885-7553-42b4-b8cf-2076062adbec"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{patente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="200" y="20" width="60" height="20" uuid="cf56aa57-4138-414d-8e43-28943ea236f6"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Kilometrage:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="260" y="20" width="140" height="20" uuid="fc75a085-7f29-4633-9912-518f25860572"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{kilometraje}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="60" height="20" uuid="583fd787-d7f1-4319-aaf2-c6fadb045708"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Combustion:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="20" width="140" height="20" uuid="86e775e9-6cee-4d6f-bf6a-e116d1b684a4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{combustion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>
