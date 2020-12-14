@@ -87,7 +87,7 @@ public class NuevosRepuestosFormView extends JDialog {
 			repuesto.getMarcaRepuesto(),
 			repuesto.getFabricante(),
 			repuesto.getStockRepuesto(),
-			repuesto.getPrecioRepuesto()};
+			repuesto.getPrecioCompra()};
 			modelo.addRow(row);
 		}
 		TableColumn tc = tablaRepuestos.getColumnModel().getColumn(6);

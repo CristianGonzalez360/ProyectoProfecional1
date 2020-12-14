@@ -15,8 +15,10 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import business_logic.RepuestosController;
 import dto.taller.RepuestoDTO;
 import dto.temporal.AltaRepuestoDTO;
+import dto.temporal.IngresoStockDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.EditorRepuestosDialog;
+import presentacion.views.supervisor.IngresoStockDialog;
 import presentacion.views.supervisor.NuevosRepuestosFormView;
 import presentacion.views.supervisor.PanelGestionRepuestos;
 import presentacion.views.utils.InputDialog;
@@ -46,7 +48,8 @@ public class RepuestosPresenter {
 		this.gestionRepuestos.setActionOnEditarStock(a -> editarRepuesto(a));
 		this.gestionRepuestos.setActionBajoStock(a -> onMostrarRepuestosSinStock(a));
 		
-		EditorRepuestosDialog.getInstance().setActionOnAceptar(a ->guardarRepuesto(a));
+		EditorRepuestosDialog.getInstance().setActionOnAceptar(a -> guardarRepuesto(a));
+		IngresoStockDialog.getInstance().setActionOnAceptar(a -> onConfirmarIngreso(a));
 		cargarMarcas();
 	}
 	
@@ -170,7 +173,7 @@ public class RepuestosPresenter {
 		this.gestionRepuestos.setData(repuestos);//actualizo tabla repuestos
 	}
 	
-	private void onIngresarStock(ActionEvent a) {
+	private void onIngresarStock2(ActionEvent a) {
 		int id = this.gestionRepuestos.getIdRepuesto();
 		if (id >= 0) {
 			String stock = new InputDialog().title("Agregar Stock").setLabel("Cantidad").open();
@@ -189,6 +192,34 @@ public class RepuestosPresenter {
 			}
 		} else {
 			new MessageDialog().showMessages("Seleccione un repuesto");
+		}
+	}
+	
+	private void onIngresarStock(ActionEvent a) {
+		int id = this.gestionRepuestos.getIdRepuesto();
+		if (id >= 0) {
+			RepuestoDTO repuesto = repuestosController.readById(id);
+			IngresoStockDialog.getInstance().setData(repuesto);
+			IngresoStockDialog.getInstance().display();
+		} else {
+			new MessageDialog().showMessages("Seleccione un repuesto");
+		}
+	}
+	
+	private void onConfirmarIngreso(ActionEvent a) {
+		IngresoStockDTO ingreso = IngresoStockDialog.getInstance().getData();
+		List<String> error = ingreso.validate();
+		if (error.isEmpty()) {
+			int id = this.gestionRepuestos.getIdRepuesto();
+			RepuestoDTO repuesto = repuestosController.readById(id);
+			repuesto.setStockRepuesto(repuesto.getStockRepuesto() + Integer.parseInt(ingreso.getCantidad()));
+			repuesto.setPrecioCompra(Double.parseDouble(ingreso.getPrecioCompra()));
+			repuesto.setPrecioRepuesto(Double.parseDouble(ingreso.getPrecioVenta()));
+			repuestosController.update(repuesto);
+			refrescar();
+			IngresoStockDialog.getInstance().close();
+		} else {
+			new MessageDialog().showMessages(error);
 		}
 	}
 
