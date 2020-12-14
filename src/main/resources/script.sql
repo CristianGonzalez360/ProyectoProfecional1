@@ -78,11 +78,11 @@ CREATE TABLE FichaTecnicaVehiculo (
 DROP TABLE VehiculoConOrdenesDeTrabajo IF EXISTS;
 CREATE TABLE VehiculoConOrdenesDeTrabajo (
    idVehiculoConOT INT NOT NULL AUTO_INCREMENT,
-   idFichaTecnicaVehiculo INT NOT NULL,
+   idFichaTecnicaVehiculo INT,
    idCliente INT NOT NULL,
-   kilometrajeGarantia INT NOT NULL,
-   aseguradora VARCHAR (20) NOT NULL,
-   nroPolizaSeguro INT NOT NULL,
+   kilometrajeGarantia INT,
+   aseguradora VARCHAR (20),
+   nroPolizaSeguro INT,
    patenteVehiculo VARCHAR (10),
    idVehiculo INT,
    PRIMARY KEY (idVehiculoConOT),

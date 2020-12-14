@@ -79,10 +79,13 @@ public class RegistradorVentaVehiculosService {
 		VehiculoConOrdenDeTrabajoDTO v = new VehiculoConOrdenDeTrabajoDTO();
 		v.setIdFichaTecnica(vehiculo.getIdFichaTecnica());
 		v.setIdCliente(idCliente);
-		FichaTecnicaVehiculoDTO ficha = daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica());
-		v.setPatente(ficha.getPatente());
-		GarantiaVehiculoDTO garantia = daos.makeGarantiasVehiculosDao().readByIdVehiculo(vehiculo.getIdVehiculo());
-		v.setKilometrajeGarantia(garantia.getKilometrajeGarantizado());
+		if(vehiculo.isUsado()) {
+			FichaTecnicaVehiculoDTO ficha = daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica());
+			v.setPatente(ficha.getPatente());
+		}
+		//GarantiaVehiculoDTO garantia = daos.makeGarantiasVehiculosDao().readByIdVehiculo(vehiculo.getIdVehiculo());
+		//v.setKilometrajeGarantia(garantia.getKilometrajeGarantizado());
 		v.setIdVehiculo(idVehiculo);
+		daos.makeVehiculoConOrdeDeTrabajoDao().insert(v);
 	}
 }

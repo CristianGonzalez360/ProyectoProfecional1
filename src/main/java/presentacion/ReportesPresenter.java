@@ -17,7 +17,6 @@ public class ReportesPresenter {
 	private PanelReportes view;
 	private FacturasController facturasController;
 	private ReportesController reportesController;
-
 	private ReporteAutosVendidosFormView autosVendidosView;
 	private ReporteIngresoDiarioInputFormView reporteIngresoDiarioInputFormView;
 	private ReporteEgresoDiarioFormView reporteEgresoDiarioFormView;
@@ -102,15 +101,5 @@ public class ReportesPresenter {
 		//reportesController
 		System.out.println("Generar Reporte");
 	}
-	/*
-	 * -----------------------------------------------------------------------------
-	 * ---------
-	 */
-//	private void mostrarTicket(Integer idFactura, String medioPago) {
-//		ReporteViewImpl report = new ReporteViewImpl();
-//		TicketReport ticket = new TicketReport(facturasController.readByFactura(idFactura));
-//		ticket.setMedioDePago(medioPago);
-//		report.setData(ticket);
-//		report.open();
-//	}
+
 }
