@@ -19,9 +19,11 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import dto.ClienteDTO;
+import dto.GarantiaVehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
 import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import presentacion.views.vendedor.PanelCaracteristicasDeLaGarantia;
 
 import javax.swing.BoxLayout;
 import javax.swing.border.TitledBorder;
@@ -94,6 +96,7 @@ public class PanelClientesView extends JPanel {
 	private JTextField textTipoDeOT;
 	private JLabel lblApellido;
 	private JTextField textApellido;
+	private PanelCaracteristicasDeLaGarantia garantia;
 
 	public PanelClientesView() {
 		setLayout(new BorderLayout(0, 0));
@@ -249,7 +252,7 @@ public class PanelClientesView extends JPanel {
 		panel_1 = new JPanel();
 		splitPane.setRightComponent(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
-
+		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new TitledBorder(null, "Ficha tecnica del vehiculo", TitledBorder.LEADING, TitledBorder.TOP,
 				null, null));
@@ -305,6 +308,9 @@ public class PanelClientesView extends JPanel {
 		panel_5.add(textCombustion, "4, 12, fill, default");
 		textCombustion.setColumns(10);
 
+		garantia = new PanelCaracteristicasDeLaGarantia();
+		panel_1.add(garantia);
+		
 		panel_6 = new JPanel();
 		panel_6.setBorder(
 				new TitledBorder(null, "Orden de trabajo actual", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -479,9 +485,9 @@ public class PanelClientesView extends JPanel {
 	public void setData(List<VehiculoConOrdenDeTrabajoDTO> vehiculos) {
 		this.vehiculos = vehiculos;
 		for (VehiculoConOrdenDeTrabajoDTO dto : vehiculos) {
-			Object[] row = { dto.getId().toString(),"",// dto.getKilometrajeGarantia().toString()
+			Object[] row = { dto.getId(), dto.getKilometrajeGarantia(),// dto.getKilometrajeGarantia().toString()
 					dto.getAseguradora(),
-					"", //dto.getNroPolizaSeguro().toString(),
+					dto.getNroPolizaSeguro(), //dto.getNroPolizaSeguro().toString(),
 					dto.getPatente() };
 			this.tableModelVehiculos.addRow(row);
 		}
@@ -542,6 +548,7 @@ public class PanelClientesView extends JPanel {
 		this.clearDataFichaTecnicaVehiculo();
 		this.clearDataListadoVehiculosCliente();
 		this.clearDataOrdenDeTrabajo();
+		this.clearDataGarantia();
 	}
 
 	public void lockButtonRegistrarOrdenDeTrabajo() {
@@ -550,5 +557,13 @@ public class PanelClientesView extends JPanel {
 
 	public void unlockButtonRegistrarOrdenDeTrabajo() {
 		this.btnRegistrarOrdenDeTrabajo.setEnabled(true);
+	}
+	
+	public void setDataGarantia(GarantiaVehiculoDTO garantia) {
+		this.garantia.setData(garantia);
+	}
+	
+	public void clearDataGarantia() {
+		this.garantia.clearData();
 	}
 }
