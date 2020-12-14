@@ -16,6 +16,8 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 
 	private static final String readByIdVehiculo = "SELECT * FROM GarantiasVehiculos WHERE GarantiasVehiculos.idVehiculo = ?";
 
+	private static final String readAll = "SELECT * FROM GarantiasVehiculos";
+	
 	public GarantiasDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -55,8 +57,7 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 
 	@Override
 	public List<GarantiaVehiculoDTO> readAll() {
-
-		return null;
+		return getTemplate().query(readAll).excecute(getMapper());
 	}
 
 	@Override

@@ -16,6 +16,8 @@ public class CaracteristicasVehiculoDaoImpl extends GenericJdbcDao<Caracteristic
 
 	private static final String maximoId = "SELECT MAX(idCaracteristica) FROM CaracteristicasVehiculo";
 	
+	private static final String readAll = "SELECT * FROM CaracteristicasVehiculo";
+	
 	public CaracteristicasVehiculoDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -55,7 +57,7 @@ public class CaracteristicasVehiculoDaoImpl extends GenericJdbcDao<Caracteristic
 
 	@Override
 	public List<CaracteristicaVehiculoDTO> readAll() {
-		return null;
+		return getTemplate().query(readAll).excecute(getMapper());
 	}
 
 	@Override

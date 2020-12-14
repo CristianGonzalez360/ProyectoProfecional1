@@ -5,14 +5,17 @@ import java.util.List;
 
 import dto.CaracteristicaVehiculoDTO;
 import dto.VehiculoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
 
 public class DatabaseGraphVehiculoNuevo {
 	private List<VehiculoDTO> vehiculos;
 	private List<CaracteristicaVehiculoDTO> caracteristicaVehiculo;
+	private List<FichaTecnicaVehiculoDTO> fichaTecnica;
 	
 	public DatabaseGraphVehiculoNuevo () {
 		vehiculos = new LinkedList<>();
 		caracteristicaVehiculo = new LinkedList<>();
+		setFichaTecnica(new LinkedList<>());
 	}
 	
 	public List<VehiculoDTO> getVehiculos(){
@@ -29,5 +32,13 @@ public class DatabaseGraphVehiculoNuevo {
 	
 	public void setCaracteristicas(List<CaracteristicaVehiculoDTO> caracteristicas) {
 		this.caracteristicaVehiculo = caracteristicas;
+	}
+
+	public List<FichaTecnicaVehiculoDTO> getFichaTecnica() {
+		return fichaTecnica;
+	}
+
+	public void setFichaTecnica(List<FichaTecnicaVehiculoDTO> fichaTecnica) {
+		this.fichaTecnica = fichaTecnica;
 	}
 }

@@ -107,4 +107,52 @@ public class VehiculosController {
 		return daos.makeFichaTecnicaVehiculoDao().getIdMaximo();
 	}
 	
+	public Integer guardarCaracteristicaNueva(CaracteristicaVehiculoDTO caracteristica) { 
+		daos.makeCaracteristicasVehiculoDao().insert(caracteristica);
+		return daos.makeCaracteristicasVehiculoDao().getIdMaximo();
+	}
+	
+	public List <CaracteristicaVehiculoDTO> readAllCaracteristicas (){
+		return daos.makeCaracteristicasVehiculoDao().readAll();
+	}
+	
+	public Integer guardarFichaTecnicaNueva(FichaTecnicaVehiculoDTO ficha) { 
+		daos.makeFichaTecnicaVehiculoDao().insert(ficha);
+		return daos.makeFichaTecnicaVehiculoDao().getIdMaximo();
+	}
+	
+	public List <FichaTecnicaVehiculoDTO> readAllFichas (){
+		return daos.makeFichaTecnicaVehiculoDao().readAll();
+	}
+	
+	public Integer guardarVehiculoNuevo (VehiculoDTO vehiculo) {
+		daos.makeVehiculoDao().insert(vehiculo);
+		return daos.makeVehiculoDao().getIdMaximo();
+	}
+	
+	public List<VehiculoDTO> readAllVehiculos (){
+		return daos.makeVehiculoDao().readAll();
+	}
+	
+	public void guardarGarantiaNuevo(GarantiaVehiculoDTO garantia) {
+		daos.makeGarantiasVehiculosDao().insert(garantia);
+	}
+	
+	public List<GarantiaVehiculoDTO> readAllGarantias () {
+		return daos.makeGarantiasVehiculosDao().readAll();
+	}
+	
+	public boolean isNroMotorExistente (Integer nroMotor) {//==null no hay motor repetidos
+		if(daos.makeFichaTecnicaVehiculoDao().readByNroMotor(nroMotor) != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isNroChasisExistente (Integer nroChasis) {//==null no hay chasis repetidos
+		if(daos.makeFichaTecnicaVehiculoDao().readByNroChasis(nroChasis) != null) {
+			return true;
+		}
+		return false;
+	}
 }
