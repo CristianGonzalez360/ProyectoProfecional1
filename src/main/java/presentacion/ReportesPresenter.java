@@ -11,6 +11,7 @@ import presentacion.views.gerente.ReporteEgresoDiarioFormView;
 import presentacion.views.gerente.ReporteIngresoDiarioInputFormView;
 import presentacion.views.gerente.ReporteIngresoMensualFormView;
 import presentacion.views.gerente.ReporteRepuestos;
+import presentacion.views.utils.ReporteViewImpl;
 
 public class ReportesPresenter {
 
