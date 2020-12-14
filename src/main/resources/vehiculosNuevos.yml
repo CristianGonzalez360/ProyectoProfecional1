@@ -1,52 +1,48 @@
 vehiculos:
   - precioVenta: 3500000
     idFichaTecnica: 1
-    marca: Ford
+    marca: CHINWENWENCHA
     familia: Focus
     linea: Vip
     color: Azul
-    fechaIngreso: 2017-10-11
+    idCaracteristicas: 1
+    fechaIngreso: 2020-12-13
     disponible: true
     usado: false
-    idCompra:
-    idCaracteristicas: 1
     idSucursal: 1
-  - precioVenta: 3000000
+  - precioVenta: 7000000
     idFichaTecnica: 1
     marca: Volkswagen
     familia: Polo
     linea: Trend
     color: Negro
-    fechaIngreso:
+    idCaracteristicas: 1
+    fechaIngreso: 2020-12-13
     disponible: true
     usado: false
-    idCompra:
-    idCaracteristicas: 1
-    idSucursal: 2
-  - precioVenta: 3800000
+    idSucursal: 1
+  - precioVenta: 4800000
     idFichaTecnica: 1
     marca: Chevrolet
     familia: Spin
     linea: Vip
     color: Azul
-    fechaIngreso: 2017-10-11
+    idCaracteristicas: 1
+    fechaIngreso: 2020-12-13
     disponible: true
     usado: false
-    idCompra:
-    idCaracteristicas: 2
-    idSucursal: 3
-  - precioVenta: 5200000
+    idSucursal: 1
+  - precioVenta: 9200000
     idFichaTecnica: 1
     marca: Volkswagen
     familia: Golf
     linea: Vip
     color: Blanco
-    fechaIngreso: 2017-10-11
+    idCaracteristicas: 1
+    fechaIngreso: 2020-12-13
     disponible: true
     usado: false
-    idCompra:
-    idCaracteristicas: 1
-    idSucursal: 4
+    idSucursal: 1
 caracteristicas:
   - cilindrada: 1.58
     motor: 1.56 MSI nafta
@@ -90,5 +86,42 @@ caracteristicas:
     frenosTraseros: A tambor
     torqueMaximo: 200/4000
     volumenBaul: 600 cc
-    cantidadPuertas: 4
+    cantidadPuertas: 6
     precio: 400000
+fichaTecnica:
+  - nroChasis: 66611
+    nroMotor: 2255166
+    kilometraje: 22222
+    marca: suzuki
+    modelo: 1993
+    color: rojo
+    combustion: gas/nafta
+    descripcion: calienta mucho
+    patente: 123abc
+  - nroChasis: 6667
+    nroMotor: 225432
+    kilometraje: 22222
+    marca: suzuki
+    modelo: 1993
+    color: rojo
+    combustion: gas/nafta
+    descripcion: calienta mucho
+    patente: 123abc
+  - nroChasis: 6668
+    nroMotor: 2252352
+    kilometraje: 22222
+    marca: suzuki
+    modelo: 1993
+    color: rojo
+    combustion: gas/nafta
+    descripcion: calienta mucho
+    patente: 123abc
+  - nroChasis: 6669
+    nroMotor: 22553252
+    kilometraje: 22222
+    marca: suzuki
+    modelo: 1993
+    color: rojo
+    combustion: gas/nafta
+    descripcion: calienta mucho
+    patente: 123abc
