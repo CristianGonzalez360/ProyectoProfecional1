@@ -73,6 +73,7 @@
 		<fieldDescription><![CDATA[color]]></fieldDescription>
 	</field>
 	<group name="GrupoMarca">
+		<groupExpression><![CDATA[$F{marca}]]></groupExpression>
 		<groupHeader>
 			<band height="23">
 				<frame>
@@ -189,7 +190,7 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="50">
+		<band height="542">
 			<frame>
 				<reportElement mode="Opaque" x="-1" y="0" width="551" height="26" backcolor="#71C4E1" uuid="64767c54-5643-4eca-9526-2e3896977f36"/>
 				<staticText>
@@ -198,6 +199,50 @@
 					<text><![CDATA[Grafico por Marcas]]></text>
 				</staticText>
 			</frame>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="115" y="30" width="330" height="242" uuid="92d1be56-d811-42cd-8698-8ed90648fb00"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report" incrementType="Group" incrementGroup="GrupoMarca"/>
+					<keyExpression><![CDATA[$F{marca}]]></keyExpression>
+					<valueExpression><![CDATA[$V{GrupoMarca_COUNT}]]></valueExpression>
+					<labelExpression><![CDATA[$F{marca}]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="50" y="280" width="460" height="256" uuid="6ca24799-e598-437b-9104-ae8d3f949c0e"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report" incrementType="Group" incrementGroup="GrupoMarca"/>
+					<categorySeries>
+						<seriesExpression><![CDATA["SERIES 1"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{marca}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{GrupoMarca_COUNT}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
 		</band>
 	</summary>
 </jasperReport>
