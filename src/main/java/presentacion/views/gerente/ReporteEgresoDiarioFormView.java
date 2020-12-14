@@ -22,7 +22,11 @@ import dto.TarjetaDebitoDTO;
 
 public class ReporteEgresoDiarioFormView extends JDialog {
 
-	private static final long serialVersionUID = -6293870932970697649L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3151816259067675101L;
+
 	private final JPanel contentPanel = new JPanel();
 
 	private static ReporteEgresoDiarioFormView instance;

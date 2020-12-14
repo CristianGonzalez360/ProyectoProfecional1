@@ -21,7 +21,11 @@ import dto.TarjetaDebitoDTO;
 
 public class ReporteRepuestos extends JDialog {
 
-	private static final long serialVersionUID = -6293870932970697649L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6720211970320268729L;
+
 	private final JPanel contentPanel = new JPanel();
 
 	private static ReporteRepuestos instance;

@@ -3,7 +3,6 @@ package presentacion.views.gerente;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,16 +15,17 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
-import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JMonthChooser;
 
 import dto.TarjetaDebitoDTO;
 
 public class ReporteIngresoMensualFormView extends JDialog {
 
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -924620339991326071L;
+	private static final long serialVersionUID = -976490381401830710L;
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -33,7 +33,7 @@ public class ReporteIngresoMensualFormView extends JDialog {
 	private JButton btnSalvar;
 	private JTextField textFechaExpiracion;
 
-	private JDateChooser fechaSeleccionada;
+	private JMonthChooser fechaSeleccionada;
 
 	private ReporteIngresoMensualFormView() {
 		setTitle("Reporte ingreso mensual");
@@ -60,7 +60,7 @@ public class ReporteIngresoMensualFormView extends JDialog {
 						JLabel lblFecha = new JLabel("Fecha de reporte");
 						panel.add(lblFecha, "4, 6, right, default");
 		
-				fechaSeleccionada = new JDateChooser();
+				fechaSeleccionada = new JMonthChooser();
 				panel.add(fechaSeleccionada, "6, 6, fill, default");
 
 		JPanel panel_1 = new JPanel();
@@ -89,9 +89,9 @@ public class ReporteIngresoMensualFormView extends JDialog {
 		return instance;
 	}
 //	Devuelve la fecha seleccionada en el datePicker
-	public Date getData() {
-		Date fecha = fechaSeleccionada.getDate();
-		return fecha;
+	public int getData() {
+		int mes = fechaSeleccionada.getMonth();
+		return mes;
 	}
 
 	public void setData(TarjetaDebitoDTO tarjeta) {
