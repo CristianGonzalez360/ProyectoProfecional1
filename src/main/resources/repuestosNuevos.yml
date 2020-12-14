@@ -8,6 +8,7 @@ repuestos:
     stockMinimo: 13
     stockMinimo: 13
     garantia: true
+    precioCompra: 90
   - codigoRepuesto: 1123
     precioRepuesto: 500
     marcaRepuesto: Renault
@@ -17,6 +18,7 @@ repuestos:
     stockMinimo: 11
     stockMinimo: 13
     garantia: true
+    precioCompra: 90
   - codigoRepuesto: 22230
     precioRepuesto: 200
     marcaRepuesto: xx1
@@ -26,3 +28,4 @@ repuestos:
     stockMinimo: 13
     stockMinimo: 13
     garantia: true
+    precioCompra: 90
