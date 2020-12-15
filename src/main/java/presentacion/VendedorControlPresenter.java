@@ -9,11 +9,14 @@ import javax.swing.event.ListSelectionEvent;
 
 import business_logic.CalculadoraMontoFinalVentaService;
 import business_logic.ClientesController;
+import business_logic.ControllersFactory;
 import business_logic.GarantiasController;
 import business_logic.VentasVehiculosController;
 import business_logic.exceptions.ForbiddenException;
 import dto.ClienteDTO;
 import dto.GarantiaVehiculoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
@@ -29,17 +32,10 @@ public class VendedorControlPresenter {
 
 	private final VendedorControlView view = VendedorControlView.getInstance();
 
-	private ClientesController clientesController;
-
-	private VentasVehiculosController ventasController;
-
-	private GarantiasController garantiasController;
-
-	public VendedorControlPresenter(ClientesController clientesController,
-			VentasVehiculosController vehiculosController, GarantiasController garantiasController) {
-		this.clientesController = clientesController;
-		this.ventasController = vehiculosController;
-		this.garantiasController = garantiasController;
+	private ControllersFactory controllers;
+	
+	public VendedorControlPresenter(ControllersFactory controllers) {
+		this.controllers = controllers;
 		setActions();
 		setOpcionesBusqueda();
 	}
@@ -50,7 +46,7 @@ public class VendedorControlPresenter {
 		 * @ApiIssue NO DEBERÍA ESTAR HARDCODEADO LAS FINANCIERAS
 		 */
 		this.view.addFinancieras(Arrays.asList(new String[] { "Santander", "ICBC", "HSBC", "City Bank" }));
-		this.view.addMarcasBusqueda(ventasController.readNombreMarcasVehiculos());
+		this.view.addMarcasBusqueda(controllers.makeVentasVehiculosController().readNombreMarcasVehiculos());
 	}
 
 	private void setActions() {
@@ -79,10 +75,10 @@ public class VendedorControlPresenter {
 		OutputConsultaVehiculoEnVentaDTO vehiculo = view.getDataVehiculoEnVenta();
 		ModalidadVentaVehiculoDTO modalidadVenta = view.getDataModalidadVenta();
 		try {
-			ventasController.registrarVenta(idCliente, vehiculo, modalidadVenta);
+			controllers.makeVentasVehiculosController().registrarVenta(idCliente, vehiculo, modalidadVenta);
 			ReporteViewImpl ventanaReporte = new ReporteViewImpl();
-			ventanaReporte.setData(ventasController.makeFacturaVentaVehiculo(
-					ventasController.readByIdVehiculo(Integer.parseInt(vehiculo.getCodigo()))));
+			ventanaReporte.setData(controllers.makeVentasVehiculosController().makeFacturaVentaVehiculo(
+					controllers.makeVentasVehiculosController().readByIdVehiculo(Integer.parseInt(vehiculo.getCodigo()))));
 			ventanaReporte.open();
 			new MessageDialog().showMessages(VENTA_MSG);
 			view.clearData();
@@ -126,10 +122,17 @@ public class VendedorControlPresenter {
 		if (view.getDataVehiculoEnVenta() != null) {
 			OutputConsultaVehiculoEnVentaDTO out = view.getDataVehiculoEnVenta();
 			Integer codigoVehiculo = Integer.parseInt(out.getCodigo());
-			view.setData(ventasController.readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo));
-			GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(codigoVehiculo);
+			view.setData(controllers.makeVentasVehiculosController().readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo));
+			GarantiaVehiculoDTO garantia = controllers.makeGarantiasController().readByIdVehiculo(codigoVehiculo);
 			if(garantia != null)view.setData(garantia);
 			view.clearDataModalidadVenta();
+			
+			FichaTecnicaVehiculoDTO ficha = controllers.makeVehiculosController().readFichaTecnicaByIdVehiculo(codigoVehiculo);
+			view.clearDataFichaTecnica();
+			if(ficha != null) {
+				view.setData(ficha);
+			}
+			
 			updatePanelVenta(out.getPrecio(), garantia.getCostoFinalConIVA().toString());
 			updateMontoCuota();
 		}
@@ -149,7 +152,7 @@ public class VendedorControlPresenter {
 			boolean esDniConFormatoCorrecto = new StringValidator(dniBuscado).number("").validate().isEmpty();
 			if (esDniConFormatoCorrecto) {
 				Integer dniCliente = Integer.parseInt(dniBuscado);
-				ClienteDTO cliente = clientesController.readByDni(dniCliente);
+				ClienteDTO cliente = controllers.makeClientesController().readByDni(dniCliente);
 				view.clearDataCliente();
 				if (cliente != null) {
 					view.setData(cliente);
@@ -162,7 +165,7 @@ public class VendedorControlPresenter {
 		ConsultaVehiculoParaVentaDTO consulta = view.getDataConsultaVehiculo();
 		view.clearDataVehiculos();
 		if (consulta.validate().isEmpty()) {
-			List<OutputConsultaVehiculoEnVentaDTO> vehiculos = ventasController.readDisponiblesByCriteria(consulta);
+			List<OutputConsultaVehiculoEnVentaDTO> vehiculos = controllers.makeVentasVehiculosController().readDisponiblesByCriteria(consulta);
 			view.setData(vehiculos);
 		}
 	}
