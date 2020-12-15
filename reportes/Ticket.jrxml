@@ -37,20 +37,20 @@
 	<field name="medioDePago" class="java.lang.String"/>
 	<field name="sucursal" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<title>
-		<band height="251" splitType="Stretch">
+		<band height="350" splitType="Stretch">
 			<staticText>
-				<reportElement x="8" y="139" width="80" height="20" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8"/>
+				<reportElement x="8" y="158" width="80" height="20" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Fecha de pago:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="68" y="159" width="188" height="20" uuid="3836ce65-eca3-4cad-a6de-b1818def0a2b"/>
+				<reportElement x="68" y="178" width="188" height="20" uuid="3836ce65-eca3-4cad-a6de-b1818def0a2b"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="8" y="159" width="60" height="20" uuid="0b3f9342-da78-4cfa-9fc5-2301c4749678"/>
+				<reportElement x="8" y="178" width="60" height="20" uuid="0b3f9342-da78-4cfa-9fc5-2301c4749678"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Factura Nro:]]></text>
@@ -66,27 +66,29 @@
 				<text><![CDATA[Concesionario Larusso]]></text>
 			</staticText>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="88" y="140" width="168" height="18" uuid="9bf3fff8-9396-47e9-91d6-1aac99a242a0"/>
+				<reportElement x="88" y="159" width="168" height="18" uuid="9bf3fff8-9396-47e9-91d6-1aac99a242a0"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="80" y="110" width="140" height="20" uuid="e0851e3e-3184-4c34-965a-f7155d0fb1d4"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="77" y="132" width="140" height="20" uuid="e0851e3e-3184-4c34-965a-f7155d0fb1d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Comprobante de pago]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="8" y="50" width="280" height="60" uuid="23c9c0a6-1ae2-4dcc-8e4d-9ed13e9039e8"/>
+				<reportElement x="8" y="50" width="280" height="80" uuid="23c9c0a6-1ae2-4dcc-8e4d-9ed13e9039e8"/>
 				<dataSourceExpression><![CDATA[$F{sucursal}]]></dataSourceExpression>
 				<subreportExpression><![CDATA["reportes/subreportSucursal.jasper"]]></subreportExpression>
 			</subreport>
 			<textField>
-				<reportElement x="87" y="179" width="169" height="20" uuid="d713d482-a284-4807-a9eb-34c5ae0e0ce7"/>
+				<reportElement x="87" y="198" width="169" height="20" uuid="d713d482-a284-4807-a9eb-34c5ae0e0ce7"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{medioDePago}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="8" y="179" width="78" height="20" uuid="4425230f-d032-4e07-a9aa-1095dbefaf2a"/>
+				<reportElement x="8" y="198" width="78" height="20" uuid="4425230f-d032-4e07-a9aa-1095dbefaf2a"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Medio de pago:]]></text>
 			</staticText>

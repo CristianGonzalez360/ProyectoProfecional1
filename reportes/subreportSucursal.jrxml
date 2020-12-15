@@ -15,7 +15,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="60" splitType="Stretch">
+		<band height="80" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="45" height="20" uuid="ca976b83-f1e7-478d-a747-da6291abdb3b"/>
 				<textElement verticalAlignment="Middle"/>
@@ -45,6 +45,10 @@
 				<reportElement x="0" y="40" width="44" height="20" uuid="b42d2a24-37c8-4016-a8d1-a261759e0381"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Pais:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="200" height="20" uuid="24e1ec4e-0816-431d-afc1-ae1e168d719c"/>
+				<text><![CDATA[I.V.A.       Responsable Inscripto]]></text>
 			</staticText>
 		</band>
 	</title>
