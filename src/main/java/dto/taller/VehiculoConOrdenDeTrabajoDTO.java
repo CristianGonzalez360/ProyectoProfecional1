@@ -17,7 +17,7 @@ public class VehiculoConOrdenDeTrabajoDTO {
 	private Integer nroPolizaSeguro;
 
 	private String patente;
-	
+
 	private Integer idVehiculo;
 
 	public VehiculoConOrdenDeTrabajoDTO() {
@@ -33,7 +33,7 @@ public class VehiculoConOrdenDeTrabajoDTO {
 		ret.setPatente("SOA152");
 		return ret;
 	}
-	
+
 	public VehiculoConOrdenDeTrabajoDTO(AltaDeVehiculoDTO vehiculoDeAlta) {
 		if (vehiculoDeAlta.getKilometrajeGarantia() != null)
 			this.kilometrajeGarantia = Integer.parseInt(vehiculoDeAlta.getKilometrajeGarantia());

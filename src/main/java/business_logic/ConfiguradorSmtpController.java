@@ -8,11 +8,12 @@ import dto.temporal.ConfigSmtpServerDTO;
 import services.PropertiesServiceImpl;
 
 public class ConfiguradorSmtpController {
-	
+
 	private static final String file = "conf/config_smtp.properties";
-	
-	public ConfiguradorSmtpController() {}
-		
+
+	public ConfiguradorSmtpController() {
+	}
+
 	public void save(ConfigSmtpServerDTO dto) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("correo_remitente", dto.getCorreoRemitente());
@@ -27,7 +28,7 @@ public class ConfiguradorSmtpController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public ConfigSmtpServerDTO read() {
 		ConfigSmtpServerDTO dto = new ConfigSmtpServerDTO();
 		PropertiesServiceImpl service = new PropertiesServiceImpl(file);

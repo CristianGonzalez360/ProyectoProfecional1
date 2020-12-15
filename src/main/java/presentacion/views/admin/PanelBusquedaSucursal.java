@@ -15,20 +15,20 @@ public class PanelBusquedaSucursal extends JPanel {
 	private static final long serialVersionUID = 633811077360140055L;
 
 	private JComboBox<String> comboBoxPais;
-	
+
 	private JButton btnBuscar;
 
 	private JLabel searchLabel;
 
 	public PanelBusquedaSucursal() {
 		setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
+
 		searchLabel = new JLabel("Pais");
 		add(searchLabel);
-		
+
 		comboBoxPais = new JComboBox<String>();
 		add(comboBoxPais);
-		
+
 		btnBuscar = new JButton("Buscar");
 		add(btnBuscar);
 	}
@@ -36,9 +36,9 @@ public class PanelBusquedaSucursal extends JPanel {
 	public void setSearchLabelName(String title) {
 		this.searchLabel.setText(title);
 	}
-	
+
 	public String getData() {
-		if(comboBoxPais.getSelectedItem() != null) {
+		if (comboBoxPais.getSelectedItem() != null) {
 			return this.comboBoxPais.getSelectedItem().toString();
 		}
 		return "";
@@ -49,7 +49,7 @@ public class PanelBusquedaSucursal extends JPanel {
 	}
 
 	public void addPaises(String[] strings) {
-		for(String str: strings) {
+		for (String str : strings) {
 			this.comboBoxPais.addItem(str);
 		}
 	}

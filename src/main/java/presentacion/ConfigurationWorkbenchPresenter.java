@@ -13,7 +13,7 @@ import presentacion.views.utils.MessageDialog;
 public class ConfigurationWorkbenchPresenter implements Presenter {
 
 	private AdminLoggerController loginController;
-	
+
 	public ConfigurationWorkbenchPresenter(AdminLoggerController controller) {
 		WorkbenchView.getInstance().setActionOnLogin((a) -> onDisplayLoginView(a));
 		WorkbenchView.getInstance().setActionOnLogout((a) -> onLogout(a));
@@ -36,8 +36,9 @@ public class ConfigurationWorkbenchPresenter implements Presenter {
 		if (credentials != null) {
 			try {
 				SessionDTO session = loginController.logUser(credentials);
-				if(session != null) {
-					String datosDeSession = String.format("%s - Usuario: %s", session.getFecha() ,session.getNombreUsuario());
+				if (session != null) {
+					String datosDeSession = String.format("%s - Usuario: %s", session.getFecha(),
+							session.getNombreUsuario());
 					WorkbenchView.getInstance().setData(datosDeSession);
 					if (session.getRole().equals("admin")) {
 						AdminControlView.getInstance().clearData();

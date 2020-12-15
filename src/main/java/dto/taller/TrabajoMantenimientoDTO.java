@@ -1,7 +1,7 @@
 package dto.taller;
 
 public class TrabajoMantenimientoDTO {
-	
+
 	private Integer idTrabajoMantenimiento;
 	private Integer idMantenimiento;
 	private String descripcionTrabajo;
@@ -58,12 +58,12 @@ public class TrabajoMantenimientoDTO {
 				+ ", descripcionTrabajo=" + descripcionTrabajo + ", precioTrabajo=" + precioTrabajo
 				+ ", tiempoEstTrabajo=" + tiempoEstTrabajo + "]";
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		boolean ret = false;
-		if(obj instanceof TrabajoMantenimientoDTO) {
-			TrabajoMantenimientoDTO trabajo = (TrabajoMantenimientoDTO)obj;
+		if (obj instanceof TrabajoMantenimientoDTO) {
+			TrabajoMantenimientoDTO trabajo = (TrabajoMantenimientoDTO) obj;
 			ret = this.getIdTrabajoMantenimiento().equals(trabajo.getIdTrabajoMantenimiento());
 		}
 		return ret;

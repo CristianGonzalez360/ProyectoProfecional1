@@ -16,23 +16,25 @@ public class FacturaRepuestosReport {
 	private Double total;
 	private Date fecha;
 	private Integer numero;
-	
+
 	public FacturaRepuestosReport() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public JRDataSource getCliente() {
 		List<DatosPersonalesDTO> cliente = new ArrayList<>();
 		cliente.add(this.cliente);
-		return new JRBeanCollectionDataSource(cliente) ;
+		return new JRBeanCollectionDataSource(cliente);
 	}
+
 	public void setCliente(DatosPersonalesDTO cliente) {
 		this.cliente = cliente;
 	}
-	
+
 	public JRDataSource getRepuestos() {
 		return new JRBeanCollectionDataSource(repuestos);
 	}
+
 	public void setRepuestos(List<RepuestoCompradoDTO> repuestos) {
 		this.repuestos = repuestos;
 	}

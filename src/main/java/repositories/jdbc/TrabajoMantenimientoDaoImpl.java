@@ -13,7 +13,7 @@ public class TrabajoMantenimientoDaoImpl extends GenericJdbcDao<TrabajoMantenimi
 	private static final String insert = "INSERT INTO TrabajosMantenimiento(descripcionTrabajo, idMantenimiento, precio, tiempoEstTrabajo) VALUES (?,?,?,?)";
 	private static final String readByIdMantenimiento = "SELECT * FROM TrabajosMantenimiento WHERE idMantenimiento = ?";
 	private static final String delete = "DELETE FROM TrabajosMantenimiento WHERE idTrabajoMantenimiento = ?";
-	
+
 	public TrabajoMantenimientoDaoImpl(Connection connection) {
 		super(connection);
 	}

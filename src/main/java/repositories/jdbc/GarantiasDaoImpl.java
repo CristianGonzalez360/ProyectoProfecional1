@@ -17,45 +17,45 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 	private static final String readByIdVehiculo = "SELECT * FROM GarantiasVehiculos WHERE GarantiasVehiculos.idVehiculo = ?";
 
 	private static final String readAll = "SELECT * FROM GarantiasVehiculos";
-	
-	private static final String update = "UPDATE GarantiasVehiculos "
-			+ "SET aniosDeGarantia = ?,"
-			+ " kilometrajeInicialDelVehiculo = ?"
-			+ ",kilometrajeGarantizado = ?,"
-			+ "fechaInicioDeLaGarantia = ?,"
-			+ " fechaDeCaducidadDeLaGarantia = ?,"
-			+ "costoFinalConIVA = ?"
-			+ " WHERE idVehiculo = ?";
-	
+
+	private static final String update = "UPDATE GarantiasVehiculos " + "SET aniosDeGarantia = ?,"
+			+ " kilometrajeInicialDelVehiculo = ?" + ",kilometrajeGarantizado = ?," + "fechaInicioDeLaGarantia = ?,"
+			+ " fechaDeCaducidadDeLaGarantia = ?," + "costoFinalConIVA = ?" + " WHERE idVehiculo = ?";
+
 	private static final String readById = readAll + " " + "WHERE idVehiculo = ?";
-	
+
 	public GarantiasDaoImpl(Connection connection) {
 		super(connection);
 	}
 
 	@Override
 	public boolean update(GarantiaVehiculoDTO entity) {
-		return getTemplate().query(update)
-				.param(entity.getAniosDeGarantia() == null ? 0 : entity.getAniosDeGarantia())
-				.param(entity.getKilometrajeInicialDelVehiculo() == null ? 0 : entity.getKilometrajeInicialDelVehiculo())
-				.param(entity.getKilometrajeGarantizado() == null? new NullObject() : entity.getKilometrajeGarantizado())
-				.param(entity.getFechaInicioDeLaGarantia() == null? new NullObject() : entity.getFechaInicioDeLaGarantia())
-				.param(entity.getFechaDeCaducidadDeLaGarantia() == null? new NullObject() : entity.getFechaDeCaducidadDeLaGarantia())
-				.param(entity.getCostoFinalConIVA() == null? new NullObject() : entity.getCostoFinalConIVA())
-				.param(entity.getIdVehiculo())
-				.excecute();
+		return getTemplate().query(update).param(entity.getAniosDeGarantia() == null ? 0 : entity.getAniosDeGarantia())
+				.param(entity.getKilometrajeInicialDelVehiculo() == null ? 0
+						: entity.getKilometrajeInicialDelVehiculo())
+				.param(entity.getKilometrajeGarantizado() == null ? new NullObject()
+						: entity.getKilometrajeGarantizado())
+				.param(entity.getFechaInicioDeLaGarantia() == null ? new NullObject()
+						: entity.getFechaInicioDeLaGarantia())
+				.param(entity.getFechaDeCaducidadDeLaGarantia() == null ? new NullObject()
+						: entity.getFechaDeCaducidadDeLaGarantia())
+				.param(entity.getCostoFinalConIVA() == null ? new NullObject() : entity.getCostoFinalConIVA())
+				.param(entity.getIdVehiculo()).excecute();
 	}
 
 	@Override
 	public boolean insert(GarantiaVehiculoDTO entity) {
-		return getTemplate().query(insert)
-				.param(entity.getIdVehiculo())
+		return getTemplate().query(insert).param(entity.getIdVehiculo())
 				.param(entity.getAniosDeGarantia() == null ? 0 : entity.getAniosDeGarantia())
-				.param(entity.getKilometrajeInicialDelVehiculo() == null ? 0 : entity.getKilometrajeInicialDelVehiculo())
-				.param(entity.getKilometrajeGarantizado() == null ? new NullObject() : entity.getKilometrajeGarantizado())
-				.param(entity.getFechaInicioDeLaGarantia() == null? new NullObject() : entity.getFechaInicioDeLaGarantia())
-				.param(entity.getFechaDeCaducidadDeLaGarantia() == null? new NullObject() : entity.getFechaDeCaducidadDeLaGarantia())
-				.param(entity.getCostoFinalConIVA() == null? new NullObject() : entity.getCostoFinalConIVA())
+				.param(entity.getKilometrajeInicialDelVehiculo() == null ? 0
+						: entity.getKilometrajeInicialDelVehiculo())
+				.param(entity.getKilometrajeGarantizado() == null ? new NullObject()
+						: entity.getKilometrajeGarantizado())
+				.param(entity.getFechaInicioDeLaGarantia() == null ? new NullObject()
+						: entity.getFechaInicioDeLaGarantia())
+				.param(entity.getFechaDeCaducidadDeLaGarantia() == null ? new NullObject()
+						: entity.getFechaDeCaducidadDeLaGarantia())
+				.param(entity.getCostoFinalConIVA() == null ? new NullObject() : entity.getCostoFinalConIVA())
 				.excecute();
 	}
 

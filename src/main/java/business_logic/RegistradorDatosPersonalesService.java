@@ -5,7 +5,7 @@ import dto.DatosPersonalesDTO;
 import repositories.DatosPersonalesDao;
 
 public class RegistradorDatosPersonalesService {
-	
+
 	private static final String CONFLICT_EMAIL = "El email está en uso por otro contacto.";
 
 	private static final String CONFLICT_TELEFONO = "El telefono está en uso por otro contacto.";
@@ -17,7 +17,7 @@ public class RegistradorDatosPersonalesService {
 	public RegistradorDatosPersonalesService(DatosPersonalesDao datosDao) {
 		this.datosPersonalesDao = datosDao;
 	}
-	
+
 	public void validate(DatosPersonalesDTO datos) {
 		if (datosPersonalesDao.readByDni(datos.getDni()) != null)
 			throw new ConflictException(CONFLICT_DNI);

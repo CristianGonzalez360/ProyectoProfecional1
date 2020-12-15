@@ -13,22 +13,23 @@ import javax.swing.JCheckBox;
 public class FormConfigurationDBView extends JDialog {
 
 	private static final long serialVersionUID = -4088765082266597046L;
-	
+
 	private PanelConfiguracionDB panelConfiguracion;
-	
+
 	private JButton okButton;
-	
+
 	private JCheckBox chckbxIsLocalhost;
-	
+
 	private static FormConfigurationDBView instance;
-	
+
 	private JButton btnCancel;
-	
+
 	public static FormConfigurationDBView getInstance() {
-		if(instance == null) instance = new FormConfigurationDBView();
+		if (instance == null)
+			instance = new FormConfigurationDBView();
 		return instance;
-	}	
-	
+	}
+
 	private FormConfigurationDBView() {
 		setTitle("Parametros de configuración db");
 		setResizable(false);
@@ -38,7 +39,7 @@ public class FormConfigurationDBView extends JDialog {
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			
+
 			chckbxIsLocalhost = new JCheckBox("Is localhost");
 			buttonPane.add(chckbxIsLocalhost);
 			{
@@ -58,20 +59,20 @@ public class FormConfigurationDBView extends JDialog {
 		}
 		setModal(true);
 	}
-	
+
 	public void open() {
 		setVisible(true);
 	}
-	
+
 	public void close() {
 		this.dispose();
-	}			
-		
+	}
+
 	public void setActionSave(ActionListener listener) {
 		assert listener != null;
 		okButton.addActionListener(listener);
 	}
-		
+
 	public void setActionLocalhost(ActionListener listener) {
 		assert listener != null;
 		this.chckbxIsLocalhost.addActionListener(listener);

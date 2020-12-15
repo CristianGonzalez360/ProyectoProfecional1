@@ -13,16 +13,16 @@ public class SessionDTO {
 	private UsuarioDTO user;
 
 	private SucursalDTO sucursal;
-	
+
 	public SessionDTO() {
 	}
 
 	public String getFecha() {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        String formattedDate = formatter.format(initSession);
+		String formattedDate = formatter.format(initSession);
 		return formattedDate;
 	}
-	
+
 	public Date getInitSession() {
 		return initSession;
 	}
@@ -58,7 +58,7 @@ public class SessionDTO {
 	public void setSucursal(SucursalDTO sucursal) {
 		this.sucursal = sucursal;
 	}
-	
+
 	public SucursalDTO getSucursal() {
 		return this.sucursal;
 	}

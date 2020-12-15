@@ -15,18 +15,19 @@ public class FormConfiguracionSmtpView extends JDialog {
 	private static final long serialVersionUID = -8728212924086785516L;
 
 	private PanelConfiguracionSMTP panelConfiguracion;
-	
+
 	private JButton okButton;
-	
+
 	private JButton cancelButton;
-	
+
 	private static FormConfiguracionSmtpView instance;
-	
+
 	public static FormConfiguracionSmtpView getInstance() {
-		if(instance == null) instance = new FormConfiguracionSmtpView();
+		if (instance == null)
+			instance = new FormConfiguracionSmtpView();
 		return instance;
 	}
-	
+
 	private FormConfiguracionSmtpView() {
 		setTitle("Parametros de configuracion smtp");
 		setResizable(false);
@@ -57,19 +58,19 @@ public class FormConfiguracionSmtpView extends JDialog {
 	public void clearData() {
 		this.panelConfiguracion.clearData();
 	}
-	
+
 	public void setData(ConfigSmtpServerDTO dto) {
 		this.panelConfiguracion.setData(dto);
 	}
-	
+
 	public ConfigSmtpServerDTO getData() {
 		return this.panelConfiguracion.getData();
 	}
-	
+
 	public void setActionOk(ActionListener listener) {
 		this.okButton.addActionListener(listener);
 	}
-	
+
 	public void setActionCancel(ActionListener listener) {
 		this.cancelButton.addActionListener(listener);
 	}
@@ -77,7 +78,7 @@ public class FormConfiguracionSmtpView extends JDialog {
 	public void open() {
 		setVisible(true);
 	}
-	
+
 	public void close() {
 		dispose();
 	}

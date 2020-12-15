@@ -19,9 +19,9 @@ public class SQLDataSource extends DataSource {
 	private String password;
 
 	private String database;
-	
+
 	private boolean status = false;
-	
+
 	public SQLDataSource dbName(String db) {
 		this.database = db;
 		return this;

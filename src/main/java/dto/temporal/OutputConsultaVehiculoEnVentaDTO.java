@@ -1,24 +1,24 @@
 package dto.temporal;
 
 public class OutputConsultaVehiculoEnVentaDTO {
-	
+
 	private String codigo;
-	
+
 	private String marca;
-	
+
 	private String familia;
-	
+
 	private String linea;
-	
+
 	private String sucursal;
-	
+
 	private String color;
-	
+
 	private String precio;
 
 	public OutputConsultaVehiculoEnVentaDTO() {
 	}
-	
+
 	public String getCodigo() {
 		return codigo;
 	}

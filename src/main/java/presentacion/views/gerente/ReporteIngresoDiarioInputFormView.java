@@ -22,7 +22,6 @@ import dto.TarjetaDebitoDTO;
 
 public class ReporteIngresoDiarioInputFormView extends JDialog {
 
-
 	/**
 	 * 
 	 */
@@ -57,12 +56,12 @@ public class ReporteIngresoDiarioInputFormView extends JDialog {
 						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("26px"), FormSpecs.RELATED_GAP_ROWSPEC,
 						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
-				
-						JLabel lblFecha = new JLabel("Fecha de reporte");
-						panel.add(lblFecha, "4, 6, right, default");
-		
-				fechaSeleccionada = new JDateChooser();
-				panel.add(fechaSeleccionada, "6, 6, fill, default");
+
+		JLabel lblFecha = new JLabel("Fecha de reporte");
+		panel.add(lblFecha, "4, 6, right, default");
+
+		fechaSeleccionada = new JDateChooser();
+		panel.add(fechaSeleccionada, "6, 6, fill, default");
 
 		JPanel panel_1 = new JPanel();
 		contentPanel.add(panel_1, BorderLayout.SOUTH);
@@ -89,6 +88,7 @@ public class ReporteIngresoDiarioInputFormView extends JDialog {
 		}
 		return instance;
 	}
+
 //	Devuelve la fecha seleccionada en el datePicker
 	public Date getData() {
 		Date fecha = fechaSeleccionada.getDate();

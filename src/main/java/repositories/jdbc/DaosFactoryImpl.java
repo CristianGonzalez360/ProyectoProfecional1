@@ -56,29 +56,29 @@ public class DaosFactoryImpl extends DaosFactory {
 	private TrabajosPresupuestadosDao trabajosPlanificadosDao;
 
 	private RepuestosPlanificadosDao repuestosPlanificadosDao;
-	
+
 	private FacturasDao facturasDao;
 
 	private VehiculosDao vehiculoDao;
-	
+
 	private MonedaDao monedasDao;
-	
+
 	private SucursalesDao sucursalesDao;
-		
+
 	private PedidoVehiculoDao pedidoVehiculoDao;
-	
+
 	private VentaVehiculoDao ventaVehiculoDao;
-	
+
 	private CaracteristicasVehiculoDao caracteristicasDao;
 
 	private GarantiasDaoImpl garantiasDao;
-	
-	private MantenimientoDao  mantenimientoDao;
+
+	private MantenimientoDao mantenimientoDao;
 
 	private RepuestoMantenimientoDao repuestoMantenimientoDao;
-	
+
 	private TrabajoMantenimientoDao trabajoMantenimientoDao;
-	
+
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
 	}
@@ -173,49 +173,50 @@ public class DaosFactoryImpl extends DaosFactory {
 
 	@Override
 	public FacturasDao makeFacturasDao() {
-		if (facturasDao == null) 
+		if (facturasDao == null)
 			facturasDao = new FacturasDaoImpl(ds.getConnection());
 		return facturasDao;
 	}
 
 	@Override
 	public VehiculosDao makeVehiculoDao() {
-		if (vehiculoDao == null) 
+		if (vehiculoDao == null)
 			vehiculoDao = new VehiculoDaoImpl(ds.getConnection());
 		return vehiculoDao;
 	}
 
 	@Override
 	public SucursalesDao makeSucursalesDao() {
-		if(sucursalesDao == null) sucursalesDao = new SucursalesDaoImpl(ds.getConnection());
+		if (sucursalesDao == null)
+			sucursalesDao = new SucursalesDaoImpl(ds.getConnection());
 		return sucursalesDao;
 	}
-	
+
 	@Override
 	public PedidoVehiculoDao makePedidoVehiculoDao() {
-		if(this.pedidoVehiculoDao == null) {
+		if (this.pedidoVehiculoDao == null) {
 			this.pedidoVehiculoDao = new PedidoVehiculoDaoImpl(ds.getConnection());
 		}
 		return pedidoVehiculoDao;
 	}
-	
+
 	@Override
 	public VentaVehiculoDao makeVentaVehiculoDao() {
-		if (ventaVehiculoDao == null) 
+		if (ventaVehiculoDao == null)
 			ventaVehiculoDao = new VentaVehiculoDaoImpl(ds.getConnection());
 		return ventaVehiculoDao;
 	}
 
 	@Override
 	public CaracteristicasVehiculoDao makeCaracteristicasVehiculoDao() {
-		if(caracteristicasDao == null) 
+		if (caracteristicasDao == null)
 			caracteristicasDao = new CaracteristicasVehiculoDaoImpl(ds.getConnection());
 		return caracteristicasDao;
 	}
 
 	@Override
 	public MonedaDao makeMonedasDao() {
-		if(monedasDao == null) {
+		if (monedasDao == null) {
 			monedasDao = new MonedaDaoImpl(ds.getConnection());
 		}
 		return monedasDao;
@@ -223,24 +224,28 @@ public class DaosFactoryImpl extends DaosFactory {
 
 	@Override
 	public MantenimientoDao makeMantenimientoDao() {
-		if(mantenimientoDao == null) mantenimientoDao = new MantenimientoDaoImpl(ds.getConnection());
+		if (mantenimientoDao == null)
+			mantenimientoDao = new MantenimientoDaoImpl(ds.getConnection());
 		return mantenimientoDao;
 	}
 
 	@Override
 	public RepuestoMantenimientoDao makeRepuestoMantenimientoDao() {
-		if(repuestoMantenimientoDao == null) repuestoMantenimientoDao = new RepuestoMantenimientoDaoImpl(ds.getConnection());
+		if (repuestoMantenimientoDao == null)
+			repuestoMantenimientoDao = new RepuestoMantenimientoDaoImpl(ds.getConnection());
 		return repuestoMantenimientoDao;
 	}
 
 	@Override
 	public TrabajoMantenimientoDao makeTrabajoMantenimientoDao() {
-		if(trabajoMantenimientoDao == null) trabajoMantenimientoDao = new TrabajoMantenimientoDaoImpl(ds.getConnection());
+		if (trabajoMantenimientoDao == null)
+			trabajoMantenimientoDao = new TrabajoMantenimientoDaoImpl(ds.getConnection());
 		return trabajoMantenimientoDao;
 	}
-	
+
 	public GarantiasDao makeGarantiasVehiculosDao() {
-		if(garantiasDao == null) garantiasDao = new GarantiasDaoImpl(ds.getConnection());
+		if (garantiasDao == null)
+			garantiasDao = new GarantiasDaoImpl(ds.getConnection());
 		return garantiasDao;
 	}
 }

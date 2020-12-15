@@ -35,7 +35,7 @@ public class PresupuestoDTO {
 	private List<TrabajoPresupuestadoDTO> trabajos;
 
 	private List<RepuestoPlanificadoDTO> repuestos;
-	
+
 	private Boolean garantia;
 
 	public PresupuestoDTO() {
@@ -51,10 +51,10 @@ public class PresupuestoDTO {
 		this.fechaAltaPresu = new Date();
 		this.trabajos = new ArrayList<>();
 		this.repuestos = new ArrayList<>();
-		for(RepuestoMantenimientoDTO repuesto : mantenimiento.getRepuestos()) {
+		for (RepuestoMantenimientoDTO repuesto : mantenimiento.getRepuestos()) {
 			agregarRepuestos(new RepuestoPlanificadoDTO(repuesto));
 		}
-		for(TrabajoMantenimientoDTO trabajo: mantenimiento.getTrabajos()) {
+		for (TrabajoMantenimientoDTO trabajo : mantenimiento.getTrabajos()) {
 			agregarTrabajo(new TrabajoPresupuestadoDTO(trabajo));
 		}
 	}
@@ -174,13 +174,13 @@ public class PresupuestoDTO {
 	public Double getPrecio() {
 		Double ret = 0.0;
 		for (RepuestoPlanificadoDTO dto : repuestos) {
-			if(!garantia) {
+			if (!garantia) {
 				ret += dto.getRepuesto().getPrecioRepuesto() * dto.getCantRequerida();
-			}else if(!dto.getRepuesto().isGarantia()) {
+			} else if (!dto.getRepuesto().isGarantia()) {
 				ret += dto.getRepuesto().getPrecioRepuesto() * dto.getCantRequerida();
 			}
 		}
-		if(!garantia) {
+		if (!garantia) {
 			for (TrabajoPresupuestadoDTO dto : trabajos) {
 				ret += dto.getPrecioTrabajo();
 			}

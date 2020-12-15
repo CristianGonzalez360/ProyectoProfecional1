@@ -4,7 +4,7 @@ package dto.taller;
 public class RepuestoPlanificadoDTO {
 
 	private Integer idRepuestoPlanificado;
-	
+
 	private Integer idRepuesto;
 
 	private Integer idPresu;
@@ -69,29 +69,29 @@ public class RepuestoPlanificadoDTO {
 	public void setIdRepuesto(Integer idRepuesto) {
 		this.idRepuesto = idRepuesto;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		boolean ret = false;
-		if(obj instanceof RepuestoPlanificadoDTO) {
+		if (obj instanceof RepuestoPlanificadoDTO) {
 			RepuestoPlanificadoDTO rp = (RepuestoPlanificadoDTO) obj;
 			ret = this.getIdRepuestoPlanificado().equals(rp.getIdRepuestoPlanificado());
 		}
 		return ret;
 	}
-	
+
 	public Double getPrecioTotal() {
-		return repuesto.getPrecioRepuesto()*cantRequerida;
+		return repuesto.getPrecioRepuesto() * cantRequerida;
 	}
-	
+
 	public String getDescripcion() {
 		return repuesto.getDescripcionRepuesto();
 	}
-	
+
 	public Double getPrecio() {
 		return repuesto.getPrecioRepuesto();
 	}
-	
+
 	public String getMarca() {
 		return repuesto.getMarcaRepuesto();
 	}

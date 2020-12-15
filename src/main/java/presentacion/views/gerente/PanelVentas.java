@@ -19,7 +19,8 @@ public class PanelVentas extends JPanel {
 
 	private JTable tablaVentas;
 	private DefaultTableModel modelo;
-	private static final String[] columnas = { "Nro.", "Vehículo", "Fecha", "Precio", "Estado del pedido", "Fecha del pedido" };
+	private static final String[] columnas = { "Nro.", "Vehículo", "Fecha", "Precio", "Estado del pedido",
+			"Fecha del pedido" };
 
 	public PanelVentas() {
 		setLayout(new BorderLayout(0, 0));
@@ -29,6 +30,7 @@ public class PanelVentas extends JPanel {
 
 		tablaVentas = new JTable() {
 			private static final long serialVersionUID = 6338578460850975220L;
+
 			@Override
 			public boolean isCellEditable(int arg0, int arg1) {
 				return false;
@@ -46,10 +48,11 @@ public class PanelVentas extends JPanel {
 		modelo.setRowCount(0);
 		for (VehiculoParaEntregar venta : ventas) {
 			Object[] row = { venta.getVenta().getIdVentaVehiculo(),
-					venta.getVehiculo().getMarca() + " " + venta.getVehiculo().getFamilia() + " " + venta.getVehiculo().getLinea(),
+					venta.getVehiculo().getMarca() + " " + venta.getVehiculo().getFamilia() + " "
+							+ venta.getVehiculo().getLinea(),
 					venta.getVenta().getFechaVentaVN(), venta.getVenta().getPrecioVenta(),
-					venta.isPedido() ? "PEDIDO" : "PENDIENTE" ,
-					venta.isPedido() ? venta.getPedido().getFechaPedido():"-"};
+					venta.isPedido() ? "PEDIDO" : "PENDIENTE",
+					venta.isPedido() ? venta.getPedido().getFechaPedido() : "-" };
 			modelo.addRow(row);
 		}
 	}

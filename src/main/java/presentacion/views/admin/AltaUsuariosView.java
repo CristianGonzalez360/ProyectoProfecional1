@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 public class AltaUsuariosView extends JDialog {
 
 	private static final long serialVersionUID = 3395649891931894532L;
-	
+
 	private final JPanel contentPanel = new JPanel();
 
 	public AltaUsuariosView() {

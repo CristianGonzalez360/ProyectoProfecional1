@@ -11,25 +11,25 @@ public class DatabaseGraphVehiculoNuevo {
 	private List<VehiculoDTO> vehiculos;
 	private List<CaracteristicaVehiculoDTO> caracteristicaVehiculo;
 	private List<FichaTecnicaVehiculoDTO> fichaTecnica;
-	
-	public DatabaseGraphVehiculoNuevo () {
+
+	public DatabaseGraphVehiculoNuevo() {
 		vehiculos = new LinkedList<>();
 		caracteristicaVehiculo = new LinkedList<>();
 		setFichaTecnica(new LinkedList<>());
 	}
-	
-	public List<VehiculoDTO> getVehiculos(){
+
+	public List<VehiculoDTO> getVehiculos() {
 		return vehiculos;
 	}
-	
+
 	public void setVehiculos(List<VehiculoDTO> vehiculos) {
 		this.vehiculos = vehiculos;
 	}
-	
-	public List<CaracteristicaVehiculoDTO> getCaracteristicas () {
+
+	public List<CaracteristicaVehiculoDTO> getCaracteristicas() {
 		return caracteristicaVehiculo;
 	}
-	
+
 	public void setCaracteristicas(List<CaracteristicaVehiculoDTO> caracteristicas) {
 		this.caracteristicaVehiculo = caracteristicas;
 	}

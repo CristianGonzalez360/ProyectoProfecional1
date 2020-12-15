@@ -20,15 +20,19 @@ public class RepuestosController {
 	public List<RepuestoDTO> readAll() {
 		return dao.readAll();
 	}
+
 	public List<RepuestoDTO> readByMarca(String marca) {
 		return dao.readByMarca(marca);
 	}
+
 	public List<RepuestoDTO> readByDescripcion(String descripción) {
 		return dao.readByDescripcion(descripción);
 	}
+
 	public List<RepuestoDTO> readbyMarcaYDescripcion(String marca, String descripcion) {
 		return dao.readByMarcaYDescripcion(marca, descripcion);
 	}
+
 	public List<String> readMarcas() {
 		return dao.readMarcas();
 	}
@@ -36,16 +40,16 @@ public class RepuestosController {
 	public RepuestoDTO readByCodigo(Integer codigo) {
 		return dao.readByCodigo(codigo);
 	}
-	
+
 	public void saveByCodigo(RepuestoDTO nuevoRepuesto) {
-		
-		if(dao.readByCodigo(nuevoRepuesto.getCodigoRepuesto()) != null) {
+
+		if (dao.readByCodigo(nuevoRepuesto.getCodigoRepuesto()) != null) {
 			dao.updateByCodigo(nuevoRepuesto);
-		}else {
+		} else {
 			dao.insert(nuevoRepuesto);
 		}
 	}
-	
+
 	public void updateByCodigo(RepuestoDTO repuesto) {
 		dao.updateByCodigo(repuesto);
 	}
@@ -54,8 +58,7 @@ public class RepuestosController {
 		dao.update(entity);
 	}
 
-
-	public List<RepuestoDTO> readRepuestosSinStock(){
+	public List<RepuestoDTO> readRepuestosSinStock() {
 		return dao.readRepuestosSinStock();
 	}
 }

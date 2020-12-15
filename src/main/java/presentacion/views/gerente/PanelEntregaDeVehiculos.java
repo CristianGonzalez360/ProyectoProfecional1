@@ -20,32 +20,32 @@ import dto.temporal.VehiculoParaEntregar;
 import presentacion.views.supervisor.ClientePanelView;
 import presentacion.views.vendedor.CaracteristicaDeVehiculoPanel;
 
-public class PanelEntregaDeVehiculos extends JPanel{
+public class PanelEntregaDeVehiculos extends JPanel {
 
 	private static final long serialVersionUID = -5610520087472443466L;
 	private ClientePanelView panelCliente;
 	private CaracteristicaDeVehiculoPanel panelVehiculo;
-	private PanelVentaVehiculosDisponibles panelVentas;  
-	
+	private PanelVentaVehiculosDisponibles panelVentas;
+
 	private static PanelEntregaDeVehiculos instance;
 	private JPanel panelSuperior;
 	private JPanel PanelInferior;
 	private JButton btnRefrescar;
 	private JButton btnRegistrarEntrega;
-	
+
 	private PanelEntregaDeVehiculos() {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel principal = new JPanel();
 		add(principal, BorderLayout.CENTER);
-		
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{413, 129, 0};
-		gridBagLayout.rowHeights = new int[]{272, 142, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 413, 129, 0 };
+		gridBagLayout.rowHeights = new int[] { 272, 142, 0 };
+		gridBagLayout.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
 		principal.setLayout(gridBagLayout);
-		
+
 		panelVentas = new PanelVentaVehiculosDisponibles();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 5, 5);
@@ -53,7 +53,6 @@ public class PanelEntregaDeVehiculos extends JPanel{
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 0;
 		principal.add(panelVentas, gbc_panel);
-		
 
 		panelCliente = new ClientePanelView();
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
@@ -61,9 +60,10 @@ public class PanelEntregaDeVehiculos extends JPanel{
 		gbc_panel_2.gridx = 1;
 		gbc_panel_2.gridy = 0;
 		principal.add(panelCliente, gbc_panel_2);
-		
+
 		panelVehiculo = new CaracteristicaDeVehiculoPanel();
-		panelVehiculo.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Datos Vehiculo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelVehiculo.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null),
+				"Datos Vehiculo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.gridwidth = 2;
 		gbc_panel_1.insets = new Insets(0, 0, 0, 5);
@@ -71,43 +71,41 @@ public class PanelEntregaDeVehiculos extends JPanel{
 		gbc_panel_1.gridx = 0;
 		gbc_panel_1.gridy = 1;
 		principal.add(panelVehiculo, gbc_panel_1);
-		
+
 		panelSuperior = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelSuperior.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		add(panelSuperior, BorderLayout.NORTH);
-		
+
 		btnRefrescar = new JButton("Refrescar");
 		panelSuperior.add(btnRefrescar);
-		
+
 		PanelInferior = new JPanel();
 		add(PanelInferior, BorderLayout.SOUTH);
-		
+
 		btnRegistrarEntrega = new JButton("Registrar Entrega");
 		PanelInferior.add(btnRegistrarEntrega);
 	}
 
-
-	
 	public static PanelEntregaDeVehiculos getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new PanelEntregaDeVehiculos();
 		}
 		return instance;
 	}
-	
+
 	public void setData(List<VehiculoParaEntregar> ventas) {
 		this.panelVentas.setData(ventas);
 	}
-	
+
 	public void setData(ClienteDTO cliente) {
 		this.panelCliente.setData(cliente);
 	}
-	
+
 	public void setdata(CaracteristicaVehiculoDTO vehiculo) {
 		this.panelVehiculo.setData(vehiculo);
 	}
-	
+
 	public void setActionOnSeleccionarVenta(ListSelectionListener listener) {
 		this.panelVentas.setActionOnSeleccionarVenta(listener);
 	}
@@ -115,11 +113,11 @@ public class PanelEntregaDeVehiculos extends JPanel{
 	public int getFilaSeleciconada() {
 		return panelVentas.getFIlaSaleccionada();
 	}
-	
+
 	public void setActionOnRefrescar(ActionListener listener) {
 		this.btnRefrescar.addActionListener(listener);
 	}
-	
+
 	public void setActionOnRegistrar(ActionListener listener) {
 		this.btnRegistrarEntrega.addActionListener(listener);
 	}
@@ -129,7 +127,7 @@ public class PanelEntregaDeVehiculos extends JPanel{
 		panelVehiculo.clearData();
 		panelVentas.clearData();
 	}
-	
+
 	public boolean papelesEnRegla(int idFila) {
 		return (boolean) panelVentas.papelesEnRegla(idFila);
 	}

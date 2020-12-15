@@ -7,27 +7,27 @@ import java.util.List;
 import dto.ClienteDTO;
 
 public class FacturaDTO {
-	
+
 	private Integer idFactura;
-	
+
 	private Integer idOrdenDeTrabajo;
-	
+
 	private Date fechaDeAlta;
-	
+
 	private Date fechaDeCierrePorPago;
-	
+
 	private Double total;
-	
+
 	private List<PresupuestoDTO> presupuestosFacturados;
-			
+
 	private String estado;
-	
+
 	private Integer dni;
 
 	private ClienteDTO cliente;
 
 	private List<RepuestoCompradoDTO> repuestos;
-	
+
 	private int idCliente;
 
 	public FacturaDTO() {
@@ -35,7 +35,7 @@ public class FacturaDTO {
 		presupuestosFacturados = new ArrayList<>();
 		setFechaDeAlta(new Date());
 	}
-		
+
 	public Integer getIdFactura() {
 		return idFactura;
 	}
@@ -69,8 +69,9 @@ public class FacturaDTO {
 	}
 
 	public boolean estaPagada() {
-		return fechaDeAlta == null? false: true;
+		return fechaDeAlta == null ? false : true;
 	}
+
 	@Override
 	public String toString() {
 		return "FacturaDTO [idFactura=" + idFactura + ", idOrdenDeTrabajo=" + idOrdenDeTrabajo + ", fechaDeAlta="
@@ -94,7 +95,6 @@ public class FacturaDTO {
 		this.estado = estado;
 	}
 
-
 	public Integer getDni() {
 		return dni;
 	}
@@ -102,6 +102,7 @@ public class FacturaDTO {
 	public void setDni(Integer dni) {
 		this.dni = dni;
 	}
+
 	public List<PresupuestoDTO> getPresupuestosFacturados() {
 		return presupuestosFacturados;
 	}
@@ -109,7 +110,6 @@ public class FacturaDTO {
 	public void setPresupuestosFacturados(List<PresupuestoDTO> presupuestosFacturados) {
 		this.presupuestosFacturados = presupuestosFacturados;
 	}
-
 
 	public ClienteDTO getCliente() {
 		return cliente;
@@ -137,7 +137,7 @@ public class FacturaDTO {
 		this.idCliente = idCliente;
 	}
 
-	public List<TrabajoPresupuestadoDTO> getTabajos(){
+	public List<TrabajoPresupuestadoDTO> getTabajos() {
 		List<TrabajoPresupuestadoDTO> ret = new ArrayList<>();
 		for (PresupuestoDTO presupuesto : presupuestosFacturados) {
 			ret.addAll(presupuesto.getTrabajos());
@@ -145,7 +145,7 @@ public class FacturaDTO {
 		return ret;
 	}
 
-	public List<RepuestoPlanificadoDTO> getRepuestosPlanificados(){
+	public List<RepuestoPlanificadoDTO> getRepuestosPlanificados() {
 		List<RepuestoPlanificadoDTO> ret = new ArrayList<>();
 		for (PresupuestoDTO presupuesto : presupuestosFacturados) {
 			ret.addAll(presupuesto.getRepuestos());

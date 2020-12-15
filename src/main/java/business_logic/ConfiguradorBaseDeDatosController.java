@@ -10,9 +10,10 @@ import services.PropertiesServiceImpl;
 public class ConfiguradorBaseDeDatosController {
 
 	private static final String file = "conf/config_db.properties";
-	
-	public ConfiguradorBaseDeDatosController() {}
-		
+
+	public ConfiguradorBaseDeDatosController() {
+	}
+
 	public void save(ConfigDatabaseDTO dto) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("user", dto.getUser());
@@ -26,7 +27,7 @@ public class ConfiguradorBaseDeDatosController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public ConfigDatabaseDTO read() {
 		ConfigDatabaseDTO dto = new ConfigDatabaseDTO();
 		PropertiesServiceImpl service = new PropertiesServiceImpl(file);

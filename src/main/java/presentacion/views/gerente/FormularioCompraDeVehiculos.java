@@ -24,74 +24,72 @@ import java.awt.Color;
 import javax.swing.UIManager;
 
 public class FormularioCompraDeVehiculos extends JDialog {
-	
-	private  CaracteristicaDeVehiculoPanel caracteristicas;
+
+	private CaracteristicaDeVehiculoPanel caracteristicas;
 	private FichaTecnicaPanel fichaTecnica;
 	private JTextField txtPrecioCompra;
 	private JTextField txtPrecioVenta;
-	
+
 	private static FormularioCompraDeVehiculos instance;
 	private JPanel panel;
 	private JButton btnRegistrar;
-	
+
 	private FormularioCompraDeVehiculos() {
 		setTitle("Registro de Vehiculo Usado");
-		setBounds(100,100,650,540);
+		setBounds(100, 100, 650, 540);
 		setResizable(false);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
-		
+
 		JPanel panelCentral = new JPanel();
-		getContentPane().add(panelCentral,BorderLayout.CENTER);
+		getContentPane().add(panelCentral, BorderLayout.CENTER);
 		this.caracteristicas = new CaracteristicaDeVehiculoPanel();
-		caracteristicas.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos T\u00E9cnicos del Veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		caracteristicas.setBorder(
+				new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos T\u00E9cnicos del Veh\u00EDculo",
+						TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
 		this.fichaTecnica = new FichaTecnicaPanel();
-		fichaTecnica.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n del Vehiculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		
+		fichaTecnica.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"),
+				"Informaci\u00F3n del Vehiculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+
 		JPanel precios = new JPanel();
 		precios.setBorder(UIManager.getBorder("TitledBorder.border"));
-		
+
 		panelCentral.add(precios);
-		precios.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormSpecs.LINE_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
-		
+		precios.setLayout(new FormLayout(
+				new ColumnSpec[] { FormSpecs.DEFAULT_COLSPEC, FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+						ColumnSpec.decode("default:grow"), FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
+						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), },
+				new RowSpec[] { FormSpecs.LINE_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+
 		JLabel lblPrecioDeCompra = new JLabel("Precio de Compra");
 		precios.add(lblPrecioDeCompra, "1, 2, left, center");
-		
+
 		txtPrecioCompra = new JTextField();
 		precios.add(txtPrecioCompra, "3, 2, fill, default");
 		txtPrecioCompra.setColumns(10);
-		
+
 		JLabel lblPrecioDeVenta = new JLabel("Precio de venta");
 		precios.add(lblPrecioDeVenta, "5, 2, right, default");
-		
+
 		txtPrecioVenta = new JTextField();
 		precios.add(txtPrecioVenta, "7, 2, fill, default");
 		txtPrecioVenta.setColumns(10);
 		panelCentral.add(fichaTecnica);
 		panelCentral.add(caracteristicas);
-		
+
 		panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.SOUTH);
-		
+
 		btnRegistrar = new JButton("Registrar");
 		panel.add(btnRegistrar);
-		
+
 		close();
 	}
-	
+
 	public static FormularioCompraDeVehiculos getInstance() {
-		if(instance == null) instance = new FormularioCompraDeVehiculos();
+		if (instance == null)
+			instance = new FormularioCompraDeVehiculos();
 		return instance;
 	}
 
@@ -112,25 +110,25 @@ public class FormularioCompraDeVehiculos extends JDialog {
 		ret.setPrecioVenta(this.txtPrecioVenta.getText());
 		return ret;
 	}
-	
+
 	public void clearData() {
 		caracteristicas.clearData();
 		fichaTecnica.cleardata();
 		this.txtPrecioVenta.setText("");
 		this.txtPrecioCompra.setText("");
 	}
-	
+
 	public void display() {
 		setVisible(true);
 	}
-	
+
 	public void close() {
 		setVisible(false);
 		clearData();
 	}
-	
+
 	public void setActionOnRegistrar(ActionListener listener) {
 		this.btnRegistrar.addActionListener(listener);
 	}
-	
+
 }

@@ -18,7 +18,7 @@ public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoCo
 	private static final String readByPatente = readAll + " " + "WHERE patenteVehiculo = ?";
 
 	private static final String readByClienteId = readAll + " " + "WHERE idCliente = ?";
-	
+
 	private static final String readAllId = "SELECT * FROM VehiculoConOrdenesDeTrabajo WHERE idVehiculoConOT = ?";
 
 	public VehiculosConOrdenDeTrabajoDaoImpl(Connection connection) {
@@ -32,13 +32,12 @@ public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoCo
 
 	@Override
 	public boolean insert(VehiculoConOrdenDeTrabajoDTO entity) {
-		return getTemplate().query(insert).param(entity.getIdFichaTecnica())
-				.param(entity.getIdCliente())
-				.param(entity.getKilometrajeGarantia() == null? new NullObject() : entity.getKilometrajeGarantia())
-				.param(entity.getAseguradora() == null? new NullObject() : entity.getAseguradora())
-				.param(entity.getNroPolizaSeguro() == null? new NullObject() : entity.getNroPolizaSeguro())
-				.param(entity.getPatente() == null? new NullObject() : entity.getPatente())
-				.param(entity.getIdVehiculo() == null? new NullObject() : entity.getIdVehiculo()).excecute();
+		return getTemplate().query(insert).param(entity.getIdFichaTecnica()).param(entity.getIdCliente())
+				.param(entity.getKilometrajeGarantia() == null ? new NullObject() : entity.getKilometrajeGarantia())
+				.param(entity.getAseguradora() == null ? new NullObject() : entity.getAseguradora())
+				.param(entity.getNroPolizaSeguro() == null ? new NullObject() : entity.getNroPolizaSeguro())
+				.param(entity.getPatente() == null ? new NullObject() : entity.getPatente())
+				.param(entity.getIdVehiculo() == null ? new NullObject() : entity.getIdVehiculo()).excecute();
 	}
 
 	@Override

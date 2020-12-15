@@ -30,10 +30,6 @@ public class VentasVehiculosController {
 		this.daos = daos;
 	}
 
-	public VehiculoDTO readByCodigo(Integer codigoVehiculo) {
-		return daos.makeVehiculoDao().readByID(codigoVehiculo);
-	}
-
 	public List<VehiculoParaEntregar> readVentasVehiculosNoDisponibles() {
 		List<VentaVehiculoDTO> aux = daos.makeVentaVehiculoDao().readVentasVehiculosNoDisponibles();
 		List<VehiculoParaEntregar> ret = new ArrayList<VehiculoParaEntregar>();
@@ -45,10 +41,6 @@ public class VentasVehiculosController {
 
 	public List<String> readNombreMarcasVehiculos() {
 		return daos.makeVehiculoDao().readAllMarcasVehiculos();
-	}
-
-	public List<VentaVehiculoDTO> readAll() {
-		return daos.makeVentaVehiculoDao().readAll();
 	}
 
 	public List<VentaVehiculoDTO> readFechas(Date desde, Date hasta) {
@@ -90,34 +82,23 @@ public class VentasVehiculosController {
 		return daos.makeCaracteristicasVehiculoDao().readByID(vehiculo.getIdCaracteristicas());
 	}
 
-	public List<String> readNombreSucursales() {
-		List<SucursalDTO> sucursales = daos.makeSucursalesDao().readByPais(readPaisSucursal());
-		List<String> nombresSucursales = new LinkedList<>();
-		for (SucursalDTO suc : sucursales)
-			nombresSucursales.add(suc.getLocalidad());
-		return nombresSucursales;
-	}
-
-	private String readPaisSucursal() {
-		Integer idSucursal = SessionServiceImpl.getInstance().getActiveSession().getIdSucursal();
-		SucursalDTO sucursal = daos.makeSucursalesDao().readByID(idSucursal);
-		return sucursal.getPais();
-	}
-
-	public void registrarEntrega(VehiculoParaEntregar ventaParaEntregar) throws ForbiddenException{
-		if(ventaParaEntregar == null) throw new ForbiddenException("Para entregar una venta es necesario seleccionarla.");
-		if(ventaParaEntregar.getVehiculo().getIdSucursal() == null) {
-			if(!ventaParaEntregar.isPedido()) throw new ForbiddenException("El vehículo no fue pedido.");
-			if(!ventaParaEntregar.isIngresado()) throw new ForbiddenException("El vehículo No fue ingresado a la consecionaria.");
-		}
-		else {
-			if (ventaParaEntregar.getSucursal().getIdSucursal() != SessionServiceImpl.getInstance().getActiveSession().getIdSucursal()) 
+	public void registrarEntrega(VehiculoParaEntregar ventaParaEntregar) throws ForbiddenException {
+		if (ventaParaEntregar == null)
+			throw new ForbiddenException("Para entregar una venta es necesario seleccionarla.");
+		if (ventaParaEntregar.getVehiculo().getIdSucursal() == null) {
+			if (!ventaParaEntregar.isPedido())
+				throw new ForbiddenException("El vehículo no fue pedido.");
+			if (!ventaParaEntregar.isIngresado())
+				throw new ForbiddenException("El vehículo No fue ingresado a la consecionaria.");
+		} else {
+			if (ventaParaEntregar.getSucursal().getIdSucursal() != SessionServiceImpl.getInstance().getActiveSession()
+					.getIdSucursal())
 				throw new ForbiddenException("El vehículo no esta en esta sucursal");
 		}
 		VentaVehiculoDTO venta = ventaParaEntregar.getVenta();
 		venta.setFechaEntregaReal(new Date());
 		daos.makeVentaVehiculoDao().update(venta);
-		
+
 	}
 
 	public List<VehiculoParaEntregar> readVentasVehiculosParaEntregar() {
@@ -128,15 +109,15 @@ public class VentasVehiculosController {
 		}
 		return ret;
 	}
-	
+
 	private VehiculoParaEntregar makeVentaParaEntregar(VentaVehiculoDTO venta) {
-		VehiculoParaEntregar ret =  new VehiculoParaEntregar();
+		VehiculoParaEntregar ret = new VehiculoParaEntregar();
 		ret.setPedido(daos.makePedidoVehiculoDao().estaPedido(venta.getIdVentaVehiculo()));
 		ret.setPedido(daos.makePedidoVehiculoDao().readByIdVenta(venta.getIdVentaVehiculo()));
 		ret.setIngresado(daos.makePedidoVehiculoDao().estaIngresado(venta.getIdVentaVehiculo()));
 		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(venta.getIdVehiculo());
 		ret.setVehiculo(vehiculo);
-		if(vehiculo.getIdSucursal() != null)
+		if (vehiculo.getIdSucursal() != null)
 			ret.setSucursal(daos.makeSucursalesDao().readByID(vehiculo.getIdSucursal()));
 		ret.setVenta(venta);
 		return ret;
@@ -151,7 +132,7 @@ public class VentasVehiculosController {
 		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(venta.getIdVehiculo());
 		ret.setVehiculo(vehiculo);
 		ret.setCaracteristicaVehiculo(daos.makeCaracteristicasVehiculoDao().readByID(vehiculo.getIdCaracteristicas()));
-		if(vehiculo.getIdFichaTecnica()!=null) {
+		if (vehiculo.getIdFichaTecnica() != null) {
 			ret.setFichaTecnicaVehiculo(daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica()));
 		}
 		ret.setTotal(vehiculo.getPrecioVenta());
@@ -168,10 +149,22 @@ public class VentasVehiculosController {
 		return ret;
 	}
 
+	public VehiculoDTO readByCodigo(Integer codigoVehiculo) {
+		return daos.makeVehiculoDao().readByID(codigoVehiculo);
+	}
+
 	public VentaVehiculoDTO readByIdVehiculo(Integer idVehiculo) {
 		return daos.makeVentaVehiculoDao().readByIdVehiculo(idVehiculo);
 	}
 
+	/**
+	 * TODO PUEDE IR EN UNA CLASE SEPARADA Y ES LO MAS RECOMENDABLE
+	 * 
+	 * @param idUsuario
+	 * @param desde
+	 * @param hasta
+	 * @return
+	 */
 	public List<VentaDTO> readVentas(Integer idUsuario, Date desde, Date hasta) {
 		List<VentaDTO> ventas = new LinkedList<>();
 

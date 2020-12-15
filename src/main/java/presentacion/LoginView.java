@@ -74,7 +74,7 @@ public class LoginView extends JDialog {
 		buttonPane.add(cancelButton);
 		setModal(true);
 		setResizable(false);
-		
+
 		this.cancelButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -101,7 +101,8 @@ public class LoginView extends JDialog {
 	}
 
 	public UserCrendentialsDTO getData() {
-		return new UserCrendentialsDTO(this.textFieldUsuario.getText(), String.valueOf(this.textFieldPassword.getPassword()));
+		return new UserCrendentialsDTO(this.textFieldUsuario.getText(),
+				String.valueOf(this.textFieldPassword.getPassword()));
 	}
 
 	public void setActionAceptar(ActionListener listener) {

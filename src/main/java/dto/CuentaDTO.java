@@ -20,9 +20,9 @@ public class CuentaDTO {
 
 	private String role;
 
-	public CuentaDTO() {	
+	public CuentaDTO() {
 	}
-		
+
 	public CuentaDTO makeTestDTO() {
 		CuentaDTO cuenta = new CuentaDTO();
 		cuenta.setFechaDeAlta(new Date());
@@ -88,10 +88,10 @@ public class CuentaDTO {
 		errors.addAll(new StringValidator(this.password).notBlank("El password es obligatorio")
 				.max(20, "Maximo una longitud de 8 caracteres para el password").validate());
 		errors.addAll(new StringValidator(this.role).notBlank("El rol es obligatorio")
-				.max(20, "Maximo una longitud de 12 caracteres para el rol").validate());		
+				.max(20, "Maximo una longitud de 12 caracteres para el rol").validate());
 		return errors;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "CuentaDTO [idCuenta=" + idCuenta + ", fechaDeAlta=" + fechaDeAlta + ", fechaDeBaja=" + fechaDeBaja

@@ -26,7 +26,7 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 	private static final String insert = "INSERT INTO Turnos (idCliente, fechaCanceladoTurno, fechaAltaTurno, fechProgramadaTurno, nombreCliente, apellidoCliente, dniCliente, telefonoCliente, emailCliente) VALUES (?,?,?,?,?,?,?,?,?)";
 
 	private static final String readByFechaProgramada = "SELECT * FROM Turnos t WHERE (t.fechProgramadaTurno >= CURRENT_DATE()) AND (t.fechaCanceladoTurno IS NULL) AND t.fechProgramadaTurno = ?";
-	
+
 	public TurnosDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -41,15 +41,10 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 
 	@Override
 	public boolean insert(TurnoDTO entity) {
-		return getTemplate().query(insert)
-				.param(entity.getIdCliente())
+		return getTemplate().query(insert).param(entity.getIdCliente())
 				.param(entity.getFechaCancelado() == null ? new NullObject() : entity.getFechaCancelado())
-				.param(entity.getFechaAlta())
-				.param(entity.getFechaProgramada())
-				.param(entity.getNombreCliente())
-				.param(entity.getApellidoCliente())
-				.param(entity.getDniCliente())
-				.param(entity.getTelefonoCliente())
+				.param(entity.getFechaAlta()).param(entity.getFechaProgramada()).param(entity.getNombreCliente())
+				.param(entity.getApellidoCliente()).param(entity.getDniCliente()).param(entity.getTelefonoCliente())
 				.param(entity.getEmailCliente()).excecute();
 	}
 
@@ -90,7 +85,7 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 	public List<TurnoDTO> readAllByFechaProgramada(Date fechaProgramada) {
 		return getTemplate().query(readByFechaProgramada).param(fechaProgramada).excecute(getMapper());
 	}
-	
+
 	@Override
 	protected Mapper<TurnoDTO> getMapper() {
 		return new Mapper<TurnoDTO>() {
@@ -113,5 +108,4 @@ public class TurnosDaoImpl extends GenericJdbcDao<TurnoDTO> implements TurnosDao
 		};
 	}
 
-	
 }

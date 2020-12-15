@@ -18,27 +18,26 @@ public class VehiculosUsadosPresenter {
 
 	private PanelVehiculosUsados view;
 	private VehiculosController controller;
-	
+
 	public VehiculosUsadosPresenter(VehiculosController vehiculosController) {
 		this.view = PanelVehiculosUsados.getInstance();
 		this.controller = vehiculosController;
-		
+
 		this.view.setActionOnSeleccionarVehiculo(a -> onSeleccionarVehiculo(a));
-		FormularioCompraDeVehiculos.getInstance().setActionOnRegistrar(a ->registrar(a));
-		this.view.setActionOnRegistrar(a->MostrarFormulario(a));
+		FormularioCompraDeVehiculos.getInstance().setActionOnRegistrar(a -> registrar(a));
+		this.view.setActionOnRegistrar(a -> MostrarFormulario(a));
 		this.view.setData(controller.readVehiculosUsados());
 	}
 
 	private void registrar(ActionEvent a) {
 		CompraVehiculoUsadoDTO compra = FormularioCompraDeVehiculos.getInstance().getData();
 		List<String> errors = compra.validate();
-		if(errors.isEmpty()) {
+		if (errors.isEmpty()) {
 			this.controller.saveVehiculoUsado(compra);
 			FormularioCompraDeVehiculos.getInstance().close();
 			this.view.clearData();
 			this.view.setData(controller.readVehiculosUsados());
-		}
-		else {
+		} else {
 			new MessageDialog().showMessages(errors);
 		}
 	}
@@ -50,9 +49,10 @@ public class VehiculosUsadosPresenter {
 
 	private void onSeleccionarVehiculo(ListSelectionEvent a) {
 		VehiculoDTO vehiculo = this.view.getSeleccionado();
-		if(vehiculo != null) {
+		if (vehiculo != null) {
 			vehiculo = controller.readVehiculoById(vehiculo.getIdVehiculo());
-			CaracteristicaVehiculoDTO carac = controller.readCaracteristicaVehiculoByIdVehiculo(vehiculo.getIdVehiculo());
+			CaracteristicaVehiculoDTO carac = controller
+					.readCaracteristicaVehiculoByIdVehiculo(vehiculo.getIdVehiculo());
 			FichaTecnicaVehiculoDTO ficha = controller.readFichaTecnicaByIdVehiculo(vehiculo.getIdVehiculo());
 			this.view.setData(carac);
 			this.view.setData(ficha);

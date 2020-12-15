@@ -28,7 +28,7 @@ public class OrdenDeTrabajoPanelView extends JPanel {
 	private JTextField textTrabajoSugeridoOt;
 	private JLabel lblTipoDeOrden;
 	private JTextField textTipoDeOT;
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -91,7 +91,7 @@ public class OrdenDeTrabajoPanelView extends JPanel {
 		this.textTrabajoSugeridoOt.setText("");
 		this.textTrabajoSolicitadoOt.setText("");
 	}
-	
+
 	public void setData(OrdenDeTrabajoDTO ordenDeTrabajo) {
 		this.textFechaAltaOt.setText(ordenDeTrabajo.getFechaDeAlta().toString());
 		this.textFechaCierreOt.setText(

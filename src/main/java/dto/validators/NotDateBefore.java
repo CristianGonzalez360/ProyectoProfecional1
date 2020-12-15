@@ -4,14 +4,14 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class NotDateBefore implements Validator<Date>{
-	 
+public class NotDateBefore implements Validator<Date> {
+
 	private String message;
-	
+
 	public NotDateBefore(String message) {
 		this.message = message;
 	}
-	
+
 	@Override
 	public List<String> validate(Date date) {
 		assert date != null;

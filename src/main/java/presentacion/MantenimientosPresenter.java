@@ -33,14 +33,14 @@ public class MantenimientosPresenter {
 		this.view = MantenimientosPanel.getInstance();
 		this.repuestos = this.view.getRepuestosPanel();
 		this.trabajos = this.view.getTrabajosPanel();
-		
+
 		this.repuestos.setActionOnBuscarRepuesto(a -> onBuscarRepuesto(a));
 		this.repuestos.setActionOnAgregarRepuesto(a -> onAgregarRepuesto(a));
 		this.repuestos.setActionOnQuitarRepuesto(a -> onQuitarRepuesto(a));
-		
+
 		this.trabajos.setActionOnAgregarTrabajo(a -> onAgregarTrabajos(a));
 		this.trabajos.setActionOnQuitarTrabajo(a -> onQuitarTrabajo(a));
-		
+
 		this.view.setActionOnGuardar(a -> onGuardar(a));
 		mostrarMantenimientos();
 		mostrarRepuestos();
@@ -51,10 +51,10 @@ public class MantenimientosPresenter {
 	private void onGuardar(ActionEvent a) {
 		String comentario = this.view.getComentario();
 		String nombre = this.view.getNombre();
-		if(!comentario.isEmpty() && !seleccionado.getTrabajos().isEmpty() && !seleccionado.getRepuestos().isEmpty()) {
+		if (!comentario.isEmpty() && !seleccionado.getTrabajos().isEmpty() && !seleccionado.getRepuestos().isEmpty()) {
 			seleccionado.setComentario(comentario);
 			seleccionado.setNombre(nombre);
-			if(seleccionado.getId() == null) {
+			if (seleccionado.getId() == null) {
 				mantenimientosController.save(seleccionado);
 			} else {
 				mantenimientosController.update(seleccionado);
@@ -64,16 +64,16 @@ public class MantenimientosPresenter {
 			this.seleccionado = new MantenimientoDTO();
 		} else {
 			List<String> errors = new ArrayList<>();
-			if(comentario.isEmpty()) {
+			if (comentario.isEmpty()) {
 				errors.add("Ingrece un comentario");
 			}
-			if(nombre.isEmpty()) {
+			if (nombre.isEmpty()) {
 				errors.add("Ingrece un nombre");
 			}
-			if(seleccionado.getTrabajos().isEmpty()) {
+			if (seleccionado.getTrabajos().isEmpty()) {
 				errors.add("Agregue al menos un trabajo");
 			}
-			if(seleccionado.getRepuestos().isEmpty()) {
+			if (seleccionado.getRepuestos().isEmpty()) {
 				errors.add("Agregue al menos un repuesto");
 			}
 			new MessageDialog().showMessages(errors);
@@ -128,13 +128,13 @@ public class MantenimientosPresenter {
 		if (errors.isEmpty()) {
 			RepuestoDTO repuesto = repuestosController.readById(Integer.parseInt(idRepuesto));
 			int cant = Integer.parseInt(cantidad);
-				RepuestoMantenimientoDTO repuestoMantenimiento = new RepuestoMantenimientoDTO();
-				repuestoMantenimiento.setCantRequerida(cant);
-				repuestoMantenimiento.setRepuesto(repuesto);
-				this.seleccionado.agregarRepuestos(repuestoMantenimiento);
-				this.view.setPrecio(seleccionado.getPrecio());
-				onBuscarRepuesto(a);
-				this.repuestos.setDataRepuestosMantenimiento(seleccionado.getRepuestos());
+			RepuestoMantenimientoDTO repuestoMantenimiento = new RepuestoMantenimientoDTO();
+			repuestoMantenimiento.setCantRequerida(cant);
+			repuestoMantenimiento.setRepuesto(repuesto);
+			this.seleccionado.agregarRepuestos(repuestoMantenimiento);
+			this.view.setPrecio(seleccionado.getPrecio());
+			onBuscarRepuesto(a);
+			this.repuestos.setDataRepuestosMantenimiento(seleccionado.getRepuestos());
 		} else {
 			new MessageDialog().showMessages(errors);
 			;
@@ -176,14 +176,14 @@ public class MantenimientosPresenter {
 		String marca = this.repuestos.getMarca();
 		String descripcion = this.repuestos.getDescripcion();
 		List<RepuestoDTO> listaRepuestos;
-		if(descripcion.isEmpty()) {
-			if(marca == "Todas") {
+		if (descripcion.isEmpty()) {
+			if (marca == "Todas") {
 				listaRepuestos = repuestosController.readAll();
 			} else {
 				listaRepuestos = repuestosController.readByMarca(marca);
 			}
 		} else {
-			if(marca == "Todas") {
+			if (marca == "Todas") {
 				listaRepuestos = repuestosController.readByDescripcion(descripcion);
 			} else {
 				listaRepuestos = repuestosController.readbyMarcaYDescripcion(marca, descripcion);

@@ -20,77 +20,77 @@ import presentacion.views.tecnico.PlanificarTrabajosFormView;
 import javax.swing.JComboBox;
 
 public class MantenimientosPanel extends JPanel {
-	
+
 	private JButton btnAceptar;
 	private JButton btnCancelar;
-	
+
 	private PlanificarTrabajosFormView trabajos;
 	private PlanificarRepuestosFormView repuestos;
 	private JPanel panel;
 	private JLabel lblNombre;
 	private JTextField tfNombre;
-	private JComboBox<MantenimientoDTO>comboPresets;
+	private JComboBox<MantenimientoDTO> comboPresets;
 	private JLabel lblMantenimiento;
-	
+
 	private static MantenimientosPanel instance;
 	private JLabel lblPrecio;
 	private JTextField tfPrecio;
 	private JLabel lblComentario;
 	private JTextField tfComentario;
-	
+
 	private MantenimientosPanel() {
 		setLayout(new BorderLayout());
-				
+
 		JPanel panelBotones = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelBotones.getLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(panelBotones, BorderLayout.SOUTH);
-		
+
 		btnAceptar = new JButton("Aceptar");
 		panelBotones.add(btnAceptar);
-		
+
 		btnCancelar = new JButton("Cancelar");
 		panelBotones.add(btnCancelar);
-		
+
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setEnabled(false);
 		splitPane.setResizeWeight(0.5);
-	    add(splitPane, BorderLayout.CENTER);
-		
+		add(splitPane, BorderLayout.CENTER);
+
 		trabajos = new PlanificarTrabajosFormView();
-		repuestos = new  PlanificarRepuestosFormView();
-		
+		repuestos = new PlanificarRepuestosFormView();
+
 		splitPane.setLeftComponent(trabajos);
 		splitPane.setRightComponent(repuestos);
-		
+
 		panel = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panel.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		add(panel, BorderLayout.NORTH);
-		
+
 		lblMantenimiento = new JLabel("Mantenimiento:");
 		panel.add(lblMantenimiento);
-		
+
 		comboPresets = new JComboBox<>();
 		panel.add(comboPresets);
-		
+
 		lblNombre = new JLabel("Nombre:");
 		panel.add(lblNombre);
-		
+
 		tfNombre = new JTextField();
 		panel.add(tfNombre);
 		tfNombre.setColumns(10);
-		
+
 		lblComentario = new JLabel("Comentario:");
 		panel.add(lblComentario);
-		
+
 		tfComentario = new JTextField();
 		panel.add(tfComentario);
 		tfComentario.setColumns(10);
-		
+
 		lblPrecio = new JLabel("Precio:");
 		panel.add(lblPrecio);
-		
+
 		tfPrecio = new JTextField();
 		tfPrecio.setFocusable(false);
 		tfPrecio.setEditable(false);
@@ -99,10 +99,11 @@ public class MantenimientosPanel extends JPanel {
 	}
 
 	public static MantenimientosPanel getInstance() {
-		if(instance == null) instance = new MantenimientosPanel();
+		if (instance == null)
+			instance = new MantenimientosPanel();
 		return instance;
 	}
-	
+
 	public void setData(List<MantenimientoDTO> mantenimientos) {
 		DefaultComboBoxModel<MantenimientoDTO> model = new DefaultComboBoxModel<>();
 		for (MantenimientoDTO mantenimiento : mantenimientos) {
@@ -110,15 +111,15 @@ public class MantenimientosPanel extends JPanel {
 		}
 		comboPresets.setModel(model);
 	}
-	
+
 	public void setDataTrabajos(List<TrabajoMantenimientoDTO> trabajos) {
 		this.trabajos.setDataTrabajosMantenimiento(trabajos);
 	}
-	
+
 	public void setDataRepuestos(List<RepuestoMantenimientoDTO> repuestos) {
 		this.repuestos.setDataRepuestosMantenimiento(repuestos);
 	}
-	
+
 	public Integer getMantenimientoSeleccionado() {
 		return comboPresets.getModel().getElementAt(comboPresets.getSelectedIndex()).getId();
 	}

@@ -12,15 +12,15 @@ import services.SessionServiceImpl;
 public class TicketReport {
 
 	private Integer numero;
-	
+
 	private Date fechaDeCierrePorPago;
-	
+
 	private Double total;
-					
+
 	private Integer dni;
-	
+
 	private SucursalDTO sucursal;
-	
+
 	private String medioDePago;
 
 	public TicketReport(FacturaDTO factura) {

@@ -19,41 +19,42 @@ public class AdminControlView extends JInternalFrame {
 	private static final long serialVersionUID = -8187193486426314619L;
 
 	private static AdminControlView instance;
-		
+
 	private PanelSucursales panelSucursales;
-	
+
 	private PanelGestionUsuariosView panelUsuarios;
-	
+
 	private PanelConfiguracionGeneral panelConfiguracion;
-			
+
 	public static AdminControlView getInstance() {
-		if(instance == null) instance = new AdminControlView();
+		if (instance == null)
+			instance = new AdminControlView();
 		return instance;
 	}
-	
+
 	private AdminControlView() {
 		setMaximizable(true);
 		setIconifiable(true);
 		setTitle("Admin control view");
 		setBounds(100, 100, 633, 424);
 		getContentPane().setLayout(new BorderLayout(0, 0));
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
-		
+
 		panelSucursales = new PanelSucursales();
 		tabbedPane.addTab("Consulta de sucursales", null, panelSucursales, null);
-		
+
 		panelUsuarios = new PanelGestionUsuariosView();
-		tabbedPane.addTab("Gestion de usuarios", null,panelUsuarios, null);
-		
+		tabbedPane.addTab("Gestion de usuarios", null, panelUsuarios, null);
+
 		panelConfiguracion = new PanelConfiguracionGeneral();
 		tabbedPane.addTab("Configuracion general", null, panelConfiguracion, null);
-		
+
 		JPanel panel = new JPanel();
 		panelUsuarios.add(panel, BorderLayout.SOUTH);
 	}
-	
+
 	public void display() {
 		try {
 			setMaximum(true);
@@ -79,11 +80,11 @@ public class AdminControlView extends JInternalFrame {
 		panelSucursales.clearData();
 		panelSucursales.clearDataMoneda();
 	}
-	
+
 	public void setData(List<SucursalDTO> sucursales) {
 		panelSucursales.setData(sucursales);
 	}
-	
+
 	public void setActionSeleccionSucursal(ListSelectionListener listener) {
 		panelSucursales.setActionSeleccionSucursal(listener);
 	}
@@ -99,11 +100,11 @@ public class AdminControlView extends JInternalFrame {
 	public void clearDataMoneda() {
 		panelSucursales.clearDataMoneda();
 	}
-	
+
 	public void setActionEscogerTerminal(ActionListener listener) {
 		panelSucursales.setActionEscogerTerminal(listener);
 	}
-	
+
 	public void close() {
 		setVisible(false);
 	}
@@ -111,7 +112,7 @@ public class AdminControlView extends JInternalFrame {
 	public PanelGestionUsuariosView getUsuariosView() {
 		return this.panelUsuarios;
 	}
-	
+
 	public PanelConfiguracionGeneral getPanelConfiguracion() {
 		return this.panelConfiguracion;
 	}

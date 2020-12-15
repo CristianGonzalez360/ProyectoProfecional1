@@ -1,5 +1,4 @@
 
-
 package presentacion.views.tecnico;
 
 import java.awt.BorderLayout;
@@ -142,7 +141,8 @@ public class PanelGestionTrabajoView extends JPanel {
 		panelEste.setLayout(new BoxLayout(panelEste, BoxLayout.Y_AXIS));
 
 		panelEsteNorte = new JPanel();
-		panelEsteNorte.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Ordenes de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelEsteNorte.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null),
+				"Ordenes de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panelEsteNorte);
 		panelEsteNorte.setLayout(new BorderLayout(0, 0));
 
@@ -161,7 +161,9 @@ public class PanelGestionTrabajoView extends JPanel {
 		scrollPaneVehiculos.setViewportView(tableVehiculos);
 
 		panelEsteSur = new JPanel();
-		panelEsteSur.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Descripci\u00F3n de la orden de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelEsteSur.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null),
+				"Descripci\u00F3n de la orden de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
 		panelEste.add(panelEsteSur);
 
 		panelEsteSur.setLayout(new FormLayout(
@@ -213,7 +215,9 @@ public class PanelGestionTrabajoView extends JPanel {
 		textTrabajoSolicitadoOt.setColumns(10);
 
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Ficha t\u00E9cnica del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null),
+				"Ficha t\u00E9cnica del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
 		panelEste.add(panel);
 		panel.setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(33dlu;default)"),
@@ -228,7 +232,7 @@ public class PanelGestionTrabajoView extends JPanel {
 
 		textMarca = new JTextField();
 		textMarca.setEditable(false);
-		
+
 		panel.add(textMarca, "4, 2, fill, default");
 		textMarca.setColumns(10);
 
@@ -277,13 +281,14 @@ public class PanelGestionTrabajoView extends JPanel {
 		panelOeste.setLayout(new BoxLayout(panelOeste, BoxLayout.Y_AXIS));
 
 		this.listadoDePresupuestosModel = new DefaultTableModel(null, this.columnasListadoDePresupuestos);
-		
+
 		panel_8 = new JPanel();
-		panel_8.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Presupuestos", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		panel_8.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Presupuestos",
+				TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		panelOeste.add(panel_8);
 		panel_8.setLayout(new BorderLayout(0, 0));
-		
-		tablePresupuestos = new JTable(listadoDePresupuestosModel){
+
+		tablePresupuestos = new JTable(listadoDePresupuestosModel) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -293,22 +298,22 @@ public class PanelGestionTrabajoView extends JPanel {
 		};
 		scrollPane = new JScrollPane(tablePresupuestos);
 		panel_8.add(scrollPane, BorderLayout.CENTER);
-		
+
 		panel_7 = new JPanel();
 		panel_8.add(panel_7, BorderLayout.SOUTH);
 		FlowLayout flowLayout = (FlowLayout) panel_7.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
-				
+
 		toolBar = new JToolBar();
 		toolBar.setFloatable(false);
 		panel_7.add(toolBar);
-		
+
 		btnRegistrarTrabajo = new JButton("Registrar trabajo");
 		toolBar.add(btnRegistrarTrabajo);
-		
+
 		panel_1 = new JPanel();
-		panel_1.setBorder(
-				new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_1.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null),
+				"Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelOeste.add(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 
@@ -323,7 +328,7 @@ public class PanelGestionTrabajoView extends JPanel {
 		panel_3.add(scrollPaneRepuestos, BorderLayout.CENTER);
 
 		this.listadoDeRepuestosModel = new DefaultTableModel(null, this.columnasListadoDeRepuestos);
-		tableRepuestos = new JTable(listadoDeRepuestosModel){
+		tableRepuestos = new JTable(listadoDeRepuestosModel) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -341,7 +346,7 @@ public class PanelGestionTrabajoView extends JPanel {
 		panel_5.add(scrollPaneTrabajos, BorderLayout.CENTER);
 
 		this.listadoDeTrabajosModel = new DefaultTableModel(null, this.columnasListadoDeTrabajos);
-		tableTrabajos = new JTable(listadoDeTrabajosModel){
+		tableTrabajos = new JTable(listadoDeTrabajosModel) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -382,7 +387,7 @@ public class PanelGestionTrabajoView extends JPanel {
 		this.btnBuscar.addActionListener(listener);
 	}
 
-	public void setActionOnRegistrar (ActionListener listener) {
+	public void setActionOnRegistrar(ActionListener listener) {
 		this.btnRegistrarTrabajo.addActionListener(listener);
 	}
 
@@ -441,7 +446,7 @@ public class PanelGestionTrabajoView extends JPanel {
 	public Integer getIdOrdenDeTrabajo() {
 		return this.idOrdenDeTrabajo;
 	}
-	
+
 	public void setData(OrdenDeTrabajoDTO ordenDeTrabajo) {
 		this.idOrdenDeTrabajo = ordenDeTrabajo.getIdOrdenTrabajo();
 		this.textTipoTrabajo.setText(ordenDeTrabajo.getTipoOrdeTrabajo());
@@ -470,35 +475,36 @@ public class PanelGestionTrabajoView extends JPanel {
 	public String getTxtDni() {
 		return txtDNI.getText();
 	}
-	
+
 	public void setDataPresupuestos(List<PresupuestoDTO> presupuestos) {
 		clearDataPresupuestos();
-		for(PresupuestoDTO p : presupuestos) {
-			if(p.getEstado()==EstadoPresupuesto.APROBADO || p.getEstado()==EstadoPresupuesto.PAGADO) {
+		for (PresupuestoDTO p : presupuestos) {
+			if (p.getEstado() == EstadoPresupuesto.APROBADO || p.getEstado() == EstadoPresupuesto.PAGADO) {
 				this.idsPresupuestos.add(p.getIdPresupuesto());
-				Object[] row = {p.getIdPresupuesto(), p.getFechaAltaPresu(), p.getComentarioAltaPresu(), p.getEstado()};
+				Object[] row = { p.getIdPresupuesto(), p.getFechaAltaPresu(), p.getComentarioAltaPresu(),
+						p.getEstado() };
 				this.listadoDePresupuestosModel.addRow(row);
 			}
 		}
 	}
-	
+
 	public void clearDataPresupuestos() {
 		listadoDePresupuestosModel.setRowCount(0);
 		listadoDeRepuestosModel.setRowCount(0);
 		listadoDeTrabajosModel.setRowCount(0);
 		idsPresupuestos.clear();
 	}
-	
+
 	public void setActionOnSeleccionarPresupuesto(ListSelectionListener listener) {
 		this.tablePresupuestos.getSelectionModel().addListSelectionListener(listener);
 	}
 
 	public Integer getIdPresupuesto() {
-		
+
 		Integer fila = tablePresupuestos.getSelectedRow();
-		if(fila>=0) {
+		if (fila >= 0) {
 			fila = this.idsPresupuestos.get(fila);
-		} 
+		}
 		return fila;
 	}
 
@@ -506,15 +512,15 @@ public class PanelGestionTrabajoView extends JPanel {
 		setDataRepuestosPlanificados(presupuesto.getRepuestos());
 		setDataTrabajosPlanificados(presupuesto.getTrabajos());
 	}
-	
+
 	public int getIdPresupuestoSeleccionada() {
 		int fila = -1;
 		int id = -1;
-		if(tablePresupuestos.getSelectedRowCount()==1) {
-			fila=tablePresupuestos.getSelectedRow();
-			id= (int) tablePresupuestos.getValueAt(fila, 0);
+		if (tablePresupuestos.getSelectedRowCount() == 1) {
+			fila = tablePresupuestos.getSelectedRow();
+			id = (int) tablePresupuestos.getValueAt(fila, 0);
 		}
 		return id;
 	}
-	
+
 }

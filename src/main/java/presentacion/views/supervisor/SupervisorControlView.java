@@ -17,12 +17,12 @@ public class SupervisorControlView extends JInternalFrame {
 
 	private static final long serialVersionUID = 4306672868994985561L;
 
-	private static final String [] COLUMNAS_ORDENES = new String [] {""};
+	private static final String[] COLUMNAS_ORDENES = new String[] { "" };
 
 	private static SupervisorControlView instance;
 
 	private TurnosPanelView turnosPanelView;
-	
+
 	private DefaultTableModel modelOrdenesDeTrabajo;
 
 	private PanelClientesView panelClientesView;
@@ -47,7 +47,7 @@ public class SupervisorControlView extends JInternalFrame {
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
-		
+
 		JPanel turnosPanel = new JPanel();
 		tabbedPane.addTab("Gestión de Turnos", null, turnosPanel, null);
 		turnosPanel.setLayout(new BorderLayout(0, 0));
@@ -64,7 +64,7 @@ public class SupervisorControlView extends JInternalFrame {
 
 		panelConsultaOTPresupuestadasView = ConsultaDePresupuestosSupervisorView.getInstance();
 		tabbedPane.addTab("Gestión de presupuestos", panelConsultaOTPresupuestadasView);
-		
+
 		PanelGestionRepuestos repuestos = PanelGestionRepuestos.getInstance();
 		tabbedPane.add("Gestión de Repuestos", repuestos);
 
@@ -74,10 +74,10 @@ public class SupervisorControlView extends JInternalFrame {
 		JPanel entregasPanel = new JPanel();
 		tabbedPane.addTab("Gestión entrega de vehículo", null, entregasPanel, null);
 		entregasPanel.setLayout(new BorderLayout(0, 0));
-		
+
 		panelEntregaVehiculosView = new EntregaVehiculosPanelView();
 		entregasPanel.add(panelEntregaVehiculosView);
-		
+
 		MantenimientosPanel mantenimiento = MantenimientosPanel.getInstance();
 		tabbedPane.addTab("Mantenimientos", mantenimiento);
 	}
@@ -113,11 +113,11 @@ public class SupervisorControlView extends JInternalFrame {
 	public TurnosPanelView getTurnosView() {
 		return this.turnosPanelView;
 	}
-	
+
 	public PanelClientesView getClientesView() {
 		return this.panelClientesView;
 	}
-	
+
 	public EntregaVehiculosPanelView getEntregasView() {
 		return this.panelEntregaVehiculosView;
 	}

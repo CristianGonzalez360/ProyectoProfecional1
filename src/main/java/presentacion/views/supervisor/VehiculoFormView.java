@@ -112,7 +112,7 @@ public class VehiculoFormView extends JDialog {
 		contentPanel.add(panel, "2, 14, 7, 1, fill, bottom");
 		panel.add(btnSalvar);
 		panel.add(btnCancelar);
-		
+
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);

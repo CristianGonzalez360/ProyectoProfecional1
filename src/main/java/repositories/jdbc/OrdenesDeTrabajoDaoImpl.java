@@ -21,22 +21,23 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 			+ "VALUES (?,?,?,?,?,?,?)";
 
 	private static final String readByVehiculoId = readAll + " " + "WHERE idVehiculoOt = ?";
-	
+
 	private static final String readAllOrdenesParaEntregar = "SELECT o.idOT, o.tipoTrabajo, o.idUsuAlta, o.idVehiculoOt, o.fechaAltaOt, o.trabajoSolicitado, o.trabajoSujerido, o.fechaEntregadoVehiculo "
-			+ "FROM OrdenesDeTrabajo o "
-			+ "WHERE o.fechaEntregadoVehiculo IS NULL ";
+			+ "FROM OrdenesDeTrabajo o " + "WHERE o.fechaEntregadoVehiculo IS NULL ";
 
 	private static final String readByID = "SELECT * FROM OrdenesDeTrabajo WHERE idOT = ?";
-			
+
 	private static final String update = "UPDATE OrdenesDeTrabajo SET fechaEntregadoVehiculo = ? WHERE idOT = ?";
-	
+
 	public OrdenesDeTrabajoDaoImpl(Connection connection) {
 		super(connection);
 	}
 
 	@Override
 	public boolean update(OrdenDeTrabajoDTO entity) {
-		return getTemplate().query(update).param(entity.getFechaEntregado() == null ? new NullObject() : entity.getFechaEntregado()).param(entity.getIdOrdenTrabajo()).excecute();
+		return getTemplate().query(update)
+				.param(entity.getFechaEntregado() == null ? new NullObject() : entity.getFechaEntregado())
+				.param(entity.getIdOrdenTrabajo()).excecute();
 	}
 
 	@Override
@@ -44,8 +45,7 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 		return getTemplate().query(insert).param(entity.getTipoOrdeTrabajo()).param(entity.getIdUsuarioAlta())
 				.param(entity.getIdVehiculoOt())
 				.param(entity.getFechaDeAlta() == null ? new NullObject() : entity.getFechaDeAlta())
-				.param(entity.getTrabajoSolicitado())
-				.param(entity.getTrabajoSujerido())
+				.param(entity.getTrabajoSolicitado()).param(entity.getTrabajoSujerido())
 				.param(entity.getFechaEntregado() == null ? new NullObject() : entity.getFechaEntregado()).excecute();
 	}
 

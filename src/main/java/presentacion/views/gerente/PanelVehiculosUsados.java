@@ -25,20 +25,24 @@ public class PanelVehiculosUsados extends JPanel {
 	private CaracteristicaDeVehiculoPanel caracteristicas;
 	private FichaTecnicaPanel fichaTecnica;
 	private TablePanel<VehiculoDTO> tabla;
-	private static final String[] columnas = {"NRO", "Marca", "Familia", "Linea"};
+	private static final String[] columnas = { "NRO", "Marca", "Familia", "Linea" };
 	private static PanelVehiculosUsados instance;
 	private JPanel panel;
 	private JButton btnRegistrar;
-	
+
 	private PanelVehiculosUsados() {
 		setLayout(new BorderLayout());
 		JPanel panelCentral = new JPanel();
 		add(panelCentral, BorderLayout.CENTER);
 		this.caracteristicas = new CaracteristicaDeVehiculoPanel();
-		caracteristicas.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos T\u00E9cnicos del Veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		caracteristicas.setBorder(
+				new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos T\u00E9cnicos del Veh\u00EDculo",
+						TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
 		this.fichaTecnica = new FichaTecnicaPanel();
-		fichaTecnica.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n del Veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		fichaTecnica.setBorder(
+				new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n del Veh\u00EDculo",
+						TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		this.tabla = new TablePanel<VehiculoDTO>(columnas) {
 
@@ -48,44 +52,47 @@ public class PanelVehiculosUsados extends JPanel {
 			public void setData(List<VehiculoDTO> data) {
 				clearData();
 				for (VehiculoDTO vehiculo : data) {
-					Object[] row = {vehiculo.getIdVehiculo(), vehiculo.getMarca(), vehiculo.getFamilia(), vehiculo.getLinea()};
+					Object[] row = { vehiculo.getIdVehiculo(), vehiculo.getMarca(), vehiculo.getFamilia(),
+							vehiculo.getLinea() };
 					model.addRow(row);
-				}				
+				}
 			}
-			
+
 			@Override
 			public VehiculoDTO getData() {
 				int selectedRow = table.getSelectedRow();
-				VehiculoDTO ret = null; 
-				if(selectedRow > -1) {
+				VehiculoDTO ret = null;
+				if (selectedRow > -1) {
 					ret = new VehiculoDTO();
 					ret.setIdVehiculo((Integer) model.getValueAt(selectedRow, 0));
 				}
 				return ret;
 			}
 		};
-		tabla.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Veh\u00EDculos Usados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		
+		tabla.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Veh\u00EDculos Usados",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+
 		panelCentral.add(tabla);
 		panelCentral.add(fichaTecnica);
 		panelCentral.add(caracteristicas);
-		
+
 		panel = new JPanel();
 		add(panel, BorderLayout.SOUTH);
-		
+
 		btnRegistrar = new JButton("Registrar");
 		panel.add(btnRegistrar);
 	}
-	
+
 	public static PanelVehiculosUsados getInstance() {
-		if(instance == null) instance = new PanelVehiculosUsados();
+		if (instance == null)
+			instance = new PanelVehiculosUsados();
 		return instance;
 	}
 
 	public void setActionOnSeleccionarVehiculo(ListSelectionListener listener) {
 		this.tabla.setActionSelect(listener);
 	}
-	
+
 	public VehiculoDTO getSeleccionado() {
 		return tabla.getData();
 	}
@@ -100,13 +107,13 @@ public class PanelVehiculosUsados extends JPanel {
 
 	public void setData(FichaTecnicaVehiculoDTO ficha) {
 		this.fichaTecnica.setdata(ficha);
-		
+
 	}
 
 	public void setData(VehiculoDTO vehiculo) {
 		this.fichaTecnica.setdata(vehiculo);
 	}
-	
+
 	public void setActionOnRegistrar(ActionListener listener) {
 		this.btnRegistrar.addActionListener(listener);
 	}

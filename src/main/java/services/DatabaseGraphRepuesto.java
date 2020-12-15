@@ -7,10 +7,11 @@ import dto.taller.RepuestoDTO;
 
 public class DatabaseGraphRepuesto {
 	private List<RepuestoDTO> repuestos;
-	
+
 	public DatabaseGraphRepuesto() {
 		repuestos = new LinkedList<>();
 	}
+
 	public List<RepuestoDTO> getRepuestos() {
 		return repuestos;
 	}

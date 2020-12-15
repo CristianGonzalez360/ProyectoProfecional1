@@ -49,16 +49,16 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 	private JPanel panelEste;
 	private JPanel panelOeste;
 	private JPanel panelEsteNorte;
-	private static final int EDITABLE = 6; 
-	private static final int ESTADO = 4; 
+	private static final int EDITABLE = 6;
+	private static final int ESTADO = 4;
 
 	private final String[] columnasTablaVehiculos = new String[] { "NRO. VEHICULO", "KM GARANTIA", "ASEGURADORA",
 			"NRO POLIZA SEGURO", "PATENTE" };
 	private DefaultTableModel tableModelVehiculos;
 	private JTable tableVehiculos;
 
-	private final String[] columnasListadoDePresupuestos = new String[] { "NRO.", "FECHA ALTA",
-			"COMENTARIO ALTA", "PRECIO","ESTADO", "COMENTARIO RECHAZO", "APROBAR" };
+	private final String[] columnasListadoDePresupuestos = new String[] { "NRO.", "FECHA ALTA", "COMENTARIO ALTA",
+			"PRECIO", "ESTADO", "COMENTARIO RECHAZO", "APROBAR" };
 	private DefaultTableModel listadoDePresupuestosModel;
 
 	private final String[] columnasListadoDeRepuestos = new String[] { "CODIGO", "MARCA", "DESCRIPCIÓN", "PRECIO",
@@ -389,7 +389,8 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 				check = true;
 			}
 			Object[] row = { dto.getIdPresupuesto().toString(), dto.getFechaAltaPresu().toString(),
-					dto.getComentarioAltaPresu().toString(), dto.getPrecio(), dto.getEstado().name(), dto.getComentarioRechazo(), check };
+					dto.getComentarioAltaPresu().toString(), dto.getPrecio(), dto.getEstado().name(),
+					dto.getComentarioRechazo(), check };
 			this.listadoDePresupuestosModel.addRow(row);
 		}
 	}

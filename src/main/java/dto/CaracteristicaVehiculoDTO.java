@@ -1,34 +1,34 @@
 package dto;
 
 public class CaracteristicaVehiculoDTO {
-	
+
 	private Integer idCaracteristica;
-	
+
 	private String cilindrada;
-	
+
 	private String motor;
-	
+
 	private String transmision;
-	
+
 	private String direccion;
-	
+
 	private String potencia;
-	
+
 	private String frenosDelanteros;
-	
+
 	private String frenosTraseros;
-	
+
 	private String torqueMaximo;
-	
+
 	private String volumenBaul;
-	
+
 	private String cantidadPuertas;
 
 	private String precio;
-	
+
 	public CaracteristicaVehiculoDTO() {
 	}
-	
+
 	public String getCilindrada() {
 		return cilindrada;
 	}
@@ -108,7 +108,7 @@ public class CaracteristicaVehiculoDTO {
 	public void setCantidadPuertas(String cantidadPuertas) {
 		this.cantidadPuertas = cantidadPuertas;
 	}
-	
+
 	public String getPrecio() {
 		return precio;
 	}
@@ -116,7 +116,7 @@ public class CaracteristicaVehiculoDTO {
 	public void setPrecio(String precio) {
 		this.precio = precio;
 	}
-	
+
 	public Integer getIdCaracteristica() {
 		return idCaracteristica;
 	}

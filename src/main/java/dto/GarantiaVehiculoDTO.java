@@ -3,25 +3,26 @@ package dto;
 import java.util.Date;
 
 public class GarantiaVehiculoDTO {
-	
+
 	private Integer id;
-	
+
 	private Integer idVehiculo;
-	
+
 	private Integer aniosDeGarantia;
-	
+
 	private Integer kilometrajeInicialDelVehiculo;
-	
+
 	private Integer kilometrajeGarantizado;
-	
+
 	private Date fechaInicioDeLaGarantia;
-	
+
 	private Date fechaDeCaducidadDeLaGarantia;
-	
+
 	private Double costoFinalConIVA;
 
-	public GarantiaVehiculoDTO() {}
-	
+	public GarantiaVehiculoDTO() {
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -30,7 +31,6 @@ public class GarantiaVehiculoDTO {
 		this.id = id;
 	}
 
-	
 	public Integer getIdVehiculo() {
 		return idVehiculo;
 	}

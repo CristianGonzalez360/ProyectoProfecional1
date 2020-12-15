@@ -8,12 +8,12 @@ import dto.SucursalDTO;
 import services.PropertiesServiceImpl;
 
 public class ConfiguradorTerminalController implements SucursalPredeterminadaReader {
-	
+
 	private final String file = "conf/terminal.properties";
-	
-	public ConfiguradorTerminalController() {		
+
+	public ConfiguradorTerminalController() {
 	}
-	
+
 	public void establecerSucursalPredetermidada(SucursalDTO dto) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("idSucursal", dto.getIdSucursal().toString());
@@ -28,7 +28,7 @@ public class ConfiguradorTerminalController implements SucursalPredeterminadaRea
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public SucursalDTO readSucursalPredeterminada() {
 		SucursalDTO suc = new SucursalDTO();
@@ -46,4 +46,3 @@ public class ConfiguradorTerminalController implements SucursalPredeterminadaRea
 		return suc;
 	}
 }
-

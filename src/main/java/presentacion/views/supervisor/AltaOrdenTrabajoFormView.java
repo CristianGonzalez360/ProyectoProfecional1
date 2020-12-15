@@ -144,11 +144,11 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 	public void setActionCancelar(ActionListener listener) {
 		this.botonCancelar.addActionListener(listener);
 	}
-	
+
 	public void habilitarGarantia() {
 		this.rdbtnGarantia.setEnabled(true);
 	}
-	
+
 	public void deshabilitarGarantia() {
 		this.rdbtnGarantia.setEnabled(false);
 	}

@@ -73,5 +73,5 @@ public class PanelReportes extends JPanel {
 	public void setActionDisplayReporteAutosVendidos(ActionListener listener) {
 		this.btnAutosVendidos.addActionListener(listener);
 	}
-	
+
 }

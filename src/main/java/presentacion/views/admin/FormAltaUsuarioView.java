@@ -25,14 +25,15 @@ public class FormAltaUsuarioView extends JDialog {
 	private JButton okButton;
 
 	private JButton cancelButton;
-		
+
 	private static FormAltaUsuarioView instance;
-	
+
 	public static FormAltaUsuarioView getInstance() {
-		if(instance == null) instance = new FormAltaUsuarioView();
+		if (instance == null)
+			instance = new FormAltaUsuarioView();
 		return instance;
 	}
-	
+
 	private FormAltaUsuarioView() {
 		setTitle("Form de alta de usuario");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -74,24 +75,24 @@ public class FormAltaUsuarioView extends JDialog {
 	public UsuarioDTO getData() {
 		return this.data.getData();
 	}
-	
+
 	public void clearData() {
 		this.data.clearData();
 	}
-	
+
 	public void setActionOk(ActionListener listener) {
 		this.okButton.addActionListener(listener);
 	}
-	
+
 	public void setActionCancel(ActionListener listener) {
 		this.cancelButton.addActionListener(listener);
 	}
-	
+
 	public void open() {
 		clearData();
 		setVisible(true);
 	}
-	
+
 	public void close() {
 		setVisible(false);
 	}

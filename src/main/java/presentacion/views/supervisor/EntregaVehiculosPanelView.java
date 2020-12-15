@@ -22,8 +22,8 @@ public class EntregaVehiculosPanelView extends JPanel {
 
 	private static final long serialVersionUID = -5623725856065117794L;
 
-	private static final String[] COLUMNAS_ENTREGAS = {"ID", "DNI CLIENTE", "NOMBRE Y APELLIDO" , "MARCA DE AUTO", "MODELO DE AUTO", "COLOR",
-			"PATENTE" };
+	private static final String[] COLUMNAS_ENTREGAS = { "ID", "DNI CLIENTE", "NOMBRE Y APELLIDO", "MARCA DE AUTO",
+			"MODELO DE AUTO", "COLOR", "PATENTE" };
 
 	private JLabel lblDniCliente;
 	private JTextField textDniCliente;
@@ -90,35 +90,35 @@ public class EntregaVehiculosPanelView extends JPanel {
 
 	public void setData(List<EntregaDeVehiculoDTO> entregas) {
 		for (EntregaDeVehiculoDTO entrega : entregas) {
-			Object[] row = { entrega.getIdOrdenDeTrabajo(), entrega.getDniCliente(), entrega.getNombreCompleto(), entrega.getMarcaAuto(),
-					entrega.getModeloAuto(), entrega.getColorAuto(), entrega.getPatenteAuto() };
+			Object[] row = { entrega.getIdOrdenDeTrabajo(), entrega.getDniCliente(), entrega.getNombreCompleto(),
+					entrega.getMarcaAuto(), entrega.getModeloAuto(), entrega.getColorAuto(), entrega.getPatenteAuto() };
 			tableModelEntregas.addRow(row);
 		}
 	}
 
 	public Integer getIdSelectedEntrega() {
-		int row = tableEntregas.getSelectedRow(); //id de fila seleccionada
-		int id; //para id de la OT
+		int row = tableEntregas.getSelectedRow(); // id de fila seleccionada
+		int id; // para id de la OT
 		if (tableEntregas.getSelectedRow() != -1) {
 			id = Integer.parseInt(tableEntregas.getValueAt(row, 0).toString());
 			return id;
 		}
 		return null;
 	}
-	
+
 	public Integer getDNISelectedEntrega() {
-		int row = tableEntregas.getSelectedRow(); //id de fila seleccionada
-		int dni; //para dni
+		int row = tableEntregas.getSelectedRow(); // id de fila seleccionada
+		int dni; // para dni
 		if (tableEntregas.getSelectedRow() != -1) {
 			dni = Integer.parseInt(tableEntregas.getValueAt(row, 1).toString());
 			return dni;
 		}
 		return null;
 	}
-	
+
 	public Integer getIdSelectedRow() {
 		int row = tableEntregas.getSelectedRow();
-		return row; //id de fila seleccionada
+		return row; // id de fila seleccionada
 	}
 
 }

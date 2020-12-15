@@ -85,9 +85,9 @@ public class PanelGestionRepuestos extends JPanel {
 
 			@Override
 			public Class<?> getColumnClass(int column) {
-				return column == 8? Boolean.class : super.getColumnClass(column);
+				return column == 8 ? Boolean.class : super.getColumnClass(column);
 			}
-			
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -139,7 +139,8 @@ public class PanelGestionRepuestos extends JPanel {
 		for (RepuestoDTO r : repuestos) {
 			idRepuestos.add(r.getIdRepuesto());
 			Object[] row = { r.getCodigoRepuesto(), r.getDescripcionRepuesto(), r.getMarcaRepuesto(), r.getFabricante(),
-					r.getStockRepuesto(), r.getStockMinimo(), r.getPrecioRepuesto(), r.getPrecioCompra(), r.isGarantia() };
+					r.getStockRepuesto(), r.getStockMinimo(), r.getPrecioRepuesto(), r.getPrecioCompra(),
+					r.isGarantia() };
 			modelo.addRow(row);
 		}
 	}

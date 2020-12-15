@@ -28,7 +28,7 @@ public class VehiculosController {
 	public VehiculoDTO readVehiculoById(Integer idVehiculo) {
 		return daos.makeVehiculoDao().readByID(idVehiculo);
 	}
-	
+
 	public CaracteristicaVehiculoDTO readCaracteristicaVehiculoByIdVehiculo(Integer idVehiculo) {
 		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(idVehiculo);
 		return daos.makeCaracteristicasVehiculoDao().readByID(vehiculo.getIdCaracteristicas());
@@ -58,7 +58,7 @@ public class VehiculosController {
 		guardarGarantiaUsado(compra, idVehiculo);
 		guardarCompra(compra, idVehiculo);
 	}
-	
+
 	private void guardarCompra(CompraVehiculoUsadoDTO compra, int idVehiculo) {
 		CompraVehiculoDTO c = new CompraVehiculoDTO();
 		c.setFechaCompra(new Date());
@@ -73,7 +73,7 @@ public class VehiculosController {
 		garantia.setAniosDeGarantia(1);
 		garantia.setKilometrajeInicialDelVehiculo(Integer.parseInt(compra.getKilometraje()));
 	}
-	
+
 	private int guardarCaracteristicas(CompraVehiculoUsadoDTO compra) {
 		CaracteristicaVehiculoDTO carac = new CaracteristicaVehiculoDTO();
 		carac.setCantidadPuertas(compra.getCantidadPuertas());
@@ -87,11 +87,11 @@ public class VehiculosController {
 		carac.setTransmision(compra.getTransmision());
 		carac.setVolumenBaul(compra.getVolumenBaul());
 		carac.setPrecio(compra.getPrecio());
-		
+
 		daos.makeCaracteristicasVehiculoDao().insert(carac);
 		return daos.makeCaracteristicasVehiculoDao().getIdMaximo();
 	}
-	
+
 	private int guardarFichaTecnica(CompraVehiculoUsadoDTO compra) {
 		FichaTecnicaVehiculoDTO ficha = new FichaTecnicaVehiculoDTO();
 		ficha.setColor(compra.getColor());
@@ -102,55 +102,55 @@ public class VehiculosController {
 		ficha.setNroChasis(Integer.parseInt(compra.getNroChasis()));
 		ficha.setNroMotor(Integer.parseInt(compra.getNroMotor()));
 		ficha.setPatente(compra.getPatente());
-		
+
 		daos.makeFichaTecnicaVehiculoDao().insert(ficha);
 		return daos.makeFichaTecnicaVehiculoDao().getIdMaximo();
 	}
-	
-	public Integer guardarCaracteristicaNueva(CaracteristicaVehiculoDTO caracteristica) { 
+
+	public Integer guardarCaracteristicaNueva(CaracteristicaVehiculoDTO caracteristica) {
 		daos.makeCaracteristicasVehiculoDao().insert(caracteristica);
 		return daos.makeCaracteristicasVehiculoDao().getIdMaximo();
 	}
-	
-	public List <CaracteristicaVehiculoDTO> readAllCaracteristicas (){
+
+	public List<CaracteristicaVehiculoDTO> readAllCaracteristicas() {
 		return daos.makeCaracteristicasVehiculoDao().readAll();
 	}
-	
-	public Integer guardarFichaTecnicaNueva(FichaTecnicaVehiculoDTO ficha) { 
+
+	public Integer guardarFichaTecnicaNueva(FichaTecnicaVehiculoDTO ficha) {
 		daos.makeFichaTecnicaVehiculoDao().insert(ficha);
 		return daos.makeFichaTecnicaVehiculoDao().getIdMaximo();
 	}
-	
-	public List <FichaTecnicaVehiculoDTO> readAllFichas (){
+
+	public List<FichaTecnicaVehiculoDTO> readAllFichas() {
 		return daos.makeFichaTecnicaVehiculoDao().readAll();
 	}
-	
-	public Integer guardarVehiculoNuevo (VehiculoDTO vehiculo) {
+
+	public Integer guardarVehiculoNuevo(VehiculoDTO vehiculo) {
 		daos.makeVehiculoDao().insert(vehiculo);
 		return daos.makeVehiculoDao().getIdMaximo();
 	}
-	
-	public List<VehiculoDTO> readAllVehiculos (){
+
+	public List<VehiculoDTO> readAllVehiculos() {
 		return daos.makeVehiculoDao().readAll();
 	}
-	
+
 	public void guardarGarantiaNuevo(GarantiaVehiculoDTO garantia) {
 		daos.makeGarantiasVehiculosDao().insert(garantia);
 	}
-	
-	public List<GarantiaVehiculoDTO> readAllGarantias () {
+
+	public List<GarantiaVehiculoDTO> readAllGarantias() {
 		return daos.makeGarantiasVehiculosDao().readAll();
 	}
-	
-	public boolean isNroMotorExistente (Integer nroMotor) {//==null no hay motor repetidos
-		if(daos.makeFichaTecnicaVehiculoDao().readByNroMotor(nroMotor) != null) {
+
+	public boolean isNroMotorExistente(Integer nroMotor) {// ==null no hay motor repetidos
+		if (daos.makeFichaTecnicaVehiculoDao().readByNroMotor(nroMotor) != null) {
 			return true;
 		}
 		return false;
 	}
-	
-	public boolean isNroChasisExistente (Integer nroChasis) {//==null no hay chasis repetidos
-		if(daos.makeFichaTecnicaVehiculoDao().readByNroChasis(nroChasis) != null) {
+
+	public boolean isNroChasisExistente(Integer nroChasis) {// ==null no hay chasis repetidos
+		if (daos.makeFichaTecnicaVehiculoDao().readByNroChasis(nroChasis) != null) {
 			return true;
 		}
 		return false;

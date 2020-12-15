@@ -19,20 +19,20 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 	private static final String readByDescripcion = readAll + " " + "WHERE descripcionRepuesto = ?";
 
 	private static final String readByMarca = readAll + " " + "WHERE marcaRepuesto = ?";
-	
-	private static final String readByMarcaYDescripcion = readAll + " " + "WHERE marcaRepuesto = ? AND descripcionRepuesto = ?";
-	
+
+	private static final String readByMarcaYDescripcion = readAll + " "
+			+ "WHERE marcaRepuesto = ? AND descripcionRepuesto = ?";
+
 	private static final String readMarcas = "SELECT DISTINCT marcaRepuesto FROM Repuestos";
-	
+
 	private static final String readByCodigo = "SELECT * FROM Repuestos WHERE Repuestos.codigoRepuesto = ?";
-	
+
 	private static final String updateByCodigo = "UPDATE Repuestos SET Repuestos.stockRepuesto = ? WHERE Repuestos.codigoRepuesto = ?";
 
 	private static final String update = "UPDATE repuestos SET stockRepuesto = ?, stockMinimo = ? , codigoRepuesto = ?, precioRepuesto = ?,"
 			+ " marcaRepuesto = ?, descripcionRepuesto = ?, fabricante = ?, precioCompra = ?, garantia = ? WHERE idRepuesto = ?";
-	
-	private static final String readSinStock = readAll + " " + "WHERE stockRepuesto<stockMinimo";
 
+	private static final String readSinStock = readAll + " " + "WHERE stockRepuesto<stockMinimo";
 
 	public RepuestosDaoImpl(Connection connection) {
 		super(connection);
@@ -41,17 +41,10 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 
 	@Override
 	public boolean update(RepuestoDTO entity) {
-		return getTemplate().query(update).param(entity.getStockRepuesto())
-				.param(entity.getStockMinimo())
-				.param(entity.getCodigoRepuesto())
-				.param(entity.getPrecioRepuesto())
-				.param(entity.getMarcaRepuesto())
-				.param(entity.getDescripcionRepuesto())
-				.param(entity.getFabricante())
-				.param(entity.getPrecioCompra())
-				.param(entity.isGarantia())
-				.param(entity.getIdRepuesto())
-				.excecute();
+		return getTemplate().query(update).param(entity.getStockRepuesto()).param(entity.getStockMinimo())
+				.param(entity.getCodigoRepuesto()).param(entity.getPrecioRepuesto()).param(entity.getMarcaRepuesto())
+				.param(entity.getDescripcionRepuesto()).param(entity.getFabricante()).param(entity.getPrecioCompra())
+				.param(entity.isGarantia()).param(entity.getIdRepuesto()).excecute();
 	}
 
 	@Override
@@ -60,8 +53,7 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 		return getTemplate().query(insert).param(entity.getCodigoRepuesto()).param(entity.getPrecioRepuesto())
 				.param(entity.getMarcaRepuesto()).param(entity.getDescripcionRepuesto())
 				.param(entity.getStockRepuesto()).param(entity.getFabricante()).param(entity.getStockMinimo())
-				.param(entity.getPrecioCompra()).param(entity.isGarantia())
-				.excecute();
+				.param(entity.getPrecioCompra()).param(entity.isGarantia()).excecute();
 	}
 
 	@Override
@@ -109,7 +101,7 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 				dto.setStockMinimo((Integer) obj[7]);
 				dto.setGarantia((Boolean) obj[8]);
 				dto.setPrecioCompra((Double) obj[9]);
-				
+
 				return dto;
 			}
 		};
@@ -123,7 +115,7 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 	@Override
 	public List<String> readMarcas() {
 		Mapper<String> mapper = new Mapper<String>() {
-			
+
 			@Override
 			public String map(Object[] obj) {
 				return (String) obj[0];
@@ -140,12 +132,13 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 
 	@Override
 	public void updateByCodigo(RepuestoDTO repuesto) {
-		getTemplate().query(updateByCodigo).param(repuesto.getStockRepuesto()).param(repuesto.getCodigoRepuesto()).excecute();
-	}	
-	
+		getTemplate().query(updateByCodigo).param(repuesto.getStockRepuesto()).param(repuesto.getCodigoRepuesto())
+				.excecute();
+	}
+
 	@Override
-	public List<RepuestoDTO> readRepuestosSinStock(){
+	public List<RepuestoDTO> readRepuestosSinStock() {
 		return getTemplate().query(readSinStock).excecute(getMapper());
 	}
-	
+
 }

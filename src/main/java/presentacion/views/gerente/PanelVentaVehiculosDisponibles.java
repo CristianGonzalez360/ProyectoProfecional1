@@ -14,7 +14,7 @@ import dto.temporal.VehiculoParaEntregar;
 public class PanelVentaVehiculosDisponibles extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private static final int PAPELES = 5;
-	
+
 	private JTable tablaVentas;
 	private DefaultTableModel modelo;
 	private static final String[] columnas = { "Nro.", "Fecha de venta", "Estado del pedido", "Estado del vehículo",
@@ -52,10 +52,12 @@ public class PanelVentaVehiculosDisponibles extends JPanel {
 		modelo.setRowCount(0);
 		for (VehiculoParaEntregar venta : ventas) {
 			Object[] row = { venta.getVenta().getIdVentaVehiculo(), venta.getVenta().getFechaVentaVN(),
-					venta.getSucursal() == null? (venta.isPedido() ? "PEDIDO" : "PENDIENTE") : "-", 
-							venta.getSucursal() == null? (venta.isIngresado() ? "DISPONIBLE" : "NO INGRESADO" ): "DISPONIBLE",
-							venta.getSucursal() != null? venta.getSucursal().getIdSucursal() + " " + venta.getSucursal().getLocalidad() : "",
-							false };
+					venta.getSucursal() == null ? (venta.isPedido() ? "PEDIDO" : "PENDIENTE") : "-",
+					venta.getSucursal() == null ? (venta.isIngresado() ? "DISPONIBLE" : "NO INGRESADO") : "DISPONIBLE",
+					venta.getSucursal() != null
+							? venta.getSucursal().getIdSucursal() + " " + venta.getSucursal().getLocalidad()
+							: "",
+					false };
 			modelo.addRow(row);
 		}
 	}

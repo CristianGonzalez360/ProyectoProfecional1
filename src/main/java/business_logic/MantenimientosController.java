@@ -40,7 +40,8 @@ public class MantenimientosController {
 
 	public MantenimientoDTO readByID(int id) {
 		MantenimientoDTO ret = daos.makeMantenimientoDao().readByID(id);
-		List<RepuestoMantenimientoDTO> repuestos = daos.makeRepuestoMantenimientoDao().readByIdMantenimiento(ret.getId());
+		List<RepuestoMantenimientoDTO> repuestos = daos.makeRepuestoMantenimientoDao()
+				.readByIdMantenimiento(ret.getId());
 		for (RepuestoMantenimientoDTO r : repuestos) {
 			r.setRepuesto(daos.makeRepuestoDao().readByID(r.getIdRepuesto()));
 		}
@@ -52,33 +53,32 @@ public class MantenimientosController {
 	public void update(MantenimientoDTO mantenimiento) {
 		daos.makeMantenimientoDao().update(mantenimiento);
 		MantenimientoDTO actual = readByID(mantenimiento.getId());
-		
-		for(RepuestoMantenimientoDTO nuevoRM : mantenimiento.getRepuestos()) {
-			if(nuevoRM.getIdRepuestoMantenimiento() == null) {
+
+		for (RepuestoMantenimientoDTO nuevoRM : mantenimiento.getRepuestos()) {
+			if (nuevoRM.getIdRepuestoMantenimiento() == null) {
 				nuevoRM.setidMantenimiento(mantenimiento.getId());
-				daos.makeRepuestoMantenimientoDao().insert(nuevoRM);	
+				daos.makeRepuestoMantenimientoDao().insert(nuevoRM);
 			}
 		}
 
-		for(RepuestoMantenimientoDTO rp : actual.getRepuestos()) {
-			if(!mantenimiento.getRepuestos().contains(rp)) {        
+		for (RepuestoMantenimientoDTO rp : actual.getRepuestos()) {
+			if (!mantenimiento.getRepuestos().contains(rp)) {
 				daos.makeRepuestoMantenimientoDao().deleteById(rp.getIdRepuestoMantenimiento());
 			}
 		}
-		
-		for(TrabajoMantenimientoDTO nuevoT : mantenimiento.getTrabajos()) {
-			if(nuevoT.getIdTrabajoMantenimiento() == null) {
+
+		for (TrabajoMantenimientoDTO nuevoT : mantenimiento.getTrabajos()) {
+			if (nuevoT.getIdTrabajoMantenimiento() == null) {
 				nuevoT.setidMantenimiento(mantenimiento.getId());
-				daos.makeTrabajoMantenimientoDao().insert(nuevoT);		
+				daos.makeTrabajoMantenimientoDao().insert(nuevoT);
 			}
 		}
-		
-		for(TrabajoMantenimientoDTO tp : actual.getTrabajos()) {
-			if(!mantenimiento.getTrabajos().contains(tp)) {        
+
+		for (TrabajoMantenimientoDTO tp : actual.getTrabajos()) {
+			if (!mantenimiento.getTrabajos().contains(tp)) {
 				daos.makeTrabajoMantenimientoDao().deleteById(tp.getIdTrabajoMantenimiento());
 			}
 		}
-		
-		
+
 	}
 }

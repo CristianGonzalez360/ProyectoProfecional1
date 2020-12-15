@@ -67,11 +67,11 @@ public class TarjetaCreditoFormView extends JDialog {
 		textNumeroTarjeta = new JTextField();
 		textNumeroTarjeta.setColumns(10);
 		panel.add(textNumeroTarjeta, "4, 2, fill, default");
-		
+
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("VISA");
 		buttonGroup.add(rdbtnNewRadioButton);
 		panel.add(rdbtnNewRadioButton, "6, 2, center, default");
-		
+
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("MasterCard");
 		buttonGroup.add(rdbtnNewRadioButton_1);
 		panel.add(rdbtnNewRadioButton_1, "8, 2, center, default");

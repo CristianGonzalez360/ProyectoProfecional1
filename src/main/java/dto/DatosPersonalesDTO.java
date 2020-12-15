@@ -10,7 +10,7 @@ public class DatosPersonalesDTO {
 	private Integer id;
 
 	private String nombre;
-	
+
 	private String apellido;
 
 	private Integer dni;
@@ -148,9 +148,9 @@ public class DatosPersonalesDTO {
 
 	@Override
 	public String toString() {
-		return "DatosPersonalesDTO [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido +", dni=" + dni + ", telefono="
-				+ telefono + ", email=" + email + ", calle=" + calle + ", altura=" + altura + ", piso=" + piso
-				+ ", dpto=" + dpto + ", localidad=" + localidad + "]";
+		return "DatosPersonalesDTO [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
+				+ ", telefono=" + telefono + ", email=" + email + ", calle=" + calle + ", altura=" + altura + ", piso="
+				+ piso + ", dpto=" + dpto + ", localidad=" + localidad + "]";
 	}
 
 	public String getApellido() {
