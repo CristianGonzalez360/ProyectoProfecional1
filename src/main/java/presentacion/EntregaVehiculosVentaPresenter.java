@@ -47,7 +47,7 @@ public class EntregaVehiculosVentaPresenter {
 			errors.add("Debe seleccionar una venta.");
 		}
 		if (!view.papelesEnRegla(ventaSeleccionada)) {
-			errors.add("Entregue los papeles. ");
+			errors.add("Para registrar la entrega, primero debe confirmar la recepcion de los papeles");
 		}
 
 		if (errors.isEmpty()) {
