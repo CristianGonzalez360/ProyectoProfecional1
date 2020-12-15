@@ -20,7 +20,7 @@ import dto.GarantiaVehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
-import presentacion.views.supervisor.ClientePanelView;
+import presentacion.views.supervisor.PanelCliente;
 
 public class VendedorControlView extends JInternalFrame {
 
@@ -30,7 +30,7 @@ public class VendedorControlView extends JInternalFrame {
 
 	private PanelBusquedaPorDniView busquedaPanel;
 
-	private ClientePanelView clientePanel;
+	private PanelCliente clientePanel;
 
 	private BusquedaVehiculoPanel busquedaVehiculoPanel;
 
@@ -75,7 +75,7 @@ public class VendedorControlView extends JInternalFrame {
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 		busquedaPanel = new PanelBusquedaPorDniView();
 		panel_1.add(busquedaPanel);
-		clientePanel = new ClientePanelView();
+		clientePanel = new PanelCliente();
 		panel_1.add(clientePanel);
 
 		JPanel panel_3 = new JPanel();

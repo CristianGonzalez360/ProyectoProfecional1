@@ -14,7 +14,7 @@ import dto.ClienteDTO;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
 
-public class ClientePanelView extends JPanel {
+public class PanelCliente extends JPanel {
 
 	/**
 	 * 
@@ -47,7 +47,7 @@ public class ClientePanelView extends JPanel {
 
 	private JTextField tfApellido;
 
-	public ClientePanelView() {
+	public PanelCliente() {
 		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Datos del cliente",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setLayout(new FormLayout(
@@ -141,11 +141,9 @@ public class ClientePanelView extends JPanel {
 		textLocalidad.setFocusable(false);
 		add(textLocalidad, "4, 20, fill, top");
 		textLocalidad.setColumns(10);
-
-		this.disableAllClienteInputs();
 	}
 
-	private void disableAllClienteInputs() {
+	public void disableAllClienteInputs() {
 		this.textNombre.setEditable(false);
 		this.textDni.setEditable(false);
 		this.textTelefono.setEditable(false);

@@ -38,7 +38,10 @@ public class ClientePresenter {
 	private VehiculosConOrdenDeTrabajoController vehiculosController;
 
 	private OrdenesTrabajoController ordenDeTrabajoController;
+	
 	private GarantiasController garantiasController;
+
+	private Integer idClientePresentado;
 
 	public ClientePresenter(PanelClientesView view, ClientesController controller,
 			VehiculosConOrdenDeTrabajoController vehiculoController, OrdenesTrabajoController otController,
@@ -86,7 +89,7 @@ public class ClientePresenter {
 	}
 
 	private void onDisplayVehiculoFormView(ActionEvent e) {
-		if (view.getIdCliente() != null) {
+		if (idClientePresentado != null) {
 			VehiculoFormView.getInstance().clearData();
 			VehiculoFormView.getInstance().display();
 		}
@@ -97,6 +100,7 @@ public class ClientePresenter {
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
+				idClientePresentado = cliente.getIdCliente();
 				view.clearDataCliente();
 				view.setData(cliente);
 				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
@@ -161,10 +165,10 @@ public class ClientePresenter {
 		List<String> errors = vehiculoDeAlta.validate();
 		if (errors.isEmpty()) {
 			try {
-				vehiculosController.save(view.getIdCliente(), vehiculoDeAlta);
+				vehiculosController.save(idClientePresentado, vehiculoDeAlta);
 				VehiculoFormView.getInstance().close();
 				view.clearDataListadoVehiculosCliente();
-				view.setData(vehiculosController.readByIdCliente(view.getIdCliente()));
+				view.setData(vehiculosController.readByIdCliente(idClientePresentado));
 			} catch (ConflictException e1) {
 				new MessageDialog().showMessages(e1.getMessage());
 			}
@@ -194,7 +198,7 @@ public class ClientePresenter {
 	}
 
 	private void onDisplayFormForUpdate(ActionEvent a) {
-		if (view.getIdCliente() != null) {
+		if (idClientePresentado != null) {
 			ClienteFormView.getInstance().clearData();
 			ClienteFormView.getInstance()
 					.setData(clienteController.readByDni(Integer.parseInt(view.dniClienteSeleccionado())));
@@ -209,8 +213,8 @@ public class ClientePresenter {
 		List<String> errores = clienteAux.validate();
 		if (errores.isEmpty()) {
 			ClienteDTO cliente = new ClienteDTO(clienteAux);
-			cliente.setIdCliente(view.getIdCliente());
-			cliente.getDatosPersonalesDTO().setId(view.getIdDatosPersonalesCliente());
+			cliente.setIdCliente(idClientePresentado);
+			cliente.getDatosPersonalesDTO().setId(this.clienteController.readById(idClientePresentado).getIdDatosPersonales());
 			clienteController.update(cliente);
 			view.clearDataCliente();
 			view.setData(cliente);
