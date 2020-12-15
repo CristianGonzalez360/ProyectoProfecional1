@@ -26,49 +26,51 @@ public class RegistradorVentaVehiculosService {
 		this.daos = daos;
 	}
 
-	@SuppressWarnings("deprecation")
-	public void registrarVenta(Integer idCliente, OutputConsultaVehiculoEnVentaDTO vehiculo,
-			ModalidadVentaVehiculoDTO modalidadVenta) {
-		if (idCliente == null)
-			throw new ForbiddenException(FORBIDDEN_CLIENTE);
-		if (vehiculo == null)
-			throw new ForbiddenException(FORBIDDEN_VEHICULO);
+	public void registrarVenta(Integer idCliente, OutputConsultaVehiculoEnVentaDTO vehiculo, ModalidadVentaVehiculoDTO modalidadVenta) {
+		if (idCliente == null)throw new ForbiddenException(FORBIDDEN_CLIENTE);
+		if (vehiculo == null) throw new ForbiddenException(FORBIDDEN_VEHICULO);
 		VentaVehiculoDTO venta = makeVentaDTO(idCliente, vehiculo, modalidadVenta);
 		VehiculoDTO vehiculoNuevoEnLaFabrica = null;
-		if (requiereRegistrarPrimero(vehiculo)) {
+		final boolean REQUIERE_REGISTRAR = vehiculo.getSucursal().equals(FABRICANTE);
+		if (REQUIERE_REGISTRAR) {
 			vehiculoNuevoEnLaFabrica = makeVehiculoNuevoParaRegistrar(vehiculo);
-			vehiculo.setCodigo(vehiculoNuevoEnLaFabrica.getIdVehiculo() + "");
+			vehiculo.setCodigo(vehiculoNuevoEnLaFabrica.getIdVehiculo()+"");
 			venta.setIdVehiculo(vehiculoNuevoEnLaFabrica.getIdVehiculo());
 		}
+		else {
+			venta.setIdVehiculo(Integer.parseInt(vehiculo.getCodigo()));
+		}
 		daos.makeVentaVehiculoDao().insert(venta);
-		daos.makeVehiculoDao().updateDisponibilidadVehiculo(venta.getIdVehiculo(), new Boolean(false));
-		updateGarantia(modalidadVenta, venta, vehiculoNuevoEnLaFabrica);
+		new ActualizadorDeGarantiaService(daos).updateGarantiaVehiculo(venta.getIdVehiculo(), modalidadVenta);
 		makeVehiculoConOrdenDeTrabajo(venta.getIdVehiculo(), idCliente);
 	}
-
-	private void updateGarantia(ModalidadVentaVehiculoDTO modalidadVenta, VentaVehiculoDTO venta,
-			VehiculoDTO vehiculoNuevoEnLaFabrica) {
-		ActualizadorDeGarantiaService serv = new ActualizadorDeGarantiaService(daos);
-		if (vehiculoNuevoEnLaFabrica != null) {
-			serv.updateGarantiaVehiculo(vehiculoNuevoEnLaFabrica.getIdVehiculo(), modalidadVenta);
-		} else {
-			serv.updateGarantiaVehiculo(venta.getIdVehiculo(), modalidadVenta);
+	
+	private void makeVehiculoConOrdenDeTrabajo(Integer idVehiculo, Integer idCliente) {
+		VehiculoConOrdenDeTrabajoDTO vehiConOT = new VehiculoConOrdenDeTrabajoDTO();
+		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(idVehiculo);		
+		
+		/**
+		 * @SI EL VEHICULO ES NUEVO Y NO ESTÁ EN UNA SUCURSAL NO TIENE QUE TENER FICHA TECNICA
+		 */
+		vehiConOT.setIdFichaTecnica(vehiculo.getIdFichaTecnica());
+		vehiConOT.setIdCliente(idCliente);
+		if (vehiculo.isUsado()) {
+			FichaTecnicaVehiculoDTO ficha = daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica());
+			vehiConOT.setPatente(ficha.getPatente());
 		}
+		vehiConOT.setIdVehiculo(idVehiculo);
+		daos.makeVehiculoConOrdeDeTrabajoDao().insert(vehiConOT);
 	}
 
 	private VehiculoDTO makeVehiculoNuevoParaRegistrar(OutputConsultaVehiculoEnVentaDTO vehiculo) {
 		VehiculoDTO nuevo = daos.makeVehiculoDao().readByID(Integer.parseInt(vehiculo.getCodigo()));
 		nuevo.setIdVehiculo(null);
-		nuevo.setDisponible(true);
+		nuevo.setDisponible(false);
 		nuevo.setFechaIngreso(null);
 		daos.makeVehiculoDao().insert(nuevo);
 		int last = daos.makeVehiculoDao().readAll().size() - 1;
 		VehiculoDTO target = daos.makeVehiculoDao().readAll().get(last);
 		return target;
-	}
-
-	private boolean requiereRegistrarPrimero(OutputConsultaVehiculoEnVentaDTO vehiculo) {
-		return vehiculo.getSucursal().equals(FABRICANTE);
 	}
 
 	private VentaVehiculoDTO makeVentaDTO(Integer idCliente, OutputConsultaVehiculoEnVentaDTO vehiculo,
@@ -88,21 +90,5 @@ public class RegistradorVentaVehiculosService {
 		venta.setComisionCobrada(Double.parseDouble(modalidadVenta.getComision()));
 		venta.setPrecioVenta(new CalculadoraMontoFinalVentaService(modalidadVenta).getPrecioFinalVenta());
 		return venta;
-	}
-
-	private void makeVehiculoConOrdenDeTrabajo(Integer idVehiculo, Integer idCliente) {
-		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(idVehiculo);
-		VehiculoConOrdenDeTrabajoDTO v = new VehiculoConOrdenDeTrabajoDTO();
-		v.setIdFichaTecnica(vehiculo.getIdFichaTecnica());
-		v.setIdCliente(idCliente);
-		if (vehiculo.isUsado()) {
-			FichaTecnicaVehiculoDTO ficha = daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica());
-			v.setPatente(ficha.getPatente());
-		}
-		// GarantiaVehiculoDTO garantia =
-		// daos.makeGarantiasVehiculosDao().readByIdVehiculo(vehiculo.getIdVehiculo());
-		// v.setKilometrajeGarantia(garantia.getKilometrajeGarantizado());
-		v.setIdVehiculo(idVehiculo);
-		daos.makeVehiculoConOrdeDeTrabajoDao().insert(v);
 	}
 }

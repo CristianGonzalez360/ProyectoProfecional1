@@ -111,7 +111,7 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	}
 
 	@Override
-	public VentaVehiculoDTO readByIdVehiculoVendido(Integer idVehiculo) {
+	public VentaVehiculoDTO readVentaByIdVehiculo(Integer idVehiculo) {
 		List<VentaVehiculoDTO> ventas = getTemplate().query(readByIdVehiculoVendido).param(idVehiculo)
 				.excecute(getMapper());
 		return ventas.isEmpty() ? null : ventas.get(0);

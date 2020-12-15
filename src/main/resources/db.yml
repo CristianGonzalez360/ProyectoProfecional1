@@ -178,15 +178,6 @@ turnos:
     emailCliente: "ejemplo3@dominio.com"
     
 fichaTecnicaVehiculos:
-  - nroChasis: 3123
-    nroMotor: 22551
-    kilometraje: 22222
-    marca: suzuki
-    modelo: 1993
-    color: rojo
-    combustion: gas/nafta
-    descripcion: calienta mucho
-    patente: 123abc
   - nroChasis: 3125
     nroMotor: 22552
     kilometraje: 22122
@@ -455,124 +446,45 @@ sucursales:
     idMoneda: 1
 
 vehiculos:
+#CATALOGO DE VEHICULOS USADOS
   - precioVenta: 1300000
     idFichaTecnica: 1
     marca: Ford
     familia: Focus
     linea: vip
     color: rojo
-    fechaIngreso: 2017-10-11
-    disponible: true
-    usado: false
-    idCaracteristicas: 1
-    idSucursal: 1 
-  - precioVenta: 1300999
-    idFichaTecnica: 1
-    marca: Ford
-    familia: Fiesta
-    linea: Max
-    color: azul
-    fechaIngreso: 2017-10-11
-    disponible: true
+    fechaIngreso: 2018-10-11
+    disponible: false
     usado: true
     idCaracteristicas: 1
-    idSucursal: 1
+    idSucursal: 1 
+ 
 #CATALOGO DE VEHICULOS NUEVOS SIN STOCK
   - precioVenta: 2100000
     idFichaTecnica: 1
-    marca: Ford
-    familia: Fiesta
-    linea: Vip
-    color: Amarillo
+    marca: Peugeot
+    familia: 505
+    linea: full
+    color: Negro
     fechaIngreso: 2017-10-11
     disponible: true
-    usado: true
-    idCaracteristicas: 1
-    idSucursal: 2
-  - precioVenta: 2500000
-    idFichaTecnica: 1
-    marca: Fiat
-    familia: Siena
-    linea: Full TS
-    color: Gris
-    fechaIngreso: 2017-10-11
-    disponible: false
     usado: false
     idCaracteristicas: 1
-    idSucursal: 
-  - precioVenta: 4000000
-    idFichaTecnica: 1
-    marca: Fiat
-    familia: Linea
-    linea: AS sport
-    color: Dark Red
-    fechaIngreso: 2017-10-11
-    disponible: false
-    usado: false
-    idCaracteristicas: 1
-    idSucursal: 
-
-ventaVehiculo:
-  - idUsuVentaVN: 5
-    idUsuPedido:
-    idUsuLlegada:
-    idPagoVentaVN: 
-    fechaVentaVN: 2018-10-10
-    fechaEntregaReal: 
-    fabricante: Ford
-    comisionCobrada: 5000
-    precioVenta: 1288444
-    idVehiculo: 1
-    idCliente: 1
-    idUsuEntrega:
-    idSucursalVenta: 1
-  - idUsuVentaVN: 1
-    idUsuPedido:
-    idUsuLlegada:
-    idPagoVentaVN: 
-    fechaVentaVN: 2018-10-10
-    fechaEntregaReal: 
-    fabricante: Ford
-    comisionCobrada: 5000
-    precioVenta: 1288444
-    idVehiculo: 2
-    idCliente: 1
-    idUsuEntrega:
-    idSucursalVenta: 1
+    idSucursal:
 
 garantias:
   - idVehiculo: 1
-    aniosDeGarantia: 3
+    aniosDeGarantia: 1
     kilometrajeInicialDelVehiculo: 0
-    kilometrajeGarantizado: 150000
-    fechaInicioDeLaGarantia: 2020-10-10
-    fechaDeCaducidadDeLaGarantia: 2023-10-10
-    costoFinalConIVA: 32000
+    kilometrajeGarantizado: 90000
+    fechaInicioDeLaGarantia: 
+    fechaDeCaducidadDeLaGarantia: 
+    costoFinalConIVA: 10000
   - idVehiculo: 2
     aniosDeGarantia: 3
     kilometrajeInicialDelVehiculo: 0
-    kilometrajeGarantizado: 90000
-    fechaInicioDeLaGarantia: 2020-10-10
-    fechaDeCaducidadDeLaGarantia: 2023-10-10
-    costoFinalConIVA: 32000
-  - idVehiculo: 3
-    aniosDeGarantia: 3
-    kilometrajeInicialDelVehiculo: 0
     kilometrajeGarantizado: 150000
-    fechaInicioDeLaGarantia: 2020-10-10
-    fechaDeCaducidadDeLaGarantia: 2023-10-10
+    fechaInicioDeLaGarantia: 
+    fechaDeCaducidadDeLaGarantia: 
     costoFinalConIVA: 32000
-  - idVehiculo: 4
-    aniosDeGarantia: 3
-    kilometrajeInicialDelVehiculo: 0
-    kilometrajeGarantizado: 150000
-    fechaInicioDeLaGarantia: 2020-10-10
-    fechaDeCaducidadDeLaGarantia: 2023-10-10
-    costoFinalConIVA: 32000
-  - idVehiculo: 5
-    aniosDeGarantia: 3
-    kilometrajeInicialDelVehiculo: 0
-    kilometrajeGarantizado: 150000
-    fechaInicioDeLaGarantia: 2020-10-10
-    fechaDeCaducidadDeLaGarantia: 2023-10-10
-    costoFinalConIVA: 32000
+ 

@@ -14,7 +14,7 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	private static final String insert = "INSERT INTO Vehiculos(precioVenta,idFichaTecnica,marca,familia,linea,color,idCaracteristica,fechaIngreso,disponible,usado,idSucursal) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-	private static final String readDisponiblesByCriteria = "SELECT * FROM Vehiculos WHERE marca = ? AND usado = ?";
+	private static final String readByCriteria = "SELECT * FROM Vehiculos WHERE marca = ? AND usado = ?";
 
 	private static final String readById = "SELECT * FROM Vehiculos WHERE idVehiculo = ?";
 
@@ -43,8 +43,9 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 		return getTemplate().query(updateDisponibilidad).param(boolean1).param(id).excecute();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public boolean insert(VehiculoDTO entity) {
+	public boolean insert(VehiculoDTO entity) {		
 		return getTemplate().query(insert).param(entity.getPrecioVenta())
 				.param(entity.getIdFichaTecnica() == null ? new NullObject() : entity.getIdFichaTecnica())
 				.param(entity.getMarca()).param(entity.getFamilia()).param(entity.getLinea()).param(entity.getColor())
@@ -81,8 +82,8 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	}
 
 	@Override
-	public List<VehiculoDTO> readDisponiblesByCriteria(String marca, Boolean usado) {
-		return getTemplate().query(readDisponiblesByCriteria).param(marca).param(usado).excecute(getMapper());
+	public List<VehiculoDTO> readByCriteria(String marca, Boolean usado) {
+		return getTemplate().query(readByCriteria).param(marca).param(usado).excecute(getMapper());
 	}
 
 	@Override
