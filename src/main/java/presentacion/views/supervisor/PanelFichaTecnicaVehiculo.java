@@ -83,7 +83,7 @@ public class PanelFichaTecnicaVehiculo extends JPanel {
 		textCombustion.setColumns(10);
 	}
 
-	public void disableAllFichaTecnicaInputs() {
+	public void disableInputs() {
 		this.textNroDeChasis.setEditable(false);
 		this.textNroMotor.setEditable(false);
 		this.textMarca.setEditable(false);
@@ -92,7 +92,7 @@ public class PanelFichaTecnicaVehiculo extends JPanel {
 		this.textModelo.setEditable(false);
 	}
 
-	public void clearDataFichaTecnicaVehiculo() {
+	public void clearData() {
 		this.textNroDeChasis.setText("");
 		this.textNroMotor.setText("");
 		this.textMarca.setText("");

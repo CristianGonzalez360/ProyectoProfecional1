@@ -143,7 +143,7 @@ public class PanelCliente extends JPanel {
 		textLocalidad.setColumns(10);
 	}
 
-	public void disableAllClienteInputs() {
+	public void disableInputs() {
 		this.textNombre.setEditable(false);
 		this.textDni.setEditable(false);
 		this.textTelefono.setEditable(false);

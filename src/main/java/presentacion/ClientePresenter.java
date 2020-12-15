@@ -72,7 +72,7 @@ public class ClientePresenter {
 
 	private void onDisplayOrdenDeTrabajoForm(ActionEvent a) {
 		if (view.getidVehiculoSeleccionado() != null) {
-			if (!garantiasController.estaEnGarantia(view.getidVehiculoSeleccionado().getIdVehiculo())) {
+			if (!garantiasController.estaEnGarantia(view.getidVehiculoSeleccionado())) {
 				AltaOrdenTrabajoFormView.getInstance().deshabilitarGarantia();
 			} else {
 				AltaOrdenTrabajoFormView.getInstance().habilitarGarantia();
@@ -96,37 +96,27 @@ public class ClientePresenter {
 	}
 
 	private void onBuscar(ActionEvent a) {
+		view.clearAll();
 		String inputDni = view.getDniCliente();
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
 				idClientePresentado = cliente.getIdCliente();
-				view.clearDataCliente();
 				view.setData(cliente);
-				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
-						.readByIdCliente(cliente.getIdCliente());
-				view.clearDataListadoVehiculosCliente();
-				view.setData(vehiculos);
-				view.clearDataFichaTecnicaVehiculo();
-				view.clearDataOrdenDeTrabajo();
-			} else {
-				view.clearAll();
+				view.setData(vehiculosController.readByIdCliente(cliente.getIdCliente()));
 			}
-		} else {
-			view.clearAll();
 		}
 	}
 
 	private void onSelectVehiculoDeCliente() {
-		VehiculoConOrdenDeTrabajoDTO idVehiculo = view.getidVehiculoSeleccionado();
+		Integer idVehiculo = view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
-			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController
-					.readFichaTecnicaById(idVehiculo.getIdFichaTecnica());
+			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController.readFichaTecnicaById(idVehiculo);
 			if (fichaVehiculo != null) {
 				view.clearDataFichaTecnicaVehiculo();
 				view.clearDataOrdenDeTrabajo();
 				view.setData(fichaVehiculo);
-				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo.getId());
+				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo);
 				if (ordenDeTrabajo != null) {
 					view.setData(ordenDeTrabajo);
 					view.lockButtonRegistrarOrdenDeTrabajo();
@@ -135,8 +125,8 @@ public class ClientePresenter {
 					view.unlockButtonRegistrarOrdenDeTrabajo();
 				}
 			}
-			if (idVehiculo.getIdVehiculo() != null) {
-				GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(idVehiculo.getIdVehiculo());
+			if (idVehiculo != null) {
+				GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(idVehiculo);
 				if (garantia != null) {
 					view.setDataGarantia(garantia);
 				}
@@ -178,7 +168,7 @@ public class ClientePresenter {
 	}
 
 	private void onRegistrarOrdenDeTrabajo(ActionEvent e) {
-		Integer idVehiculo = view.getidVehiculoSeleccionado().getId();
+		Integer idVehiculo = view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
 			AltaOrdenDeTrabajoDTO ordenDeTrabajo = AltaOrdenTrabajoFormView.getInstance().getData();
 			List<String> errors = ordenDeTrabajo.validate();
@@ -200,8 +190,7 @@ public class ClientePresenter {
 	private void onDisplayFormForUpdate(ActionEvent a) {
 		if (idClientePresentado != null) {
 			ClienteFormView.getInstance().clearData();
-			ClienteFormView.getInstance()
-					.setData(clienteController.readByDni(Integer.parseInt(view.dniClienteSeleccionado())));
+			ClienteFormView.getInstance().setData(clienteController.readById(this.idClientePresentado));
 			ClienteFormView.getInstance().display();
 		} else {
 			new MessageDialog().showMessages(CLIENTE_NO_SELECCIONADO);

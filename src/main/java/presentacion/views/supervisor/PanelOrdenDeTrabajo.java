@@ -92,7 +92,7 @@ public class PanelOrdenDeTrabajo extends JPanel {
 		this.textTipoDeOT.setText(ordenDeTrabajo.getTipoOrdeTrabajo());
 	}
 	
-	public void clearDataOrdenDeTrabajo() {
+	public void clearData() {
 		this.textFechaAltaOt.setText("");
 		this.textFechaCierreOt.setText("");
 		this.textTrabajoSugeridoOt.setText("");
