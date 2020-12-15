@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import dto.ClienteDTO;
-import dto.DatosPersonalesDTO;
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
-import dto.temporal.VentaDTO;
 import presentacion.views.utils.VentasReport;
 import repositories.DaosFactory;
 

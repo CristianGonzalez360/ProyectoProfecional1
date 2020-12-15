@@ -99,6 +99,9 @@
 	<field name="color" class="java.lang.String">
 		<fieldDescription><![CDATA[color]]></fieldDescription>
 	</field>
+	<field name="fechaDeVenta" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaDeVenta]]></fieldDescription>
+	</field>
 	<group name="GrupoMarca">
 		<groupExpression><![CDATA[$F{marca}]]></groupExpression>
 		<groupHeader>
@@ -233,6 +236,11 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{color}]]></textFieldExpression>
 				</textField>
+				<textField>
+					<reportElement x="480" y="0" width="74" height="20" forecolor="#595959" uuid="e7b3e793-423a-4667-958e-c517f760f01c"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{fechaDeVenta}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</detail>
@@ -274,7 +282,7 @@
 			</frame>
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="37" y="40" width="480" height="309" uuid="d25bfb52-13ab-4c33-b815-944e47047e37"/>
+					<reportElement x="37" y="40" width="480" height="309" uuid="4eecf0eb-d8e1-467f-88a3-aed9d0df4334"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>

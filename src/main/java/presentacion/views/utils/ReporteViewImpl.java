@@ -10,7 +10,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import dto.VehiculoDTO;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -25,7 +24,7 @@ public class ReporteViewImpl {
 	private static final String URLFacturaRepuestos = "FacturaRepuestos.jasper";
 	private static final String URLFacturaVentaVehiculo = "FacturaVentaVehiculo/FacturaVehiculo.jasper";
 	private static final String URLTicket = "Ticket.jasper";
-	private static final String URLReporteVentas = "VentasReport.jasper";
+	private static final String URLReporteVentas = "ReporteVentas.jasper";
 
 	private JasperReport reporte;
 	private JasperViewer reporteViewer;
@@ -50,7 +49,7 @@ public class ReporteViewImpl {
 					new JRBeanCollectionDataSource(dto));
 			log.info("Se cargó correctamente el reporte");
 		} catch (JRException ex) {
-			log.error("Ocurrió un error mientras se cargaba el archivo ProyectoReporteAgenda.Jasper", ex);
+			log.error("Ocurrió un error mientras se cargaba el archivo Jasper", ex);
 		}
 	}
 
