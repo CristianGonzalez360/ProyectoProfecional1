@@ -72,12 +72,12 @@ public class ClientePresenter {
 
 	private void onDisplayOrdenDeTrabajoForm(ActionEvent a) {
 		if (view.getidVehiculoSeleccionado() != null) {
+			AltaOrdenTrabajoFormView.getInstance().clearData();
 			if (!garantiasController.estaEnGarantia(view.getidVehiculoSeleccionado())) {
 				AltaOrdenTrabajoFormView.getInstance().deshabilitarGarantia();
 			} else {
 				AltaOrdenTrabajoFormView.getInstance().habilitarGarantia();
 			}
-			AltaOrdenTrabajoFormView.getInstance().clearData();
 			AltaOrdenTrabajoFormView.getInstance().display();
 		}
 	}

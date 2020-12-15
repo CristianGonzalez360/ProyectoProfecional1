@@ -290,11 +290,9 @@ CREATE TABLE Vehiculos (
   fechaIngreso DATE,
   disponible BOOLEAN NOT NULL,
   usado BOOLEAN NOT NULL,
-  idCompra INT,
   idSucursal INT,
   PRIMARY KEY (idVehiculo),
   FOREIGN KEY (idFichaTecnica) REFERENCES FichaTecnicaVehiculo(idFichaTecnicaVehiculo),
-  FOREIGN KEY (idCompra) REFERENCES CompraVehiculo(idCompraVehiculo),
   FOREIGN KEY (idCaracteristica) REFERENCES CaracteristicasVehiculo(idCaracteristica),
   FOREIGN KEY (idSucursal) REFERENCES Sucursal(idSucursal)
 );

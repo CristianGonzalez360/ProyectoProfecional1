@@ -35,7 +35,8 @@ public class VehiculosController {
 	}
 
 	public FichaTecnicaVehiculoDTO readFichaTecnicaByIdVehiculo(Integer idVehiculo) {
-		return daos.makeFichaTecnicaVehiculoDao().readByID(idVehiculo);
+		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(idVehiculo);
+		return daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica());
 	}
 
 	public void saveVehiculoUsado(CompraVehiculoUsadoDTO compra) {
