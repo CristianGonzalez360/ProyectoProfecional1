@@ -20,6 +20,7 @@ import repositories.PresupuestosDao;
 import repositories.RepuestosPlanificadosDao;
 import repositories.TrabajosPresupuestadosDao;
 import repositories.VehiculosConOrdenDeTrabajoDao;
+import services.SessionServiceImpl;
 
 public class FacturasController {
 
@@ -126,6 +127,7 @@ public class FacturasController {
 		ret.setTotal(factura.getTotal());
 		ret.setFecha(factura.getFechaDeAlta());
 		ret.setNumero(factura.getIdFactura());
+		ret.setSucursal(SessionServiceImpl.getInstance().getActiveSession().getSucursal());
 
 		return ret;
 	}
@@ -140,7 +142,7 @@ public class FacturasController {
 	public FacturaRepuestosReport makeFacturaRepuestos(FacturaDTO factura) {
 
 		FacturaRepuestosReport ret = new FacturaRepuestosReport();
-
+		ret.setSucursal(SessionServiceImpl.getInstance().getActiveSession().getSucursal());
 		ret.setCliente(factura.getCliente().getDatosPersonalesDTO());
 		ret.setRepuestos(factura.getRepuestosComprados());
 		ret.setTotal(factura.getTotal());
