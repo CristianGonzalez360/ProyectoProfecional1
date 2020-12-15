@@ -10,7 +10,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import dto.VehiculoDTO;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -50,7 +49,7 @@ public class ReporteViewImpl {
 					new JRBeanCollectionDataSource(dto));
 			log.info("Se cargó correctamente el reporte");
 		} catch (JRException ex) {
-			log.error("Ocurrió un error mientras se cargaba el archivo ProyectoReporteAgenda.Jasper", ex);
+			log.error("Ocurrió un error mientras se cargaba el archivo Jasper", ex);
 		}
 	}
 
@@ -87,8 +86,8 @@ public class ReporteViewImpl {
 		report.add(ticket);
 		setData(report);
 	}
-	
-	public void setDataVentas(List<VehiculoDTO> vehiculos) {
+
+	public void setDataVentas(List<VentasReport> vehiculos) {
 		this.file = URLReporteVentas;
 		setData(vehiculos);
 	}
