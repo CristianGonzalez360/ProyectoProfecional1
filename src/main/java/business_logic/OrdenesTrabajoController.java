@@ -38,6 +38,7 @@ public class OrdenesTrabajoController {
 		OrdenDeTrabajoDTO dto = new OrdenDeTrabajoDTO(ordenDeTrabajo);
 		dto.setFechaDeAlta(new Date());
 		dto.setIdVehiculoOt(idVehiculo);
+		dto.setTipoOrdeTrabajo(ordenDeTrabajo.getTipoDeTrabajo());
 		dto.setIdUsuarioAlta(service.getActiveSession().getIdUsuario());
 		OrdenDeTrabajoDTO aux = dao.readByIdVehiculoConOtNoCerrada(idVehiculo);
 		if (aux != null) {
@@ -67,5 +68,9 @@ public class OrdenesTrabajoController {
 			}
 		}
 		return cantRechazadas == cantPresupuestos;
+	}
+	 
+	public OrdenDeTrabajoDTO readById(Integer id) {
+		return dao.readByID(id);
 	}
 }

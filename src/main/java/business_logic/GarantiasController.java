@@ -25,15 +25,18 @@ public class GarantiasController {
 		if (idVehiculo != null) {
 			ret = true;
 			GarantiaVehiculoDTO garantia = readByIdVehiculo(idVehiculo);
-			Date fechaCaducidad = garantia.getFechaDeCaducidadDeLaGarantia();
-			if (fechaCaducidad.after(new Date())) {
-				ret = false;
-			}
-			VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(idVehiculo);
-			FichaTecnicaVehiculoDTO ficha = daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica());
-			if (ficha.getKilometraje() > garantia.getKilometrajeGarantizado()
-					- garantia.getKilometrajeInicialDelVehiculo()) {
-				ret = false;
+			if (garantia != null) {
+				Date fechaCaducidad = garantia.getFechaDeCaducidadDeLaGarantia();
+				if (fechaCaducidad.after(new Date())) {
+					ret = false;
+				}
+				VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(idVehiculo);
+				FichaTecnicaVehiculoDTO ficha = daos.makeFichaTecnicaVehiculoDao()
+						.readByID(vehiculo.getIdFichaTecnica());
+				if (ficha.getKilometraje() > garantia.getKilometrajeGarantizado()
+						- garantia.getKilometrajeInicialDelVehiculo()) {
+					ret = false;
+				} 
 			}
 		}
 		return ret;

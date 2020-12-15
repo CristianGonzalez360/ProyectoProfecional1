@@ -236,7 +236,7 @@ vehiculosConOrdenDeTrabajo:
     idVehiculo:
 
 ordenesDeTrabajo:
-  - tipoOrdeTrabajo: service
+  - tipoOrdeTrabajo: Garantia
     idUsuarioAlta: 1
     fechaDeAlta: 2020-05-10
     fechaEntregado:
