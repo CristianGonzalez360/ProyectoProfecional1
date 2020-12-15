@@ -97,6 +97,7 @@ public class PanelOrdenDeTrabajo extends JPanel {
 		this.textFechaCierreOt.setText("");
 		this.textTrabajoSugeridoOt.setText("");
 		this.textTrabajoSolicitadoOt.setText("");
+		this.textTipoDeOT.setText("");
 	}
 
 }
