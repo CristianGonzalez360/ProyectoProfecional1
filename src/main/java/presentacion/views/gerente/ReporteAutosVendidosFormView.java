@@ -2,6 +2,7 @@ package presentacion.views.gerente;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -100,24 +101,12 @@ public class ReporteAutosVendidosFormView extends JDialog {
 		return btnGenerarReporte;
 	}
 
-	public void setBtnGenerarReporte(JButton btnGenerarReporte) {
-		this.btnGenerarReporte = btnGenerarReporte;
+	public Date getFechaDesde() {
+		return fechaDesde.getDate();
 	}
 
-	public JDateChooser getFechaDesde() {
-		return fechaDesde;
-	}
-
-	public void setFechaDesde(JDateChooser fechaDesde) {
-		this.fechaDesde = fechaDesde;
-	}
-
-	public JDateChooser getFechaHasta() {
-		return fechaHasta;
-	}
-
-	public void setFechaHasta(JDateChooser fechaHasta) {
-		this.fechaHasta = fechaHasta;
+	public Date getFechaHasta() {
+		return fechaHasta.getDate();
 	}
 
 }

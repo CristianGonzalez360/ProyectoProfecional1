@@ -39,7 +39,7 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	
 	private static final String readByIdVehículo = readAll + " WHERE idVehiculo = ?";
 	
-	private static final String readAllOrderByFabricante = "SELECT * FROM VentasVehiculos ORDER BY Fabricante ASC";
+	private static final String readAllOrderByFabricante = "SELECT * FROM VentasVehiculos WHERE fechaVentaVN BETWEEN ? AND ? ORDER BY Fabricante ASC";
 	
 	public VentaVehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -93,8 +93,9 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	}
 
 	@Override
-	public List<VentaVehiculoDTO> readAllOrderByFabricante(){
-		return getTemplate().query(readAllOrderByFabricante).excecute(getMapper());
+	public List<VentaVehiculoDTO> readAllOrderByFabricante(Date desde, Date hasta){
+		return getTemplate().query(readAllOrderByFabricante)
+				.param(desde).param(hasta).excecute(getMapper());
 	}
 	
 	@Override

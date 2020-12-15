@@ -2,6 +2,7 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.Date;
 import java.util.List;
 
 import business_logic.FacturasController;
@@ -14,10 +15,13 @@ import presentacion.views.gerente.ReporteIngresoDiarioInputFormView;
 import presentacion.views.gerente.ReporteIngresoMensualFormView;
 import presentacion.views.gerente.ReporteRepuestos;
 import presentacion.views.utils.ReporteViewImpl;
+import presentacion.views.utils.VentasReport;
 
 public class ReportesPresenter {
 
 	private PanelReportes view;
+	private ReporteAutosVendidosFormView viewAutosVendidos;
+
 	private FacturasController facturasController;
 	private ReportesController reportesController;
 	private ReporteAutosVendidosFormView autosVendidosView;
@@ -28,6 +32,7 @@ public class ReportesPresenter {
 
 	public ReportesPresenter(FacturasController facturasController, ReportesController reportesController) {
 		this.view = PanelReportes.getInstance();
+		this.viewAutosVendidos = ReporteAutosVendidosFormView.getInstance();
 		this.facturasController = facturasController;
 		this.reportesController = reportesController;
 
@@ -50,7 +55,6 @@ public class ReportesPresenter {
 
 		this.view.setActionDisplayreportes((a) -> onDisplayRepuestos(a));
 		this.autosVendidosView.setActionGenerarReporte((a) -> generarReporteRepuestos());
-
 	}
 
 	private void onDisplayIngresosDiarios(ActionEvent e) {
@@ -79,8 +83,14 @@ public class ReportesPresenter {
 	}
 
 	private void generarReporteAutosVendidos() {
+		Date fechaDesde = viewAutosVendidos.getFechaDesde();
+		Date fechaHasta = viewAutosVendidos.getFechaHasta();
+
+		if (fechaDesde == null || fechaHasta == null)
+			return;
+
+		List<VentasReport> autosVendidos = reportesController.readAutosVendidos(fechaDesde, fechaHasta);
 		ReporteViewImpl reporte = new ReporteViewImpl();
-		List<VehiculoDTO> autosVendidos = reportesController.readAutosVendidos();
 		reporte.setDataVentas(autosVendidos);
 		reporte.open();
 	}
