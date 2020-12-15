@@ -546,34 +546,6 @@ vehiculos:
     idCaracteristicas: 1
     idSucursal:
 
-ventaVehiculo:
-  - idUsuVentaVN: 5
-    idUsuPedido:
-    idUsuLlegada:
-    idPagoVentaVN: 
-    fechaVentaVN: 2018-10-10
-    fechaEntregaReal: 
-    fabricante: Ford
-    comisionCobrada: 5000
-    precioVenta: 1288444
-    idVehiculo: 1
-    idCliente: 1
-    idUsuEntrega:
-    idSucursalVenta: 1
-  - idUsuVentaVN: 1
-    idUsuPedido:
-    idUsuLlegada:
-    idPagoVentaVN: 
-    fechaVentaVN: 2018-10-10
-    fechaEntregaReal: 
-    fabricante: Ford
-    comisionCobrada: 5000
-    precioVenta: 1288444
-    idVehiculo: 2
-    idCliente: 1
-    idUsuEntrega:
-    idSucursalVenta: 1
-
 garantias:
   - idVehiculo: 1
     aniosDeGarantia: 3
