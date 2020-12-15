@@ -315,4 +315,8 @@ public class VendedorControlView extends JInternalFrame {
 	public void setData(FichaTecnicaVehiculoDTO ficha) {
 		fichaPanel.setData(ficha);
 	}
+
+	public void clearDataFichaTecnica() {
+		fichaPanel.clearData();
+	}
 }

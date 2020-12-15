@@ -461,7 +461,7 @@ vehiculos:
  
 #CATALOGO DE VEHICULOS NUEVOS SIN STOCK
   - precioVenta: 2100000
-    idFichaTecnica: 1
+    idFichaTecnica: 
     marca: Peugeot
     familia: 505
     linea: full
