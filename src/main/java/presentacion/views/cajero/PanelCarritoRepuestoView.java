@@ -32,7 +32,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import dto.ClienteDTO;
 import dto.taller.RepuestoCompradoDTO;
 import dto.taller.RepuestoDTO;
-import presentacion.views.supervisor.ClientePanelView;
+import presentacion.views.supervisor.PanelCliente;
 
 public class PanelCarritoRepuestoView extends JPanel {
 
@@ -75,7 +75,7 @@ public class PanelCarritoRepuestoView extends JPanel {
 	private List<Integer> idRepuestos;
 	private JButton btnCrearFactura;
 	private JButton btnCancelar;
-	private ClientePanelView panelCliente;
+	private PanelCliente panelCliente;
 	private JSplitPane splitPane;
 	private JPanel panelBotonesCliente;
 	private JButton btnRegistrarCliente;
@@ -148,7 +148,7 @@ public class PanelCarritoRepuestoView extends JPanel {
 
 		JPanel panelIzquierdo = new JPanel(new BorderLayout());
 
-		panelCliente = new ClientePanelView();
+		panelCliente = new PanelCliente();
 		panelIzquierdo.add(panelCliente, BorderLayout.CENTER);
 
 		splitPane.setLeftComponent(panelIzquierdo);

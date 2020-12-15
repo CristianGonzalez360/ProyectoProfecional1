@@ -17,13 +17,13 @@ import javax.swing.event.ListSelectionListener;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.temporal.VehiculoParaEntregar;
-import presentacion.views.supervisor.ClientePanelView;
+import presentacion.views.supervisor.PanelCliente;
 import presentacion.views.vendedor.CaracteristicaDeVehiculoPanel;
 
 public class PanelEntregaDeVehiculos extends JPanel {
 
 	private static final long serialVersionUID = -5610520087472443466L;
-	private ClientePanelView panelCliente;
+	private PanelCliente panelCliente;
 	private CaracteristicaDeVehiculoPanel panelVehiculo;
 	private PanelVentaVehiculosDisponibles panelVentas;
 
@@ -54,7 +54,7 @@ public class PanelEntregaDeVehiculos extends JPanel {
 		gbc_panel.gridy = 0;
 		principal.add(panelVentas, gbc_panel);
 
-		panelCliente = new ClientePanelView();
+		panelCliente = new PanelCliente();
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
 		gbc_panel_2.fill = GridBagConstraints.BOTH;
 		gbc_panel_2.gridx = 1;
