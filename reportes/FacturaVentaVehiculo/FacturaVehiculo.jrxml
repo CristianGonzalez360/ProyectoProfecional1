@@ -36,9 +36,9 @@
 	<field name="montoCuota" class="java.lang.Double"/>
 	<field name="sucursal" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<title>
-		<band height="88" splitType="Stretch">
+		<band height="112" splitType="Stretch">
 			<line>
-				<reportElement x="-1" y="86" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
+				<reportElement x="-1" y="110" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -80,7 +80,7 @@
 				<text><![CDATA[Concesionario Larusso]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="80" y="26" width="280" height="60" uuid="45eabe59-103c-4a8d-bee4-37a629580df1"/>
+				<reportElement x="80" y="26" width="280" height="80" uuid="45eabe59-103c-4a8d-bee4-37a629580df1"/>
 				<dataSourceExpression><![CDATA[$F{sucursal}]]></dataSourceExpression>
 				<subreportExpression><![CDATA["reportes/subreportSucursal.jasper"]]></subreportExpression>
 			</subreport>
@@ -90,7 +90,7 @@
 		<band height="100" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.spreadsheet.SpreadsheetLayout"/>
 			<subreport>
-				<reportElement x="0" y="0" width="555" height="100" uuid="b2ea59dd-eb48-4a28-b0e4-ee78a8eb88cd"/>
+				<reportElement x="0" y="0" width="557" height="100" uuid="b2ea59dd-eb48-4a28-b0e4-ee78a8eb88cd"/>
 				<dataSourceExpression><![CDATA[$F{cliente}]]></dataSourceExpression>
 				<subreportExpression><![CDATA["reportes/FacturaVentaVehiculo/subreportCliente.jasper"]]></subreportExpression>
 			</subreport>
@@ -107,9 +107,11 @@
 				<subreportExpression><![CDATA["reportes/FacturaVentaVehiculo/subreportVehiculo.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="19181c92-963d-4b4a-8262-e64fba135e23"/>
+				<reportElement x="0" y="0" width="170" height="20" uuid="19181c92-963d-4b4a-8262-e64fba135e23"/>
 				<box leftPadding="0"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Datos del Vehiculo]]></text>
 			</staticText>
 		</band>

@@ -23,7 +23,9 @@
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="100" height="20" uuid="ca976b83-f1e7-478d-a747-da6291abdb3b"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Datos del Cliente]]></text>
 			</staticText>
 			<staticText>
