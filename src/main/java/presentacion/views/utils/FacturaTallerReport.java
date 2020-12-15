@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import dto.DatosPersonalesDTO;
+import dto.SucursalDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.RepuestoPlanificadoDTO;
 import dto.taller.TrabajoPresupuestadoDTO;
@@ -21,6 +22,7 @@ public class FacturaTallerReport {
 	private Double total;
 	private Date fecha;
 	private Integer numero;
+	private SucursalDTO sucursal;
 
 	public FacturaTallerReport() {
 		// TODO Auto-generated constructor stub
@@ -84,5 +86,15 @@ public class FacturaTallerReport {
 
 	public void setNumero(Integer numero) {
 		this.numero = numero;
+	}
+	
+	public JRDataSource getSucursal() {
+		List<SucursalDTO> sucursal = new ArrayList<>();
+		sucursal.add(this.sucursal);
+		return new JRBeanCollectionDataSource(sucursal);
+	}
+
+	public void setSucursal(SucursalDTO sucursal) {
+		this.sucursal = sucursal;
 	}
 }

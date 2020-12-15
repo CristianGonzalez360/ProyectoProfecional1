@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import dto.DatosPersonalesDTO;
+import dto.SucursalDTO;
 import dto.taller.RepuestoCompradoDTO;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -16,6 +17,7 @@ public class FacturaRepuestosReport {
 	private Double total;
 	private Date fecha;
 	private Integer numero;
+	private SucursalDTO sucursal;
 
 	public FacturaRepuestosReport() {
 		// TODO Auto-generated constructor stub
@@ -61,5 +63,15 @@ public class FacturaRepuestosReport {
 
 	public void setNumero(Integer numero) {
 		this.numero = numero;
+	}
+	
+	public JRDataSource getSucursal() {
+		List<SucursalDTO> sucursal = new ArrayList<>();
+		sucursal.add(this.sucursal);
+		return new JRBeanCollectionDataSource(sucursal);
+	}
+
+	public void setSucursal(SucursalDTO sucursal) {
+		this.sucursal = sucursal;
 	}
 }

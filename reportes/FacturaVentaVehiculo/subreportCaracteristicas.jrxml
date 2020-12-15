@@ -28,117 +28,124 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="100" splitType="Stretch">
+		<band height="120" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="73" height="20" uuid="9d238bbc-1167-4db6-a0cf-0afc00326126"/>
+				<reportElement x="0" y="20" width="73" height="20" uuid="9d238bbc-1167-4db6-a0cf-0afc00326126"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Cilindrada:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="20" width="73" height="20" uuid="0420d75c-7a77-4e2b-b88c-5851c88eefc3"/>
+				<reportElement x="0" y="40" width="73" height="20" uuid="0420d75c-7a77-4e2b-b88c-5851c88eefc3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Motor:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="40" width="73" height="20" uuid="5353212a-45cb-46df-9e4c-7d81ac0bb6f9"/>
+				<reportElement x="0" y="60" width="73" height="20" uuid="5353212a-45cb-46df-9e4c-7d81ac0bb6f9"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Transmisión:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="277" y="0" width="95" height="20" uuid="b6b1c7e7-afe8-4d3c-b9d8-68938c334fe4"/>
+				<reportElement x="277" y="20" width="95" height="20" uuid="b6b1c7e7-afe8-4d3c-b9d8-68938c334fe4"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Dirección:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="60" width="73" height="20" uuid="f6bfd9cf-5d71-47fe-ae05-b657bcd06478"/>
+				<reportElement x="0" y="80" width="73" height="20" uuid="f6bfd9cf-5d71-47fe-ae05-b657bcd06478"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Potencia:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="277" y="40" width="95" height="20" uuid="c2bc3ef3-d7fc-4758-a960-7ea39401937c"/>
+				<reportElement x="277" y="60" width="95" height="20" uuid="c2bc3ef3-d7fc-4758-a960-7ea39401937c"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Frenos Deleanteros:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="277" y="60" width="95" height="20" uuid="0e83017e-0a80-4c65-a8b3-53511616daa6"/>
+				<reportElement x="277" y="80" width="95" height="20" uuid="0e83017e-0a80-4c65-a8b3-53511616daa6"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Frenos Traseros:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="80" width="73" height="20" uuid="d207822b-f05a-48ab-8138-647981dffe16"/>
+				<reportElement x="0" y="100" width="73" height="20" uuid="d207822b-f05a-48ab-8138-647981dffe16"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Torque Máximo:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="277" y="80" width="95" height="20" uuid="ed84e542-bbb7-47e2-a0c1-16699ff70546"/>
+				<reportElement x="277" y="100" width="95" height="20" uuid="ed84e542-bbb7-47e2-a0c1-16699ff70546"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Volumen del baúl:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="277" y="20" width="95" height="20" uuid="1b7edf38-cd84-4a53-944b-403289affdce"/>
+				<reportElement x="277" y="40" width="95" height="20" uuid="1b7edf38-cd84-4a53-944b-403289affdce"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Cantidad de puertas:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="73" y="0" width="204" height="20" uuid="f1f848dc-385d-44da-a4b0-df71d49064fa"/>
+				<reportElement x="73" y="20" width="204" height="20" uuid="f1f848dc-385d-44da-a4b0-df71d49064fa"/>
 				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{cilindrada}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="73" y="20" width="204" height="20" uuid="830e96cd-18f3-4abf-b692-12e6c2dfb644"/>
+				<reportElement x="73" y="40" width="204" height="20" uuid="830e96cd-18f3-4abf-b692-12e6c2dfb644"/>
 				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{motor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="73" y="40" width="204" height="20" uuid="7cfc83a8-3d25-4666-993d-f270945ded38"/>
+				<reportElement x="73" y="60" width="204" height="20" uuid="7cfc83a8-3d25-4666-993d-f270945ded38"/>
 				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{transmision}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="73" y="60" width="204" height="20" uuid="9e4031d8-765f-4a3f-8efa-6a715a3604cf"/>
+				<reportElement x="73" y="80" width="204" height="20" uuid="9e4031d8-765f-4a3f-8efa-6a715a3604cf"/>
 				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{potencia}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="73" y="80" width="204" height="20" uuid="8f488805-9b59-4829-8430-59b49473b837"/>
+				<reportElement x="73" y="100" width="204" height="20" uuid="8f488805-9b59-4829-8430-59b49473b837"/>
 				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{torqueMaximo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="372" y="0" width="183" height="20" uuid="9722bd32-fe5d-464e-a3b7-408a2ef58034"/>
+				<reportElement x="372" y="20" width="183" height="20" uuid="9722bd32-fe5d-464e-a3b7-408a2ef58034"/>
 				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="372" y="20" width="183" height="20" uuid="bc386289-3ccd-408e-ad63-9a9aa929f4b8"/>
+				<reportElement x="372" y="40" width="183" height="20" uuid="bc386289-3ccd-408e-ad63-9a9aa929f4b8"/>
 				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{cantidadPuertas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="372" y="40" width="183" height="20" uuid="47e733af-6a93-493d-917a-0b2492e02781"/>
+				<reportElement x="372" y="60" width="183" height="20" uuid="47e733af-6a93-493d-917a-0b2492e02781"/>
 				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{frenosDelanteros}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="372" y="60" width="183" height="20" uuid="7d163389-e4fe-4975-8f83-e3dbc35b1f75"/>
+				<reportElement x="372" y="80" width="183" height="20" uuid="7d163389-e4fe-4975-8f83-e3dbc35b1f75"/>
 				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{frenosTraseros}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="372" y="80" width="183" height="20" uuid="f8117c23-8497-433d-ab01-9774bead91b1"/>
+				<reportElement x="372" y="100" width="183" height="20" uuid="f8117c23-8497-433d-ab01-9774bead91b1"/>
 				<box leftPadding="3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{volumenBaul}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="213" height="20" uuid="30c0ef7a-5a7e-413d-865f-08c2ff07728a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Características del Vehículo]]></text>
+			</staticText>
 		</band>
 	</title>
 </jasperReport>

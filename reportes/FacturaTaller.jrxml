@@ -30,10 +30,11 @@
 	<field name="vehiculo" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<field name="fecha" class="java.util.Date"/>
 	<field name="numero" class="java.lang.Integer"/>
+	<field name="sucursal" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<title>
 		<band height="182" splitType="Stretch">
 			<line>
-				<reportElement x="0" y="80" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
+				<reportElement x="0" y="108" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -74,39 +75,20 @@
 				</textElement>
 				<text><![CDATA[Concesionario Larusso]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="95" y="55" width="55" height="15" uuid="b8cc42fd-b569-497d-834d-7e854040ad18"/>
-				<text><![CDATA[Teléfono:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="25" width="55" height="15" uuid="c226e44d-3bb5-4145-b0b3-903bf1d79fde"/>
-				<text><![CDATA[Sucursal: ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="95" y="40" width="55" height="15" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e"/>
-				<text><![CDATA[Dirección:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="150" y="25" width="140" height="14" uuid="75f08269-d154-41a6-8c54-8e9558f4674e"/>
-				<textFieldExpression><![CDATA["Numero de sucursal"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="150" y="40" width="140" height="14" uuid="374d827f-72bd-4e29-885b-ea4ad311360c"/>
-				<textFieldExpression><![CDATA["Direccion de sucursal"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="150" y="55" width="140" height="14" uuid="68668af5-a83e-4113-a902-a32bb6fc161a"/>
-				<textFieldExpression><![CDATA["Telefono de la sucursal"]]></textFieldExpression>
-			</textField>
 			<subreport>
-				<reportElement x="0" y="81" width="280" height="100" uuid="aa34ea00-053e-4996-a8e9-d7063099d103"/>
+				<reportElement x="0" y="110" width="280" height="71" uuid="aa34ea00-053e-4996-a8e9-d7063099d103"/>
 				<dataSourceExpression><![CDATA[$F{cliente}]]></dataSourceExpression>
 				<subreportExpression><![CDATA["reportes/subreportCliente.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="280" y="80" width="274" height="101" uuid="d9ed3cc9-8f5b-4c1b-8f81-62c9bf8c382b"/>
+				<reportElement x="280" y="110" width="274" height="71" uuid="d9ed3cc9-8f5b-4c1b-8f81-62c9bf8c382b"/>
 				<dataSourceExpression><![CDATA[$F{vehiculo}]]></dataSourceExpression>
 				<subreportExpression><![CDATA["reportes/subreportVehiculo.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="88" y="25" width="280" height="80" uuid="767f0104-9baf-43db-b721-a3afbffaf356"/>
+				<dataSourceExpression><![CDATA[$F{sucursal}]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reportes/subreportSucursal.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</title>

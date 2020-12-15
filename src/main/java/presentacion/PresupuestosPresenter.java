@@ -157,12 +157,14 @@ public class PresupuestosPresenter {
 		}
 	}
 
-	// Crea un nuevo presupuesto y lo guarda
+	// Crea un nuevo presupuesto 
 	private void onNuevoPresupuesto(ActionEvent a) {
 		Integer idOT = view.getIdOrdenDeTrabajo();
 		if (idOT != null) {
+			OrdenDeTrabajoDTO OT = ordenDeTrabajoController.readById(idOT);
 			nuevoPresupuesto = new PresupuestoDTO();
 			nuevoPresupuesto.setIdOT(idOT);
+			nuevoPresupuesto.setGarantia(OT.getTipoOrdeTrabajo() == "Garantia"? true : false);
 			onDisplayForPlanRepuesto(a);
 			onDisplayForPlanTrabajos(a);
 			this.altaPresupuesto.setData(nuevoPresupuesto);

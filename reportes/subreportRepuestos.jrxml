@@ -81,7 +81,9 @@
 			<staticText>
 				<reportElement x="0" y="0" width="554" height="20" uuid="fd2bc378-c3f7-4728-8aaa-386488bc4789"/>
 				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="5"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Repuestos]]></text>
 			</staticText>
 		</band>
