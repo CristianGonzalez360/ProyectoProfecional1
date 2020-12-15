@@ -7,12 +7,13 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import dto.taller.TurnoDTO;
 
 public class EmailSenderService {
 
@@ -34,7 +35,7 @@ public class EmailSenderService {
 		props.put("mail.smtp.auth", "true"); // Usar autenticación mediante usuario y clave
 	}
 
-	public boolean enviarMailRecordatorio(String correoDestinatario) {
+	public boolean enviarMailRecordatorio(String correoDestinatario,TurnoDTO turno) {
 		if (!cargarArchivoDePropiedades())
 			return false;
 
@@ -46,6 +47,7 @@ public class EmailSenderService {
 		String fechaHoy = sdf.format(hoy.getTime());
 
 		if (!(fechaRecordatorio.equals(fechaHoy)) || fechaRecordatorio.length() == 0) {// fecha del archivo vacia
+
 			Session session = Session.getDefaultInstance(props);
 			MimeMessage message = new MimeMessage(session);
 			Transport transport;
@@ -54,8 +56,7 @@ public class EmailSenderService {
 				message.setFrom(new InternetAddress(correoRemitente));
 				message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoDestinatario));
 				message.setSubject(Recordatorio.asunto);
-				message.setContent(Recordatorio.recordatorioHYML, "text/html");
-
+				message.setContent(Recordatorio.getMessage(turno), "text/html");
 				transport = session.getTransport("smtp");
 				transport.connect(correoRemitente, contraseñaRemitente);
 				transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));

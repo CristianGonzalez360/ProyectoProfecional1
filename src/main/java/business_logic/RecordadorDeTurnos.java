@@ -28,7 +28,7 @@ public class RecordadorDeTurnos {
 			if (turno.getFechaProgramada().toString().equals(fechaHoy)) {
 				String correoDestinatario = turno.getEmailCliente();
 				if (correoDestinatario != null)
-					servicio.enviarMailRecordatorio(correoDestinatario);
+					servicio.enviarMailRecordatorio(correoDestinatario,turno);
 			}
 		}
 	}
