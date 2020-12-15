@@ -103,18 +103,21 @@ public class ClientePresenter {
 			if (cliente != null) {
 				idClientePresentado = cliente.getIdCliente();
 				view.setData(cliente);
-				view.setData(vehiculosController.readByIdCliente(cliente.getIdCliente()));
+				view.setData(vehiculosController.readVehiculosConFichaTecnicaByIdCliente(cliente.getIdCliente()));
 			}
 		}
 	}
 
 	private void onSelectVehiculoDeCliente() {
+		view.clearDataFichaTecnicaVehiculo();
+		view.clearDataOrdenDeTrabajo();
+		view.clearDataGarantia();
+		
 		Integer idVehiculo = view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
-			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController.readFichaTecnicaById(idVehiculo);
+			VehiculoConOrdenDeTrabajoDTO vehiConOT = vehiculosController.readById(idVehiculo);
+			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController.readFichaTecnicaById(vehiConOT.getIdFichaTecnica());
 			if (fichaVehiculo != null) {
-				view.clearDataFichaTecnicaVehiculo();
-				view.clearDataOrdenDeTrabajo();
 				view.setData(fichaVehiculo);
 				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo);
 				if (ordenDeTrabajo != null) {
@@ -124,8 +127,6 @@ public class ClientePresenter {
 					view.clearDataOrdenDeTrabajo();
 					view.unlockButtonRegistrarOrdenDeTrabajo();
 				}
-			}
-			if (idVehiculo != null) {
 				GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(idVehiculo);
 				if (garantia != null) {
 					view.setDataGarantia(garantia);
@@ -158,7 +159,7 @@ public class ClientePresenter {
 				vehiculosController.save(idClientePresentado, vehiculoDeAlta);
 				VehiculoFormView.getInstance().close();
 				view.clearDataListadoVehiculosCliente();
-				view.setData(vehiculosController.readByIdCliente(idClientePresentado));
+				view.setData(vehiculosController.readVehiculosConFichaTecnicaByIdCliente(idClientePresentado));
 			} catch (ConflictException e1) {
 				new MessageDialog().showMessages(e1.getMessage());
 			}

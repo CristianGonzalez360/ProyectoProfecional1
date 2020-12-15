@@ -29,9 +29,15 @@ public class VehiculosConOrdenDeTrabajoController {
 		this.otDao = otDao;
 	}
 
-	public List<VehiculoConOrdenDeTrabajoDTO> readByIdCliente(Integer idCliente) {
+	public List<VehiculoConOrdenDeTrabajoDTO> readVehiculosConFichaTecnicaByIdCliente(Integer idCliente) {
 		assert idCliente != null;
-		return vehiculosDao.readByClienteId(idCliente);
+		List<VehiculoConOrdenDeTrabajoDTO> ret = new LinkedList<>();
+		for(VehiculoConOrdenDeTrabajoDTO temp : vehiculosDao.readByClienteId(idCliente)) {
+			if(temp.getIdFichaTecnica() != null) {
+				ret.add(temp);
+			}
+		}
+		return ret;
 	}
 
 	public FichaTecnicaVehiculoDTO readFichaTecnicaById(Integer idFichaTecnica) {
@@ -72,4 +78,7 @@ public class VehiculosConOrdenDeTrabajoController {
 		return vClienteRet;
 	}
 
+	public VehiculoConOrdenDeTrabajoDTO readById(Integer idVehiculo) {
+		return vehiculosDao.readByID(idVehiculo);
+	}
 }
