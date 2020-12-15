@@ -35,7 +35,7 @@ public class IngresoStockDialog extends JDialog {
 	
 	private IngresoStockDialog() {
 		setTitle("Ingreso de Stock");
-		
+		setBounds(100,100,400,300);
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new FormLayout(new ColumnSpec[] {

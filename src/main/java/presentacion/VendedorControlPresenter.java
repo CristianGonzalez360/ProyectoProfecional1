@@ -117,14 +117,16 @@ public class VendedorControlPresenter {
 	}
 	
 	private void onSelectVehiculo(ListSelectionEvent a) {
-		OutputConsultaVehiculoEnVentaDTO out = view.getDataVehiculoEnVenta();
-		Integer codigoVehiculo = Integer.parseInt(out.getCodigo());
-		view.setData(ventasController.readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo));
-		GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(codigoVehiculo);
-		view.setData(garantia);
-		view.clearDataModalidadVenta();
-		updatePanelVenta(out.getPrecio(), garantia.getCostoFinalConIVA().toString());
-		updateMontoCuota();
+		if(view.getDataVehiculoEnVenta() != null) {
+			OutputConsultaVehiculoEnVentaDTO out = view.getDataVehiculoEnVenta();
+			Integer codigoVehiculo = Integer.parseInt(out.getCodigo());
+			view.setData(ventasController.readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo));
+			GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(codigoVehiculo);
+			view.setData(garantia);
+			view.clearDataModalidadVenta();
+			updatePanelVenta(out.getPrecio(), garantia.getCostoFinalConIVA().toString());
+			updateMontoCuota();	
+		}
 	}
 		
 	private void updatePanelVenta(String precioUnidad, String precioGarantia) {

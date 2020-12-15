@@ -16,12 +16,10 @@ import business_logic.RepuestosController;
 import dto.taller.RepuestoDTO;
 import dto.temporal.AltaRepuestoDTO;
 import dto.temporal.IngresoStockDTO;
-import dto.validators.StringValidator;
 import presentacion.views.supervisor.EditorRepuestosDialog;
 import presentacion.views.supervisor.IngresoStockDialog;
 import presentacion.views.supervisor.NuevosRepuestosFormView;
 import presentacion.views.supervisor.PanelGestionRepuestos;
-import presentacion.views.utils.InputDialog;
 import presentacion.views.utils.MessageDialog;
 import services.DatabaseGraphRepuesto;
 
@@ -72,6 +70,7 @@ public class RepuestosPresenter {
 			RepuestoDTO repuesto = new RepuestoDTO(altaRepuesto);
 			repuesto.setIdRepuesto(id);
 			repuestosController.update(repuesto);
+			cargarMarcas();
 			refrescar();
 			EditorRepuestosDialog.getInstance().close();
 		} else {
@@ -171,28 +170,6 @@ public class RepuestosPresenter {
 		cargarMarcas();//actualizo combobox
 		List<RepuestoDTO> repuestos = repuestosController.readAll();
 		this.gestionRepuestos.setData(repuestos);//actualizo tabla repuestos
-	}
-	
-	private void onIngresarStock2(ActionEvent a) {
-		int id = this.gestionRepuestos.getIdRepuesto();
-		if (id >= 0) {
-			String stock = new InputDialog().title("Agregar Stock").setLabel("Cantidad").open();
-			if (stock != null) {
-				List<String> error = new StringValidator(stock).notBlank("Debe ingresar un valor")
-						.number("El valor debe ser numérico").validate();
-				if (error.isEmpty()) {
-					int cantidad = Integer.parseInt(stock);
-					RepuestoDTO repuesto = repuestosController.readById(id);
-					repuesto.setStockRepuesto(repuesto.getStockRepuesto() + cantidad);
-					repuestosController.update(repuesto);
-					refrescar();
-				} else {
-					new MessageDialog().showMessages(error);
-				}
-			}
-		} else {
-			new MessageDialog().showMessages("Seleccione un repuesto");
-		}
 	}
 	
 	private void onIngresarStock(ActionEvent a) {
