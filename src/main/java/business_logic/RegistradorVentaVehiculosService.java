@@ -2,7 +2,6 @@ package business_logic;
 
 import java.util.Date;
 import business_logic.exceptions.ForbiddenException;
-import dto.GarantiaVehiculoDTO;
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
@@ -27,6 +26,7 @@ public class RegistradorVentaVehiculosService {
 		this.daos = daos;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void registrarVenta(Integer idCliente, OutputConsultaVehiculoEnVentaDTO vehiculo, ModalidadVentaVehiculoDTO modalidadVenta) {
 		if(idCliente == null) throw new ForbiddenException(FORBIDDEN_CLIENTE);
 		if(vehiculo == null) throw new ForbiddenException(FORBIDDEN_VEHICULO);
