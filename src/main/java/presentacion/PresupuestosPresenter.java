@@ -69,7 +69,6 @@ public class PresupuestosPresenter {
 		this.planRepuestosView.setActionOnQuitarRepuesto(a -> onQuitarRepuesto(a));
 		this.planRepuestosView.setActionOnBuscarRepuesto(a -> onBuscarRepuesto(a));
 
-		this.altaPresupuesto.setActionOnMantenimiento(a -> onMantenimiento(a));
 		this.altaPresupuesto.setActionOnSeleccionar(a -> onSeleccionar(a));
 		this.view.setActionOnBuscar(a -> onBuscar(a));
 		this.view.setActionSelectVehiculoCliente(a -> onSelectVehiculoDeCliente(a));
@@ -89,6 +88,8 @@ public class PresupuestosPresenter {
 		nuevoPresupuesto = new PresupuestoDTO(mantenimiento);
 		Integer idOT = view.getIdOrdenDeTrabajo();
 		nuevoPresupuesto.setIdOT(idOT);
+		OrdenDeTrabajoDTO OT = ordenDeTrabajoController.readById(idOT);
+		nuevoPresupuesto.setGarantia(OT.getTipoOrdeTrabajo() == "Garantia"? true : false);
 		for (RepuestoPlanificadoDTO repuesto : nuevoPresupuesto.getRepuestos()) {
 			RepuestoDTO r = repuesto.getRepuesto();
 			r.setStockRepuesto(r.getStockRepuesto() - repuesto.getCantRequerida());
@@ -96,15 +97,6 @@ public class PresupuestosPresenter {
 		}
 		onBuscarRepuesto(a);
 		this.altaPresupuesto.setData(nuevoPresupuesto);
-	}
-
-	private void onMantenimiento(ActionEvent a) {
-		if (this.altaPresupuesto.esMantenimiento()) {
-			this.altaPresupuesto.deshabilitarEdicion();
-		} else {
-			this.altaPresupuesto.habilitarEdicion();
-		}
-		reiniciar();
 	}
 
 	private void onCancelar(ActionEvent a) {
