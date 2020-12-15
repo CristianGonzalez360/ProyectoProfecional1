@@ -342,12 +342,15 @@ repuestosPlanificados:
   - idRepuesto: 1
     idPresu: 1
     cantRequerida: 24
+    precio: 126
   - idRepuesto: 3
     idPresu: 1
     cantRequerida: 14
+    precio: 1523
   - idRepuesto: 2
     idPresu: 2
     cantRequerida: 5
+    precio: 876
 
 facturas:
   - idFactura: 1

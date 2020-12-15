@@ -193,6 +193,7 @@ public class AltaPresupuestoFormView extends JDialog {
 
 	public void close() {
 		setVisible(false);
+		clearData();
 	}
 
 	public void setPrecio(double precio) {

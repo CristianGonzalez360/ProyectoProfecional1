@@ -12,6 +12,8 @@ public class RepuestoPlanificadoDTO {
 	private Integer cantRequerida;
 
 	private RepuestoDTO repuesto;
+	
+	private Double precio;
 
 	public RepuestoPlanificadoDTO() {
 
@@ -21,6 +23,7 @@ public class RepuestoPlanificadoDTO {
 		this.idRepuesto = repuesto2.getIdRepuesto();
 		this.cantRequerida = repuesto2.getCantRequerida();
 		this.repuesto = repuesto2.getRepuesto();
+		this.precio = repuesto2.getRepuesto().getPrecioRepuesto();
 	}
 
 	public Integer getIdPresu() {
@@ -60,6 +63,7 @@ public class RepuestoPlanificadoDTO {
 	public void setRepuesto(RepuestoDTO repuesto) {
 		this.repuesto = repuesto;
 		this.idRepuesto = repuesto.getIdRepuesto();
+		this.precio = repuesto.getPrecioRepuesto();
 	}
 
 	public Integer getIdRepuesto() {
@@ -89,10 +93,14 @@ public class RepuestoPlanificadoDTO {
 	}
 
 	public Double getPrecio() {
-		return repuesto.getPrecioRepuesto();
+		return this.precio;
 	}
 
 	public String getMarca() {
 		return repuesto.getMarcaRepuesto();
+	}
+
+	public void setPrecio(Double precio) {
+		this.precio = precio;
 	}
 }

@@ -15,7 +15,7 @@ public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanifi
 
 	public static final String readByPresupuestoId = readAll + " " + "WHERE idPresu = ?";
 
-	public static final String insert = "INSERT INTO RepuestosPlanificados (idPresu, idRepuesto, cantRequerida) VALUES (?,?,?)";
+	public static final String insert = "INSERT INTO RepuestosPlanificados (idPresu, idRepuesto, cantRequerida, precio) VALUES (?,?,?,?)";
 
 	private static final String update = "UPDATE RepuestosPlanificados SET cantRequerida = ? WHERE idRepuestoPlanificado = ?";
 
@@ -34,6 +34,7 @@ public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanifi
 	@Override
 	public boolean insert(RepuestoPlanificadoDTO entity) {
 		return getTemplate().query(insert).param(entity.getIdPresu()).param(entity.getIdRepuesto())
+				.param(entity.getPrecio())
 				.param(entity.getCantRequerida()).excecute();
 	}
 
@@ -70,18 +71,19 @@ public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanifi
 				dto.setIdPresu((Integer) obj[1]);
 				dto.setIdRepuesto((Integer) obj[2]);
 				dto.setCantRequerida((Integer) obj[3]);
+				dto.setPrecio((Double)obj[4]);
 
 				RepuestoDTO repuesto = new RepuestoDTO();
-				repuesto.setIdRepuesto((Integer) obj[4]);
-				repuesto.setCodigoRepuesto((Integer) obj[5]);
-				repuesto.setPrecioRepuesto((Double) obj[6]);
-				repuesto.setMarcaRepuesto((String) obj[7]);
-				repuesto.setDescripcionRepuesto((String) obj[8]);
-				repuesto.setStockRepuesto((Integer) obj[9]);
-				repuesto.setFabricante((String) obj[10]);
-				repuesto.setStockMinimo((Integer) obj[11]);
-				repuesto.setGarantia((Boolean) obj[12]);
-				repuesto.setPrecioCompra((Double) obj[13]);
+				repuesto.setIdRepuesto((Integer) obj[5]);
+				repuesto.setCodigoRepuesto((Integer) obj[6]);
+				repuesto.setPrecioRepuesto((Double) obj[7]);
+				repuesto.setMarcaRepuesto((String) obj[8]);
+				repuesto.setDescripcionRepuesto((String) obj[9]);
+				repuesto.setStockRepuesto((Integer) obj[10]);
+				repuesto.setFabricante((String) obj[11]);
+				repuesto.setStockMinimo((Integer) obj[12]);
+				repuesto.setGarantia((Boolean) obj[13]);
+				repuesto.setPrecioCompra((Double) obj[14]);
 				dto.setRepuesto(repuesto);
 				return dto;
 			}
