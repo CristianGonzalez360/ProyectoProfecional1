@@ -223,7 +223,7 @@ public class NuevosCarPresenter {
 		garantiaDefault = new GarantiaVehiculoDTO();
 		garantiaDefault.setAniosDeGarantia(3);
 		garantiaDefault.setKilometrajeInicialDelVehiculo(0);
-		garantiaDefault.setKilometrajeGarantizado(150000);
+		garantiaDefault.setKilometrajeGarantizado(100000);
 		garantiaDefault.setFechaInicioDeLaGarantia(new Date());
 		Calendar hoy = Calendar.getInstance();
 		hoy.add(Calendar.YEAR, 3);

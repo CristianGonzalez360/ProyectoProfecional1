@@ -80,7 +80,6 @@ public class ReportesPresenter {
 
 	private void generarReporteAutosVendidos() {
 		ReporteViewImpl reporte = new ReporteViewImpl();
-		//List<VehiculoDTO> autosVendidos = reportesController.readAutosVendidos(desde, hasta);
 		List<VehiculoDTO> autosVendidos = reportesController.readAutosVendidos();
 		reporte.setDataVentas(autosVendidos);
 		reporte.open();
