@@ -6,11 +6,8 @@ import java.util.List;
 
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
-<<<<<<< HEAD
 import dto.taller.FacturaDTO;
-=======
 import presentacion.views.utils.VentasReport;
->>>>>>> develop
 import repositories.DaosFactory;
 
 public class ReportesController {
@@ -43,7 +40,6 @@ public class ReportesController {
 		}
 		return autosVendidos;
 	}
-<<<<<<< HEAD
 	
 	public List<FacturaDTO> readFacturasPagas(Date desde ,Date hasta) {
 		List<FacturaDTO> facturasPagas = new ArrayList<>();
@@ -53,7 +49,6 @@ public class ReportesController {
 		}
 		return facturasPagas;
 	}
-=======
 
 	public List<VentaVehiculoDTO> readVentas(Date desde, Date hasta) {
 		return daos.makeVentaVehiculoDao().readAllOrderByFabricante(desde, hasta);
@@ -69,5 +64,4 @@ public class ReportesController {
 		return daos.makeVehiculoDao().readByID(idVehiculo);
 	}
 
->>>>>>> develop
 }
