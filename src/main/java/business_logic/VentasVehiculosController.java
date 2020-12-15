@@ -68,6 +68,11 @@ public class VentasVehiculosController {
 		}
 	}
 
+	/**
+	 * 
+	 * @param consulta
+	 * @return listado de vehículos nuevos disponibles (están en catálogo) && vehiculos no vendidos
+	 */
 	public List<OutputConsultaVehiculoEnVentaDTO> readDisponiblesByCriteria(ConsultaVehiculoParaVentaDTO consulta) {
 		return new ConsultadorVehiculosEnVentaService().read(daos, consulta);
 	}

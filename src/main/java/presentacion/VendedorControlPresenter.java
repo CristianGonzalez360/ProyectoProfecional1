@@ -128,7 +128,7 @@ public class VendedorControlPresenter {
 			Integer codigoVehiculo = Integer.parseInt(out.getCodigo());
 			view.setData(ventasController.readCaracteristicaVehiculoByIdVehiculo(codigoVehiculo));
 			GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(codigoVehiculo);
-			view.setData(garantia);
+			if(garantia != null)view.setData(garantia);
 			view.clearDataModalidadVenta();
 			updatePanelVenta(out.getPrecio(), garantia.getCostoFinalConIVA().toString());
 			updateMontoCuota();

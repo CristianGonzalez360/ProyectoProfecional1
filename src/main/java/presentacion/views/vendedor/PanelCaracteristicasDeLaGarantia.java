@@ -99,8 +99,8 @@ public class PanelCaracteristicasDeLaGarantia extends JPanel {
 		this.textAniosDeGarantia.setText(dto.getAniosDeGarantia().toString());
 		this.textKilometrajeInicialDelVehiculo.setText(dto.getKilometrajeInicialDelVehiculo().toString());
 		this.textKilometrajeGarantizado.setText(dto.getKilometrajeGarantizado().toString());
-		this.textFechaInicioDeLaGarantia.setText(dto.getFechaInicioDeLaGarantia().toString());
-		this.textFechaDeCaducidadDeLaGarantia.setText(dto.getFechaDeCaducidadDeLaGarantia().toString());
+		this.textFechaInicioDeLaGarantia.setText(dto.getFechaInicioDeLaGarantia() != null ? dto.getFechaInicioDeLaGarantia().toString() : "");
+		this.textFechaDeCaducidadDeLaGarantia.setText(dto.getFechaDeCaducidadDeLaGarantia() != null ? dto.getFechaDeCaducidadDeLaGarantia().toString() : "");
 		this.textCostoFinalConIVA.setText(dto.getCostoFinalConIVA().toString());
 	}
 
@@ -118,17 +118,16 @@ public class PanelCaracteristicasDeLaGarantia extends JPanel {
 		dto.setAniosDeGarantia(Integer.parseInt(textAniosDeGarantia.getText()));
 		dto.setKilometrajeInicialDelVehiculo(Integer.parseInt(textKilometrajeInicialDelVehiculo.getText()));
 		dto.setKilometrajeGarantizado(Integer.parseInt(textKilometrajeGarantizado.getText()));
-
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-dd-mm");
-
 		try {
-			dto.setFechaInicioDeLaGarantia(sdf.parse(textFechaInicioDeLaGarantia.getText()));
+			String date = textFechaInicioDeLaGarantia.getText();
+			if(!date.isEmpty())dto.setFechaInicioDeLaGarantia(sdf.parse(textFechaInicioDeLaGarantia.getText()));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			dto.setFechaDeCaducidadDeLaGarantia(sdf.parse(textFechaDeCaducidadDeLaGarantia.getText()));
+			String date = textFechaDeCaducidadDeLaGarantia.getText();
+			if(!date.isEmpty())	dto.setFechaDeCaducidadDeLaGarantia(sdf.parse(textFechaDeCaducidadDeLaGarantia.getText()));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

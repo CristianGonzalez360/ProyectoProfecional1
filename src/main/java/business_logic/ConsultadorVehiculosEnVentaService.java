@@ -16,13 +16,14 @@ public class ConsultadorVehiculosEnVentaService {
 	public ConsultadorVehiculosEnVentaService() {
 	}
 
+	@SuppressWarnings("deprecation")
 	public List<OutputConsultaVehiculoEnVentaDTO> read(DaosFactory daos, ConsultaVehiculoParaVentaDTO consulta) {
-		List<VehiculoDTO> temp = daos.makeVehiculoDao().readDisponiblesByCriteria(consulta.getMarca(),
-				new Boolean(consulta.getTipo().equals("Usado")));
+		Boolean ES_USADO =  new Boolean(consulta.getTipo().equals("Usado"));
+		List<VehiculoDTO> temp = daos.makeVehiculoDao().readByCriteria(consulta.getMarca(), ES_USADO);
 		List<OutputConsultaVehiculoEnVentaDTO> ret = new LinkedList<>();
 		for (VehiculoDTO dto : temp) {
-			VentaVehiculoDTO ventasRegistradas = daos.makeVentaVehiculoDao()
-					.readByIdVehiculoVendido(dto.getIdVehiculo());
+			
+			VentaVehiculoDTO ventasRegistradas = daos.makeVentaVehiculoDao().readVentaByIdVehiculo(dto.getIdVehiculo());
 			final boolean VEHICULO_NO_VENDIDO = ventasRegistradas == null;
 			if (VEHICULO_NO_VENDIDO) {
 				ret.add(makeFromVehiculo(dto));

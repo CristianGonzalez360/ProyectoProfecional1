@@ -21,7 +21,7 @@ public interface VentaVehiculoDao extends GenericDao<VentaVehiculoDTO, Integer> 
 
 	public List<VentaVehiculoDTO> readByIdVendedor(Integer id, Date desde, Date hasta);
 
-	public VentaVehiculoDTO readByIdVehiculoVendido(Integer idVehiculo);
+	public VentaVehiculoDTO readVentaByIdVehiculo(Integer idVehiculo);
 
 	public VentaVehiculoDTO readByIdVehiculo(Integer idVehiculo);
 
