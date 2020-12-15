@@ -128,9 +128,11 @@ public class ClientePresenter {
 					view.unlockButtonRegistrarOrdenDeTrabajo();
 				}
 			}
-			GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(vehiConOT.getIdVehiculo());
-			if (garantia != null) {
-				view.setDataGarantia(garantia);
+			if(vehiConOT.getIdVehiculo() != null ) {
+				GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(vehiConOT.getIdVehiculo());
+				if (garantia != null) {
+					view.setDataGarantia(garantia);
+				}	
 			}
 		}
 	}

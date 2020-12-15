@@ -17,9 +17,11 @@ import javax.swing.event.ListSelectionListener;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.GarantiaVehiculoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
+import presentacion.views.supervisor.FichaTecnicaVehiculoPanelView;
 import presentacion.views.supervisor.PanelCliente;
 
 public class VendedorControlView extends JInternalFrame {
@@ -45,6 +47,8 @@ public class VendedorControlView extends JInternalFrame {
 	private HistorialVentasView panelHistorial;
 
 	private JButton btnRegistrarCliente;
+
+	private FichaTecnicaVehiculoPanelView fichaPanel;
 
 	public static VendedorControlView getInstance() {
 		if (instance == null)
@@ -139,6 +143,10 @@ public class VendedorControlView extends JInternalFrame {
 		garantiaPanel = new PanelCaracteristicasDeLaGarantia();
 		tabbedPane_1.addTab("Caracteristicas de la garantia", null, garantiaPanel, null);
 		garantiaPanel.disableAllInputs();
+		
+		fichaPanel = new FichaTecnicaVehiculoPanelView();
+		tabbedPane_1.addTab("Ficha Técnica", null, fichaPanel, null);
+		
 	}
 
 	public void display() {
@@ -153,8 +161,9 @@ public class VendedorControlView extends JInternalFrame {
 	public void close() {
 		setVisible(false);
 	}
-
+	
 	public void clearData() {
+		this.fichaPanel.clearData();
 		busquedaPanel.clearData();
 		clientePanel.clearData();
 		busquedaVehiculoPanel.clearData();
@@ -301,5 +310,9 @@ public class VendedorControlView extends JInternalFrame {
 
 	public void setDataCostoBaseGarantia(String costoFinalConIVA) {
 		datosVentaVehiculoPanel.setDataCostoGarantia(costoFinalConIVA);
+	}
+	
+	public void setData(FichaTecnicaVehiculoDTO ficha) {
+		fichaPanel.setData(ficha);
 	}
 }
