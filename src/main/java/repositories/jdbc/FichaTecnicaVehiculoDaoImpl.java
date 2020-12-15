@@ -17,11 +17,11 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 	private static final String readAll = "SELECT * FROM FichaTecnicaVehiculo";
 
 	private static final String readByNroMotor = readAll + " " + "WHERE nroMotor = ?";
-	
+
 	private static final String readByNroChasis = readAll + " " + "WHERE nroChasis = ?";
 
 	private static final String readById = readAll + " " + "WHERE idFichaTecnicaVehiculo = ?";
-	
+
 	private static final String maximoId = "SELECT MAX(idFichaTecnicaVehiculo) FROM FichaTecnicaVehiculo";
 
 	public FichaTecnicaVehiculoDaoImpl(Connection connection) {
@@ -40,8 +40,7 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 				.param(entity.getKilometraje()).param(entity.getMarca()).param(entity.getModelo())
 				.param(entity.getColor()).param(entity.getCombustion())
 				.param(entity.getDescripcion() == null ? new NullObject() : entity.getDescripcion())
-				.param(entity.getPatente() == null? new NullObject(): entity.getPatente())
-				.excecute();
+				.param(entity.getPatente() == null ? new NullObject() : entity.getPatente()).excecute();
 	}
 
 	@Override
@@ -100,10 +99,11 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 			}
 		}).get(0);
 	}
-	
+
 	@Override
 	public FichaTecnicaVehiculoDTO readByNroChasis(Integer nroChasis) {
-		List<FichaTecnicaVehiculoDTO> dtos = getTemplate().query(readByNroChasis).param(nroChasis).excecute(getMapper());
+		List<FichaTecnicaVehiculoDTO> dtos = getTemplate().query(readByNroChasis).param(nroChasis)
+				.excecute(getMapper());
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 }

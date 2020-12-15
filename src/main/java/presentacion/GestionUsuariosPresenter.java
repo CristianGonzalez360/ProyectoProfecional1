@@ -16,28 +16,28 @@ import presentacion.views.utils.MessageDialog;
 public class GestionUsuariosPresenter {
 
 	private PanelGestionUsuariosView view = AdminControlView.getInstance().getUsuariosView();
-	
+
 	private UsuariosController controller;
-	
+
 	public GestionUsuariosPresenter(UsuariosController controller) {
 		this.controller = controller;
-		this.view.setActionSelectUsuario((a)->onSelectUsuario(a));
-		this.view.setActionRegistrarUsuario((a)->onDisplayFormAltaDeUsuario(a));
-		FormAltaUsuarioView.getInstance().setActionOk((a)->onRegistrarUsuario(a));
+		this.view.setActionSelectUsuario((a) -> onSelectUsuario(a));
+		this.view.setActionRegistrarUsuario((a) -> onDisplayFormAltaDeUsuario(a));
+		FormAltaUsuarioView.getInstance().setActionOk((a) -> onRegistrarUsuario(a));
 		onInit();
 	}
-	
+
 	private void onRegistrarUsuario(ActionEvent a) {
 		UsuarioDTO dto = FormAltaUsuarioView.getInstance().getData();
-		if(dto != null) {
+		if (dto != null) {
 			List<String> errors = dto.validate();
-			if(errors.isEmpty()) {
+			if (errors.isEmpty()) {
 				try {
 					controller.save(dto);
 					view.clearData();
 					view.setData(controller.readAll());
 					FormAltaUsuarioView.getInstance().close();
-				} catch(ConflictException e) {
+				} catch (ConflictException e) {
 					new MessageDialog().showMessages(e.toString());
 				}
 			} else {
@@ -58,9 +58,9 @@ public class GestionUsuariosPresenter {
 	private void onSelectUsuario(ListSelectionEvent a) {
 		Integer id = view.getData();
 		view.clearUsuarioData();
-		if(id != null) {
+		if (id != null) {
 			UsuarioDTO target = controller.readById(id);
-			if(target != null) {
+			if (target != null) {
 				view.setData(target);
 			}
 		}

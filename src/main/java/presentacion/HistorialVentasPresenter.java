@@ -27,10 +27,10 @@ public class HistorialVentasPresenter {
 		Integer userID = SessionServiceImpl.getInstance().getActiveSession().getIdUsuario();
 		Date ventaDesde = view.getVentaDesde();
 		Date ventaHasta = view.getVentaHasta();
-		
-		if(ventaDesde == null || ventaHasta == null)
+
+		if (ventaDesde == null || ventaHasta == null)
 			return;
-		
+
 		this.view.cargarTabla(ventasVehiculosController.readVentas(userID, ventaDesde, ventaHasta));
 	}
 

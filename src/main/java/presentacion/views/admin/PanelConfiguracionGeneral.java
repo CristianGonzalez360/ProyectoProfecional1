@@ -14,31 +14,31 @@ public class PanelConfiguracionGeneral extends JPanel {
 	private static final long serialVersionUID = 7616885639212161352L;
 
 	private PanelConfiguracionDB panelConfiguracion;
-	
+
 	private PanelConfiguracionSMTP panelSmtp;
-	
+
 	private JButton btnConfigurarDb;
-	
+
 	private JButton btnNewButton_1;
-	
+
 	public PanelConfiguracionGeneral() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
+
 		panelConfiguracion = new PanelConfiguracionDB();
 		add(panelConfiguracion);
-		
+
 		panelSmtp = new PanelConfiguracionSMTP();
 		add(panelSmtp);
-		
+
 		JPanel panelOpciones = new JPanel();
 		add(panelOpciones);
-		
+
 		btnConfigurarDb = new JButton("Configurar DB");
 		panelOpciones.add(btnConfigurarDb);
-		
+
 		btnNewButton_1 = new JButton("Configurar SMTP");
 		panelOpciones.add(btnNewButton_1);
-		
+
 		this.panelConfiguracion.disableAllInputs();
 		this.panelSmtp.disableAllInputs();
 	}
@@ -46,7 +46,7 @@ public class PanelConfiguracionGeneral extends JPanel {
 	public void setActionConfigurarDb(ActionListener listener) {
 		this.btnConfigurarDb.addActionListener(listener);
 	}
-	
+
 	public void setActionConfigurarSmtp(ActionListener listener) {
 		this.btnNewButton_1.addActionListener(listener);
 	}

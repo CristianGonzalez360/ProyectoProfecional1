@@ -1,7 +1,7 @@
 package dto.taller;
 
 public class RepuestoCompradoDTO {
-	
+
 	private int cantRequerida;
 	private RepuestoDTO repuesto;
 	private Integer idRepuestoComprado;
@@ -40,17 +40,17 @@ public class RepuestoCompradoDTO {
 	}
 
 	public Double getPrecioTotal() {
-		return repuesto.getPrecioRepuesto()*cantRequerida;
+		return repuesto.getPrecioRepuesto() * cantRequerida;
 	}
-	
+
 	public String getDescripcion() {
 		return repuesto.getDescripcionRepuesto();
 	}
-	
+
 	public Double getPrecio() {
 		return repuesto.getPrecioRepuesto();
 	}
-	
+
 	public String getMarca() {
 		return repuesto.getMarcaRepuesto();
 	}

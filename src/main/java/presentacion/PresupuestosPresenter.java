@@ -42,7 +42,7 @@ public class PresupuestosPresenter {
 	private OrdenesTrabajoController ordenDeTrabajoController;
 	private ClientesController clienteController;
 	private MantenimientosController mantenimientosController;
-	
+
 	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController,
 			OrdenesTrabajoController ordenDetranajoController, VehiculosConOrdenDeTrabajoController vehiculoController,
 			ClientesController clienteController, MantenimientosController mantenimientosController) {
@@ -57,10 +57,10 @@ public class PresupuestosPresenter {
 		this.altaPresupuesto = AltaPresupuestoFormView.getInstance();
 		this.planRepuestosView = altaPresupuesto.getRepuestosPanel();
 		this.planTrabajosView = altaPresupuesto.getTrabajosPanel();
-		
+
 		this.altaPresupuesto.setActionOnAceptar(a -> onRegistrar(a));
 		this.altaPresupuesto.setActionOnCancelar(a -> onCancelar(a));
-		
+
 		this.view.setActionOnSeleccionarPresupuesto(a -> onSelecionarPresupuesto(a));
 		this.view.setActionOnNuevoPresupuesto(a -> onNuevoPresupuesto(a));
 		this.planTrabajosView.setActionOnAgregarTrabajo(a -> onAgregarTrabajos(a));
@@ -68,7 +68,7 @@ public class PresupuestosPresenter {
 		this.planRepuestosView.setActionOnAgregarRepuesto(a -> onAgregarRepuesto(a));
 		this.planRepuestosView.setActionOnQuitarRepuesto(a -> onQuitarRepuesto(a));
 		this.planRepuestosView.setActionOnBuscarRepuesto(a -> onBuscarRepuesto(a));
-		
+
 		this.altaPresupuesto.setActionOnMantenimiento(a -> onMantenimiento(a));
 		this.altaPresupuesto.setActionOnSeleccionar(a -> onSeleccionar(a));
 		this.view.setActionOnBuscar(a -> onBuscar(a));
@@ -81,7 +81,7 @@ public class PresupuestosPresenter {
 			}
 		});
 	}
-	
+
 	private void onSeleccionar(ActionEvent a) {
 		Integer id = altaPresupuesto.getMantenimiento();
 		MantenimientoDTO mantenimiento = mantenimientosController.readByID(id);
@@ -89,9 +89,9 @@ public class PresupuestosPresenter {
 		nuevoPresupuesto = new PresupuestoDTO(mantenimiento);
 		Integer idOT = view.getIdOrdenDeTrabajo();
 		nuevoPresupuesto.setIdOT(idOT);
-		for(RepuestoPlanificadoDTO repuesto : nuevoPresupuesto.getRepuestos()) {
+		for (RepuestoPlanificadoDTO repuesto : nuevoPresupuesto.getRepuestos()) {
 			RepuestoDTO r = repuesto.getRepuesto();
-			r.setStockRepuesto(r.getStockRepuesto()-repuesto.getCantRequerida());
+			r.setStockRepuesto(r.getStockRepuesto() - repuesto.getCantRequerida());
 			repuestosController.update(r);
 		}
 		onBuscarRepuesto(a);
@@ -99,7 +99,7 @@ public class PresupuestosPresenter {
 	}
 
 	private void onMantenimiento(ActionEvent a) {
-		if(this.altaPresupuesto.esMantenimiento()) {
+		if (this.altaPresupuesto.esMantenimiento()) {
 			this.altaPresupuesto.deshabilitarEdicion();
 		} else {
 			this.altaPresupuesto.habilitarEdicion();
@@ -111,7 +111,7 @@ public class PresupuestosPresenter {
 		reiniciar();
 		altaPresupuesto.close();
 	}
-	
+
 	private void reiniciar() {
 		devolverStock();
 		this.nuevoPresupuesto = new PresupuestoDTO();
@@ -121,9 +121,9 @@ public class PresupuestosPresenter {
 		this.planRepuestosView.clearDataRepuestosPlanificados();
 		this.planTrabajosView.clearData();
 	}
-	
+
 	private void devolverStock() {
-		if(nuevoPresupuesto != null) {
+		if (nuevoPresupuesto != null) {
 			for (RepuestoPlanificadoDTO repuestoPlanificado : nuevoPresupuesto.getRepuestos()) {
 				RepuestoDTO repuesto = repuestoPlanificado.getRepuesto();
 				repuesto.setStockRepuesto(repuestoPlanificado.getCantRequerida() + repuesto.getStockRepuesto());
@@ -132,10 +132,10 @@ public class PresupuestosPresenter {
 		}
 	}
 
-	//Quita un repuesto del presupuesto
+	// Quita un repuesto del presupuesto
 	private void onQuitarRepuesto(ActionEvent a) {
 		Integer fila = this.planRepuestosView.getSeleccionado();
-		if(fila >= 0) {
+		if (fila >= 0) {
 			RepuestoPlanificadoDTO repuestoPlanificado = nuevoPresupuesto.getRepuestos().get(fila);
 			RepuestoDTO repuesto = repuestosController.readById(repuestoPlanificado.getRepuesto().getIdRepuesto());
 			repuesto.setStockRepuesto(repuestoPlanificado.getCantRequerida() + repuesto.getStockRepuesto());
@@ -147,20 +147,20 @@ public class PresupuestosPresenter {
 		}
 	}
 
-	//Quita un trabajo del presupuesto
+	// Quita un trabajo del presupuesto
 	private void onQuitarTrabajo(ActionEvent a) {
 		Integer fila = this.planTrabajosView.getSeleccionado();
-		if(fila >= 0) {
+		if (fila >= 0) {
 			this.nuevoPresupuesto.quitarTrabajo(fila);
 			this.planTrabajosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
 			this.altaPresupuesto.setPrecio(nuevoPresupuesto.getPrecio());
 		}
 	}
 
-	//Crea un nuevo presupuesto y lo guarda
+	// Crea un nuevo presupuesto y lo guarda
 	private void onNuevoPresupuesto(ActionEvent a) {
 		Integer idOT = view.getIdOrdenDeTrabajo();
-		if(idOT != null) {
+		if (idOT != null) {
 			nuevoPresupuesto = new PresupuestoDTO();
 			nuevoPresupuesto.setIdOT(idOT);
 			onDisplayForPlanRepuesto(a);
@@ -170,28 +170,28 @@ public class PresupuestosPresenter {
 			this.altaPresupuesto.display();
 		}
 	}
-	
-	//Muestra datos presupuesto seleccionado
+
+	// Muestra datos presupuesto seleccionado
 	private void onSelecionarPresupuesto(ListSelectionEvent a) {
-		if(view.getIdPresupuesto() >= 0) {
+		if (view.getIdPresupuesto() >= 0) {
 			this.nuevoPresupuesto = presupuestosController.readById(view.getIdPresupuesto());
 			view.setDataPresupuesto(nuevoPresupuesto);
 		}
 	}
 
-	//Busca repuestos segun criterio seleccionado
+	// Busca repuestos segun criterio seleccionado
 	private void onBuscarRepuesto(ActionEvent a) {
 		String marca = planRepuestosView.getMarca();
 		String descripcion = planRepuestosView.getDescripcion();
 		List<RepuestoDTO> repuestos;
-		if(descripcion.isEmpty()) {
-			if(marca == "Todas") {
+		if (descripcion.isEmpty()) {
+			if (marca == "Todas") {
 				repuestos = repuestosController.readAll();
 			} else {
 				repuestos = repuestosController.readByMarca(marca);
 			}
 		} else {
-			if(marca == "Todas") {
+			if (marca == "Todas") {
 				repuestos = repuestosController.readByDescripcion(descripcion);
 			} else {
 				repuestos = repuestosController.readbyMarcaYDescripcion(marca, descripcion);
@@ -200,10 +200,11 @@ public class PresupuestosPresenter {
 		planRepuestosView.setDataRepuestos(repuestos);
 	}
 
-	//registra los repuestos y trabajos planificados
+	// registra los repuestos y trabajos planificados
 	private void onRegistrar(ActionEvent a) {
 		String comentario = altaPresupuesto.getComentario();
-		if(!comentario.isEmpty() && !nuevoPresupuesto.getTrabajos().isEmpty() && !nuevoPresupuesto.getRepuestos().isEmpty()) {
+		if (!comentario.isEmpty() && !nuevoPresupuesto.getTrabajos().isEmpty()
+				&& !nuevoPresupuesto.getRepuestos().isEmpty()) {
 			nuevoPresupuesto.setComentarioAltaPresu(comentario);
 			presupuestosController.save(nuevoPresupuesto);
 			nuevoPresupuesto = null;
@@ -211,20 +212,20 @@ public class PresupuestosPresenter {
 			this.altaPresupuesto.close();
 		} else {
 			List<String> errors = new ArrayList<>();
-			if(comentario.isEmpty()) {
+			if (comentario.isEmpty()) {
 				errors.add("Ingrece un comentario");
 			}
-			if(nuevoPresupuesto.getTrabajos().isEmpty()) {
+			if (nuevoPresupuesto.getTrabajos().isEmpty()) {
 				errors.add("Agregue al menos un trabajo");
 			}
-			if(nuevoPresupuesto.getRepuestos().isEmpty()) {
+			if (nuevoPresupuesto.getRepuestos().isEmpty()) {
 				errors.add("Agregue al menos un repuesto");
 			}
 			new MessageDialog().showMessages(errors);
 		}
 	}
 
-	//Agrega repuesto a el nuevo repuesto
+	// Agrega repuesto a el nuevo repuesto
 	private void onAgregarRepuesto(ActionEvent a) {
 		String cantidad = planRepuestosView.getCantidad();
 		String idRepuesto = planRepuestosView.getIdRepuesto();
@@ -235,7 +236,7 @@ public class PresupuestosPresenter {
 			RepuestoDTO repuesto = repuestosController.readById(Integer.parseInt(idRepuesto));
 			int cant = Integer.parseInt(cantidad);
 			int stock = repuesto.getStockRepuesto();
-			if(cant <= stock) {
+			if (cant <= stock) {
 				RepuestoPlanificadoDTO repuestoPlanificado = new RepuestoPlanificadoDTO();
 				repuestoPlanificado.setCantRequerida(cant);
 				repuestoPlanificado.setRepuesto(repuesto);
@@ -252,16 +253,18 @@ public class PresupuestosPresenter {
 			new MessageDialog().showMessages(errors);
 		}
 	}
-	
-	//Agrega trabajos al nuevo repuesto
+
+	// Agrega trabajos al nuevo repuesto
 	private void onAgregarTrabajos(ActionEvent a) {
 		String descripcion = planTrabajosView.getDescripcion();
 		String monto = planTrabajosView.getMonto();
 		String esfuerzo = planTrabajosView.getEsfuerzo();
 		List<String> errors = new StringValidator(descripcion).notBlank("Ingrese una descripción.").validate();
-		errors.addAll(new StringValidator(monto).notBlank("Ingrese un monto.").positiveDouble("El monto debe ser un número mayor a 0.").validate());
-		errors.addAll(new StringValidator(esfuerzo).notBlank("Ingrese un esfuerzo estimado.").positiveInteger("El esfuerzo debe ser un número entero mayor a 0.").validate());
-		if(errors.isEmpty()) {
+		errors.addAll(new StringValidator(monto).notBlank("Ingrese un monto.")
+				.positiveDouble("El monto debe ser un número mayor a 0.").validate());
+		errors.addAll(new StringValidator(esfuerzo).notBlank("Ingrese un esfuerzo estimado.")
+				.positiveInteger("El esfuerzo debe ser un número entero mayor a 0.").validate());
+		if (errors.isEmpty()) {
 			TrabajoPresupuestadoDTO trabajo = this.planTrabajosView.getDataNuevoTrabajo();
 			trabajo.setFechaAlta(new Date());
 			nuevoPresupuesto.agregarTrabajo(trabajo);
@@ -273,7 +276,7 @@ public class PresupuestosPresenter {
 		}
 	}
 
-	//Muestra pantalla de planificacion de repuestos
+	// Muestra pantalla de planificacion de repuestos
 	private void onDisplayForPlanRepuesto(ActionEvent a) {
 		if (nuevoPresupuesto != null) {
 			List<String> marcas = new ArrayList<>();
@@ -287,8 +290,8 @@ public class PresupuestosPresenter {
 			new MessageDialog().showMessages("Seleccione un presupuesto");
 		}
 	}
-	
-	//Muestra pantalla de planificacion de trabajos
+
+	// Muestra pantalla de planificacion de trabajos
 	private void onDisplayForPlanTrabajos(ActionEvent a) {
 		if (nuevoPresupuesto != null) {
 			this.planTrabajosView.clearData();
@@ -299,20 +302,21 @@ public class PresupuestosPresenter {
 		}
 	}
 
-	//Busca vehiculos con orden de trabajo abiertas
+	// Busca vehiculos con orden de trabajo abiertas
 	private void onBuscar(ActionEvent a) {
 		view.clearAll();
 		String inputDni = view.getTxtDni();
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
-				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController.readVehicleWithClientIdWhereOtIsOpen(cliente.getIdCliente());
+				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
+						.readVehicleWithClientIdWhereOtIsOpen(cliente.getIdCliente());
 				view.setData(vehiculos);
 			}
 		}
 	}
 
-	//Muestra la orden de trabajo del vehiculo seleccionado.
+	// Muestra la orden de trabajo del vehiculo seleccionado.
 	private void onSelectVehiculoDeCliente(ListSelectionEvent a) {
 		VehiculoConOrdenDeTrabajoDTO idVehiculo = view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
@@ -322,10 +326,11 @@ public class PresupuestosPresenter {
 				view.clearDataFichaTecnicaVehiculo();
 				view.clearDataOrdenDeTrabajo();
 				view.setData(fichaVehiculo);
-				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo.getId());				
+				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo.getId());
 				if (ordenDeTrabajo != null) {
 					view.setData(ordenDeTrabajo);
-					List<PresupuestoDTO> presupuestos = this.presupuestosController.readByIdOt(ordenDeTrabajo.getIdOrdenTrabajo());
+					List<PresupuestoDTO> presupuestos = this.presupuestosController
+							.readByIdOt(ordenDeTrabajo.getIdOrdenTrabajo());
 					view.setDataPresupuestos(presupuestos);
 				} else {
 					view.clearDataOrdenDeTrabajo();
@@ -334,7 +339,7 @@ public class PresupuestosPresenter {
 			}
 		}
 	}
-	
+
 	private void mostrarMantenimientos() {
 		List<MantenimientoDTO> datos = mantenimientosController.readAll();
 		this.altaPresupuesto.setDataMantenimientos(datos);

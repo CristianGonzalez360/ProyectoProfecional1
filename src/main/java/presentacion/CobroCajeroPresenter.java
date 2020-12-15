@@ -236,7 +236,7 @@ public class CobroCajeroPresenter {
 			JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	private void mostrarTicket(Integer idFactura, String medioPago) {
 		ReporteViewImpl report = new ReporteViewImpl();
 		TicketReport ticket = new TicketReport(facturasController.readByFactura(idFactura));

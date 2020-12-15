@@ -6,7 +6,11 @@ import java.util.List;
 
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
+<<<<<<< HEAD
 import dto.taller.FacturaDTO;
+=======
+import presentacion.views.utils.VentasReport;
+>>>>>>> develop
 import repositories.DaosFactory;
 
 public class ReportesController {
@@ -30,19 +34,16 @@ public class ReportesController {
 		return daos.makeVehiculoDao().readAll();
 	}
 
-	public List<VehiculoDTO> readAutosVendidos(Date desde, Date hasta) {
-		return null;
+	public List<VentasReport> readAutosVendidos(Date desde, Date hasta) {
+		List<VentasReport> autosVendidos = new ArrayList<>();
 
-	}
-
-	public List<VehiculoDTO> readAutosVendidos() {
-		List<VehiculoDTO> autosVendidos = new ArrayList<>();
-		for (VentaVehiculoDTO venta : daos.makeVentaVehiculoDao().readAllOrderByFabricante()) {
-			VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(venta.getIdVehiculo());
+		for (VentaVehiculoDTO venta : readVentas(desde, hasta)) {
+			VentasReport vehiculo = readInformacionDeVenta(venta);
 			autosVendidos.add(vehiculo);
 		}
 		return autosVendidos;
 	}
+<<<<<<< HEAD
 	
 	public List<FacturaDTO> readFacturasPagas(Date desde ,Date hasta) {
 		List<FacturaDTO> facturasPagas = new ArrayList<>();
@@ -52,4 +53,21 @@ public class ReportesController {
 		}
 		return facturasPagas;
 	}
+=======
+
+	public List<VentaVehiculoDTO> readVentas(Date desde, Date hasta) {
+		return daos.makeVentaVehiculoDao().readAllOrderByFabricante(desde, hasta);
+	}
+
+	private VentasReport readInformacionDeVenta(VentaVehiculoDTO venta) {
+		VehiculoDTO vehiculo = readVehiculoByID(venta.getIdVehiculo());
+		return new VentasReport(venta.getFechaVentaVN(), vehiculo.getMarca(), vehiculo.getFamilia(),
+				vehiculo.getLinea(), vehiculo.getColor());
+	}
+
+	private VehiculoDTO readVehiculoByID(Integer idVehiculo) {
+		return daos.makeVehiculoDao().readByID(idVehiculo);
+	}
+
+>>>>>>> develop
 }

@@ -80,12 +80,12 @@ public class ClienteDTO {
 	public List<String> validate() {
 		return this.datosPersonalesDTO.validate();
 	}
-	
+
 	public ClienteDTO makeTestDTO(DatosPersonalesDTO datos) {
 		ClienteDTO cliente = new ClienteDTO();
 		cliente.setDatosPersonalesDTO(datos);
 		cliente.setFechaAltaCliente(new Date());
 		return cliente;
 	}
-	
+
 }

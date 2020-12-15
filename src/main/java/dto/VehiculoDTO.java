@@ -7,74 +7,74 @@ import dto.taller.FichaTecnicaVehiculoDTO;
 public class VehiculoDTO {
 
 	private Integer idVehiculo;
-	
+
 	private Double precioVenta;
-	
-	private Integer  idFichaTecnica;
+
+	private Integer idFichaTecnica;
 
 	private String marca;
-	
+
 	private String familia;
-	
+
 	private String linea;
-	
+
 	private String color;
-	
+
 	private Date fechaIngreso;
-	
+
 	private boolean disponible;
-	
-	private boolean  usado;
-		
+
+	private boolean usado;
+
 	private Integer idCaracteristicas;
-	
+
 	private Integer idSucursal;
-	
+
 	private FichaTecnicaVehiculoDTO fichaTecnica;
-		
+
 	public VehiculoDTO() {
 	}
-	
+
 	public Integer getIdVehiculo() {
 		return idVehiculo;
 	}
-	
+
 	public void setIdVehiculo(Integer idVehiculo) {
 		this.idVehiculo = idVehiculo;
 	}
-	
+
 	public Double getPrecioVenta() {
 		return precioVenta;
 	}
-	
+
 	public void setPrecioVenta(Double precioVenta) {
 		this.precioVenta = precioVenta;
 	}
-	
+
 	public Integer getIdFichaTecnica() {
 		return idFichaTecnica;
 	}
-	
+
 	public void setIdFichaTecnica(Integer idFichaTecnica) {
 		this.idFichaTecnica = idFichaTecnica;
 	}
-	
+
 	public Date getFechaIngreso() {
 		return fechaIngreso;
 	}
-	
+
 	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
-	
+
 	public boolean isDisponible() {
 		return disponible;
 	}
-	
+
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}
-	
+
 	public FichaTecnicaVehiculoDTO getFichaTecnica() {
 		return fichaTecnica;
 	}
@@ -130,7 +130,7 @@ public class VehiculoDTO {
 	public void setUsado(boolean usado) {
 		this.usado = usado;
 	}
-	
+
 	public String getColor() {
 		return color;
 	}
@@ -143,8 +143,8 @@ public class VehiculoDTO {
 	public String toString() {
 		return "VehiculoDTO [idVehiculo=" + idVehiculo + ", precioVenta=" + precioVenta + ", idFichaTecnica="
 				+ idFichaTecnica + ", marca=" + marca + ", familia=" + familia + ", linea=" + linea + ", color=" + color
-				+ ", fechaIngreso=" + fechaIngreso + ", disponible=" + disponible + ", usado=" + usado 
-				+ ", idCaracteristicas=" + idCaracteristicas + ", idSucursal=" + idSucursal
-				+ ", fichaTecnica=" + fichaTecnica + "]";
+				+ ", fechaIngreso=" + fechaIngreso + ", disponible=" + disponible + ", usado=" + usado
+				+ ", idCaracteristicas=" + idCaracteristicas + ", idSucursal=" + idSucursal + ", fichaTecnica="
+				+ fichaTecnica + "]";
 	}
 }

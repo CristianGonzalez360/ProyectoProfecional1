@@ -252,7 +252,7 @@ public class PanelClientesView extends JPanel {
 		panel_1 = new JPanel();
 		splitPane.setRightComponent(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
-		
+
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new TitledBorder(null, "Ficha tecnica del vehiculo", TitledBorder.LEADING, TitledBorder.TOP,
 				null, null));
@@ -310,7 +310,7 @@ public class PanelClientesView extends JPanel {
 
 		garantia = new PanelCaracteristicasDeLaGarantia();
 		panel_1.add(garantia);
-		
+
 		panel_6 = new JPanel();
 		panel_6.setBorder(
 				new TitledBorder(null, "Orden de trabajo actual", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -485,9 +485,7 @@ public class PanelClientesView extends JPanel {
 	public void setData(List<VehiculoConOrdenDeTrabajoDTO> vehiculos) {
 		this.vehiculos = vehiculos;
 		for (VehiculoConOrdenDeTrabajoDTO dto : vehiculos) {
-			Object[] row = { dto.getId(), dto.getKilometrajeGarantia(),
-					dto.getAseguradora(),
-					dto.getNroPolizaSeguro(), 
+			Object[] row = { dto.getId(), dto.getKilometrajeGarantia(), dto.getAseguradora(), dto.getNroPolizaSeguro(),
 					dto.getPatente() };
 			this.tableModelVehiculos.addRow(row);
 		}
@@ -510,7 +508,7 @@ public class PanelClientesView extends JPanel {
 	public String dniClienteSeleccionado() {
 		return this.textDni.getText();
 	}
-	
+
 	public Integer getIdCliente() {
 		return this.idCliente;
 	}
@@ -558,11 +556,11 @@ public class PanelClientesView extends JPanel {
 	public void unlockButtonRegistrarOrdenDeTrabajo() {
 		this.btnRegistrarOrdenDeTrabajo.setEnabled(true);
 	}
-	
+
 	public void setDataGarantia(GarantiaVehiculoDTO garantia) {
 		this.garantia.setData(garantia);
 	}
-	
+
 	public void clearDataGarantia() {
 		this.garantia.clearData();
 	}

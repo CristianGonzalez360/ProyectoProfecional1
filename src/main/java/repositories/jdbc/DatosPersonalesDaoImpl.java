@@ -17,9 +17,9 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 	private static final String readAll = "SELECT * FROM DatosPersonales";
 
 	private static final String readByTelefono = "SELECT * FROM DatosPersonales WHERE DatosPersonales.telefono = ?";
-	
+
 	private static final String readByDni = readAll + " wHERE DatosPersonales.dni = ?";
-	
+
 	private static final String readAllId = readAll + " WHERE DatosPersonales.idDatosPersonales = ?";
 
 	public DatosPersonalesDaoImpl(Connection connection) {
@@ -28,9 +28,10 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 
 	@Override
 	public boolean insert(DatosPersonalesDTO entity) {
-		return getTemplate().query(insertDatosPersonales).param(entity.getNombreCompleto()).param(entity.getApellido()).param(entity.getDni())
-				.param(entity.getTelefono()).param(entity.getEmail()).param(entity.getCalle()).param(entity.getAltura())
-				.param(entity.getPiso()).param(entity.getDpto()).param(entity.getLocalidad()).excecute();
+		return getTemplate().query(insertDatosPersonales).param(entity.getNombreCompleto()).param(entity.getApellido())
+				.param(entity.getDni()).param(entity.getTelefono()).param(entity.getEmail()).param(entity.getCalle())
+				.param(entity.getAltura()).param(entity.getPiso()).param(entity.getDpto()).param(entity.getLocalidad())
+				.excecute();
 	}
 
 	@Override
@@ -50,22 +51,17 @@ public class DatosPersonalesDaoImpl extends GenericJdbcDao<DatosPersonalesDTO> i
 
 	@Override
 	public DatosPersonalesDTO readByTelefono(String telefono) {
-		List<DatosPersonalesDTO> dtos = getTemplate()
-				.query(readByTelefono)
-				.param(telefono)
-				.excecute(getMapper());
+		List<DatosPersonalesDTO> dtos = getTemplate().query(readByTelefono).param(telefono).excecute(getMapper());
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
 	@Override
 	public DatosPersonalesDTO readByEmail(String email) {
-		List<DatosPersonalesDTO> dtos = getTemplate()
-				.query(readAll + " WHERE email = ?")
-				.param(email)
+		List<DatosPersonalesDTO> dtos = getTemplate().query(readAll + " WHERE email = ?").param(email)
 				.excecute(getMapper());
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}
-	
+
 	@Override
 	public DatosPersonalesDTO readByID(Integer id) {
 		List<DatosPersonalesDTO> dtos = getTemplate().query(readAllId).param(id).excecute(getMapper());

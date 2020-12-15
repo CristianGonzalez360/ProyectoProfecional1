@@ -6,7 +6,7 @@ import dto.PedidoVehiculoDTO;
 import dto.temporal.PedidoDTO;
 
 public interface PedidoVehiculoDao extends GenericDao<PedidoVehiculoDTO, Integer> {
-	
+
 	public List<PedidoVehiculoDTO> readByCliente(int idCliente);
 
 	List<PedidoVehiculoDTO> readAllPedidosDeVenta(Integer idSucursal);

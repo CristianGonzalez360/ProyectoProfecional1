@@ -10,12 +10,12 @@ public class MantenimientoDTO {
 	private String comentario;
 	private List<TrabajoMantenimientoDTO> trabajos;
 	private List<RepuestoMantenimientoDTO> repuestos;
-	
+
 	public MantenimientoDTO() {
 		this.trabajos = new ArrayList<>();
 		this.repuestos = new ArrayList<>();
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -35,15 +35,15 @@ public class MantenimientoDTO {
 	public List<TrabajoMantenimientoDTO> getTrabajos() {
 		return trabajos;
 	}
-	
+
 	public void setTrabajos(List<TrabajoMantenimientoDTO> trabajos) {
 		this.trabajos = trabajos;
 	}
-	
+
 	public List<RepuestoMantenimientoDTO> getRepuestos() {
 		return repuestos;
 	}
-	
+
 	public void setRepuestos(List<RepuestoMantenimientoDTO> repuestos) {
 		this.repuestos = repuestos;
 	}
@@ -78,7 +78,7 @@ public class MantenimientoDTO {
 
 	public void quitarTrabajo(int fila) {
 		this.trabajos.remove(fila);
-		
+
 	}
 
 	public void setComentario(String comentario) {

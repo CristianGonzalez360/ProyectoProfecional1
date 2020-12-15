@@ -11,68 +11,60 @@ import repositories.jdbc.utils.NullObject;
 import services.SessionServiceImpl;
 
 public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> implements VentaVehiculoDao {
-	
+
 	private static final String readFechas = "SELECT * FROM VentasVehiculos where fechaVentaVN BETWEEN ? and ?";
-	
+
 	private static final String readAll = "SELECT * FROM VentasVehiculos";
 
 	private static final String readByIdVehiculoVendido = "SELECT * FROM VentasVehiculos WHERE idVehiculo = ?";
-	
-	private static final String insert = 
-			"INSERT INTO VentasVehiculos(idUsuVentaVN,idUsuPedido,idUsuLlegada,idPagoVentaVN,fechaVentaVN"
+
+	private static final String insert = "INSERT INTO VentasVehiculos(idUsuVentaVN,idUsuPedido,idUsuLlegada,idPagoVentaVN,fechaVentaVN"
 			+ ",fechaEntregaReal,fabricante,comisionCobrada,precioVenta,financiera,nroCuotas,montoCuota"
 			+ ",idVehiculo,idCliente,idUsuEntrega,idSucursal) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	
+
 	private static final String readVentasVehiculosNoDisponibles = readAll + " INNER JOIN Vehiculos "
 			+ "WHERE VentasVehiculos.idVehiculo = Vehiculos.idVehiculo "
-			+ "AND Vehiculos.idSucursal IS null AND VentasVehiculos.idSucursal = ?"; 
+			+ "AND Vehiculos.idSucursal IS null AND VentasVehiculos.idSucursal = ?";
 
 	private static final String readById = "SELECT * FROM VentasVehiculos WHERE idVentaVehiculo = ?";
-	
+
 	private static final String readByIdVenta = readAll + " WHERE idVentaVehiculo = ? AND fechaEntregaReal is null";
-	
+
 	private static final String updateEntregaVehiculo = "UPDATE VentasVehiculos SET fechaEntregaReal = ? WHERE idVentaVehiculo = ?";
 
 	private static final String readVentaParaEntregar = "SELECT * FROM VentasVehiculos where fechaEntregaReal is null AND idSucursal = ?";
 
 	private static final String readByIdVendedor = "SELECT * FROM VentasVehiculos WHERE idUsuVentaVN = ? and fechaVentaVN BETWEEN ? and ?";
-	
+
 	private static final String readByIdVehículo = readAll + " WHERE idVehiculo = ?";
-	
-	private static final String readAllOrderByFabricante = "SELECT * FROM VentasVehiculos ORDER BY Fabricante ASC";
-	
+
+	private static final String readAllOrderByFabricante = "SELECT * FROM VentasVehiculos WHERE fechaVentaVN BETWEEN ? AND ? ORDER BY Fabricante ASC";
+
 	public VentaVehiculoDaoImpl(Connection connection) {
 		super(connection);
 	}
 
 	@Override
 	public boolean update(VentaVehiculoDTO entity) {
-		return getTemplate().query(updateEntregaVehiculo)
-				.param(entity.getFechaEntregaReal())
+		return getTemplate().query(updateEntregaVehiculo).param(entity.getFechaEntregaReal())
 				.param(entity.getIdVentaVehiculo()).excecute();
 	}
 
 	@Override
 	public boolean insert(VentaVehiculoDTO entity) {
-		return getTemplate()
-				.query(insert)
-				.param(entity.getIdUsuVentaVN())
+		return getTemplate().query(insert).param(entity.getIdUsuVentaVN())
 				.param(entity.getIdUsuPedido() == null ? new NullObject() : entity.getIdUsuPedido())
 				.param(entity.getIdUsuLlegada() == null ? new NullObject() : entity.getIdUsuLlegada())
 				.param(entity.getIdPagoVentaVN() == null ? new NullObject() : entity.getIdPagoVentaVN())
 				.param(entity.getFechaVentaVN() == null ? new NullObject() : entity.getFechaVentaVN())
 				.param(entity.getFechaEntregaReal() == null ? new NullObject() : entity.getFechaEntregaReal())
-				.param(entity.getFabricante())
-				.param(entity.getComisionCobrada())
-				.param(entity.getPrecioVenta())
+				.param(entity.getFabricante()).param(entity.getComisionCobrada()).param(entity.getPrecioVenta())
 				.param(entity.getFinanciera() == null ? new NullObject() : entity.getFinanciera())
 				.param(entity.getNroCuotas() == null ? new NullObject() : entity.getNroCuotas())
 				.param(entity.getMontoCuota() == null ? new NullObject() : entity.getMontoCuota())
-				.param(entity.getIdVehiculo())
-				.param(entity.getIdCliente())
+				.param(entity.getIdVehiculo()).param(entity.getIdCliente())
 				.param(entity.getIdUsuEntrega() == null ? new NullObject() : entity.getIdUsuEntrega())
-				.param(entity.getIdSucursalVenta() == null ? new NullObject() : entity.getIdSucursalVenta())
-				.excecute();
+				.param(entity.getIdSucursalVenta() == null ? new NullObject() : entity.getIdSucursalVenta()).excecute();
 	}
 
 	@Override
@@ -93,33 +85,25 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 	}
 
 	@Override
-	public List<VentaVehiculoDTO> readAllOrderByFabricante(){
-		return getTemplate().query(readAllOrderByFabricante).excecute(getMapper());
-	}
-	
-	@Override
-	public List<VentaVehiculoDTO> readFechas(Date desde, Date hasta) {
-		return getTemplate().query(readFechas)
-				.param(desde)
-				.param(hasta)
-				.excecute(getMapper());
+	public List<VentaVehiculoDTO> readAllOrderByFabricante(Date desde, Date hasta) {
+		return getTemplate().query(readAllOrderByFabricante).param(desde).param(hasta).excecute(getMapper());
 	}
 
-	
 	@Override
-	public List<VentaVehiculoDTO> readByIdVendedor(Integer id,Date desde, Date hasta) {
-		return getTemplate().query(readByIdVendedor)
-				.param(id)
-				.param(desde)
-				.param(hasta)
-				.excecute(getMapper());
+	public List<VentaVehiculoDTO> readFechas(Date desde, Date hasta) {
+		return getTemplate().query(readFechas).param(desde).param(hasta).excecute(getMapper());
 	}
-	
+
+	@Override
+	public List<VentaVehiculoDTO> readByIdVendedor(Integer id, Date desde, Date hasta) {
+		return getTemplate().query(readByIdVendedor).param(id).param(desde).param(hasta).excecute(getMapper());
+	}
+
 	public List<VentaVehiculoDTO> readByVendedor(int idUsuario) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public List<VentaVehiculoDTO> readVentasVehiculosNoDisponibles() {
 		return getTemplate().query(readVentasVehiculosNoDisponibles)
@@ -128,10 +112,11 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 
 	@Override
 	public VentaVehiculoDTO readByIdVehiculoVendido(Integer idVehiculo) {
-		List<VentaVehiculoDTO> ventas = getTemplate().query(readByIdVehiculoVendido).param(idVehiculo).excecute(getMapper());
+		List<VentaVehiculoDTO> ventas = getTemplate().query(readByIdVehiculoVendido).param(idVehiculo)
+				.excecute(getMapper());
 		return ventas.isEmpty() ? null : ventas.get(0);
 	}
-	
+
 	@Override
 	protected Mapper<VentaVehiculoDTO> getMapper() {
 		return new Mapper<VentaVehiculoDTO>() {
@@ -161,7 +146,6 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 		};
 	}
 
-
 	@Override
 	public boolean noEstaEntregado(Integer idVentaVehiculo) {
 		return !getTemplate().query(readByIdVenta).param(idVentaVehiculo).excecute(getMapper()).isEmpty();
@@ -169,7 +153,8 @@ public class VentaVehiculoDaoImpl extends GenericJdbcDao<VentaVehiculoDTO> imple
 
 	@Override
 	public List<VentaVehiculoDTO> readVentasVehiculosParaEntregar() {
-		return getTemplate().query(readVentaParaEntregar).param(SessionServiceImpl.getInstance().getActiveSession().getIdSucursal()).excecute(getMapper());
+		return getTemplate().query(readVentaParaEntregar)
+				.param(SessionServiceImpl.getInstance().getActiveSession().getIdSucursal()).excecute(getMapper());
 	}
 
 	@Override

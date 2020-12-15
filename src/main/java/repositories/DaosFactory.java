@@ -47,7 +47,7 @@ public abstract class DaosFactory {
 	public abstract SucursalesDao makeSucursalesDao();
 
 	public abstract PedidoVehiculoDao makePedidoVehiculoDao();
-	
+
 	public abstract VentaVehiculoDao makeVentaVehiculoDao();
 
 	public abstract CaracteristicasVehiculoDao makeCaracteristicasVehiculoDao();
@@ -55,9 +55,9 @@ public abstract class DaosFactory {
 	public abstract MonedaDao makeMonedasDao();
 
 	public abstract MantenimientoDao makeMantenimientoDao();
-	
+
 	public abstract RepuestoMantenimientoDao makeRepuestoMantenimientoDao();
-	
+
 	public abstract TrabajoMantenimientoDao makeTrabajoMantenimientoDao();
 
 	public abstract GarantiasDao makeGarantiasVehiculosDao();

@@ -8,17 +8,17 @@ import dto.validators.StringValidator;
 public class ConfigDatabaseDTO {
 
 	private String user;
-	
+
 	private String password;
-	
+
 	private String port;
-	
+
 	private String ip;
-		
+
 	public ConfigDatabaseDTO() {
 		super();
 	}
-			
+
 	public String getUser() {
 		return user;
 	}
@@ -55,20 +55,18 @@ public class ConfigDatabaseDTO {
 	public String toString() {
 		return "ConfigDatabaseDTO [user=" + user + ", password=" + password + ", port=" + port + ", ip=" + ip + "]";
 	}
-	
-	public List<String>	validate() {
+
+	public List<String> validate() {
 		List<String> userErrors = new StringValidator(user).notBlank("El usuario es obligatorio").validate();
 		List<String> passwordErrors = new StringValidator(password).notBlank("El password es obligatorio").validate();
-		List<String> portErrors = new StringValidator(port)
-				.notBlank("El port es obligatorio")
-				.number("El port debe ser un numero.")
-				.validate();
+		List<String> portErrors = new StringValidator(port).notBlank("El port es obligatorio")
+				.number("El port debe ser un numero.").validate();
 		List<String> ipErrors = new LinkedList<>();
-		if(ip.isEmpty()) {
+		if (ip.isEmpty()) {
 			ipErrors = new StringValidator(ip).notBlank("El ip es obligatorio").validate();
 		}
-		if(!ip.contains("localhost")) {
-			ipErrors = new StringValidator(ip).number("Si el ip no es localhost debe ser un numero natural").validate();	
+		if (!ip.contains("localhost")) {
+			ipErrors = new StringValidator(ip).number("Si el ip no es localhost debe ser un numero natural").validate();
 		}
 		userErrors.addAll(passwordErrors);
 		userErrors.addAll(portErrors);

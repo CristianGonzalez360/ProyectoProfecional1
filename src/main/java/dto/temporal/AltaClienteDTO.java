@@ -9,7 +9,7 @@ import dto.validators.StringValidator;
 public class AltaClienteDTO {
 
 	private String nombreCompleto;
-	
+
 	private String apellido;
 
 	private String dni;
@@ -113,7 +113,7 @@ public class AltaClienteDTO {
 
 		ret.addAll(new StringValidator(nombreCompleto).notBlank("Debe ingresar un nombre.")
 				.regex("El nombre debe tener solo letras.", "[a-zA-Záéíóú ]+").validate());
-		
+
 		ret.addAll(new StringValidator(apellido).notBlank("Debe ingresar un apellido.")
 				.regex("El apellido debe tener solo letras.", "[a-zA-Záéíóú ]+").validate());
 
@@ -133,11 +133,12 @@ public class AltaClienteDTO {
 		ret.addAll(new StringValidator(piso).number("El piso solo debe tener números")
 				.max(2, "Maximo 2 digitos para el piso.").validate());
 
-		ret.addAll(new StringValidator(dpto).regex("El departamento solo puede tener letras y números", Patterns.ALPHANUMERIC)
+		ret.addAll(new StringValidator(dpto)
+				.regex("El departamento solo puede tener letras y números", Patterns.ALPHANUMERIC)
 				.max(3, "Maximo 3 chars para el dpto.").validate());
 
-		ret.addAll(new StringValidator(localidad).regex("La localidad solo debe tener letras y números", Patterns.ALPHANUMERIC)
-				.validate());
+		ret.addAll(new StringValidator(localidad)
+				.regex("La localidad solo debe tener letras y números", Patterns.ALPHANUMERIC).validate());
 
 		return ret;
 	}

@@ -12,38 +12,39 @@ import dto.SucursalDTO;
 import presentacion.views.admin.AdminControlView;
 
 public class SucursalesControlPresenter {
-	
+
 	private AdminControlView view = AdminControlView.getInstance();
-	
+
 	private SucursalesController controller;
-	
+
 	private ConfiguradorTerminalController confController;
-	
+
 	public SucursalesControlPresenter(SucursalesController controller, ConfiguradorTerminalController confController) {
 		assert controller != null;
 		this.controller = controller;
 		this.confController = confController;
-		this.view.setActionBuscarSucursal((a)->onBuscarSucursales(a));
-		this.view.setActionSeleccionSucursal((a)->onSelectSucursal(a));
-		this.view.setActionEscogerTerminal((a)->onEscogerComoTerminal(a));
-		this.view.addPaisesDeBusqueda(new String [] {"Argentina", "Uruguay", "Brazil", "Bolivia", "Venezuela", "Paraguay"});
+		this.view.setActionBuscarSucursal((a) -> onBuscarSucursales(a));
+		this.view.setActionSeleccionSucursal((a) -> onSelectSucursal(a));
+		this.view.setActionEscogerTerminal((a) -> onEscogerComoTerminal(a));
+		this.view.addPaisesDeBusqueda(
+				new String[] { "Argentina", "Uruguay", "Brazil", "Bolivia", "Venezuela", "Paraguay" });
 	}
-	
+
 	private void onEscogerComoTerminal(ActionEvent a) {
 		SucursalDTO sucursal = view.getData();
-		if(sucursal != null) {
+		if (sucursal != null) {
 			confController.establecerSucursalPredetermidada(sucursal);
 		}
 	}
 
 	private void onSelectSucursal(ListSelectionEvent a) {
 		SucursalDTO sucursal = view.getData();
-		if(sucursal != null) {
+		if (sucursal != null) {
 			MonedaDTO moneda = controller.readMonedaByPais(sucursal.getPais());
-			if(moneda != null) {
+			if (moneda != null) {
 				view.clearDataMoneda();
 				view.setData(moneda);
-			}	
+			}
 		}
 	}
 
@@ -51,7 +52,7 @@ public class SucursalesControlPresenter {
 		String nombrePais = view.getDataNombrePais();
 		List<SucursalDTO> sucursales = controller.readByPais(nombrePais);
 		view.clearData();
-		if(!sucursales.isEmpty()) {
+		if (!sucursales.isEmpty()) {
 			view.setData(sucursales);
 		}
 	}

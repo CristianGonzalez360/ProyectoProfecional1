@@ -23,29 +23,29 @@ import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import presentacion.views.supervisor.ClientePanelView;
 
 public class VendedorControlView extends JInternalFrame {
-	  	
+
 	private static final long serialVersionUID = 1308877516578945407L;
 
 	private static VendedorControlView instance;
-	
+
 	private PanelBusquedaPorDniView busquedaPanel;
-	
+
 	private ClientePanelView clientePanel;
-	
+
 	private BusquedaVehiculoPanel busquedaVehiculoPanel;
-	
+
 	private DatosVentaVehiculo datosVentaVehiculoPanel;
 
 	private TablePanel<OutputConsultaVehiculoEnVentaDTO> tableView;
-	
+
 	private CaracteristicaDeVehiculoPanel caracteristicaVehiculoPanel;
-	
+
 	private PanelCaracteristicasDeLaGarantia garantiaPanel;
-	
+
 	private HistorialVentasView panelHistorial;
-	
+
 	private JButton btnRegistrarCliente;
-	
+
 	public static VendedorControlView getInstance() {
 		if (instance == null)
 			instance = new VendedorControlView();
@@ -59,17 +59,17 @@ public class VendedorControlView extends JInternalFrame {
 		setIconifiable(true);
 		setBounds(100, 100, 1055, 739);
 		getContentPane().setLayout(new BorderLayout(0, 0));
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane);
-		
+
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Venta de vehículos", null, panel, null);
 		panel.setLayout(new BorderLayout(0, 0));
-		
+
 		JSplitPane splitPane = new JSplitPane();
 		panel.add(splitPane, BorderLayout.CENTER);
-		
+
 		JPanel panel_1 = new JPanel();
 		splitPane.setLeftComponent(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
@@ -77,45 +77,47 @@ public class VendedorControlView extends JInternalFrame {
 		panel_1.add(busquedaPanel);
 		clientePanel = new ClientePanelView();
 		panel_1.add(clientePanel);
-		
+
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3);
-		
+
 		btnRegistrarCliente = new JButton("Registrar Cliente");
 		panel_3.add(btnRegistrarCliente);
-		
+
 		JPanel panel_2 = new JPanel();
 		splitPane.setRightComponent(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
-		
+
 		busquedaVehiculoPanel = new BusquedaVehiculoPanel();
 		panel_2.add(busquedaVehiculoPanel, BorderLayout.NORTH);
-		
+
 		datosVentaVehiculoPanel = new DatosVentaVehiculo();
 		panel_2.add(datosVentaVehiculoPanel, BorderLayout.SOUTH);
 		datosVentaVehiculoPanel.setNoEditable();
-		
+
 		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
 		panel_2.add(tabbedPane_1, BorderLayout.CENTER);
-		
+
 		this.panelHistorial = HistorialVentasView.getInstance();
-		tabbedPane.add("Historial Ventas", this.panelHistorial);	
-		
-		tableView = new TablePanel<OutputConsultaVehiculoEnVentaDTO>(new String [] {"Código", "Marca", "Familia", "Linea", "Color","Sucursal", "Precio"}) {
+		tabbedPane.add("Historial Ventas", this.panelHistorial);
+
+		tableView = new TablePanel<OutputConsultaVehiculoEnVentaDTO>(
+				new String[] { "Código", "Marca", "Familia", "Linea", "Color", "Sucursal", "Precio" }) {
 			private static final long serialVersionUID = -6912872259496249346L;
 
 			@Override
 			public void setData(List<OutputConsultaVehiculoEnVentaDTO> data) {
-				for(OutputConsultaVehiculoEnVentaDTO dto : data) {
-					Object [] row = { dto.getCodigo(), dto.getMarca(), dto.getFamilia(), dto.getLinea(),dto.getColor(), dto.getSucursal(), dto.getPrecio() };
-					model.addRow(row);	
+				for (OutputConsultaVehiculoEnVentaDTO dto : data) {
+					Object[] row = { dto.getCodigo(), dto.getMarca(), dto.getFamilia(), dto.getLinea(), dto.getColor(),
+							dto.getSucursal(), dto.getPrecio() };
+					model.addRow(row);
 				}
 			}
 
 			@Override
 			public OutputConsultaVehiculoEnVentaDTO getData() {
 				OutputConsultaVehiculoEnVentaDTO ret = null;
-				if(table.getSelectedRowCount() == 1) {
+				if (table.getSelectedRowCount() == 1) {
 					int row = table.getSelectedRow();
 					ret = new OutputConsultaVehiculoEnVentaDTO();
 					ret.setCodigo(model.getValueAt(row, 0).toString());
@@ -129,11 +131,11 @@ public class VendedorControlView extends JInternalFrame {
 				return ret;
 			}
 		};
-		
+
 		tabbedPane_1.addTab("Listado de vehículos", null, tableView, null);
 		caracteristicaVehiculoPanel = new CaracteristicaDeVehiculoPanel();
 		tabbedPane_1.addTab("Caracteristica del Vehículo", null, caracteristicaVehiculoPanel, null);
-		
+
 		garantiaPanel = new PanelCaracteristicasDeLaGarantia();
 		tabbedPane_1.addTab("Caracteristicas de la garantia", null, garantiaPanel, null);
 		garantiaPanel.disableAllInputs();
@@ -164,7 +166,7 @@ public class VendedorControlView extends JInternalFrame {
 	public void setActionConsultarCliente(ActionListener listener) {
 		this.busquedaPanel.setActionBuscar(listener);
 	}
-	
+
 	public String getData() {
 		return this.busquedaPanel.getData();
 	}
@@ -220,7 +222,7 @@ public class VendedorControlView extends JInternalFrame {
 	public boolean isVentaEnEfectivo() {
 		return this.datosVentaVehiculoPanel.isVentaEnEfectivo();
 	}
-	
+
 	public void disableVentaFinanciada() {
 		this.datosVentaVehiculoPanel.disableFinanciamiento();
 	}
@@ -228,7 +230,7 @@ public class VendedorControlView extends JInternalFrame {
 	public void enableVentafinanciada() {
 		this.datosVentaVehiculoPanel.enableFinanciamiento();
 	}
-	
+
 	public void setActionRegistrarCliente(ActionListener listener) {
 		this.btnRegistrarCliente.addActionListener(listener);
 	}
@@ -260,7 +262,7 @@ public class VendedorControlView extends JInternalFrame {
 	public void setDataPrecioFinal(Double precioFinalVenta) {
 		datosVentaVehiculoPanel.setPrecioFinalVenta(precioFinalVenta.toString());
 	}
-	
+
 	public void setActionUpdateNroCuotas(ChangeListener listener) {
 		datosVentaVehiculoPanel.setActionUpdtNroDeCuotas(listener);
 	}
@@ -272,11 +274,11 @@ public class VendedorControlView extends JInternalFrame {
 	public void clearDataModalidadVenta() {
 		datosVentaVehiculoPanel.clearData();
 	}
-	
+
 	public void setMarcas(List<String> marcas) {
 		this.busquedaVehiculoPanel.setDataMarcas(marcas);
 	}
-	
+
 	public PanelCaracteristicasDeLaGarantia getCaracteristicasDeLaGarantiaView() {
 		return this.garantiaPanel;
 	}
@@ -288,11 +290,11 @@ public class VendedorControlView extends JInternalFrame {
 	public GarantiaVehiculoDTO getDataGarantia() {
 		return this.garantiaPanel.getData();
 	}
-	
+
 	public void setActionSelectExtenderGarantia(ActionListener listener) {
 		this.datosVentaVehiculoPanel.setActionExtenderGarantia(listener);
 	}
-	
+
 	public boolean isExtenderGarantia() {
 		return this.datosVentaVehiculoPanel.isExtenderGarantia();
 	}

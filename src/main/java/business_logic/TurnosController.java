@@ -39,7 +39,7 @@ public class TurnosController {
 		dao.update(turnoSeleccionado);
 	}
 
-	public  List<TurnoDTO> readCantidadDeTurnos(Date fechaProgramada) {
+	public List<TurnoDTO> readCantidadDeTurnos(Date fechaProgramada) {
 		return dao.readAllByFechaProgramada(fechaProgramada);
 	}
 }

@@ -48,21 +48,21 @@ public class DatabaseGraph {
 	private List<TrabajoPresupuestadoDTO> trabajos;
 
 	private List<RepuestoPlanificadoDTO> repuestosPlanificados;
-	
+
 	private List<FacturaDTO> facturas;
-	
+
 	private List<VentaVehiculoDTO> ventaVehiculo;
-	
+
 	private List<CaracteristicaVehiculoDTO> caracteristicaVehiculo;
 
 	private List<VehiculoDTO> vehiculos;
-	
+
 	private List<MonedaDTO> monedas;
-	
+
 	private List<SucursalDTO> sucursales;
-	
+
 	private List<GarantiaVehiculoDTO> garantias;
-	
+
 	public DatabaseGraph() {
 		cuentas = new LinkedList<>();
 		datosPersonales = new LinkedList<>();
@@ -186,7 +186,7 @@ public class DatabaseGraph {
 	public void setFacturas(List<FacturaDTO> facturas) {
 		this.facturas = facturas;
 	}
-	
+
 	public List<VentaVehiculoDTO> getVentaVehiculo() {
 		return ventaVehiculo;
 	}

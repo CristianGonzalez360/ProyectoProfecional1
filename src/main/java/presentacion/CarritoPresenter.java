@@ -33,7 +33,7 @@ public class CarritoPresenter {
 	private Double precioTotal = 0.00;
 	RepuestoCompradoDTO repuestoComprado = new RepuestoCompradoDTO();
 	ClienteDTO clienteFactura;
-	
+
 	private List<RepuestoCompradoDTO> repuestos;
 
 	public CarritoPresenter(RepuestosController repuestosController, ClientesController clientesController,
@@ -51,18 +51,16 @@ public class CarritoPresenter {
 
 		this.view.setActionOnAgregarCliente(a -> onDisplayClienteForm(a));
 
-		
 		this.view.setActionOnBuscarCliente(a -> onBuscarCliente(a));
 		this.view.setActionOnBuscar(a -> onBuscarRepuesto(a));
-		
-		//issue#32
+
+		// issue#32
 		this.view.setActionOnCrearFactura(a -> onCrearFactura(a));
-		
+
 		repuestos = new ArrayList<>();
-		
+
 		this.cargarBuscadorRepuestos();
-		
-		
+
 	}
 
 	private void onDisplayClienteForm(ActionEvent a) {
@@ -89,12 +87,13 @@ public class CarritoPresenter {
 			onBuscarRepuesto(a);
 			this.repuestos.remove(fila.intValue());
 			this.view.setDataRepuestosComprados(repuestos);
-			//issue32
-			precioTotal = precioTotal - repuestocomprado.getRepuesto().getPrecioRepuesto() * (repuestocomprado.getCantRequerida());
+			// issue32
+			precioTotal = precioTotal
+					- repuestocomprado.getRepuesto().getPrecioRepuesto() * (repuestocomprado.getCantRequerida());
 			this.view.getTfTotalFactura().setText(precioTotal.toString());
 		}
 	}
-	
+
 	// Agrega repuesto a el carrito
 	private void onAgregarRepuesto(ActionEvent a) {
 		String cantidad = view.getCantidad();
@@ -114,7 +113,8 @@ public class CarritoPresenter {
 				repuestosController.update(repuesto);
 				repuestos.add(repuestoComprado);
 //				issue#32
-				precioTotal = precioTotal + (repuestoComprado.getRepuesto().getPrecioRepuesto()) * (Integer.parseInt(cantidad) )  ;
+				precioTotal = precioTotal
+						+ (repuestoComprado.getRepuesto().getPrecioRepuesto()) * (Integer.parseInt(cantidad));
 				onBuscarRepuesto(a);
 				view.setDataRepuestosComprados(repuestos);
 				view.getTfTotalFactura().setText(precioTotal.toString());
@@ -140,21 +140,20 @@ public class CarritoPresenter {
 	private void onBuscarCliente(ActionEvent a) {
 		view.clearClienteData();
 		String inputDni = view.getDniCliente();
-		if (new StringValidator(inputDni).number("").validate().isEmpty() ) {
+		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
 				view.setDataCliente(cliente);
 				clienteFactura = cliente;
-			}else {
+			} else {
 				clienteFactura = null;
 			}
-			
+
 		}
-		if (inputDni.isEmpty() || inputDni == null ) {
+		if (inputDni.isEmpty() || inputDni == null) {
 			clienteFactura = null;
 		}
 	}
-
 
 	private void refrescar() {
 		List<RepuestoDTO> repuestos;
@@ -189,17 +188,17 @@ public class CarritoPresenter {
 		this.view.setTextCantidad("0");
 	}
 
-	
-	//Crea la factura con el cliente seleciconado, una suma total del precio de los productos y la lista de repuestos
+	// Crea la factura con el cliente seleciconado, una suma total del precio de los
+	// productos y la lista de repuestos
 	private void onCrearFactura(ActionEvent a) {
 		List<String> errors = new ArrayList<String>();
-		if (clienteFactura==null) {
+		if (clienteFactura == null) {
 			errors.add("Debe seleccionar un cliente.");
 		}
 		if (repuestos.isEmpty()) {
 			errors.add("Debe seleccionar un repuesto.");
 		}
-		if (clienteFactura!=null && precioTotal>.00 && !repuestos.isEmpty()) {
+		if (clienteFactura != null && precioTotal > .00 && !repuestos.isEmpty()) {
 			FacturaDTO facturaCarrito = new FacturaDTO();
 			facturaCarrito.setCliente(clienteFactura);
 			facturaCarrito.setRepuestosComprados(repuestos);
@@ -213,11 +212,11 @@ public class CarritoPresenter {
 			this.view.setTfDni("");
 			this.repuestos.clear();
 
-		}else {
+		} else {
 			new MessageDialog().showMessages(errors);
 		}
 	}
-	
+
 	private void mostrarFactura(FacturaDTO factura) {
 		ReporteViewImpl ventanaReporte = new ReporteViewImpl();
 		ventanaReporte.setData(facturasController.makeFacturaRepuestos(factura));

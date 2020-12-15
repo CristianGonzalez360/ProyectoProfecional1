@@ -46,7 +46,6 @@ public class Application {
 		} else {
 			ViewsFactory.setFactory(new AdminViewFactory());
 		}
-
 		ViewsFactory.getFactory().makePresenter().onInit();
 	}
 

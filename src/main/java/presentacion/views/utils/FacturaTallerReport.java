@@ -21,36 +21,43 @@ public class FacturaTallerReport {
 	private Double total;
 	private Date fecha;
 	private Integer numero;
-	
+
 	public FacturaTallerReport() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public JRDataSource getCliente() {
 		List<DatosPersonalesDTO> cliente = new ArrayList<>();
 		cliente.add(this.cliente);
-		return new JRBeanCollectionDataSource(cliente) ;
+		return new JRBeanCollectionDataSource(cliente);
 	}
+
 	public void setCliente(DatosPersonalesDTO cliente) {
 		this.cliente = cliente;
 	}
+
 	public JRDataSource getVehiculo() {
 		List<FichaTecnicaVehiculoDTO> vehiculo = new ArrayList<>();
 		vehiculo.add(this.vehiculo);
 		return new JRBeanCollectionDataSource(vehiculo);
 	}
+
 	public void setVehiculo(FichaTecnicaVehiculoDTO vehiculo) {
 		this.vehiculo = vehiculo;
 	}
+
 	public JRDataSource getTrabajos() {
 		return new JRBeanCollectionDataSource(trabajos);
 	}
+
 	public void setTrabajos(List<TrabajoPresupuestadoDTO> trabajos) {
 		this.trabajos = trabajos;
 	}
+
 	public JRDataSource getRepuestos() {
 		return new JRBeanCollectionDataSource(repuestos);
 	}
+
 	public void setRepuestos(List<RepuestoPlanificadoDTO> repuestos) {
 		this.repuestos = repuestos;
 	}

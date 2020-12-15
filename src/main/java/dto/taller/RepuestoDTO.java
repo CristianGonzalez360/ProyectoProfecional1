@@ -19,15 +19,15 @@ public class RepuestoDTO {
 	private String fabricante;
 
 	private Integer stockMinimo;
-	
+
 	private Boolean garantia;
-	
+
 	private Double precioCompra;
 
 	public RepuestoDTO() {
 
 	}
-	
+
 	public RepuestoDTO(AltaRepuestoDTO repuesto) {
 		this.codigoRepuesto = Integer.parseInt(repuesto.getCodigoRepuesto());
 		this.descripcionRepuesto = repuesto.getDescripcionRepuesto();

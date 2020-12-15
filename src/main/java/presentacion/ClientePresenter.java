@@ -41,13 +41,14 @@ public class ClientePresenter {
 	private GarantiasController garantiasController;
 
 	public ClientePresenter(PanelClientesView view, ClientesController controller,
-			VehiculosConOrdenDeTrabajoController vehiculoController, OrdenesTrabajoController otController, GarantiasController garantiasController) {
+			VehiculosConOrdenDeTrabajoController vehiculoController, OrdenesTrabajoController otController,
+			GarantiasController garantiasController) {
 		this.view = view;
 		clienteController = controller;
 		this.vehiculosController = vehiculoController;
 		ordenDeTrabajoController = otController;
 		this.garantiasController = garantiasController;
-		
+
 		view.setActionBuscar((a) -> onBuscar(a));
 		view.setActionSelectVehiculoCliente(new ListSelectionListener() {
 			@Override
@@ -68,7 +69,7 @@ public class ClientePresenter {
 
 	private void onDisplayOrdenDeTrabajoForm(ActionEvent a) {
 		if (view.getidVehiculoSeleccionado() != null) {
-			if(!garantiasController.estaEnGarantia(view.getidVehiculoSeleccionado().getIdVehiculo())) {
+			if (!garantiasController.estaEnGarantia(view.getidVehiculoSeleccionado().getIdVehiculo())) {
 				AltaOrdenTrabajoFormView.getInstance().deshabilitarGarantia();
 			} else {
 				AltaOrdenTrabajoFormView.getInstance().habilitarGarantia();
@@ -130,9 +131,9 @@ public class ClientePresenter {
 					view.unlockButtonRegistrarOrdenDeTrabajo();
 				}
 			}
-			if(idVehiculo.getIdVehiculo() != null) {
+			if (idVehiculo.getIdVehiculo() != null) {
 				GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(idVehiculo.getIdVehiculo());
-				if(garantia != null) {
+				if (garantia != null) {
 					view.setDataGarantia(garantia);
 				}
 			}
@@ -191,18 +192,18 @@ public class ClientePresenter {
 			}
 		}
 	}
-	
+
 	private void onDisplayFormForUpdate(ActionEvent a) {
 		if (view.getIdCliente() != null) {
 			ClienteFormView.getInstance().clearData();
-			ClienteFormView.getInstance().setData(clienteController.readByDni(Integer.parseInt(view.dniClienteSeleccionado())));
+			ClienteFormView.getInstance()
+					.setData(clienteController.readByDni(Integer.parseInt(view.dniClienteSeleccionado())));
 			ClienteFormView.getInstance().display();
-		}
-		else {
+		} else {
 			new MessageDialog().showMessages(CLIENTE_NO_SELECCIONADO);
 		}
 	}
-	
+
 	private void onUpdate(ActionEvent a) {
 		AltaClienteDTO clienteAux = ClienteFormView.getInstance().getData();
 		List<String> errores = clienteAux.validate();

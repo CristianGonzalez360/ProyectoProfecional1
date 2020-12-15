@@ -20,7 +20,7 @@ public class ClientesDaoImpl extends GenericJdbcDao<ClienteDTO> implements Clien
 	private static final String readByTelefono = readall + " " + "WHERE DatosPersonales.telefono = ?";
 
 	private static final String readById = readall + " WHERE Clientes.idCliente = ?";
-			
+
 	public ClientesDaoImpl(Connection connection) {
 		super(connection);
 	}

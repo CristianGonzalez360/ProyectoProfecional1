@@ -281,12 +281,12 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelOeste.setLayout(new BoxLayout(panelOeste, BoxLayout.Y_AXIS));
 
 		this.listadoDePresupuestosModel = new DefaultTableModel(null, this.columnasListadoDePresupuestos) {
-			
+
 			private static final long serialVersionUID = 3547862522448460634L;
 
 			@Override
 			public Class<?> getColumnClass(int columnIndex) {
-				return columnIndex  == 4? Boolean.class : super.getColumnClass(columnIndex) ;
+				return columnIndex == 4 ? Boolean.class : super.getColumnClass(columnIndex);
 			}
 		};
 
@@ -326,7 +326,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.listadoDeRepuestosModel = new DefaultTableModel(null, this.columnasListadoDeRepuestos) {
 			@Override
 			public Class<?> getColumnClass(int columnIndex) {
-				return columnIndex  == 5? Boolean.class : super.getColumnClass(columnIndex) ;
+				return columnIndex == 5 ? Boolean.class : super.getColumnClass(columnIndex);
 			}
 		};
 		tableRepuestos = new JTable(listadoDeRepuestosModel) {
@@ -381,8 +381,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.listadoDeRepuestosModel.setRowCount(0);
 		for (RepuestoPlanificadoDTO r : repuestos) {
 			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getMarcaRepuesto(),
-					r.getRepuesto().getDescripcionRepuesto(), r.getRepuesto().getPrecioRepuesto(),
-					r.getCantRequerida(), r.getRepuesto().isGarantia() };
+					r.getRepuesto().getDescripcionRepuesto(), r.getRepuesto().getPrecioRepuesto(), r.getCantRequerida(),
+					r.getRepuesto().isGarantia() };
 			this.listadoDeRepuestosModel.addRow(row);
 		}
 	}
@@ -489,7 +489,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 		clearDataPresupuestos();
 		for (PresupuestoDTO p : presupuestos) {
 			this.idsPresupuestos.add(p.getIdPresupuesto());
-			Object[] row = { p.getIdPresupuesto(), p.getFechaAltaPresu(), p.getComentarioAltaPresu(), p.getPrecio(), p.isGarantia() };
+			Object[] row = { p.getIdPresupuesto(), p.getFechaAltaPresu(), p.getComentarioAltaPresu(), p.getPrecio(),
+					p.isGarantia() };
 			this.listadoDePresupuestosModel.addRow(row);
 		}
 	}

@@ -17,7 +17,7 @@ import javax.swing.UIManager;
 public class CaracteristicaNuevoCarView extends JPanel {
 
 	private static CaracteristicaNuevoCarView instance;
-	private JTextField textTransmision;	
+	private JTextField textTransmision;
 	private JTextField textCilindrada;
 	private JTextField textDireccion;
 	private JTextField textPotencia;
@@ -25,57 +25,39 @@ public class CaracteristicaNuevoCarView extends JPanel {
 	private JTextField textFrenosTraseros;
 	private JTextField textTorqueMaximo;
 	private JTextField textVolumenBaul;
-	private JTextField textCantidadPuertas;	
+	private JTextField textCantidadPuertas;
 	private JLabel lblMotor;
 	private JTextField textMotor;
 	private JLabel lblPrecio;
 	private JTextField textPrecio;
-	
-	
+
 	public CaracteristicaNuevoCarView() {
-		setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Caracteristicas del vehiculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("right:123px"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("122px:grow"),},
-			new RowSpec[] {
-				FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
-		
+		setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Caracteristicas del vehiculo",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		setLayout(new FormLayout(
+				new ColumnSpec[] { FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("right:123px"),
+						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("122px:grow"), },
+				new RowSpec[] { FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, }));
+
 		JLabel lblNewLabel_1 = new JLabel("Cilindrada");
 		add(lblNewLabel_1, "2, 4, right, center");
-														
+
 		textCilindrada = new JTextField();
 		textCilindrada.setFocusable(false);
 		add(textCilindrada, "4, 4, fill, top");
 		textCilindrada.setColumns(10);
-		
+
 		lblMotor = new JLabel("Motor");
 		add(lblMotor, "2, 6, right, default");
-		
+
 		textMotor = new JTextField();
 		textMotor.setFocusable(false);
 		add(textMotor, "4, 6, fill, top");
@@ -88,7 +70,7 @@ public class CaracteristicaNuevoCarView extends JPanel {
 		textTransmision.setFocusable(false);
 		add(textTransmision, "4, 8, fill, top");
 		textTransmision.setColumns(10);
-												
+
 		JLabel lblNewLabel_2 = new JLabel("Direccion");
 		add(lblNewLabel_2, "2, 10, right, center");
 
@@ -104,7 +86,7 @@ public class CaracteristicaNuevoCarView extends JPanel {
 		textPotencia.setFocusable(false);
 		add(textPotencia, "4, 12, fill, top");
 		textPotencia.setColumns(10);
-						
+
 		JLabel Calle = new JLabel("Frenos delanteros");
 		add(Calle, "2, 14, right, center");
 
@@ -123,7 +105,7 @@ public class CaracteristicaNuevoCarView extends JPanel {
 
 		JLabel lblNewLabel_5 = new JLabel("Torque maximo");
 		add(lblNewLabel_5, "2, 18, right, center");
-		
+
 		textTorqueMaximo = new JTextField();
 		textTorqueMaximo.setFocusable(false);
 		add(textTorqueMaximo, "4, 18, fill, top");
@@ -136,18 +118,18 @@ public class CaracteristicaNuevoCarView extends JPanel {
 		textVolumenBaul.setFocusable(false);
 		add(textVolumenBaul, "4, 20, fill, top");
 		textVolumenBaul.setColumns(10);
-		
+
 		lblPrecio = new JLabel("Precio");
 		add(lblPrecio, "2, 24, right, default");
-		
+
 		textPrecio = new JTextField();
 		textPrecio.setFocusable(false);
 		add(textPrecio, "4, 24, fill, top");
 		textPrecio.setColumns(10);
-		
+
 		JLabel lblNewLabel_7 = new JLabel("Cantidad puertas");
 		add(lblNewLabel_7, "2, 22, right, center");
-		
+
 		textCantidadPuertas = new JTextField();
 		textCantidadPuertas.setFocusable(false);
 		add(textCantidadPuertas, "4, 22, fill, top");
@@ -161,8 +143,8 @@ public class CaracteristicaNuevoCarView extends JPanel {
 			instance = new CaracteristicaNuevoCarView();
 		}
 		return instance;
-	}	
-	
+	}
+
 	private void disableAllCaracteristicasInputs() {
 		this.textCilindrada.setEditable(false);
 		this.textTransmision.setEditable(false);
@@ -176,7 +158,7 @@ public class CaracteristicaNuevoCarView extends JPanel {
 		this.textMotor.setEditable(false);
 		this.textPrecio.setEditable(false);
 	}
-	
+
 	public void clearData() {
 		this.textCilindrada.setText("");
 		this.textTransmision.setText("");
@@ -190,7 +172,7 @@ public class CaracteristicaNuevoCarView extends JPanel {
 		this.textMotor.setText("");
 		this.textPrecio.setText("");
 	}
-	
+
 	public void setData(CaracteristicaVehiculoDTO caracteristica) {
 		this.textCilindrada.setText(caracteristica.getCilindrada());
 		this.textMotor.setText(caracteristica.getMotor());

@@ -5,13 +5,12 @@ import java.util.List;
 
 public class PositiveDouble implements Validator<String> {
 
-	
 	private String message;
 
 	public PositiveDouble(String message) {
 		this.message = message;
 	}
-	
+
 	@Override
 	public List<String> validate(String target) {
 		LinkedList<String> ret = new LinkedList<String>();

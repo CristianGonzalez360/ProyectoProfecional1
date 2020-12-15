@@ -91,11 +91,11 @@ public class TrabajoPresupuestadoDTO {
 				+ ", descripcionTrabajo=" + descripcionTrabajo + ", precioTrabajo=" + precioTrabajo
 				+ ", tiempoEstTrabajo=" + tiempoEstTrabajo + "]";
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		boolean ret = false;
-		if(obj instanceof TrabajoPresupuestadoDTO) {
+		if (obj instanceof TrabajoPresupuestadoDTO) {
 			ret = this.getIdTrabajoPresu().equals(((TrabajoPresupuestadoDTO) obj).getIdTrabajoPresu());
 		}
 		return ret;

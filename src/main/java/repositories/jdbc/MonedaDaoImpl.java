@@ -10,9 +10,9 @@ import repositories.jdbc.utils.Mapper;
 public class MonedaDaoImpl extends GenericJdbcDao<MonedaDTO> implements MonedaDao {
 
 	private static final String insert = "INSERT INTO moneda(nombre, simbolo, cotizacionDolar) VALUES(?,?,?)";
-	
+
 	private static final String readById = "SELECT * FROM moneda WHERE idMoneda = ?";
-	
+
 	public MonedaDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -24,12 +24,8 @@ public class MonedaDaoImpl extends GenericJdbcDao<MonedaDTO> implements MonedaDa
 
 	@Override
 	public boolean insert(MonedaDTO entity) {
-		return getTemplate()
-				.query(insert)
-				.param(entity.getNombre())
-				.param(entity.getSimbolo())
-				.param(entity.getCotizacionDolar())
-				.excecute();
+		return getTemplate().query(insert).param(entity.getNombre()).param(entity.getSimbolo())
+				.param(entity.getCotizacionDolar()).excecute();
 	}
 
 	@Override
@@ -57,12 +53,12 @@ public class MonedaDaoImpl extends GenericJdbcDao<MonedaDTO> implements MonedaDa
 			@Override
 			public MonedaDTO map(Object[] obj) {
 				MonedaDTO dto = new MonedaDTO();
-				dto.setIdMoneda((Integer)obj[0]);
-				dto.setNombre((String)obj[1]);
-				dto.setSimbolo((String)obj[2]);
-				dto.setCotizacionDolar((Double)obj[3]);
+				dto.setIdMoneda((Integer) obj[0]);
+				dto.setNombre((String) obj[1]);
+				dto.setSimbolo((String) obj[2]);
+				dto.setCotizacionDolar((Double) obj[3]);
 				return dto;
-			}			
+			}
 		};
 	}
 }

@@ -29,53 +29,57 @@ public class GestionTrabajosPresenter {
 	private PresupuestoDTO nuevoPresupuesto;
 
 	public GestionTrabajosPresenter(PresupuestosController presupuestoController, ClientesController clienteController,
-			VehiculosConOrdenDeTrabajoController vehiculosController,OrdenesTrabajoController ordenDeTrabajoController, PresupuestosController presupuestosController) {
-		
+			VehiculosConOrdenDeTrabajoController vehiculosController, OrdenesTrabajoController ordenDeTrabajoController,
+			PresupuestosController presupuestosController) {
+
 		this.presupuestosController = presupuestoController;
 		this.clienteController = clienteController;
 		this.view = PanelGestionTrabajoView.getInstance();
 		this.vehiculosController = vehiculosController;
 		this.ordenDeTrabajoController = ordenDeTrabajoController;
 		this.presupuestosController = presupuestosController;
-		
+
 		this.view.setActionOnBuscar(a -> onBuscar(a));
 		this.view.setActionSelectVehiculoCliente(a -> onSelectVehiculoDeCliente(a));
 		this.view.setActionOnSeleccionarPresupuesto(a -> onSelecionarPresupuesto(a));
 		this.view.setActionOnRegistrar(a -> onRegistrar(a));
 	}
-	
-	
+
 	private void onBuscar(ActionEvent a) {
-		
+
 		this.view.clearAll();
-		List<VehiculoConOrdenDeTrabajoDTO> vehiculosEnTabla= new LinkedList<VehiculoConOrdenDeTrabajoDTO>();
+		List<VehiculoConOrdenDeTrabajoDTO> vehiculosEnTabla = new LinkedList<VehiculoConOrdenDeTrabajoDTO>();
 		String inputDni = this.view.getTxtDni();
 		boolean flag = false;
-		
+
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
-				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController.readVehicleWithClientIdWhereOtIsOpen(cliente.getIdCliente());		
-				for (VehiculoConOrdenDeTrabajoDTO vehiculoConOrdenDeTrabajo : vehiculos) {		
-					OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(vehiculoConOrdenDeTrabajo.getId());
-					List<PresupuestoDTO> presupuestos = this.presupuestosController.readByIdOt(ordenDeTrabajo.getIdOrdenTrabajo());
+				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
+						.readVehicleWithClientIdWhereOtIsOpen(cliente.getIdCliente());
+				for (VehiculoConOrdenDeTrabajoDTO vehiculoConOrdenDeTrabajo : vehiculos) {
+					OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController
+							.readByIdVehiculo(vehiculoConOrdenDeTrabajo.getId());
+					List<PresupuestoDTO> presupuestos = this.presupuestosController
+							.readByIdOt(ordenDeTrabajo.getIdOrdenTrabajo());
 					for (PresupuestoDTO presupuesto : presupuestos) {
-						if(presupuesto.getEstado()==EstadoPresupuesto.APROBADO || presupuesto.getEstado()==EstadoPresupuesto.PAGADO) {//pagado o aprobado
-							flag=true;
+						if (presupuesto.getEstado() == EstadoPresupuesto.APROBADO
+								|| presupuesto.getEstado() == EstadoPresupuesto.PAGADO) {// pagado o aprobado
+							flag = true;
 						}
 					}
-					if(flag==true) {
+					if (flag == true) {
 						vehiculosEnTabla.add(vehiculoConOrdenDeTrabajo);
 					}
-					flag=false;
+					flag = false;
 				}
-				if(vehiculosEnTabla.size()>0) {
+				if (vehiculosEnTabla.size() > 0) {
 					this.view.setData(vehiculosEnTabla);
 				}
 			}
-		}		
+		}
 	}
-	
+
 	private void onSelectVehiculoDeCliente(ListSelectionEvent a) {
 		VehiculoConOrdenDeTrabajoDTO idVehiculo = this.view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
@@ -85,10 +89,11 @@ public class GestionTrabajosPresenter {
 				this.view.clearDataFichaTecnicaVehiculo();
 				this.view.clearDataOrdenDeTrabajo();
 				this.view.setData(fichaVehiculo);
-				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo.getId());				
+				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo.getId());
 				if (ordenDeTrabajo != null) {
 					this.view.setData(ordenDeTrabajo);
-					List<PresupuestoDTO> presupuestos = this.presupuestosController.readByIdOt(ordenDeTrabajo.getIdOrdenTrabajo());
+					List<PresupuestoDTO> presupuestos = this.presupuestosController
+							.readByIdOt(ordenDeTrabajo.getIdOrdenTrabajo());
 					this.view.setDataPresupuestos(presupuestos);
 				} else {
 					this.view.clearDataOrdenDeTrabajo();
@@ -99,20 +104,21 @@ public class GestionTrabajosPresenter {
 	}
 
 	private void onSelecionarPresupuesto(ListSelectionEvent a) {
-		if(this.view.getIdPresupuesto() >= 0) {
+		if (this.view.getIdPresupuesto() >= 0) {
 			this.nuevoPresupuesto = presupuestosController.readById(this.view.getIdPresupuesto());
 			this.view.setDataPresupuesto(nuevoPresupuesto);
 		}
 	}
-	
+
 	private void onRegistrar(ActionEvent a) {
-		
+
 		int idPresupuesto = this.view.getIdPresupuestoSeleccionada();
 
-		if(idPresupuesto!=-1) {
-			int resp =JOptionPane.showOptionDialog(null, "¿Estás seguro que quieres registrar\n el presupuesto realizado?", "Confirmación",
+		if (idPresupuesto != -1) {
+			int resp = JOptionPane.showOptionDialog(null,
+					"¿Estás seguro que quieres registrar\n el presupuesto realizado?", "Confirmación",
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-			if(resp==0) {
+			if (resp == 0) {
 				presupuestosController.updateEstadoPresupuesto(idPresupuesto);
 				this.onBuscar(a);
 			}

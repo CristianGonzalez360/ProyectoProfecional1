@@ -21,7 +21,8 @@ public class OrdenesTrabajoController {
 
 	private final SessionService service;
 
-	public OrdenesTrabajoController(OrdenesDeTrabajoDao dao, SessionService service, FacturasDao facturasDao, PresupuestosDao presupuestos) {
+	public OrdenesTrabajoController(OrdenesDeTrabajoDao dao, SessionService service, FacturasDao facturasDao,
+			PresupuestosDao presupuestos) {
 		this.dao = dao;
 		this.presDao = presupuestos;
 		this.service = service;
@@ -55,13 +56,13 @@ public class OrdenesTrabajoController {
 		assert idVehiculo != null;
 		return dao.readByIdVehiculoConOtNoCerrada(idVehiculo);
 	}
-	
+
 	public boolean esRechazada(Integer ordenDeTrabajoId) {
 		List<PresupuestoDTO> presu = presDao.readByOrdenDeTrabajoId(ordenDeTrabajoId);
 		int cantPresupuestos = presu.size();
 		int cantRechazadas = 0;
-		for(PresupuestoDTO temp: presu) {
-			if(temp.getEstado().equals(EstadoPresupuesto.RECHAZADO)) {
+		for (PresupuestoDTO temp : presu) {
+			if (temp.getEstado().equals(EstadoPresupuesto.RECHAZADO)) {
 				cantRechazadas++;
 			}
 		}

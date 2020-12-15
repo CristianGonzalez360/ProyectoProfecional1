@@ -19,7 +19,7 @@ public class VehiculosConOrdenDeTrabajoController {
 	private FichaTecnicaVehiculoDao fichasDao;
 
 	private OrdenesDeTrabajoDao otDao;
-			
+
 	public VehiculosConOrdenDeTrabajoController(VehiculosConOrdenDeTrabajoDao vehiculosDao, OrdenesDeTrabajoDao otDao,
 			FichaTecnicaVehiculoDao fichasDao) {
 		assert vehiculosDao != null;
@@ -71,5 +71,5 @@ public class VehiculosConOrdenDeTrabajoController {
 		}
 		return vClienteRet;
 	}
-	
+
 }

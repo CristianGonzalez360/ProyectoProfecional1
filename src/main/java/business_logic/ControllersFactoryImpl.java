@@ -22,19 +22,19 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	private RepuestosController repuestosController;
 
 	private FacturasController facturasController;
-	
+
 	private EntregaDeVehiculoController entregasController;
-	
+
 	private SucursalesController sucursalesController;
-	
+
 	private PedidosController pedidosController;
-	
+
 	private VentasVehiculosController ventasController;
-	
+
 	private ConfiguradorTerminalController configurador;
-	
+
 	private ConfiguradorCapacidadTurnosController configuradorCapacidad;
-	
+
 	private VehiculosController vehiculosController2;
 
 	private UsuariosController usuariosController;
@@ -42,13 +42,13 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	private ConfiguradorBaseDeDatosController configDbController;
 
 	private ConfiguradorSmtpController configSmtpController;
-	
+
 	private MantenimientosController mantenimientosController;
 
 	private GarantiasController garantiasController;
-	
+
 	private ReportesController reportesController;
-	
+
 	public ControllersFactoryImpl(DaosFactory daos) {
 		this.daos = daos;
 	}
@@ -88,7 +88,7 @@ public class ControllersFactoryImpl extends ControllersFactory {
 	public PresupuestosController makePresupuestosController() {
 		if (presupuestosController == null) {
 			presupuestosController = new PresupuestosController(daos.makePresupuestoDao(),
-					daos.makeTrabajosPlanificadosDao(), daos.makeRepuestosPlanificadosDao(), daos.makeRepuestoDao());	
+					daos.makeTrabajosPlanificadosDao(), daos.makeRepuestosPlanificadosDao(), daos.makeRepuestoDao());
 		}
 		return presupuestosController;
 	}
@@ -102,98 +102,112 @@ public class ControllersFactoryImpl extends ControllersFactory {
 
 	@Override
 	public FacturasController makeFacturasController() {
-		if(facturasController == null) 
+		if (facturasController == null)
 			facturasController = new FacturasController(daos);
 		return facturasController;
 	}
-	
+
 	@Override
 	public EntregaDeVehiculoController makeEntregasController() {
-		if(entregasController == null)
-			entregasController = new EntregaDeVehiculoController(daos.makeClienteDao(), daos.makeDatosPersonalesDao(), daos.makeOrdenDeTrabajoDao(), daos.makePresupuestoDao(), daos.makeVehiculoConOrdeDeTrabajoDao(), daos.makeFichaTecnicaVehiculoDao(), daos.makeFacturasDao());
+		if (entregasController == null)
+			entregasController = new EntregaDeVehiculoController(daos.makeClienteDao(), daos.makeDatosPersonalesDao(),
+					daos.makeOrdenDeTrabajoDao(), daos.makePresupuestoDao(), daos.makeVehiculoConOrdeDeTrabajoDao(),
+					daos.makeFichaTecnicaVehiculoDao(), daos.makeFacturasDao());
 		return entregasController;
 	}
 
 	@Override
 	public SucursalesController makeSucursalesController() {
-		if(sucursalesController == null) {
+		if (sucursalesController == null) {
 			sucursalesController = new SucursalesController(daos);
 		}
 		return sucursalesController;
 	}
-	
+
 	@Override
 	public PedidosController makePedidosController() {
-		if(pedidosController == null) {
-			pedidosController = new PedidosController(daos.makeDatosPersonalesDao(), daos.makeUsuariosDao(), daos.makeVentaVehiculoDao(), daos.makeVehiculoDao(), daos.makePedidoVehiculoDao());
+		if (pedidosController == null) {
+			pedidosController = new PedidosController(daos.makeDatosPersonalesDao(), daos.makeUsuariosDao(),
+					daos.makeVentaVehiculoDao(), daos.makeVehiculoDao(), daos.makePedidoVehiculoDao());
 		}
 		return pedidosController;
 	}
 
 	@Override
 	public VentasVehiculosController makeVentasVehiculosController() {
-		if(ventasController == null) ventasController = new VentasVehiculosController(daos);
+		if (ventasController == null)
+			ventasController = new VentasVehiculosController(daos);
 		return ventasController;
 	}
-	
+
 	@Override
 	public ConfiguradorTerminalController makeConfiguradorTerminalController() {
-		if(configurador == null) configurador = new ConfiguradorTerminalController();
+		if (configurador == null)
+			configurador = new ConfiguradorTerminalController();
 		return configurador;
 	}
-	
+
 	@Override
 	public ConfiguradorCapacidadTurnosController makeConfiguradorCapacidadTurnosController() {
-		if(configuradorCapacidad == null) configuradorCapacidad = new ConfiguradorCapacidadTurnosController();
+		if (configuradorCapacidad == null)
+			configuradorCapacidad = new ConfiguradorCapacidadTurnosController();
 		return configuradorCapacidad;
 	}
-	
+
 	@Override
 	public LoginController makeLoginController() {
 		if (loginController == null)
-			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance(), configurador);
+			loginController = new LoginController(daos.makeUsuariosDao(), SessionServiceImpl.getInstance(),
+					configurador);
 		return loginController;
 	}
 
 	@Override
 	public VehiculosController makeVehiculosController() {
-		if(vehiculosController2 == null) vehiculosController2 = new VehiculosController(daos);
+		if (vehiculosController2 == null)
+			vehiculosController2 = new VehiculosController(daos);
 		return vehiculosController2;
 	}
-	
+
 	@Override
 	public UsuariosController makeUsuariosController() {
-		if(usuariosController == null) usuariosController = new UsuariosController(daos);
+		if (usuariosController == null)
+			usuariosController = new UsuariosController(daos);
 		return usuariosController;
 	}
 
 	@Override
 	public ConfiguradorBaseDeDatosController makeConfiguradorBaseDeDatosController() {
-		if(configDbController == null) configDbController = new ConfiguradorBaseDeDatosController();
+		if (configDbController == null)
+			configDbController = new ConfiguradorBaseDeDatosController();
 		return configDbController;
 	}
 
 	@Override
 	public ConfiguradorSmtpController makeConfiguradorSmtpController() {
-		if(configSmtpController == null) configSmtpController = new ConfiguradorSmtpController();
+		if (configSmtpController == null)
+			configSmtpController = new ConfiguradorSmtpController();
 		return configSmtpController;
 	}
 
 	@Override
 
 	public MantenimientosController makeMantenimientosController() {
-		if(mantenimientosController == null) mantenimientosController = new MantenimientosController(daos);
-		return mantenimientosController;	
+		if (mantenimientosController == null)
+			mantenimientosController = new MantenimientosController(daos);
+		return mantenimientosController;
 	}
-	
+
 	public GarantiasController makeGarantiasController() {
-		if(garantiasController == null) garantiasController = new GarantiasController(daos);
+		if (garantiasController == null)
+			garantiasController = new GarantiasController(daos);
 		return garantiasController;
 	}
-	
+
 	@Override
 	public ReportesController makeReportesController() {
-		if(reportesController == null) reportesController = new ReportesController(daos);
+		if (reportesController == null)
+			reportesController = new ReportesController(daos);
 		return reportesController;
 	}
 }

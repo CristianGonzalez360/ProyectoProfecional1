@@ -6,11 +6,11 @@ import java.util.List;
 import dto.validators.StringValidator;
 
 public class ConsultaVehiculoParaVentaDTO {
-	
+
 	private String tipo;
-	
+
 	private String marca;
-		
+
 	public ConsultaVehiculoParaVentaDTO() {
 	}
 

@@ -1,27 +1,27 @@
 package dto.temporal;
 
 public class ModalidadVentaVehiculoDTO {
-	
+
 	private boolean efectivo;
-	
+
 	private String financiera;
-	
+
 	private String nroCuotas;
-	
+
 	private String montoCuota;
-	
+
 	private String precioFinal;
-	
+
 	private String comision;
-	
+
 	private String montoFinanciado;
-	
+
 	private boolean extiendeGarantia;
-	
+
 	private String costoGarantia;
-	
+
 	private String costoExtensionGarantia;
-		
+
 	public ModalidadVentaVehiculoDTO() {
 	}
 
@@ -64,7 +64,7 @@ public class ModalidadVentaVehiculoDTO {
 	public void setPrecioFinal(String precioFinal) {
 		this.precioFinal = precioFinal;
 	}
-	
+
 	public String getComision() {
 		return comision;
 	}
@@ -72,7 +72,7 @@ public class ModalidadVentaVehiculoDTO {
 	public void setComision(String comision) {
 		this.comision = comision;
 	}
-	
+
 	public String getMontoFinanciado() {
 		return montoFinanciado;
 	}

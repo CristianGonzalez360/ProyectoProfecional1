@@ -29,7 +29,7 @@ public class ConfiguracionView extends JDialog {
 
 	private JButton btnConfirmar;
 	private JButton btnCancelar;
-	
+
 	private SpinnerNumberModel modelSpinner;
 	private JSpinner spinner;
 
@@ -47,7 +47,8 @@ public class ConfiguracionView extends JDialog {
 		contentPanel.setLayout(null);
 
 		JPanel panelForm = new JPanel();
-		panelForm.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Capacidad de Turnos de Taller", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelForm.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"),
+				"Capacidad de Turnos de Taller", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelForm.setBounds(10, 11, 334, 147);
 		contentPanel.add(panelForm);
 		panelForm.setLayout(new FormLayout(
@@ -62,12 +63,12 @@ public class ConfiguracionView extends JDialog {
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
 
 		modelSpinner = new SpinnerNumberModel(1, 0, 1000, 1);
-		
-				JLabel lblCapacidad = new JLabel("Cantidad de Turnos");
-				panelForm.add(lblCapacidad, "4, 6");
-				spinner = new JSpinner();
-				spinner.setModel(modelSpinner);
-				panelForm.add(spinner, "10, 6");
+
+		JLabel lblCapacidad = new JLabel("Cantidad de Turnos");
+		panelForm.add(lblCapacidad, "4, 6");
+		spinner = new JSpinner();
+		spinner.setModel(modelSpinner);
+		panelForm.add(spinner, "10, 6");
 
 		{
 			JPanel panelButton = new JPanel();
@@ -96,7 +97,7 @@ public class ConfiguracionView extends JDialog {
 	public String getCapacidadTurnos() {
 		return this.spinner.getValue().toString();
 	}
-	
+
 	public void setCapacidadTurnos(String capacidad) {
 		this.spinner.setValue(capacidad);
 	}

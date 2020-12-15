@@ -92,22 +92,22 @@ public class DatabaseSeederServiceImpl {
 			daos.makeFacturasDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for (CaracteristicaVehiculoDTO target: graph.getCaracteristicaVehiculo()) {
+		for (CaracteristicaVehiculoDTO target : graph.getCaracteristicaVehiculo()) {
 			daos.makeCaracteristicasVehiculoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(MonedaDTO target: graph.getMonedas()) {
+		for (MonedaDTO target : graph.getMonedas()) {
 			daos.makeMonedasDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(SucursalDTO target: graph.getSucursales()) {
+		for (SucursalDTO target : graph.getSucursales()) {
 			daos.makeSucursalesDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for(VehiculoDTO target: graph.getVehiculos()) {
+		for (VehiculoDTO target : graph.getVehiculos()) {
 			daos.makeVehiculoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
-		}		
+		}
 		for (VentaVehiculoDTO target : graph.getVentaVehiculo()) {
 			daos.makeVentaVehiculoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
@@ -117,7 +117,7 @@ public class DatabaseSeederServiceImpl {
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
 	}
-	
+
 	private DatabaseGraph loadDatabaseGraph() {
 		DatabaseGraph graph = null;
 		try {

@@ -11,7 +11,7 @@ import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
 
 public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implements PresupuestosDao {
-	
+
 	private static final String readAll = "SELECT * FROM Presupuestos";
 
 	private static final String readById = readAll + " " + "WHERE Presupuestos.idPresupuesto = ?";
@@ -23,36 +23,35 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 	private static final String updateState = "UPDATE Presupuestos SET estado = ?, fechaAprobacion = ? WHERE idPresupuesto = ?";
-	
+
 	private static final String updateStateForPayment = "UPDATE Presupuestos SET estado = ? WHERE idPresupuesto = ?";
-	
+
 	private static final String delete = "DELETE FROM Presupuestos WHERE idPresupuesto = ?";
-	
+
 	private static final String update = "UPDATE Presupuestos SET comentarioAltaPresu = ?, idFactura = ? WHERE idPresupuesto = ?";
-	
+
 	private static final String readByIdFactura = readAll + " " + "WHERE Presupuestos.idFactura = ?";
-	
+
 	private static final String rechazo = "UPDATE Presupuestos SET estado = ?, fechaAprobacion = ?, comentarioRechazo = ? WHERE idPresupuesto = ?";
-		
+
 	public PresupuestosDaoImpl(Connection connection) {
 		super(connection);
 	}
 
 	@Override
 	public boolean updateStateById(Integer id, Date aprovedDate, EstadoPresupuesto estado) {
-			return getTemplate().query(updateState).param(estado.name()).param(aprovedDate).param(id).excecute();
+		return getTemplate().query(updateState).param(estado.name()).param(aprovedDate).param(id).excecute();
 	}
-	
+
 	@Override
 	public boolean updateState(Integer id, EstadoPresupuesto estado) {
 		return getTemplate().query(updateStateForPayment).param(estado.name()).param(id).excecute();
 	}
-	
-	
+
 	@Override
 	public boolean update(PresupuestoDTO entity) {
 		return getTemplate().query(update).param(entity.getComentarioAltaPresu())
-				.param(entity.getIdFactura() == null? new NullObject() : entity.getIdFactura())
+				.param(entity.getIdFactura() == null ? new NullObject() : entity.getIdFactura())
 				.param(entity.getIdPresupuesto()).excecute();
 	}
 
@@ -68,9 +67,7 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 				.param(entity.getFechaCierrePresu() == null ? new NullObject() : entity.getFechaCierrePresu())
 				.param(entity.getComentarioRechazo() == null ? new NullObject() : entity.getComentarioRechazo())
 				.param(entity.getFechaAprobacion() == null ? new NullObject() : entity.getFechaAprobacion())
-				.param(entity.getEstado().name())
-				.param(entity.isGarantia())
-				.excecute();
+				.param(entity.getEstado().name()).param(entity.isGarantia()).excecute();
 	}
 
 	@Override
@@ -97,13 +94,13 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 	@Override
 	protected Mapper<PresupuestoDTO> getMapper() {
 		return new Mapper<PresupuestoDTO>() {
-		
+
 			@Override
 			public PresupuestoDTO map(Object[] obj) {
 				PresupuestoDTO dto = new PresupuestoDTO();
-				dto.setIdPresupuesto((Integer)obj[0]);
+				dto.setIdPresupuesto((Integer) obj[0]);
 				dto.setIdOT((Integer) obj[1]);
-				dto.setIdFactura(obj[2] == null ? null :(Integer) obj[2]);
+				dto.setIdFactura(obj[2] == null ? null : (Integer) obj[2]);
 				dto.setIdUsuAltaPresu(obj[3] == null ? null : (Integer) obj[3]);
 				dto.setIdUsuCierrePresu(obj[4] == null ? null : (Integer) obj[4]);
 				dto.setIdUsuRegPago(obj[5] == null ? null : (Integer) obj[5]);
@@ -134,8 +131,8 @@ public class PresupuestosDaoImpl extends GenericJdbcDao<PresupuestoDTO> implemen
 	public boolean registrarAprobacion(PresupuestoDTO presupuesto) {
 		return getTemplate().query(rechazo).param(presupuesto.getEstado().name())
 				.param(presupuesto.getFechaAprobacion())
-				.param(presupuesto.getComentarioRechazo() == null? new NullObject() : presupuesto.getComentarioRechazo())
-				.param(presupuesto.getIdPresupuesto())
-				.excecute();
+				.param(presupuesto.getComentarioRechazo() == null ? new NullObject()
+						: presupuesto.getComentarioRechazo())
+				.param(presupuesto.getIdPresupuesto()).excecute();
 	}
 }

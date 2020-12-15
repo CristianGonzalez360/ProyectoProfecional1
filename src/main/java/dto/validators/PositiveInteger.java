@@ -6,7 +6,7 @@ import java.util.List;
 public class PositiveInteger implements Validator<String> {
 
 	private String message;
-	
+
 	public PositiveInteger(String message) {
 		this.message = message;
 	}
@@ -25,7 +25,5 @@ public class PositiveInteger implements Validator<String> {
 		}
 		return ret;
 	}
-
-	
 
 }

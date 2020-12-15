@@ -6,6 +6,6 @@ import dto.temporal.SessionDTO;
 public interface UserLogger {
 
 	public SessionDTO logUser(UserCrendentialsDTO credentials);
-	
+
 	public void logout();
 }

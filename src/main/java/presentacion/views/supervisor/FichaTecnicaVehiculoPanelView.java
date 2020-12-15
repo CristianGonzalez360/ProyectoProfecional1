@@ -24,12 +24,13 @@ public class FichaTecnicaVehiculoPanelView extends JPanel {
 	private JTextField textModelo;
 	private JTextField textColor;
 	private JTextField textCombustion;
+
 	/**
 	 * Create the panel.
 	 */
 	public FichaTecnicaVehiculoPanelView() {
-		setBorder(new TitledBorder(null, "Ficha tecnica del vehiculo", TitledBorder.LEADING, TitledBorder.TOP,
-				null, null));
+		setBorder(new TitledBorder(null, "Ficha tecnica del vehiculo", TitledBorder.LEADING, TitledBorder.TOP, null,
+				null));
 		setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
 						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), FormSpecs.RELATED_GAP_COLSPEC,
@@ -82,7 +83,7 @@ public class FichaTecnicaVehiculoPanelView extends JPanel {
 		textCombustion.setColumns(10);
 
 	}
-	
+
 	public void disableAllFichaTecnicaInputs() {
 		this.textNroDeChasis.setEditable(false);
 		this.textNroMotor.setEditable(false);
@@ -100,7 +101,7 @@ public class FichaTecnicaVehiculoPanelView extends JPanel {
 		this.textCombustion.setText("");
 		this.textModelo.setText("");
 	}
-	
+
 	public void setData(FichaTecnicaVehiculoDTO fichaVehiculo) {
 		fichaVehiculo.getId();
 		this.textNroDeChasis.setText(fichaVehiculo.getNroChasis().toString());

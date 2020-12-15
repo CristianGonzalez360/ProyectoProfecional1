@@ -15,11 +15,11 @@ public class GarantiasController {
 		super();
 		this.daos = daos;
 	}
-	
+
 	public GarantiaVehiculoDTO readByIdVehiculo(Integer id) {
 		return daos.makeGarantiasVehiculosDao().readByIdVehiculo(id);
 	}
-	
+
 	public boolean estaEnGarantia(Integer idVehiculo) {
 		boolean ret = false;
 		if (idVehiculo != null) {
@@ -34,7 +34,7 @@ public class GarantiasController {
 			if (ficha.getKilometraje() > garantia.getKilometrajeGarantizado()
 					- garantia.getKilometrajeInicialDelVehiculo()) {
 				ret = false;
-			} 
+			}
 		}
 		return ret;
 	}

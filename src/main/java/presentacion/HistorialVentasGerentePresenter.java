@@ -22,10 +22,10 @@ public class HistorialVentasGerentePresenter {
 	private void onCargar(ActionEvent a) {
 		Date desde = view.getVentaDesde();
 		Date hasta = view.getVentaHasta();
-		
-		if(desde == null || hasta == null)
+
+		if (desde == null || hasta == null)
 			return;
-		
+
 		this.view.clear();
 		this.view.cargarTabla(ventasVehiculosController.readVentas(desde, hasta));
 	}

@@ -15,19 +15,20 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 	private static final String readDisponiblesByCriteria = "SELECT * FROM Vehiculos WHERE marca = ? AND usado = ?";
-	
+
 	private static final String readById = "SELECT * FROM Vehiculos WHERE idVehiculo = ?";
 
 	private static final String readAllMarcas = "SELECT DISTINCT marca FROM Vehiculos";
-	
+
 	private static final String readAll = "SELECT * FROM Vehiculos";
 
 	private static final String updateDisponibilidad = "UPDATE Vehiculos SET disponible = ? WHERE idVehiculo = ?";
-	
-	private static final String readVehiculosUsados = readAll + " WHERE usado = true AND idVehiculo NOT IN (SELECT idVehiculo FROM VentasVehiculos)";
+
+	private static final String readVehiculosUsados = readAll
+			+ " WHERE usado = true AND idVehiculo NOT IN (SELECT idVehiculo FROM VentasVehiculos)";
 
 	private static final String maximoId = "SELECT MAX(idVehiculo) FROM Vehiculos";
-	
+
 	public VehiculoDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -36,7 +37,7 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	public boolean update(VehiculoDTO entity) {
 		return false;
 	}
-	
+
 	@Override
 	public boolean updateDisponibilidadVehiculo(Integer id, Boolean boolean1) {
 		return getTemplate().query(updateDisponibilidad).param(boolean1).param(id).excecute();
@@ -44,19 +45,13 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 
 	@Override
 	public boolean insert(VehiculoDTO entity) {
-		return getTemplate().query(insert)
-				.param(entity.getPrecioVenta())
+		return getTemplate().query(insert).param(entity.getPrecioVenta())
 				.param(entity.getIdFichaTecnica() == null ? new NullObject() : entity.getIdFichaTecnica())
-				.param(entity.getMarca())
-				.param(entity.getFamilia())
-				.param(entity.getLinea())
-				.param(entity.getColor())
+				.param(entity.getMarca()).param(entity.getFamilia()).param(entity.getLinea()).param(entity.getColor())
 				.param(entity.getIdCaracteristicas())
 				.param(entity.getFechaIngreso() == null ? new NullObject() : entity.getFechaIngreso())
-				.param(new Boolean(entity.isDisponible()))
-				.param(new Boolean(entity.isUsado()))
-				.param(entity.getIdSucursal() == null ? new NullObject() : entity.getIdSucursal())
-				.excecute();
+				.param(new Boolean(entity.isDisponible())).param(new Boolean(entity.isUsado()))
+				.param(entity.getIdSucursal() == null ? new NullObject() : entity.getIdSucursal()).excecute();
 	}
 
 	@Override
@@ -87,11 +82,7 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 
 	@Override
 	public List<VehiculoDTO> readDisponiblesByCriteria(String marca, Boolean usado) {
-		return getTemplate()
-				.query(readDisponiblesByCriteria)
-				.param(marca)
-				.param(usado)
-				.excecute(getMapper());
+		return getTemplate().query(readDisponiblesByCriteria).param(marca).param(usado).excecute(getMapper());
 	}
 
 	@Override

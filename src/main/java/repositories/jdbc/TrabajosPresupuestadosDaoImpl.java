@@ -17,9 +17,9 @@ public class TrabajosPresupuestadosDaoImpl extends GenericJdbcDao<TrabajoPresupu
 	private static final String readbByPresupuestoId = readAll + " " + "WHERE TrabajosPresupuestados.idPresupuesto = ?";
 
 	private static final String insert = "INSERT INTO TrabajosPresupuestados (idPresupuesto, descripcionTrabajo, precioTrabajo, tiempoEstTrabajo) VALUES (?,?,?,?)";
-	
+
 	private static final String update = "UPDATE TrabajosPresupuestados SET descripcionTrabajo = ?, precioTrabajo = ?, tiempoEstTrabajo = ? WHERE idTrabajoPresu = ?";
-	
+
 	private static final String delete = "DELETE FROM TrabajosPresupuestados WHERE idTrabajoPresu = ?";
 
 	public TrabajosPresupuestadosDaoImpl(Connection connection) {
@@ -29,19 +29,14 @@ public class TrabajosPresupuestadosDaoImpl extends GenericJdbcDao<TrabajoPresupu
 
 	@Override
 	public boolean update(TrabajoPresupuestadoDTO entity) {
-		return getTemplate().query(update).param(entity.getDescripcionTrabajo())
-				.param(entity.getPrecioTrabajo())
-				.param(entity.getTiempoEstTrabajo())
-				.param(entity.getIdTrabajoPresu()).excecute();
+		return getTemplate().query(update).param(entity.getDescripcionTrabajo()).param(entity.getPrecioTrabajo())
+				.param(entity.getTiempoEstTrabajo()).param(entity.getIdTrabajoPresu()).excecute();
 	}
 
 	@Override
 	public boolean insert(TrabajoPresupuestadoDTO entity) {
-		return getTemplate().query(insert)
-				.param(entity.getIdPresupuesto())
-				.param(entity.getDescripcionTrabajo())
-				.param(entity.getPrecioTrabajo())
-				.param(entity.getTiempoEstTrabajo()).excecute();
+		return getTemplate().query(insert).param(entity.getIdPresupuesto()).param(entity.getDescripcionTrabajo())
+				.param(entity.getPrecioTrabajo()).param(entity.getTiempoEstTrabajo()).excecute();
 	}
 
 	@Override
@@ -68,7 +63,7 @@ public class TrabajosPresupuestadosDaoImpl extends GenericJdbcDao<TrabajoPresupu
 	@Override
 	protected Mapper<TrabajoPresupuestadoDTO> getMapper() {
 		return new Mapper<TrabajoPresupuestadoDTO>() {
-			
+
 			@Override
 			public TrabajoPresupuestadoDTO map(Object[] obj) {
 				TrabajoPresupuestadoDTO dto = new TrabajoPresupuestadoDTO();

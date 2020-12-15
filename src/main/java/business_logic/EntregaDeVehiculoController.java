@@ -33,7 +33,7 @@ public class EntregaDeVehiculoController {
 	private FichaTecnicaVehiculoDao fichaTecnicaDao;
 	private FacturasDao facturaDao;
 	private VentaVehiculoDao ventaVehiculoDAO;
-	
+
 	private EmailSenderService servicio;
 
 	public EntregaDeVehiculoController(ClientesDao clienteDao, DatosPersonalesDao datosPersonalesDao,
@@ -50,7 +50,7 @@ public class EntregaDeVehiculoController {
 
 		this.servicio = new EmailSenderService();
 	}
-	
+
 	public EntregaDeVehiculoController(ClientesDao clientesDao, VehiculosConOrdenDeTrabajoDao vehiculosDao,
 			VentaVehiculoDao ventaVehiculoDAO) {
 		this.clientesDao = clientesDao;
@@ -136,11 +136,11 @@ public class EntregaDeVehiculoController {
 	public boolean enviarCorreoDeSatisfaccion(String correoDestinatario) {
 		return this.servicio.enviarMailDeSatisfaccion(correoDestinatario);
 	}
-	
-	public List <VentaVehiculoDTO>  cargarTablaVentaVehiculos() {
-		List <VentaVehiculoDTO> ventaVehiculoList = ventaVehiculoDAO.readAll();
+
+	public List<VentaVehiculoDTO> cargarTablaVentaVehiculos() {
+		List<VentaVehiculoDTO> ventaVehiculoList = ventaVehiculoDAO.readAll();
 		return ventaVehiculoList;
-		
+
 	}
-	
+
 }

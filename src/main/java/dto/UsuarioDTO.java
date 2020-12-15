@@ -12,7 +12,7 @@ public class UsuarioDTO {
 	private DatosPersonalesDTO datos;
 
 	private SucursalDTO sucursal;
-	
+
 	public UsuarioDTO() {
 
 	}
@@ -30,7 +30,7 @@ public class UsuarioDTO {
 		usuario.setDatosPersonales(datos);
 		return usuario;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -66,7 +66,7 @@ public class UsuarioDTO {
 	public void setSucursal(SucursalDTO sucursal) {
 		this.sucursal = sucursal;
 	}
-	
+
 	public List<String> validate() {
 		List<String> lst = datos.validate();
 		lst.addAll(cuenta.validate());
