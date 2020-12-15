@@ -56,7 +56,7 @@ public class EmailSenderService {
 				message.setFrom(new InternetAddress(correoRemitente));
 				message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoDestinatario));
 				message.setSubject(Recordatorio.asunto);
-				message.setContent(Recordatorio.getMessage(turno), "text/html");
+				message.setContent(Recordatorio.getMensajeRecordatorio(turno), "text/html");
 				transport = session.getTransport("smtp");
 				transport.connect(correoRemitente, contraseñaRemitente);
 				transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
