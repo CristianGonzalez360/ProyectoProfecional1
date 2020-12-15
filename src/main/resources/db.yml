@@ -458,39 +458,7 @@ vehiculos:
     usado: true
     idCaracteristicas: 1
     idSucursal: 1 
-  - precioVenta: 800000
-    idFichaTecnica: 1
-    marca: Ford
-    familia: Fiesta
-    linea: Max
-    color: azul
-    fechaIngreso: 2017-10-11
-    disponible: false
-    usado: true
-    idCaracteristicas: 1
-    idSucursal: 1
-  - precioVenta: 400000
-    idFichaTecnica: 1
-    marca: Ford
-    familia: Escort
-    linea: Super
-    color: magenta
-    fechaIngreso: 2014-10-11
-    disponible: true
-    usado: true
-    idCaracteristicas: 1
-    idSucursal: 3
-  - precioVenta: 100000
-    idFichaTecnica: 1
-    marca: Ford
-    familia: Sierra
-    linea: Familiar classic
-    color: White
-    fechaIngreso: 2019-10-11
-    disponible: true
-    usado: true
-    idCaracteristicas: 1
-    idSucursal: 1
+ 
 #CATALOGO DE VEHICULOS NUEVOS SIN STOCK
   - precioVenta: 2100000
     idFichaTecnica: 1
@@ -503,94 +471,20 @@ vehiculos:
     usado: false
     idCaracteristicas: 1
     idSucursal:
-  - precioVenta: 2500000
-    idFichaTecnica: 1
-    marca: Fiat
-    familia: Siena
-    linea: Full TS
-    color: Gris
-    fechaIngreso: 2017-10-11
-    disponible: true
-    usado: false
-    idCaracteristicas: 1
-    idSucursal: 
-  - precioVenta: 4000000
-    idFichaTecnica: 1
-    marca: Fiat
-    familia: Linea
-    linea: AS sport
-    color: Dark Red
-    fechaIngreso: 2017-10-11
-    disponible: true
-    usado: false
-    idCaracteristicas: 1
-    idSucursal:
-  - precioVenta: 5300000
-    idFichaTecnica: 1
-    marca: Volkswagen
-    familia: Polo
-    linea: Trend AT
-    color: Dark Red
-    fechaIngreso: 2020-10-11
-    disponible: true
-    usado: false
-    idCaracteristicas: 1
-    idSucursal:
 
 garantias:
   - idVehiculo: 1
-    aniosDeGarantia: 3
-    kilometrajeInicialDelVehiculo: 0
-    kilometrajeGarantizado: 150000
-    fechaInicioDeLaGarantia: 
-    fechaDeCaducidadDeLaGarantia: 
-    costoFinalConIVA: 32000
-  - idVehiculo: 2
-    aniosDeGarantia: 3
+    aniosDeGarantia: 1
     kilometrajeInicialDelVehiculo: 0
     kilometrajeGarantizado: 90000
     fechaInicioDeLaGarantia: 
     fechaDeCaducidadDeLaGarantia: 
-    costoFinalConIVA: 32000
-  - idVehiculo: 3
-    aniosDeGarantia: 1
-    kilometrajeInicialDelVehiculo: 200000
-    kilometrajeGarantizado: 2090000
-    fechaInicioDeLaGarantia:
-    fechaDeCaducidadDeLaGarantia:
-    costoFinalConIVA: 32000
-  - idVehiculo: 4
-    aniosDeGarantia: 1
-    kilometrajeInicialDelVehiculo: 200000
-    kilometrajeGarantizado: 2090000
-    fechaInicioDeLaGarantia:
-    fechaDeCaducidadDeLaGarantia:
-    costoFinalConIVA: 32000 
-  - idVehiculo: 5
+    costoFinalConIVA: 10000
+  - idVehiculo: 2
     aniosDeGarantia: 3
     kilometrajeInicialDelVehiculo: 0
     kilometrajeGarantizado: 150000
     fechaInicioDeLaGarantia: 
     fechaDeCaducidadDeLaGarantia: 
     costoFinalConIVA: 32000
-  - idVehiculo: 6
-    aniosDeGarantia: 3
-    kilometrajeInicialDelVehiculo: 0
-    kilometrajeGarantizado: 150000
-    fechaInicioDeLaGarantia: 
-    fechaDeCaducidadDeLaGarantia: 
-    costoFinalConIVA: 32000
-  - idVehiculo: 7
-    aniosDeGarantia: 3
-    kilometrajeInicialDelVehiculo: 0
-    kilometrajeGarantizado: 150000
-    fechaInicioDeLaGarantia:
-    fechaDeCaducidadDeLaGarantia:
-    costoFinalConIVA: 32000
-  - idVehiculo: 8
-    aniosDeGarantia: 3
-    kilometrajeInicialDelVehiculo: 0
-    kilometrajeGarantizado: 150000
-    fechaInicioDeLaGarantia: 
-    fechaDeCaducidadDeLaGarantia: 
-    costoFinalConIVA: 32000
+ 
