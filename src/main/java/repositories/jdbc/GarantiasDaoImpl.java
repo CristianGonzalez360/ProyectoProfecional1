@@ -91,12 +91,12 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 				GarantiaVehiculoDTO ret = new GarantiaVehiculoDTO();
 				ret.setId((Integer) obj[0]);
 				ret.setIdVehiculo((Integer) obj[1]);
-				ret.setAniosDeGarantia((Integer) obj[2]);
-				ret.setKilometrajeInicialDelVehiculo((Integer) obj[3]);
-				ret.setKilometrajeGarantizado((Integer) obj[4]);
-				ret.setFechaInicioDeLaGarantia((Date) obj[5]);
-				ret.setFechaDeCaducidadDeLaGarantia((Date) obj[6]);
-				ret.setCostoFinalConIVA((Double) obj[7]);
+				ret.setAniosDeGarantia(obj[2] != null ? (Integer) obj[2] : 0);
+				ret.setKilometrajeInicialDelVehiculo(obj[3] != null ? (Integer) obj[3] : 0);
+				ret.setKilometrajeGarantizado(obj[4] != null ? (Integer) obj[4] : 0);
+				ret.setFechaInicioDeLaGarantia(obj[5] != null ? (Date) obj[5] : null);
+				ret.setFechaDeCaducidadDeLaGarantia(obj[6] != null ? (Date) obj[6] : null);
+				ret.setCostoFinalConIVA(obj[7] != null ? (Double) obj[7] : 0.0);
 				return ret;
 			}
 		};
