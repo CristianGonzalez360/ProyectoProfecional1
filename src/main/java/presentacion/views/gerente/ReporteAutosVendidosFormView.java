@@ -39,7 +39,7 @@ public class ReporteAutosVendidosFormView extends JDialog {
 
 	public ReporteAutosVendidosFormView() {
 		setTitle("Reporte Autos Vendidos");
-		setBounds(100, 100, 400, 280);
+		setBounds(100, 100, 380, 280);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -48,33 +48,44 @@ public class ReporteAutosVendidosFormView extends JDialog {
 		JPanel panelCentral = new JPanel();
 		panelCentral.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPanel.add(panelCentral, BorderLayout.CENTER);
-		panelCentral.setLayout(new FormLayout(
-				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
-						FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
-						FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), },
-				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+		panelCentral.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
 
 		JLabel lblDesde = new JLabel("Desde");
 		panelCentral.add(lblDesde, "4, 4");
-
-		fechaDesde = new JDateChooser();
-		panelCentral.add(fechaDesde, "6, 4");
-
-		JLabel lblHasta = new JLabel("Hasta");
-		panelCentral.add(lblHasta, "8, 4");
-
-		fechaHasta = new JDateChooser();
-		panelCentral.add(fechaHasta, "10, 4");
-
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Marca");
-		panelCentral.add(rdbtnNewRadioButton, "4, 8");
-
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Modelo");
-		panelCentral.add(rdbtnNewRadioButton_1, "4, 10");
+				
+						fechaDesde = new JDateChooser();
+						panelCentral.add(fechaDesde, "8, 4, 3, 1");
+		
+				JLabel lblHasta = new JLabel("Hasta");
+				panelCentral.add(lblHasta, "4, 6");
+				
+						fechaHasta = new JDateChooser();
+						panelCentral.add(fechaHasta, "8, 6, 3, 1");
 
 		JPanel panelInferior = new JPanel();
 		contentPanel.add(panelInferior, BorderLayout.SOUTH);
