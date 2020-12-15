@@ -74,6 +74,9 @@ public class ReportesPresenter {
 	private void generarReporteIngresos() {
 		Date fechaDesde = reporteIngresoDiarioInputFormView.getFechaDesde();
 		Date fechaHasta = reporteIngresoDiarioInputFormView.getFechaHasta();
+		
+		if (fechaDesde == null || fechaHasta == null)
+			return;
 
 		ReporteViewImpl reporte = new ReporteViewImpl();
 		List<FacturaDTO> ingresos = reportesController.readFacturasPagas(fechaDesde, fechaHasta);
