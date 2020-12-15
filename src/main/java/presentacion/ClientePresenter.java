@@ -132,7 +132,7 @@ public class ClientePresenter {
 				GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(vehiConOT.getIdVehiculo());
 				if (garantia != null) {
 					view.setDataGarantia(garantia);
-				}	
+				}
 			}
 		}
 	}
