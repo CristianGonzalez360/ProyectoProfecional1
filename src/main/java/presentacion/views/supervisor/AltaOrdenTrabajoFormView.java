@@ -3,6 +3,8 @@ package presentacion.views.supervisor;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -27,7 +29,6 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 	private JEditorPane editorTrabajoSugerido;
 	private ButtonGroup grupo;
 	private JButton botonGuardar;
-	private JButton botonCancelar;
 	private JRadioButton rdbtnGarantia;
 	private JRadioButton rdbtnTaller;
 
@@ -103,18 +104,23 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 		panelBotones.add(botonGuardar);
 		getRootPane().setDefaultButton(botonGuardar);
 
-		botonCancelar = new JButton("Cancelar");
-		botonCancelar.setActionCommand("Cancel");
-		panelBotones.add(botonCancelar);
-
 		this.rdbtnGarantia.setSelected(true);
 		this.rdbtnTaller.setSelected(false);
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				clearData();
+			}
+		});
+		
 		setModal(true);
 	}
 
 	public void clearData() {
 		this.editorTrabajoSolicitado.setText("");
 		this.editorTrabajoSugerido.setText("");
+		habilitarGarantia();
 	}
 
 	public AltaOrdenDeTrabajoDTO getData() {
@@ -141,15 +147,12 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 		this.botonGuardar.addActionListener(listener);
 	}
 
-	public void setActionCancelar(ActionListener listener) {
-		this.botonCancelar.addActionListener(listener);
-	}
-
 	public void habilitarGarantia() {
 		this.rdbtnGarantia.setEnabled(true);
 	}
 
 	public void deshabilitarGarantia() {
 		this.rdbtnGarantia.setEnabled(false);
+		this.rdbtnTaller.setSelected(true);
 	}
 }
