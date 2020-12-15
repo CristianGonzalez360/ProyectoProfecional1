@@ -70,12 +70,6 @@ public class ReporteIngresoDiarioInputFormView extends JDialog {
 		fechaHasta = new JDateChooser();
 		panelCentral.add(fechaHasta, "10, 4");
 
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Marca");
-		panelCentral.add(rdbtnNewRadioButton, "4, 8");
-
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Modelo");
-		panelCentral.add(rdbtnNewRadioButton_1, "4, 10");
-
 		JPanel panelInferior = new JPanel();
 		contentPanel.add(panelInferior, BorderLayout.SOUTH);
 
