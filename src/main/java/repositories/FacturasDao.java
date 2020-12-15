@@ -21,4 +21,6 @@ public interface FacturasDao extends GenericDao<FacturaDTO, Integer> {
 
 	void insertFacturaCarrito(FacturaDTO facturaCarrito);
 
+	List<FacturaDTO> readByDates(Date desde, Date hasta);
+
 }
