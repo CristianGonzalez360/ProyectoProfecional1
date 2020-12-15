@@ -24,10 +24,10 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 			+ ",kilometrajeGarantizado = ?,"
 			+ "fechaInicioDeLaGarantia = ?,"
 			+ " fechaDeCaducidadDeLaGarantia = ?,"
-			+ "costoFinalConIVAidGarantia = ?"
-			+ " WHERE idGarantia = ?";
+			+ "costoFinalConIVA = ?"
+			+ " WHERE idVehiculo = ?";
 	
-	private static final String readById = readAll + " " + "WHERE idGarantia = ?";
+	private static final String readById = readAll + " " + "WHERE idVehiculo = ?";
 	
 	public GarantiasDaoImpl(Connection connection) {
 		super(connection);
@@ -42,7 +42,7 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 				.param(entity.getFechaInicioDeLaGarantia() == null? new NullObject() : entity.getFechaInicioDeLaGarantia())
 				.param(entity.getFechaDeCaducidadDeLaGarantia() == null? new NullObject() : entity.getFechaDeCaducidadDeLaGarantia())
 				.param(entity.getCostoFinalConIVA() == null? new NullObject() : entity.getCostoFinalConIVA())
-				.param(entity.getId())
+				.param(entity.getIdVehiculo())
 				.excecute();
 	}
 
@@ -52,7 +52,7 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 				.param(entity.getIdVehiculo())
 				.param(entity.getAniosDeGarantia() == null ? 0 : entity.getAniosDeGarantia())
 				.param(entity.getKilometrajeInicialDelVehiculo() == null ? 0 : entity.getKilometrajeInicialDelVehiculo())
-				.param(entity.getKilometrajeGarantizado() == null? new NullObject() : entity.getKilometrajeGarantizado())
+				.param(entity.getKilometrajeGarantizado() == null ? new NullObject() : entity.getKilometrajeGarantizado())
 				.param(entity.getFechaInicioDeLaGarantia() == null? new NullObject() : entity.getFechaInicioDeLaGarantia())
 				.param(entity.getFechaDeCaducidadDeLaGarantia() == null? new NullObject() : entity.getFechaDeCaducidadDeLaGarantia())
 				.param(entity.getCostoFinalConIVA() == null? new NullObject() : entity.getCostoFinalConIVA())
@@ -91,12 +91,12 @@ public class GarantiasDaoImpl extends GenericJdbcDao<GarantiaVehiculoDTO> implem
 				GarantiaVehiculoDTO ret = new GarantiaVehiculoDTO();
 				ret.setId((Integer) obj[0]);
 				ret.setIdVehiculo((Integer) obj[1]);
-				ret.setAniosDeGarantia((Integer) obj[2]);
-				ret.setKilometrajeInicialDelVehiculo((Integer) obj[3]);
-				ret.setKilometrajeGarantizado((Integer) obj[4]);
-				ret.setFechaInicioDeLaGarantia((Date) obj[5]);
-				ret.setFechaDeCaducidadDeLaGarantia((Date) obj[6]);
-				ret.setCostoFinalConIVA((Double) obj[7]);
+				ret.setAniosDeGarantia(obj[2] != null ? (Integer) obj[2] : 0);
+				ret.setKilometrajeInicialDelVehiculo(obj[3] != null ? (Integer) obj[3] : 0);
+				ret.setKilometrajeGarantizado(obj[4] != null ? (Integer) obj[4] : 0);
+				ret.setFechaInicioDeLaGarantia(obj[5] != null ? (Date) obj[5] : null);
+				ret.setFechaDeCaducidadDeLaGarantia(obj[6] != null ? (Date) obj[6] : null);
+				ret.setCostoFinalConIVA(obj[7] != null ? (Double) obj[7] : 0.0);
 				return ret;
 			}
 		};

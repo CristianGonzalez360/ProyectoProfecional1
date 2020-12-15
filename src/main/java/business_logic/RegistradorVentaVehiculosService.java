@@ -18,7 +18,7 @@ public class RegistradorVentaVehiculosService {
 	private static final String FORBIDDEN_CLIENTE = "Para cerrar una venta es necesario indicar el cliente.";
 	
 	private static final String FABRICANTE = "Fabricante";
-	
+
 	private DaosFactory daos;
 	
 	public RegistradorVentaVehiculosService(DaosFactory daos) {
@@ -31,14 +31,26 @@ public class RegistradorVentaVehiculosService {
 		if(idCliente == null) throw new ForbiddenException(FORBIDDEN_CLIENTE);
 		if(vehiculo == null) throw new ForbiddenException(FORBIDDEN_VEHICULO);
 		VentaVehiculoDTO venta = makeVentaDTO(idCliente, vehiculo, modalidadVenta);
+		VehiculoDTO vehiculoNuevoEnLaFabrica = null;
 		if(requiereRegistrarPrimero(vehiculo)) {
-			VehiculoDTO target = makeVehiculoNuevoParaRegistrar(vehiculo);
-			vehiculo.setCodigo(target.getIdVehiculo()+"");
-			venta.setIdVehiculo(target.getIdVehiculo());
+			vehiculoNuevoEnLaFabrica = makeVehiculoNuevoParaRegistrar(vehiculo);
+			vehiculo.setCodigo(vehiculoNuevoEnLaFabrica.getIdVehiculo()+"");
+			venta.setIdVehiculo(vehiculoNuevoEnLaFabrica.getIdVehiculo());
 		}
 		daos.makeVentaVehiculoDao().insert(venta);
 		daos.makeVehiculoDao().updateDisponibilidadVehiculo(venta.getIdVehiculo(), new Boolean(false));
+		updateGarantia(modalidadVenta, venta, vehiculoNuevoEnLaFabrica);
 		makeVehiculoConOrdenDeTrabajo(venta.getIdVehiculo(), idCliente);
+	}
+
+	private void updateGarantia(ModalidadVentaVehiculoDTO modalidadVenta, VentaVehiculoDTO venta,
+			VehiculoDTO vehiculoNuevoEnLaFabrica) {
+		ActualizadorDeGarantiaService serv = new ActualizadorDeGarantiaService(daos);
+		if(vehiculoNuevoEnLaFabrica != null) {
+			serv.updateGarantiaVehiculo(vehiculoNuevoEnLaFabrica.getIdVehiculo(), modalidadVenta);
+		} else {
+			serv.updateGarantiaVehiculo(venta.getIdVehiculo(), modalidadVenta);
+		}
 	}
 	
 	private VehiculoDTO makeVehiculoNuevoParaRegistrar(OutputConsultaVehiculoEnVentaDTO vehiculo) {
