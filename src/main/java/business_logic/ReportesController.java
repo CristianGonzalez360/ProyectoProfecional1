@@ -6,6 +6,7 @@ import java.util.List;
 
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
+import dto.taller.FacturaDTO;
 import repositories.DaosFactory;
 
 public class ReportesController {
@@ -41,5 +42,14 @@ public class ReportesController {
 			autosVendidos.add(vehiculo);
 		}
 		return autosVendidos;
+	}
+	
+	public List<FacturaDTO> readFacturasPagas(Date desde ,Date hasta) {
+		List<FacturaDTO> facturasPagas = new ArrayList<>();
+		for (FacturaDTO facturaPaga : daos.makeFacturasDao().readByDates(desde,hasta)) {
+			FacturaDTO factura = daos.makeFacturasDao().readByID(facturaPaga.getIdFactura());
+			facturasPagas.add(factura);
+		}
+		return facturasPagas;
 	}
 }

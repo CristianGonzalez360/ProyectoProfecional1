@@ -7,6 +7,7 @@ import java.util.List;
 import business_logic.FacturasController;
 import business_logic.ReportesController;
 import dto.VehiculoDTO;
+import dto.taller.FacturaDTO;
 import presentacion.views.gerente.PanelReportes;
 import presentacion.views.gerente.ReporteAutosVendidosFormView;
 import presentacion.views.gerente.ReporteEgresoDiarioFormView;
@@ -35,21 +36,12 @@ public class ReportesPresenter {
 
 		this.view.setActionDisplayReporteAutosVendidos((a) -> onDisplayReporteAutosVendidos(a));
 		this.autosVendidosView.setActionGenerarReporte((a) -> generarReporteAutosVendidos());
-
-		this.view.setActionDisplayIngresosDiarios((a) -> onDisplayIngresosDiarios(a));
-		this.autosVendidosView.setActionGenerarReporte((a) -> generarReporteIngresosDiarios());
+		//TODO jere trabajando
+//		this.view.setActionDisplayIngresosDiarios((a) -> onDisplayIngresosDiarios(a));
+//		this.autosVendidosView.setActionGenerarReporte((a) -> generarReporteIngresos());
 
 		this.view.setActionDisplayEgresosDiarios((a) -> onDisplayEgresosDiarios(a));
-		this.autosVendidosView.setActionGenerarReporte((a) -> generarReporteEgresosDiarios());
-
-		this.view.setActionDisplayIngresoMensual((a) -> onDisplayEgresosMensuales(a));
-		this.autosVendidosView.setActionGenerarReporte((a) -> generarReporteEgresosMensuales());
-
-		this.view.setActionDisplayIngresoMensual((a) -> onDisplayEgresosMensuales(a));
-		this.autosVendidosView.setActionGenerarReporte((a) -> generarReporteEgresosMensuales());
-
-		this.view.setActionDisplayreportes((a) -> onDisplayRepuestos(a));
-		this.autosVendidosView.setActionGenerarReporte((a) -> generarReporteRepuestos());
+		this.autosVendidosView.setActionGenerarReporte((a) -> generarReporteEgresos());
 
 	}
 
@@ -59,16 +51,6 @@ public class ReportesPresenter {
 	}
 
 	private void onDisplayEgresosDiarios(ActionEvent e) {
-		reporteEgresoDiarioFormView.getInstance().clearData();
-		reporteEgresoDiarioFormView.getInstance().display();
-	}
-
-	private void onDisplayEgresosMensuales(ActionEvent e) {
-		reporteEgresoDiarioFormView.getInstance().clearData();
-		reporteEgresoDiarioFormView.getInstance().display();
-	}
-
-	private void onDisplayRepuestos(ActionEvent e) {
 		reporteEgresoDiarioFormView.getInstance().clearData();
 		reporteEgresoDiarioFormView.getInstance().display();
 	}
@@ -85,24 +67,28 @@ public class ReportesPresenter {
 		reporte.open();
 	}
 
-	private void generarReporteIngresosDiarios() {
-		// reportesController
-		System.out.println("Generar Reporte");
-	}
+	//TODO jere trabajando
+//	private void generarReporteIngresos() {
+//		reporteIngresoDiarioInputFormView.getSWW
+//		ReporteViewImpl reporte = new ReporteViewImpl();
+//		List<FacturaDTO> autosVendidos = reportesController.readFacturasPagas(desde, hasta);
+//		reporte.setDataVentas(autosVendidos);
+//		reporte.open();
+//	}
 
-	private void generarReporteEgresosDiarios() {
+	private void generarReporteEgresos() {
 		// reportesController
 		System.out.println("Generar Reporte");
 	}
-
-	private void generarReporteEgresosMensuales() {
-		// reportesController
-		System.out.println("Generar Reporte");
-	}
-
-	private void generarReporteRepuestos() {
-		// reportesController
-		System.out.println("Generar Reporte");
-	}
+//
+//	private void generarReporteEgresosMensuales() {
+//		// reportesController
+//		System.out.println("Generar Reporte");
+//	}
+//
+//	private void generarReporteRepuestos() {
+//		// reportesController
+//		System.out.println("Generar Reporte");
+//	}
 
 }

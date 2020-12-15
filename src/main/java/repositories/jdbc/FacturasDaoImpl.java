@@ -26,6 +26,8 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 	
 	private static final String insertFacturaCarrito = "INSERT INTO Facturas (estado, fechaDeAlta, total, dni, idCliente) VALUES (?,?,?,?,?)";
 
+	private static final String getFacturasPagasDate = "SELECT * FROM Facturas WHERE estado = 'PAGA' AND fechaDeCierrePorPago between '?' AND '?'";
+
 	
 	public FacturasDaoImpl(Connection connection) {
 		super(connection);
@@ -118,4 +120,10 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 			.param(facturaCarrito.getCliente().getIdCliente()).excecute();
 	}
 
+	public List<FacturaDTO> readByDates(Date desde,Date hasta) {
+		return getTemplate().query(getFacturasPagasDate).param(desde).param(hasta).excecute(getMapper());
+	}
+
+
+	
 }
