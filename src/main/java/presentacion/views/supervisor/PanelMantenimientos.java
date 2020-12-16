@@ -19,7 +19,7 @@ import presentacion.views.tecnico.PlanificarRepuestosFormView;
 import presentacion.views.tecnico.PlanificarTrabajosFormView;
 import javax.swing.JComboBox;
 
-public class MantenimientosPanel extends JPanel {
+public class PanelMantenimientos extends JPanel {
 
 	private JButton btnAceptar;
 	private JButton btnCancelar;
@@ -32,13 +32,13 @@ public class MantenimientosPanel extends JPanel {
 	private JComboBox<MantenimientoDTO> comboPresets;
 	private JLabel lblMantenimiento;
 
-	private static MantenimientosPanel instance;
+	private static PanelMantenimientos instance;
 	private JLabel lblPrecio;
 	private JTextField tfPrecio;
 	private JLabel lblComentario;
 	private JTextField tfComentario;
 
-	private MantenimientosPanel() {
+	private PanelMantenimientos() {
 		setLayout(new BorderLayout());
 
 		JPanel panelBotones = new JPanel();
@@ -98,9 +98,9 @@ public class MantenimientosPanel extends JPanel {
 		tfPrecio.setColumns(10);
 	}
 
-	public static MantenimientosPanel getInstance() {
+	public static PanelMantenimientos getInstance() {
 		if (instance == null)
-			instance = new MantenimientosPanel();
+			instance = new PanelMantenimientos();
 		return instance;
 	}
 
