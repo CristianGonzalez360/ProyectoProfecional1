@@ -22,7 +22,7 @@ import dto.taller.PresupuestoDTO;
 import dto.taller.RepuestoDTO;
 import dto.taller.RepuestoPlanificadoDTO;
 import dto.taller.TrabajoPresupuestadoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.tecnico.AltaPresupuestoFormView;
 import presentacion.views.tecnico.PanelGestionPresupuestoView;
@@ -309,7 +309,7 @@ public class PresupuestosPresenter {
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
-				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
+				List<IngresoOrdenDeTrabajoDTO> vehiculos = vehiculosController
 						.readVehicleWithClientIdWhereOtIsOpen(cliente.getIdCliente());
 				view.setData(vehiculos);
 			}
@@ -318,7 +318,7 @@ public class PresupuestosPresenter {
 
 	// Muestra la orden de trabajo del vehiculo seleccionado.
 	private void onSelectVehiculoDeCliente(ListSelectionEvent a) {
-		VehiculoConOrdenDeTrabajoDTO idVehiculo = view.getidVehiculoSeleccionado();
+		IngresoOrdenDeTrabajoDTO idVehiculo = view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
 			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController
 					.readFichaTecnicaById(idVehiculo.getIdFichaTecnica());

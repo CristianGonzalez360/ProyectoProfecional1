@@ -84,6 +84,7 @@ public class PanelCaracteristicasDeLaGarantia extends JPanel {
 		textCostoFinalConIVA = new JTextField();
 		add(textCostoFinalConIVA, "4, 12, fill, default");
 		textCostoFinalConIVA.setColumns(10);
+		clearData();
 	}
 
 	public void disableAllInputs() {
@@ -115,9 +116,9 @@ public class PanelCaracteristicasDeLaGarantia extends JPanel {
 
 	public GarantiaVehiculoDTO getData() {
 		GarantiaVehiculoDTO dto = new GarantiaVehiculoDTO();
-		dto.setAniosDeGarantia(Integer.parseInt(textAniosDeGarantia.getText()));
-		dto.setKilometrajeInicialDelVehiculo(Integer.parseInt(textKilometrajeInicialDelVehiculo.getText()));
-		dto.setKilometrajeGarantizado(Integer.parseInt(textKilometrajeGarantizado.getText()));
+		dto.setAniosDeGarantia((textAniosDeGarantia.getText().isEmpty() ? null : Integer.parseInt(textAniosDeGarantia.getText())));
+		dto.setKilometrajeInicialDelVehiculo(textKilometrajeInicialDelVehiculo.getText().isEmpty() ? null : Integer.parseInt(textKilometrajeInicialDelVehiculo.getText()));
+		dto.setKilometrajeGarantizado(textKilometrajeGarantizado.getText().isEmpty() ? null : Integer.parseInt(textKilometrajeGarantizado.getText()));
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-dd-mm");
 		try {
 			String date = textFechaInicioDeLaGarantia.getText();
@@ -131,7 +132,7 @@ public class PanelCaracteristicasDeLaGarantia extends JPanel {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		dto.setCostoFinalConIVA(Double.parseDouble(textCostoFinalConIVA.getText()));
+		dto.setCostoFinalConIVA(textCostoFinalConIVA.getText().isEmpty() ? null : Double.parseDouble(textCostoFinalConIVA.getText()));
 		return dto;
 	}
 }

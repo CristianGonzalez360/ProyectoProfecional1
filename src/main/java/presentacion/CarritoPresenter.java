@@ -14,7 +14,7 @@ import dto.taller.RepuestoCompradoDTO;
 import dto.taller.RepuestoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.cajero.PanelCarritoRepuestoView;
-import presentacion.views.supervisor.ClienteFormView;
+import presentacion.views.supervisor.FormCliente;
 import presentacion.views.tecnico.AltaPresupuestoFormView;
 import presentacion.views.utils.MessageDialog;
 import presentacion.views.utils.ReporteViewImpl;
@@ -65,8 +65,8 @@ public class CarritoPresenter {
 
 	private void onDisplayClienteForm(ActionEvent a) {
 		// TODO Auto-generated method stub
-		ClienteFormView.getInstance().clearData();
-		ClienteFormView.getInstance().display();
+		FormCliente.getInstance().clearData();
+		FormCliente.getInstance().display();
 	}
 
 	// Cuando se cancela, borra el presupuesto para que no quede vacio.

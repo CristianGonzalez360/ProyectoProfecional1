@@ -5,7 +5,7 @@ import business_logic.exceptions.ForbiddenException;
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import repositories.DaosFactory;
@@ -46,7 +46,7 @@ public class RegistradorVentaVehiculosService {
 	}
 	
 	private void makeVehiculoConOrdenDeTrabajo(Integer idVehiculo, Integer idCliente) {
-		VehiculoConOrdenDeTrabajoDTO vehiConOT = new VehiculoConOrdenDeTrabajoDTO();
+		IngresoOrdenDeTrabajoDTO vehiConOT = new IngresoOrdenDeTrabajoDTO();
 		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(idVehiculo);		
 		
 		/**

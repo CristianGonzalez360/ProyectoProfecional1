@@ -21,7 +21,7 @@ public class SupervisorControlView extends JInternalFrame {
 
 	private static SupervisorControlView instance;
 
-	private TurnosPanelView turnosPanelView;
+	private PanelTurnos turnosPanelView;
 
 	private DefaultTableModel modelOrdenesDeTrabajo;
 
@@ -52,7 +52,7 @@ public class SupervisorControlView extends JInternalFrame {
 		tabbedPane.addTab("Gestión de Turnos", null, turnosPanel, null);
 		turnosPanel.setLayout(new BorderLayout(0, 0));
 
-		turnosPanelView = new TurnosPanelView();
+		turnosPanelView = new PanelTurnos();
 		turnosPanel.add(turnosPanelView);
 
 		JPanel clientesPanel = new PanelClientesView();
@@ -78,7 +78,7 @@ public class SupervisorControlView extends JInternalFrame {
 		panelEntregaVehiculosView = new EntregaVehiculosPanelView();
 		entregasPanel.add(panelEntregaVehiculosView);
 
-		MantenimientosPanel mantenimiento = MantenimientosPanel.getInstance();
+		PanelMantenimientos mantenimiento = PanelMantenimientos.getInstance();
 		tabbedPane.addTab("Mantenimientos", mantenimiento);
 	}
 
@@ -110,7 +110,7 @@ public class SupervisorControlView extends JInternalFrame {
 		modelOrdenesDeTrabajo.setColumnIdentifiers(COLUMNAS_ORDENES);
 	}
 
-	public TurnosPanelView getTurnosView() {
+	public PanelTurnos getTurnosView() {
 		return this.turnosPanelView;
 	}
 

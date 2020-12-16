@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import business_logic.TurnosController;
 import presentacion.views.gerente.RegistrarEntregaVehiculoFormView;
-import presentacion.views.supervisor.TurnosPanelView;
+import presentacion.views.supervisor.PanelTurnos;
 
 public class VentaVehiculoPresenter {
 
@@ -18,7 +18,7 @@ public class VentaVehiculoPresenter {
 
 	private TurnosController controller;
 
-	public VentaVehiculoPresenter(TurnosPanelView view, TurnosController controller) {
+	public VentaVehiculoPresenter(PanelTurnos view, TurnosController controller) {
 //		this.view = view;
 		this.controller = controller;
 		entregaVehiculoVentaForm.setActionSave(a -> onSave(a));

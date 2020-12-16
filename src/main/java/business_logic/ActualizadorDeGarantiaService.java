@@ -89,7 +89,11 @@ public class ActualizadorDeGarantiaService {
 		garantia = new GarantiaVehiculoDTO();
 		garantia.setIdVehiculo(vehiculo.getIdVehiculo());
 		FichaTecnicaVehiculoDTO ftecnica = daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica());
-		garantia.setKilometrajeInicialDelVehiculo(ftecnica.getKilometraje());
+		if(ftecnica != null) {
+			garantia.setKilometrajeInicialDelVehiculo(ftecnica.getKilometraje());	
+		} else {
+			garantia.setKilometrajeInicialDelVehiculo(0);
+		}
 		garantia.setCostoFinalConIVA(COSTO_INICIAL_GARANTIA);
 		daos.makeGarantiasVehiculosDao().insert(garantia);
 		return garantia;
