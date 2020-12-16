@@ -34,6 +34,8 @@ import dto.taller.TrabajoPresupuestadoDTO;
 import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 
 import javax.swing.UIManager;
+import javax.swing.JCheckBox;
+import javax.swing.SwingConstants;
 
 public class PanelGestionPresupuestoView extends JPanel {
 
@@ -104,6 +106,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JTable tablePresupuestos;
 	private List<Integer> idsPresupuestos;
 	private JButton btnNuevoPresupuesto;
+	private JCheckBox chckbxGarantia;
 
 	public static PanelGestionPresupuestoView getInstance() {
 		if (instance == null) {
@@ -141,8 +144,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelEste.setLayout(new BoxLayout(panelEste, BoxLayout.Y_AXIS));
 
 		panelEsteNorte = new JPanel();
-		panelEsteNorte.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ordenes de trabajo",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelEsteNorte.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Ordenes de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panelEsteNorte);
 		panelEsteNorte.setLayout(new BorderLayout(0, 0));
 
@@ -162,8 +164,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 
 		panelEsteSur = new JPanel();
 		panelEsteSur.setBorder(
-				new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Descripci\u00F3n de la orden de trabajo",
-						TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Descripci\u00F3n de la orden de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panelEsteSur);
 
 		panelEsteSur.setLayout(new FormLayout(
@@ -197,6 +198,11 @@ public class PanelGestionPresupuestoView extends JPanel {
 		textFechaCierreOt.setEditable(false);
 		panelEsteSur.add(textFechaCierreOt, "4, 4, fill, default");
 		textFechaCierreOt.setColumns(10);
+		
+		chckbxGarantia = new JCheckBox("Garantia");
+		chckbxGarantia.setEnabled(false);
+		chckbxGarantia.setHorizontalTextPosition(SwingConstants.LEFT);
+		panelEsteSur.add(chckbxGarantia, "8, 4, center, center");
 
 		lblNewLabel_3 = new JLabel("Trabajo sugerido");
 		panelEsteSur.add(lblNewLabel_3, "2, 6");
@@ -216,8 +222,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 
 		panel = new JPanel();
 		panel.setBorder(
-				new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ficha t\u00E9cnica del veh\u00EDculo",
-						TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Ficha t\u00E9cnica del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panel);
 		panel.setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(33dlu;default)"),
@@ -291,8 +296,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		};
 
 		panel_8 = new JPanel();
-		panel_8.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Presupuestos",
-				TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_8.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Presupuestos", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelOeste.add(panel_8);
 		panel_8.setLayout(new BorderLayout(0, 0));
 
@@ -308,8 +312,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_8.add(scrollPane, BorderLayout.CENTER);
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Detalles del presupuesto",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_1.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelOeste.add(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 
@@ -521,6 +524,10 @@ public class PanelGestionPresupuestoView extends JPanel {
 
 	public void setActionOnNuevoPresupuesto(ActionListener listener) {
 		this.btnNuevoPresupuesto.addActionListener(listener);
+	}
+
+	public void setGarantia(boolean garantia) {
+		this.chckbxGarantia.setSelected(garantia);
 	}
 
 }

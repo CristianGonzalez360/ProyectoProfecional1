@@ -26,6 +26,7 @@ import dto.taller.PresupuestoDTO;
 import java.awt.Dimension;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
 
 public class AltaPresupuestoFormView extends JDialog {
 
@@ -41,8 +42,7 @@ public class AltaPresupuestoFormView extends JDialog {
 	private JTextField tfFechaAlta;
 	private JTextField tfPrecio;
 	private JComboBox<MantenimientoDTO> comboMantenimientos;
-	private JCheckBox checkBox;
-	private JLabel lblGarantia;
+	private JCheckBox chckbxGaranta;
 
 	private AltaPresupuestoFormView() {
 		setMinimumSize(new Dimension(1000, 600));
@@ -75,8 +75,6 @@ public class AltaPresupuestoFormView extends JDialog {
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("max(40dlu;default)"),
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -98,43 +96,40 @@ public class AltaPresupuestoFormView extends JDialog {
 			new RowSpec[] {
 				FormSpecs.LINE_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
-		
-		lblGarantia = new JLabel("Garantia:");
-		panel.add(lblGarantia, "2, 2, fill, default");
 
-		checkBox = new JCheckBox("");
-		checkBox.setEnabled(false);
-		panel.add(checkBox, "4, 2, center, center");
+		chckbxGaranta = new JCheckBox("Garantía");
+		chckbxGaranta.setHorizontalTextPosition(SwingConstants.LEFT);
+		panel.add(chckbxGaranta, "2, 2, center, center");
 
-		JLabel lblMantenimiento = new JLabel("Mantenimiento:");
-		panel.add(lblMantenimiento, "6, 2, right, center");
+		JLabel lblMantenimiento = new JLabel("Mantenimientos:");
+		panel.add(lblMantenimiento, "4, 2, right, center");
 
 		comboMantenimientos = new JComboBox<>();
-		panel.add(comboMantenimientos, "8, 2, fill, default");
+		panel.add(comboMantenimientos, "6, 2, fill, default");
 
 		JLabel lblFechaDeAlta = new JLabel("Fecha de Alta:");
-		panel.add(lblFechaDeAlta, "10, 2, right, center");
+		panel.add(lblFechaDeAlta, "8, 2, right, center");
 
 		tfFechaAlta = new JTextField();
 		tfFechaAlta.setFocusable(false);
 		tfFechaAlta.setEditable(false);
-		panel.add(tfFechaAlta, "12, 2, fill, fill");
+		panel.add(tfFechaAlta, "10, 2, fill, fill");
 		tfFechaAlta.setColumns(10);
 
 		JLabel lblComentario = new JLabel("Comentario:");
-		panel.add(lblComentario, "14, 2, right, center");
+		panel.add(lblComentario, "12, 2, right, center");
 
 		tfComentario = new JTextField();
-		panel.add(tfComentario, "16, 2, fill, fill");
+		panel.add(tfComentario, "14, 2, fill, fill");
 		tfComentario.setColumns(10);
 
 		JLabel lblPrecio = new JLabel("Precio:");
-		panel.add(lblPrecio, "18, 2, right, center");
+		panel.add(lblPrecio, "16, 2, right, center");
 
 		tfPrecio = new JTextField();
 		tfPrecio.setFocusable(false);
 		tfPrecio.setEditable(false);
-		panel.add(tfPrecio, "20, 2, fill, fill");
+		panel.add(tfPrecio, "18, 2, fill, fill");
 		tfPrecio.setColumns(10);
 
 		setVisible(false);
@@ -184,7 +179,7 @@ public class AltaPresupuestoFormView extends JDialog {
 		this.tfPrecio.setText(presupuesto.getPrecio() + "");
 		this.repuestos.setDataRepuestosPlanificados(presupuesto.getRepuestos());
 		this.trabajos.setDataTrabajosPlanificados(presupuesto.getTrabajos());
-		this.checkBox.setSelected(presupuesto.isGarantia());
+		this.chckbxGaranta.setSelected(presupuesto.isGarantia());
 	}
 
 	public void setActionOnClose(WindowListener listener) {
@@ -214,5 +209,13 @@ public class AltaPresupuestoFormView extends JDialog {
 
 	public Integer getMantenimiento() {
 		return comboMantenimientos.getModel().getElementAt(comboMantenimientos.getSelectedIndex()).getId();
+	}
+	
+	public void setActionOnGarantia(ActionListener listener) {
+		this.chckbxGaranta.addActionListener(listener);
+	}
+
+	public Boolean getGarantia() {
+		return this.chckbxGaranta.isSelected();
 	}
 }

@@ -36,7 +36,7 @@ public class GarantiasController {
 				if (ficha.getKilometraje() > garantia.getKilometrajeGarantizado()
 						- garantia.getKilometrajeInicialDelVehiculo()) {
 					ret = false;
-				} 
+				}
 			}
 		}
 		return ret;

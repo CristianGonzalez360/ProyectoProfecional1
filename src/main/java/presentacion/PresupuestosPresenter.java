@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import business_logic.ClientesController;
+import business_logic.GarantiasController;
 import business_logic.MantenimientosController;
 import business_logic.OrdenesTrabajoController;
 import business_logic.PresupuestosController;
@@ -42,11 +43,13 @@ public class PresupuestosPresenter {
 	private OrdenesTrabajoController ordenDeTrabajoController;
 	private ClientesController clienteController;
 	private MantenimientosController mantenimientosController;
+	private GarantiasController garantiasController;
 
 	public PresupuestosPresenter(PresupuestosController presupuestosController, RepuestosController repuestosController,
 			OrdenesTrabajoController ordenDetranajoController, VehiculosConOrdenDeTrabajoController vehiculoController,
-			ClientesController clienteController, MantenimientosController mantenimientosController) {
+			ClientesController clienteController, MantenimientosController mantenimientosController, GarantiasController garantiasController) {
 
+		this.garantiasController = garantiasController;
 		this.mantenimientosController = mantenimientosController;
 		this.clienteController = clienteController;
 		this.vehiculosController = vehiculoController;
@@ -68,6 +71,7 @@ public class PresupuestosPresenter {
 		this.planRepuestosView.setActionOnAgregarRepuesto(a -> onAgregarRepuesto(a));
 		this.planRepuestosView.setActionOnQuitarRepuesto(a -> onQuitarRepuesto(a));
 		this.planRepuestosView.setActionOnBuscarRepuesto(a -> onBuscarRepuesto(a));
+		this.altaPresupuesto.setActionOnGarantia(a -> onGarantia(a));
 
 		this.altaPresupuesto.setActionOnSeleccionar(a -> onSeleccionar(a));
 		this.view.setActionOnBuscar(a -> onBuscar(a));
@@ -81,6 +85,11 @@ public class PresupuestosPresenter {
 		});
 	}
 
+	private void onGarantia(ActionEvent a) {
+		nuevoPresupuesto.setGarantia(this.altaPresupuesto.getGarantia());
+		this.altaPresupuesto.setPrecio(nuevoPresupuesto.getPrecio());
+	}
+
 	private void onSeleccionar(ActionEvent a) {
 		Integer id = altaPresupuesto.getMantenimiento();
 		MantenimientoDTO mantenimiento = mantenimientosController.readByID(id);
@@ -88,8 +97,6 @@ public class PresupuestosPresenter {
 		nuevoPresupuesto = new PresupuestoDTO(mantenimiento);
 		Integer idOT = view.getIdOrdenDeTrabajo();
 		nuevoPresupuesto.setIdOT(idOT);
-		OrdenDeTrabajoDTO OT = ordenDeTrabajoController.readById(idOT);
-		nuevoPresupuesto.setGarantia(OT.getTipoOrdeTrabajo() == "Garantia"? true : false);
 		for (RepuestoPlanificadoDTO repuesto : nuevoPresupuesto.getRepuestos()) {
 			RepuestoDTO r = repuesto.getRepuesto();
 			r.setStockRepuesto(r.getStockRepuesto() - repuesto.getCantRequerida());
@@ -153,10 +160,8 @@ public class PresupuestosPresenter {
 	private void onNuevoPresupuesto(ActionEvent a) {
 		Integer idOT = view.getIdOrdenDeTrabajo();
 		if (idOT != null) {
-			OrdenDeTrabajoDTO OT = ordenDeTrabajoController.readById(idOT);
 			nuevoPresupuesto = new PresupuestoDTO();
 			nuevoPresupuesto.setIdOT(idOT);
-			nuevoPresupuesto.setGarantia(OT.getTipoOrdeTrabajo() == "Garantia"? true : false);
 			onDisplayForPlanRepuesto(a);
 			onDisplayForPlanTrabajos(a);
 			this.altaPresupuesto.setData(nuevoPresupuesto);
@@ -330,6 +335,7 @@ public class PresupuestosPresenter {
 					view.clearDataOrdenDeTrabajo();
 					view.clearDataPresupuestos();
 				}
+				this.view.setGarantia(this.garantiasController.estaEnGarantia(idVehiculo.getId()));
 			}
 		}
 	}
