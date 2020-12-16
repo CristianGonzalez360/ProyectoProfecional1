@@ -219,6 +219,11 @@ public class ClientePresenter {
 	}
 	
 	private void onMostrarHistorialDeVehiculo(ActionEvent e) {
-		System.out.println("Reporte");
+		Integer idVehiculo = view.getidVehiculoSeleccionado();
+		if (idVehiculo != null) {
+			for(OrdenDeTrabajoDTO ordenDeTrabajo : ordenDeTrabajoController.readAllByIdVehiculo(idVehiculo)) {
+				System.out.println(ordenDeTrabajo);
+			}
+		}
 	}
 }

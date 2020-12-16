@@ -28,6 +28,9 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 	private static final String readByID = "SELECT * FROM OrdenesDeTrabajo WHERE idOT = ?";
 
 	private static final String update = "UPDATE OrdenesDeTrabajo SET fechaEntregadoVehiculo = ? WHERE idOT = ?";
+	
+	private static final String readAllByIdVehiculo = readAll + " "
+			+ "WHERE idVehiculoOt = ?";
 
 	public OrdenesDeTrabajoDaoImpl(Connection connection) {
 		super(connection);
@@ -99,5 +102,10 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 	@Override
 	public List<OrdenDeTrabajoDTO> readAllOrdenesSinEntregar() {
 		return getTemplate().query(readAllOrdenesParaEntregar).excecute(getMapper());
+	}
+
+	@Override
+	public List<OrdenDeTrabajoDTO> readAllByIdVehiculo(Integer idVehiculo) {
+		return getTemplate().query(readAllByIdVehiculo).param(idVehiculo).excecute(getMapper());
 	}
 }
