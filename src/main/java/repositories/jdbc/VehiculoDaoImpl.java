@@ -14,7 +14,7 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	private static final String insert = "INSERT INTO Vehiculos(precioVenta,idFichaTecnica,marca,familia,linea,color,idCaracteristica,fechaIngreso,disponible,usado,idSucursal) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-	private static final String readByCriteria = "SELECT * FROM Vehiculos WHERE marca = ? AND usado = ?";
+	private static final String readByCriteria = "SELECT * FROM Vehiculos WHERE marca = ? AND usado = ? AND idVehiculo NOT IN (SELECT idVehiculo FROM VentasVehiculos)";
 
 	private static final String readById = "SELECT * FROM Vehiculos WHERE idVehiculo = ?";
 

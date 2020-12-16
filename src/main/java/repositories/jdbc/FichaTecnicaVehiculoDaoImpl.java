@@ -51,6 +51,7 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 
 	@Override
 	public FichaTecnicaVehiculoDTO readByID(Integer id) {
+		if(id == null) return null;
 		List<FichaTecnicaVehiculoDTO> dtos = getTemplate().query(readById).param(id).excecute(getMapper());
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}

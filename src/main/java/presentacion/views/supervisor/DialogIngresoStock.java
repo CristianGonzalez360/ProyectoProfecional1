@@ -21,19 +21,19 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class IngresoStockDialog extends JDialog {
+public class DialogIngresoStock extends JDialog {
 	private JTextField tfCodigo;
 	private JTextField tfDescripcion;
 	private JTextField tfMarca;
 	private JTextField tfStock;
 	private JTextField tfPrecio;
 
-	private static IngresoStockDialog instance;
+	private static DialogIngresoStock instance;
 	private JButton btnAceptar;
 	private JLabel lblPrecioDeVenta;
 	private JTextField tfPrecioVenta;
 
-	private IngresoStockDialog() {
+	private DialogIngresoStock() {
 		setTitle("Ingreso de Stock");
 		setBounds(100, 100, 400, 300);
 		JPanel panel = new JPanel();
@@ -120,9 +120,9 @@ public class IngresoStockDialog extends JDialog {
 		this.tfPrecioVenta.setText("");
 	}
 
-	public static IngresoStockDialog getInstance() {
+	public static DialogIngresoStock getInstance() {
 		if (instance == null)
-			instance = new IngresoStockDialog();
+			instance = new DialogIngresoStock();
 		return instance;
 	}
 

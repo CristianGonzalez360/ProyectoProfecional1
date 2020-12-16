@@ -11,4 +11,6 @@ public interface OrdenesDeTrabajoDao extends GenericDao<OrdenDeTrabajoDTO, Integ
 	List<OrdenDeTrabajoDTO> readByVehiculoId(Integer idVehiculo);
 
 	List<OrdenDeTrabajoDTO> readAllOrdenesSinEntregar();
+
+	List<OrdenDeTrabajoDTO> readAllByIdVehiculo(Integer idVehiculo);
 }

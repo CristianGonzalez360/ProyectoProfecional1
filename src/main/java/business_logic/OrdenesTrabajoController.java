@@ -73,4 +73,8 @@ public class OrdenesTrabajoController {
 	public OrdenDeTrabajoDTO readById(Integer id) {
 		return dao.readByID(id);
 	}
+
+	public List<OrdenDeTrabajoDTO> readAllByIdVehiculo(Integer idVehiculo) {
+		return dao.readAllByIdVehiculo(idVehiculo);
+	}
 }
