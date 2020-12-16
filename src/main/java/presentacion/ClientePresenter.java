@@ -14,6 +14,7 @@ import business_logic.exceptions.ConflictException;
 import business_logic.exceptions.ForbiddenException;
 import dto.ClienteDTO;
 import dto.GarantiaVehiculoDTO;
+import dto.taller.FacturaDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
 import dto.taller.VehiculoConOrdenDeTrabajoDTO;
@@ -26,6 +27,7 @@ import presentacion.views.supervisor.ClienteFormView;
 import presentacion.views.supervisor.PanelClientesView;
 import presentacion.views.supervisor.VehiculoFormView;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.utils.ReporteViewImpl;
 
 public class ClientePresenter {
 
@@ -220,10 +222,21 @@ public class ClientePresenter {
 	
 	private void onMostrarHistorialDeVehiculo(ActionEvent e) {
 		Integer idVehiculo = view.getidVehiculoSeleccionado();
+		
 		if (idVehiculo != null) {
-			for(OrdenDeTrabajoDTO ordenDeTrabajo : ordenDeTrabajoController.readAllByIdVehiculo(idVehiculo)) {
-				System.out.println(ordenDeTrabajo);
-			}
+			List<OrdenDeTrabajoDTO> trabajos = ordenDeTrabajoController.readAllByIdVehiculo(idVehiculo);
+			
+			ReporteViewImpl reporte = new ReporteViewImpl();
+			reporte.setDataTrabajos(trabajos);
+			reporte.open();
+//			for(OrdenDeTrabajoDTO ordenDeTrabajo : ordenDeTrabajoController.readAllByIdVehiculo(idVehiculo)) {
+//				ReporteViewImpl reporte = new ReporteViewImpl();
+//				List<FacturaDTO> ingresos = reportesController.readFacturasPagas(fechaDesde, fechaHasta);
+//				reporte.setDataIngresos(ingresos);
+//				reporte.open();
+//				
+//				System.out.println(ordenDeTrabajo);
+//			}
 		}
 	}
 }

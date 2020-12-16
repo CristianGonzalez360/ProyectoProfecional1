@@ -29,8 +29,7 @@ public class OrdenesDeTrabajoDaoImpl extends GenericJdbcDao<OrdenDeTrabajoDTO> i
 
 	private static final String update = "UPDATE OrdenesDeTrabajo SET fechaEntregadoVehiculo = ? WHERE idOT = ?";
 	
-	private static final String readAllByIdVehiculo = readAll + " "
-			+ "WHERE idVehiculoOt = ?";
+	private static final String readAllByIdVehiculo = "SELECT * FROM OrdenesDeTrabajo WHERE idVehiculoOt = ? ORDER BY fechaAltaOt";
 
 	public OrdenesDeTrabajoDaoImpl(Connection connection) {
 		super(connection);
