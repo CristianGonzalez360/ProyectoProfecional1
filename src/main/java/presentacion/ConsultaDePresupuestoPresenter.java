@@ -24,7 +24,7 @@ import dto.taller.TrabajoPresupuestadoDTO;
 import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ConsultaDePresupuestosSupervisorView;
-import presentacion.views.supervisor.InputComentarioDialog;
+import presentacion.views.supervisor.DialogInputComentario;
 import presentacion.views.utils.ReporteViewImpl;
 
 public class ConsultaDePresupuestoPresenter {
@@ -129,7 +129,7 @@ public class ConsultaDePresupuestoPresenter {
 			if (presupuesto.getEstado().equals(EstadoPresupuesto.PENDIENTE)) {
 				presupuesto.setFechaAprobacion(new Date());
 				if (v.booleanValue() == false) {
-					String comentario = new InputComentarioDialog(presupuesto).open();
+					String comentario = new DialogInputComentario(presupuesto).open();
 					presupuesto.setComentarioRechazo(comentario);
 					presupuesto.setEstado(EstadoPresupuesto.RECHAZADO);
 				} else {

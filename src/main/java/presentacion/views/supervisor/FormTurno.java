@@ -22,11 +22,11 @@ import com.toedter.calendar.JDateChooser;
 import dto.temporal.AltaDeTurnoDTO;
 
 @SuppressWarnings("serial")
-public class TurnoFormView extends JDialog {
+public class FormTurno extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
-	private static TurnoFormView instance;
+	private static FormTurno instance;
 	private JTextField textNombre;
 	private JTextField textDNI;
 	private JTextField textTelefono;
@@ -37,13 +37,13 @@ public class TurnoFormView extends JDialog {
 	private JButton btnCancelar;
 	private JTextField textApellido;
 
-	public static TurnoFormView getInstance() {
+	public static FormTurno getInstance() {
 		if (instance == null)
-			instance = new TurnoFormView();
+			instance = new FormTurno();
 		return instance;
 	}
 
-	private TurnoFormView() {
+	private FormTurno() {
 		setBounds(100, 100, 350, 350);
 		setTitle("Nuevo Turno");
 		getContentPane().setLayout(new BorderLayout());

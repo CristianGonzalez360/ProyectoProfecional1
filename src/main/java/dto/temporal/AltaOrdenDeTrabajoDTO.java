@@ -13,6 +13,8 @@ public class AltaOrdenDeTrabajoDTO {
 
 	private String tipoDeTrabajo;
 
+	private String kilometrajeActual;
+	
 	public AltaOrdenDeTrabajoDTO() {
 		super();
 	}
@@ -41,6 +43,14 @@ public class AltaOrdenDeTrabajoDTO {
 		this.tipoDeTrabajo = tipoDeTrabajo;
 	}
 
+	public String getKilometrajeActual() {
+		return kilometrajeActual;
+	}
+
+	public void setKilometrajeActual(String kilometrajeActual) {
+		this.kilometrajeActual = kilometrajeActual;
+	}
+
 	public List<String> validate() {
 		List<String> errors = new LinkedList<>();
 		errors.addAll(new StringValidator(trabajoSolicitado).notBlank("El trabajo solicitado es requerido.")
@@ -49,6 +59,7 @@ public class AltaOrdenDeTrabajoDTO {
 			errors.addAll(new StringValidator(this.trabajoSugerido)
 					.max(60, "Como máximo 60 caracteres para el trabajo sugerido").validate());
 		}
+		errors.addAll(new StringValidator(this.kilometrajeActual).number("El kilometraje debe ser un numero").validate());
 		return errors;
 	}
 }

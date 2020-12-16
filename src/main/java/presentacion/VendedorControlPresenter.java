@@ -18,7 +18,7 @@ import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import dto.validators.StringValidator;
-import presentacion.views.supervisor.ClienteFormView;
+import presentacion.views.supervisor.FormCliente;
 import presentacion.views.utils.MessageDialog;
 import presentacion.views.utils.ReporteViewImpl;
 import presentacion.views.vendedor.VendedorControlView;
@@ -86,8 +86,8 @@ public class VendedorControlPresenter {
 
 	private void onDisplayClienteFormView(ActionEvent e) {
 		view.clearDataCliente();
-		ClienteFormView.getInstance().clearData();
-		ClienteFormView.getInstance().display();
+		FormCliente.getInstance().clearData();
+		FormCliente.getInstance().display();
 	}
 
 	private void onSelectVentaEnEfectivo(ActionEvent a) {
