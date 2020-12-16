@@ -26,6 +26,7 @@ import presentacion.views.gerente.NuevosVehiculosFormView;
 import presentacion.views.utils.MessageDialog;
 import presentacion.views.vendedor.VendedorControlView;
 import services.DatabaseGraphVehiculoNuevo;
+import services.SessionServiceImpl;
 
 public class NuevosCarPresenter {
 
@@ -71,18 +72,8 @@ public class NuevosCarPresenter {
 				vehiculosGraph = yaml.load(inputStream);
 
 				if (validarArchivo()) {
-					if (validarFichasTecnicasMotor()) {
-						if (validarFichasTecnicasChasis()) {
-							this.nuevosVehiculos.cargarTabla(vehiculosGraph.getVehiculos());
-							this.nuevosVehiculos.mostrar();
-						} else {
-							new MessageDialog().showMessages(
-									"El archivo contiene:\n-Nro de chasis\nexistentes.\nPor favor revisar el contenido del archivo.");
-						}
-					} else {
-						new MessageDialog().showMessages(
-								"El archivo contiene:\n-Nro de motor\nexistentes.\nPor favor revisar el contenido del archivo.");
-					}
+					this.nuevosVehiculos.cargarTabla(vehiculosGraph.getVehiculos());
+					this.nuevosVehiculos.mostrar();			
 				} else {
 					new MessageDialog().showMessages(
 							"El archivo debe tener por cada vehiculo nuevo: \n-una caracteristica  \n-una ficha tecnica.\nPor favor revisar el contenido del archivo.");
@@ -98,52 +89,44 @@ public class NuevosCarPresenter {
 		List<VehiculoDTO> vehiculosNuevos = vehiculosGraph.getVehiculos();
 		List<CaracteristicaVehiculoDTO> caracteristicas = vehiculosGraph.getCaracteristicas();
 		List<FichaTecnicaVehiculoDTO> fichasTecnicas = vehiculosGraph.getFichaTecnica();
-
-		// cada vehiculo tiene 1 caracteristica y 1 ficha tecnica
-		quitarVehiculosNoAceptados(idAutosNoAceptados, vehiculosNuevos);// quito los no aceptados
-		quitarCaracteristicasNoAceptados(idAutosNoAceptados, caracteristicas);
-		quitarFichastecnicasNoAceptadas(idAutosNoAceptados, fichasTecnicas);
-
-		if (vehiculosNuevos.size() > 0) {
-			for (int i = 0; i < vehiculosNuevos.size(); i++) {
-				vehiculosNuevos.get(i)
-						.setIdCaracteristicas(vehiculosController.guardarCaracteristicaNueva(caracteristicas.get(i)));// me
-																														// devuelve
-																														// el
-																														// id
-																														// de
-																														// la
-																														// caracteristica
-																														// que
-																														// guarde
-				vehiculosNuevos.get(i)
-						.setIdFichaTecnica(vehiculosController.guardarFichaTecnicaNueva(fichasTecnicas.get(i)));// devuelve
-																												// el id
-																												// de la
-																												// ficha
-																												// que
-																												// guarde
-				vehiculosNuevos.get(i).setFechaIngreso(new Date());
-				garantiaDefault.setIdVehiculo((vehiculosController.guardarVehiculoNuevo(vehiculosNuevos.get(i))));// devuelve
-																													// el
-																													// id
-																													// del
-																													// vehiculo
-																													// que
-																													// guarde
-				vehiculosController.guardarGarantiaNuevo(garantiaDefault);
+		if(validarFichaTecnica()) {
+			// cada vehiculo tiene 1 caracteristica y 1 ficha tecnica
+			quitarVehiculosNoAceptados(idAutosNoAceptados, vehiculosNuevos);// quito los no aceptados
+			quitarCaracteristicasNoAceptados(idAutosNoAceptados, caracteristicas);
+			if(this.nuevosVehiculos.getDeposito()) {
+				quitarFichastecnicasNoAceptadas(idAutosNoAceptados, fichasTecnicas);
 			}
+	
+			if (vehiculosNuevos.size() > 0) {
+				for (int i = 0; i < vehiculosNuevos.size(); i++) {
+					vehiculosNuevos.get(i).setIdCaracteristicas(vehiculosController.guardarCaracteristicaNueva(caracteristicas.get(i)));
+					if(this.nuevosVehiculos.getDeposito()) {
+						vehiculosNuevos.get(i).setIdFichaTecnica(vehiculosController.guardarFichaTecnicaNueva(fichasTecnicas.get(i)));
+					}																								
+					vehiculosNuevos.get(i).setFechaIngreso(new Date());
+					if(this.nuevosVehiculos.getDeposito()) {
+						vehiculosNuevos.get(i).setDisponible(true);
+						vehiculosNuevos.get(i).setIdSucursal(SessionServiceImpl.getInstance().getActiveSession().getIdSucursal());
+					}
+					else {
+						vehiculosNuevos.get(i).setDisponible(false);
+						vehiculosNuevos.get(i).setIdSucursal(null);
+					}
+					garantiaDefault.setIdVehiculo((vehiculosController.guardarVehiculoNuevo(vehiculosNuevos.get(i))));
+					vehiculosController.guardarGarantiaNuevo(garantiaDefault);
+				}
+			}
+	
+			this.view.clear();
+			this.cargarTodosVehiculos();
+			this.cargarMarcas();
+			this.nuevosVehiculos.cerrar();
+			this.nuevosVehiculos.clear();
+			List<String> marcas = new ArrayList<String>();
+			marcas.addAll(ventasVehiculosController.readNombreMarcasVehiculos());
+			VendedorControlView.getInstance().clearData();
+			VendedorControlView.getInstance().setMarcas(marcas);
 		}
-
-		this.view.clear();
-		this.cargarTodosVehiculos();
-		this.cargarMarcas();
-		this.nuevosVehiculos.cerrar();
-		this.nuevosVehiculos.clear();
-		List<String> marcas = new ArrayList<String>();
-		marcas.addAll(ventasVehiculosController.readNombreMarcasVehiculos());
-		VendedorControlView.getInstance().clearData();
-		VendedorControlView.getInstance().setMarcas(marcas);
 	}
 
 	private void quitarVehiculosNoAceptados(List<Integer> idAutosNoAceptados, List<VehiculoDTO> vehiculosNuevos) {
@@ -205,13 +188,7 @@ public class NuevosCarPresenter {
 
 	public void cargarTodosVehiculos() {// modificado
 		List<VehiculoDTO> vehiculos = ventasVehiculosController.readAllVehiculoNuevos();
-		List<VehiculoDTO> vehiculosNuevos = new ArrayList<VehiculoDTO>();
-		for (VehiculoDTO vehiculo : vehiculos) {
-			if (vehiculo.isDisponible() && !vehiculo.isUsado()) {
-				vehiculosNuevos.add(vehiculo);
-			}
-		}
-		this.view.cargarTabla(vehiculosNuevos);
+		this.view.cargarTabla(vehiculos);
 	}
 
 	private void onSelectVehiculo(ListSelectionEvent a) {
@@ -233,9 +210,7 @@ public class NuevosCarPresenter {
 			List<VehiculoDTO> vehiculosPorMarca = new ArrayList<VehiculoDTO>();
 			for (VehiculoDTO vehiculo : vehiculosNuevos) {
 				if (vehiculo.getMarca().equals(marcaSeleccionada)) {
-					if (vehiculo.isDisponible() && !vehiculo.isUsado()) {
-						vehiculosPorMarca.add(vehiculo);
-					}
+					vehiculosPorMarca.add(vehiculo);
 				}
 			}
 			this.cargarVehiculosPorMarca(vehiculosPorMarca);
@@ -261,18 +236,38 @@ public class NuevosCarPresenter {
 	}
 
 	private boolean validarArchivo() {
-
-		if (vehiculosGraph.getVehiculos().size() == vehiculosGraph.getCaracteristicas().size()
-				&& vehiculosGraph.getCaracteristicas().size() == vehiculosGraph.getFichaTecnica().size()) {
-			return true;
+		boolean ret = true;
+		if (vehiculosGraph.getVehiculos().size() != vehiculosGraph.getCaracteristicas().size()) {
+			ret = false;
 		}
-		return false;
+		return ret;
+	}
+	
+	private boolean validarFichaTecnica() {
+		boolean ret = true;
+		if(this.nuevosVehiculos.getDeposito()) {
+			if(vehiculosGraph.getCaracteristicas().size() != vehiculosGraph.getFichaTecnica().size()) {
+				ret = false;
+				new MessageDialog().showMessages(
+						"El archivo debe tener por cada vehiculo nuevo: \n-una caracteristica  \n-una ficha tecnica.\nPor favor revisar el contenido del archivo.");
+			}
+			if (ret && !validarFichasTecnicasMotor()) {
+				ret = false;
+				new MessageDialog().showMessages(
+							"El archivo contiene:\n-Nro de motor\nexistente.\nPor favor revisar el contenido del archivo.");
+			}
+			if (ret && !validarFichasTecnicasChasis()) {
+				ret = false;
+				new MessageDialog().showMessages(
+							"El archivo contiene:\n-Nro de chasis\nexistente.\nPor favor revisar el contenido del archivo.");
+			}
+		}
+		return ret;
 	}
 
 	private boolean validarFichasTecnicasMotor() {
 		List<FichaTecnicaVehiculoDTO> fichasTecnicas = vehiculosGraph.getFichaTecnica();
 		for (FichaTecnicaVehiculoDTO fichaTecnica : fichasTecnicas) {
-//			fichaTecnica.getNroChasis();
 			if (vehiculosController.isNroMotorExistente(fichaTecnica.getNroMotor()) == true) {// hay un nro motor
 																								// existente
 				return false;
