@@ -102,6 +102,7 @@ public class PresupuestosPresenter {
 			r.setStockRepuesto(r.getStockRepuesto() - repuesto.getCantRequerida());
 			repuestosController.update(r);
 		}
+		nuevoPresupuesto.setGarantia(this.altaPresupuesto.getGarantia());
 		onBuscarRepuesto(a);
 		this.altaPresupuesto.setData(nuevoPresupuesto);
 	}

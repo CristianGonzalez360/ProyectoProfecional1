@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -200,8 +202,11 @@ public class PanelGestionPresupuestoView extends JPanel {
 		textFechaCierreOt.setColumns(10);
 		
 		chckbxGarantia = new JCheckBox("Garantia");
-		chckbxGarantia.setEnabled(false);
+		chckbxGarantia.setFocusable(false);
 		chckbxGarantia.setHorizontalTextPosition(SwingConstants.LEFT);
+		for (EventListener eventListener : chckbxGarantia.getListeners(MouseListener.class)) {
+			chckbxGarantia.removeMouseListener((MouseListener) eventListener);
+		}
 		panelEsteSur.add(chckbxGarantia, "8, 4, center, center");
 
 		lblNewLabel_3 = new JLabel("Trabajo sugerido");

@@ -27,7 +27,7 @@ public class GarantiasController {
 			GarantiaVehiculoDTO garantia = readByIdVehiculo(idVehiculo);
 			if (garantia != null) {
 				Date fechaCaducidad = garantia.getFechaDeCaducidadDeLaGarantia();
-				if (fechaCaducidad.after(new Date())) {
+				if (fechaCaducidad.before(new Date())) {
 					ret = false;
 				}
 				VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(idVehiculo);
