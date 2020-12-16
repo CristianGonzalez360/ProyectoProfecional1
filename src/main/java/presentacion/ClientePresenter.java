@@ -23,9 +23,10 @@ import dto.temporal.AltaOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.FormAltaOrdenTrabajo;
 import presentacion.views.supervisor.FormCliente;
-import presentacion.views.supervisor.PanelClientesView;
 import presentacion.views.supervisor.FormVehiculo;
+import presentacion.views.supervisor.PanelClientesView;
 import presentacion.views.utils.MessageDialog;
+import presentacion.views.utils.ReporteViewImpl;
 
 public class ClientePresenter {
 
@@ -62,10 +63,15 @@ public class ClientePresenter {
 		view.setActionRegistrarCliente((a) -> onDisplayClienteFormView(a));
 		view.setActionRegistrarVehiculo((a) -> onDisplayVehiculoFormView(a));
 		view.setActionRegistrarOrdenDeTrabajo((a) -> onDisplayOrdenDeTrabajoForm(a));
-
+		view.setActionReporteDeVehiculo((a) -> onMostrarHistorialDeVehiculo(a));
+		
+//		ClienteFormView.getInstance().setActionOnSave((a) -> onRegistrarCliente(a));
+//		VehiculoFormView.getInstance().setActionSave((a) -> onRegistrarVehiculo(a));
+//		AltaOrdenTrabajoFormView.getInstance().setActionGuardar((a) -> onRegistrarOrdenDeTrabajo(a));
 		FormCliente.getInstance().setActionOnSave((a) -> onRegistrarCliente(a));
 		FormVehiculo.getInstance().setActionSave((a) -> onRegistrarVehiculo(a));
 		FormAltaOrdenTrabajo.getInstance().setActionGuardar((a) -> onRegistrarOrdenDeTrabajo(a));
+
 		view.setActionOnEditarCliente(a -> onDisplayFormForUpdate(a));
 		FormCliente.getInstance().setActionOnUpdate(a -> onUpdate(a));
 	}
@@ -214,6 +220,18 @@ public class ClientePresenter {
 			FormCliente.getInstance().close();
 		} else {
 			new MessageDialog().showMessages(errores);
+		}
+	}
+	
+	private void onMostrarHistorialDeVehiculo(ActionEvent e) {
+		Integer idVehiculo = view.getidVehiculoSeleccionado();
+		
+		if (idVehiculo != null) {
+			List<OrdenDeTrabajoDTO> trabajos = ordenDeTrabajoController.readAllByIdVehiculo(idVehiculo);
+			
+			ReporteViewImpl reporte = new ReporteViewImpl();
+			reporte.setDataTrabajos(trabajos);
+			reporte.open();
 		}
 	}
 }
