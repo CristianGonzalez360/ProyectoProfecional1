@@ -6,6 +6,7 @@ import java.util.List;
 
 import dto.CaracteristicaVehiculoDTO;
 import dto.DatosPersonalesDTO;
+import dto.GarantiaVehiculoDTO;
 import dto.SucursalDTO;
 import dto.VehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
@@ -29,6 +30,7 @@ public class FacturaVentaVehiculoReport {
 	private String financiera;
 	private Integer nroCuotas;
 	private Double montoCuota;
+	private GarantiaVehiculoDTO garantia;
 
 	public FacturaVentaVehiculoReport() {
 		// TODO Auto-generated constructor stub
@@ -139,5 +141,15 @@ public class FacturaVentaVehiculoReport {
 
 	public void setNumero(Integer numero) {
 		this.numero = numero;
+	}
+
+	public JRDataSource getGarantia() {
+		List<GarantiaVehiculoDTO> garantiaVehiculo = new ArrayList<>();
+		garantiaVehiculo.add(this.garantia);
+		return new JRBeanCollectionDataSource(garantiaVehiculo);
+	}
+	
+	public void setGarantia(GarantiaVehiculoDTO garantia) {
+		this.garantia = garantia;
 	}
 }

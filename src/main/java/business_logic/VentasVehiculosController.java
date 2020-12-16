@@ -137,10 +137,11 @@ public class VentasVehiculosController {
 		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(venta.getIdVehiculo());
 		ret.setVehiculo(vehiculo);
 		ret.setCaracteristicaVehiculo(daos.makeCaracteristicasVehiculoDao().readByID(vehiculo.getIdCaracteristicas()));
+		ret.setGarantia(daos.makeGarantiasVehiculosDao().readByID(vehiculo.getIdVehiculo()));//
 		if (vehiculo.getIdFichaTecnica() != null) {
 			ret.setFichaTecnicaVehiculo(daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica()));
 		}
-		ret.setTotal(vehiculo.getPrecioVenta());
+		ret.setTotal(vehiculo.getPrecioVenta()+daos.makeGarantiasVehiculosDao().readByID(vehiculo.getIdVehiculo()).getCostoFinalConIVA());
 		ret.setFecha(venta.getFechaVentaVN());
 		if (venta.getFinanciera() != null) {
 			ret.setFormaPago(FacturaVentaVehiculoReport.FINANCIADO);
