@@ -2,11 +2,11 @@ package repositories;
 
 import java.util.List;
 
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 
-public interface VehiculosConOrdenDeTrabajoDao extends GenericDao<VehiculoConOrdenDeTrabajoDTO, Integer> {
+public interface VehiculosConOrdenDeTrabajoDao extends GenericDao<IngresoOrdenDeTrabajoDTO, Integer> {
 
-	List<VehiculoConOrdenDeTrabajoDTO> readByClienteId(Integer idCliente);
+	List<IngresoOrdenDeTrabajoDTO> readByClienteId(Integer idCliente);
 
-	VehiculoConOrdenDeTrabajoDTO readByPatente(String patente);
+	IngresoOrdenDeTrabajoDTO readByPatente(String patente);
 }

@@ -12,7 +12,7 @@ import dto.taller.FacturaDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
 import dto.taller.PresupuestoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 import repositories.ClientesDao;
 import repositories.DatosPersonalesDao;
 import repositories.FacturasDao;
@@ -106,7 +106,7 @@ public class EntregaDeVehiculoController {
 	}
 
 	private EntregaDeVehiculoDTO generarEntrega(OrdenDeTrabajoDTO orden) {
-		VehiculoConOrdenDeTrabajoDTO vehiculoConOT = vehiculosDao.readByID(orden.getIdVehiculoOt());
+		IngresoOrdenDeTrabajoDTO vehiculoConOT = vehiculosDao.readByID(orden.getIdVehiculoOt());
 		FichaTecnicaVehiculoDTO fichaTecnica = fichaTecnicaDao.readByID(vehiculoConOT.getIdFichaTecnica());
 		ClienteDTO cliente = clientesDao.readByID(vehiculoConOT.getIdCliente());
 		DatosPersonalesDTO datosPersonales = datosPersonalesDao.readByID(cliente.getIdDatosPersonales());

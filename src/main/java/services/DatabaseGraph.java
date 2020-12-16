@@ -21,7 +21,7 @@ import dto.taller.RepuestoDTO;
 import dto.taller.RepuestoPlanificadoDTO;
 import dto.taller.TrabajoPresupuestadoDTO;
 import dto.taller.TurnoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 
 public class DatabaseGraph {
 
@@ -37,7 +37,7 @@ public class DatabaseGraph {
 
 	private List<OrdenDeTrabajoDTO> ordenesDeTrabajo;
 
-	private List<VehiculoConOrdenDeTrabajoDTO> vehiculosConOrdenDeTrabajo;
+	private List<IngresoOrdenDeTrabajoDTO> vehiculosConOrdenDeTrabajo;
 
 	private List<ClienteDTO> clientes;
 
@@ -131,11 +131,11 @@ public class DatabaseGraph {
 		this.ordenesDeTrabajo = ordenesDeTrabajo;
 	}
 
-	public List<VehiculoConOrdenDeTrabajoDTO> getVehiculosConOrdenDeTrabajo() {
+	public List<IngresoOrdenDeTrabajoDTO> getVehiculosConOrdenDeTrabajo() {
 		return vehiculosConOrdenDeTrabajo;
 	}
 
-	public void setVehiculosConOrdenDeTrabajo(List<VehiculoConOrdenDeTrabajoDTO> vehiculosConOrdenDeTrabajo) {
+	public void setVehiculosConOrdenDeTrabajo(List<IngresoOrdenDeTrabajoDTO> vehiculosConOrdenDeTrabajo) {
 		this.vehiculosConOrdenDeTrabajo = vehiculosConOrdenDeTrabajo;
 	}
 
