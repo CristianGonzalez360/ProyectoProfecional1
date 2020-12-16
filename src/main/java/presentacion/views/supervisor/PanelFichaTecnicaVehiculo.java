@@ -29,16 +29,34 @@ public class PanelFichaTecnicaVehiculo extends JPanel {
 	private JTextField textColor;
 
 	private JTextField textCombustion;
+	
+	private JLabel lblNewLabel;
+	
+	private JTextField textKilometraje;
 
 	public PanelFichaTecnicaVehiculo() {
-		setLayout(new FormLayout(
-				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), FormSpecs.RELATED_GAP_COLSPEC,
-						FormSpecs.DEFAULT_COLSPEC, },
-				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+		setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
 
 		JLabel lblNewLabel_8 = new JLabel("Nro de motor");
 		add(lblNewLabel_8, "2, 2");
@@ -81,6 +99,13 @@ public class PanelFichaTecnicaVehiculo extends JPanel {
 		textCombustion = new JTextField();
 		add(textCombustion, "4, 12, fill, default");
 		textCombustion.setColumns(10);
+		
+		lblNewLabel = new JLabel("Kilometraje");
+		add(lblNewLabel, "2, 14, left, default");
+		
+		textKilometraje = new JTextField();
+		add(textKilometraje, "4, 14, fill, default");
+		textKilometraje.setColumns(10);
 	}
 
 	public void disableInputs() {
@@ -90,6 +115,7 @@ public class PanelFichaTecnicaVehiculo extends JPanel {
 		this.textColor.setEditable(false);
 		this.textCombustion.setEditable(false);
 		this.textModelo.setEditable(false);
+		this.textKilometraje.setEditable(false);
 	}
 
 	public void clearData() {
@@ -99,6 +125,7 @@ public class PanelFichaTecnicaVehiculo extends JPanel {
 		this.textColor.setText("");
 		this.textCombustion.setText("");
 		this.textModelo.setText("");
+		this.textKilometraje.setText("");
 	}
 
 	public void setData(FichaTecnicaVehiculoDTO fichaVehiculo) {
@@ -109,6 +136,22 @@ public class PanelFichaTecnicaVehiculo extends JPanel {
 		this.textColor.setText(fichaVehiculo.getColor());
 		this.textCombustion.setText(fichaVehiculo.getCombustion());
 		this.textModelo.setText(fichaVehiculo.getModelo().toString());
+		this.textKilometraje.setText(fichaVehiculo.getKilometraje().toString());
 	}
 
+	public void updateKilometraje(String kilometrajeActual) {
+		this.textKilometraje.setText(kilometrajeActual);
+	}
+
+	public FichaTecnicaVehiculoDTO getData() {
+		FichaTecnicaVehiculoDTO ret = new FichaTecnicaVehiculoDTO();
+		ret.setNroChasis(Integer.parseInt(textNroDeChasis.getText()));
+		ret.setNroMotor(Integer.parseInt(textNroMotor.getText()));
+		ret.setMarca(textMarca.getText());
+		ret.setColor(textColor.getText());
+		ret.setCombustion(textCombustion.getText());
+		ret.setModelo(Integer.parseInt(textModelo.getText()));
+		ret.setKilometraje(Integer.parseInt(textKilometraje.getText()));
+		return ret;
+	}
 }
