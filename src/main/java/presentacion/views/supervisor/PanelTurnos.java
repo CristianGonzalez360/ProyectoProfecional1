@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 import dto.taller.TurnoDTO;
 
-public class TurnosPanelView extends JPanel {
+public class PanelTurnos extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class TurnosPanelView extends JPanel {
 	private JLabel lblNewLabel;
 	private JButton btnConfiguracion;
 
-	public TurnosPanelView() {
+	public PanelTurnos() {
 		setLayout(new BorderLayout(0, 0));
 		JPanel panel_1 = new JPanel();
 		setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));

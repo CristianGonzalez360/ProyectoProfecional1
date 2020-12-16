@@ -19,7 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 @SuppressWarnings("serial")
-public class NuevosRepuestosFormView extends JDialog {
+public class FormNuevosRepuestos extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable tablaRepuestos;
@@ -28,15 +28,15 @@ public class NuevosRepuestosFormView extends JDialog {
 			"quitar" };// columna checkbox editable
 	private JButton okButton;
 	private JButton cancelButton;
-	private static NuevosRepuestosFormView instance;
+	private static FormNuevosRepuestos instance;
 
-	public static NuevosRepuestosFormView getInstance() {
+	public static FormNuevosRepuestos getInstance() {
 		if (instance == null)
-			instance = new NuevosRepuestosFormView();
+			instance = new FormNuevosRepuestos();
 		return instance;
 	}
 
-	public NuevosRepuestosFormView() {
+	public FormNuevosRepuestos() {
 		setTitle("Nuevos repuestos");
 		setBounds(100, 100, 800, 551);
 		setModal(true);// para hacer que la ventana se tenga que cerrar si o si
