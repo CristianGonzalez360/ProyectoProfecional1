@@ -248,4 +248,16 @@ public class PanelClientesView extends JPanel {
 	public void setActionReporteDeVehiculo(ActionListener listener) {
 		this.btnReporteVehiculo.addActionListener(listener);
 	}
+	
+	public void setUpdateKilometrajeOnFichaTecnica(String kilometrajeActual) {
+		this.panelFichaTecnica.updateKilometraje(kilometrajeActual);
+	}
+
+	public FichaTecnicaVehiculoDTO getDataFichaTechica() {
+		return this.panelFichaTecnica.getData();
+	}
+
+	public GarantiaVehiculoDTO getDataGarantia() {
+		return this.garantia.getData();
+	}
 }

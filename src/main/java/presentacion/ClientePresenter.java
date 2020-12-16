@@ -6,12 +6,10 @@ import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import business_logic.ClientesController;
-import business_logic.GarantiasController;
-import business_logic.OrdenesTrabajoController;
-import business_logic.VehiculosConOrdenDeTrabajoController;
+import business_logic.ControllersFactory;
 import business_logic.exceptions.ConflictException;
 import business_logic.exceptions.ForbiddenException;
+import business_logic.exceptions.NotFoundException;
 import dto.ClienteDTO;
 import dto.GarantiaVehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
@@ -34,24 +32,13 @@ public class ClientePresenter {
 
 	private PanelClientesView view;
 
-	private ClientesController clienteController;
-
-	private VehiculosConOrdenDeTrabajoController vehiculosController;
-
-	private OrdenesTrabajoController ordenDeTrabajoController;
+	private ControllersFactory controllers;
 	
-	private GarantiasController garantiasController;
-
 	private Integer idClientePresentado;
 
-	public ClientePresenter(PanelClientesView view, ClientesController controller,
-			VehiculosConOrdenDeTrabajoController vehiculoController, OrdenesTrabajoController otController,
-			GarantiasController garantiasController) {
+	public ClientePresenter(PanelClientesView view, ControllersFactory controllers) {
 		this.view = view;
-		clienteController = controller;
-		this.vehiculosController = vehiculoController;
-		ordenDeTrabajoController = otController;
-		this.garantiasController = garantiasController;
+		this.controllers = controllers;
 
 		view.setActionBuscar((a) -> onBuscar(a));
 		view.setActionSelectVehiculoCliente(new ListSelectionListener() {
@@ -65,13 +52,9 @@ public class ClientePresenter {
 		view.setActionRegistrarOrdenDeTrabajo((a) -> onDisplayOrdenDeTrabajoForm(a));
 		view.setActionReporteDeVehiculo((a) -> onMostrarHistorialDeVehiculo(a));
 		
-//		ClienteFormView.getInstance().setActionOnSave((a) -> onRegistrarCliente(a));
-//		VehiculoFormView.getInstance().setActionSave((a) -> onRegistrarVehiculo(a));
-//		AltaOrdenTrabajoFormView.getInstance().setActionGuardar((a) -> onRegistrarOrdenDeTrabajo(a));
 		FormCliente.getInstance().setActionOnSave((a) -> onRegistrarCliente(a));
 		FormVehiculo.getInstance().setActionSave((a) -> onRegistrarVehiculo(a));
 		FormAltaOrdenTrabajo.getInstance().setActionGuardar((a) -> onRegistrarOrdenDeTrabajo(a));
-
 		view.setActionOnEditarCliente(a -> onDisplayFormForUpdate(a));
 		FormCliente.getInstance().setActionOnUpdate(a -> onUpdate(a));
 	}
@@ -79,8 +62,10 @@ public class ClientePresenter {
 	private void onDisplayOrdenDeTrabajoForm(ActionEvent a) {
 		if (view.getidVehiculoSeleccionado() != null) {
 			FormAltaOrdenTrabajo.getInstance().clearData();
-			Integer idVehiculo = vehiculosController.readById(view.getidVehiculoSeleccionado()).getIdVehiculo();
-			if (!garantiasController.estaEnGarantia(idVehiculo)) {
+			Integer kilometraje = view.getDataFichaTechica().getKilometraje();
+			FormAltaOrdenTrabajo.getInstance().setKilometraje(kilometraje.toString());
+			Integer idVehiculo = controllers.makeVehiculosConOrdenDeTrabajoController().readById(view.getidVehiculoSeleccionado()).getIdVehiculo();
+			if (!controllers.makeGarantiasController().estaEnGarantia(idVehiculo) && view.getDataGarantia().getAniosDeGarantia() == null) {
 				FormAltaOrdenTrabajo.getInstance().deshabilitarGarantia();
 			} else {
 				FormAltaOrdenTrabajo.getInstance().habilitarGarantia();
@@ -106,11 +91,11 @@ public class ClientePresenter {
 		view.clearAll();
 		String inputDni = view.getDniCliente();
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
-			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
+			ClienteDTO cliente = controllers.makeClientesController().readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
 				idClientePresentado = cliente.getIdCliente();
 				view.setData(cliente);
-				view.setData(vehiculosController.readVehiculosConFichaTecnicaByIdCliente(cliente.getIdCliente()));
+				view.setData(controllers.makeVehiculosConOrdenDeTrabajoController().readVehiculosConFichaTecnicaByIdCliente(cliente.getIdCliente()));
 			}
 		}
 	}
@@ -122,11 +107,11 @@ public class ClientePresenter {
 		
 		Integer idVehiculo = view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
-			VehiculoConOrdenDeTrabajoDTO vehiConOT = vehiculosController.readById(idVehiculo);
-			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController.readFichaTecnicaById(vehiConOT.getIdFichaTecnica());
+			VehiculoConOrdenDeTrabajoDTO vehiConOT = controllers.makeVehiculosConOrdenDeTrabajoController().readById(idVehiculo);
+			FichaTecnicaVehiculoDTO fichaVehiculo = controllers.makeVehiculosConOrdenDeTrabajoController().readFichaTecnicaById(vehiConOT.getIdFichaTecnica());
 			if (fichaVehiculo != null) {
 				view.setData(fichaVehiculo);
-				OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController.readByIdVehiculo(idVehiculo);
+				OrdenDeTrabajoDTO ordenDeTrabajo = controllers.makeOrdenesDeTrabajoController().readByIdVehiculo(idVehiculo);
 				if (ordenDeTrabajo != null) {
 					view.setData(ordenDeTrabajo);
 					view.lockButtonRegistrarOrdenDeTrabajo();
@@ -136,7 +121,7 @@ public class ClientePresenter {
 				}
 			}
 			if(vehiConOT.getIdVehiculo() != null ) {
-				GarantiaVehiculoDTO garantia = garantiasController.readByIdVehiculo(vehiConOT.getIdVehiculo());
+				GarantiaVehiculoDTO garantia = controllers.makeGarantiasController().readByIdVehiculo(vehiConOT.getIdVehiculo());
 				if (garantia != null) {
 					view.setDataGarantia(garantia);
 				}
@@ -149,7 +134,7 @@ public class ClientePresenter {
 		List<String> errors = cliente.validate();
 		if (errors.isEmpty()) {
 			try {
-				clienteController.save(new ClienteDTO(cliente));
+				controllers.makeClientesController().save(new ClienteDTO(cliente));
 				FormCliente.getInstance().clearData();
 				FormCliente.getInstance().close();
 			} catch (ConflictException e1) {
@@ -165,10 +150,10 @@ public class ClientePresenter {
 		List<String> errors = vehiculoDeAlta.validate();
 		if (errors.isEmpty()) {
 			try {
-				vehiculosController.save(idClientePresentado, vehiculoDeAlta);
+				controllers.makeVehiculosConOrdenDeTrabajoController().save(idClientePresentado, vehiculoDeAlta);
 				FormVehiculo.getInstance().close();
 				view.clearDataListadoVehiculosCliente();
-				view.setData(vehiculosController.readVehiculosConFichaTecnicaByIdCliente(idClientePresentado));
+				view.setData(controllers.makeVehiculosConOrdenDeTrabajoController().readVehiculosConFichaTecnicaByIdCliente(idClientePresentado));
 			} catch (ConflictException e1) {
 				new MessageDialog().showMessages(e1.getMessage());
 			}
@@ -184,11 +169,16 @@ public class ClientePresenter {
 			List<String> errors = ordenDeTrabajo.validate();
 			if (errors.isEmpty()) {
 				try {
-					ordenDeTrabajoController.save(idVehiculo, ordenDeTrabajo);
-					OrdenDeTrabajoDTO dto = ordenDeTrabajoController.readByIdVehiculo(idVehiculo);
+					controllers.makeOrdenesDeTrabajoController().save(idVehiculo, ordenDeTrabajo);
+					OrdenDeTrabajoDTO dto = controllers.makeOrdenesDeTrabajoController().readByIdVehiculo(idVehiculo);
+					
+					FichaTecnicaVehiculoDTO ficha = view.getDataFichaTechica();
+					controllers.makeVehiculosController().updateKilometraje(ficha, ordenDeTrabajo);
+					view.setUpdateKilometrajeOnFichaTecnica(ordenDeTrabajo.getKilometrajeActual());
+					
 					view.setData(dto);
 					FormAltaOrdenTrabajo.getInstance().close();
-				} catch (ForbiddenException e1) {
+				} catch (ForbiddenException | ConflictException | NotFoundException e1) {
 					new MessageDialog().showMessages(e1.getMessage());
 				}
 			} else {
@@ -200,7 +190,7 @@ public class ClientePresenter {
 	private void onDisplayFormForUpdate(ActionEvent a) {
 		if (idClientePresentado != null) {
 			FormCliente.getInstance().clearData();
-			FormCliente.getInstance().setData(clienteController.readById(this.idClientePresentado));
+			FormCliente.getInstance().setData(controllers.makeClientesController().readById(this.idClientePresentado));
 			FormCliente.getInstance().display();
 		} else {
 			new MessageDialog().showMessages(CLIENTE_NO_SELECCIONADO);
@@ -213,8 +203,8 @@ public class ClientePresenter {
 		if (errores.isEmpty()) {
 			ClienteDTO cliente = new ClienteDTO(clienteAux);
 			cliente.setIdCliente(idClientePresentado);
-			cliente.getDatosPersonalesDTO().setId(this.clienteController.readById(idClientePresentado).getIdDatosPersonales());
-			clienteController.update(cliente);
+			cliente.getDatosPersonalesDTO().setId(controllers.makeClientesController().readById(idClientePresentado).getIdDatosPersonales());
+			controllers.makeClientesController().update(cliente);
 			view.clearDataCliente();
 			view.setData(cliente);
 			FormCliente.getInstance().close();
@@ -225,10 +215,8 @@ public class ClientePresenter {
 	
 	private void onMostrarHistorialDeVehiculo(ActionEvent e) {
 		Integer idVehiculo = view.getidVehiculoSeleccionado();
-		
 		if (idVehiculo != null) {
-			List<OrdenDeTrabajoDTO> trabajos = ordenDeTrabajoController.readAllByIdVehiculo(idVehiculo);
-			
+			List<OrdenDeTrabajoDTO> trabajos = controllers.makeOrdenesDeTrabajoController().readAllByIdVehiculo(idVehiculo);
 			ReporteViewImpl reporte = new ReporteViewImpl();
 			reporte.setDataTrabajos(trabajos);
 			reporte.open();

@@ -168,4 +168,8 @@ public class FormAltaOrdenTrabajo extends JDialog {
 		this.rdbtnGarantia.setEnabled(false);
 		this.rdbtnTaller.setSelected(true);
 	}
+
+	public void setKilometraje(String string) {
+		this.kilometrajeActual.setText(string);
+	}
 }
