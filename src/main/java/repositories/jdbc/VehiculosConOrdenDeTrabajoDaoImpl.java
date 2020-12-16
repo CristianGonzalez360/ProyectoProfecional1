@@ -32,7 +32,9 @@ public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoCo
 
 	@Override
 	public boolean insert(VehiculoConOrdenDeTrabajoDTO entity) {
-		return getTemplate().query(insert).param(entity.getIdFichaTecnica()).param(entity.getIdCliente())
+		return getTemplate().query(insert)
+				.param(entity.getIdFichaTecnica() == null ? new NullObject() : entity.getIdFichaTecnica())
+				.param(entity.getIdCliente())
 				.param(entity.getKilometrajeGarantia() == null ? new NullObject() : entity.getKilometrajeGarantia())
 				.param(entity.getAseguradora() == null ? new NullObject() : entity.getAseguradora())
 				.param(entity.getNroPolizaSeguro() == null ? new NullObject() : entity.getNroPolizaSeguro())
