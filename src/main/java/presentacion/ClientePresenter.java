@@ -62,7 +62,8 @@ public class ClientePresenter {
 		view.setActionRegistrarCliente((a) -> onDisplayClienteFormView(a));
 		view.setActionRegistrarVehiculo((a) -> onDisplayVehiculoFormView(a));
 		view.setActionRegistrarOrdenDeTrabajo((a) -> onDisplayOrdenDeTrabajoForm(a));
-
+		view.setActionReporteDeVehiculo((a) -> onMostrarHistorialDeVehiculo(a));
+		
 		ClienteFormView.getInstance().setActionOnSave((a) -> onRegistrarCliente(a));
 		VehiculoFormView.getInstance().setActionSave((a) -> onRegistrarVehiculo(a));
 		AltaOrdenTrabajoFormView.getInstance().setActionGuardar((a) -> onRegistrarOrdenDeTrabajo(a));
@@ -215,5 +216,9 @@ public class ClientePresenter {
 		} else {
 			new MessageDialog().showMessages(errores);
 		}
+	}
+	
+	private void onMostrarHistorialDeVehiculo(ActionEvent e) {
+		System.out.println("Reporte");
 	}
 }
