@@ -3,12 +3,12 @@ package repositories.jdbc;
 import java.sql.Connection;
 import java.util.List;
 
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 import repositories.VehiculosConOrdenDeTrabajoDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
 
-public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoConOrdenDeTrabajoDTO>
+public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<IngresoOrdenDeTrabajoDTO>
 		implements VehiculosConOrdenDeTrabajoDao {
 
 	private static final String insert = "INSERT INTO VehiculoConOrdenesDeTrabajo (idFichaTecnicaVehiculo,idCliente,kilometrajeGarantia,aseguradora,nroPolizaSeguro,patenteVehiculo,idVehiculo) VALUES (?,?,?,?,?,?,?)";
@@ -26,12 +26,12 @@ public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoCo
 	}
 
 	@Override
-	public boolean update(VehiculoConOrdenDeTrabajoDTO entity) {
+	public boolean update(IngresoOrdenDeTrabajoDTO entity) {
 		return false;
 	}
 
 	@Override
-	public boolean insert(VehiculoConOrdenDeTrabajoDTO entity) {
+	public boolean insert(IngresoOrdenDeTrabajoDTO entity) {
 		return getTemplate().query(insert)
 				.param(entity.getIdFichaTecnica() == null ? new NullObject() : entity.getIdFichaTecnica())
 				.param(entity.getIdCliente())
@@ -48,35 +48,35 @@ public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<VehiculoCo
 	}
 
 	@Override
-	public VehiculoConOrdenDeTrabajoDTO readByID(Integer id) {
-		List<VehiculoConOrdenDeTrabajoDTO> dtos = getTemplate().query(readAllId).param(id).excecute(getMapper());
+	public IngresoOrdenDeTrabajoDTO readByID(Integer id) {
+		List<IngresoOrdenDeTrabajoDTO> dtos = getTemplate().query(readAllId).param(id).excecute(getMapper());
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
 	@Override
-	public List<VehiculoConOrdenDeTrabajoDTO> readAll() {
+	public List<IngresoOrdenDeTrabajoDTO> readAll() {
 		return getTemplate().query(readAll).excecute(getMapper());
 	}
 
 	@Override
-	public VehiculoConOrdenDeTrabajoDTO readByPatente(String patente) {
-		List<VehiculoConOrdenDeTrabajoDTO> dtos = getTemplate().query(readByPatente).param(patente)
+	public IngresoOrdenDeTrabajoDTO readByPatente(String patente) {
+		List<IngresoOrdenDeTrabajoDTO> dtos = getTemplate().query(readByPatente).param(patente)
 				.excecute(getMapper());
 		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 
 	@Override
-	public List<VehiculoConOrdenDeTrabajoDTO> readByClienteId(Integer idCliente) {
+	public List<IngresoOrdenDeTrabajoDTO> readByClienteId(Integer idCliente) {
 		return getTemplate().query(readByClienteId).param(idCliente).excecute(getMapper());
 	}
 
 	@Override
-	protected Mapper<VehiculoConOrdenDeTrabajoDTO> getMapper() {
+	protected Mapper<IngresoOrdenDeTrabajoDTO> getMapper() {
 
-		return new Mapper<VehiculoConOrdenDeTrabajoDTO>() {
+		return new Mapper<IngresoOrdenDeTrabajoDTO>() {
 			@Override
-			public VehiculoConOrdenDeTrabajoDTO map(Object[] obj) {
-				VehiculoConOrdenDeTrabajoDTO dto = new VehiculoConOrdenDeTrabajoDTO();
+			public IngresoOrdenDeTrabajoDTO map(Object[] obj) {
+				IngresoOrdenDeTrabajoDTO dto = new IngresoOrdenDeTrabajoDTO();
 				dto.setId((Integer) obj[0]);
 				dto.setIdFichaTecnica((Integer) obj[1]);
 				dto.setIdCliente((Integer) obj[2]);

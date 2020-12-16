@@ -14,7 +14,7 @@ import dto.ClienteDTO;
 import dto.GarantiaVehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 import dto.temporal.AltaClienteDTO;
 import dto.temporal.AltaDeVehiculoDTO;
 import dto.temporal.AltaOrdenDeTrabajoDTO;
@@ -107,7 +107,7 @@ public class ClientePresenter {
 		
 		Integer idVehiculo = view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
-			VehiculoConOrdenDeTrabajoDTO vehiConOT = controllers.makeVehiculosConOrdenDeTrabajoController().readById(idVehiculo);
+			IngresoOrdenDeTrabajoDTO vehiConOT = controllers.makeVehiculosConOrdenDeTrabajoController().readById(idVehiculo);
 			FichaTecnicaVehiculoDTO fichaVehiculo = controllers.makeVehiculosConOrdenDeTrabajoController().readFichaTecnicaById(vehiConOT.getIdFichaTecnica());
 			if (fichaVehiculo != null) {
 				view.setData(fichaVehiculo);

@@ -33,7 +33,7 @@ import dto.taller.OrdenDeTrabajoDTO;
 import dto.taller.PresupuestoDTO;
 import dto.taller.RepuestoPlanificadoDTO;
 import dto.taller.TrabajoPresupuestadoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 
 public class PanelGestionTrabajoView extends JPanel {
 
@@ -46,7 +46,7 @@ public class PanelGestionTrabajoView extends JPanel {
 	private JPanel panelEste;
 	private JPanel panelOeste;
 	private JPanel panelEsteNorte;
-	private List<VehiculoConOrdenDeTrabajoDTO> vehiculos;
+	private List<IngresoOrdenDeTrabajoDTO> vehiculos;
 
 	private final String[] columnasTablaVehiculos = new String[] { "NRO. VEHICULO", "KM GARANTIA", "ASEGURADORA",
 			"NRO POLIZA SEGURO", "PATENTE" };
@@ -395,19 +395,19 @@ public class PanelGestionTrabajoView extends JPanel {
 		this.tableVehiculos.getSelectionModel().addListSelectionListener(listener);
 	}
 
-	public VehiculoConOrdenDeTrabajoDTO getidVehiculoSeleccionado() {
+	public IngresoOrdenDeTrabajoDTO getidVehiculoSeleccionado() {
 		int rows = this.tableVehiculos.getSelectedRowCount();
 		if (rows == 1) {
 			int row = this.tableVehiculos.getSelectedRow();
-			VehiculoConOrdenDeTrabajoDTO dto = this.vehiculos.get(row);
+			IngresoOrdenDeTrabajoDTO dto = this.vehiculos.get(row);
 			return dto;
 		}
 		return null;
 	}
 
-	public void setData(List<VehiculoConOrdenDeTrabajoDTO> vehiculos) {
+	public void setData(List<IngresoOrdenDeTrabajoDTO> vehiculos) {
 		this.vehiculos = vehiculos;
-		for (VehiculoConOrdenDeTrabajoDTO dto : vehiculos) {
+		for (IngresoOrdenDeTrabajoDTO dto : vehiculos) {
 			Object[] row = { dto.getId().toString(), dto.getKilometrajeGarantia().toString(), dto.getAseguradora(),
 					dto.getNroPolizaSeguro().toString(), dto.getPatente() };
 			this.tableModelVehiculos.addRow(row);

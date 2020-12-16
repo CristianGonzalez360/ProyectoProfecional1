@@ -12,7 +12,7 @@ import dto.ClienteDTO;
 import dto.GarantiaVehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 import presentacion.views.vendedor.PanelCaracteristicasDeLaGarantia;
 import presentacion.views.vendedor.TablePanel;
 
@@ -40,7 +40,7 @@ public class PanelClientesView extends JPanel {
 
 	private JPanel panelDerecho;
 
-	private TablePanel<VehiculoConOrdenDeTrabajoDTO> table;
+	private TablePanel<IngresoOrdenDeTrabajoDTO> table;
 
 	private PanelCliente panelCliente;
 
@@ -93,13 +93,13 @@ public class PanelClientesView extends JPanel {
 		toolBar = new ToolbarPanelGestionClientes();
 		panel_1.add(toolBar);
 
-		table = new TablePanel<VehiculoConOrdenDeTrabajoDTO>(columnasTablaVehiculos) {
+		table = new TablePanel<IngresoOrdenDeTrabajoDTO>(columnasTablaVehiculos) {
 
 			private static final long serialVersionUID = -2201535451043046243L;
 
 			@Override
-			public void setData(List<VehiculoConOrdenDeTrabajoDTO> data) {
-				for (VehiculoConOrdenDeTrabajoDTO dto : data) {
+			public void setData(List<IngresoOrdenDeTrabajoDTO> data) {
+				for (IngresoOrdenDeTrabajoDTO dto : data) {
 					Object[] row = { dto.getId(), dto.getKilometrajeGarantia(), dto.getAseguradora(),
 							dto.getNroPolizaSeguro(), dto.getPatente() };
 					this.model.addRow(row);
@@ -107,11 +107,11 @@ public class PanelClientesView extends JPanel {
 			}
 
 			@Override
-			public VehiculoConOrdenDeTrabajoDTO getData() {
+			public IngresoOrdenDeTrabajoDTO getData() {
 				int rows = this.table.getSelectedRowCount();
 				if (rows == 1) {
 					int row = this.table.getSelectedRow();
-					VehiculoConOrdenDeTrabajoDTO dto = new VehiculoConOrdenDeTrabajoDTO();
+					IngresoOrdenDeTrabajoDTO dto = new IngresoOrdenDeTrabajoDTO();
 					dto.setId(Integer.parseInt(model.getValueAt(row, 0).toString()));
 					return dto;
 				}
@@ -193,7 +193,7 @@ public class PanelClientesView extends JPanel {
 		this.panelOrdenTrabajo.setData(ordenDeTrabajo);
 	}
 
-	public void setData(List<VehiculoConOrdenDeTrabajoDTO> vehiculos) {
+	public void setData(List<IngresoOrdenDeTrabajoDTO> vehiculos) {
 		this.table.setData(vehiculos);
 	}
 
