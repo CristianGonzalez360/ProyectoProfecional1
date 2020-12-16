@@ -69,7 +69,7 @@ public class VehiculoFormView extends JDialog {
 		textKilometraje.setColumns(10);
 		textPatente.setColumns(10);
 		textNroDeMotor.setColumns(10);
-		setBounds(100, 100, 607, 355);
+		setBounds(100, 100, 607, 282);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
