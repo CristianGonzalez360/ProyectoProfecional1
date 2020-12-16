@@ -44,13 +44,23 @@ public class ReportesController {
 	
 	public List<IngresosReport> readIngresos(Date desde ,Date hasta) {
 		List<IngresosReport> ingresosReport = new ArrayList<>();
+		
 		for (FacturaDTO facturaPaga : daos.makeFacturasDao().readByDates(desde,hasta)) {
 			IngresosReport ingreso = new IngresosReport();
-			ingreso.setDescripcion("taller");
+			ingreso.setDescripcion("Taller");
 			ingreso.setFechaDePago(facturaPaga.getFechaDeCierrePorPago());
 			ingreso.setMontoTotal(facturaPaga.getTotal());
 			ingresosReport.add(ingreso);
 		}
+		
+		for (VentaVehiculoDTO ventas : daos.makeVentaVehiculoDao().readFechas(desde, hasta)){//makeFacturasDao().readByDates(desde,hasta))//			
+			IngresosReport ingreso = new IngresosReport();
+			ingreso.setDescripcion("Ventas");
+			ingreso.setFechaDePago(ventas.getFechaVentaVN());
+			ingreso.setMontoTotal(ventas.getPrecioVenta());
+			ingresosReport.add(ingreso);
+		}
+		
 		return ingresosReport;
 	}
 

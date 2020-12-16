@@ -26,7 +26,7 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 
 	private static final String insertFacturaCarrito = "INSERT INTO Facturas (estado, fechaDeAlta, total, dni, idCliente) VALUES (?,?,?,?,?)";
 
-	private static final String getFacturasPagasDate = "SELECT * FROM Facturas WHERE estado = 'PAGA' AND fechaDeCierrePorPago between '?' AND '?'";
+	private static final String getFacturasPagasDate = "SELECT * FROM Facturas WHERE estado = 'PAGA' AND fechaDeCierrePorPago between ? AND ?";
 
 
 	public FacturasDaoImpl(Connection connection) {

@@ -60,46 +60,15 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="marca" class="java.lang.String">
-		<fieldDescription><![CDATA[marca]]></fieldDescription>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcion]]></fieldDescription>
 	</field>
-	<field name="familia" class="java.lang.String">
-		<fieldDescription><![CDATA[familia]]></fieldDescription>
+	<field name="fechaDePago" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaDePago]]></fieldDescription>
 	</field>
-	<field name="linea" class="java.lang.String">
-		<fieldDescription><![CDATA[linea]]></fieldDescription>
+	<field name="montoTotal" class="java.lang.Double">
+		<fieldDescription><![CDATA[montoTotal]]></fieldDescription>
 	</field>
-	<field name="color" class="java.lang.String">
-		<fieldDescription><![CDATA[color]]></fieldDescription>
-	</field>
-	<group name="GrupoMarca">
-		<groupExpression><![CDATA[$F{marca}]]></groupExpression>
-		<groupHeader>
-			<band height="23">
-				<frame>
-					<reportElement mode="Opaque" x="0" y="0" width="550" height="20" backcolor="#BEEDD3" uuid="4b10d655-d54c-4af6-932e-f0301a56c53e"/>
-					<staticText>
-						<reportElement x="0" y="0" width="79" height="19" uuid="26599341-7cdd-48e1-9717-01e7cfd0c321"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle"/>
-						<text><![CDATA[Marca:]]></text>
-					</staticText>
-					<textField>
-						<reportElement x="79" y="0" width="100" height="19" uuid="877c0a6b-18f1-4805-af94-cfc52bfd69c3"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle"/>
-						<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
-					</textField>
-				</frame>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="21">
-				<textField>
-					<reportElement x="440" y="0" width="110" height="20" uuid="61d26fe2-7668-4ead-8dd9-a4b193b66132"/>
-					<textFieldExpression><![CDATA["Total Grupo: "+$V{GrupoMarca_COUNT}]]></textFieldExpression>
-				</textField>
-			</band>
-		</groupFooter>
-	</group>
 	<title>
 		<band height="76" splitType="Stretch">
 			<image hAlign="Center">
@@ -138,17 +107,17 @@
 				<staticText>
 					<reportElement x="480" y="0" width="70" height="25" uuid="9f9d8f62-cc10-4897-b1e0-0094f7188a34"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[Color]]></text>
+					<text><![CDATA[total]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="0" y="0" width="79" height="26" uuid="3db51d1b-1170-4c2a-9963-e023c4d86e57"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[Familia]]></text>
+					<text><![CDATA[Descripcion]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="79" y="0" width="100" height="26" uuid="059b8786-a197-4f0a-919e-2b7a073eb3de"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[Linea]]></text>
+					<text><![CDATA[Fecha de ingreso]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -160,17 +129,17 @@
 				<textField>
 					<reportElement x="0" y="0" width="80" height="20" uuid="65605e1b-81e3-4bae-8666-3447a9e5a44b"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{familia}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="80" y="0" width="99" height="20" uuid="4a5ec0e8-849a-4440-b12d-56ea81d08aba"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{linea}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{fechaDePago}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="480" y="0" width="70" height="20" uuid="0b271d27-1d3d-4bd9-a806-948e787ad73d"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{color}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{montoTotal}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -193,11 +162,6 @@
 		<band height="542">
 			<frame>
 				<reportElement mode="Opaque" x="-1" y="0" width="551" height="26" backcolor="#71C4E1" uuid="64767c54-5643-4eca-9526-2e3896977f36"/>
-				<staticText>
-					<reportElement x="81" y="0" width="388" height="26" uuid="cb94f0c8-0aaf-40bb-94d5-7a1d33fbade3"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<text><![CDATA[Grafico por Marcas]]></text>
-				</staticText>
 			</frame>
 		</band>
 	</summary>

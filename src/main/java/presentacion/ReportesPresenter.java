@@ -82,7 +82,7 @@ public class ReportesPresenter {
 		List<IngresosReport> ingresos = reportesController.readIngresos(fechaDesde, fechaHasta);
 		System.out.println(ingresos.toString());
 		reporte.setDataIngresos(ingresos);
-//		reporte.open();
+		reporte.open();
 	}
 
 	private void generarReporteEgresos() {
