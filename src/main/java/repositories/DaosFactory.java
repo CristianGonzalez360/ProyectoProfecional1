@@ -62,4 +62,8 @@ public abstract class DaosFactory {
 
 	public abstract GarantiasDao makeGarantiasVehiculosDao();
 
+	public abstract CompraVehiculoDao makeCompraVehiculosDao();
+
+	public abstract CompraRepuestoDao makeCompraRepuestosDao();
+
 }

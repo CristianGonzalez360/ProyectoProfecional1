@@ -52,9 +52,8 @@ public class ReportesPresenter {
 		reporte.open();
 	}
 
-	// TODO en este metodo en lugar de recolectarse en la lista de ingresosReport
-	// facturas y ventas de vehiculos se
-	// se buscaran compras de autos y compras de repuestos
+	//TODO en este metodo en lugar de recolectarse en la lista de ingresosReport facturas y ventas de vehiculos se 
+	//se buscaran compraVehiculo y compraRepuesto
 	private void generarReporteEgresos() {
 		Date fechaDesde = view.getFechaEgresoDesde();
 		Date fechaHasta = view.getFechaIngresoDesde();
@@ -64,7 +63,7 @@ public class ReportesPresenter {
 
 		ReporteViewImpl reporte = new ReporteViewImpl();
 		List<IngresosReport> ingresos = reportesController.readEgresos(fechaDesde, fechaHasta);
-		reporte.setDataIngresos(ingresos);
+		reporte.setDataEgresos(ingresos);
 		reporte.open();
 	}
 
