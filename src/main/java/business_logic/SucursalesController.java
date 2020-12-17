@@ -40,6 +40,7 @@ public class SucursalesController {
 		MonedaDTO moneda = readMonedaByPais(nuevaSucursal.getPais());
 		SucursalDTO sucursal = new SucursalDTO();
 		sucursal.setPais(nuevaSucursal.getPais());
+		sucursal.setLocalidad(nuevaSucursal.getLocalidad());
 		sucursal.setCalle(nuevaSucursal.getCalle());
 		sucursal.setAltura(Integer.parseInt(nuevaSucursal.getAltura()));
 		if(moneda != null) sucursal.setIdMoneda(moneda.getIdMoneda());

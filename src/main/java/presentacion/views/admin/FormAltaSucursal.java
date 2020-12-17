@@ -45,7 +45,7 @@ public class FormAltaSucursal extends JDialog {
 		setModal(true);
 		setResizable(false);
 		setTitle("Form alta de sucursal");
-		setBounds(100, 100, 294, 186);
+		setBounds(100, 100, 294, 222);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

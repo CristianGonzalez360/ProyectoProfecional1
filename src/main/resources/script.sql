@@ -257,9 +257,8 @@ CREATE TABLE Sucursal (
   calle VARCHAR(25) NOT NULL,
   altura INT NOT NULL,
   localidad VARCHAR(25) NOT NULL,
-  idMoneda INT NOT NULL,
-  PRIMARY KEY (idSucursal),
-  FOREIGN KEY (idMoneda) REFERENCES Moneda(idMoneda)
+  idMoneda INT,
+  PRIMARY KEY (idSucursal)
 );
 
 DROP TABLE CaracteristicasVehiculo IF exists;

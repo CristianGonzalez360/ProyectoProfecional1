@@ -7,6 +7,7 @@ import java.util.List;
 import dto.SucursalDTO;
 import repositories.SucursalesDao;
 import repositories.jdbc.utils.Mapper;
+import repositories.jdbc.utils.NullObject;
 
 public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements SucursalesDao {
 
@@ -27,8 +28,14 @@ public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements Su
 
 	@Override
 	public boolean insert(SucursalDTO entity) {
-		return getTemplate().query(insert).param(entity.getPais()).param(entity.getCalle()).param(entity.getAltura())
-				.param(entity.getLocalidad()).param(entity.getIdMoneda()).excecute();
+		return getTemplate()
+				.query(insert)
+				.param(entity.getPais())
+				.param(entity.getCalle())
+				.param(entity.getAltura())
+				.param(entity.getLocalidad())
+				.param(entity.getIdMoneda() == null ? new NullObject() : entity.getIdMoneda())
+				.excecute();
 	}
 
 	@Override

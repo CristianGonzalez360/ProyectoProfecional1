@@ -43,6 +43,7 @@ public class SucursalesControlPresenter {
 		List<String> errors = nuevaSucursal.validate();
 		if(errors.isEmpty()) {
 			controller.save(nuevaSucursal);
+			FormAltaSucursal.getInstance().close();
 		} else {
 			new MessageDialog().showMessages(errors);
 		}

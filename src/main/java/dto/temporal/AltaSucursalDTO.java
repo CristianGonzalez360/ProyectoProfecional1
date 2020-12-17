@@ -62,7 +62,6 @@ public class AltaSucursalDTO {
 	public List<String> validate() {
 		List<String> ret = new LinkedList<>();
 		ret.addAll(new StringValidator(this.pais).notBlank("El país es obligatorio").validate());
-		ret.addAll(new StringValidator(this.moneda).notBlank("La moneda es obligatoria").validate());
 		ret.addAll(new StringValidator(this.localidad).notBlank("El localidad es obligatoria").validate());
 		ret.addAll(new StringValidator(this.calle).notBlank("La calle es obligatorio").validate());
 		ret.addAll(new StringValidator(this.altura).number("La altura debe ser un número").validate());
