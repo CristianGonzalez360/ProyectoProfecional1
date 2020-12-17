@@ -1,9 +1,14 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
-
 import business_logic.PedidosController;
+import business_logic.VehiculosController;
+import dto.PedidoVehiculoDTO;
+import dto.VehiculoDTO;
+import dto.VentaVehiculoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
 import presentacion.views.gerente.PedidosPanelView;
+import presentacion.views.gerente.FichaTecnicaFormView;
 import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.MessageDialog;
 import services.SessionServiceImpl;
@@ -14,13 +19,17 @@ public class PedidosPresenter {
 
 	private PedidosPanelView view;
 	private PedidosController controller;
-
-	public PedidosPresenter(PedidosPanelView view, PedidosController controller) {
+	private FichaTecnicaFormView formNuevaFicha;
+	private VehiculosController vehiculosController;
+	
+	public PedidosPresenter(PedidosPanelView view, PedidosController controller, VehiculosController vehiculosController) {
 		this.view = view;
 		this.controller = controller;
-
+		this.vehiculosController = vehiculosController;
+		formNuevaFicha = FichaTecnicaFormView.getInstance();
 		view.setActionBuscar((a) -> onBuscar(a));
 		view.setActionRegistrarIngreso((a) -> onRegistrar(a));
+		formNuevaFicha.setActionSave((a) -> onRegistrarNuevaFicha(a));
 	}
 
 	private void onBuscar(ActionEvent a) {
@@ -32,16 +41,9 @@ public class PedidosPresenter {
 
 	private void onRegistrar(ActionEvent event) {
 		Integer idFila = view.getIdSelectedRow();
-		Integer idUsuario = SessionServiceImpl.getInstance().getActiveSession().getIdUsuario();
-
+		
 		if (puedoRegistrarIngreso(idFila)) {
-			Integer idPedido = view.getIdSelectedPedido();
-
-			if (controller.registrarIngresoPedidoById(idPedido, idUsuario))
-				new MessageDialog().showMessages("Vehiculo Registrado!");
-			else
-				new MessageDialog().showMessages("No se puedo registrar el ingreso del Vehiculo!");
-			view.clear();
+			this.fichaFormDisplay();//va aca
 		}
 	}
 
@@ -51,5 +53,57 @@ public class PedidosPresenter {
 
 	private boolean hayFilaSeleccionada(Integer idFila) {
 		return (idFila != -1);
+	}
+	
+
+	private void onRegistrarNuevaFicha(ActionEvent a) {//guarda ficha tecnica con 
+		FichaTecnicaVehiculoDTO fichaNueva = formNuevaFicha.getData();
+		Integer idUsuario = SessionServiceImpl.getInstance().getActiveSession().getIdUsuario();
+		Integer idPedido = view.getIdSelectedPedido();
+		
+		if (controller.registrarIngresoPedidoById(idPedido, idUsuario)) {
+			new MessageDialog().showMessages("Vehiculo Registrado!");
+			
+		} else
+			new MessageDialog().showMessages("No se puedo registrar el ingreso del Vehiculo!");
+		
+		if(isNroMotorNuevo(fichaNueva.getNroMotor())) {
+			if(isNroChasisNuevo(fichaNueva.getNroChasis())) {//todo Ok
+//				setIdFichaTecnica(vehiculosController.guardarFichaTecnicaNueva(fichaNueva));
+				
+				PedidoVehiculoDTO pedido = controller.readPedidoById(idPedido);//obtengo el pedido, necesito el idventa
+				VentaVehiculoDTO venta = controller.readByVentaId(pedido.getIdVentaVehiculo());
+				VehiculoDTO vehiculo = controller.readByVehiculoId(venta.getIdVehiculo());
+				//registrar la ficha tecnica nueva
+				System.out.println(formNuevaFicha.getData());
+				vehiculo.setIdFichaTecnica(vehiculo.getIdFichaTecnica());
+				vehiculo.setIdFichaTecnica(vehiculosController.guardarFichaTecnicaNueva(formNuevaFicha.getData()));
+				controller.updateIdFichaTecnicaDeVehiculo(vehiculo);
+				
+			} else {
+				new MessageDialog().showMessages("El numero de chasis no esta disponible");
+			}
+		} else {
+			new MessageDialog().showMessages("El numero de motor no esta disponible");
+		}
+	}
+
+	private boolean isNroMotorNuevo(Integer nroMotor) {
+		if (vehiculosController.isNroMotorExistente(nroMotor) == true) {// hay un nro motor existente																		
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean isNroChasisNuevo(Integer nroChasis) {
+		if (vehiculosController.isNroMotorExistente(nroChasis) == true) {// hay un nro chasis existente																		
+			return false;
+		}
+		return true;
+	}
+	
+	private void fichaFormDisplay() {
+		formNuevaFicha.clearData();
+		formNuevaFicha.display();
 	}
 }
