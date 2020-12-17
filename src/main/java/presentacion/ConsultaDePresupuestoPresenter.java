@@ -21,10 +21,10 @@ import dto.taller.OrdenDeTrabajoDTO;
 import dto.taller.PresupuestoDTO;
 import dto.taller.RepuestoPlanificadoDTO;
 import dto.taller.TrabajoPresupuestadoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ConsultaDePresupuestosSupervisorView;
-import presentacion.views.supervisor.InputComentarioDialog;
+import presentacion.views.supervisor.DialogInputComentario;
 import presentacion.views.utils.ReporteViewImpl;
 
 public class ConsultaDePresupuestoPresenter {
@@ -69,7 +69,7 @@ public class ConsultaDePresupuestoPresenter {
 	}
 
 	private void onSelectVehiculoDeCliente() {
-		VehiculoConOrdenDeTrabajoDTO vehiculo = view.getVehiculoSeleccionado();
+		IngresoOrdenDeTrabajoDTO vehiculo = view.getVehiculoSeleccionado();
 		if (vehiculo != null) {
 			OrdenDeTrabajoDTO ordenDeTrabajo = otController.readByIdVehiculo(vehiculo.getId());
 			view.setData(ordenDeTrabajo);
@@ -114,7 +114,7 @@ public class ConsultaDePresupuestoPresenter {
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
 			cliente = clientesController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
-				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculoController
+				List<IngresoOrdenDeTrabajoDTO> vehiculos = vehiculoController
 						.readVehicleWithClientIdWhereOtIsOpen(cliente.getIdCliente());
 				view.clearDataListadoVehiculosCliente();
 				view.setData(vehiculos);
@@ -129,7 +129,7 @@ public class ConsultaDePresupuestoPresenter {
 			if (presupuesto.getEstado().equals(EstadoPresupuesto.PENDIENTE)) {
 				presupuesto.setFechaAprobacion(new Date());
 				if (v.booleanValue() == false) {
-					String comentario = new InputComentarioDialog(presupuesto).open();
+					String comentario = new DialogInputComentario(presupuesto).open();
 					presupuesto.setComentarioRechazo(comentario);
 					presupuesto.setEstado(EstadoPresupuesto.RECHAZADO);
 				} else {

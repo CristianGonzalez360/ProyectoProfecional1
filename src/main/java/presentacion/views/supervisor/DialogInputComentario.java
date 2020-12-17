@@ -22,7 +22,7 @@ import dto.taller.PresupuestoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.utils.MessageDialog;
 
-public class InputComentarioDialog extends JDialog {
+public class DialogInputComentario extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
@@ -33,7 +33,7 @@ public class InputComentarioDialog extends JDialog {
 	private JPanel panelRechazo;
 	private JTextField txtComentario;
 
-	public InputComentarioDialog(PresupuestoDTO presupuesto) {
+	public DialogInputComentario(PresupuestoDTO presupuesto) {
 		contentPane = new JPanel();
 		contentPane.setPreferredSize(new Dimension(420, 203));
 		contentPane.setLayout(new FormLayout(new ColumnSpec[] { FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
@@ -114,12 +114,12 @@ public class InputComentarioDialog extends JDialog {
 		title("Presupuesto Rechazado");
 	}
 
-	public InputComentarioDialog title(String title) {
+	public DialogInputComentario title(String title) {
 		this.title = title;
 		return this;
 	}
 
-	public InputComentarioDialog setText(String text) {
+	public DialogInputComentario setText(String text) {
 		txtComentario.setText(text);
 		return this;
 	}

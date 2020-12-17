@@ -26,6 +26,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import dto.taller.TrabajoMantenimientoDTO;
 import dto.taller.TrabajoPresupuestadoDTO;
+import javax.swing.UIManager;
 
 public class PlanificarTrabajosFormView extends JPanel {
 	private static final long serialVersionUID = -8919580357142104418L;
@@ -47,8 +48,7 @@ public class PlanificarTrabajosFormView extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		JPanel panelAgregarTrabajo = new JPanel();
-		panelAgregarTrabajo.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null),
-				"Nuevo Trabajo", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelAgregarTrabajo.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Nuevo Trabajo", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelAgregarTrabajo.setLayout(new BorderLayout(0, 0));
 
 		JPanel panelBotones = new JPanel();
@@ -100,8 +100,7 @@ public class PlanificarTrabajosFormView extends JPanel {
 		add(panelAgregarTrabajo);
 
 		panelTrabajosPlanificados
-				.setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null),
-						"Trabajos Planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Trabajos Planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		add(panelTrabajosPlanificados);
 		panelTrabajosPlanificados.setLayout(new BorderLayout(0, 0));
 

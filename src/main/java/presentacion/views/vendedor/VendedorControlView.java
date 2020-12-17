@@ -319,4 +319,8 @@ public class VendedorControlView extends JInternalFrame {
 	public void clearDataFichaTecnica() {
 		fichaPanel.clearData();
 	}
+
+	public void clearDataGarantia() {
+		garantiaPanel.clearData();
+	}
 }

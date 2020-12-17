@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreportVehiculo" pageWidth="600" pageHeight="842" columnWidth="600" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="15257b8a-e71f-4ed3-8976-ffb9f85fe759">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="aniosDeGarantia" class="java.lang.Integer"/>
+	<field name="kilometrajeInicialDelVehiculo" class="java.lang.Integer"/>
+	<field name="kilometrajeGarantizado" class="java.lang.Integer"/>
+	<field name="fechaInicioDeLaGarantia" class="java.util.Date"/>
+	<field name="fechaDeCaducidadDeLaGarantia" class="java.util.Date"/>
+	<field name="costoFinalConIVA" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="200" height="20" uuid="f2c81f33-0535-414e-a9a7-ac1b91f83abf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos de la Garantía]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="130" height="20" uuid="f275078c-7bb4-4d14-a737-1b6468a8bce1"/>
+				<text><![CDATA[Kilometraje inicial:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="20" width="100" height="20" uuid="323e6f5d-b576-4794-b0b5-0db441b264f1"/>
+				<text><![CDATA[Fecha caducidad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="40" width="150" height="20" uuid="d068192d-f31c-465a-bd5c-d1ec22b79e40"/>
+				<text><![CDATA[Kilometraje garantizado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="140" height="20" uuid="7b9a995a-055c-4bed-8cfa-02986c1cd7a9"/>
+				<text><![CDATA[Fecha de inicio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="20" uuid="3a10bcc3-337f-4e44-a23d-3b67ceb94140"/>
+				<text><![CDATA[Costo final con IVA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="20" width="160" height="20" uuid="bb2c3073-d93a-4aef-9aa7-31cb6b7d7b84"/>
+				<textFieldExpression><![CDATA[$F{fechaInicioDeLaGarantia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="20" width="170" height="20" uuid="4c214c3a-f582-49d0-93d1-c313fa5a6e86"/>
+				<textFieldExpression><![CDATA[$F{fechaDeCaducidadDeLaGarantia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="40" width="170" height="20" uuid="5ac0660c-3774-4702-a081-e2f4639b9c30"/>
+				<textFieldExpression><![CDATA[$F{kilometrajeInicialDelVehiculo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="40" width="150" height="20" uuid="8f6ae9db-92f1-4759-aecb-7a41b1c7d921"/>
+				<textFieldExpression><![CDATA[$F{kilometrajeGarantizado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="60" width="100" height="20" uuid="5403470f-566f-42e4-b838-f6ab4b98e82a"/>
+				<textFieldExpression><![CDATA[$F{costoFinalConIVA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

@@ -43,6 +43,7 @@ public class PresupuestoDTO {
 		this.trabajos = new ArrayList<>();
 		this.repuestos = new ArrayList<>();
 		this.fechaAltaPresu = new Date();
+		this.garantia = false;
 	}
 
 	public PresupuestoDTO(MantenimientoDTO mantenimiento) {

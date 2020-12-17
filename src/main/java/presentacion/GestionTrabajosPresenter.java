@@ -15,7 +15,7 @@ import dto.taller.EstadoPresupuesto;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
 import dto.taller.PresupuestoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.tecnico.PanelGestionTrabajoView;
 
@@ -48,16 +48,16 @@ public class GestionTrabajosPresenter {
 	private void onBuscar(ActionEvent a) {
 
 		this.view.clearAll();
-		List<VehiculoConOrdenDeTrabajoDTO> vehiculosEnTabla = new LinkedList<VehiculoConOrdenDeTrabajoDTO>();
+		List<IngresoOrdenDeTrabajoDTO> vehiculosEnTabla = new LinkedList<IngresoOrdenDeTrabajoDTO>();
 		String inputDni = this.view.getTxtDni();
 		boolean flag = false;
 
 		if (new StringValidator(inputDni).number("").validate().isEmpty()) {
 			ClienteDTO cliente = clienteController.readByDni(Integer.parseInt(inputDni));
 			if (cliente != null) {
-				List<VehiculoConOrdenDeTrabajoDTO> vehiculos = vehiculosController
+				List<IngresoOrdenDeTrabajoDTO> vehiculos = vehiculosController
 						.readVehicleWithClientIdWhereOtIsOpen(cliente.getIdCliente());
-				for (VehiculoConOrdenDeTrabajoDTO vehiculoConOrdenDeTrabajo : vehiculos) {
+				for (IngresoOrdenDeTrabajoDTO vehiculoConOrdenDeTrabajo : vehiculos) {
 					OrdenDeTrabajoDTO ordenDeTrabajo = this.ordenDeTrabajoController
 							.readByIdVehiculo(vehiculoConOrdenDeTrabajo.getId());
 					List<PresupuestoDTO> presupuestos = this.presupuestosController
@@ -81,7 +81,7 @@ public class GestionTrabajosPresenter {
 	}
 
 	private void onSelectVehiculoDeCliente(ListSelectionEvent a) {
-		VehiculoConOrdenDeTrabajoDTO idVehiculo = this.view.getidVehiculoSeleccionado();
+		IngresoOrdenDeTrabajoDTO idVehiculo = this.view.getidVehiculoSeleccionado();
 		if (idVehiculo != null) {
 			FichaTecnicaVehiculoDTO fichaVehiculo = vehiculosController
 					.readFichaTecnicaById(idVehiculo.getIdFichaTecnica());

@@ -23,7 +23,7 @@ import dto.taller.RepuestoDTO;
 import dto.taller.RepuestoPlanificadoDTO;
 import dto.taller.TrabajoPresupuestadoDTO;
 import dto.taller.TurnoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 import repositories.DaosFactory;
 import javax.inject.Inject;
 import java.io.InputStream;
@@ -64,7 +64,7 @@ public class DatabaseSeederServiceImpl {
 			daos.makeClienteDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}
-		for (VehiculoConOrdenDeTrabajoDTO target : graph.getVehiculosConOrdenDeTrabajo()) {
+		for (IngresoOrdenDeTrabajoDTO target : graph.getVehiculosConOrdenDeTrabajo()) {
 			daos.makeVehiculoConOrdeDeTrabajoDao().insert(target);
 			LogManager.getLogger(this.getClass()).log(Level.INFO, "Seed database >>>>>> " + target.toString());
 		}

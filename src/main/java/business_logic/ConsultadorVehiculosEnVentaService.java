@@ -22,12 +22,7 @@ public class ConsultadorVehiculosEnVentaService {
 		List<VehiculoDTO> temp = daos.makeVehiculoDao().readByCriteria(consulta.getMarca(), ES_USADO);
 		List<OutputConsultaVehiculoEnVentaDTO> ret = new LinkedList<>();
 		for (VehiculoDTO dto : temp) {
-			
-			VentaVehiculoDTO ventasRegistradas = daos.makeVentaVehiculoDao().readVentaByIdVehiculo(dto.getIdVehiculo());
-			final boolean VEHICULO_NO_VENDIDO = ventasRegistradas == null;
-			if (VEHICULO_NO_VENDIDO) {
-				ret.add(makeFromVehiculo(dto));
-			}
+			ret.add(makeFromVehiculo(dto));
 		}
 		return ret;
 	}

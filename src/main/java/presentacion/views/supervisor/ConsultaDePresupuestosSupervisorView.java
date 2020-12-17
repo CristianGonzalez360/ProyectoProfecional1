@@ -20,7 +20,7 @@ import dto.taller.OrdenDeTrabajoDTO;
 import dto.taller.PresupuestoDTO;
 import dto.taller.RepuestoPlanificadoDTO;
 import dto.taller.TrabajoPresupuestadoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 
 import javax.swing.BoxLayout;
 import javax.swing.border.TitledBorder;
@@ -94,7 +94,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 	private JTable tableTrabajos;
 
 	private List<PresupuestoDTO> presupuestos;
-	private List<VehiculoConOrdenDeTrabajoDTO> vehiculosCliente;
+	private List<IngresoOrdenDeTrabajoDTO> vehiculosCliente;
 	private JButton btnGenerarFactura;
 	private Integer idOrdenDeTrabajo;
 
@@ -313,11 +313,11 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		this.btnBuscar.addActionListener(listener);
 	}
 
-	public void setData(List<VehiculoConOrdenDeTrabajoDTO> vehiculos) {
+	public void setData(List<IngresoOrdenDeTrabajoDTO> vehiculos) {
 		vehiculosCliente = vehiculos;
-		for (VehiculoConOrdenDeTrabajoDTO dto : vehiculos) {
-			Object[] row = { dto.getId().toString(), dto.getKilometrajeGarantia().toString(), dto.getAseguradora(),
-					dto.getNroPolizaSeguro().toString(), dto.getPatente() };
+		for (IngresoOrdenDeTrabajoDTO dto : vehiculos) {
+			Object[] row = { dto.getId().toString(), dto.getKilometrajeGarantia(), dto.getAseguradora(),
+					dto.getNroPolizaSeguro(), dto.getPatente() };
 			this.tableModelVehiculos.addRow(row);
 		}
 	}
@@ -326,11 +326,11 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		clearTable(tableModelVehiculos, columnasTablaVehiculos);
 	}
 
-	public VehiculoConOrdenDeTrabajoDTO getVehiculoSeleccionado() {
+	public IngresoOrdenDeTrabajoDTO getVehiculoSeleccionado() {
 		int rows = this.tableVehiculos.getSelectedRowCount();
 		if (rows == 1) {
 			int row = this.tableVehiculos.getSelectedRow();
-			VehiculoConOrdenDeTrabajoDTO dto = this.vehiculosCliente.get(row);
+			IngresoOrdenDeTrabajoDTO dto = this.vehiculosCliente.get(row);
 			return dto;
 		}
 		return null;

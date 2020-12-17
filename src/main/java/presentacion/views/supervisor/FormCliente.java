@@ -20,12 +20,12 @@ import dto.temporal.AltaClienteDTO;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class ClienteFormView extends JDialog {
+public class FormCliente extends JDialog {
 
 	private static final long serialVersionUID = -6293870932970697649L;
 	private final JPanel contentPanel = new JPanel();
 
-	private static ClienteFormView instance;
+	private static FormCliente instance;
 	private JButton btnSalvar;
 	private JButton btnUpdate;
 	private JTextField textNombre;
@@ -39,7 +39,7 @@ public class ClienteFormView extends JDialog {
 	private JTextField textLocalidad;
 	private JTextField textApellido;
 
-	private ClienteFormView() {
+	private FormCliente() {
 		setBounds(100, 100, 506, 253);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
@@ -152,9 +152,9 @@ public class ClienteFormView extends JDialog {
 		clearData();
 	}
 
-	public static ClienteFormView getInstance() {
+	public static FormCliente getInstance() {
 		if (instance == null) {
-			instance = new ClienteFormView();
+			instance = new FormCliente();
 			instance.setTitle("Registrar Cliente");
 
 		}

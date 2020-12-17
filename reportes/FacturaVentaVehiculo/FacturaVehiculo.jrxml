@@ -35,6 +35,7 @@
 	<field name="nroCuotas" class="java.lang.Integer"/>
 	<field name="montoCuota" class="java.lang.Double"/>
 	<field name="sucursal" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<field name="garantia" class="net.sf.jasperreports.engine.JRDataSource"/>
 	<title>
 		<band height="112" splitType="Stretch">
 			<line>
@@ -120,6 +121,13 @@
 				<reportElement x="0" y="0" width="555" height="100" uuid="29e1e67d-93fa-4391-9d97-41c8087f39f0"/>
 				<dataSourceExpression><![CDATA[$F{caracteristicaVehiculo}]]></dataSourceExpression>
 				<subreportExpression><![CDATA["reportes/FacturaVentaVehiculo/subreportCaracteristicas.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="82">
+			<subreport>
+				<reportElement x="0" y="2" width="557" height="80" uuid="252923ef-03dc-4908-9576-11a9d2eeeeb8"/>
+				<dataSourceExpression><![CDATA[$F{garantia}]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reportes/FacturaVentaVehiculo/subreportGarantia.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="85">

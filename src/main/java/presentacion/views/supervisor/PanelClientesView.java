@@ -12,7 +12,7 @@ import dto.ClienteDTO;
 import dto.GarantiaVehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 import presentacion.views.vendedor.PanelCaracteristicasDeLaGarantia;
 import presentacion.views.vendedor.TablePanel;
 
@@ -25,41 +25,39 @@ import javax.swing.JTabbedPane;
 
 public class PanelClientesView extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5623725856065117794L;
-	
+
 	private final String[] columnasTablaVehiculos = new String[] { "NRO. VEHICULO", "KM GARANTIA", "ASEGURADORA",
 			"NRO POLIZA SEGURO", "PATENTE" };
-	
+
 	private static PanelClientesView instance;
-	
+
 	private JButton btnBuscar;
-	
+
 	private JSplitPane splitPane;
-	
+
 	private JPanel panel;
-	
+
 	private JPanel panelDerecho;
-	
-	private TablePanel<VehiculoConOrdenDeTrabajoDTO> table;
+
+	private TablePanel<IngresoOrdenDeTrabajoDTO> table;
 
 	private PanelCliente panelCliente;
-	
+
 	private JTextField textDniBusqueda;
-	
+
 	private JTabbedPane tabbedPane;
-	
+
 	private PanelFichaTecnicaVehiculo panelFichaTecnica;
-	
+
 	private PanelCaracteristicasDeLaGarantia garantia;
-	
+
 	private PanelOrdenDeTrabajo panelOrdenTrabajo;
-	
+
 	private JPanel panel_1;
-	
+
 	private ToolbarPanelGestionClientes toolBar;
+	private JButton btnReporteVehiculo;
 
 	public PanelClientesView() {
 		setLayout(new BorderLayout(0, 0));
@@ -71,7 +69,7 @@ public class PanelClientesView extends JPanel {
 
 		JLabel lblClienteDNI = new JLabel("Cliente DNI");
 		panel_4.add(lblClienteDNI);
-		
+
 		textDniBusqueda = new JTextField();
 		panel_4.add(textDniBusqueda);
 		textDniBusqueda.setColumns(10);
@@ -88,59 +86,62 @@ public class PanelClientesView extends JPanel {
 
 		this.panelCliente = new PanelCliente();
 		panel.add(panelCliente);
-		
+
 		panel_1 = new JPanel();
 		panel.add(panel_1);
-		
+
 		toolBar = new ToolbarPanelGestionClientes();
 		panel_1.add(toolBar);
 
-		table = new TablePanel<VehiculoConOrdenDeTrabajoDTO>(columnasTablaVehiculos) {
+		table = new TablePanel<IngresoOrdenDeTrabajoDTO>(columnasTablaVehiculos) {
 
 			private static final long serialVersionUID = -2201535451043046243L;
 
 			@Override
-			public void setData(List<VehiculoConOrdenDeTrabajoDTO> data) {
-				for (VehiculoConOrdenDeTrabajoDTO dto : data) {
-					Object[] row = { dto.getId(), dto.getKilometrajeGarantia(), dto.getAseguradora(), dto.getNroPolizaSeguro(),
-							dto.getPatente() };
+			public void setData(List<IngresoOrdenDeTrabajoDTO> data) {
+				for (IngresoOrdenDeTrabajoDTO dto : data) {
+					Object[] row = { dto.getId(), dto.getKilometrajeGarantia(), dto.getAseguradora(),
+							dto.getNroPolizaSeguro(), dto.getPatente() };
 					this.model.addRow(row);
 				}
 			}
 
 			@Override
-			public VehiculoConOrdenDeTrabajoDTO getData() {
+			public IngresoOrdenDeTrabajoDTO getData() {
 				int rows = this.table.getSelectedRowCount();
 				if (rows == 1) {
 					int row = this.table.getSelectedRow();
-					VehiculoConOrdenDeTrabajoDTO dto = new VehiculoConOrdenDeTrabajoDTO();
+					IngresoOrdenDeTrabajoDTO dto = new IngresoOrdenDeTrabajoDTO();
 					dto.setId(Integer.parseInt(model.getValueAt(row, 0).toString()));
 					return dto;
 				}
 				return null;
 			}
-			
+
 		};
 
 		panelDerecho = new JPanel();
 		splitPane.setRightComponent(panelDerecho);
-		
+
 		panelDerecho.add(table);
-		
+
 		panelDerecho.setLayout(new BoxLayout(panelDerecho, BoxLayout.Y_AXIS));
-		
+
+		btnReporteVehiculo = new JButton("Historial del Vehiculo");
+		panelDerecho.add(btnReporteVehiculo);
+
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		panelDerecho.add(tabbedPane);
-		
+
 		panelFichaTecnica = new PanelFichaTecnicaVehiculo();
 		tabbedPane.addTab("Ficha técnica", null, panelFichaTecnica, null);
-		
+
 		garantia = new PanelCaracteristicasDeLaGarantia();
 		tabbedPane.addTab("Garantía", null, garantia, null);
-		
+
 		panelOrdenTrabajo = new PanelOrdenDeTrabajo();
 		tabbedPane.addTab("Orden de trabajo", null, panelOrdenTrabajo, null);
-		
+
 		this.panelCliente.disableInputs();
 	}
 
@@ -150,7 +151,7 @@ public class PanelClientesView extends JPanel {
 		}
 		return instance;
 	}
-	
+
 	public void clearAll() {
 		this.clearDataCliente();
 		this.clearDataFichaTecnicaVehiculo();
@@ -158,7 +159,7 @@ public class PanelClientesView extends JPanel {
 		this.clearDataOrdenDeTrabajo();
 		this.garantia.clearData();
 	}
-	
+
 	public void clearDataCliente() {
 		this.panelCliente.clearData();
 	}
@@ -170,7 +171,7 @@ public class PanelClientesView extends JPanel {
 	public void clearDataOrdenDeTrabajo() {
 		this.panelOrdenTrabajo.clearData();
 	}
-	
+
 	public void clearDataListadoVehiculosCliente() {
 		this.table.clearData();
 	}
@@ -178,7 +179,7 @@ public class PanelClientesView extends JPanel {
 	public void clearDataGarantia() {
 		this.garantia.clearData();
 	}
-	
+
 	public void setData(ClienteDTO cliente) {
 		this.panelCliente.setData(cliente);
 	}
@@ -192,7 +193,7 @@ public class PanelClientesView extends JPanel {
 		this.panelOrdenTrabajo.setData(ordenDeTrabajo);
 	}
 
-	public void setData(List<VehiculoConOrdenDeTrabajoDTO> vehiculos) {
+	public void setData(List<IngresoOrdenDeTrabajoDTO> vehiculos) {
 		this.table.setData(vehiculos);
 	}
 
@@ -219,7 +220,7 @@ public class PanelClientesView extends JPanel {
 	public String getDniCliente() {
 		return this.textDniBusqueda.getText() != null ? this.textDniBusqueda.getText() : "";
 	}
-		
+
 	public void setActionSelectVehiculoCliente(ListSelectionListener listener) {
 		this.table.setActionSelect(listener);
 	}
@@ -227,7 +228,7 @@ public class PanelClientesView extends JPanel {
 	public void setActionBuscar(ActionListener listener) {
 		this.btnBuscar.addActionListener(listener);
 	}
-	
+
 	public void setActionRegistrarCliente(ActionListener listener) {
 		this.toolBar.setActionRegistrarNuevoCliente(listener);
 	}
@@ -242,5 +243,21 @@ public class PanelClientesView extends JPanel {
 
 	public void setActionOnEditarCliente(ActionListener listener) {
 		this.toolBar.setActionEditarCliente(listener);
+	}
+	
+	public void setActionReporteDeVehiculo(ActionListener listener) {
+		this.btnReporteVehiculo.addActionListener(listener);
+	}
+	
+	public void setUpdateKilometrajeOnFichaTecnica(String kilometrajeActual) {
+		this.panelFichaTecnica.updateKilometraje(kilometrajeActual);
+	}
+
+	public FichaTecnicaVehiculoDTO getDataFichaTechica() {
+		return this.panelFichaTecnica.getData();
+	}
+
+	public GarantiaVehiculoDTO getDataGarantia() {
+		return this.garantia.getData();
 	}
 }
