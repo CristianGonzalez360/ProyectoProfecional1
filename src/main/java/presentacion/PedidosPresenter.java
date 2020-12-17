@@ -1,6 +1,8 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.util.List;
+
 import business_logic.PedidosController;
 import business_logic.VehiculosController;
 import dto.PedidoVehiculoDTO;
@@ -61,18 +63,17 @@ public class PedidosPresenter {
 
 		if(isNroMotorNuevo(fichaNueva.getNroMotor())) {
 			if(isNroChasisNuevo(fichaNueva.getNroChasis())) {//todo Ok
-				//todos los nro chasis.
-				
+			
 				PedidoVehiculoDTO pedido = controller.readPedidoById(idPedido);//obtengo el pedido, necesito el idventa
 				VentaVehiculoDTO venta = controller.readByVentaId(pedido.getIdVentaVehiculo());
 				VehiculoDTO vehiculo = controller.readByVehiculoId(venta.getIdVehiculo());
 				vehiculo.setIdFichaTecnica(vehiculo.getIdFichaTecnica());
 				vehiculo.setIdFichaTecnica(vehiculosController.guardarFichaTecnicaNueva(formNuevaFicha.getData()));
 				controller.updateIdFichaTecnicaDeVehiculo(vehiculo);
-				
+
 				if (controller.registrarIngresoPedidoById(idPedido, idUsuario)) {
 					
-					new MessageDialog().showMessages("Ficha técnica registrada.");
+					new MessageDialog().showMessages("Vehiculo ingresado!");
 					formNuevaFicha.close();
 				} else
 					new MessageDialog().showMessages("No se puedo registrar el ingreso del Vehiculo!");
@@ -93,8 +94,12 @@ public class PedidosPresenter {
 	}
 	
 	private boolean isNroChasisNuevo(Integer nroChasis) {
-		if (vehiculosController.isNroMotorExistente(nroChasis) == true) {// hay un nro chasis existente																		
-			return false;
+
+		List<FichaTecnicaVehiculoDTO> fichas = vehiculosController.readAllFichas();
+		for (FichaTecnicaVehiculoDTO fichaTecnica : fichas) {
+			
+			if(fichaTecnica.getNroChasis().intValue()==nroChasis.intValue()) 
+				return false;	
 		}
 		return true;
 	}
