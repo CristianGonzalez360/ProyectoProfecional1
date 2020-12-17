@@ -72,6 +72,7 @@ public class VehiculosController {
 		c.setIdUsuCompra(SessionServiceImpl.getInstance().getActiveSession().getIdSucursal());
 		c.setIdVehiculo(idVehiculo);
 		c.setPrecioCompra(Double.parseDouble(compra.getPrecio()));
+		daos.makeVehiculoDao().registrarCompra(c);
 	}
 
 	private void guardarGarantiaUsado(CompraVehiculoUsadoDTO compra, int idVehiculo) {
@@ -79,6 +80,7 @@ public class VehiculosController {
 		garantia.setIdVehiculo(idVehiculo);
 		garantia.setAniosDeGarantia(1);
 		garantia.setKilometrajeInicialDelVehiculo(Integer.parseInt(compra.getKilometraje()));
+		daos.makeGarantiasVehiculosDao().insert(garantia);
 	}
 
 	private int guardarCaracteristicas(CompraVehiculoUsadoDTO compra) {

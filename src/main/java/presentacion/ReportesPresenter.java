@@ -7,11 +7,11 @@ import java.util.List;
 
 import business_logic.FacturasController;
 import business_logic.ReportesController;
-import dto.taller.FacturaDTO;
 import presentacion.views.gerente.PanelReportes;
 import presentacion.views.gerente.ReporteAutosVendidosFormView;
 import presentacion.views.gerente.ReporteEgresoDiarioFormView;
 import presentacion.views.gerente.ReporteIngresoDiarioInputFormView;
+import presentacion.views.utils.IngresosReport;
 import presentacion.views.utils.ReporteViewImpl;
 import presentacion.views.utils.VentasReport;
 
@@ -79,14 +79,25 @@ public class ReportesPresenter {
 			return;
 
 		ReporteViewImpl reporte = new ReporteViewImpl();
-		List<FacturaDTO> ingresos = reportesController.readFacturasPagas(fechaDesde, fechaHasta);
+		List<IngresosReport> ingresos = reportesController.readIngresos(fechaDesde, fechaHasta);
+		System.out.println(ingresos.toString());
 		reporte.setDataIngresos(ingresos);
 		reporte.open();
 	}
-
+	//TODO en este metodo en lugar de recolectarse en la lista de ingresosReport facturas y ventas de vehiculos se 
+	//se buscaran compras de autos y compras de repuestos
 	private void generarReporteEgresos() {
-		// reportesController
-		System.out.println("Generar Reporte");
+		Date fechaDesde = reporteIngresoDiarioInputFormView.getFechaDesde();
+		Date fechaHasta = reporteIngresoDiarioInputFormView.getFechaHasta();
+		
+		if (fechaDesde == null || fechaHasta == null)
+			return;
+
+		ReporteViewImpl reporte = new ReporteViewImpl();
+		List<IngresosReport> ingresos = reportesController.readEgresos(fechaDesde, fechaHasta);
+		System.out.println(ingresos.toString());
+		reporte.setDataIngresos(ingresos);
+		reporte.open();
 	}
 
 }

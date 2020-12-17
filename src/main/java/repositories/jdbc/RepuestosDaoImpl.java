@@ -1,8 +1,10 @@
 package repositories.jdbc;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 
+import dto.CompraRepuestoDTO;
 import dto.taller.RepuestoDTO;
 import repositories.RepuestosDao;
 import repositories.jdbc.utils.Mapper;
@@ -33,6 +35,10 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 			+ " marcaRepuesto = ?, descripcionRepuesto = ?, fabricante = ?, precioCompra = ?, garantia = ? WHERE idRepuesto = ?";
 
 	private static final String readSinStock = readAll + " " + "WHERE stockRepuesto<stockMinimo";
+	
+	private static final String registroCompra = "INSERT INTO CompraRepuesto(codigoRepuesto,precioCompra,fechaCompra, cantidad) VALUES (?,?,?,?)";
+	
+	private static final String readCompras = "SELECT * FROM CompraRepuesto WHERE fechaCompra BETWEEN ? AND ? ORDER BY fechaCompra ASC";
 
 	public RepuestosDaoImpl(Connection connection) {
 		super(connection);
@@ -141,4 +147,27 @@ public class RepuestosDaoImpl extends GenericJdbcDao<RepuestoDTO> implements Rep
 		return getTemplate().query(readSinStock).excecute(getMapper());
 	}
 
+	@Override
+	public void registrarCompra(CompraRepuestoDTO compra) {
+		getTemplate().query(registroCompra).param(compra.getCodigoRepuesto()).param(compra.getPrecioCompra())
+		.param(compra.getFechaCompra()).param(compra.getCantidad()).excecute();
+	}
+
+	@Override
+	public List<CompraRepuestoDTO> readCompras(Date desde, Date hasta){
+		return getTemplate().query(readCompras).param(desde).param(hasta).excecute(new Mapper<CompraRepuestoDTO>() {
+
+			@Override
+			public CompraRepuestoDTO map(Object[] obj) {
+				CompraRepuestoDTO ret = new CompraRepuestoDTO();
+				ret.setIdCompraRepuesto((Integer)obj[0]);
+				ret.setCodigoRepuesto((Integer) obj[1]);
+				ret.setPrecioCompra((Double)obj[2]);
+				ret.setFechaCompra((Date)obj[3]);
+				ret.setCantidad((Integer) obj[4]);
+				return ret;
+			}
+		});
+	}
+	
 }

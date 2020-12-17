@@ -54,7 +54,7 @@ public class RegistradorVentaVehiculosService {
 		 */
 		vehiConOT.setIdFichaTecnica(vehiculo.getIdFichaTecnica());
 		vehiConOT.setIdCliente(idCliente);
-		if (vehiculo.isUsado()) {
+		if (vehiculo.isDisponible()) {
 			FichaTecnicaVehiculoDTO ficha = daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica());
 			vehiConOT.setPatente(ficha.getPatente());
 		}

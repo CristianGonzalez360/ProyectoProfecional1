@@ -13,6 +13,7 @@ import org.apache.log4j.LogManager;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import business_logic.RepuestosController;
+import dto.CompraRepuestoDTO;
 import dto.taller.RepuestoDTO;
 import dto.temporal.AltaRepuestoDTO;
 import dto.temporal.IngresoStockDTO;
@@ -161,6 +162,7 @@ public class RepuestosPresenter {
 		while (it.hasNext()) {// busco los que ya existen y actualizo la cantidad de repuestos
 			repuestoAuxiliar = it.next();
 			if (repuestosController.readByCodigo(repuestoAuxiliar.getCodigoRepuesto()) != null) {
+				registrarCompra(repuestoAuxiliar, repuestoAuxiliar.getStockRepuesto());
 				repuestoAuxiliar.setStockRepuesto(repuestoAuxiliar.getStockRepuesto()
 						+ repuestosController.readByCodigo(repuestoAuxiliar.getCodigoRepuesto()).getStockRepuesto());
 			}
@@ -197,6 +199,7 @@ public class RepuestosPresenter {
 		if (error.isEmpty()) {
 			int id = this.gestionRepuestos.getIdRepuesto();
 			RepuestoDTO repuesto = repuestosController.readById(id);
+			registrarCompra(repuesto, Integer.parseInt(ingreso.getCantidad()));
 			repuesto.setStockRepuesto(repuesto.getStockRepuesto() + Integer.parseInt(ingreso.getCantidad()));
 			repuesto.setPrecioCompra(Double.parseDouble(ingreso.getPrecioCompra()));
 			repuesto.setPrecioRepuesto(Double.parseDouble(ingreso.getPrecioVenta()));
@@ -245,5 +248,13 @@ public class RepuestosPresenter {
 		descripcion = "";
 		gestionRepuestos.resetBuscador();
 		gestionRepuestos.setData(repuestosController.readRepuestosSinStock());
+	}
+	
+	private void registrarCompra(RepuestoDTO repuesto, Integer cantidad) {
+		CompraRepuestoDTO compra = new CompraRepuestoDTO();
+		compra.setCantidad(cantidad);
+		compra.setCodigoRepuesto(repuesto.getCodigoRepuesto());
+		compra.setPrecioCompra(repuesto.getPrecioCompra());
+		repuestosController.registrarCompra(compra);
 	}
 }

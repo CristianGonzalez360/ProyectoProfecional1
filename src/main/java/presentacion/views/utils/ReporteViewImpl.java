@@ -97,7 +97,7 @@ public class ReporteViewImpl {
 		setData(vehiculos);
 	}
 	
-	public void setDataIngresos(List<FacturaDTO> ingresos) {
+	public void setDataIngresos(List<IngresosReport> ingresos) {
 		this.file = URLReporteIngresos;
 		setData(ingresos);
 	}

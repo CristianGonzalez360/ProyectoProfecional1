@@ -3,7 +3,6 @@ package business_logic;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import dto.DatosPersonalesDTO;
 import dto.PedidoVehiculoDTO;
 import dto.UsuarioDTO;
@@ -103,5 +102,20 @@ public class PedidosController {
 
 		return pedidosDao.updateIngreso(pedido);
 	}
-
+	
+	public PedidoVehiculoDTO readPedidoById (Integer idPedido) {
+		return pedidosDao.readByID(idPedido);
+	}
+	
+	public VentaVehiculoDTO readByVentaId(Integer idVentaVehiculo) {
+		return ventaVehiculoDao.readByID(idVentaVehiculo);
+	}
+	
+	public VehiculoDTO readByVehiculoId(Integer idVehiculo) {
+		return vehiculosDao.readByID(idVehiculo);
+	}
+	
+	public boolean updateIdFichaTecnicaDeVehiculo (VehiculoDTO vehiculo) {
+		return vehiculosDao.updateIdFichaTecnica(vehiculo);
+	}
 }

@@ -1,7 +1,9 @@
 package repositories;
 
+import java.util.Date;
 import java.util.List;
 
+import dto.CompraRepuestoDTO;
 import dto.taller.RepuestoDTO;
 
 public interface RepuestosDao extends GenericDao<RepuestoDTO, Integer> {
@@ -19,4 +21,8 @@ public interface RepuestosDao extends GenericDao<RepuestoDTO, Integer> {
 	void updateByCodigo(RepuestoDTO repuesto);
 
 	List<RepuestoDTO> readRepuestosSinStock();
+
+	void registrarCompra(CompraRepuestoDTO compra);
+
+	List<CompraRepuestoDTO> readCompras(Date desde, Date hasta);
 }

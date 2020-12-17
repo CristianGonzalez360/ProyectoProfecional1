@@ -240,6 +240,8 @@ public class PresupuestosPresenter {
 				RepuestoPlanificadoDTO repuestoPlanificado = new RepuestoPlanificadoDTO();
 				repuestoPlanificado.setCantRequerida(cant);
 				repuestoPlanificado.setRepuesto(repuesto);
+				repuestoPlanificado.setPrecio(repuesto.getPrecioRepuesto());
+				repuestoPlanificado.setGarantia(repuesto.isGarantia());
 				repuesto.setStockRepuesto(stock - cant);
 				repuestosController.update(repuesto);
 				nuevoPresupuesto.agregarRepuestos(repuestoPlanificado);

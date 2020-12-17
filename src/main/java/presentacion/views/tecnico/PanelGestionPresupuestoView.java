@@ -390,7 +390,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		for (RepuestoPlanificadoDTO r : repuestos) {
 			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getMarcaRepuesto(),
 					r.getRepuesto().getDescripcionRepuesto(), r.getRepuesto().getPrecioRepuesto(), r.getCantRequerida(),
-					r.getRepuesto().isGarantia() };
+					r.isGarantia() };
 			this.listadoDeRepuestosModel.addRow(row);
 		}
 	}
@@ -425,8 +425,8 @@ public class PanelGestionPresupuestoView extends JPanel {
 	public void setData(List<IngresoOrdenDeTrabajoDTO> vehiculos) {
 		this.vehiculos = vehiculos;
 		for (IngresoOrdenDeTrabajoDTO dto : vehiculos) {
-			Object[] row = { dto.getId().toString(), dto.getKilometrajeGarantia().toString(), dto.getAseguradora(),
-					dto.getNroPolizaSeguro().toString(), dto.getPatente() };
+			Object[] row = { dto.getId().toString(), dto.getKilometrajeGarantia(), dto.getAseguradora(),
+					dto.getNroPolizaSeguro(), dto.getPatente() };
 			this.tableModelVehiculos.addRow(row);
 		}
 	}
