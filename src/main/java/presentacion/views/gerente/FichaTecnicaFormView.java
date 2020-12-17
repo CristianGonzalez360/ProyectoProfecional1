@@ -103,6 +103,8 @@ import java.awt.Font;
 			lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			contentPanel.add(lblNewLabel_3, "6, 4");
 			contentPanel.add(textKilometraje, "8, 4, fill, default");
+			textKilometraje.setText("0");
+			textKilometraje.setEditable(false);
 			lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			contentPanel.add(lblNewLabel_4, "2, 6");
 			contentPanel.add(textMarca, "4, 6, fill, default");
@@ -131,7 +133,7 @@ import java.awt.Font;
 			this.textNroChasis.setText("");
 			this.textNroDeMotor.setText("");
 			this.textPatente.setText("");
-			this.textKilometraje.setText("");
+//			this.textKilometraje.setText("");
 			this.textMarca.setText("");
 			this.textModelo.setText("");
 			this.textColor.setText("");
@@ -148,11 +150,6 @@ import java.awt.Font;
 			dto.setModelo(Integer.parseInt(this.textModelo.getText()));
 			dto.setColor(this.textColor.getText());
 			dto.setCombustion(this.textCombustion.getText());
-//			dto.set
-			//nroPoliza aseguradora
-//			dto.setAsegurador(this.textAsegurador.getText());
-//			dto.setNroPolizaSeguro(this.textNroPoliza.getText());
-//			dto.setKilometrajeGarantia(this.textGarantia.getText());
 			return dto;
 		}
 

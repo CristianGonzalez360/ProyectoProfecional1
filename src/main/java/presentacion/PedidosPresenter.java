@@ -9,7 +9,6 @@ import dto.VentaVehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import presentacion.views.gerente.PedidosPanelView;
 import presentacion.views.gerente.FichaTecnicaFormView;
-import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.MessageDialog;
 import services.SessionServiceImpl;
 
@@ -48,37 +47,35 @@ public class PedidosPresenter {
 	}
 
 	private boolean puedoRegistrarIngreso(Integer idFila) {
-		return hayFilaSeleccionada(idFila) && new ConfirmationDialog(CONFIRMATION).open() == 0;
+		return hayFilaSeleccionada(idFila);//&& new ConfirmationDialog(CONFIRMATION).open() == 0
 	}
 
 	private boolean hayFilaSeleccionada(Integer idFila) {
 		return (idFila != -1);
 	}
 	
-
 	private void onRegistrarNuevaFicha(ActionEvent a) {//guarda ficha tecnica con 
 		FichaTecnicaVehiculoDTO fichaNueva = formNuevaFicha.getData();
 		Integer idUsuario = SessionServiceImpl.getInstance().getActiveSession().getIdUsuario();
 		Integer idPedido = view.getIdSelectedPedido();
-		
-		if (controller.registrarIngresoPedidoById(idPedido, idUsuario)) {
-			new MessageDialog().showMessages("Vehiculo Registrado!");
-			
-		} else
-			new MessageDialog().showMessages("No se puedo registrar el ingreso del Vehiculo!");
-		
+
 		if(isNroMotorNuevo(fichaNueva.getNroMotor())) {
 			if(isNroChasisNuevo(fichaNueva.getNroChasis())) {//todo Ok
-//				setIdFichaTecnica(vehiculosController.guardarFichaTecnicaNueva(fichaNueva));
+				//todos los nro chasis.
 				
 				PedidoVehiculoDTO pedido = controller.readPedidoById(idPedido);//obtengo el pedido, necesito el idventa
 				VentaVehiculoDTO venta = controller.readByVentaId(pedido.getIdVentaVehiculo());
 				VehiculoDTO vehiculo = controller.readByVehiculoId(venta.getIdVehiculo());
-				//registrar la ficha tecnica nueva
-				System.out.println(formNuevaFicha.getData());
 				vehiculo.setIdFichaTecnica(vehiculo.getIdFichaTecnica());
 				vehiculo.setIdFichaTecnica(vehiculosController.guardarFichaTecnicaNueva(formNuevaFicha.getData()));
 				controller.updateIdFichaTecnicaDeVehiculo(vehiculo);
+				
+				if (controller.registrarIngresoPedidoById(idPedido, idUsuario)) {
+					
+					new MessageDialog().showMessages("Ficha técnica registrada.");
+					formNuevaFicha.close();
+				} else
+					new MessageDialog().showMessages("No se puedo registrar el ingreso del Vehiculo!");
 				
 			} else {
 				new MessageDialog().showMessages("El numero de chasis no esta disponible");
