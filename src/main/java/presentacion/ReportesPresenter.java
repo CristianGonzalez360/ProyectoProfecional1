@@ -33,11 +33,11 @@ public class ReportesPresenter {
 		this.facturasController = facturasController;
 		this.reportesController = reportesController;
 		
-		this.view.setActionDisplayReporteAutosVendidos((a) -> onDisplayReporteAutosVendidos(a));
-		this.reporteAutosVendidosFormView.setActionGenerarReporte((a) -> generarReporteAutosVendidos());
-
-		this.view.setActionDisplayIngresosDiarios((a) -> onDisplayIngresosDiarios(a));
-		this.reporteIngresoDiarioInputFormView.setActionGenerarReporte((a) -> generarReporteIngresos());
+//		this.view.setActionDisplayReporteAutosVendidos((a) -> onDisplayReporteAutosVendidos(a));
+//		this.reporteAutosVendidosFormView.setActionGenerarReporte((a) -> generarReporteAutosVendidos());
+//
+//		this.view.setActionDisplayIngresosDiarios((a) -> onDisplayIngresosDiarios(a));
+//		this.reporteIngresoDiarioInputFormView.setActionGenerarReporte((a) -> generarReporteIngresos());
 
 //		this.view.setActionDisplayEgresosDiarios((a) -> onDisplayEgresosDiarios(a));
 //		this.autosVendidosView.setActionGenerarReporte((a) -> generarReporteEgresos());
