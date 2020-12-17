@@ -3,7 +3,6 @@ package repositories.jdbc;
 import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
-
 import dto.VehiculoDTO;
 import repositories.VehiculosDao;
 import repositories.jdbc.utils.Mapper;
@@ -28,6 +27,8 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 			+ " WHERE usado = true AND idVehiculo NOT IN (SELECT idVehiculo FROM VentasVehiculos)";
 
 	private static final String maximoId = "SELECT MAX(idVehiculo) FROM Vehiculos";
+	
+	private static final String updateIdFichaTecnica = "UPDATE Vehiculos SET idFichaTecnica = ? WHERE idVehiculo = ?";
 
 	private static final String readNuevosNoVendidos = readAll + " WHERE usado = false AND idVehiculo NOT IN (SELECT idVehiculo FROM VentasVehiculos)";
 
@@ -45,7 +46,7 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 		return getTemplate().query(updateDisponibilidad).param(boolean1).param(id).excecute();
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	public boolean insert(VehiculoDTO entity) {		
 		return getTemplate().query(insert).param(entity.getPrecioVenta())
@@ -130,5 +131,10 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 				return (Integer) obj[0];
 			}
 		}).get(0);
+	}
+	
+	@Override
+	public boolean updateIdFichaTecnica (VehiculoDTO entity) {
+		return getTemplate().query(updateIdFichaTecnica).param(entity.getIdFichaTecnica()).param(entity.getIdVehiculo()).excecute();
 	}
 }
