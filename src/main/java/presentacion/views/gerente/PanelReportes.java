@@ -1,22 +1,22 @@
 package presentacion.views.gerente;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
-import java.awt.BorderLayout;
-import com.jgoodies.forms.layout.FormLayout;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
-import java.awt.Color;
-import java.awt.GridLayout;
+import com.toedter.calendar.JDateChooser;
 
 public class PanelReportes extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -28,117 +28,162 @@ public class PanelReportes extends JPanel {
 		return instance;
 	}
 
-	private JButton btnIngresosDiarios;
-	private JButton btnEgresosDiarios;
-	private JButton btnIngresosMensuales;
-	private JButton btnIngresosSemanales;
-	private JButton btnRepuestos;
+	private JDateChooser fechaIngresoDesde;
+	private JDateChooser fechaIngresoHasta;
+	private JButton btnReporteIngresos;
 
-	private JButton btnAutosVendidos;
+	private JDateChooser fechaEgresoDesde;
+	private JDateChooser fechaEgresoHasta;
+	private JButton btnReporteEgresos;
+
+	private JDateChooser fechaVentasDesde;
+	private JDateChooser fechaVentasHasta;
+	private JButton btnReporteVentas;
 
 	public PanelReportes() {
 		setLayout(new BorderLayout(0, 0));
-		setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		FlowLayout flowLayout_1 = (FlowLayout) panel.getLayout();
-		flowLayout_1.setVgap(20);
-		flowLayout_1.setHgap(20);
-		add(panel, BorderLayout.NORTH);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		add(panel_1, BorderLayout.CENTER);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Reporte de Ingresos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_1.add(panel_3);
-		panel_3.setLayout(new GridLayout(0, 5, 0, 0));
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		panel_3.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		panel_3.add(lblNewLabel_1);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Reporte de Egresos", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		FlowLayout flowLayout_3 = (FlowLayout) panel_4.getLayout();
-		flowLayout_3.setVgap(20);
-		flowLayout_3.setHgap(20);
-		panel_1.add(panel_4);
-		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		panel_4.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		panel_4.add(lblNewLabel_3);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Reporte de Venta de Unidad", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		FlowLayout flowLayout_4 = (FlowLayout) panel_5.getLayout();
-		flowLayout_4.setVgap(20);
-		flowLayout_4.setHgap(20);
-		panel_1.add(panel_5);
-		
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		panel_5.add(lblNewLabel_4);
-		
-		JLabel lblNewLabel_5 = new JLabel("New label");
-		panel_5.add(lblNewLabel_5);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
-		flowLayout.setVgap(20);
-		flowLayout.setHgap(20);
-		add(panel_2, BorderLayout.SOUTH);
-//
-//		JLabel lblNewLabel = new JLabel("Seleccione un reporte : ");
-//		add(lblNewLabel);
-//
-//		btnIngresosDiarios = new JButton("Reporte Ingresos Diarios");
-//		add(btnIngresosDiarios);
-//
-//		btnEgresosDiarios = new JButton("Reporte Egresos Diarios");
-//		add(btnEgresosDiarios);
-//
-//		btnIngresosMensuales = new JButton("Reporte Ingresos Mensuales");
-//		add(btnIngresosMensuales);
-//
-//		btnIngresosSemanales = new JButton("Reporte Ingresos Semanales");
-//		add(btnIngresosSemanales);
-//
-//		btnRepuestos = new JButton("Reporte De Repuestos");
-//		add(btnRepuestos);
-//
-//		btnAutosVendidos = new JButton("Reporte de Auto Vendidos");
-//		add(btnAutosVendidos);
+		setLayout(new BorderLayout(5, 5));
+
+		JPanel panelSuperior = new JPanel();
+		panelSuperior.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		FlowLayout fl_panelSuperior = (FlowLayout) panelSuperior.getLayout();
+		fl_panelSuperior.setVgap(40);
+		fl_panelSuperior.setHgap(20);
+		add(panelSuperior, BorderLayout.NORTH);
+
+		JPanel panelCentral = new JPanel();
+		panelCentral.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Reportes",
+				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		add(panelCentral, BorderLayout.CENTER);
+		panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.X_AXIS));
+
+		JPanel panelReporteIngresos = new JPanel();
+		panelReporteIngresos.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"),
+				"Reporte de Ingresos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelCentral.add(panelReporteIngresos);
+		panelReporteIngresos.setLayout(new FormLayout(
+				new ColumnSpec[] { FormSpecs.UNRELATED_GAP_COLSPEC, ColumnSpec.decode("46px:grow"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
+						ColumnSpec.decode("default:grow"), FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, },
+				new RowSpec[] { FormSpecs.PREF_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.MIN_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+
+		JLabel lblIngresosDesde = new JLabel("Ingresos Desde");
+		panelReporteIngresos.add(lblIngresosDesde, "2, 4, 3, 1");
+
+		fechaIngresoDesde = new JDateChooser();
+		panelReporteIngresos.add(fechaIngresoDesde, "6, 4, fill, default");
+
+		JLabel lblIngresosHasta = new JLabel("Ingresos Hasta");
+		panelReporteIngresos.add(lblIngresosHasta, "2, 6, 3, 1, fill, fill");
+
+		fechaIngresoHasta = new JDateChooser();
+		panelReporteIngresos.add(fechaIngresoHasta, "6, 6, fill, default");
+
+		btnReporteIngresos = new JButton("Ver Reporte de Ingresos");
+		panelReporteIngresos.add(btnReporteIngresos, "6, 12");
+
+		JPanel panelReporteEgresos = new JPanel();
+		panelReporteEgresos.setBorder(
+				new TitledBorder(null, "Reporte de Egresos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelCentral.add(panelReporteEgresos);
+		panelReporteEgresos.setLayout(new FormLayout(
+				new ColumnSpec[] { FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("46px:grow"),
+						FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
+						ColumnSpec.decode("default:grow"), FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, },
+				new RowSpec[] { FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+
+		JLabel lblEgresosDesde = new JLabel("Egresos Desde");
+		panelReporteEgresos.add(lblEgresosDesde, "2, 4, left, top");
+
+		fechaEgresoDesde = new JDateChooser();
+		panelReporteEgresos.add(fechaEgresoDesde, "6, 4, fill, default");
+
+		JLabel lblEgresosHasta = new JLabel("Egresos Hasta");
+		panelReporteEgresos.add(lblEgresosHasta, "2, 6");
+
+		fechaEgresoHasta = new JDateChooser();
+		panelReporteEgresos.add(fechaEgresoHasta, "6, 6, fill, default");
+
+		btnReporteEgresos = new JButton("Ver Reporte de Egresos");
+		panelReporteEgresos.add(btnReporteEgresos, "6, 12");
+
+		JPanel panelReporteVentas = new JPanel();
+		panelReporteVentas.setBorder(new TitledBorder(null, "Reporte de Venta de Unidad", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
+		panelCentral.add(panelReporteVentas);
+		panelReporteVentas.setLayout(new FormLayout(
+				new ColumnSpec[] { FormSpecs.UNRELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
+						ColumnSpec.decode("max(45dlu;default):grow"), FormSpecs.RELATED_GAP_COLSPEC,
+						FormSpecs.DEFAULT_COLSPEC, },
+				new RowSpec[] { FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+
+		JLabel lblVentasDesde = new JLabel("Ventas Desde");
+		panelReporteVentas.add(lblVentasDesde, "2, 4, left, top");
+
+		fechaVentasDesde = new JDateChooser();
+		panelReporteVentas.add(fechaVentasDesde, "6, 4, fill, default");
+
+		JLabel lblVentasHasta = new JLabel("Ventas Hasta");
+		panelReporteVentas.add(lblVentasHasta, "2, 6");
+
+		fechaVentasHasta = new JDateChooser();
+		panelReporteVentas.add(fechaVentasHasta, "6, 6, fill, default");
+
+		btnReporteVentas = new JButton("Ver Reporte de Ventas");
+		panelReporteVentas.add(btnReporteVentas, "6, 12");
+
+		JPanel panelInferior = new JPanel();
+		panelInferior.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		FlowLayout fl_panelInferior = (FlowLayout) panelInferior.getLayout();
+		fl_panelInferior.setVgap(80);
+		fl_panelInferior.setHgap(25);
+		add(panelInferior, BorderLayout.SOUTH);
 	}
 
-	public void setActionDisplayIngresosDiarios(ActionListener listener) {
-		this.btnIngresosDiarios.addActionListener(listener);
+	public JDateChooser getFechaIngresoDesde() {
+		return fechaIngresoDesde;
 	}
 
-	public void setActionDisplayEgresosDiarios(ActionListener listener) {
-		this.btnEgresosDiarios.addActionListener(listener);
+	public JDateChooser getFechaIngresoHasta() {
+		return fechaIngresoHasta;
 	}
 
-	public void setActionDisplayIngresoMensual(ActionListener listener) {
-		this.btnIngresosMensuales.addActionListener(listener);
+	public JDateChooser getFechaEgresoDesde() {
+		return fechaEgresoDesde;
 	}
 
-	public void setActionDisplayIngresoSemanal(ActionListener listener) {
-		this.btnIngresosSemanales.addActionListener(listener);
+	public JDateChooser getFechaEgresoHasta() {
+		return fechaEgresoHasta;
 	}
 
-	public void setActionDisplayreportes(ActionListener listener) {
-		this.btnRepuestos.addActionListener(listener);
+	public JDateChooser getFechaVentasDesde() {
+		return fechaVentasDesde;
 	}
 
-	public void setActionDisplayReporteAutosVendidos(ActionListener listener) {
-		this.btnAutosVendidos.addActionListener(listener);
+	public JDateChooser getFechaVentasHasta() {
+		return fechaVentasHasta;
+	}
+
+	public void setActionReporteIngresos(ActionListener listener) {
+		this.btnReporteIngresos.addActionListener(listener);
+	}
+
+	public void setActionReporteEgresos(ActionListener listener) {
+		this.btnReporteEgresos.addActionListener(listener);
+	}
+
+	public void setActionReporteVentas(ActionListener listener) {
+		this.btnReporteVentas.addActionListener(listener);
 	}
 
 }
