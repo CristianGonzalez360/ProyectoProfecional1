@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import dto.CompraRepuestoDTO;
 import dto.CompraVehiculoDTO;
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
@@ -91,13 +92,13 @@ public class ReportesController {
 			ingresosReport.add(ingreso);
 		}
 		
-		for (CompraRepuestoDTO ventas : daos.makeVentaVehiculoDao().readFechas(desde, hasta)){			
+		for (CompraRepuestoDTO compraRepuesto : daos.makeCompraRepuestosDao().readFechas(desde, hasta)){			
 			IngresosReport ingreso = new IngresosReport();
 			ingreso.setFechaReporte(new Date());
 			ingreso.setDescripcion("Compra de Repuestos");
-			ingreso.setFechaDePago(ventas.getFechaVentaVN());
-			ingreso.setMontoTotal(ventas.getPrecioVenta());
-			ingreso.setId(ventas.getIdVentaVehiculo());
+			ingreso.setFechaDePago(compraRepuesto.getFechaCompra());
+			ingreso.setMontoTotal(compraRepuesto.getPrecioCompra());
+			ingreso.setId(compraRepuesto.getCodigoRepuesto());
 			ingresosReport.add(ingreso);
 		}
 		

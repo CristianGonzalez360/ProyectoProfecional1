@@ -96,7 +96,7 @@ public class ReportesPresenter {
 		ReporteViewImpl reporte = new ReporteViewImpl();
 		List<IngresosReport> ingresos = reportesController.readEgresos(fechaDesde, fechaHasta);
 		System.out.println(ingresos.toString());
-		reporte.setDataIngresos(ingresos);
+		reporte.setDataEgresos(ingresos);
 		reporte.open();
 	}
 
