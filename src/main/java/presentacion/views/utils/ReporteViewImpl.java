@@ -104,7 +104,7 @@ public class ReporteViewImpl {
 	}
 	
 	public void setDataEgresos(List<IngresosReport> ingresos) {
-		this.file = URLReporteIngresos;
+		this.file = URLReporteEgresos;
 		setData(ingresos);
 	}
 

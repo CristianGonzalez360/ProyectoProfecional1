@@ -187,4 +187,14 @@ public class PanelReportes extends JPanel {
 		this.btnReporteVentas.addActionListener(listener);
 	}
 
+	public void setActionDisplayEgresosDiarios(Object object) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setActionDisplayIngresosDiarios(Object object) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

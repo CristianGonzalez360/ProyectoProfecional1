@@ -52,12 +52,13 @@ public class ReportesPresenter {
 		reporte.open();
 	}
 
-	//TODO en este metodo en lugar de recolectarse en la lista de ingresosReport facturas y ventas de vehiculos se 
-	//se buscaran compraVehiculo y compraRepuesto
+	// TODO en este metodo en lugar de recolectarse en la lista de ingresosReport
+	// facturas y ventas de vehiculos se
+	// se buscaran compraVehiculo y compraRepuesto
 
 	private void generarReporteEgresos() {
 		Date fechaDesde = view.getFechaEgresoDesde();
-		Date fechaHasta = view.getFechaIngresoDesde();
+		Date fechaHasta = view.getFechaEgresoHasta();
 
 		if (fechaDesde == null || fechaHasta == null)
 			return;
