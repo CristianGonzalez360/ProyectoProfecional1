@@ -9,7 +9,7 @@ import business_logic.UsuariosController;
 import business_logic.exceptions.ConflictException;
 import dto.UsuarioDTO;
 import presentacion.views.admin.AdminControlView;
-import presentacion.views.admin.FormAltaUsuarioView;
+import presentacion.views.admin.FormAltaUsuario;
 import presentacion.views.admin.PanelGestionUsuariosView;
 import presentacion.views.utils.MessageDialog;
 
@@ -23,12 +23,12 @@ public class GestionUsuariosPresenter {
 		this.controller = controller;
 		this.view.setActionSelectUsuario((a) -> onSelectUsuario(a));
 		this.view.setActionRegistrarUsuario((a) -> onDisplayFormAltaDeUsuario(a));
-		FormAltaUsuarioView.getInstance().setActionOk((a) -> onRegistrarUsuario(a));
+		FormAltaUsuario.getInstance().setActionOk((a) -> onRegistrarUsuario(a));
 		onInit();
 	}
 
 	private void onRegistrarUsuario(ActionEvent a) {
-		UsuarioDTO dto = FormAltaUsuarioView.getInstance().getData();
+		UsuarioDTO dto = FormAltaUsuario.getInstance().getData();
 		if (dto != null) {
 			List<String> errors = dto.validate();
 			if (errors.isEmpty()) {
@@ -36,7 +36,7 @@ public class GestionUsuariosPresenter {
 					controller.save(dto);
 					view.clearData();
 					view.setData(controller.readAll());
-					FormAltaUsuarioView.getInstance().close();
+					FormAltaUsuario.getInstance().close();
 				} catch (ConflictException e) {
 					new MessageDialog().showMessages(e.toString());
 				}
@@ -47,7 +47,7 @@ public class GestionUsuariosPresenter {
 	}
 
 	private void onDisplayFormAltaDeUsuario(ActionEvent a) {
-		FormAltaUsuarioView.getInstance().open();
+		FormAltaUsuario.getInstance().open();
 	}
 
 	private void onInit() {

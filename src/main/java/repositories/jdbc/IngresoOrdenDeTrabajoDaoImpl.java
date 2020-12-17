@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.util.List;
 
 import dto.taller.IngresoOrdenDeTrabajoDTO;
-import repositories.VehiculosConOrdenDeTrabajoDao;
+import repositories.IngresoOrdenDeTrabajoDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
 
-public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<IngresoOrdenDeTrabajoDTO>
-		implements VehiculosConOrdenDeTrabajoDao {
+public class IngresoOrdenDeTrabajoDaoImpl extends GenericJdbcDao<IngresoOrdenDeTrabajoDTO>
+		implements IngresoOrdenDeTrabajoDao {
 
 	private static final String insert = "INSERT INTO VehiculoConOrdenesDeTrabajo (idFichaTecnicaVehiculo,idCliente,kilometrajeGarantia,aseguradora,nroPolizaSeguro,patenteVehiculo,idVehiculo) VALUES (?,?,?,?,?,?,?)";
 
@@ -21,7 +21,7 @@ public class VehiculosConOrdenDeTrabajoDaoImpl extends GenericJdbcDao<IngresoOrd
 
 	private static final String readAllId = "SELECT * FROM VehiculoConOrdenesDeTrabajo WHERE idVehiculoConOT = ?";
 
-	public VehiculosConOrdenDeTrabajoDaoImpl(Connection connection) {
+	public IngresoOrdenDeTrabajoDaoImpl(Connection connection) {
 		super(connection);
 	}
 

@@ -19,7 +19,7 @@ import repositories.FacturasDao;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
 import repositories.PresupuestosDao;
-import repositories.VehiculosConOrdenDeTrabajoDao;
+import repositories.IngresoOrdenDeTrabajoDao;
 import repositories.VentaVehiculoDao;
 import services.EmailSenderService;
 
@@ -29,7 +29,7 @@ public class EntregaDeVehiculoController {
 	private DatosPersonalesDao datosPersonalesDao;
 	private OrdenesDeTrabajoDao ordenesDeTrabajoDao;
 	private PresupuestosDao presupuestosDao;
-	private VehiculosConOrdenDeTrabajoDao vehiculosDao;
+	private IngresoOrdenDeTrabajoDao vehiculosDao;
 	private FichaTecnicaVehiculoDao fichaTecnicaDao;
 	private FacturasDao facturaDao;
 	private VentaVehiculoDao ventaVehiculoDAO;
@@ -38,7 +38,7 @@ public class EntregaDeVehiculoController {
 
 	public EntregaDeVehiculoController(ClientesDao clienteDao, DatosPersonalesDao datosPersonalesDao,
 			OrdenesDeTrabajoDao ordenDeTrabajoDao, PresupuestosDao presupuestoDao,
-			VehiculosConOrdenDeTrabajoDao vehiculoConOrdeDeTrabajoDao, FichaTecnicaVehiculoDao fichaTecnicaDao,
+			IngresoOrdenDeTrabajoDao vehiculoConOrdeDeTrabajoDao, FichaTecnicaVehiculoDao fichaTecnicaDao,
 			FacturasDao facturaDao) {
 		this.clientesDao = clienteDao;
 		this.datosPersonalesDao = datosPersonalesDao;
@@ -51,7 +51,7 @@ public class EntregaDeVehiculoController {
 		this.servicio = new EmailSenderService();
 	}
 
-	public EntregaDeVehiculoController(ClientesDao clientesDao, VehiculosConOrdenDeTrabajoDao vehiculosDao,
+	public EntregaDeVehiculoController(ClientesDao clientesDao, IngresoOrdenDeTrabajoDao vehiculosDao,
 			VentaVehiculoDao ventaVehiculoDAO) {
 		this.clientesDao = clientesDao;
 		this.vehiculosDao = vehiculosDao;

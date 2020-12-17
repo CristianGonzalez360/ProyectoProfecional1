@@ -13,6 +13,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
+import dto.taller.AltaFichaNuevaDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import java.awt.Font;
 
@@ -152,7 +154,19 @@ import java.awt.Font;
 			dto.setCombustion(this.textCombustion.getText());
 			return dto;
 		}
-
+		
+		public AltaFichaNuevaDTO getAltaFichaNueva() {
+			AltaFichaNuevaDTO dto = new AltaFichaNuevaDTO();
+			dto.setNroChasis(this.textNroChasis.getText());
+			dto.setNroMotor(this.textNroDeMotor.getText());
+			dto.setPatente(this.textPatente.getText());
+			dto.setMarca(this.textMarca.getText());
+			dto.setModelo(this.textModelo.getText());
+			dto.setColor(this.textColor.getText());
+			dto.setCombustion(this.textCombustion.getText());
+			return dto;
+		}
+		
 		public void display() {
 			setLocationRelativeTo(null);
 			this.setVisible(true);
