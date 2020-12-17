@@ -16,6 +16,8 @@ import dto.temporal.CompraVehiculoUsadoDTO;
 
 public class FichaTecnicaPanel extends JPanel {
 
+	private static final long serialVersionUID = 8478235249392964386L;
+	
 	private JTextField textNroChasis;
 	private JLabel lblNewLabel_1 = new JLabel("Nro. de motor");
 	private JTextField textNroDeMotor = new JTextField();
@@ -38,7 +40,6 @@ public class FichaTecnicaPanel extends JPanel {
 		setLayout(new BorderLayout());
 
 		JPanel contentPanel = new JPanel();
-		// contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
@@ -120,7 +121,6 @@ public class FichaTecnicaPanel extends JPanel {
 		this.textNroChasis.setText(ficha.getNroChasis() + "");
 		this.textPatente.setText(ficha.getPatente());
 		this.textKilometraje.setText(ficha.getKilometraje() + "");
-		;
 		this.textMarca.setText(ficha.getMarca());
 		this.textModelo.setText(ficha.getModelo() + "");
 		this.textColor.setText(ficha.getColor());
@@ -137,10 +137,11 @@ public class FichaTecnicaPanel extends JPanel {
 		this.textNroChasis.setText("");
 		this.textPatente.setText("");
 		this.textKilometraje.setText("");
-		;
 		this.textMarca.setText("");
 		this.textModelo.setText("");
 		this.textColor.setText("");
 		this.textCombustion.setText("");
+		this.txtFamilia.setText("");
+		this.txtLinea.setText("");
 	}
 }
