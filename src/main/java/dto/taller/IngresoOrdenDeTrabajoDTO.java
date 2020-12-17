@@ -2,7 +2,7 @@ package dto.taller;
 
 import dto.temporal.AltaDeVehiculoDTO;
 
-public class VehiculoConOrdenDeTrabajoDTO {
+public class IngresoOrdenDeTrabajoDTO {
 
 	private Integer id;
 
@@ -20,11 +20,11 @@ public class VehiculoConOrdenDeTrabajoDTO {
 
 	private Integer idVehiculo;
 
-	public VehiculoConOrdenDeTrabajoDTO() {
+	public IngresoOrdenDeTrabajoDTO() {
 	}
 
-	public VehiculoConOrdenDeTrabajoDTO makeTestDTO() {
-		VehiculoConOrdenDeTrabajoDTO ret = new VehiculoConOrdenDeTrabajoDTO();
+	public IngresoOrdenDeTrabajoDTO makeTestDTO() {
+		IngresoOrdenDeTrabajoDTO ret = new IngresoOrdenDeTrabajoDTO();
 		ret.setIdCliente(10);
 		ret.setIdFichaTecnica(4);
 		ret.setKilometrajeGarantia(10000);
@@ -34,7 +34,7 @@ public class VehiculoConOrdenDeTrabajoDTO {
 		return ret;
 	}
 
-	public VehiculoConOrdenDeTrabajoDTO(AltaDeVehiculoDTO vehiculoDeAlta) {
+	public IngresoOrdenDeTrabajoDTO(AltaDeVehiculoDTO vehiculoDeAlta) {
 		if (vehiculoDeAlta.getKilometrajeGarantia() != null)
 			this.kilometrajeGarantia = Integer.parseInt(vehiculoDeAlta.getKilometrajeGarantia());
 		else

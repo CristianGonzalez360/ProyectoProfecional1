@@ -68,6 +68,30 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 	}
 
 	@Override
+	public Integer getIdMaximo() {
+		return getTemplate().query(maximoId).excecute(new Mapper<Integer>() {
+
+			@Override
+			public Integer map(Object[] obj) {
+				return (Integer) obj[0];
+			}
+		}).get(0);
+	}
+
+	@Override
+	public FichaTecnicaVehiculoDTO readByNroChasis(Integer nroChasis) {
+		List<FichaTecnicaVehiculoDTO> dtos = getTemplate().query(readByNroChasis).param(nroChasis)
+				.excecute(getMapper());
+		return dtos.isEmpty() ? null : dtos.get(0);
+	}
+
+	@Override
+	public void updateKilometraje(Integer idVehiculo, Integer kilometrajeActual) {
+		final String query = "UPDATE FichaTecnicaVehiculo SET kilometraje = ? WHERE idFichaTecnicaVehiculo = ?";
+		getTemplate().query(query).param(kilometrajeActual).param(idVehiculo).excecute();
+	}
+	
+	@Override
 	protected Mapper<FichaTecnicaVehiculoDTO> getMapper() {
 		// TODO Auto-generated method stub
 		return new Mapper<FichaTecnicaVehiculoDTO>() {
@@ -88,23 +112,5 @@ public class FichaTecnicaVehiculoDaoImpl extends GenericJdbcDao<FichaTecnicaVehi
 				return dto;
 			}
 		};
-	}
-
-	@Override
-	public Integer getIdMaximo() {
-		return getTemplate().query(maximoId).excecute(new Mapper<Integer>() {
-
-			@Override
-			public Integer map(Object[] obj) {
-				return (Integer) obj[0];
-			}
-		}).get(0);
-	}
-
-	@Override
-	public FichaTecnicaVehiculoDTO readByNroChasis(Integer nroChasis) {
-		List<FichaTecnicaVehiculoDTO> dtos = getTemplate().query(readByNroChasis).param(nroChasis)
-				.excecute(getMapper());
-		return dtos.isEmpty() ? null : dtos.get(0);
 	}
 }

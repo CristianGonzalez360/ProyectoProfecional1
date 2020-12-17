@@ -15,7 +15,6 @@ import presentacion.views.vendedor.CaracteristicaDeVehiculoPanel;
 import presentacion.views.vendedor.TablePanel;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
-import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import java.awt.Color;
 

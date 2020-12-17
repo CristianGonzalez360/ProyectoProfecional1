@@ -6,7 +6,7 @@ import java.util.List;
 import business_logic.exceptions.ConflictException;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 import dto.temporal.AltaDeVehiculoDTO;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
@@ -29,10 +29,10 @@ public class VehiculosConOrdenDeTrabajoController {
 		this.otDao = otDao;
 	}
 
-	public List<VehiculoConOrdenDeTrabajoDTO> readVehiculosConFichaTecnicaByIdCliente(Integer idCliente) {
+	public List<IngresoOrdenDeTrabajoDTO> readVehiculosConFichaTecnicaByIdCliente(Integer idCliente) {
 		assert idCliente != null;
-		List<VehiculoConOrdenDeTrabajoDTO> ret = new LinkedList<>();
-		for(VehiculoConOrdenDeTrabajoDTO temp : vehiculosDao.readByClienteId(idCliente)) {
+		List<IngresoOrdenDeTrabajoDTO> ret = new LinkedList<>();
+		for(IngresoOrdenDeTrabajoDTO temp : vehiculosDao.readByClienteId(idCliente)) {
 			if(temp.getIdFichaTecnica() != null) {
 				ret.add(temp);
 			}
@@ -52,7 +52,7 @@ public class VehiculosConOrdenDeTrabajoController {
 		if (vehiculosDao.readByPatente(vehiculoDeAlta.getPatente()) != null)
 			throw new ConflictException("La patente ya está registrada");
 		if (fichasDao.insert(ficha)) {
-			VehiculoConOrdenDeTrabajoDTO target = new VehiculoConOrdenDeTrabajoDTO(vehiculoDeAlta);
+			IngresoOrdenDeTrabajoDTO target = new IngresoOrdenDeTrabajoDTO(vehiculoDeAlta);
 			target.setIdCliente(idCliente);
 			target.setIdFichaTecnica(fichasDao.readByNroMotor(Integer.parseInt(vehiculoDeAlta.getNroMotor())).getId());
 			vehiculosDao.insert(target);
@@ -61,10 +61,10 @@ public class VehiculosConOrdenDeTrabajoController {
 		}
 	}
 
-	public List<VehiculoConOrdenDeTrabajoDTO> readVehicleWithClientIdWhereOtIsOpen(Integer idCliente) {
-		List<VehiculoConOrdenDeTrabajoDTO> vCliente = vehiculosDao.readByClienteId(idCliente);
-		List<VehiculoConOrdenDeTrabajoDTO> vClienteRet = new LinkedList<>();
-		for (VehiculoConOrdenDeTrabajoDTO aux : vCliente) {
+	public List<IngresoOrdenDeTrabajoDTO> readVehicleWithClientIdWhereOtIsOpen(Integer idCliente) {
+		List<IngresoOrdenDeTrabajoDTO> vCliente = vehiculosDao.readByClienteId(idCliente);
+		List<IngresoOrdenDeTrabajoDTO> vClienteRet = new LinkedList<>();
+		for (IngresoOrdenDeTrabajoDTO aux : vCliente) {
 			for (OrdenDeTrabajoDTO temp : otDao.readByVehiculoId(aux.getId())) {
 				if (temp != null) {
 					if (temp.getFechaEntregado() == null) {
@@ -78,7 +78,7 @@ public class VehiculosConOrdenDeTrabajoController {
 		return vClienteRet;
 	}
 
-	public VehiculoConOrdenDeTrabajoDTO readById(Integer idVehiculo) {
+	public IngresoOrdenDeTrabajoDTO readById(Integer idVehiculo) {
 		return vehiculosDao.readByID(idVehiculo);
 	}
 }

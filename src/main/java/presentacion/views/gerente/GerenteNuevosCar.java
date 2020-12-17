@@ -67,7 +67,7 @@ public class GerenteNuevosCar extends JPanel {
 
 		JPanel panelDerecho = new JPanel(new BorderLayout());
 
-		panelCaracteristicas = CaracteristicaNuevoCarView.getInstance();// CaracteristicaNuevoCarView.getInstance();
+		panelCaracteristicas = CaracteristicaNuevoCarView.getInstance();
 		panelDerecho.add(panelCaracteristicas, BorderLayout.CENTER);
 
 		splitPane.setRightComponent(panelDerecho);
@@ -84,31 +84,16 @@ public class GerenteNuevosCar extends JPanel {
 
 		panel_1 = new JPanel();
 		panelSuperior.add(panel_1, BorderLayout.NORTH);
-		panel_1.setLayout(new FormLayout(
-				new ColumnSpec[] { ColumnSpec.decode("10px"), ColumnSpec.decode("max(34dlu;default)"),
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("157px"),
-						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("right:154px"),
-						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("137px"),
-						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("260px"), },
-				new RowSpec[] { FormSpecs.LINE_GAP_ROWSPEC, RowSpec.decode("23px"), }));
+		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		lblMarca = new JLabel("Marca");
-		panel_1.add(lblMarca, "4, 2, right, default");
+		panel_1.add(lblMarca);
 
 		comboMarcas = new JComboBox<>();
-		panel_1.add(comboMarcas, "6, 2, default, center");
-
-		// lblDescripcion = new JLabel();
-		// panel_1.add(lblDescripcion, "6, 2, right, center");
-		// lblDescripcion.setHorizontalAlignment(SwingConstants.CENTER);
-		// lblDescripcion.setText("Descripción");
-
-		// textDescipcion = new JTextField();
-		// panel_1.add(textDescipcion, "8, 2, default, center");
-		// textDescipcion.setColumns(10);
+		panel_1.add(comboMarcas);
 
 		btnBuscar = new JButton("Buscar");
-		panel_1.add(btnBuscar, "8, 2, fill, top");
+		panel_1.add(btnBuscar);
 
 		panelInterior = new JPanel();
 		panelInterior.setBackground(SystemColor.menu);

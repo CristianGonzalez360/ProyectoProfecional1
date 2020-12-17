@@ -27,9 +27,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 	public Presenter makePresenter() {
 		new TurnosPresenter(SupervisorControlView.getInstance().getTurnosView(), controllers.makeTurnosController(),
 				controllers.makeConfiguradorCapacidadTurnosController());
-		new ClientePresenter(SupervisorControlView.getInstance().getClientesView(),
-				controllers.makeClientesController(), controllers.makeVehiculosConOrdenDeTrabajoController(),
-				controllers.makeOrdenesDeTrabajoController(), controllers.makeGarantiasController());
+		new ClientePresenter(SupervisorControlView.getInstance().getClientesView(),controllers);
 		new OrdenDeTrabajoPresenter(controllers.makeOrdenesDeTrabajoController());
 		new PresupuestosPresenter(controllers.makePresupuestosController(), controllers.makeRepuestosController(),
 				controllers.makeOrdenesDeTrabajoController(), controllers.makeVehiculosConOrdenDeTrabajoController(),
@@ -42,7 +40,7 @@ public class ViewsFactoryImpl extends ViewsFactory {
 		new HistorialVentasGerentePresenter(controllers.makeVentasVehiculosController());
 		new VendedorControlPresenter(controllers);
 		new PedidosPresenter(GerenteControlView.getInstance().getPedidosPanelView(),
-				controllers.makePedidosController());
+				controllers.makePedidosController(), controllers.makeVehiculosController());
 		new NuevosCarPresenter(GerenteControlView.getInstance().getAutosNuevosPanelView(),
 				controllers.makeVentasVehiculosController(), controllers.makeVehiculosController());//
 		new CarritoPresenter(controllers.makeRepuestosController(), controllers.makeClientesController(),
