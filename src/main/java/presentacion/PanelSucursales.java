@@ -32,6 +32,7 @@ public class PanelSucursales extends JPanel {
 	private JButton btnEscogerComoTerminal;
 	
 	private JButton btnRegistrarSucursal;
+	private JButton btnRegistrarMoneda;
 
 	public PanelSucursales() {
 		setBounds(100, 100, 633, 424);
@@ -39,6 +40,9 @@ public class PanelSucursales extends JPanel {
 
 		panelBusqueda = new PanelBusquedaSucursal();
 		add(panelBusqueda, BorderLayout.NORTH);
+		
+		btnRegistrarMoneda = new JButton("Registrar moneda");
+		panelBusqueda.add(btnRegistrarMoneda);
 
 		tablePanel = new TablePanel<SucursalDTO>(
 				new String[] { "Nro. de sucursal", "Pais", "Calle", "Altura", "Localidad" }) {
@@ -137,6 +141,10 @@ public class PanelSucursales extends JPanel {
 
 	public void setActionRegistrarSucursal(ActionListener listener) {
 		this.btnRegistrarSucursal.addActionListener(listener);
+	}
+	
+	public void setActionRegistrarMoneda(ActionListener listener) {
+		this.btnRegistrarMoneda.addActionListener(listener);
 	}
 	
 	public void close() {

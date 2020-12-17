@@ -8,30 +8,41 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class AltaUsuariosView extends JDialog {
+public class FormAltaMoneda extends JDialog {
 
-	private static final long serialVersionUID = 3395649891931894532L;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6611059187380399388L;
+	
 	private final JPanel contentPanel = new JPanel();
+	
+	private PanelDataMoneda panelMoneda;
 
-	public AltaUsuariosView() {
-		setBounds(100, 100, 450, 300);
+	private JButton okButton;
+
+	private JButton cancelButton;
+
+	public FormAltaMoneda() {
+		setBounds(100, 100, 528, 149);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
+			panelMoneda = new PanelDataMoneda();
+			contentPanel.add(panelMoneda);
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				okButton = new JButton("OK");
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
