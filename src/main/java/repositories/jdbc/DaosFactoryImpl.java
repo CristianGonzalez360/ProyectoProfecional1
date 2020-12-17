@@ -5,6 +5,7 @@ package repositories.jdbc;
 
 import repositories.CaracteristicasVehiculoDao;
 import repositories.ClientesDao;
+import repositories.CompraVehiculoDao;
 import repositories.CuentasDao;
 import repositories.DaosFactory;
 import repositories.DatosPersonalesDao;
@@ -78,6 +79,9 @@ public class DaosFactoryImpl extends DaosFactory {
 	private RepuestoMantenimientoDao repuestoMantenimientoDao;
 
 	private TrabajoMantenimientoDao trabajoMantenimientoDao;
+	
+	private CompraVehiculoDao compraVehiculoDao;
+
 
 	public DaosFactoryImpl(DataSource dataSource) {
 		ds = dataSource;
@@ -248,4 +252,11 @@ public class DaosFactoryImpl extends DaosFactory {
 			garantiasDao = new GarantiasDaoImpl(ds.getConnection());
 		return garantiasDao;
 	}
+	
+	public CompraVehiculoDao makeCompraVehiculosDao() {
+		if (compraVehiculoDao == null)
+			compraVehiculoDao = new CompraVehiculoDaoImpl(ds.getConnection());
+		return compraVehiculoDao;
+	}
+	
 }
