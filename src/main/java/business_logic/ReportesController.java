@@ -97,7 +97,7 @@ public class ReportesController {
 			ingreso.setFechaReporte(new Date());
 			ingreso.setDescripcion("Compra de Repuestos");
 			ingreso.setFechaDePago(compraRepuesto.getFechaCompra());
-			ingreso.setMontoTotal(compraRepuesto.getPrecioCompra());
+			ingreso.setMontoTotal(compraRepuesto.getPrecioCompra()*compraRepuesto.getCantidad());
 			ingreso.setId(compraRepuesto.getCodigoRepuesto());
 			ingresosReport.add(ingreso);
 		}
