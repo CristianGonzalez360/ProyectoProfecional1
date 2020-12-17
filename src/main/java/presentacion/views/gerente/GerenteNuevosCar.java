@@ -17,24 +17,17 @@ import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
-
 import dto.CaracteristicaVehiculoDTO;
 import dto.VehiculoDTO;
 
 @SuppressWarnings("serial")
 public class GerenteNuevosCar extends JPanel {
 
-	private static final String[] nombreColumnasAuto = { "Código", "Marca", "Familia", "Linea", "Color", "Precio" };
+	private static final String[] nombreColumnasAuto = { "Código", "Marca", "Familia", "Linea", "Color", "Precio", "Deposito" };
 
 	private JPanel panelSuperior = new JPanel();
 	private JPanel panelInterior = new JPanel();
 	private JComboBox<String> comboMarcas;
-//	private JLabel lblDescripcion;
-//	private JTextField textDescipcion;
 	private JButton btnBuscar;
 	private JScrollPane scrollPaneRepuestos;
 	private DefaultTableModel modelAutosNuevos;
@@ -61,7 +54,7 @@ public class GerenteNuevosCar extends JPanel {
 		JPanel panelIzquierdo = new JPanel();
 		splitPane = new JSplitPane();
 		splitPane.setEnabled(true);
-		splitPane.setResizeWeight(0.0);
+		splitPane.setResizeWeight(0.5);
 		add(splitPane, BorderLayout.CENTER);
 		splitPane.setLeftComponent(panelIzquierdo);
 
@@ -99,7 +92,12 @@ public class GerenteNuevosCar extends JPanel {
 		panelInterior.setBackground(SystemColor.menu);
 		panelSuperior.add(panelInterior, BorderLayout.CENTER);
 		panelInterior.setLayout(new BorderLayout(0, 0));
-		tablaAutosNuevos = new JTable(modelAutosNuevos);
+		tablaAutosNuevos = new JTable(modelAutosNuevos) {
+			@Override
+			public Class<?> getColumnClass(int column) {
+				return column == 6? Boolean.class : super.getColumnClass(column);
+			}
+		};
 		scrollPaneRepuestos = new JScrollPane(tablaAutosNuevos);
 		panelInterior.add(scrollPaneRepuestos, BorderLayout.CENTER);
 
@@ -134,7 +132,7 @@ public class GerenteNuevosCar extends JPanel {
 	public void cargarTabla(List<VehiculoDTO> vehiculos) {
 		for (VehiculoDTO vehiculo : vehiculos) {
 			Object[] row = { vehiculo.getIdVehiculo(), vehiculo.getMarca(), vehiculo.getFamilia(), vehiculo.getLinea(),
-					vehiculo.getColor(), vehiculo.getPrecioVenta() };
+					vehiculo.getColor(), vehiculo.getPrecioVenta(), vehiculo.isDisponible() };
 			modelAutosNuevos.addRow(row);
 		}
 	}

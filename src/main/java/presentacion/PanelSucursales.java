@@ -30,6 +30,8 @@ public class PanelSucursales extends JPanel {
 	private JPanel panel;
 
 	private JButton btnEscogerComoTerminal;
+	
+	private JButton btnRegistrarSucursal;
 
 	public PanelSucursales() {
 		setBounds(100, 100, 633, 424);
@@ -84,6 +86,9 @@ public class PanelSucursales extends JPanel {
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		panelCenter.add(panel);
+		
+		btnRegistrarSucursal = new JButton("Registrar sucursal");
+		panel.add(btnRegistrarSucursal);
 
 		btnEscogerComoTerminal = new JButton("Escoger como terminal");
 		panel.add(btnEscogerComoTerminal);
@@ -130,8 +135,11 @@ public class PanelSucursales extends JPanel {
 		this.btnEscogerComoTerminal.addActionListener(listener);
 	}
 
+	public void setActionRegistrarSucursal(ActionListener listener) {
+		this.btnRegistrarSucursal.addActionListener(listener);
+	}
+	
 	public void close() {
 		setVisible(false);
 	}
-
 }
