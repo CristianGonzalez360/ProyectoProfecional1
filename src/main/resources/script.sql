@@ -397,3 +397,15 @@ CREATE TABLE GarantiasVehiculos(
 	PRIMARY KEY(idGarantia),
 	FOREIGN KEY(idVehiculo) REFERENCES Vehiculos(idVehiculo)
 );
+
+DROP TABLE CompraRepuesto IF EXISTS;
+CREATE TABLE CompraRepuesto(
+	idCompra INT NOT NULL AUTO_INCREMENT,
+	codigoRepuesto INT NOT NULL,
+	precioCompra DOUBLE NOT NULL,
+	fechaCompra DATE,
+	cantidad INT,
+	PRIMARY KEY(idCompra),
+);
+
+

@@ -5,12 +5,13 @@ import java.util.Date;
 public class CompraRepuestoDTO {
 
 	private Integer idCompraRepuesto;
-	private Integer idRepuesto;
+	private Integer codigoRepuesto;
 	private Double precioCompra;
 	private Date fechaCompra;
+	private Integer cantidad;
 	
 	public CompraRepuestoDTO() {
-		// TODO Auto-generated constructor stub
+		this.fechaCompra = new Date();
 	}
 
 	public Integer getIdCompraRepuesto() {
@@ -21,12 +22,12 @@ public class CompraRepuestoDTO {
 		this.idCompraRepuesto = idCompraRepuesto;
 	}
 
-	public Integer getIdRepuesto() {
-		return idRepuesto;
+	public Integer getCodigoRepuesto() {
+		return codigoRepuesto;
 	}
 
-	public void setIdRepuesto(Integer idRepuesto) {
-		this.idRepuesto = idRepuesto;
+	public void setCodigoRepuesto(Integer idRepuesto) {
+		this.codigoRepuesto = idRepuesto;
 	}
 
 	public Double getPrecioCompra() {
@@ -43,5 +44,13 @@ public class CompraRepuestoDTO {
 
 	public void setFechaCompra(Date fechaCompra) {
 		this.fechaCompra = fechaCompra;
+	}
+
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
 	}
 }

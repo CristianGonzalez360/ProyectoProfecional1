@@ -3,7 +3,11 @@ package repositories.jdbc;
 import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
+
+import dto.CompraRepuestoDTO;
+import dto.CompraVehiculoDTO;
 import dto.VehiculoDTO;
+import dto.temporal.CompraVehiculoUsadoDTO;
 import repositories.VehiculosDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
@@ -31,7 +35,11 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	private static final String updateIdFichaTecnica = "UPDATE Vehiculos SET idFichaTecnica = ? WHERE idVehiculo = ?";
 
 	private static final String readNuevosNoVendidos = readAll + " WHERE usado = false AND idVehiculo NOT IN (SELECT idVehiculo FROM VentasVehiculos)";
-
+	
+	private static final String registroCompra = "INSERT INTO CompraVehiculo(idVehiculo,PrecioCompra,fechaCompra, idUsuCompra) VALUES (?,?,?,?)";
+	
+	private static final String readCompras = "SELECT * FROM CompraVehiculo WHERE fechaCompra BETWEEN ? AND ? ORDER BY fechaCompra ASC";
+	
 	public VehiculoDaoImpl(Connection connection) {
 		super(connection);
 	}
@@ -45,7 +53,6 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	public boolean updateDisponibilidadVehiculo(Integer id, Boolean boolean1) {
 		return getTemplate().query(updateDisponibilidad).param(boolean1).param(id).excecute();
 	}
-
 	
 	@Override
 	public boolean insert(VehiculoDTO entity) {		
@@ -136,5 +143,29 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	@Override
 	public boolean updateIdFichaTecnica (VehiculoDTO entity) {
 		return getTemplate().query(updateIdFichaTecnica).param(entity.getIdFichaTecnica()).param(entity.getIdVehiculo()).excecute();
+	}
+
+	@Override
+	public void registrarCompra(CompraVehiculoDTO compra) {
+		getTemplate().query(registroCompra).param(compra.getIdVehiculo()).param(compra.getPrecioCompra())
+		.param(compra.getFechaCompra()).param(compra.getIdUsuCompra()).excecute();
+	}
+	
+	@Override
+	public List<CompraVehiculoDTO> readCompras(Date desde, Date hasta){
+		return getTemplate().query(readCompras).param(desde).param(hasta).excecute(new Mapper<CompraVehiculoDTO>() {
+
+			@Override
+			public CompraVehiculoDTO map(Object[] obj) {
+				CompraVehiculoDTO ret = new CompraVehiculoDTO();
+				ret.setIdCompraVehiculo((Integer)obj[0]);
+				ret.setIdVehiculo((Integer)obj[1]);
+				ret.setPrecioCompra((Double)obj[2]);
+				ret.setFechaCompra((Date) obj[3]);
+				ret.setIdUsuCompra((Integer)obj[4]);
+				return ret;
+			}
+
+		});
 	}
 }
