@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -15,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import dto.VehiculoDTO;
+import javax.swing.JRadioButton;
 
 @SuppressWarnings("serial")
 public class NuevosVehiculosFormView extends JDialog {
@@ -28,6 +31,9 @@ public class NuevosVehiculosFormView extends JDialog {
 	private JButton okButton;
 	private JButton cancelButton;
 	private static NuevosVehiculosFormView instance;
+	private JPanel panel;
+	private JRadioButton rdbtnCatalogo;
+	private JRadioButton rdbtnDepsito;
 
 	public static NuevosVehiculosFormView getInstance() {
 		if (instance == null)
@@ -44,42 +50,54 @@ public class NuevosVehiculosFormView extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
-		{
-			modelo = new DefaultTableModel(null, nombreColumnas) {
-				public boolean isCellEditable(int row, int column) {
-					return column == 5;
-				}
 
-				@SuppressWarnings({ "unchecked", "rawtypes" })
-				@Override
-				public Class getColumnClass(int col) {
-					if (col == 5)
-						return Boolean.class;
-					else
-						return Object.class;
-				}
-			};
+		modelo = new DefaultTableModel(null, nombreColumnas) {
+			public boolean isCellEditable(int row, int column) {
+				return column == 5;
+			}
 
-			tablaVehiculos = new JTable(modelo);
-			JScrollPane scrollPane = new JScrollPane(tablaVehiculos);
-			contentPanel.add(scrollPane, BorderLayout.CENTER);
-		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				okButton = new JButton("Cargar vehiculos");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+			@SuppressWarnings({ "unchecked", "rawtypes" })
+			@Override
+			public Class getColumnClass(int col) {
+				if (col == 5)
+					return Boolean.class;
+				else
+					return Object.class;
 			}
-			{
-				cancelButton = new JButton("Cancelar");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
+		};
+
+		tablaVehiculos = new JTable(modelo);
+		JScrollPane scrollPane = new JScrollPane(tablaVehiculos);
+		contentPanel.add(scrollPane, BorderLayout.CENTER);
+
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+
+		okButton = new JButton("Cargar vehiculos");
+		okButton.setActionCommand("OK");
+		buttonPane.add(okButton);
+		getRootPane().setDefaultButton(okButton);
+
+		cancelButton = new JButton("Cancelar");
+		cancelButton.setActionCommand("Cancel");
+		buttonPane.add(cancelButton);
+
+		panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		getContentPane().add(panel, BorderLayout.NORTH);
+
+		rdbtnDepsito = new JRadioButton("Depósito");
+		rdbtnDepsito.setSelected(true);
+		panel.add(rdbtnDepsito);
+		
+		ButtonGroup grupo = new ButtonGroup();
+		grupo.add(rdbtnDepsito);
+		
+				rdbtnCatalogo = new JRadioButton("Catálogo");
+				panel.add(rdbtnCatalogo);
+				grupo.add(rdbtnCatalogo);
 	}
 
 	public void cargarTabla(List<VehiculoDTO> vehiculos) {
@@ -125,5 +143,9 @@ public class NuevosVehiculosFormView extends JDialog {
 			}
 		}
 		return vehiculosId;
+	}
+	
+	public boolean getDeposito() {
+		return this.rdbtnDepsito.isSelected();
 	}
 }

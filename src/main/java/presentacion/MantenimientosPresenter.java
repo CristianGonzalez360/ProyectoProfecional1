@@ -11,7 +11,7 @@ import dto.taller.RepuestoDTO;
 import dto.taller.RepuestoMantenimientoDTO;
 import dto.taller.TrabajoMantenimientoDTO;
 import dto.validators.StringValidator;
-import presentacion.views.supervisor.MantenimientosPanel;
+import presentacion.views.supervisor.PanelMantenimientos;
 import presentacion.views.tecnico.PlanificarRepuestosFormView;
 import presentacion.views.tecnico.PlanificarTrabajosFormView;
 import presentacion.views.utils.MessageDialog;
@@ -20,7 +20,7 @@ public class MantenimientosPresenter {
 
 	private MantenimientosController mantenimientosController;
 	private RepuestosController repuestosController;
-	private MantenimientosPanel view;
+	private PanelMantenimientos view;
 	private PlanificarRepuestosFormView repuestos;
 	private PlanificarTrabajosFormView trabajos;
 
@@ -30,7 +30,7 @@ public class MantenimientosPresenter {
 			RepuestosController repuestosController) {
 		this.mantenimientosController = mantenimientosController;
 		this.repuestosController = repuestosController;
-		this.view = MantenimientosPanel.getInstance();
+		this.view = PanelMantenimientos.getInstance();
 		this.repuestos = this.view.getRepuestosPanel();
 		this.trabajos = this.view.getTrabajosPanel();
 

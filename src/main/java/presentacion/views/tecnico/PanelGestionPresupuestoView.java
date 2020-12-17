@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -31,9 +33,11 @@ import dto.taller.OrdenDeTrabajoDTO;
 import dto.taller.PresupuestoDTO;
 import dto.taller.RepuestoPlanificadoDTO;
 import dto.taller.TrabajoPresupuestadoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 
 import javax.swing.UIManager;
+import javax.swing.JCheckBox;
+import javax.swing.SwingConstants;
 
 public class PanelGestionPresupuestoView extends JPanel {
 
@@ -46,7 +50,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JPanel panelEste;
 	private JPanel panelOeste;
 	private JPanel panelEsteNorte;
-	private List<VehiculoConOrdenDeTrabajoDTO> vehiculos;
+	private List<IngresoOrdenDeTrabajoDTO> vehiculos;
 
 	private final String[] columnasTablaVehiculos = new String[] { "NRO. VEHICULO", "KM GARANTIA", "ASEGURADORA",
 			"NRO POLIZA SEGURO", "PATENTE" };
@@ -104,6 +108,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JTable tablePresupuestos;
 	private List<Integer> idsPresupuestos;
 	private JButton btnNuevoPresupuesto;
+	private JCheckBox chckbxGarantia;
 
 	public static PanelGestionPresupuestoView getInstance() {
 		if (instance == null) {
@@ -141,8 +146,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panelEste.setLayout(new BoxLayout(panelEste, BoxLayout.Y_AXIS));
 
 		panelEsteNorte = new JPanel();
-		panelEsteNorte.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ordenes de trabajo",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelEsteNorte.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Ordenes de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panelEsteNorte);
 		panelEsteNorte.setLayout(new BorderLayout(0, 0));
 
@@ -162,8 +166,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 
 		panelEsteSur = new JPanel();
 		panelEsteSur.setBorder(
-				new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Descripci\u00F3n de la orden de trabajo",
-						TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Descripci\u00F3n de la orden de trabajo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panelEsteSur);
 
 		panelEsteSur.setLayout(new FormLayout(
@@ -197,6 +200,14 @@ public class PanelGestionPresupuestoView extends JPanel {
 		textFechaCierreOt.setEditable(false);
 		panelEsteSur.add(textFechaCierreOt, "4, 4, fill, default");
 		textFechaCierreOt.setColumns(10);
+		
+		chckbxGarantia = new JCheckBox("Garantia");
+		chckbxGarantia.setFocusable(false);
+		chckbxGarantia.setHorizontalTextPosition(SwingConstants.LEFT);
+		for (EventListener eventListener : chckbxGarantia.getListeners(MouseListener.class)) {
+			chckbxGarantia.removeMouseListener((MouseListener) eventListener);
+		}
+		panelEsteSur.add(chckbxGarantia, "8, 4, center, center");
 
 		lblNewLabel_3 = new JLabel("Trabajo sugerido");
 		panelEsteSur.add(lblNewLabel_3, "2, 6");
@@ -216,8 +227,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 
 		panel = new JPanel();
 		panel.setBorder(
-				new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ficha t\u00E9cnica del veh\u00EDculo",
-						TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Ficha t\u00E9cnica del veh\u00EDculo", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panel);
 		panel.setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(33dlu;default)"),
@@ -291,8 +301,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		};
 
 		panel_8 = new JPanel();
-		panel_8.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Presupuestos",
-				TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_8.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Presupuestos", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelOeste.add(panel_8);
 		panel_8.setLayout(new BorderLayout(0, 0));
 
@@ -308,8 +317,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_8.add(scrollPane, BorderLayout.CENTER);
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Detalles del presupuesto",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_1.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelOeste.add(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 
@@ -404,21 +412,21 @@ public class PanelGestionPresupuestoView extends JPanel {
 		this.tableVehiculos.getSelectionModel().addListSelectionListener(listener);
 	}
 
-	public VehiculoConOrdenDeTrabajoDTO getidVehiculoSeleccionado() {
+	public IngresoOrdenDeTrabajoDTO getidVehiculoSeleccionado() {
 		int rows = this.tableVehiculos.getSelectedRowCount();
 		if (rows == 1) {
 			int row = this.tableVehiculos.getSelectedRow();
-			VehiculoConOrdenDeTrabajoDTO dto = this.vehiculos.get(row);
+			IngresoOrdenDeTrabajoDTO dto = this.vehiculos.get(row);
 			return dto;
 		}
 		return null;
 	}
 
-	public void setData(List<VehiculoConOrdenDeTrabajoDTO> vehiculos) {
+	public void setData(List<IngresoOrdenDeTrabajoDTO> vehiculos) {
 		this.vehiculos = vehiculos;
-		for (VehiculoConOrdenDeTrabajoDTO dto : vehiculos) {
-			Object[] row = { dto.getId().toString(), dto.getKilometrajeGarantia().toString(), dto.getAseguradora(),
-					dto.getNroPolizaSeguro().toString(), dto.getPatente() };
+		for (IngresoOrdenDeTrabajoDTO dto : vehiculos) {
+			Object[] row = { dto.getId().toString(), dto.getKilometrajeGarantia(), dto.getAseguradora(),
+					dto.getNroPolizaSeguro(), dto.getPatente() };
 			this.tableModelVehiculos.addRow(row);
 		}
 	}
@@ -521,6 +529,10 @@ public class PanelGestionPresupuestoView extends JPanel {
 
 	public void setActionOnNuevoPresupuesto(ActionListener listener) {
 		this.btnNuevoPresupuesto.addActionListener(listener);
+	}
+
+	public void setGarantia(boolean garantia) {
+		this.chckbxGarantia.setSelected(garantia);
 	}
 
 }

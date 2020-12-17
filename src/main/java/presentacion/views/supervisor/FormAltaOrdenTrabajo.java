@@ -20,9 +20,10 @@ import javax.swing.JEditorPane;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class AltaOrdenTrabajoFormView extends JDialog {
+public class FormAltaOrdenTrabajo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JEditorPane editorTrabajoSolicitado;
@@ -32,15 +33,16 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 	private JRadioButton rdbtnGarantia;
 	private JRadioButton rdbtnTaller;
 
-	private static AltaOrdenTrabajoFormView instance;
+	private static FormAltaOrdenTrabajo instance;
+	private JTextField kilometrajeActual;
 
-	public static AltaOrdenTrabajoFormView getInstance() {
+	public static FormAltaOrdenTrabajo getInstance() {
 		if (instance == null)
-			instance = new AltaOrdenTrabajoFormView();
+			instance = new FormAltaOrdenTrabajo();
 		return instance;
 	}
 
-	private AltaOrdenTrabajoFormView() {
+	private FormAltaOrdenTrabajo() {
 		setTitle("Form alta de orden de trabajo");
 		setResizable(false);
 		setModal(true);
@@ -96,8 +98,17 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 		grupo.add(rdbtnGarantia);
 
 		JPanel panelBotones = new JPanel();
-		panelBotones.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		FlowLayout fl_panelBotones = new FlowLayout(FlowLayout.CENTER);
+		fl_panelBotones.setHgap(20);
+		panelBotones.setLayout(fl_panelBotones);
 		getContentPane().add(panelBotones, BorderLayout.SOUTH);
+		
+		JLabel lblNewLabel = new JLabel("Kilometraje actual");
+		panelBotones.add(lblNewLabel);
+		
+		kilometrajeActual = new JTextField();
+		panelBotones.add(kilometrajeActual);
+		kilometrajeActual.setColumns(10);
 
 		botonGuardar = new JButton("Guardar");
 		botonGuardar.setActionCommand("OK");
@@ -120,11 +131,13 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 	public void clearData() {
 		this.editorTrabajoSolicitado.setText("");
 		this.editorTrabajoSugerido.setText("");
+		this.kilometrajeActual.setText("");
 		habilitarGarantia();
 	}
 
 	public AltaOrdenDeTrabajoDTO getData() {
 		AltaOrdenDeTrabajoDTO dto = new AltaOrdenDeTrabajoDTO();
+		dto.setKilometrajeActual(this.kilometrajeActual.getText());
 		dto.setTrabajoSugerido(this.editorTrabajoSugerido.getText());
 		dto.setTrabajoSolicitado(this.editorTrabajoSolicitado.getText());
 		if (this.rdbtnTaller.isSelected()) {
@@ -154,5 +167,9 @@ public class AltaOrdenTrabajoFormView extends JDialog {
 	public void deshabilitarGarantia() {
 		this.rdbtnGarantia.setEnabled(false);
 		this.rdbtnTaller.setSelected(true);
+	}
+
+	public void setKilometraje(String string) {
+		this.kilometrajeActual.setText(string);
 	}
 }

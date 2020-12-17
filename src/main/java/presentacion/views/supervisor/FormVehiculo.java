@@ -17,7 +17,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import dto.temporal.AltaDeVehiculoDTO;
 
-public class VehiculoFormView extends JDialog {
+public class FormVehiculo extends JDialog {
 
 	private static final long serialVersionUID = -2246189166156653659L;
 	private final JPanel contentPanel = new JPanel();
@@ -47,15 +47,15 @@ public class VehiculoFormView extends JDialog {
 	private final JButton btnSalvar = new JButton("Salvar");
 	private final JButton btnCancelar = new JButton("Cancelar");
 
-	private static VehiculoFormView instance;
+	private static FormVehiculo instance;
 
-	public static VehiculoFormView getInstance() {
+	public static FormVehiculo getInstance() {
 		if (instance == null)
-			instance = new VehiculoFormView();
+			instance = new FormVehiculo();
 		return instance;
 	}
 
-	private VehiculoFormView() {
+	private FormVehiculo() {
 		setTitle("Form alta de vehículo");
 		setResizable(false);
 		setModal(true);
@@ -69,7 +69,7 @@ public class VehiculoFormView extends JDialog {
 		textKilometraje.setColumns(10);
 		textPatente.setColumns(10);
 		textNroDeMotor.setColumns(10);
-		setBounds(100, 100, 607, 355);
+		setBounds(100, 100, 607, 282);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

@@ -52,14 +52,8 @@ public class VentasVehiculosController {
 	}
 
 	public List<VehiculoDTO> readAllVehiculoNuevos() {
-		List<VehiculoDTO> vehiculos = daos.makeVehiculoDao().readAll();
-		List<VehiculoDTO> vehiculosNuevos = new LinkedList<VehiculoDTO>();
-		for (VehiculoDTO vehiculo : vehiculos) {
-			if (vehiculo.isUsado() == false) {
-				vehiculosNuevos.add(vehiculo);
-			}
-		}
-		return vehiculosNuevos;
+		List<VehiculoDTO> vehiculos = daos.makeVehiculoDao().readNuevosNoVendidos();
+		return vehiculos;
 	}
 
 	public void saveVehiculosNuevos(List<VehiculoDTO> vehiculosNuevos) {

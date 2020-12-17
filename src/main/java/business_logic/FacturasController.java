@@ -9,7 +9,7 @@ import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.OrdenDeTrabajoDTO;
 import dto.taller.PresupuestoDTO;
 import dto.taller.ResumenDeFacturaOrdenTrabajoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
+import dto.taller.IngresoOrdenDeTrabajoDTO;
 import presentacion.views.utils.FacturaRepuestosReport;
 import presentacion.views.utils.FacturaTallerReport;
 import repositories.DaosFactory;
@@ -134,7 +134,7 @@ public class FacturasController {
 
 	private FichaTecnicaVehiculoDTO getFichaTecnica(FacturaDTO factura) {
 		OrdenDeTrabajoDTO ordenTrabajo = ordenTrabajoDao.readByID(factura.getIdOrdenDeTrabajo());
-		VehiculoConOrdenDeTrabajoDTO vehiculoConOrdenTrabajo = vehiculoConOrdenTrabajoDao
+		IngresoOrdenDeTrabajoDTO vehiculoConOrdenTrabajo = vehiculoConOrdenTrabajoDao
 				.readByID(ordenTrabajo.getIdOrdenTrabajo());
 		return fichaTecnicaDao.readByID(vehiculoConOrdenTrabajo.getIdFichaTecnica());
 	}

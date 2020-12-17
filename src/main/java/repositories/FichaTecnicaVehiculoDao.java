@@ -9,4 +9,6 @@ public interface FichaTecnicaVehiculoDao extends GenericDao<FichaTecnicaVehiculo
 	FichaTecnicaVehiculoDTO readByNroChasis(Integer nroChasis);
 
 	public Integer getIdMaximo();
+
+	void updateKilometraje(Integer idVehiculo, Integer kilometrajeActual);
 }

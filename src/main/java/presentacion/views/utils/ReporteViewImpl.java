@@ -11,6 +11,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import dto.taller.FacturaDTO;
+import dto.taller.OrdenDeTrabajoDTO;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -27,6 +28,7 @@ public class ReporteViewImpl {
 	private static final String URLTicket = "Ticket.jasper";
 	private static final String URLReporteVentas = "ReporteVentas.jasper";
 	private static final String URLReporteIngresos = "IngresosDiarios.jasper";
+	private static final String URLReporteHistorialDeTrabajos = "HistorialDeVehiculo.jasper";
 
 	
 	private JasperReport reporte;
@@ -98,6 +100,11 @@ public class ReporteViewImpl {
 	public void setDataIngresos(List<IngresosReport> ingresos) {
 		this.file = URLReporteIngresos;
 		setData(ingresos);
+	}
+
+	public void setDataTrabajos(List<OrdenDeTrabajoDTO> trabajos) {
+		this.file = URLReporteHistorialDeTrabajos;
+		setData(trabajos);
 	}
 	
 
