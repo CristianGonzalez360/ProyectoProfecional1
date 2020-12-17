@@ -86,17 +86,27 @@ public class NuevosCarPresenter {
 
 	private void onValidarCarga(ActionEvent a) {
 		List<Integer> idAutosNoAceptados = this.nuevosVehiculos.getIdVehiculosNoAceptados();
-		List<VehiculoDTO> vehiculosNuevos = vehiculosGraph.getVehiculos();
-		List<CaracteristicaVehiculoDTO> caracteristicas = vehiculosGraph.getCaracteristicas();
-		List<FichaTecnicaVehiculoDTO> fichasTecnicas = vehiculosGraph.getFichaTecnica();
+		List<VehiculoDTO> vehiculosNuevos = new ArrayList<>();
+		for(VehiculoDTO vehiculo : vehiculosGraph.getVehiculos()) {
+			vehiculosNuevos.add(vehiculo);
+		}
+		List<CaracteristicaVehiculoDTO> caracteristicas = new ArrayList<>();
+		for(CaracteristicaVehiculoDTO carac : vehiculosGraph.getCaracteristicas()) {
+			caracteristicas.add(carac);
+		}
+		List<FichaTecnicaVehiculoDTO> fichasTecnicas = new ArrayList<>();
+		for(FichaTecnicaVehiculoDTO ficha : vehiculosGraph.getFichaTecnica()) {
+			fichasTecnicas.add(ficha);
+		}
+		
+		// cada vehiculo tiene 1 caracteristica y 1 ficha tecnica
+		quitarVehiculosNoAceptados(idAutosNoAceptados, vehiculosNuevos);// quito los no aceptados
+		quitarCaracteristicasNoAceptados(idAutosNoAceptados, caracteristicas);
+		if(this.nuevosVehiculos.getDeposito()) {
+			quitarFichastecnicasNoAceptadas(idAutosNoAceptados, fichasTecnicas);
+		}
+			
 		if(validarFichaTecnica()) {
-			// cada vehiculo tiene 1 caracteristica y 1 ficha tecnica
-			quitarVehiculosNoAceptados(idAutosNoAceptados, vehiculosNuevos);// quito los no aceptados
-			quitarCaracteristicasNoAceptados(idAutosNoAceptados, caracteristicas);
-			if(this.nuevosVehiculos.getDeposito()) {
-				quitarFichastecnicasNoAceptadas(idAutosNoAceptados, fichasTecnicas);
-			}
-	
 			if (vehiculosNuevos.size() > 0) {
 				for (int i = 0; i < vehiculosNuevos.size(); i++) {
 					vehiculosNuevos.get(i).setIdCaracteristicas(vehiculosController.guardarCaracteristicaNueva(caracteristicas.get(i)));
@@ -104,12 +114,11 @@ public class NuevosCarPresenter {
 						vehiculosNuevos.get(i).setIdFichaTecnica(vehiculosController.guardarFichaTecnicaNueva(fichasTecnicas.get(i)));
 					}																								
 					vehiculosNuevos.get(i).setFechaIngreso(new Date());
+					vehiculosNuevos.get(i).setDisponible(this.nuevosVehiculos.getDeposito());
 					if(this.nuevosVehiculos.getDeposito()) {
-						vehiculosNuevos.get(i).setDisponible(true);
 						vehiculosNuevos.get(i).setIdSucursal(SessionServiceImpl.getInstance().getActiveSession().getIdSucursal());
 					}
 					else {
-						vehiculosNuevos.get(i).setDisponible(false);
 						vehiculosNuevos.get(i).setIdSucursal(null);
 					}
 					garantiaDefault.setIdVehiculo((vehiculosController.guardarVehiculoNuevo(vehiculosNuevos.get(i))));
@@ -202,7 +211,7 @@ public class NuevosCarPresenter {
 
 	private void onBuscar(ActionEvent a) {
 		String marcaSeleccionada = this.view.getMarca();
-		if (marcaSeleccionada.equals(new String("Todas"))) {
+		if (marcaSeleccionada.equals(All)) {
 			this.view.clear();
 			this.cargarTodosVehiculos();
 		} else {
