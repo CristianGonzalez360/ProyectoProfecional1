@@ -44,23 +44,35 @@ public class ReportesController {
 	
 	public List<IngresosReport> readIngresos(Date desde ,Date hasta) {
 		List<IngresosReport> ingresosReport = new ArrayList<>();
-		
+		Double sumaParcial = 0.00;
 		for (FacturaDTO facturaPaga : daos.makeFacturasDao().readByDates(desde,hasta)) {
 			IngresosReport ingreso = new IngresosReport();
+			ingreso.setFechaReporte(new Date());
 			ingreso.setDescripcion("Taller");
 			ingreso.setFechaDePago(facturaPaga.getFechaDeCierrePorPago());
 			ingreso.setMontoTotal(facturaPaga.getTotal());
+			ingreso.setId(facturaPaga.getIdFactura());
+			
 			ingresosReport.add(ingreso);
 		}
 		
-		for (VentaVehiculoDTO ventas : daos.makeVentaVehiculoDao().readFechas(desde, hasta)){//makeFacturasDao().readByDates(desde,hasta))//			
+		for (VentaVehiculoDTO ventas : daos.makeVentaVehiculoDao().readFechas(desde, hasta)){			
 			IngresosReport ingreso = new IngresosReport();
+			ingreso.setFechaReporte(new Date());
 			ingreso.setDescripcion("Ventas");
 			ingreso.setFechaDePago(ventas.getFechaVentaVN());
 			ingreso.setMontoTotal(ventas.getPrecioVenta());
+			ingreso.setId(ventas.getIdVentaVehiculo());
 			ingresosReport.add(ingreso);
 		}
 		
+			for (IngresosReport ingresos : ingresosReport) {
+				sumaParcial += ingresos.getMontoTotal();
+			}
+			for (IngresosReport ingresos : ingresosReport) {
+				ingresos.setTotal(sumaParcial);
+			}
+			
 		return ingresosReport;
 	}
 
