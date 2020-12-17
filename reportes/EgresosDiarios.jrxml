@@ -200,7 +200,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
-					<text><![CDATA[ingreso]]></text>
+					<text><![CDATA[Egreso]]></text>
 				</staticText>
 			</frame>
 		</band>
