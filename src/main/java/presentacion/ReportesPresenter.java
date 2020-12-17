@@ -7,12 +7,7 @@ import java.util.List;
 import business_logic.FacturasController;
 import business_logic.ReportesController;
 import presentacion.views.gerente.PanelReportes;
-
-import presentacion.views.gerente.ReporteAutosVendidosFormView;
-import presentacion.views.gerente.ReporteEgresoDiarioFormView;
-import presentacion.views.gerente.ReporteIngresoDiarioInputFormView;
 import presentacion.views.utils.IngresosReport;
-
 import presentacion.views.utils.ReporteViewImpl;
 import presentacion.views.utils.VentasReport;
 
@@ -53,7 +48,6 @@ public class ReportesPresenter {
 
 		ReporteViewImpl reporte = new ReporteViewImpl();
 		List<IngresosReport> ingresos = reportesController.readIngresos(fechaDesde, fechaHasta);
-		System.out.println(ingresos.toString());
 		reporte.setDataIngresos(ingresos);
 		reporte.open();
 	}
@@ -70,7 +64,6 @@ public class ReportesPresenter {
 
 		ReporteViewImpl reporte = new ReporteViewImpl();
 		List<IngresosReport> ingresos = reportesController.readEgresos(fechaDesde, fechaHasta);
-		System.out.println(ingresos.toString());
 		reporte.setDataIngresos(ingresos);
 		reporte.open();
 	}
