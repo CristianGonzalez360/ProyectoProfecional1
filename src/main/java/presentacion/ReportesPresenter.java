@@ -39,8 +39,8 @@ public class ReportesPresenter {
 		this.view.setActionDisplayIngresosDiarios((a) -> onDisplayIngresosDiarios(a));
 		this.reporteIngresoDiarioInputFormView.setActionGenerarReporte((a) -> generarReporteIngresos());
 
-//		this.view.setActionDisplayEgresosDiarios((a) -> onDisplayEgresosDiarios(a));
-//		this.autosVendidosView.setActionGenerarReporte((a) -> generarReporteEgresos());
+		this.view.setActionDisplayEgresosDiarios((a) -> onDisplayEgresosDiarios(a));
+		this.reporteEgresoDiarioFormView.setActionGenerarReporte((a) -> generarReporteEgresos());
 	}
 
 	private void onDisplayIngresosDiarios(ActionEvent e) {
@@ -87,8 +87,8 @@ public class ReportesPresenter {
 	//TODO en este metodo en lugar de recolectarse en la lista de ingresosReport facturas y ventas de vehiculos se 
 	//se buscaran compraVehiculo y compraRepuesto
 	private void generarReporteEgresos() {
-		Date fechaDesde = reporteIngresoDiarioInputFormView.getFechaDesde();
-		Date fechaHasta = reporteIngresoDiarioInputFormView.getFechaHasta();
+		Date fechaDesde = reporteEgresoDiarioFormView.getFechaDesde();
+		Date fechaHasta = reporteEgresoDiarioFormView.getFechaHasta();
 		
 		if (fechaDesde == null || fechaHasta == null)
 			return;

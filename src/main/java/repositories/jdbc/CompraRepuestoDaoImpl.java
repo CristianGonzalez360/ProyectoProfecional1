@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import dto.CompraRepuestoDTO;
+import dto.CompraVehiculoDTO;
 import repositories.CompraRepuestoDao;
 import repositories.jdbc.utils.Mapper;
 
@@ -55,8 +56,29 @@ public class CompraRepuestoDaoImpl extends GenericJdbcDao<CompraRepuestoDTO> imp
 
 	@Override
 	protected Mapper<CompraRepuestoDTO> getMapper() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Mapper<CompraRepuestoDTO>() {
+
+			@Override
+			public CompraRepuestoDTO map(Object[] obj) {
+				CompraRepuestoDTO compraVehiculo = new CompraRepuestoDTO();
+				compraVehiculo.setIdCompraRepuesto((Integer) obj[0]);
+				compraVehiculo.setCodigoRepuesto((Integer) obj[1]);
+				compraVehiculo.setPrecioCompra((Double) obj[2]);
+				compraVehiculo.setFechaCompra((Date) obj[3]);
+				compraVehiculo.setCantidad((Integer) obj[4]);
+				return compraVehiculo;
+			}
+		};
 	}
+	
+//	DROP TABLE CompraRepuesto IF EXISTS;
+//	CREATE TABLE CompraRepuesto(
+//		idCompra INT NOT NULL AUTO_INCREMENT,
+//		codigoRepuesto INT NOT NULL,
+//		precioCompra DOUBLE NOT NULL,
+//		fechaCompra DATE,
+//		cantidad INT,
+//		PRIMARY KEY(idCompra),
+//	);
 	
 }
