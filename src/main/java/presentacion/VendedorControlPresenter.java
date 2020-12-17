@@ -8,20 +8,17 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 
 import business_logic.CalculadoraMontoFinalVentaService;
-import business_logic.ClientesController;
 import business_logic.ControllersFactory;
-import business_logic.GarantiasController;
-import business_logic.VentasVehiculosController;
 import business_logic.exceptions.ForbiddenException;
 import dto.ClienteDTO;
 import dto.GarantiaVehiculoDTO;
+import dto.VehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
-import dto.taller.VehiculoConOrdenDeTrabajoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.ModalidadVentaVehiculoDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import dto.validators.StringValidator;
-import presentacion.views.supervisor.ClienteFormView;
+import presentacion.views.supervisor.FormCliente;
 import presentacion.views.utils.MessageDialog;
 import presentacion.views.utils.ReporteViewImpl;
 import presentacion.views.vendedor.VendedorControlView;
@@ -89,8 +86,8 @@ public class VendedorControlPresenter {
 
 	private void onDisplayClienteFormView(ActionEvent e) {
 		view.clearDataCliente();
-		ClienteFormView.getInstance().clearData();
-		ClienteFormView.getInstance().display();
+		FormCliente.getInstance().clearData();
+		FormCliente.getInstance().display();
 	}
 
 	private void onSelectVentaEnEfectivo(ActionEvent a) {
@@ -126,13 +123,14 @@ public class VendedorControlPresenter {
 			GarantiaVehiculoDTO garantia = controllers.makeGarantiasController().readByIdVehiculo(codigoVehiculo);
 			if(garantia != null)view.setData(garantia);
 			view.clearDataModalidadVenta();
-			
-			FichaTecnicaVehiculoDTO ficha = controllers.makeVehiculosController().readFichaTecnicaByIdVehiculo(codigoVehiculo);
-			view.clearDataFichaTecnica();
-			if(ficha != null) {
-				view.setData(ficha);
+			VehiculoDTO vehiculo = controllers.makeVehiculosController().readVehiculoById(codigoVehiculo);
+			if(vehiculo.getIdFichaTecnica() != null) {
+				FichaTecnicaVehiculoDTO ficha = controllers.makeVehiculosController().readByIdFichaTecnica(vehiculo.getIdFichaTecnica());
+				view.clearDataFichaTecnica();
+				if(ficha != null) {
+					view.setData(ficha);
+				}	
 			}
-			
 			updatePanelVenta(out.getPrecio(), garantia.getCostoFinalConIVA().toString());
 			updateMontoCuota();
 		}
@@ -163,7 +161,11 @@ public class VendedorControlPresenter {
 
 	private void onConsultarVehiculo(ActionEvent a) {
 		ConsultaVehiculoParaVentaDTO consulta = view.getDataConsultaVehiculo();
+		view.clearDataCliente();
+		view.clearDataFichaTecnica();
+		view.clearDataModalidadVenta();
 		view.clearDataVehiculos();
+		view.clearDataGarantia();
 		if (consulta.validate().isEmpty()) {
 			List<OutputConsultaVehiculoEnVentaDTO> vehiculos = controllers.makeVentasVehiculosController().readDisponiblesByCriteria(consulta);
 			view.setData(vehiculos);

@@ -9,8 +9,8 @@ import business_logic.TurnosController;
 import dto.temporal.AltaDeTurnoDTO;
 import dto.validators.StringValidator;
 import presentacion.views.supervisor.ConfiguracionView;
-import presentacion.views.supervisor.TurnoFormView;
-import presentacion.views.supervisor.TurnosPanelView;
+import presentacion.views.supervisor.FormTurno;
+import presentacion.views.supervisor.PanelTurnos;
 import presentacion.views.utils.ConfirmationDialog;
 import presentacion.views.utils.MessageDialog;
 
@@ -22,15 +22,15 @@ public class TurnosPresenter {
 
 	private static final String LIMITE_TURNOS = "No hay espacio disponible de Turnos para ese día";
 
-	private TurnosPanelView view;
+	private PanelTurnos view;
 
-	private TurnoFormView turnoForm = TurnoFormView.getInstance();
+	private FormTurno turnoForm = FormTurno.getInstance();
 	private ConfiguracionView configuracionForm = ConfiguracionView.getInstance();
 
 	private TurnosController controller;
 	private ConfiguradorCapacidadTurnosController configurador;
 
-	public TurnosPresenter(TurnosPanelView view, TurnosController controller,
+	public TurnosPresenter(PanelTurnos view, TurnosController controller,
 			ConfiguradorCapacidadTurnosController configController) {
 		this.view = view;
 		this.controller = controller;
@@ -50,8 +50,8 @@ public class TurnosPresenter {
 	}
 
 	private void onDisplayTurnosFormView(ActionEvent e) {
-		TurnoFormView.getInstance().clearData();
-		TurnoFormView.getInstance().display();
+		FormTurno.getInstance().clearData();
+		FormTurno.getInstance().display();
 	}
 
 	private void onDisplayConfiguracionFormView(ActionEvent e) {

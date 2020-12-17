@@ -3,11 +3,13 @@ package business_logic;
 import java.util.Date;
 import java.util.List;
 
+import business_logic.exceptions.ConflictException;
 import dto.CaracteristicaVehiculoDTO;
 import dto.CompraVehiculoDTO;
 import dto.GarantiaVehiculoDTO;
 import dto.VehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.temporal.AltaOrdenDeTrabajoDTO;
 import dto.temporal.CompraVehiculoUsadoDTO;
 import repositories.DaosFactory;
 import services.SessionServiceImpl;
@@ -29,6 +31,10 @@ public class VehiculosController {
 		return daos.makeVehiculoDao().readByID(idVehiculo);
 	}
 
+	public FichaTecnicaVehiculoDTO readByIdFichaTecnica(Integer idFicha) {
+		return daos.makeFichaTecnicaVehiculoDao().readByID(idFicha);
+	}
+	
 	public CaracteristicaVehiculoDTO readCaracteristicaVehiculoByIdVehiculo(Integer idVehiculo) {
 		VehiculoDTO vehiculo = daos.makeVehiculoDao().readByID(idVehiculo);
 		return daos.makeCaracteristicasVehiculoDao().readByID(vehiculo.getIdCaracteristicas());
@@ -155,5 +161,17 @@ public class VehiculosController {
 			return true;
 		}
 		return false;
+	}
+
+	public void updateKilometraje(FichaTecnicaVehiculoDTO ficha, AltaOrdenDeTrabajoDTO ordenDeTrabajo) {
+		FichaTecnicaVehiculoDTO target = daos.makeFichaTecnicaVehiculoDao().readByNroMotor(ficha.getNroMotor());
+		Integer antiguo = ficha.getKilometraje();
+		Integer actual = Integer.parseInt(ordenDeTrabajo.getKilometrajeActual());
+		if(ordenDeTrabajo.getTipoDeTrabajo().equals("Garantia")) {
+			if(actual <= antiguo) throw new ConflictException("El kilometraje debe ser mayor al registrado en la ficha tecnica");
+		} else {
+			if(actual < antiguo) throw new ConflictException("El kilometraje no debe ser menor al registrado en la ficha tecnica");
+		}
+		daos.makeFichaTecnicaVehiculoDao().updateKilometraje(target.getId(), actual);
 	}
 }

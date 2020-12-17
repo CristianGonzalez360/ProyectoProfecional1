@@ -13,7 +13,7 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	private static final String insert = "INSERT INTO Vehiculos(precioVenta,idFichaTecnica,marca,familia,linea,color,idCaracteristica,fechaIngreso,disponible,usado,idSucursal) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-	private static final String readByCriteria = "SELECT * FROM Vehiculos WHERE marca = ? AND usado = ?";
+	private static final String readByCriteria = "SELECT * FROM Vehiculos WHERE marca = ? AND usado = ? AND idVehiculo NOT IN (SELECT idVehiculo FROM VentasVehiculos)";
 
 	private static final String readById = "SELECT * FROM Vehiculos WHERE idVehiculo = ?";
 
@@ -29,6 +29,8 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	private static final String maximoId = "SELECT MAX(idVehiculo) FROM Vehiculos";
 	
 	private static final String updateIdFichaTecnica = "UPDATE Vehiculos SET idFichaTecnica = ? WHERE idVehiculo = ?";
+
+	private static final String readNuevosNoVendidos = readAll + " WHERE usado = false AND idVehiculo NOT IN (SELECT idVehiculo FROM VentasVehiculos)";
 
 	public VehiculoDaoImpl(Connection connection) {
 		super(connection);
@@ -71,7 +73,12 @@ public class VehiculoDaoImpl extends GenericJdbcDao<VehiculoDTO> implements Vehi
 	public List<VehiculoDTO> readAll() {
 		return getTemplate().query(readAll).excecute(getMapper());
 	}
-
+	
+	@Override
+	public List<VehiculoDTO> readNuevosNoVendidos() {
+		return getTemplate().query(readNuevosNoVendidos).excecute(getMapper());
+	}
+	
 	@Override
 	public List<String> readAllMarcasVehiculos() {
 		return getTemplate().query(readAllMarcas).excecute(new Mapper<String>() {

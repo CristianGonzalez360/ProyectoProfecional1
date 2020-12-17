@@ -75,8 +75,7 @@ public class PlanificarRepuestosFormView extends JPanel {
 
 		panelSuperior = new JPanel();
 		panelSuperior.setForeground(SystemColor.menu);
-		panelSuperior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Repuestos disponibles",
-				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelSuperior.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Repuestos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelSuperior.setBackground(SystemColor.menu);
 		add(panelSuperior);
 		panelSuperior.setLayout(new BorderLayout(0, 0));
@@ -140,8 +139,7 @@ public class PlanificarRepuestosFormView extends JPanel {
 		panel_2.add(btnAgregar);
 
 		panelInferior = new JPanel();
-		panelInferior.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Repuestos planificados",
-				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelInferior.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Repuestos planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelInferior.setBackground(SystemColor.menu);
 		add(panelInferior);
 		panelInferior.setLayout(new BorderLayout(0, 0));

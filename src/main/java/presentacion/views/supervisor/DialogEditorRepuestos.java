@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class EditorRepuestosDialog extends JDialog {
+public class DialogEditorRepuestos extends JDialog {
 
 	private static final long serialVersionUID = 4827100761114913193L;
 
@@ -31,13 +31,13 @@ public class EditorRepuestosDialog extends JDialog {
 	private JTextField tfPrecioCompra;
 	private JTextField tfPrecioVenta;
 
-	private static EditorRepuestosDialog instance;
+	private static DialogEditorRepuestos instance;
 	private JCheckBox checkBox;
 	private JPanel panel;
 	private JButton btnAceptar;
 	private JButton btnCancelar;
 
-	private EditorRepuestosDialog() {
+	private DialogEditorRepuestos() {
 		setBounds(100, 100, 350, 400);
 		setTitle("Editar Repuesto");
 		setResizable(false);
@@ -129,9 +129,9 @@ public class EditorRepuestosDialog extends JDialog {
 		setVisible(false);
 	}
 
-	public static EditorRepuestosDialog getInstance() {
+	public static DialogEditorRepuestos getInstance() {
 		if (instance == null)
-			instance = new EditorRepuestosDialog();
+			instance = new DialogEditorRepuestos();
 		return instance;
 	}
 
