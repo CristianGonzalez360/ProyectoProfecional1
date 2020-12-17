@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import dto.CompraRepuestoDTO;
+import dto.CompraVehiculoDTO;
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
 import dto.taller.FacturaDTO;
@@ -79,24 +81,24 @@ public class ReportesController {
 	public List<IngresosReport> readEgresos(Date desde ,Date hasta) {
 		List<IngresosReport> ingresosReport = new ArrayList<>();
 		Double sumaParcial = 0.00;
-		for (FacturaDTO facturaPaga : daos.makeFacturasDao().readByDates(desde,hasta)) {
+		for (CompraVehiculoDTO comprasVehiculo : daos.makeCompraVehiculosDao().readFechas(desde, hasta)){
 			IngresosReport ingreso = new IngresosReport();
 			ingreso.setFechaReporte(new Date());
 			ingreso.setDescripcion("Compra de usados");
-			ingreso.setFechaDePago(facturaPaga.getFechaDeCierrePorPago());
-			ingreso.setMontoTotal(facturaPaga.getTotal());
-			ingreso.setId(facturaPaga.getIdFactura());
+			ingreso.setFechaDePago(comprasVehiculo.getFechaCompra());
+			ingreso.setMontoTotal(comprasVehiculo.getPrecioCompra());
+			ingreso.setId(comprasVehiculo.getIdCompraVehiculo());
 			
 			ingresosReport.add(ingreso);
 		}
 		
-		for (VentaVehiculoDTO ventas : daos.makeVentaVehiculoDao().readFechas(desde, hasta)){			
+		for (CompraRepuestoDTO compraRepuesto : daos.makeCompraRepuestosDao().readFechas(desde, hasta)){			
 			IngresosReport ingreso = new IngresosReport();
 			ingreso.setFechaReporte(new Date());
 			ingreso.setDescripcion("Compra de Repuestos");
-			ingreso.setFechaDePago(ventas.getFechaVentaVN());
-			ingreso.setMontoTotal(ventas.getPrecioVenta());
-			ingreso.setId(ventas.getIdVentaVehiculo());
+			ingreso.setFechaDePago(compraRepuesto.getFechaCompra());
+			ingreso.setMontoTotal(compraRepuesto.getPrecioCompra());
+			ingreso.setId(compraRepuesto.getCodigoRepuesto());
 			ingresosReport.add(ingreso);
 		}
 		
