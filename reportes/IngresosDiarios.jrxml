@@ -112,14 +112,14 @@
 		<groupFooter>
 			<band height="43">
 				<textField>
-					<reportElement mode="Opaque" x="440" y="0" width="114" height="20" forecolor="#363E5B" backcolor="#FED54F" uuid="61d26fe2-7668-4ead-8dd9-a4b193b66132"/>
+					<reportElement mode="Opaque" x="480" y="0" width="74" height="20" forecolor="#363E5B" backcolor="#FED54F" uuid="61d26fe2-7668-4ead-8dd9-a4b193b66132"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement positionType="FixRelativeToBottom" x="390" y="0" width="50" height="20" uuid="6233dc32-9605-4056-b4eb-d3de0bdf8ba6"/>
+					<reportElement positionType="FixRelativeToBottom" x="430" y="0" width="50" height="20" uuid="6233dc32-9605-4056-b4eb-d3de0bdf8ba6"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
