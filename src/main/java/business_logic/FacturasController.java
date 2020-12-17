@@ -19,7 +19,7 @@ import repositories.OrdenesDeTrabajoDao;
 import repositories.PresupuestosDao;
 import repositories.RepuestosPlanificadosDao;
 import repositories.TrabajosPresupuestadosDao;
-import repositories.VehiculosConOrdenDeTrabajoDao;
+import repositories.IngresoOrdenDeTrabajoDao;
 import services.SessionServiceImpl;
 
 public class FacturasController {
@@ -34,7 +34,7 @@ public class FacturasController {
 
 	private OrdenesDeTrabajoDao ordenTrabajoDao;
 	private FichaTecnicaVehiculoDao fichaTecnicaDao;
-	private VehiculosConOrdenDeTrabajoDao vehiculoConOrdenTrabajoDao;
+	private IngresoOrdenDeTrabajoDao vehiculoConOrdenTrabajoDao;
 
 	public FacturasController(DaosFactory daos) {
 		this.facturaDao = daos.makeFacturasDao();

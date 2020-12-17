@@ -10,17 +10,17 @@ import dto.taller.IngresoOrdenDeTrabajoDTO;
 import dto.temporal.AltaDeVehiculoDTO;
 import repositories.FichaTecnicaVehiculoDao;
 import repositories.OrdenesDeTrabajoDao;
-import repositories.VehiculosConOrdenDeTrabajoDao;
+import repositories.IngresoOrdenDeTrabajoDao;
 
 public class VehiculosConOrdenDeTrabajoController {
 
-	private VehiculosConOrdenDeTrabajoDao vehiculosDao;
+	private IngresoOrdenDeTrabajoDao vehiculosDao;
 
 	private FichaTecnicaVehiculoDao fichasDao;
 
 	private OrdenesDeTrabajoDao otDao;
 
-	public VehiculosConOrdenDeTrabajoController(VehiculosConOrdenDeTrabajoDao vehiculosDao, OrdenesDeTrabajoDao otDao,
+	public VehiculosConOrdenDeTrabajoController(IngresoOrdenDeTrabajoDao vehiculosDao, OrdenesDeTrabajoDao otDao,
 			FichaTecnicaVehiculoDao fichasDao) {
 		assert vehiculosDao != null;
 		assert fichasDao != null;
