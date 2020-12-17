@@ -116,4 +116,8 @@ public class AdminControlView extends JInternalFrame {
 	public PanelConfiguracionGeneral getPanelConfiguracion() {
 		return this.panelConfiguracion;
 	}
+
+	public void setActionRegistrarSucursal(ActionListener listener) {
+		panelSucursales.setActionRegistrarSucursal(listener);
+	}
 }

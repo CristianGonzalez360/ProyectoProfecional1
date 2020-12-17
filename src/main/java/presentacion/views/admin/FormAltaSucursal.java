@@ -34,8 +34,6 @@ public class FormAltaSucursal extends JDialog {
 
 	private JComboBox<String> comboBoxPais;
 
-	private JComboBox<String> comboBoxMoneda;
-
 	private JButton okButton;
 
 	private JButton cancelButton;
@@ -47,7 +45,7 @@ public class FormAltaSucursal extends JDialog {
 		setModal(true);
 		setResizable(false);
 		setTitle("Form alta de sucursal");
-		setBounds(100, 100, 294, 220);
+		setBounds(100, 100, 294, 186);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -57,8 +55,6 @@ public class FormAltaSucursal extends JDialog {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -76,38 +72,30 @@ public class FormAltaSucursal extends JDialog {
 			contentPanel.add(comboBoxPais, "4, 2, fill, default");
 		}
 		{
-			JLabel lblNewLabel_4 = new JLabel("Moneda");
-			contentPanel.add(lblNewLabel_4, "2, 4, left, default");
-		}
-		{
-			comboBoxMoneda = new JComboBox<String>();
-			contentPanel.add(comboBoxMoneda, "4, 4, fill, default");
-		}
-		{
 			JLabel lblNewLabel_1 = new JLabel("Calle");
-			contentPanel.add(lblNewLabel_1, "2, 6, left, default");
+			contentPanel.add(lblNewLabel_1, "2, 4, left, default");
 		}
 		{
 			textCalle = new JTextField();
-			contentPanel.add(textCalle, "4, 6, fill, default");
+			contentPanel.add(textCalle, "4, 4, fill, default");
 			textCalle.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("Altura");
-			contentPanel.add(lblNewLabel_2, "2, 8, left, default");
+			contentPanel.add(lblNewLabel_2, "2, 6, left, default");
 		}
 		{
 			textAltura = new JTextField();
-			contentPanel.add(textAltura, "4, 8, fill, default");
+			contentPanel.add(textAltura, "4, 6, fill, default");
 			textAltura.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_3 = new JLabel("Localidad");
-			contentPanel.add(lblNewLabel_3, "2, 10, left, default");
+			contentPanel.add(lblNewLabel_3, "2, 8, left, default");
 		}
 		{
 			textLocalidad = new JTextField();
-			contentPanel.add(textLocalidad, "4, 10, fill, default");
+			contentPanel.add(textLocalidad, "4, 8, fill, default");
 			textLocalidad.setColumns(10);
 		}
 		{
@@ -126,8 +114,6 @@ public class FormAltaSucursal extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		
-		clearData();
 	}
 
 	public static FormAltaSucursal getInstance() {
@@ -137,7 +123,6 @@ public class FormAltaSucursal extends JDialog {
 	
 	public void clearData() {
 		comboBoxPais.removeAllItems();
-		comboBoxMoneda.removeAllItems();
 		textAltura.setText("");
 		textCalle.setText("");
 		textLocalidad.setText("");
@@ -149,16 +134,11 @@ public class FormAltaSucursal extends JDialog {
 		dto.setCalle(textCalle.getText());
 		dto.setLocalidad(textLocalidad.getText());
 		dto.setPais(comboBoxPais.getSelectedItem() == null ? "" : comboBoxPais.getSelectedItem().toString());
-		dto.setMoneda(comboBoxMoneda.getSelectedItem() == null ? "" : comboBoxMoneda.getSelectedItem().toString());
 		return dto;
 	}
 	
 	public void setDataPaises(List<String> paises) {
 		for(String pais: paises) this.comboBoxPais.addItem(pais);
-	}
-	
-	public void setDataMonedas(List<String> monedas) {
-		for(String moneda: monedas) this.comboBoxMoneda.addItem(moneda);
 	}
 	
 	public void setActionOk(ActionListener listener) {
@@ -167,5 +147,17 @@ public class FormAltaSucursal extends JDialog {
 	
 	public void setActionCancel(ActionListener listener) {
 		this.cancelButton.addActionListener(listener);
+	}
+
+	public void onDisplay() {
+		this.setVisible(true);
+	}
+	
+	public void close() {
+		this.dispose();
+	}
+
+	public void setactionOnSelectPais(ActionListener listener) {
+		this.comboBoxPais.addActionListener(listener);
 	}
 }
