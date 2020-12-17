@@ -224,6 +224,7 @@ CREATE TABLE RepuestosPlanificados (
   idRepuesto INT NOT NULL,
   cantRequerida INT,
   precio DOUBLE,
+  garantia BOOLEAN,
   PRIMARY KEY (idRepuestoPlanificado),
   FOREIGN KEY (idPresu) REFERENCES Presupuestos (idPresupuesto),
   FOREIGN KEY (idRepuesto) REFERENCES Repuestos (idRepuesto)

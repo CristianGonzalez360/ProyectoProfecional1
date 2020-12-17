@@ -390,7 +390,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		for (RepuestoPlanificadoDTO r : repuestos) {
 			Object[] row = { r.getRepuesto().getCodigoRepuesto(), r.getRepuesto().getMarcaRepuesto(),
 					r.getRepuesto().getDescripcionRepuesto(), r.getRepuesto().getPrecioRepuesto(), r.getCantRequerida(),
-					r.getRepuesto().isGarantia() };
+					r.isGarantia() };
 			this.listadoDeRepuestosModel.addRow(row);
 		}
 	}
