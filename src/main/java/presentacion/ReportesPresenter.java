@@ -84,10 +84,20 @@ public class ReportesPresenter {
 		reporte.setDataIngresos(ingresos);
 		reporte.open();
 	}
-
+	//TODO en este metodo en lugar de recolectarse en la lista de ingresosReport facturas y ventas de vehiculos se 
+	//se buscaran compras de autos y compras de repuestos
 	private void generarReporteEgresos() {
-		// reportesController
-		System.out.println("Generar Reporte");
+		Date fechaDesde = reporteIngresoDiarioInputFormView.getFechaDesde();
+		Date fechaHasta = reporteIngresoDiarioInputFormView.getFechaHasta();
+		
+		if (fechaDesde == null || fechaHasta == null)
+			return;
+
+		ReporteViewImpl reporte = new ReporteViewImpl();
+		List<IngresosReport> ingresos = reportesController.readEgresos(fechaDesde, fechaHasta);
+		System.out.println(ingresos.toString());
+		reporte.setDataIngresos(ingresos);
+		reporte.open();
 	}
 
 }
