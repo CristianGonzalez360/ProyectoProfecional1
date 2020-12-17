@@ -14,7 +14,7 @@ import dto.UsuarioDTO;
 
 import javax.swing.BoxLayout;
 
-public class FormAltaUsuarioView extends JDialog {
+public class FormAltaUsuario extends JDialog {
 
 	private static final long serialVersionUID = -5572151219348301926L;
 
@@ -26,15 +26,15 @@ public class FormAltaUsuarioView extends JDialog {
 
 	private JButton cancelButton;
 
-	private static FormAltaUsuarioView instance;
+	private static FormAltaUsuario instance;
 
-	public static FormAltaUsuarioView getInstance() {
+	public static FormAltaUsuario getInstance() {
 		if (instance == null)
-			instance = new FormAltaUsuarioView();
+			instance = new FormAltaUsuario();
 		return instance;
 	}
 
-	private FormAltaUsuarioView() {
+	private FormAltaUsuario() {
 		setTitle("Form de alta de usuario");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 379, 602);

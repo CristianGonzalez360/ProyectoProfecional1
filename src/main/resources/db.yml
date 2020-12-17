@@ -343,14 +343,17 @@ repuestosPlanificados:
     idPresu: 1
     cantRequerida: 24
     precio: 126
+    garantia : true
   - idRepuesto: 3
     idPresu: 1
     cantRequerida: 14
     precio: 1523
+    garantia : false
   - idRepuesto: 2
     idPresu: 2
     cantRequerida: 5
     precio: 876
+    garantia : false
 
 facturas:
   - idFactura: 1
@@ -457,7 +460,7 @@ vehiculos:
     linea: vip
     color: rojo
     fechaIngreso: 2018-10-11
-    disponible: false
+    disponible: true
     usado: true
     idCaracteristicas: 1
     idSucursal: 1 
@@ -481,13 +484,13 @@ garantias:
     kilometrajeInicialDelVehiculo: 0
     kilometrajeGarantizado: 90000
     fechaInicioDeLaGarantia: 
-    fechaDeCaducidadDeLaGarantia: 
+    fechaDeCaducidadDeLaGarantia: 2022-10-11 
     costoFinalConIVA: 10000
   - idVehiculo: 2
     aniosDeGarantia: 3
     kilometrajeInicialDelVehiculo: 0
     kilometrajeGarantizado: 150000
     fechaInicioDeLaGarantia: 
-    fechaDeCaducidadDeLaGarantia: 
+    fechaDeCaducidadDeLaGarantia: 2018-10-11
     costoFinalConIVA: 32000
  

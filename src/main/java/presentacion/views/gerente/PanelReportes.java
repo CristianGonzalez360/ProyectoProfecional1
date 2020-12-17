@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -150,28 +151,28 @@ public class PanelReportes extends JPanel {
 		add(panelInferior, BorderLayout.SOUTH);
 	}
 
-	public JDateChooser getFechaIngresoDesde() {
-		return fechaIngresoDesde;
+	public Date getFechaIngresoDesde() {
+		return fechaIngresoDesde.getDate();
 	}
 
-	public JDateChooser getFechaIngresoHasta() {
-		return fechaIngresoHasta;
+	public Date getFechaIngresoHasta() {
+		return fechaIngresoHasta.getDate();
 	}
 
-	public JDateChooser getFechaEgresoDesde() {
-		return fechaEgresoDesde;
+	public Date getFechaEgresoDesde() {
+		return fechaEgresoDesde.getDate();
 	}
 
-	public JDateChooser getFechaEgresoHasta() {
-		return fechaEgresoHasta;
+	public Date getFechaEgresoHasta() {
+		return fechaEgresoHasta.getDate();
 	}
 
-	public JDateChooser getFechaVentasDesde() {
-		return fechaVentasDesde;
+	public Date getFechaVentasDesde() {
+		return fechaVentasDesde.getDate();
 	}
 
-	public JDateChooser getFechaVentasHasta() {
-		return fechaVentasHasta;
+	public Date getFechaVentasHasta() {
+		return fechaVentasHasta.getDate();
 	}
 
 	public void setActionReporteIngresos(ActionListener listener) {

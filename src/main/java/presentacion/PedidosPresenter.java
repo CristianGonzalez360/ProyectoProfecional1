@@ -2,12 +2,12 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
-
 import business_logic.PedidosController;
 import business_logic.VehiculosController;
 import dto.PedidoVehiculoDTO;
 import dto.VehiculoDTO;
 import dto.VentaVehiculoDTO;
+import dto.taller.AltaFichaNuevaDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import presentacion.views.gerente.PedidosPanelView;
 import presentacion.views.gerente.FichaTecnicaFormView;
@@ -15,8 +15,6 @@ import presentacion.views.utils.MessageDialog;
 import services.SessionServiceImpl;
 
 public class PedidosPresenter {
-
-	private static final String CONFIRMATION = "¿Está seguro que desea registrar el pedido?";
 
 	private PedidosPanelView view;
 	private PedidosController controller;
@@ -44,50 +42,63 @@ public class PedidosPresenter {
 		Integer idFila = view.getIdSelectedRow();
 		
 		if (puedoRegistrarIngreso(idFila)) {
-			this.fichaFormDisplay();//va aca
+			this.fichaFormDisplay();
 		}
 	}
 
 	private boolean puedoRegistrarIngreso(Integer idFila) {
-		return hayFilaSeleccionada(idFila);//&& new ConfirmationDialog(CONFIRMATION).open() == 0
+		return hayFilaSeleccionada(idFila);
 	}
 
 	private boolean hayFilaSeleccionada(Integer idFila) {
 		return (idFila != -1);
 	}
 	
-	private void onRegistrarNuevaFicha(ActionEvent a) {//guarda ficha tecnica con 
-		FichaTecnicaVehiculoDTO fichaNueva = formNuevaFicha.getData();
+	private void onRegistrarNuevaFicha(ActionEvent a) {
+				
 		Integer idUsuario = SessionServiceImpl.getInstance().getActiveSession().getIdUsuario();
 		Integer idPedido = view.getIdSelectedPedido();
-
-		if(isNroMotorNuevo(fichaNueva.getNroMotor())) {
-			if(isNroChasisNuevo(fichaNueva.getNroChasis())) {//todo Ok
+		
+		AltaFichaNuevaDTO altaFicha = formNuevaFicha.getAltaFichaNueva();
+		List<String> errors = altaFicha.validateNuevaFicha();
+		
+		if (errors.isEmpty()) {
 			
-				PedidoVehiculoDTO pedido = controller.readPedidoById(idPedido);//obtengo el pedido, necesito el idventa
-				VentaVehiculoDTO venta = controller.readByVentaId(pedido.getIdVentaVehiculo());
-				VehiculoDTO vehiculo = controller.readByVehiculoId(venta.getIdVehiculo());
-				vehiculo.setIdFichaTecnica(vehiculo.getIdFichaTecnica());
-				vehiculo.setIdFichaTecnica(vehiculosController.guardarFichaTecnicaNueva(formNuevaFicha.getData()));
-				controller.updateIdFichaTecnicaDeVehiculo(vehiculo);
-
-				if (controller.registrarIngresoPedidoById(idPedido, idUsuario)) {
-					
-					new MessageDialog().showMessages("Vehiculo ingresado!");
-					formNuevaFicha.close();
-				} else
-					new MessageDialog().showMessages("No se puedo registrar el ingreso del Vehiculo!");
+			FichaTecnicaVehiculoDTO fichaNueva = formNuevaFicha.getData();
+			
+			if(isNroMotorNuevo(fichaNueva.getNroMotor())) {
 				
+				if(isNroChasisNuevo(fichaNueva.getNroChasis())) {
+					
+					PedidoVehiculoDTO pedido = controller.readPedidoById(idPedido);
+					VentaVehiculoDTO venta = controller.readByVentaId(pedido.getIdVentaVehiculo());
+					VehiculoDTO vehiculo = controller.readByVehiculoId(venta.getIdVehiculo());
+					vehiculo.setIdFichaTecnica(vehiculo.getIdFichaTecnica());
+					vehiculo.setIdFichaTecnica(vehiculosController.guardarFichaTecnicaNueva(formNuevaFicha.getData()));
+					controller.updateIdFichaTecnicaDeVehiculo(vehiculo);
+	
+					if (controller.registrarIngresoPedidoById(idPedido, idUsuario)) {
+						
+						formNuevaFicha.close();
+						onBuscar(a);
+						new MessageDialog().showMessages("Vehiculo ingresado!");
+					} else
+						new MessageDialog().showMessages("No se puedo registrar el ingreso del Vehiculo!");
+
+				} else {
+					new MessageDialog().showMessages("El numero de chasis no esta disponible");
+				}
 			} else {
-				new MessageDialog().showMessages("El numero de chasis no esta disponible");
+				new MessageDialog().showMessages("El numero de motor no esta disponible");
 			}
 		} else {
-			new MessageDialog().showMessages("El numero de motor no esta disponible");
+			new MessageDialog().showMessages(errors);
 		}
 	}
 
 	private boolean isNroMotorNuevo(Integer nroMotor) {
-		if (vehiculosController.isNroMotorExistente(nroMotor) == true) {// hay un nro motor existente																		
+		
+		if (vehiculosController.isNroMotorExistente(nroMotor) == true) {																	
 			return false;
 		}
 		return true;
@@ -105,6 +116,7 @@ public class PedidosPresenter {
 	}
 	
 	private void fichaFormDisplay() {
+		
 		formNuevaFicha.clearData();
 		formNuevaFicha.display();
 	}

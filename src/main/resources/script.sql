@@ -224,6 +224,7 @@ CREATE TABLE RepuestosPlanificados (
   idRepuesto INT NOT NULL,
   cantRequerida INT,
   precio DOUBLE,
+  garantia BOOLEAN,
   PRIMARY KEY (idRepuestoPlanificado),
   FOREIGN KEY (idPresu) REFERENCES Presupuestos (idPresupuesto),
   FOREIGN KEY (idRepuesto) REFERENCES Repuestos (idRepuesto)
@@ -256,9 +257,8 @@ CREATE TABLE Sucursal (
   calle VARCHAR(25) NOT NULL,
   altura INT NOT NULL,
   localidad VARCHAR(25) NOT NULL,
-  idMoneda INT NOT NULL,
-  PRIMARY KEY (idSucursal),
-  FOREIGN KEY (idMoneda) REFERENCES Moneda(idMoneda)
+  idMoneda INT,
+  PRIMARY KEY (idSucursal)
 );
 
 DROP TABLE CaracteristicasVehiculo IF exists;
@@ -397,3 +397,15 @@ CREATE TABLE GarantiasVehiculos(
 	PRIMARY KEY(idGarantia),
 	FOREIGN KEY(idVehiculo) REFERENCES Vehiculos(idVehiculo)
 );
+
+DROP TABLE CompraRepuesto IF EXISTS;
+CREATE TABLE CompraRepuesto(
+	idCompra INT NOT NULL AUTO_INCREMENT,
+	codigoRepuesto INT NOT NULL,
+	precioCompra DOUBLE NOT NULL,
+	fechaCompra DATE,
+	cantidad INT,
+	PRIMARY KEY(idCompra),
+);
+
+

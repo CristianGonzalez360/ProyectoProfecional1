@@ -2,6 +2,7 @@ package business_logic;
 
 import java.util.List;
 
+import dto.CompraRepuestoDTO;
 import dto.taller.RepuestoDTO;
 import repositories.RepuestosDao;
 
@@ -60,5 +61,9 @@ public class RepuestosController {
 
 	public List<RepuestoDTO> readRepuestosSinStock() {
 		return dao.readRepuestosSinStock();
+	}
+	
+	public void registrarCompra(CompraRepuestoDTO compra) {
+		dao.registrarCompra(compra);
 	}
 }
