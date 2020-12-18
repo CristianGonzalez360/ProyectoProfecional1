@@ -6,7 +6,6 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import dto.MonedaDTO;
-
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -70,5 +69,13 @@ public class PanelDataMoneda extends JPanel {
 		this.textCotizacion.setText(moneda.getCotizacionDolar().toString());
 		this.textNombre.setText(moneda.getNombre());
 		this.textSimbolo.setText(moneda.getSimbolo());
+	}
+
+	public MonedaDTO getData() {
+		MonedaDTO ret = new MonedaDTO();
+		ret.setNombre(this.textNombre.getText());
+		ret.setSimbolo(this.textSimbolo.getText());
+		ret.setCotizacion(this.textCotizacion.getText());
+		return ret;
 	}
 }

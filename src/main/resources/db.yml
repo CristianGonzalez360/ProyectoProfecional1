@@ -429,31 +429,40 @@ caracteristicaVehiculo:
     precio: 1000500
 
 monedas:
-  - nombre: peso
+  - nombre: peso arg
     simbolo: $
     cotizacionDolar: 200
+  - nombre: guarani
+    simbolo: $
+    cotizacionDolar: 1500
+  - nombre: peso uru
+    simbolo: $
+    cotizacionDolar: 80
+  - nombre: peso chi
+    simbolo: $
+    cotizacionDolar: 50
 
 sucursales:
   - pais: Argentina
-    calle: ff
+    calle: Sucre
     altura: 1233
     localidad: Avellaneda
     idMoneda: 1
-  - pais: Argentina
-    calle: ff
-    altura: 1233
-    localidad: Martinez
-    idMoneda: 1
-  - pais: Argentina
-    calle: ff
-    altura: 1233
-    localidad: Quilmes
-    idMoneda: 1
-  - pais: Argentina
-    calle: ff
-    altura: 1233
-    localidad: Munro
-    idMoneda: 1
+  - pais: Chile
+    calle: Gral. Pinochet
+    altura: 657
+    localidad: Recoleta
+    idMoneda: 4
+  - pais: Uruguay
+    calle: Susana Gimenez street
+    altura: 4329
+    localidad: Punta del Este
+    idMoneda: 3
+  - pais: Paraguay
+    calle: Rancho alto
+    altura: 1798
+    localidad: Asuncion
+    idMoneda: 2
 
 vehiculos:
 #CATALOGO DE VEHICULOS USADOS
