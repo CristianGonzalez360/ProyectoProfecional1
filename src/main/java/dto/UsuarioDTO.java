@@ -76,10 +76,10 @@ public class UsuarioDTO {
 	public static UsuarioDTO makeTestDTO() {
 		DatosPersonalesDTO datos = new DatosPersonalesDTO();
 		datos.setId(2);
-		datos.setNombreCompleto("u001");
+		datos.setNombreCompleto("u066 user");
 		datos.setDni(2233);
 		datos.setTelefono("1111");
-		datos.setEmail("u001@mail.com");
+		datos.setEmail("u006@mail.com");
 		datos.setCalle("calle");
 		datos.setAltura("2");
 		datos.setPiso("1");

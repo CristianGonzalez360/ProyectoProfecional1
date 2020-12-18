@@ -20,6 +20,7 @@ public class PanelConfiguracionGeneral extends JPanel {
 	private JButton btnConfigurarDb;
 
 	private JButton btnNewButton_1;
+	private JButton btnSeedDB;
 
 	public PanelConfiguracionGeneral() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -32,6 +33,9 @@ public class PanelConfiguracionGeneral extends JPanel {
 
 		JPanel panelOpciones = new JPanel();
 		add(panelOpciones);
+		
+		btnSeedDB = new JButton("Seed DB");
+		panelOpciones.add(btnSeedDB);
 
 		btnConfigurarDb = new JButton("Configurar DB");
 		panelOpciones.add(btnConfigurarDb);
@@ -57,5 +61,9 @@ public class PanelConfiguracionGeneral extends JPanel {
 
 	public void setData(ConfigSmtpServerDTO dto) {
 		this.panelSmtp.setData(dto);
+	}
+	
+	public void setActionSeedDB(ActionListener listener) {
+		this.btnSeedDB.addActionListener(listener);
 	}
 }

@@ -14,32 +14,24 @@ public class ConfiguradorBaseDeDatosController {
 	public ConfiguradorBaseDeDatosController() {
 	}
 
-	public void save(ConfigDatabaseDTO dto) {
+	public void save(ConfigDatabaseDTO dto) throws IOException {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("user", dto.getUser());
 		map.put("password", dto.getPassword());
 		map.put("port", dto.getPort());
 		map.put("ip", dto.getIp());
 		PropertiesServiceImpl service = new PropertiesServiceImpl(file);
-		try {
-			service.updateValues(map);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		service.updateValues(map);
 	}
 
-	public ConfigDatabaseDTO read() {
+	public ConfigDatabaseDTO read() throws IOException {
 		ConfigDatabaseDTO dto = new ConfigDatabaseDTO();
 		PropertiesServiceImpl service = new PropertiesServiceImpl(file);
-		try {
-			Map<String, String> map = service.read();
-			dto.setUser(map.get("user"));
-			dto.setPassword(map.get("password"));
-			dto.setIp(map.get("ip"));
-			dto.setPort(map.get("port"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Map<String, String> map = service.read();
+		dto.setUser(map.get("user"));
+		dto.setPassword(map.get("password"));
+		dto.setIp(map.get("ip"));
+		dto.setPort(map.get("port"));
 		return dto;
 	}
 }
