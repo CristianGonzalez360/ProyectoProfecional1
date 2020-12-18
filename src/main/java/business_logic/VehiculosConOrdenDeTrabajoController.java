@@ -83,4 +83,12 @@ public class VehiculosConOrdenDeTrabajoController {
 	public IngresoOrdenDeTrabajoDTO readById(Integer idVehiculo) {
 		return vehiculosDao.readByID(idVehiculo);
 	}
+	
+	public List<IngresoOrdenDeTrabajoDTO> readAllIngresoOrdenTrabajo() {
+		return vehiculosDao.readAll();
+	}
+	
+	public boolean updateVehiculoIngresado (IngresoOrdenDeTrabajoDTO entity) {
+		return vehiculosDao.updateById(entity);
+	}
 }

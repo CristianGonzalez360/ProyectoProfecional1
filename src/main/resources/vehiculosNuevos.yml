@@ -91,7 +91,7 @@ caracteristicas:
 fichaTecnica:
   - nroChasis: 66611
     nroMotor: 2255166
-    kilometraje: 22222
+    kilometraje: 0
     marca: suzuki
     modelo: 1993
     color: rojo
@@ -100,7 +100,7 @@ fichaTecnica:
     patente: 123abc
   - nroChasis: 6667
     nroMotor: 225432
-    kilometraje: 22222
+    kilometraje: 0
     marca: suzuki
     modelo: 1993
     color: rojo
@@ -109,7 +109,7 @@ fichaTecnica:
     patente: 123abc
   - nroChasis: 6668
     nroMotor: 2252352
-    kilometraje: 22222
+    kilometraje: 0
     marca: suzuki
     modelo: 1993
     color: rojo
@@ -118,7 +118,7 @@ fichaTecnica:
     patente: 123abc
   - nroChasis: 6669
     nroMotor: 22553252
-    kilometraje: 22222
+    kilometraje: 0
     marca: suzuki
     modelo: 1993
     color: rojo

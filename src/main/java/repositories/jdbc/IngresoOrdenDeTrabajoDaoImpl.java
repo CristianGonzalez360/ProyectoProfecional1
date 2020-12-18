@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import dto.taller.IngresoOrdenDeTrabajoDTO;
+import dto.taller.TrabajoPresupuestadoDTO;
 import repositories.IngresoOrdenDeTrabajoDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
@@ -20,6 +21,8 @@ public class IngresoOrdenDeTrabajoDaoImpl extends GenericJdbcDao<IngresoOrdenDeT
 	private static final String readByClienteId = readAll + " " + "WHERE idCliente = ?";
 
 	private static final String readAllId = "SELECT * FROM VehiculoConOrdenesDeTrabajo WHERE idVehiculoConOT = ?";
+	
+	private static final String updateById = "UPDATE VehiculoConOrdenesDeTrabajo SET aseguradora = ? , nroPolizaSeguro = ? , kilometrajeGarantia = ? WHERE idCliente = ? AND idVehiculo = ?";//"UPDATE TrabajosPresupuestados SET descripcionTrabajo = ?, precioTrabajo = ?, tiempoEstTrabajo = ? WHERE idTrabajoPresu = ?";
 
 	public IngresoOrdenDeTrabajoDaoImpl(Connection connection) {
 		super(connection);
@@ -88,5 +91,11 @@ public class IngresoOrdenDeTrabajoDaoImpl extends GenericJdbcDao<IngresoOrdenDeT
 				return dto;
 			}
 		};
+	}
+	
+	@Override
+	public boolean updateById(IngresoOrdenDeTrabajoDTO entity) {
+		return getTemplate().query(updateById).param(entity.getAseguradora()).param(entity.getNroPolizaSeguro())
+				.param(entity.getKilometrajeGarantia()).param(entity.getIdCliente()).param(entity.getIdVehiculo()).excecute();
 	}
 }

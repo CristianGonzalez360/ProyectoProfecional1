@@ -9,4 +9,6 @@ public interface IngresoOrdenDeTrabajoDao extends GenericDao<IngresoOrdenDeTraba
 	List<IngresoOrdenDeTrabajoDTO> readByClienteId(Integer idCliente);
 
 	IngresoOrdenDeTrabajoDTO readByPatente(String patente);
+
+	boolean updateById(IngresoOrdenDeTrabajoDTO entity);
 }

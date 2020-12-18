@@ -116,8 +116,13 @@ public class PedidosPresenter {
 	}
 	
 	private void fichaFormDisplay() {
-		
+		Integer idPedido = view.getIdSelectedPedido();
+		PedidoVehiculoDTO pedido = controller.readPedidoById(idPedido);
+		VentaVehiculoDTO venta = controller.readByVentaId(pedido.getIdVentaVehiculo());
+		VehiculoDTO vehiculo = controller.readByVehiculoId(venta.getIdVehiculo());
+
 		formNuevaFicha.clearData();
+		formNuevaFicha.setData(vehiculo);
 		formNuevaFicha.display();
 	}
 }
