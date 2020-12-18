@@ -146,7 +146,10 @@ public class VendedorControlPresenter {
 
 	private void onConsultarCliente(ActionEvent e) {
 		String dniBuscado = view.getData();
-		if (!dniBuscado.trim().isEmpty() && dniBuscado != null) {
+		
+		if(dniBuscado == null || dniBuscado.trim().isEmpty())
+			view.clearDataCliente();
+		else {
 			boolean esDniConFormatoCorrecto = new StringValidator(dniBuscado).number("").validate().isEmpty();
 			if (esDniConFormatoCorrecto) {
 				Integer dniCliente = Integer.parseInt(dniBuscado);
@@ -155,6 +158,8 @@ public class VendedorControlPresenter {
 				if (cliente != null) {
 					view.setData(cliente);
 				}
+			}else {
+				view.clearDataCliente();
 			}
 		}
 	}

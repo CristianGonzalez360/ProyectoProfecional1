@@ -29,6 +29,7 @@ public class ReporteViewImpl {
 	private static final String URLReporteVentas = "ReporteVentas.jasper";
 	private static final String URLReporteIngresos = "IngresosDiarios.jasper";
 	private static final String URLReporteHistorialDeTrabajos = "HistorialDeVehiculo.jasper";
+	private static final String URLReporteEgresos = "EgresosDiarios.jasper";
 
 	
 	private JasperReport reporte;
@@ -99,6 +100,11 @@ public class ReporteViewImpl {
 	
 	public void setDataIngresos(List<IngresosReport> ingresos) {
 		this.file = URLReporteIngresos;
+		setData(ingresos);
+	}
+	
+	public void setDataEgresos(List<IngresosReport> ingresos) {
+		this.file = URLReporteEgresos;
 		setData(ingresos);
 	}
 

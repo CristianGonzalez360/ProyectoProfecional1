@@ -200,6 +200,7 @@ public class CarritoPresenter {
 		}
 		if (clienteFactura != null && precioTotal > .00 && !repuestos.isEmpty()) {
 			FacturaDTO facturaCarrito = new FacturaDTO();
+			facturaCarrito.setDescripcion("Venta de Repuestos");
 			facturaCarrito.setCliente(clienteFactura);
 			facturaCarrito.setRepuestosComprados(repuestos);
 			facturaCarrito.setTotal(precioTotal);

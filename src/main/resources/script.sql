@@ -118,13 +118,14 @@ CREATE TABLE Facturas (
   idOT INT,
   fechaDeAlta DATE,
   fechaDeCierrePorPago DATE,
-  PRIMARY KEY(idFactura),
   total DOUBLE,
   estado VARCHAR(10),
-   FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo(idOT),
-   FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente),
   dni INT,
   idCliente INT,
+  descripcion VARCHAR(20),
+  PRIMARY KEY(idFactura),
+  FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo(idOT),
+  FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente),
   FOREIGN KEY (dni) REFERENCES DatosPersonales(dni)
 );
 

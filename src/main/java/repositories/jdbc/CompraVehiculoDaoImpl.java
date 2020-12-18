@@ -1,9 +1,12 @@
 package repositories.jdbc;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 
 import dto.CompraVehiculoDTO;
+import dto.VentaVehiculoDTO;
+import dto.taller.FacturaDTO;
 import repositories.CompraVehiculoDao;
 import repositories.jdbc.utils.Mapper;
 
@@ -11,6 +14,9 @@ public class CompraVehiculoDaoImpl extends GenericJdbcDao<CompraVehiculoDTO> imp
 
 	private static final String INSERT = "INSERT INTO CompraVehiculo(idVehiculo, precioCompra, fechaCompra, idUsuCompra) VALUES (?,?,?,?)";
 
+	private static final String readFechas = "SELECT * FROM CompraVehiculo where fechaCompra BETWEEN ? and ?";
+
+	
 	public CompraVehiculoDaoImpl(Connection connection) {
 		super(connection);
 		// TODO Auto-generated constructor stub
@@ -48,8 +54,23 @@ public class CompraVehiculoDaoImpl extends GenericJdbcDao<CompraVehiculoDTO> imp
 
 	@Override
 	protected Mapper<CompraVehiculoDTO> getMapper() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Mapper<CompraVehiculoDTO>() {
+
+			@Override
+			public CompraVehiculoDTO map(Object[] obj) {
+				CompraVehiculoDTO compraVehiculo = new CompraVehiculoDTO();
+				compraVehiculo.setIdCompraVehiculo((Integer) obj[0]);
+				compraVehiculo.setIdVehiculo((Integer) obj[1]);
+				compraVehiculo.setPrecioCompra((Double) obj[2]);
+				compraVehiculo.setFechaCompra((Date) obj[3]);
+				compraVehiculo.setIdUsuCompra((Integer) obj[4]);
+				return compraVehiculo;
+			}
+		};
 	}
 
+	public List<CompraVehiculoDTO> readFechas(Date desde, Date hasta) {
+		return getTemplate().query(readFechas).param(desde).param(hasta).excecute(getMapper());
+	}
+	
 }

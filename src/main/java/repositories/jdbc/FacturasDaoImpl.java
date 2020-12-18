@@ -12,7 +12,7 @@ import repositories.jdbc.utils.NullObject;
 
 public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements FacturasDao {
 
-	private static final String insert = "INSERT INTO Facturas (idOT, fechaDeAlta, fechaDeCierrePorPago, total, estado , dni) VALUES (?,?,?,?,?,?)";
+	private static final String insert = "INSERT INTO Facturas (idOT, fechaDeAlta, fechaDeCierrePorPago, total, estado , dni,idCliente,descripcion) VALUES (?,?,?,?,?,?,?,?)";
 
 	private static final String updateFechaPago = "UPDATE Facturas SET fechaDeCierrePorPago = ? WHERE idFactura = ?";
 
@@ -24,10 +24,9 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 
 	private static final String updatePago = "UPDATE Facturas SET estado = 'PAGA' , fechaDeCierrePorPago = SYSDATE WHERE idFactura = ?";
 
-	private static final String insertFacturaCarrito = "INSERT INTO Facturas (estado, fechaDeAlta, total, dni, idCliente) VALUES (?,?,?,?,?)";
+	private static final String insertFacturaCarrito = "INSERT INTO Facturas (estado, fechaDeAlta, total, dni, idCliente, descripcion) VALUES (?,?,?,?,?,?)";
 
-	private static final String getFacturasPagasDate = "SELECT * FROM Facturas WHERE estado = 'PAGA' AND fechaDeCierrePorPago between ? AND ?";
-
+	private static final String getFacturasPagasDate = "SELECT * FROM Facturas WHERE estado = 'PAGA' AND fechaDeCierrePorPago BETWEEN ? AND ?";
 
 	public FacturasDaoImpl(Connection connection) {
 		super(connection);
@@ -52,7 +51,7 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 	public boolean insert(FacturaDTO entity) {
 		return getTemplate().query(insert).param(entity.getIdOrdenDeTrabajo()).param(entity.getFechaDeAlta())
 				.param(entity.getFechaDeCierrePorPago() == null ? new NullObject() : entity.getFechaDeCierrePorPago())
-				.param(entity.getTotal()).param(entity.getEstado()).param(entity.getDni()).excecute();
+				.param(entity.getTotal()).param(entity.getEstado()).param(entity.getDni()).param(entity.getIdCliente()).param(entity.getDescripcion()).excecute();
 	}
 
 	@Override
@@ -94,6 +93,8 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 				factura.setTotal((Double) obj[4]);
 				factura.setEstado((String) obj[5]);
 				factura.setDni((Integer) obj[6]);
+				factura.setIdCliente((Integer)obj[7]);
+				factura.setDescripcion((String) obj[8]);
 				return factura;
 			}
 		};
@@ -110,13 +111,11 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 		getTemplate().query(insertFacturaCarrito).param(facturaCarrito.getEstado())
 				.param(facturaCarrito.getFechaDeAlta()).param(facturaCarrito.getTotal())
 				.param(facturaCarrito.getCliente().getDatosPersonalesDTO().getDni())
-				.param(facturaCarrito.getCliente().getIdCliente()).excecute();
+				.param(facturaCarrito.getCliente().getIdCliente()).param(facturaCarrito.getDescripcion()).excecute();
 	}
 
-	public List<FacturaDTO> readByDates(Date desde,Date hasta) {
+	public List<FacturaDTO> readByDates(Date desde, Date hasta) {
 		return getTemplate().query(getFacturasPagasDate).param(desde).param(hasta).excecute(getMapper());
 	}
 
-
-	
 }
