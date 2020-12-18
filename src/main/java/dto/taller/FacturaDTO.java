@@ -29,6 +29,8 @@ public class FacturaDTO {
 	private List<RepuestoCompradoDTO> repuestos;
 
 	private int idCliente;
+	
+	private String descripcion;
 
 	public FacturaDTO() {
 		this.estado = "IMPAGA";
@@ -156,6 +158,14 @@ public class FacturaDTO {
 
 	public boolean estaPaga() {
 		return getEstado().equals("PAGA");
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 }

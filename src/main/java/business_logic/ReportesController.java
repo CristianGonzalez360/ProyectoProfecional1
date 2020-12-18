@@ -50,30 +50,29 @@ public class ReportesController {
 		for (FacturaDTO facturaPaga : daos.makeFacturasDao().readByDates(desde,hasta)) {
 			IngresosReport ingreso = new IngresosReport();
 			ingreso.setFechaReporte(new Date());
-			ingreso.setDescripcion("Taller");
+			ingreso.setDescripcion(facturaPaga.getDescripcion());
 			ingreso.setFechaDePago(facturaPaga.getFechaDeCierrePorPago());
 			ingreso.setMontoTotal(facturaPaga.getTotal());
 			ingreso.setId(facturaPaga.getIdFactura());
-			
 			ingresosReport.add(ingreso);
 		}
 		
 		for (VentaVehiculoDTO ventas : daos.makeVentaVehiculoDao().readFechas(desde, hasta)){			
 			IngresosReport ingreso = new IngresosReport();
 			ingreso.setFechaReporte(new Date());
-			ingreso.setDescripcion("Ventas");
+			ingreso.setDescripcion("Venta Vehiculo");
 			ingreso.setFechaDePago(ventas.getFechaVentaVN());
 			ingreso.setMontoTotal(ventas.getPrecioVenta());
 			ingreso.setId(ventas.getIdVentaVehiculo());
 			ingresosReport.add(ingreso);
 		}
 		
-			for (IngresosReport ingresos : ingresosReport) {
-				sumaParcial += ingresos.getMontoTotal();
-			}
-			for (IngresosReport ingresos : ingresosReport) {
-				ingresos.setTotal(sumaParcial);
-			}
+		for (IngresosReport ingresos : ingresosReport) {
+			sumaParcial += ingresos.getMontoTotal();
+		}
+		for (IngresosReport ingresos : ingresosReport) {
+			ingresos.setTotal(sumaParcial);
+		}
 			
 		return ingresosReport;
 	}
@@ -84,7 +83,7 @@ public class ReportesController {
 		for (CompraVehiculoDTO comprasVehiculo : daos.makeCompraVehiculosDao().readFechas(desde, hasta)){
 			IngresosReport ingreso = new IngresosReport();
 			ingreso.setFechaReporte(new Date());
-			ingreso.setDescripcion("Compra de usados");
+			ingreso.setDescripcion("Compra de vehiculo usados");
 			ingreso.setFechaDePago(comprasVehiculo.getFechaCompra());
 			ingreso.setMontoTotal(comprasVehiculo.getPrecioCompra());
 			ingreso.setId(comprasVehiculo.getIdCompraVehiculo());

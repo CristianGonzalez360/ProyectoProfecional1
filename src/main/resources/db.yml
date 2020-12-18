@@ -364,6 +364,7 @@ facturas:
     estado: IMPAGA
     idCliente: 1
     dni: 33390341
+    descripcion : Venta Repuestos
   - idFactura: 2
     idOrdenDeTrabajo: 2
     fechaDeAlta: 2020-10-11
@@ -372,6 +373,7 @@ facturas:
     estado: IMPAGA
     idCliente: 1
     dni: 33390341
+    descripcion : Venta Repuestos
   - idFactura: 3
     idOrdenDeTrabajo: 2
     fechaDeAlta: 2020-10-11
@@ -380,6 +382,7 @@ facturas:
     estado: IMPAGA
     idCliente: 1
     dni: 33390342
+    descripcion : Venta Repuestos
   - idFactura: 4
     idOrdenDeTrabajo: 2
     fechaDeAlta: 2020-10-11
@@ -388,6 +391,7 @@ facturas:
     estado: PAGA
     idCliente: 1
     dni: 33390343
+    descripcion : Venta Repuestos
 
 caracteristicaVehiculo:
   - cilindrada: 1.58

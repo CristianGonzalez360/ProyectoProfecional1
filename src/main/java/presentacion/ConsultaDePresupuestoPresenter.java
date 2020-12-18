@@ -150,6 +150,7 @@ public class ConsultaDePresupuestoPresenter {
 			ordenDeTrabajoId = ps.get(0).getIdOT();
 			if (!otController.esRechazada(ordenDeTrabajoId)) {
 				factura = new FacturaDTO();
+				factura.setDescripcion("Taller");
 				factura.setIdOrdenDeTrabajo(ordenDeTrabajoId);
 				double total = 0;
 				for (PresupuestoDTO p : ps) {
