@@ -60,7 +60,8 @@ public class DatosPersonalesDTO {
 		}
 		errors.addAll(new StringValidator(telefono).number("El telefono debe ser un número").validate());
 		if (!altura.trim().isEmpty())
-			errors.addAll(new StringValidator(altura).number("La altura debe ser un número").validate());
+			errors.addAll(new StringValidator(altura).max(2, "Maximo una longitud de 20 caracteres para la altura")
+					.number("La altura debe ser un número").validate());
 		if (!piso.trim().isEmpty())
 			errors.addAll(new StringValidator(piso).number("El piso debe ser un número").validate());
 		return errors;

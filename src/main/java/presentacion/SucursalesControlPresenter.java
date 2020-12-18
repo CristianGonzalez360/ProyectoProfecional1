@@ -23,7 +23,7 @@ public class SucursalesControlPresenter {
 
 	private ConfiguradorTerminalController confController;
 
-	private static final String [] paisesDelMercosur = new String[] { "Argentina", "Uruguay", "Brazil", "Bolivia", "Venezuela", "Paraguay" };
+	private static final String [] paisesDelMercosur = new String[] { "Argentina", "Uruguay", "Chile", "Paraguay" };
 	
 	public SucursalesControlPresenter(SucursalesController controller, ConfiguradorTerminalController confController) {
 		assert controller != null;
@@ -59,6 +59,7 @@ public class SucursalesControlPresenter {
 		SucursalDTO sucursal = view.getData();
 		if (sucursal != null) {
 			confController.establecerSucursalPredetermidada(sucursal);
+			new MessageDialog().showMessages("La sucursal fué escogida");
 		}
 	}
 

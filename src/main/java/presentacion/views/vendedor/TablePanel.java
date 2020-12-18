@@ -26,8 +26,16 @@ public abstract class TablePanel<T> extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 
-		model = new DefaultTableModel(null, this.nombreColumnas);
+		model = new DefaultTableModel(null, this.nombreColumnas) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table = new JTable(model);
+
 		scrollPane.setViewportView(table);
 	}
 

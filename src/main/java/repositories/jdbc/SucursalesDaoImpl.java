@@ -27,6 +27,12 @@ public class SucursalesDaoImpl extends GenericJdbcDao<SucursalDTO> implements Su
 	}
 
 	@Override
+	public boolean updateMoneda(Integer idSucursal, Integer lastId) {
+		final String query = "UPDATE sucursal SET idMoneda = ? WHERE idSucursal = ?";
+		return getTemplate().query(query).param(lastId).param(idSucursal).excecute();
+	}
+	
+	@Override
 	public boolean insert(SucursalDTO entity) {
 		return getTemplate()
 				.query(insert)
