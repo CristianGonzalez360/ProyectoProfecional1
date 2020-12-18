@@ -32,6 +32,7 @@ public class PanelSucursales extends JPanel {
 	private JButton btnEscogerComoTerminal;
 	
 	private JButton btnRegistrarSucursal;
+	
 	private JButton btnRegistrarMoneda;
 
 	public PanelSucursales() {
@@ -41,7 +42,7 @@ public class PanelSucursales extends JPanel {
 		panelBusqueda = new PanelBusquedaSucursal();
 		add(panelBusqueda, BorderLayout.NORTH);
 		
-		btnRegistrarMoneda = new JButton("Registrar moneda");
+		btnRegistrarMoneda = new JButton("Editar moneda");
 		panelBusqueda.add(btnRegistrarMoneda);
 
 		tablePanel = new TablePanel<SucursalDTO>(
@@ -96,6 +97,8 @@ public class PanelSucursales extends JPanel {
 
 		btnEscogerComoTerminal = new JButton("Escoger como terminal");
 		panel.add(btnEscogerComoTerminal);
+		
+		this.btnRegistrarMoneda.setVisible(false);
 	}
 
 	public String getDataNombrePais() {
@@ -149,5 +152,9 @@ public class PanelSucursales extends JPanel {
 	
 	public void close() {
 		setVisible(false);
+	}
+
+	public MonedaDTO getdataMoneda() {
+		return this.panelDatosMoneda.getData();
 	}
 }

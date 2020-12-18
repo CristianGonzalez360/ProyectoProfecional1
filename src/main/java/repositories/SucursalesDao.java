@@ -11,4 +11,6 @@ public interface SucursalesDao extends GenericDao<SucursalDTO, Integer> {
 	List<String> readFinancierasByPais(String pais);
 
 	List<SucursalDTO> readByPais(String pais);
+
+	boolean updateMoneda(Integer idSucursal, Integer lastId);
 }
