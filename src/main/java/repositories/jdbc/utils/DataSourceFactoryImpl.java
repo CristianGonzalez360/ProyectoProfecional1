@@ -1,5 +1,7 @@
 package repositories.jdbc.utils;
 
+import java.io.IOException;
+
 import business_logic.ConfiguradorBaseDeDatosController;
 import dto.temporal.ConfigDatabaseDTO;
 
@@ -16,7 +18,13 @@ public class DataSourceFactoryImpl extends DataSourceFactory {
 	}
 
 	private SQLDataSource makeMySQLDataSource() {
-		ConfigDatabaseDTO dto = new ConfiguradorBaseDeDatosController().read();
+		ConfigDatabaseDTO dto = new ConfigDatabaseDTO();
+		try {
+			dto = new ConfiguradorBaseDeDatosController().read();
+		} catch (IOException e) {
+
+		}
+		
 		SQLDataSource ret = new SQLDataSource().dbName("concesionaria").user(dto.getUser()).pass(dto.getPassword())
 				.host(dto.getIp()).port(dto.getPort()).driver("com.mysql.jdbc.Driver");
 		return ret;
