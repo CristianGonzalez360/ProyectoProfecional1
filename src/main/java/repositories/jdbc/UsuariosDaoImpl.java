@@ -14,7 +14,7 @@ import repositories.jdbc.utils.Mapper;
 
 public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements UsuariosDao {
 
-	private static final String readAll = "SELECT idUsuario, Usuarios.idCuenta, usuarios.idDatosPersonales, fechaAltaCuenta, fechaBajaCuenta, nombreUsuCuenta, passUsuCuenta, rol, nombreCompleto, dni, telefono, email, calle, altura, piso, dpto, localidad FROM usuarios INNER JOIN cuentas ON usuarios.idCuenta = cuentas.idCuenta INNER JOIN datospersonales on usuarios.idDatosPersonales = datosPersonales.idDatosPersonales";
+	private static final String readAll = "SELECT idUsuario, Usuarios.idCuenta, usuarios.idDatosPersonales, fechaAltaCuenta, fechaBajaCuenta, nombreUsuCuenta, passUsuCuenta, rol, nombreCompleto, apellido, dni, telefono, email, calle, altura, piso, dpto, localidad FROM usuarios INNER JOIN cuentas ON usuarios.idCuenta = cuentas.idCuenta INNER JOIN datospersonales on usuarios.idDatosPersonales = datosPersonales.idDatosPersonales";
 
 	private static final String readByCredentials = readAll
 			+ " WHERE Cuentas.nombreUsuCuenta = ? AND Cuentas.passUsuCuenta = ?";
@@ -78,14 +78,15 @@ public class UsuariosDaoImpl extends GenericJdbcDao<UsuarioDTO> implements Usuar
 				DatosPersonalesDTO dper = new DatosPersonalesDTO();
 				dper.setId((Integer) obj[2]);
 				dper.setNombreCompleto((String) obj[8]);
-				dper.setDni((Integer) obj[9]);
-				dper.setTelefono((String) obj[10]);
-				dper.setEmail((String) obj[11]);
-				dper.setCalle((String) obj[12]);
-				dper.setAltura((String) obj[13]);
-				dper.setPiso((String) obj[14]);
-				dper.setDpto((String) obj[15]);
-				dper.setLocalidad((String) obj[16]);
+				dper.setApellido((String) obj[9]);
+				dper.setDni((Integer) obj[10]);
+				dper.setTelefono((String) obj[11]);
+				dper.setEmail((String) obj[12]);
+				dper.setCalle((String) obj[13]);
+				dper.setAltura((String) obj[14]);
+				dper.setPiso((String) obj[15]);
+				dper.setDpto((String) obj[16]);
+				dper.setLocalidad((String) obj[17]);
 				return new UsuarioDTO((Integer) obj[0], cuenta, dper);
 			}
 		};
