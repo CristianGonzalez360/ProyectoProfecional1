@@ -73,5 +73,10 @@ public class PanelVentaVehiculosDisponibles extends JPanel {
 	public void clearData() {
 		modelo.setRowCount(0);
 	}
-
+	
+//	public int getIdPedido() {
+//		
+//		return (int) tablaVentas.getValueAt(tablaVentas.getSelectedRow(), 0);
+//	}
+	
 }

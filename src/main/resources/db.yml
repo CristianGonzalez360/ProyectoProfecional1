@@ -116,6 +116,16 @@ datosPersonales:
     piso: 11
     dpto: B11
     localidad: localidad213 
+  - nombreCompleto: Marco
+    apellido: Yupanqui
+    dni: 999
+    telefono: 55555
+    email: marco.yu@gmail.com
+    calle: pepe
+    altura: 1995
+    piso: 11
+    dpto: B11
+    localidad: malvinas 
 
 usuarios:
   - cuenta:
@@ -204,7 +214,9 @@ clientes:
     fechaAltaCliente: 2020-10-25
   - idDatosPersonales: 3 
     fechaAltaCliente: 2020-10-25
-
+  - idDatosPersonales: 10 
+    fechaAltaCliente: 2020-10-25
+    
 vehiculosConOrdenDeTrabajo:
   - idFichaTecnica: 1
     idCliente: 1
@@ -476,7 +488,7 @@ vehiculos:
     disponible: true
     usado: true
     idCaracteristicas: 1
-    idSucursal: 1 
+    idSucursal: 3 
  
 #CATALOGO DE VEHICULOS NUEVOS SIN STOCK
   - precioVenta: 2100000

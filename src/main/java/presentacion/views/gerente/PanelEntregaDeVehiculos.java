@@ -131,4 +131,8 @@ public class PanelEntregaDeVehiculos extends JPanel {
 	public boolean papelesEnRegla(int idFila) {
 		return (boolean) panelVentas.papelesEnRegla(idFila);
 	}
+	
+//	public int getIdPedido () {
+//		return panelVentas.getIdPedido();
+//	}
 }

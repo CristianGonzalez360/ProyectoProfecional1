@@ -83,4 +83,11 @@ public class VehiculosConOrdenDeTrabajoController {
 	public IngresoOrdenDeTrabajoDTO readById(Integer idVehiculo) {
 		return vehiculosDao.readByID(idVehiculo);
 	}
+	
+	public void save2 (Integer idCliente, AltaDeVehiculoDTO vehiculoDeAlta) {
+		IngresoOrdenDeTrabajoDTO target = new IngresoOrdenDeTrabajoDTO(vehiculoDeAlta);
+		target.setIdCliente(idCliente);
+		target.setIdFichaTecnica(fichasDao.readByNroMotor(Integer.parseInt(vehiculoDeAlta.getNroMotor())).getId());
+		vehiculosDao.insert(target);
+	}
 }

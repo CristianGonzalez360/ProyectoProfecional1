@@ -4,17 +4,22 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.swing.event.ListSelectionEvent;
 import business_logic.ClientesController;
+import business_logic.ControllersFactory;
+import business_logic.VehiculosController;
 import business_logic.VentasVehiculosController;
 import business_logic.exceptions.ForbiddenException;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
-import dto.VentaVehiculoDTO;
+import dto.VehiculoDTO;
+import dto.taller.FichaTecnicaVehiculoDTO;
+import dto.temporal.AltaDeVehiculoDTO;
 import dto.temporal.VehiculoParaEntregar;
+import presentacion.views.gerente.FormRegistroAseguradoraView;
 import presentacion.views.gerente.PanelEntregaDeVehiculos;
 import presentacion.views.utils.MessageDialog;
+import services.SessionServiceImpl;
 
 public class EntregaVehiculosVentaPresenter {
 
@@ -25,18 +30,25 @@ public class EntregaVehiculosVentaPresenter {
 
 	private VentasVehiculosController ventasVehiculosController;
 	private ClientesController clientesController;
+	private VehiculosController vehiculoController;
+	private FormRegistroAseguradoraView formNuevaAseguradora;
+	private ControllersFactory controllers;
 
 	public EntregaVehiculosVentaPresenter(VentasVehiculosController ventasVehiculosController,
-			ClientesController clientesController) {
+			ClientesController clientesController, VehiculosController vehiculoController, ControllersFactory controllers) {
+		
 		this.view = PanelEntregaDeVehiculos.getInstance();
-
+		this.vehiculoController = vehiculoController;
 		this.view.setActionOnSeleccionarVenta(a -> onSeleccionarVenta(a));
 		this.view.setActionOnRefrescar(a -> onRefrescar(a));
 		this.view.setActionOnRegistrar(a -> onRegistrar(a));
-
+		this.formNuevaAseguradora = FormRegistroAseguradoraView.getInstance();
+		this.formNuevaAseguradora.setActionSave((a) -> onRegistrarNuevaAseguradora(a));
+		
 		this.ventasVehiculosController = ventasVehiculosController;
 		this.clientesController = clientesController;
-
+		this.controllers = controllers;
+		
 		this.ventaSeleccionada = -1;
 		this.ventas = new ArrayList<>();
 	}
@@ -51,16 +63,44 @@ public class EntregaVehiculosVentaPresenter {
 		}
 
 		if (errors.isEmpty()) {
-			try {
-				ventasVehiculosController.registrarEntrega(ventas.get(ventaSeleccionada));
-				onRefrescar(a);
-				new MessageDialog().showMessages("Entrega de vehiculo Registrada");
-			} catch (ForbiddenException e) {
-				new MessageDialog().showMessages(e.getMessage());
+//			System.out.println(ventas.get(ventaSeleccionada).getVenta().getIdSucursalVenta());
+			if(SessionServiceImpl.getInstance().getActiveSession().getSucursal().getIdSucursal().intValue()==ventas.get(ventaSeleccionada).getVenta().getIdSucursalVenta().intValue()) {
+				this.formNuevaAseguradora.display();
+			} else {
+				new MessageDialog().showMessages("El vehículo no esta en esta sucursal");
 			}
+				
 		} else {
 			new MessageDialog().showMessages(errors);
 		}
+	}
+	
+	private void onRegistrarNuevaAseguradora(ActionEvent a) {
+		
+//		System.out.println(view.getIdPedido());
+		List<String> errors = this.formNuevaAseguradora.aseguradoraValida();
+		if(errors.isEmpty()) {
+
+			ClienteDTO cliente = clientesController.readById(ventas.get(ventaSeleccionada).getVenta().getIdCliente());
+			VehiculoDTO vehiculo = ventasVehiculosController.datosVehiculo(ventas.get(ventaSeleccionada).getVenta().getIdVehiculo());
+			FichaTecnicaVehiculoDTO ficha = vehiculoController.readByIdFichaTecnica(vehiculo.getIdFichaTecnica());
+			AltaDeVehiculoDTO vehiculoDeAlta = crearAltaDeVehiculo(ficha);
+			
+			try {
+				ventasVehiculosController.registrarEntrega(ventas.get(ventaSeleccionada));
+				controllers.makeVehiculosConOrdenDeTrabajoController().save2(cliente.getIdCliente(), vehiculoDeAlta);
+				
+				onRefrescar(a);
+				formNuevaAseguradora.close();
+				
+				new MessageDialog().showMessages("Entrega de vehiculo Registrada");
+			} catch (ForbiddenException e) {
+				new MessageDialog().showMessages(e.getMessage());
+			}	
+		} else {
+			new MessageDialog().showMessages(errors);
+		}
+		
 	}
 
 	private void onRefrescar(ActionEvent a) {
@@ -86,4 +126,21 @@ public class EntregaVehiculosVentaPresenter {
 		this.view.setData(ventas);
 	}
 
+	private AltaDeVehiculoDTO crearAltaDeVehiculo(FichaTecnicaVehiculoDTO ficha) {
+		AltaDeVehiculoDTO ret = new AltaDeVehiculoDTO();
+		ret.setAsegurador(formNuevaAseguradora.getAseguradora());
+		ret.setNroPolizaSeguro(formNuevaAseguradora.getNroPoliza());
+		ret.setNroChasis(ficha.getNroChasis().toString());
+		ret.setNroMotor(ficha.getNroMotor().toString());
+		ret.setKilometraje(ficha.getKilometraje().toString());
+		ret.setMarca(ficha.getMarca());
+		ret.setModelo(ficha.getModelo().toString());
+		ret.setPatente(ficha.getPatente().toString());
+		ret.setColor(ficha.getColor());
+		ret.setCombustion(ficha.getCombustion());
+		ret.setDescripcion("");
+		ret.setKilometrajeGarantia("100000");
+		
+		return ret;
+	}
 }

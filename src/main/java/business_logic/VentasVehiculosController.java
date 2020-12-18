@@ -213,7 +213,7 @@ public class VentasVehiculosController {
 		return daos.makeClienteDao().readByID(idCliente);
 	}
 
-	private VehiculoDTO datosVehiculo(Integer idVehiculo) {
+	public VehiculoDTO datosVehiculo(Integer idVehiculo) {
 		return daos.makeVehiculoDao().readByID(idVehiculo);
 	}
 
