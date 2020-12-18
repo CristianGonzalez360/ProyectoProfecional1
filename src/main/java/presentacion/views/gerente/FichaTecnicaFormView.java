@@ -14,6 +14,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import dto.VehiculoDTO;
 import dto.taller.AltaFichaNuevaDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import java.awt.Font;
@@ -106,7 +107,6 @@ import java.awt.Font;
 			contentPanel.add(lblNewLabel_3, "6, 4");
 			contentPanel.add(textKilometraje, "8, 4, fill, default");
 			textKilometraje.setText("0");
-			textKilometraje.setEditable(false);
 			lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			contentPanel.add(lblNewLabel_4, "2, 6");
 			contentPanel.add(textMarca, "4, 6, fill, default");
@@ -129,13 +129,20 @@ import java.awt.Font;
 				}
 			});
 			clearData();
+			deshabilitarInput();
+		}
+
+		private void deshabilitarInput() {
+			textKilometraje.setEditable(false);
+			textMarca.setEditable(false);
+			textModelo.setEditable(false);
+			textColor.setEditable(false);		
 		}
 
 		public void clearData() {
 			this.textNroChasis.setText("");
 			this.textNroDeMotor.setText("");
 			this.textPatente.setText("");
-//			this.textKilometraje.setText("");
 			this.textMarca.setText("");
 			this.textModelo.setText("");
 			this.textColor.setText("");
@@ -182,5 +189,11 @@ import java.awt.Font;
 
 		public void setActionCancel(ActionListener listener) {
 			this.btnCancelar.addActionListener(listener);
+		}
+
+		public void setData(VehiculoDTO vehiculo) {
+			textMarca.setText(vehiculo.getMarca());
+			textModelo.setText(vehiculo.getFamilia());
+			textColor.setText(vehiculo.getColor());
 		}
 	}
