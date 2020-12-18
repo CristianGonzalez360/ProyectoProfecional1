@@ -1,5 +1,12 @@
 package presentacion.views.admin;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
@@ -7,13 +14,6 @@ import javax.swing.event.ListSelectionListener;
 
 import dto.UsuarioDTO;
 import presentacion.views.vendedor.TablePanel;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.util.List;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
 
 public class PanelGestionUsuariosView extends JPanel {
 
@@ -40,14 +40,14 @@ public class PanelGestionUsuariosView extends JPanel {
 		btnRegistrarUsuario = new JButton("Registrar usuario");
 		panelSouth.add(btnRegistrarUsuario);
 
-		tableUsuarios = new TablePanel<UsuarioDTO>(new String[] { "Legajo", "Nombre", "DNI" }) {
+		tableUsuarios = new TablePanel<UsuarioDTO>(new String[] { "LEGAJO", "NOMBRE COMPLETO", "DNI" }) {
 
 			private static final long serialVersionUID = -5492436929768181798L;
 
 			@Override
 			public void setData(List<UsuarioDTO> data) {
 				for (UsuarioDTO dto : data) {
-					Object[] row = { dto.getId().toString(), dto.getDatos().getNombreCompleto(),
+					Object[] row = { dto.getId().toString(), dto.getDatos().getNombreCompleto() + " " + dto.getDatos().getApellido() ,
 							dto.getDatos().getDni().toString() };
 					model.addRow(row);
 				}
