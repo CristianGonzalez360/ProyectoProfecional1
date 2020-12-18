@@ -12,6 +12,8 @@ import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.temporal.AltaOrdenDeTrabajoDTO;
 import dto.temporal.CompraVehiculoUsadoDTO;
 import repositories.DaosFactory;
+import repositories.FichaTecnicaVehiculoDao;
+import repositories.IngresoOrdenDeTrabajoDao;
 import services.SessionServiceImpl;
 
 public class VehiculosController {
@@ -45,9 +47,9 @@ public class VehiculosController {
 		return daos.makeFichaTecnicaVehiculoDao().readByID(vehiculo.getIdFichaTecnica());
 	}
 
-	public void saveVehiculoUsado(CompraVehiculoUsadoDTO compra) {
-		Integer idCarac = guardarCaracteristicas(compra);
+	public void saveVehiculoUsado(CompraVehiculoUsadoDTO compra) throws ConflictException{
 		Integer idFicha = guardarFichaTecnica(compra);
+		Integer idCarac = guardarCaracteristicas(compra);
 		VehiculoDTO vehiculo = new VehiculoDTO();
 		vehiculo.setIdCaracteristicas(idCarac);
 		vehiculo.setIdFichaTecnica(idFicha);
@@ -112,8 +114,21 @@ public class VehiculosController {
 		ficha.setNroMotor(Integer.parseInt(compra.getNroMotor()));
 		ficha.setPatente(compra.getPatente());
 
+		validar(ficha);
+
 		daos.makeFichaTecnicaVehiculoDao().insert(ficha);
 		return daos.makeFichaTecnicaVehiculoDao().getIdMaximo();
+	}
+	
+	public void validar(FichaTecnicaVehiculoDTO ficha) {
+		FichaTecnicaVehiculoDao fichasDao = daos.makeFichaTecnicaVehiculoDao();
+		if (fichasDao.readByNroMotor(ficha.getNroMotor()) != null)
+			throw new ConflictException("El nro. de motor ya está registrado.");
+		IngresoOrdenDeTrabajoDao vehiculosDao = daos.makeVehiculoConOrdeDeTrabajoDao();
+		if (vehiculosDao.readByPatente(ficha.getPatente()) != null)
+			throw new ConflictException("La patente ya está registrada");
+		if (fichasDao.readByNroChasis(ficha.getNroChasis()) != null)
+			throw new ConflictException("El nro. de chasis ya está registrada.");
 	}
 
 	public Integer guardarCaracteristicaNueva(CaracteristicaVehiculoDTO caracteristica) {

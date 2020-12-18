@@ -48,9 +48,11 @@ public class VehiculosConOrdenDeTrabajoController {
 	public void save(Integer idCliente, AltaDeVehiculoDTO vehiculoDeAlta) {
 		FichaTecnicaVehiculoDTO ficha = new FichaTecnicaVehiculoDTO(vehiculoDeAlta);
 		if (fichasDao.readByNroMotor(Integer.parseInt(vehiculoDeAlta.getNroMotor())) != null)
-			throw new ConflictException("El nro. de motor está en uso.");
+			throw new ConflictException("El nro. de motor ya está registrado.");
+		if (fichasDao.readByNroChasis(Integer.parseInt(vehiculoDeAlta.getNroChasis())) != null)
+			throw new ConflictException("El nro. de chasis ya está registrado.");
 		if (vehiculosDao.readByPatente(vehiculoDeAlta.getPatente()) != null)
-			throw new ConflictException("La patente ya está registrada");
+			throw new ConflictException("La patente ya está registrada.");
 		if (fichasDao.insert(ficha)) {
 			IngresoOrdenDeTrabajoDTO target = new IngresoOrdenDeTrabajoDTO(vehiculoDeAlta);
 			target.setIdCliente(idCliente);

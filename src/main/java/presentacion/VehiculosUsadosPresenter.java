@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 
 import business_logic.VehiculosController;
+import business_logic.exceptions.ConflictException;
 import dto.CaracteristicaVehiculoDTO;
 import dto.VehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
@@ -33,10 +34,15 @@ public class VehiculosUsadosPresenter {
 		CompraVehiculoUsadoDTO compra = FormularioCompraDeVehiculos.getInstance().getData();
 		List<String> errors = compra.validate();
 		if (errors.isEmpty()) {
-			this.controller.saveVehiculoUsado(compra);
-			FormularioCompraDeVehiculos.getInstance().close();
-			this.view.clearData();
-			this.view.setData(controller.readVehiculosUsados());
+			try {
+				this.controller.saveVehiculoUsado(compra);
+				FormularioCompraDeVehiculos.getInstance().close();
+				this.view.clearData();
+				this.view.setData(controller.readVehiculosUsados());
+			}
+			catch (ConflictException e) {
+				new MessageDialog().showMessages(e.getMessage());	
+			}
 		} else {
 			new MessageDialog().showMessages(errors);
 		}
