@@ -70,15 +70,5 @@ public class CompraRepuestoDaoImpl extends GenericJdbcDao<CompraRepuestoDTO> imp
 			}
 		};
 	}
-	
-//	DROP TABLE CompraRepuesto IF EXISTS;
-//	CREATE TABLE CompraRepuesto(
-//		idCompra INT NOT NULL AUTO_INCREMENT,
-//		codigoRepuesto INT NOT NULL,
-//		precioCompra DOUBLE NOT NULL,
-//		fechaCompra DATE,
-//		cantidad INT,
-//		PRIMARY KEY(idCompra),
-//	);
-	
+
 }

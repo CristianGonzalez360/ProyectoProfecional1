@@ -199,10 +199,11 @@ public class RepuestosPresenter {
 		if (error.isEmpty()) {
 			int id = this.gestionRepuestos.getIdRepuesto();
 			RepuestoDTO repuesto = repuestosController.readById(id);
-			registrarCompra(repuesto, Integer.parseInt(ingreso.getCantidad()));
+//			registrarCompra(repuesto, Integer.parseInt(ingreso.getCantidad()));
 			repuesto.setStockRepuesto(repuesto.getStockRepuesto() + Integer.parseInt(ingreso.getCantidad()));
 			repuesto.setPrecioCompra(Double.parseDouble(ingreso.getPrecioCompra()));
 			repuesto.setPrecioRepuesto(Double.parseDouble(ingreso.getPrecioVenta()));
+			registrarCompra(repuesto, Integer.parseInt(ingreso.getCantidad()));
 			repuestosController.update(repuesto);
 			refrescar();
 			DialogIngresoStock.getInstance().close();
