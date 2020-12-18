@@ -26,6 +26,7 @@ public class PanelGestionUsuariosView extends JPanel {
 	private CuentaUsuarioPanel cuentaPanel;
 
 	private JButton btnRegistrarUsuario;
+	private JButton btnActualizar;
 
 	public PanelGestionUsuariosView() {
 		setLayout(new BorderLayout(0, 0));
@@ -36,6 +37,9 @@ public class PanelGestionUsuariosView extends JPanel {
 
 		JPanel panelSouth = new JPanel();
 		panel_1.add(panelSouth, BorderLayout.SOUTH);
+		
+		btnActualizar = new JButton("Refresh table");
+		panelSouth.add(btnActualizar);
 
 		btnRegistrarUsuario = new JButton("Registrar usuario");
 		panelSouth.add(btnRegistrarUsuario);
@@ -105,5 +109,9 @@ public class PanelGestionUsuariosView extends JPanel {
 	public void clearData() {
 		this.datosPanel.clearData();
 		this.tableUsuarios.clearData();
+	}
+	
+	public void setActionRefreshTable(ActionListener listener) {
+		this.btnActualizar.addActionListener(listener);
 	}
 }

@@ -23,8 +23,16 @@ public class GestionUsuariosPresenter {
 		this.controller = controller;
 		this.view.setActionSelectUsuario((a) -> onSelectUsuario(a));
 		this.view.setActionRegistrarUsuario((a) -> onDisplayFormAltaDeUsuario(a));
+		this.view.setActionRefreshTable((a)->onRefreshUsersTable(a));
 		FormAltaUsuario.getInstance().setActionOk((a) -> onRegistrarUsuario(a));
 		onInit();
+	}
+
+	private void onRefreshUsersTable(ActionEvent a) {
+		view.clearData();
+		view.clearUsuarioData();
+		List<UsuarioDTO> usuarios = controller.readAll();
+		view.setData(usuarios);
 	}
 
 	private void onRegistrarUsuario(ActionEvent a) {
