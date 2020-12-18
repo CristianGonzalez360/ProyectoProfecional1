@@ -8,13 +8,13 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class AltaUsuariosView extends JDialog {
+public class FormAltaUsuarios extends JDialog {
 
 	private static final long serialVersionUID = 3395649891931894532L;
 
 	private final JPanel contentPanel = new JPanel();
 
-	public AltaUsuariosView() {
+	public FormAltaUsuarios() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());

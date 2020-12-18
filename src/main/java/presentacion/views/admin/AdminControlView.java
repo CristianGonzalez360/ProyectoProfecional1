@@ -120,4 +120,12 @@ public class AdminControlView extends JInternalFrame {
 	public void setActionRegistrarSucursal(ActionListener listener) {
 		panelSucursales.setActionRegistrarSucursal(listener);
 	}
+
+	public void setActionRegistrarMoneda(ActionListener listener) {
+		panelSucursales.setActionRegistrarMoneda(listener);
+	}
+
+	public MonedaDTO getDataMoneda() {
+		return panelSucursales.getdataMoneda();
+	}
 }
