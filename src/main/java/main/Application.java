@@ -15,7 +15,6 @@ import repositories.jdbc.utils.DataSource;
 import repositories.jdbc.utils.DataSourceFactory;
 import repositories.jdbc.utils.DataSourceFactory.DataSourceType;
 import repositories.jdbc.utils.DataSourceFactoryImpl;
-import services.DatabaseSeederServiceImpl;
 
 public class Application {
 
@@ -40,7 +39,6 @@ public class Application {
 	public void onInit(DataSource ds) {
 		if (ds.getConnection() != null) {
 			DaosFactory.setFactory(new DaosFactoryImpl(ds));
-			new DatabaseSeederServiceImpl(DaosFactory.getFactory()).seedDatabase();
 			ControllersFactory.setFactory(new ControllersFactoryImpl(DaosFactory.getFactory()));
 			ViewsFactory.setFactory(new ViewsFactoryImpl(ControllersFactory.getFactory()));
 		} else {
@@ -51,7 +49,7 @@ public class Application {
 
 	public static void main(String[] args) {
 		DataSourceFactory.setFactory(new DataSourceFactoryImpl());
-		DataSource ds = DataSourceFactory.getFactory().makeDataSource(DataSourceType.IN_MEMORY);
+		DataSource ds = DataSourceFactory.getFactory().makeDataSource(DataSourceType.PERSISTENT);
 		new Application().setUpLookAndFeel().onInit(ds);
 	}
 }

@@ -3,6 +3,8 @@ package dto.temporal;
 import java.util.LinkedList;
 import java.util.List;
 
+import dto.validators.StringValidator;
+
 public class IngresoStockDTO {
 
 	private String cantidad;
@@ -15,7 +17,9 @@ public class IngresoStockDTO {
 
 	public List<String> validate() {
 		List<String> ret = new LinkedList<>();
-		// TODO
+		ret.addAll(new StringValidator(cantidad).notBlank("La cantidad es obligatoria.").positiveInteger("La cantidad debe ser un número.").validate());
+		ret.addAll(new StringValidator(precioCompra).notBlank("El precio de compra es obligatorio.").positiveDouble("El precio de compra debe ser un número.").validate());
+		ret.addAll(new StringValidator(precioVenta).notBlank("El precio de venta es obligatorio.").positiveDouble("El precio de venta debe ser un número.").validate());
 		return ret;
 	}
 

@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.List;
 
 import business_logic.ConfiguradorBaseDeDatosController;
@@ -12,6 +13,8 @@ import presentacion.views.admin.FormConfiguracionSmtpView;
 import presentacion.views.admin.FormConfigurationDBView;
 import presentacion.views.admin.PanelConfiguracionGeneral;
 import presentacion.views.utils.MessageDialog;
+import repositories.DaosFactory;
+import services.DatabaseSeederServiceImpl;
 
 public class ConfiguracionGeneralPresenter {
 
@@ -24,8 +27,17 @@ public class ConfiguracionGeneralPresenter {
 	public ConfiguracionGeneralPresenter() {
 		view.setActionConfigurarDb((a) -> onDisplayFormConfiguracionDB(a));
 		view.setActionConfigurarSmtp((a) -> onDisplayFormConfiguracionSmtp(a));
-		view.setData(configDbController.read());
-		view.setData(configSmtpController.read());
+		try {
+			view.setData(configDbController.read());
+		} catch (IOException e1) {
+			new MessageDialog().showMessages("Configure la conexion con el motor de la base de datos");
+		}
+		try {
+			view.setData(configSmtpController.read());
+		} catch (IOException e) {
+			new MessageDialog().showMessages("Configure el servidor SMTP");
+		}
+		view.setActionSeedDB((a)->onSeedDB(a));
 		FormConfigurationDBView.getInstance().setActionSave((a) -> onRegistrarConfiguracionDB(a));
 		FormConfigurationDBView.getInstance().setActionCancel((a) -> {
 			FormConfigurationDBView.getInstance().close();
@@ -35,6 +47,10 @@ public class ConfiguracionGeneralPresenter {
 		FormConfiguracionSmtpView.getInstance().setActionCancel((a) -> {
 			FormConfiguracionSmtpView.getInstance().close();
 		});
+	}
+
+	private void onSeedDB(ActionEvent a) {
+		new DatabaseSeederServiceImpl(DaosFactory.getFactory()).seedDatabase();
 	}
 
 	private void onSelectCheckboxLocalhost(ActionEvent a) {
@@ -50,7 +66,11 @@ public class ConfiguracionGeneralPresenter {
 		ConfigSmtpServerDTO dto = FormConfiguracionSmtpView.getInstance().getData();
 		List<String> errors = dto.validate();
 		if (errors.isEmpty()) {
-			configSmtpController.save(dto);
+			try {
+				configSmtpController.save(dto);
+			} catch (IOException e) {
+				new MessageDialog().showMessages("Configure el servidor SMTP");
+			}
 			FormConfiguracionSmtpView.getInstance().close();
 			view.setData(dto);
 		} else {
@@ -62,7 +82,11 @@ public class ConfiguracionGeneralPresenter {
 		ConfigDatabaseDTO dto = FormConfigurationDBView.getInstance().getData();
 		List<String> errors = dto.validate();
 		if (errors.isEmpty()) {
-			configDbController.save(dto);
+			try {
+				configDbController.save(dto);
+			} catch (IOException e) {
+				new MessageDialog().showMessages("Configure la conexion con el motor de la base de datos");
+			}
 			FormConfigurationDBView.getInstance().close();
 			view.setData(dto);
 		} else {

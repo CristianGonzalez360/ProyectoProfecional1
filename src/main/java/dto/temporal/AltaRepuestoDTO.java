@@ -3,6 +3,8 @@ package dto.temporal;
 import java.util.LinkedList;
 import java.util.List;
 
+import dto.validators.StringValidator;
+
 public class AltaRepuestoDTO {
 
 	private String codigoRepuesto;
@@ -29,7 +31,14 @@ public class AltaRepuestoDTO {
 
 	public List<String> validate() {
 		List<String> ret = new LinkedList<>();
-		// TODO Auto-generated constructor stub
+		ret.addAll(new StringValidator(codigoRepuesto).notBlank("El código es obligatorio.").positiveInteger("El código debe ser un número.").validate());
+		ret.addAll(new StringValidator(precioRepuesto).notBlank("El precio es obligatorio.").positiveDouble("El precio debe ser un número.").validate());
+		ret.addAll(new StringValidator(marcaRepuesto).notBlank("La marca es obligatoria.").validate());
+		ret.addAll(new StringValidator(descripcionRepuesto).notBlank("La descripción es obligatoria.").validate());
+		ret.addAll(new StringValidator(stockRepuesto).notBlank("El stock es obligatorio.").positiveInteger("El estock debe ser un número.").validate());
+		ret.addAll(new StringValidator(fabricante).notBlank("El fabricante es obligatorio.").validate());
+		ret.addAll(new StringValidator(stockMinimo).notBlank("El stock mínimo es obligatorio.").positiveInteger("El estock mínimo debe ser un número.").validate());
+		ret.addAll(new StringValidator(precioCompra).notBlank("El precio de compra es obligatorio.").positiveDouble("El precio debe ser un número.").validate());
 		return ret;
 	}
 
