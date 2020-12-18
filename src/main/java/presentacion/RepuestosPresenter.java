@@ -161,13 +161,14 @@ public class RepuestosPresenter {
 		it = repuestosCargados.listIterator();
 		while (it.hasNext()) {// busco los que ya existen y actualizo la cantidad de repuestos
 			repuestoAuxiliar = it.next();
+			int cantidadIngresada = repuestoAuxiliar.getStockRepuesto();
 			if (repuestosController.readByCodigo(repuestoAuxiliar.getCodigoRepuesto()) != null) {
-				registrarCompra(repuestoAuxiliar, repuestoAuxiliar.getStockRepuesto());
 				repuestoAuxiliar.setStockRepuesto(repuestoAuxiliar.getStockRepuesto()
 						+ repuestosController.readByCodigo(repuestoAuxiliar.getCodigoRepuesto()).getStockRepuesto());
 			}
+			registrarCompra(repuestoAuxiliar, cantidadIngresada);
 		}
-
+		
 		it = repuestosCargados.listIterator();
 		while (it.hasNext()) {// inserto en la base de datos.
 			repuestoAuxiliar = it.next();
