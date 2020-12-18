@@ -74,21 +74,16 @@ CREATE TABLE FichaTecnicaVehiculo (
 
 CREATE TABLE VehiculoConOrdenesDeTrabajo (
    idVehiculoConOT INT NOT NULL AUTO_INCREMENT,
-   idFichaTecnicaVehiculo INT NOT NULL,
+   idFichaTecnicaVehiculo INT,
    idCliente INT NOT NULL,
-   kilometrajeGarantia INT NOT NULL,
-   aseguradora VARCHAR (20) NOT NULL,
-   nroPolizaSeguro INT NOT NULL,
+   kilometrajeGarantia INT,
+   aseguradora VARCHAR (20),
+   nroPolizaSeguro INT,
    patenteVehiculo VARCHAR (10),
+   idVehiculo INT,
    PRIMARY KEY (idVehiculoConOT),
    FOREIGN KEY (idFichaTecnicaVehiculo) REFERENCES FichaTecnicaVehiculo (idFichaTecnicaVehiculo),
    FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente)
-);
-
-CREATE TABLE TipoTrabajo (
-  idTipoTrabajo INT NOT NULL AUTO_INCREMENT,
-  descripcionTrabajo VARCHAR(10) UNIQUE,
-  PRIMARY KEY (idTipoTrabajo)
 );
 
 CREATE TABLE OrdenesDeTrabajo (
@@ -104,6 +99,7 @@ CREATE TABLE OrdenesDeTrabajo (
   FOREIGN KEY (idUsuAlta) REFERENCES Usuarios (idUsuario),
   FOREIGN KEY (idVehiculoOt) REFERENCES VehiculoConOrdenesDeTrabajo (idVehiculoConOT)
 );
+
 
 CREATE TABLE Emisores (
   idEmisor INT NOT NULL AUTO_INCREMENT,
@@ -140,6 +136,21 @@ CREATE TABLE Pagos (
   FOREIGN KEY ( idFinanciamiento) REFERENCES Financiamientos (idFinanciamiento)
 );
 
+CREATE TABLE Facturas (
+  idFactura INT AUTO_INCREMENT,
+  idOT INT,
+  fechaDeAlta DATE,
+  fechaDeCierrePorPago DATE,
+  total DOUBLE,
+  estado VARCHAR(10),
+  dni INT,
+  idCliente INT,
+  descripcion VARCHAR(20),
+  PRIMARY KEY(idFactura),
+  FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo(idOT),
+  FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente)
+);
+
 CREATE TABLE Presupuestos (
   idPresupuesto INT NOT NULL AUTO_INCREMENT,
   idOT INT NOT NULL,
@@ -154,6 +165,7 @@ CREATE TABLE Presupuestos (
   comentarioRechazo VARCHAR (60),
   fechaAprobacion DATE,
   estado VARCHAR(20),
+  garantia BOOLEAN NOT NULL,
   PRIMARY KEY (idPresupuesto),
   FOREIGN KEY (idOT) REFERENCES OrdenesDeTrabajo (idOT),
   FOREIGN KEY (idUsuAltaPresu) REFERENCES Usuarios (idUsuario),
@@ -181,6 +193,8 @@ CREATE TABLE Repuestos (
   stockRepuesto INT,
   fabricante VARCHAR (30),
   stockMinimo INT,
+  garantia BOOLEAN NOT NULL,
+  precioCompra DOUBLE NOT NULL,
   PRIMARY KEY (idRepuesto)
 );
 
@@ -189,8 +203,20 @@ CREATE TABLE RepuestosPlanificados (
   idPresu INT NOT NULL,
   idRepuesto INT NOT NULL,
   cantRequerida INT,
+  precio DOUBLE,
+  garantia BOOLEAN,
   PRIMARY KEY (idRepuestoPlanificado),
   FOREIGN KEY (idPresu) REFERENCES Presupuestos (idPresupuesto),
+  FOREIGN KEY (idRepuesto) REFERENCES Repuestos (idRepuesto)
+);
+
+CREATE TABLE RepuestosComprados (
+  idRepuestoComprado INT NOT NULL AUTO_INCREMENT,
+  idFactura INT NOT NULL,
+  idRepuesto INT NOT NULL,
+  cantRequerida INT,
+  PRIMARY KEY (idRepuestoComprado),
+  FOREIGN KEY (idFactura) REFERENCES Facturas (idFactura),
   FOREIGN KEY (idRepuesto) REFERENCES Repuestos (idRepuesto)
 );
 
@@ -208,7 +234,7 @@ CREATE TABLE Sucursal (
   calle VARCHAR(25) NOT NULL,
   altura INT NOT NULL,
   localidad VARCHAR(25) NOT NULL,
-  idMoneda INT NOT NULL,
+  idMoneda INT,
   PRIMARY KEY (idSucursal),
   FOREIGN KEY (idMoneda) REFERENCES Moneda(idMoneda)
 );
@@ -301,24 +327,51 @@ CREATE TABLE PedidoVehiculo (
   FOREIGN KEY (idVentaVehiculo) REFERENCES VentasVehiculos(idVentaVehiculo)
 );
 
-CREATE TABLE Facturas (
-  idFactura INT NOT NULL AUTO_INCREMENT,
-  idOT INT,
-  fechaDeAlta DATE,
-  fechaDeCierrePorPago DATE,
-  total DOUBLE,
-  estado VARCHAR(10),
-  dni INT,
-  idCliente INT,
-  PRIMARY KEY(idFactura)
+CREATE TABLE Mantenimientos (
+  idMantenimiento INTEGER NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(30) NOT NULL,
+  comentario VARCHAR(60),
+  PRIMARY KEY (idMantenimiento)
 );
 
-CREATE TABLE RepuestosComprados (
-  idRepuestoComprado INT NOT NULL AUTO_INCREMENT,
-  idFactura INT NOT NULL,
+CREATE TABLE RepuestosMantenimiento(
+  idRepuestoMantenimiento INT NOT NULL AUTO_INCREMENT,	
   idRepuesto INT NOT NULL,
-  cantRequerida INT,
-  PRIMARY KEY (idRepuestoComprado),
-  FOREIGN KEY (idFactura) REFERENCES Facturas (idFactura),
-  FOREIGN KEY (idRepuesto) REFERENCES Repuestos (idRepuesto)
+  idMantenimiento INT NOT NULL,
+  cantidad INT NOT NULL,
+  PRIMARY KEY (idRepuestoMantenimiento),
+  FOREIGN KEY (idRepuesto) REFERENCES Repuestos(idRepuesto),
+  FOREIGN KEY (idMantenimiento) REFERENCES Mantenimientos(idMantenimiento)
+);
+
+CREATE TABLE TrabajosMantenimiento(
+  idTrabajoMantenimiento INT NOT NULL AUTO_INCREMENT,	
+  descripcionTrabajo VARCHAR (60),	
+  idMantenimiento INT NOT NULL,
+  precio DOUBLE NOT NULL,
+  tiempoEstTrabajo INTEGER NOT NULL,
+  PRIMARY KEY (idTrabajoMantenimiento),
+  FOREIGN KEY (idMantenimiento) REFERENCES Mantenimientos(idMantenimiento)
+);
+
+CREATE TABLE GarantiasVehiculos(
+	idGarantia INT NOT NULL AUTO_INCREMENT,
+	idVehiculo INT NOT NULL,
+	aniosDeGarantia INT,
+	kilometrajeInicialDelVehiculo INT,
+	kilometrajeGarantizado INT,
+	fechaInicioDeLaGarantia DATE,
+	fechaDeCaducidadDeLaGarantia DATE,
+	costoFinalConIVA DOUBLE,
+	PRIMARY KEY(idGarantia),
+	FOREIGN KEY(idVehiculo) REFERENCES Vehiculos(idVehiculo)
+);
+
+CREATE TABLE CompraRepuesto(
+	idCompra INT NOT NULL AUTO_INCREMENT,
+	codigoRepuesto INT NOT NULL,
+	precioCompra DOUBLE NOT NULL,
+	fechaCompra DATE,
+	cantidad INT,
+	PRIMARY KEY(idCompra)
 );
