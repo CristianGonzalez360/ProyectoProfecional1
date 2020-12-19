@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import dto.CompraVehiculoDTO;
-import dto.VentaVehiculoDTO;
-import dto.taller.FacturaDTO;
 import repositories.CompraVehiculoDao;
 import repositories.jdbc.utils.Mapper;
 

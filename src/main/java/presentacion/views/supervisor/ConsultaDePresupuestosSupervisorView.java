@@ -226,6 +226,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 				return listadoDePresupuestosModel.getValueAt(row, ESTADO) == EstadoPresupuesto.PENDIENTE.name();
 			}
 
+			@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
 			public Class getColumnClass(int col) {
 				if (col == EDITABLE)

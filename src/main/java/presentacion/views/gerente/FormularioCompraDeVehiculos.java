@@ -1,30 +1,29 @@
 package presentacion.views.gerente;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
-
-import presentacion.views.vendedor.CaracteristicaDeVehiculoPanel;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import com.jgoodies.forms.layout.FormLayout;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import dto.CaracteristicaVehiculoDTO;
 import dto.temporal.CompraVehiculoUsadoDTO;
-import javax.swing.JButton;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.BevelBorder;
-import java.awt.Color;
-import javax.swing.UIManager;
+import presentacion.views.vendedor.CaracteristicaDeVehiculoPanel;
 
 public class FormularioCompraDeVehiculos extends JDialog {
-
+	private static final long serialVersionUID = 1L;
 	private CaracteristicaDeVehiculoPanel caracteristicas;
 	private FichaTecnicaPanel fichaTecnica;
 	private JTextField txtPrecioCompra;

@@ -8,19 +8,9 @@ import presentacion.views.supervisor.PanelTurnos;
 
 public class VentaVehiculoPresenter {
 
-	private static final String CONFIRMATION = "¿Está seguro que desea salir?";
-
-	private static final String MENSAGE_NUEVO_TURNO = "Se registró Entrega de vehiculo.";
-
-//	private TurnosPanelView view;
-
 	private RegistrarEntregaVehiculoFormView entregaVehiculoVentaForm = RegistrarEntregaVehiculoFormView.getInstance();
 
-	private TurnosController controller;
-
 	public VentaVehiculoPresenter(PanelTurnos view, TurnosController controller) {
-//		this.view = view;
-		this.controller = controller;
 		entregaVehiculoVentaForm.setActionSave(a -> onSave(a));
 		entregaVehiculoVentaForm.setActionCancel(a -> {
 			entregaVehiculoVentaForm.dispose();

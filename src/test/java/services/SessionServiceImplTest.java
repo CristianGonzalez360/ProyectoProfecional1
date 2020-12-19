@@ -26,6 +26,7 @@ class SessionServiceImplTest {
 
 	@Test
 	void testOpenSession() {
+		@SuppressWarnings("static-access")
 		UsuarioDTO dto = new UsuarioDTO().makeTestDTO();
 		Assertions.assertNotNull(dto);
 		SessionServiceImpl.getInstance().openSession(dto, new SucursalDTO());

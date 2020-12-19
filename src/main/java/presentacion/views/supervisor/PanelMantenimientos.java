@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 
 public class PanelMantenimientos extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private JButton btnAceptar;
 	private JButton btnCancelar;
 

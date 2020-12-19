@@ -1,27 +1,27 @@
 package presentacion.views.supervisor;
 
-import javax.swing.JDialog;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import com.jgoodies.forms.layout.FormLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import dto.taller.RepuestoDTO;
 import dto.temporal.IngresoStockDTO;
 
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 public class DialogIngresoStock extends JDialog {
+	private static final long serialVersionUID = 1L;
 	private JTextField tfCodigo;
 	private JTextField tfDescripcion;
 	private JTextField tfMarca;

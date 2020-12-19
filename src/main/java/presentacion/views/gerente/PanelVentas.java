@@ -1,17 +1,15 @@
 package presentacion.views.gerente;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.util.List;
 
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicTreeUI.SelectionModelPropertyChangeHandler;
 import javax.swing.table.DefaultTableModel;
 
-import dto.VentaVehiculoDTO;
 import dto.temporal.VehiculoParaEntregar;
 
 public class PanelVentas extends JPanel {

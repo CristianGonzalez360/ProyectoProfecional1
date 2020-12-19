@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.BevelBorder;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,13 +26,11 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import dto.taller.TrabajoMantenimientoDTO;
 import dto.taller.TrabajoPresupuestadoDTO;
-import javax.swing.UIManager;
 
 public class PlanificarTrabajosFormView extends JPanel {
 	private static final long serialVersionUID = -8919580357142104418L;
 
 	private final String[] columnas = new String[] { "DESCRIPCIÓN", "ESFUERZO", "PRECIO" };
-	private static PlanificarTrabajosFormView instance;
 	private final JPanel panelTrabajosPlanificados = new JPanel();
 	private JTable table;
 

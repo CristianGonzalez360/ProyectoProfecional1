@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import dto.PedidoVehiculoDTO;
-import dto.temporal.PedidoDTO;
 import repositories.PedidoVehiculoDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;

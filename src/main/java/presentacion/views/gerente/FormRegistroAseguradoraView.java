@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import java.awt.Font;
 
 public class FormRegistroAseguradoraView extends JDialog {
-
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textAseguradora;
 	private JTextField textNroPoliza;

@@ -81,6 +81,8 @@ public class PlanificarRepuestosFormView extends JPanel {
 		panelSuperior.setLayout(new BorderLayout(0, 0));
 
 		modelRepuestos = new DefaultTableModel(null, nombreColumnasSuperior) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -148,6 +150,8 @@ public class PlanificarRepuestosFormView extends JPanel {
 		panelInferior.add(scrollPaneRepuestosInferior, BorderLayout.CENTER);
 
 		modelRepuestosInferior = new DefaultTableModel(null, nombreColumnasInferior) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;

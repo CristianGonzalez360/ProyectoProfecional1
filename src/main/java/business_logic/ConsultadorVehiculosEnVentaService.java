@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import dto.VehiculoDTO;
-import dto.VentaVehiculoDTO;
 import dto.temporal.ConsultaVehiculoParaVentaDTO;
 import dto.temporal.OutputConsultaVehiculoEnVentaDTO;
 import repositories.DaosFactory;
@@ -16,7 +15,6 @@ public class ConsultadorVehiculosEnVentaService {
 	public ConsultadorVehiculosEnVentaService() {
 	}
 
-	@SuppressWarnings("deprecation")
 	public List<OutputConsultaVehiculoEnVentaDTO> read(DaosFactory daos, ConsultaVehiculoParaVentaDTO consulta) {
 		Boolean ES_USADO =  new Boolean(consulta.getTipo().equals("Usado"));
 		List<VehiculoDTO> temp = daos.makeVehiculoDao().readByCriteria(consulta.getMarca(), ES_USADO);

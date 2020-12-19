@@ -1,12 +1,8 @@
 package presentacion.views.supervisor;
 
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JToolBar;
 
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
@@ -16,7 +12,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import dto.taller.OrdenDeTrabajoDTO;
 
 public class PanelOrdenDeTrabajo extends JPanel {
-
+	private static final long serialVersionUID = 1L;
 	private JLabel lblNewLabel_15;
 	private JTextField textFechaAltaOt;
 	private JLabel lblNewLabel_16;
@@ -27,8 +23,6 @@ public class PanelOrdenDeTrabajo extends JPanel {
 	private JTextField textTrabajoSugeridoOt;
 	private JLabel lblTipoDeOrden;
 	private JTextField textTipoDeOT;
-	private JPanel panel_8;
-
 	/**
 	 * Create the panel.
 	 */

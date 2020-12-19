@@ -1,17 +1,19 @@
 package presentacion.views.gerente;
 
+import java.awt.Color;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
 import dto.CaracteristicaVehiculoDTO;
-import javax.swing.border.BevelBorder;
-import java.awt.Color;
-import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class CaracteristicaNuevoCarView extends JPanel {

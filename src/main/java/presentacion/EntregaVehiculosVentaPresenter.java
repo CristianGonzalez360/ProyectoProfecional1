@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.event.ListSelectionEvent;
+
 import business_logic.ClientesController;
 import business_logic.ControllersFactory;
 import business_logic.VentasVehiculosController;
@@ -13,7 +14,6 @@ import business_logic.exceptions.ForbiddenException;
 import dto.CaracteristicaVehiculoDTO;
 import dto.ClienteDTO;
 import dto.VehiculoDTO;
-import dto.VentaVehiculoDTO;
 import dto.taller.FichaTecnicaVehiculoDTO;
 import dto.taller.IngresoOrdenDeTrabajoDTO;
 import dto.temporal.VehiculoParaEntregar;

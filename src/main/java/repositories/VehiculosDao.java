@@ -5,7 +5,6 @@ import java.util.List;
 
 import dto.CompraVehiculoDTO;
 import dto.VehiculoDTO;
-import dto.temporal.CompraVehiculoUsadoDTO;
 
 public interface VehiculosDao extends GenericDao<VehiculoDTO, Integer> {
 

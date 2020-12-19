@@ -332,6 +332,9 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_3.add(scrollPaneRepuestos, BorderLayout.CENTER);
 
 		this.listadoDeRepuestosModel = new DefaultTableModel(null, this.columnasListadoDeRepuestos) {
+
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Class<?> getColumnClass(int columnIndex) {
 				return columnIndex == 5 ? Boolean.class : super.getColumnClass(columnIndex);

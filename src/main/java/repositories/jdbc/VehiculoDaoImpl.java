@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
-import dto.CompraRepuestoDTO;
 import dto.CompraVehiculoDTO;
 import dto.VehiculoDTO;
-import dto.temporal.CompraVehiculoUsadoDTO;
 import repositories.VehiculosDao;
 import repositories.jdbc.utils.Mapper;
 import repositories.jdbc.utils.NullObject;
