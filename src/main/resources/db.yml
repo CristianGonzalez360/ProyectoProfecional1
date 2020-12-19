@@ -1,26 +1,32 @@
 #RECOMENDADO SOLO AGREGAR!!
 cuentas:
-  - fechaDeAlta: 1990-08-07
+  - idCuenta: 1
+    fechaDeAlta: 2020-06-10
     nombreUsuario: u001
     password: pu001
     role: tecnico
-  - fechaDeAlta: 2020-10-10
+  - idCuenta: 2
+    fechaDeAlta: 2020-06-10
     nombreUsuario: u002
     password: pu002
     role: supervisor
-  - fechaDeAlta: 2010-15-10
+  - idCuenta: 3
+    fechaDeAlta: 2020-06-10
     nombreUsuario: u003
     password: pu003
     role: cajero
-  - fechaDeAlta: 2016-15-10
+  - idCuenta: 4
+    fechaDeAlta: 2020-06-10
     nombreUsuario: u004
     password: pu004
     role: gerente
-  - fechaDeAlta: 2017-05-12
+  - idCuenta: 5
+    fechaDeAlta: 2020-06-10
     nombreUsuario: u005
     password: pu005
     role: vendedor
-  - fechaDeAlta: 2011-05-12
+  - idCuenta: 6
+    fechaDeAlta: 2020-06-10
     nombreUsuario: u006
     password: pu006
     role: admin
@@ -28,104 +34,94 @@ cuentas:
 datosPersonales:
   - nombreCompleto: u001
     apellido: ap001
-    dni: 33390341
-    telefono: 1111
-    email: u001@mail.com
-    calle: calle1
-    altura: 1
-    piso: 1
+    dni: 38333441
+    telefono: 112255361
+    email: u001@lsgroup.com
+    calle: Dorrego
+    altura: 111
+    piso: 5
     dpto: A1
-    localidad: localidad1
+    localidad: Los Polvorines
   - nombreCompleto: u002
     apellido: ap002
-    dni: 33390342
-    telefono: 1112
-    email: u002@mail.com
-    calle: calle1
-    altura: 1
-    piso: 1
-    dpto: A1
-    localidad: localidad1
-  - nombreCompleto: u004
-    apellido: ap004
-    dni: 12345
-    telefono: 1112
-    email: u004@mail.com
-    calle: calle1
-    altura: 1
-    piso: 1
-    dpto: A1
-    localidad: localidad1
+    dni: 38333442
+    telefono: 1122553682
+    email: u002@lsgroup.com
+    calle: Protector del Perú
+    altura: 42
+    piso: 
+    dpto: 
+    localidad: San Miguel
   - nombreCompleto: u003
     apellido: ap003
-    dni: 33390388
-    telefono: 1113
-    email: u003@mail.com
-    calle: calle1
+    dni: 38333443
+    telefono: 1122553683
+    email: u003@lsgroup.com
+    calle: Jose Leon Suarez
     altura: 1
     piso: 1
     dpto: A1
-    localidad: localidad1
-  - nombreCompleto: c001
-    apellido: ap003
-    dni: 33390343
-    telefono: 321111
-    email: c001@mail.com
-    calle: calle1
-    altura: 11
-    piso: 12
-    dpto: A3
-    localidad: localidad3
-  - nombreCompleto: c004
+    localidad: Los Polvorines
+  - nombreCompleto: u004
     apellido: ap004
-    dni: 123456
-    telefono: 321111
-    email: c004@mail.com
-    calle: calle1
-    altura: 11
-    piso: 12
-    dpto: A3
-    localidad: localidad4
+    dni: 38333444
+    telefono: 1122553684
+    email: u004@lsgroup.com
+    calle: Maria Gutiérrez
+    altura: 
+    piso: 
+    dpto: A1
+    localidad: Gral. Pacheco
   - nombreCompleto: c005
     apellido: ap005
-    dni: 111222
-    telefono: 3211323
-    email: c005@mail.com
-    calle: calle1
-    altura: 11
-    piso: 12
-    dpto: A3
-    localidad: localidad4
-  - nombreCompleto: c002
-    apellido: ap004
-    dni: 33390344
-    telefono: 611611
-    email: c002@mail.com
-    calle: calle111
-    altura: 166
-    piso: 11
+    dni: 38333445
+    telefono: 1122553685
+    email: c005@lsgroup.com
+    calle: Roca
+    altura: 125
+    piso: 
+    dpto: 
+    localidad: San Miguel
+  - nombreCompleto: c006
+    apellido: ap006
+    dni: 38333446
+    telefono: 1122553686
+    email: c006@lsgroup.com
+    calle: Chacabuco
+    altura: 116
+    piso: 
+    dpto: 
+    localidad: Los Polvorines
+  - nombreCompleto: Ana
+    apellido: Garcia
+    dni: 33390341
+    telefono: 11333941
+    email: anagarcia@email.com
+    calle: Chaco
+    altura: 31
+    piso: 
+    dpto: 
+    localidad: Gral Pacheco
+  - nombreCompleto: Miguel
+    apellido: Sanchez
+    dni: 33390342
+    telefono: 11333942
+    email: miguel.sanchez@email.com
+    calle: Soler
+    altura: 32
+    piso: 4
     dpto: B1
-    localidad: localidad1
-  - nombreCompleto: cc002
-    apellido: ap3004
-    dni: 33311344
-    telefono: 614411
-    email: c0012@mail.com
-    calle: calle1221
-    altura: 1661
-    piso: 11
-    dpto: B11
-    localidad: localidad213 
-  - nombreCompleto: Marco
-    apellido: Yupanqui
-    dni: 999
-    telefono: 55555
-    email: marco.yu@gmail.com
-    calle: pepe
-    altura: 1995
-    piso: 11
-    dpto: B11
-    localidad: malvinas
+    localidad: Los Polvorines
+  - nombreCompleto: Julian
+    apellido: Alesio
+    dni: 33390343
+    telefono: 11333943
+    email: miguel.sanchez@email.com
+    calle: Soldan
+    altura: 53
+    piso: 5
+    dpto: A2
+    localidad: Los Polvorines
     
 usuarios:
   - cuenta:
@@ -155,38 +151,39 @@ usuarios:
       
 turnos:
   - idCliente: 1
-    dniCliente: 33333
-    fechaAlta: 2020-11-05
-    fechaProgramada: 2020-12-20
-    nombreCliente: c007
-    apellidoCliente: ap007
-    telefonoCliente: "1136635555"
-    emailCliente: "ejemplo0@dominio.com"
-  - idCliente: 12
-    dniCliente: 22222
-    fechaAlta: 2020-11-05
-    fechaProgramada: 2020-12-20
-    nombreCliente: c008
-    apellidoCliente: ap008
-    telefonoCliente: "1133335555"
-    emailCliente: "ejemplo1@dominio.com"
+    dniCliente: 33390344
+    fechaAlta: 2020-11-18
+    fechaProgramada: 2020-12-21
+    nombreCliente: Miguel
+    apellidoCliente: Sales
+    telefonoCliente: "1121587976"
+    emailCliente: "miguel.sales@gmaill.com"
+  - idCliente: 2
+    dniCliente: 33390345
+    fechaAlta: 2020-11-18
+    fechaProgramada: 2020-12-22
+    nombreCliente: Paula
+    apellidoCliente: Blazquez
+    telefonoCliente: "1128795444"
+    emailCliente: "paula.blazquez@hotmaill.com"
   - idCliente: 3
-    dniCliente: 111111
-    fechaAlta: 2020-11-05
-    fechaProgramada: 2020-12-20
-    nombreCliente: c009
-    apellidoCliente: ap009
-    telefonoCliente: "1122335555"
-    emailCliente: "ejemplo2@dominio.com"
-  - idCliente: 5
-    dniCliente: 44444
-    fechaAlta: 2020-11-05
-    fechaProgramada: 2020-12-19
-    nombreCliente: c0010
-    apellidoCliente: ap0010
-    telefonoCliente: "1133335955"
-    emailCliente: "ejemplo3@dominio.com"
+    dniCliente: 33390346
+    fechaAlta: 2020-11-18
+    fechaProgramada: 2020-12-21
+    nombreCliente: Ana
+    apellidoCliente: Ballester
+    telefonoCliente: "1100254366"
+    emailCliente: "anabelen@gmaill.com"
+  - idCliente: 4
+    dniCliente: 33390347
+    fechaAlta: 2020-11-18
+    fechaProgramada: 2020-12-23
+    nombreCliente: Diego
+    apellidoCliente: Llorente
+    telefonoCliente: "113336865"
+    emailCliente: "diego.llorente@hotmaill.com"
     
+
 fichaTecnicaVehiculos:
   - nroChasis: 3125
     nroMotor: 22552
@@ -207,124 +204,136 @@ fichaTecnicaVehiculos:
     descripcion: funciona ok
     patente: 789ghi
 
+ 
 clientes:
-  - idDatosPersonales: 1 
-    fechaAltaCliente: 2020-10-25
-  - idDatosPersonales: 2 
-    fechaAltaCliente: 2020-10-25
-  - idDatosPersonales: 3 
-    fechaAltaCliente: 2020-10-25
-  - idDatosPersonales: 10 
-    fechaAltaCliente: 2020-10-25
+  - idDatosPersonales: 7 
+    fechaAltaCliente: 2020-11-10
+  - idDatosPersonales: 8
+    fechaAltaCliente: 2020-11-10
+  - idDatosPersonales: 9
+    fechaAltaCliente: 2020-11-10
+ 
+ 
 vehiculosConOrdenDeTrabajo:
   - idFichaTecnica: 1
-    idCliente: 1
-    kilometrajeGarantia: 123
-    aseguradora: la nueva
-    nroPolizaSeguro: 4234
-    patente: 6664
-    idVehiculo:
-  - idFichaTecnica: 1
-    idCliente: 2
-    kilometrajeGarantia: 123
-    aseguradora: la nueva
-    nroPolizaSeguro: 4234
-    patente: 6662
-    idVehiculo:
-  - idFichaTecnica: 2
-    idCliente: 2
-    kilometrajeGarantia: 123
-    aseguradora: la nueva
-    nroPolizaSeguro: 4234
-    patente: 6661
-    idVehiculo:
-  - idFichaTecnica: 2
-    idCliente: 3
-    kilometrajeGarantia: 123
-    aseguradora: la nueva
-    nroPolizaSeguro: 4234
-    patente: 66611
-    idVehiculo:
-
+    idCliente: 9
+    kilometrajeGarantia: 1000
+    aseguradora: La Nueva
+    nroPolizaSeguro: 1012152209
+    patente: SGI206
+    idVehiculo: //falta
+ 
+ 
 ordenesDeTrabajo:
-  - tipoOrdeTrabajo: Garantia
+  - tipoOrdeTrabajo: Taller
     idUsuarioAlta: 1
-    fechaDeAlta: 2020-05-10
+    fechaDeAlta: 2020-12-19
     fechaEntregado:
-    trabajoSolicitado: tren delantero y chapa
-    trabajoSujerido: cambio de neumaticos delanteros
-    idVehiculoOt: 1
-  - tipoOrdeTrabajo: taller
-    idUsuarioAlta: 1
-    fechaDeAlta:
-    fechaEntregado: 2020-06-10
-    trabajoSolicitado: electricidad
-    trabajoSujerido: cambio de caja de transmision
-    idVehiculoOt: 2
-  - tipoOrdeTrabajo: taller
-    idUsuarioAlta: 1
-    fechaDeAlta: 2020-02-10
-    fechaEntregado:
-    trabajoSolicitado: cambio de cremallera
-    trabajoSujerido: cambio el auto
-    idVehiculoOt: 3
-    descripcion: funciona ok
-    
-repuestos:
-  - codigoRepuesto: 22230
-    precioRepuesto: 126
-    marcaRepuesto: xx1
-    descripcionRepuesto: ruleman
-    stockRepuesto: 337
-    fabricante: fx
-    stockMinimo: 13
-    garantia: true
-    precioCompra: 90
-  - codigoRepuesto: 111430
-    precioRepuesto: 876
-    marcaRepuesto: dfv
-    descripcionRepuesto: csdc
-    stockRepuesto: 78
-    fabricante: sdfg
-    stockMinimo: 99
-    garantia: false
-    precioCompra: 90
-  - codigoRepuesto: 109986
-    precioRepuesto: 1523
-    marcaRepuesto: ghj
-    descripcionRepuesto: ruleman
-    stockRepuesto: 310
-    fabricante: ghj
-    stockMinimo: 8
-    garantia: false
-    precioCompra: 90
-  - codigoRepuesto: 14230
-    precioRepuesto: 102
-    marcaRepuesto: gdfg
-    descripcionRepuesto: rulemanxx
-    stockRepuesto: 355
-    fabricante: sgf
-    stockMinimo: 7
-    garantia: false
-    precioCompra: 90
-  - codigoRepuesto: 510230
-    precioRepuesto: 1300
-    marcaRepuesto: skf11
-    descripcionRepuesto: dgruleman
-    stockRepuesto: 303
-    fabricante: sgdfg
-    stockMinimo: 2123
-    garantia: false
-    precioCompra: 90
+    trabajoSolicitado: Revision de frenos
+    trabajoSujerido: Cambio de disco de frenos
+    idVehiculoOt: 1 
 
+ 
+repuestos:
+  - codigoRepuesto: 22231
+    precioRepuesto: 2.440
+    marcaRepuesto: Bosch
+    descripcionRepuesto: Pastillas Delanteras / 206 1.6
+    stockRepuesto: 18
+    fabricante: Peugeot
+    stockMinimo: 10
+    garantia: true
+    precioCompra: 1.100
+  - codigoRepuesto: 22231
+    precioRepuesto: 1.150
+    marcaRepuesto: dfv
+    descripcionRepuesto: Pastillas Traseras / 206 1.6
+    stockRepuesto: 27
+    fabricante: Peugeot
+    stockMinimo: 10
+    garantia: true
+    precioCompra: 590
+  - codigoRepuesto: 22232
+    precioRepuesto: 4.690
+    marcaRepuesto: Corven
+    descripcionRepuesto: Discos / 206 308
+    stockRepuesto: 23
+    fabricante: Peugeot
+    stockMinimo: 20
+    garantia: false
+    precioCompra: 2.200
+  - codigoRepuesto: 22233
+    precioRepuesto: 4.363
+    marcaRepuesto: Peugeot
+    descripcionRepuesto: Correa Distribucion 134 Dientes / 308 1.6
+    stockRepuesto: 26
+    fabricante: Peugeot
+    stockMinimo: 7
+    garantia: true
+    precioCompra: 2.500
+  - codigoRepuesto: 22234
+    precioRepuesto: 5.394
+    marcaRepuesto: Peugeot
+    descripcionRepuesto: Vidrio Espejo Izquierdo / 308 1.6
+    stockRepuesto: 25
+    fabricante: Peugeot
+    stockMinimo: 18
+    garantia: false
+    precioCompra: 2.360 
+  - codigoRepuesto: 22234
+    precioRepuesto: 9.500
+    marcaRepuesto: Peugeot
+    descripcionRepuesto: Pomo Palanca De Cambio / Peugeot 308 1.6
+    stockRepuesto: 15
+    fabricante: Peugeot
+    stockMinimo: 10
+    garantia: false
+    precioCompra: 4.810 
+  - codigoRepuesto: 22235
+    precioRepuesto: 1.350
+    marcaRepuesto: Peugeot
+    descripcionRepuesto: Soporte Izq Motor Y Caja / 308 1.6
+    stockRepuesto: 25
+    fabricante: Peugeot
+    stockMinimo: 18
+    garantia: true
+    precioCompra: 802
+  - codigoRepuesto: 22236
+    precioRepuesto: 840
+    marcaRepuesto: Liftgate
+    descripcionRepuesto: Amortiguador Baul Trasero / Gold Trend
+    stockRepuesto: 25
+    fabricante: Liftgate
+    stockMinimo: 18
+    garantia: false
+    precioCompra: 220 
+  - codigoRepuesto: 22237
+    precioRepuesto: 840
+    marcaRepuesto: Volkswagen
+    descripcionRepuesto: Chapon Cubre Carte / Gold Trend
+    stockRepuesto: 28
+    fabricante: Volkswagen
+    stockMinimo: 19
+    garantia: false
+    precioCompra: 270 
+  - codigoRepuesto: 22237
+    precioRepuesto: 2.999
+    marcaRepuesto: Volkswagen
+    descripcionRepuesto: Perilla De Cambios / Gold Trend
+    stockRepuesto: 28
+    fabricante: Volkswagen
+    stockMinimo: 19
+    garantia: false
+    precioCompra: 1.899
+ 
 presupuestos:
   - idOT: 1
     idUsuAltaPresu:  1
     idUsuCierrePresu:
     idUsuRegPago: 
     idPago:
-    fechaAltaPresu: 2020-10-10
-    comentarioAltaPresu: El tren delantero esta destrozado
+    fechaAltaPresu: 2020-10-19
+    comentarioAltaPresu: Cambio de disco  y pastillas de freno
     comentarioRechazo:
     fechaAprobacion:
     garantia: true
@@ -333,184 +342,249 @@ presupuestos:
     idUsuCierrePresu:
     idUsuRegPago:
     idPago:
-    fechaAltaPresu: 2020-10-11
-    comentarioAltaPresu: revisar bomba de nafta
+    fechaAltaPresu: 2020-10-19
+    comentarioAltaPresu: Cambio de Neumatico trasero
     comentarioRechazo:
     fechaAprobacion:
     garantia: false
     
 trabajos: 
   - idPresupuesto: 1
-    descripcionTrabajo: reparacion de la electricidad
-    precioTrabajo: 2033
-    tiempoEstTrabajo: 12
+    descripcionTrabajo: Cambio de pastilla trasera
+    precioTrabajo: 3.150
+    tiempoEstTrabajo: 6
   - idPresupuesto: 1
-    descripcionTrabajo: reparar rotula izquierda
-    precioTrabajo: 800
-    tiempoEstTrabajo: 7
+    descripcionTrabajo: Cambio de disco trasero
+    precioTrabajo: 6.690
+    tiempoEstTrabajo: 2
  
 repuestosPlanificados:
-  - idRepuesto: 1
+  - idRepuesto: 2
     idPresu: 1
-    cantRequerida: 24
-    precio: 126
+    cantRequerida: 2
+    precio: 1.150
     garantia : true
   - idRepuesto: 3
     idPresu: 1
-    cantRequerida: 14
-    precio: 1523
-    garantia : false
-  - idRepuesto: 2
-    idPresu: 2
-    cantRequerida: 5
-    precio: 876
+    cantRequerida: 1
+    precio: 4.690
     garantia : false
 
 facturas:
-  - idFactura: 1
-    idOrdenDeTrabajo: 1
-    fechaDeAlta: 2020-10-11
-    fechaDeCierrePorPago: 
-    total: 100
-    estado: IMPAGA
-    idCliente: 1
-    dni: 33390341
-    descripcion : Venta Repuestos
-  - idFactura: 2
-    idOrdenDeTrabajo: 2
-    fechaDeAlta: 2020-10-11
-    fechaDeCierrePorPago: 
-    total: 100
-    estado: IMPAGA
-    idCliente: 1
-    dni: 33390341
-    descripcion : Venta Repuestos
-  - idFactura: 3
-    idOrdenDeTrabajo: 2
-    fechaDeAlta: 2020-10-11
-    fechaDeCierrePorPago: 
-    total: 200
-    estado: IMPAGA
-    idCliente: 1
-    dni: 33390342
-    descripcion : Venta Repuestos
-  - idFactura: 4
-    idOrdenDeTrabajo: 2
-    fechaDeAlta: 2020-10-11
-    fechaDeCierrePorPago: 2020-10-11
-    total: 200
+  - idFactura: 33540
+    idOrdenDeTrabajo:
+    fechaDeAlta: 2020-10-18
+    fechaDeCierrePorPago: 2020-10-18
+    total: 4.355
     estado: PAGA
     idCliente: 1
-    dni: 33390343
+    dni: 33390347
+    descripcion : Venta Repuestos
+  - idFactura: 33541
+    idOrdenDeTrabajo:
+    fechaDeAlta: 2020-10-18
+    fechaDeCierrePorPago: 2020-10-18
+    total: 2.368
+    estado: PAGA
+    idCliente: 2
+    dni: 33390347
     descripcion : Venta Repuestos
 
 caracteristicaVehiculo:
-  - cilindrada: 1.58
-    motor: 1.56 MSI nafta
-    transmision: Manual 5 velocidades
-    direccion: electrica asistida
-    potencia: 100 CV
-    frenosDelanteros: Discos ventilados
-    frenosTraseros: A tambor
-    torqueMaximo: 155/4000
-    volumenBaul: 300 cc
+  - cilindrada: 1499
+    motor: 1.5L TiVCT
+    transmision: Manual 5 Velocidades
+    direccion: Asistida Electrónica (EPAS)
+    potencia: (CV) 123 @ 6000
+    frenosDelanteros: Disco
+    frenosTraseros: Tambor
+    torqueMaximo: (Nm) 151 @ 4500
+    volumenBaul: 300 CC
     cantidadPuertas: 4
-    precio: 1000000
-  - cilindrada: 1.58
-    motor: 2.0 MSI nafta
-    transmision: Manual 5 velocidades
-    direccion: electrica asistida
-    potencia: 150 CV
-    frenosDelanteros: Discos ventilados
-    frenosTraseros: A tambor
-    torqueMaximo: 155/4000
-    volumenBaul: 350 cc
+    precio: 1.172.000
+  - cilindrada: 1499
+    motor: Motor 1.5L TiVCT
+    transmision: Manual 5 Velocidades
+    direccion: Asistida Electrónica (EPAS)
+    potencia: (CV) 123 @ 6000
+    frenosDelanteros: Disco
+    frenosTraseros: Tambor
+    torqueMaximo: (Nm) 151 @ 4500
+    volumenBaul: 350 CC
+    cantidadPuertas: 4
+    precio: 1.177.000
+  - cilindrada: 4.00
+    motor: 2.0L Ecoboost GTDI
+    transmision: AT 6 vel. c/Levas en volante
+    direccion: Asistida Electrónica (EPAS)
+    potencia: 240 / 5500
+    frenosDelanteros:
+    frenosTraseros:
+    torqueMaximo: 340 / 1750 - 4000
+    volumenBaul: 300 CC
+    cantidadPuertas: 4
+    precio: 4.427.900
+  - cilindrada: 1.59
+    motor: MSI 1.6 l / 8 válvulas
+    transmision: Manual / Automática
+    direccion: Asistida Electrónica (EPAS)
+    potencia: 101 CV
+    frenosDelanteros:
+    frenosTraseros:
+    torqueMaximo: 340 / 1750 - 4000
+    volumenBaul: 300 CC
+    cantidadPuertas: 4
+    precio: 768.100
+  - cilindrada: 1.60
+    motor: 1.6 L / 16 v
+    transmision: Automática
+    direccion:
+    potencia: 115 CV
+    frenosDelanteros:
+    frenosTraseros: Disco 
+    torqueMaximo: 15.8 kgm / 4.250 rpm
+    volumenBaul: 300 CC
+    cantidadPuertas: 6
+    precio: 2.065.000
+   - cilindrada: 
+    motor: 1.6 L
+    transmision: Manual
+    direccion:
+    potencia: 70 HP
+    frenosDelanteros:
+    frenosTraseros: Disco
+    torqueMaximo: 147 @ 4000 rpm
+    volumenBaul: 300 CC
     cantidadPuertas: 3
-    precio: 1500000
-  - cilindrada: 1.58
-    motor: 1.56 MSI nafta
-    transmision: Automatica 5 velocidades
-    direccion: electrica
-    potencia: 100 CV
-    frenosDelanteros: Discos ventilados
-    frenosTraseros: A tambor
-    torqueMaximo: 155/4000
-    volumenBaul: 300 cc
-    cantidadPuertas: 3
-    precio: 1000500
+    precio: 677.200
 
 monedas:
-  - nombre: peso arg
+  - nombre: Peso argentino
     simbolo: $
-    cotizacionDolar: 200
-  - nombre: guarani
+    cotizacionDolar: 82.76
+  - nombre: Guaraní paraguayo
+    simbolo: ₲
+    cotizacionDolar: 6983.65
+  - nombre: Peso uruguayo
     simbolo: $
-    cotizacionDolar: 1500
-  - nombre: peso uru
+    cotizacionDolar: 42.43
+  - nombre: Peso chileno
     simbolo: $
-    cotizacionDolar: 80
-  - nombre: peso chi
-    simbolo: $
-    cotizacionDolar: 50
+    cotizacionDolar: 725.30
 
 sucursales:
   - pais: Argentina
-    calle: Sucre
-    altura: 1233
-    localidad: Avellaneda
+    calle: Juan María Gutiérrez
+    altura: 1150
+    localidad: Los Polvorines
     idMoneda: 1
   - pais: Chile
-    calle: Gral. Pinochet
-    altura: 657
-    localidad: Recoleta
+    calle: Cárcel
+    altura: 471
+    localidad: Valparaiso
     idMoneda: 4
   - pais: Uruguay
-    calle: Susana Gimenez street
-    altura: 4329
-    localidad: Punta del Este
+    calle: Av. de las Leyes
+    altura: 11800
+    localidad: Montevideo
     idMoneda: 3
   - pais: Paraguay
-    calle: Rancho alto
-    altura: 1798
-    localidad: Asuncion
+    calle: Asunción
+    altura: 1767
+    localidad: Las Lomas
     idMoneda: 2
 
 vehiculos:
-#CATALOGO DE VEHICULOS USADOS
-  - precioVenta: 1300000
+#CATALOGO DE VEHICULOS NUEVOS / 1 DE CATALOGO
+  - precioVenta: 1.172.000
     idFichaTecnica: 1
     marca: Ford
-    familia: Focus
-    linea: vip
-    color: rojo
-    fechaIngreso: 2018-10-11
-    disponible: true
-    usado: true
-    idCaracteristicas: 1
-    idSucursal: 3 
- 
-#CATALOGO DE VEHICULOS NUEVOS SIN STOCK
-  - precioVenta: 2100000
-    idFichaTecnica: 1
-    marca: Peugeot
-    familia: 505
-    linea: full
-    color: Negro
-    fechaIngreso: 2017-10-11
+    familia: KA
+    linea: S
+    color: Rojo
+    fechaIngreso: 2020-12-10
     disponible: true
     usado: false
     idCaracteristicas: 1
-    idSucursal:
+    idSucursal: 3
+  - precioVenta: 1.177.000
+    idFichaTecnica: 2
+    marca: Ford
+    familia: KA+
+    linea: S
+    color: Negro
+    fechaIngreso: 2020-11-25
+    disponible: true
+    usado: false
+    idCaracteristicas: 2
+    idSucursal: 3
+  - precioVenta: 4.427.900
+    idFichaTecnica: 3
+    marca: Ford
+    familia: Mondeo
+    linea: Titanium
+    color: Gris
+    fechaIngreso:
+    disponible: false
+    usado: false
+    idCaracteristicas: 3
+    idSucursal: 3
+  - precioVenta: 768.100
+    idFichaTecnica: 4
+    marca: Volkswagen
+    familia: Gol
+    linea: Trendline
+    color: Gris
+    fechaIngreso: 2020-12-02
+    disponible: true
+    usado: false
+    idCaracteristicas: 4
+    idSucursal: 3
+  - precioVenta: 677.200
+    idFichaTecnica: 5
+    marca: Volkswagen
+    familia: Polo
+    linea: GTS
+    color: Rojo
+    fechaIngreso: 2020-12-03
+    disponible: true
+    usado: false
+    idCaracteristicas: 5
+    idSucursal: 3
+ 
+#CATALOGO DE VEHICULOS USADOS
+  - precioVenta: 2.065.000
+    idFichaTecnica: 6
+    marca: Peugeot
+    familia: 
+    linea: 308
+    color: Gris Claro
+    fechaIngreso: 2020-12-01
+    disponible: true
+    usado: true
+    idCaracteristicas: 6
+    idSucursal: 3
+  - precioVenta: 325.000
+    idFichaTecnica: 7
+    marca: Peugeot 
+    familia: 
+    linea: 206
+    color: Gris
+    fechaIngreso: 2020-12-05
+    disponible: true
+    usado: true
+    idCaracteristicas: 7
+    idSucursal: 3
 
 garantias:
-  - idVehiculo: 1
+  - idVehiculo: 6
     aniosDeGarantia: 1
     kilometrajeInicialDelVehiculo: 0
     kilometrajeGarantizado: 90000
     fechaInicioDeLaGarantia: 
     fechaDeCaducidadDeLaGarantia: 2022-10-11 
     costoFinalConIVA: 10000
-  - idVehiculo: 2
+  - idVehiculo: 7
     aniosDeGarantia: 3
     kilometrajeInicialDelVehiculo: 0
     kilometrajeGarantizado: 150000
