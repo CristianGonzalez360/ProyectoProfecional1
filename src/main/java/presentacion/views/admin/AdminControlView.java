@@ -35,7 +35,7 @@ public class AdminControlView extends JInternalFrame {
 	private AdminControlView() {
 		setMaximizable(true);
 		setIconifiable(true);
-		setTitle("Admin control view");
+		setTitle("Administrador Control View");
 		setBounds(100, 100, 633, 424);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -43,13 +43,13 @@ public class AdminControlView extends JInternalFrame {
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
 		panelSucursales = new PanelSucursales();
-		tabbedPane.addTab("Consulta de sucursales", null, panelSucursales, null);
+		tabbedPane.addTab("Consulta de Sucursales", null, panelSucursales, null);
 
 		panelUsuarios = new PanelGestionUsuariosView();
-		tabbedPane.addTab("Gestion de usuarios", null, panelUsuarios, null);
+		tabbedPane.addTab("Gestión de Usuarios", null, panelUsuarios, null);
 
 		panelConfiguracion = new PanelConfiguracionGeneral();
-		tabbedPane.addTab("Configuracion general", null, panelConfiguracion, null);
+		tabbedPane.addTab("Configuración General", null, panelConfiguracion, null);
 
 		JPanel panel = new JPanel();
 		panelUsuarios.add(panel, BorderLayout.SOUTH);

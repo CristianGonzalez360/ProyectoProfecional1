@@ -38,7 +38,7 @@ public class PanelGestionUsuariosView extends JPanel {
 		JPanel panelSouth = new JPanel();
 		panel_1.add(panelSouth, BorderLayout.SOUTH);
 		
-		btnActualizar = new JButton("Refresh table");
+		btnActualizar = new JButton("Refrescar tabla");
 		panelSouth.add(btnActualizar);
 
 		btnRegistrarUsuario = new JButton("Registrar usuario");

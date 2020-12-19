@@ -21,7 +21,7 @@ public class PanelConfiguracionSMTP extends JPanel {
 	private JTextField textPassword;
 
 	public PanelConfiguracionSMTP() {
-		setBorder(new TitledBorder(null, "Configuracion servirdor SMTP", TitledBorder.LEADING, TitledBorder.TOP, null,
+		setBorder(new TitledBorder(null, "Configuración de servirdor SMTP", TitledBorder.LEADING, TitledBorder.TOP, null,
 				null));
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -34,14 +34,14 @@ public class PanelConfiguracionSMTP extends JPanel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 
-		JLabel lblNewLabel_2 = new JLabel("Email remitente");
+		JLabel lblNewLabel_2 = new JLabel("Email Remitente");
 		add(lblNewLabel_2, "2, 2, left, default");
 
 		textEmail = new JTextField();
 		add(textEmail, "4, 2, fill, default");
 		textEmail.setColumns(10);
 
-		JLabel lblNewLabel_3 = new JLabel("Password remitente");
+		JLabel lblNewLabel_3 = new JLabel("Password Remitente");
 		add(lblNewLabel_3, "2, 4, left, default");
 
 		textPassword = new JTextField();

@@ -120,7 +120,7 @@ public class DatosPersonalesPanel extends JPanel {
 		add(textPiso, "4, 16, fill, default");
 		textPiso.setColumns(10);
 
-		JLabel lblNewLabel_8 = new JLabel("Dpto");
+		JLabel lblNewLabel_8 = new JLabel("Departamento");
 		add(lblNewLabel_8, "2, 18, left, default");
 
 		textDpto = new JTextField();

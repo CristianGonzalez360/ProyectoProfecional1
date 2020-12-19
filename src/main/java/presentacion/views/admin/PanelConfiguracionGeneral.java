@@ -37,7 +37,7 @@ public class PanelConfiguracionGeneral extends JPanel {
 		btnSeedDB = new JButton("Seed DB");
 		panelOpciones.add(btnSeedDB);
 
-		btnConfigurarDb = new JButton("Configurar DB");
+		btnConfigurarDb = new JButton("Configurar Base de Datos");
 		panelOpciones.add(btnConfigurarDb);
 
 		btnNewButton_1 = new JButton("Configurar SMTP");

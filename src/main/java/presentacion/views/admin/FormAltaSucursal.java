@@ -44,7 +44,7 @@ public class FormAltaSucursal extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setModal(true);
 		setResizable(false);
-		setTitle("Form alta de sucursal");
+		setTitle("Nueva Sucursal");
 		setBounds(100, 100, 294, 222);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -89,7 +89,7 @@ public class FormAltaSucursal extends JDialog {
 		okButton.setActionCommand("OK");
 		buttonPane.add(okButton);
 		getRootPane().setDefaultButton(okButton);
-		cancelButton = new JButton("Cancel");
+		cancelButton = new JButton("Cancelar");
 		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
 	}

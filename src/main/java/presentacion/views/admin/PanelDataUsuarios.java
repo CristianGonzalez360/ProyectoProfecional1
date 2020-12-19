@@ -22,7 +22,7 @@ public class PanelDataUsuarios extends JPanel {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 		usuarioPanelData = new DatosPersonalesPanel();
-		usuarioPanelData.setBorderTitle("Datos del usuario");
+		usuarioPanelData.setBorderTitle("Datos del Usuario");
 		panel.add(usuarioPanelData);
 
 		cuentaUsuarioPanel = new CuentaUsuarioPanel();

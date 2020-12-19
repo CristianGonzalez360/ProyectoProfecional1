@@ -35,7 +35,7 @@ public class FormAltaUsuario extends JDialog {
 	}
 
 	private FormAltaUsuario() {
-		setTitle("Form de alta de usuario");
+		setTitle("Nuevo Usuario");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 379, 602);
 		getContentPane().setLayout(new BorderLayout());
@@ -57,7 +57,7 @@ public class FormAltaUsuario extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				cancelButton = new JButton("Cancel");
+				cancelButton = new JButton("Cancelar");
 				cancelButton.setActionCommand("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
