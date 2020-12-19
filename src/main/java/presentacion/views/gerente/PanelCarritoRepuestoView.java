@@ -40,10 +40,10 @@ public class PanelCarritoRepuestoView extends JPanel {
 
 	private final JPanel panelDerecho = new JPanel();
 
-	private static final String[] nombreColumnasSuperior = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock",
-			"Precio" };
-	private static final String[] nombreColumnasInferior = { "Codigo", "Descripcion", "Marca", "Fabricante",
-			"Cantidad" };
+	private static final String[] nombreColumnasSuperior = { "CODIGO", "DESCRIPCION", "MARCA", "FABRICANTE", "SOTOCK",
+			"PRECIO" };
+	private static final String[] nombreColumnasInferior = { "CODIGO", "DESCRIPCION", "MARCA", "FABRICANTE",
+			"CANTIDAD" };
 
 	private JPanel panelSuperior = new JPanel();
 	private JPanel panelInterior = new JPanel();
@@ -125,7 +125,7 @@ public class PanelCarritoRepuestoView extends JPanel {
 			}
 		});
 
-		lblTotalFactura = new JLabel("Total factura: ");
+		lblTotalFactura = new JLabel("Total Factura: ");
 		buttonPane.add(lblTotalFactura);
 
 		tfTotalFactura = new JTextField();

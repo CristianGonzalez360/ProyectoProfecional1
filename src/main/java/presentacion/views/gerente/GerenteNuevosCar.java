@@ -23,7 +23,7 @@ import dto.VehiculoDTO;
 @SuppressWarnings("serial")
 public class GerenteNuevosCar extends JPanel {
 
-	private static final String[] nombreColumnasAuto = { "Código", "Marca", "Familia", "Linea", "Color", "Precio", "Deposito" };
+	private static final String[] nombreColumnasAuto = { "CODIGO", "MARCA", "FAMILIA", "LINEA", "COLOR", "PRECIO", "DEPOSITO" };
 
 	private JPanel panelSuperior = new JPanel();
 	private JPanel panelInterior = new JPanel();
@@ -70,7 +70,7 @@ public class GerenteNuevosCar extends JPanel {
 		panelSuperior = new JPanel();
 		panelSuperior.setForeground(SystemColor.menu);
 		panelSuperior.setBorder(
-				new TitledBorder(null, "Vehiculos para la venta", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+				new TitledBorder(null, "Vehiculos para la Venta", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		panelSuperior.setBackground(SystemColor.menu);
 		panelIzquierdo.add(panelSuperior);
 		panelSuperior.setLayout(new BorderLayout(0, 0));

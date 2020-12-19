@@ -72,7 +72,7 @@ public class HistorialVentasGerenteView extends JPanel {
 		panel_3.add(btnCargarVentas);
 
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Listado Ventas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null, "Listado de Ventas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		add(panel);
 
 		this.listadoDeVentasModel = new DefaultTableModel(null, this.columnasListadoDeVentas);

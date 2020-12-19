@@ -24,7 +24,7 @@ public class PanelVehiculosUsados extends JPanel {
 	private CaracteristicaDeVehiculoPanel caracteristicas;
 	private FichaTecnicaPanel fichaTecnica;
 	private TablePanel<VehiculoDTO> tabla;
-	private static final String[] columnas = { "NRO", "Marca", "Familia", "Linea" };
+	private static final String[] columnas = { "NRO", "MARCA", "FAMILIA", "LINEA" };
 	private static PanelVehiculosUsados instance;
 	private JPanel panel;
 	private JButton btnRegistrar;

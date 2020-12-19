@@ -17,8 +17,8 @@ public class PanelVentaVehiculosDisponibles extends JPanel {
 
 	private JTable tablaVentas;
 	private DefaultTableModel modelo;
-	private static final String[] columnas = { "Nro.", "Fecha de venta", "Estado del pedido", "Estado del vehículo",
-			"Sucursal", "Documentacion" };
+	private static final String[] columnas = { "NRO", "FECHA DE VENTA", "ESTADO DEL PEDIDO", "ESTADO DEL VEHICULO",
+			"SUCURSAL", "DOCUMENTACION" };
 
 	public PanelVentaVehiculosDisponibles() {
 		setLayout(new BorderLayout(0, 0));

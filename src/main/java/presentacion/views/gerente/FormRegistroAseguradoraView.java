@@ -34,7 +34,7 @@ public class FormRegistroAseguradoraView extends JDialog {
 
 	public FormRegistroAseguradoraView() {
 		setBounds(100, 100, 450, 190);
-		setTitle("Registro aseguradora");
+		setTitle("Registro de Aseguradora");
 		setModal(true);
 		setResizable(false);
 
@@ -72,7 +72,7 @@ public class FormRegistroAseguradoraView extends JDialog {
 		buttonPane.add(btnSalvar);
 		getRootPane().setDefaultButton(btnSalvar);
 
-		JButton cancelButton = new JButton("Cancel");
+		JButton cancelButton = new JButton("Cancelar");
 		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
 		cancelButton.addActionListener(new ActionListener() {
@@ -108,7 +108,7 @@ public class FormRegistroAseguradoraView extends JDialog {
 	public List<String> aseguradoraValida() {
 		List<String> errors = new LinkedList<>();
 		errors.addAll(new StringValidator(this.textAseguradora.getText()).notBlank("La Aseguradora es obligatoria.").validate());
-		errors.addAll(new StringValidator(this.textNroPoliza.getText()).number("El número de poliza debe ser un número").validate());
+		errors.addAll(new StringValidator(this.textNroPoliza.getText()).number("El número de poliza debe ser un número.").validate());
 
 		return errors;
 	}
