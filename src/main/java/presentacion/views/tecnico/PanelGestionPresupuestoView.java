@@ -52,13 +52,13 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private JPanel panelEsteNorte;
 	private List<IngresoOrdenDeTrabajoDTO> vehiculos;
 
-	private final String[] columnasTablaVehiculos = new String[] { "NRO. VEHICULO", "KM GARANTIA", "ASEGURADORA",
-			"NRO POLIZA SEGURO", "PATENTE" };
+	private final String[] columnasTablaVehiculos = new String[] { "NRO. VEHICULO", "KM. GARANTIA", "ASEGURADORA",
+			"NRO. POLIZA DE SEGURO", "PATENTE" };
 	private DefaultTableModel tableModelVehiculos;
 	private JTable tableVehiculos;
 
-	private final String[] columnasListadoDePresupuestos = new String[] { "NRO. Presupuesto", "FECHA ALTA",
-			"COMENTARIO ALTA", "PRECIO", "GARANTÍA" };
+	private final String[] columnasListadoDePresupuestos = new String[] { "NRO. PRESUPUESTO", "FECHA DE ALTA",
+			"COMENTARIO DE ALTA", "PRECIO", "GARANTÍA" };
 	private DefaultTableModel listadoDePresupuestosModel;
 
 	private final String[] columnasListadoDeRepuestos = new String[] { "CODIGO", "MARCA", "DESCRIPCIÓN", "PRECIO",
@@ -66,7 +66,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 	private DefaultTableModel listadoDeRepuestosModel;
 
 	private final String[] columnasListadoDeTrabajos = new String[] { "NRO", "FECHA ALTA", "DESCRIPCIÓN", "PRECIO",
-			"ESTIMADO", "FECHA CIERRE" };
+			"ESTIMADO", "FECHA DE CIERRE" };
 	private DefaultTableModel listadoDeTrabajosModel;
 	private JPanel panelEsteSur;
 
@@ -128,7 +128,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_4.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		add(panel_4, BorderLayout.NORTH);
 
-		JLabel lblClienteDNI = new JLabel("Cliente DNI");
+		JLabel lblClienteDNI = new JLabel("DNI");
 		panel_4.add(lblClienteDNI);
 
 		txtDNI = new JTextField("");
@@ -177,7 +177,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
 						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("default:grow"), }));
 
-		lblTipo = new JLabel("Tipo de trabajo");
+		lblTipo = new JLabel("Tipo de Trabajo");
 		panelEsteSur.add(lblTipo, "2, 2");
 
 		textTipoTrabajo = new JTextField();
@@ -262,7 +262,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel.add(textColor, "4, 4, fill, default");
 		textColor.setColumns(10);
 
-		lblNewLabel_7 = new JLabel("Combustion");
+		lblNewLabel_7 = new JLabel("Combustión");
 		panel.add(lblNewLabel_7, "6, 4");
 
 		textCombustion = new JTextField();
@@ -317,7 +317,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_8.add(scrollPane, BorderLayout.CENTER);
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_1.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Detalles del Presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelOeste.add(panel_1);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 
@@ -325,13 +325,16 @@ public class PanelGestionPresupuestoView extends JPanel {
 		panel_1.add(tabbedPane);
 
 		panel_3 = new JPanel();
-		tabbedPane.addTab("Repuestos planificados", null, panel_3, null);
+		tabbedPane.addTab("Repuestos Planificados", null, panel_3, null);
 		panel_3.setLayout(new BorderLayout(0, 0));
 
 		scrollPaneRepuestos = new JScrollPane();
 		panel_3.add(scrollPaneRepuestos, BorderLayout.CENTER);
 
 		this.listadoDeRepuestosModel = new DefaultTableModel(null, this.columnasListadoDeRepuestos) {
+
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public Class<?> getColumnClass(int columnIndex) {
 				return columnIndex == 5 ? Boolean.class : super.getColumnClass(columnIndex);
@@ -348,7 +351,7 @@ public class PanelGestionPresupuestoView extends JPanel {
 		scrollPaneRepuestos.setViewportView(tableRepuestos);
 
 		panel_5 = new JPanel();
-		tabbedPane.addTab("Trabajos planificados", null, panel_5, null);
+		tabbedPane.addTab("Trabajos Planificados", null, panel_5, null);
 		panel_5.setLayout(new BorderLayout(0, 0));
 
 		JScrollPane scrollPaneTrabajos = new JScrollPane();

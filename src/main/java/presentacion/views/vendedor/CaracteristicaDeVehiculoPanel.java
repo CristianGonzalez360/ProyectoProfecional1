@@ -110,7 +110,7 @@ public class CaracteristicaDeVehiculoPanel extends JPanel {
 		add(textFrenosDelanteros, "4, 10, fill, default");
 		textFrenosDelanteros.setColumns(10);
 
-		JLabel lblNewLabel_9 = new JLabel("Nro. puertas");
+		JLabel lblNewLabel_9 = new JLabel("Nro. Puertas");
 		add(lblNewLabel_9, "6, 10, left, default");
 
 		textNroPuertas = new JTextField();

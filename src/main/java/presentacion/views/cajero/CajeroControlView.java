@@ -7,10 +7,6 @@ import java.beans.PropertyVetoException;
 import javax.swing.JTabbedPane;
 
 public class CajeroControlView extends JInternalFrame {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1308877516578945407L;
 
 	private static CajeroControlView instance;

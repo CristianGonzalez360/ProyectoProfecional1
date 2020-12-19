@@ -76,10 +76,10 @@ public class NuevosCarPresenter {
 					this.nuevosVehiculos.mostrar();			
 				} else {
 					new MessageDialog().showMessages(
-							"El archivo debe tener por cada vehiculo nuevo: \n-una caracteristica  \n-una ficha tecnica.\nPor favor revisar el contenido del archivo.");
+							"ERROR: ¡El archivo debe tener por cada vehículo nuevo: \n-Una Caracteristica  \n-Una Ficha Tecnica.\nPor favor, revise el contenido del archivo!");
 				}
 			} catch (Exception e) {
-				new MessageDialog().showMessages("El archivo esta vacío, por favor revisar el contenido del archivo.");
+				new MessageDialog().showMessages("ERROR: ¡El archivo esta vacío, por favor revisar el contenido del archivo!");
 			}
 		}
 	}
@@ -258,17 +258,17 @@ public class NuevosCarPresenter {
 			if(vehiculosGraph.getCaracteristicas().size() != vehiculosGraph.getFichaTecnica().size()) {
 				ret = false;
 				new MessageDialog().showMessages(
-						"El archivo debe tener por cada vehiculo nuevo: \n-una caracteristica  \n-una ficha tecnica.\nPor favor revisar el contenido del archivo.");
+						"ERROR: ¡El archivo debe tener por cada vehículo nuevo: \n-Una Caracteristica  \n-Una Ficha Tecnica.\nPor favor, revise el contenido del archivo!");
 			}
 			if (ret && !validarFichasTecnicasMotor()) {
 				ret = false;
 				new MessageDialog().showMessages(
-							"El archivo contiene:\n-Nro de motor\nexistente.\nPor favor revisar el contenido del archivo.");
+							"ERROR: ¡El archivo contiene:\n-Nro de motor\nexistente.\nPor favor, revise el contenido del archivo!");
 			}
 			if (ret && !validarFichasTecnicasChasis()) {
 				ret = false;
 				new MessageDialog().showMessages(
-							"El archivo contiene:\n-Nro de chasis\nexistente.\nPor favor revisar el contenido del archivo.");
+							"ERROR: El archivo contiene:\n-Nro de chasis\nexistente.\nPor favor, revise el contenido del archivo.");
 			}
 		}
 		return ret;

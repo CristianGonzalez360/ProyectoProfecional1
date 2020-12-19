@@ -63,7 +63,7 @@ public class SupervisorControlView extends JInternalFrame {
 		clientesPanel.add(panelClientesView);
 
 		panelConsultaOTPresupuestadasView = ConsultaDePresupuestosSupervisorView.getInstance();
-		tabbedPane.addTab("Gestión de presupuestos", panelConsultaOTPresupuestadasView);
+		tabbedPane.addTab("Gestión de Presupuestos", panelConsultaOTPresupuestadasView);
 
 		PanelGestionRepuestos repuestos = PanelGestionRepuestos.getInstance();
 		tabbedPane.add("Gestión de Repuestos", repuestos);
@@ -72,7 +72,7 @@ public class SupervisorControlView extends JInternalFrame {
 		 * Entregas
 		 */
 		JPanel entregasPanel = new JPanel();
-		tabbedPane.addTab("Gestión entrega de vehículo", null, entregasPanel, null);
+		tabbedPane.addTab("Gestión Entrega de Vehículo", null, entregasPanel, null);
 		entregasPanel.setLayout(new BorderLayout(0, 0));
 
 		panelEntregaVehiculosView = new EntregaVehiculosPanelView();

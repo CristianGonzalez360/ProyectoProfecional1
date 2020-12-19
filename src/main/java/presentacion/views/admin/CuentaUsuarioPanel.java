@@ -23,21 +23,21 @@ public class CuentaUsuarioPanel extends JPanel {
 	private JTextField textRole;
 
 	public CuentaUsuarioPanel() {
-		setBorder(new TitledBorder(null, "Datos de la cuenta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(null, "Datos de la Cuenta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
 						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), },
 				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
 						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
 
-		JLabel lblNewLabel = new JLabel("Nombre de usuario");
+		JLabel lblNewLabel = new JLabel("Nombre de Usuario");
 		add(lblNewLabel, "2, 2, left, default");
 
 		textNombreUsuario = new JTextField();
 		add(textNombreUsuario, "4, 2, fill, default");
 		textNombreUsuario.setColumns(10);
 
-		JLabel lblNewLabel_1 = new JLabel("Password");
+		JLabel lblNewLabel_1 = new JLabel("Contraseña");
 		add(lblNewLabel_1, "2, 4, left, default");
 
 		textPassword = new JTextField();

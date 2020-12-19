@@ -57,8 +57,8 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 	private DefaultTableModel tableModelVehiculos;
 	private JTable tableVehiculos;
 
-	private final String[] columnasListadoDePresupuestos = new String[] { "NRO.", "FECHA ALTA", "COMENTARIO ALTA",
-			"PRECIO", "ESTADO", "COMENTARIO RECHAZO", "APROBAR" };
+	private final String[] columnasListadoDePresupuestos = new String[] { "NRO.", "FECHA DE ALTA", "COMENTARIO DE ALTA",
+			"PRECIO", "ESTADO", "COMENTARIO DE RECHAZO", "APROBAR" };
 	private DefaultTableModel listadoDePresupuestosModel;
 
 	private final String[] columnasListadoDeRepuestos = new String[] { "CODIGO", "MARCA", "DESCRIPCIÓN", "PRECIO",
@@ -115,7 +115,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		panel_4.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		add(panel_4, BorderLayout.NORTH);
 
-		JLabel lblClienteDNI = new JLabel("Cliente DNI");
+		JLabel lblClienteDNI = new JLabel("DNI");
 		panel_4.add(lblClienteDNI);
 
 		txtDNI = new JTextField("");
@@ -134,7 +134,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		panelEste.setLayout(new BoxLayout(panelEste, BoxLayout.Y_AXIS));
 
 		panelEsteNorte = new JPanel();
-		panelEsteNorte.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ordenes de trabajo",
+		panelEsteNorte.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ordenes de Trabajo",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelEste.add(panelEsteNorte);
 		panelEsteNorte.setLayout(new BorderLayout(0, 0));
@@ -168,35 +168,35 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
 						RowSpec.decode("default:grow"), FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
 
-		lblTipo = new JLabel("Tipo de trabajo");
+		lblTipo = new JLabel("Tipo de Trabajo");
 		panelEsteSur.add(lblTipo, "2, 2");
 
 		textTipoDeTrabajo = new JTextField();
 		panelEsteSur.add(textTipoDeTrabajo, "4, 2, fill, default");
 		textTipoDeTrabajo.setColumns(10);
 
-		lblNewLabel_1 = new JLabel("Fecha de alta");
+		lblNewLabel_1 = new JLabel("Fecha de Alta");
 		panelEsteSur.add(lblNewLabel_1, "2, 4");
 
 		textFechaAlta = new JTextField();
 		panelEsteSur.add(textFechaAlta, "4, 4, fill, default");
 		textFechaAlta.setColumns(10);
 
-		lblNewLabel_2 = new JLabel("Trabajo soclicitad");
+		lblNewLabel_2 = new JLabel("Trabajo Soclicitad");
 		panelEsteSur.add(lblNewLabel_2, "2, 6");
 
 		textTrabajoSolicitado = new JTextField();
 		panelEsteSur.add(textTrabajoSolicitado, "4, 6, fill, default");
 		textTrabajoSolicitado.setColumns(10);
 
-		lblNewLabel_3 = new JLabel("Trabajo sugerido");
+		lblNewLabel_3 = new JLabel("Trabajo Sugerido");
 		panelEsteSur.add(lblNewLabel_3, "2, 8");
 
 		textTrabajoSugerido = new JTextField();
 		panelEsteSur.add(textTrabajoSugerido, "4, 8, fill, default");
 		textTrabajoSugerido.setColumns(10);
 
-		lblNewLabel_4 = new JLabel("Fecha de cierre");
+		lblNewLabel_4 = new JLabel("Fecha de Cierre");
 		panelEsteSur.add(lblNewLabel_4, "2, 10");
 
 		textFechaCierre = new JTextField();
@@ -209,7 +209,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 
 		panel = new JPanel();
 		panel.setBorder(
-				new TitledBorder(null, "Listado de presupuestos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				new TitledBorder(null, "Listado de Presupuestos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelOeste.add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 
@@ -226,6 +226,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 				return listadoDePresupuestosModel.getValueAt(row, ESTADO) == EstadoPresupuesto.PENDIENTE.name();
 			}
 
+			@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
 			public Class getColumnClass(int col) {
 				if (col == EDITABLE)
@@ -239,7 +240,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(
-				new TitledBorder(null, "Detalles del presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				new TitledBorder(null, "Detalles del Presupuesto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelOeste.add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
 
@@ -247,7 +248,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		panel_1.add(tabbedPane, BorderLayout.CENTER);
 
 		panel_3 = new JPanel();
-		tabbedPane.addTab("Repuestos planificados", null, panel_3, null);
+		tabbedPane.addTab("Repuestos Planificados", null, panel_3, null);
 		panel_3.setLayout(new BorderLayout(0, 0));
 
 		scrollPaneRepuestos = new JScrollPane();
@@ -267,7 +268,7 @@ public class ConsultaDePresupuestosSupervisorView extends JPanel {
 		scrollPaneRepuestos.setViewportView(tableRepuestos);
 
 		panel_5 = new JPanel();
-		tabbedPane.addTab("Trabajos planificados", null, panel_5, null);
+		tabbedPane.addTab("Trabajos Planificados", null, panel_5, null);
 		panel_5.setLayout(new BorderLayout(0, 0));
 
 		JScrollPane scrollPaneTrabajos = new JScrollPane();

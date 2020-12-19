@@ -26,7 +26,7 @@ public class PanelConfiguracionDB extends JPanel {
 
 	public PanelConfiguracionDB() {
 		setBorder(
-				new TitledBorder(null, "Parametros base de datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				new TitledBorder(null, "Parámetros de la Base de Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
 						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), },

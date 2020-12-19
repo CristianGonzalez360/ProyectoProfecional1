@@ -43,15 +43,15 @@ public class RegistroPedidoPresenter {
 	private void onRegistrar(ActionEvent a) {
 		List<String> errors = new LinkedList<>();
 		if (ventaSeleccionada == -1) {
-			errors.add("Debe seleccionar una venta.");
+			errors.add("¡Por faovr, debe seleccionar una venta!");
 		} else if (ventas.get(ventaSeleccionada).isPedido()) {
-			errors.add("El vehículo ya fue pedido");
+			errors.add("!El vehículo ya fue pedido!");
 		}
 
 		if (errors.isEmpty()) {
 			pedidosController.save(ventas.get(ventaSeleccionada).getVenta().getIdVentaVehiculo());
 			onRefrescar(a);
-			new MessageDialog().showMessages("Pedido Registrado");
+			new MessageDialog().showMessages("Pedido Registrado.");
 		} else {
 			new MessageDialog().showMessages(errors);
 		}

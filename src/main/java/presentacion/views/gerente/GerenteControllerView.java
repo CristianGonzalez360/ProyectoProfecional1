@@ -143,7 +143,7 @@ public class GerenteControllerView extends JInternalFrame {
 		tabbedPane.addTab("Venta Repuesto", panelConsultaOTPresupuestadasView);
 
 		panelEntregaVehiculosView = new EntregaVehiculosPanelView();
-		tabbedPane.addTab("Gestion entrega de vehículo", panelEntregaVehiculosView);
+		tabbedPane.addTab("Gestion entrega de Vehículo", panelEntregaVehiculosView);
 
 		tableModelTurnos = new DefaultTableModel(null, COLUMNAS_TURNOS);
 
@@ -157,7 +157,7 @@ public class GerenteControllerView extends JInternalFrame {
 
 		panelEntregaVehiculosView.add(panelSuperiorEntrega, BorderLayout.NORTH);
 
-		lblDniDeEntrega = new JLabel("Cliente DNI");
+		lblDniDeEntrega = new JLabel("DNI");
 		panelSuperiorEntrega.add(lblDniDeEntrega);
 
 		textDniDeEntrega = new JTextField("");

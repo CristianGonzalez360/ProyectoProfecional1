@@ -36,7 +36,7 @@ public class LoginView extends JDialog {
 	private JButton cancelButton;
 
 	private LoginView() {
-		setTitle("Login form");
+		setTitle("Ingreso");
 		setBounds(100, 100, 450, 206);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,7 +53,7 @@ public class LoginView extends JDialog {
 		contentPanel.add(textFieldUsuario, "4, 2, fill, default");
 		textFieldUsuario.setColumns(10);
 
-		JLabel lblNewLabel_1 = new JLabel("Password");
+		JLabel lblNewLabel_1 = new JLabel("Contraseña");
 		contentPanel.add(lblNewLabel_1, "2, 4, right, default");
 
 		textFieldPassword = new JPasswordField("");
@@ -64,13 +64,13 @@ public class LoginView extends JDialog {
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-		okButton = new JButton("OK");
-		okButton.setActionCommand("OK");
+		okButton = new JButton("Entrar");
+		okButton.setActionCommand("Entrar");
 		buttonPane.add(okButton);
 		getRootPane().setDefaultButton(okButton);
 
-		cancelButton = new JButton("Cancel");
-		cancelButton.setActionCommand("Cancel");
+		cancelButton = new JButton("Cancelar");
+		cancelButton.setActionCommand("Cancelar");
 		buttonPane.add(cancelButton);
 		setModal(true);
 		setResizable(false);

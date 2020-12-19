@@ -28,7 +28,7 @@ public class PanelClientesView extends JPanel {
 	private static final long serialVersionUID = -5623725856065117794L;
 
 	private final String[] columnasTablaVehiculos = new String[] { "NRO. VEHICULO", "KM GARANTIA", "ASEGURADORA",
-			"NRO POLIZA SEGURO", "PATENTE" };
+			"NRO. POLIZA SEGURO", "PATENTE" };
 
 	private static PanelClientesView instance;
 
@@ -67,7 +67,7 @@ public class PanelClientesView extends JPanel {
 		panel_4.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		add(panel_4, BorderLayout.NORTH);
 
-		JLabel lblClienteDNI = new JLabel("Cliente DNI");
+		JLabel lblClienteDNI = new JLabel("DNI");
 		panel_4.add(lblClienteDNI);
 
 		textDniBusqueda = new JTextField();

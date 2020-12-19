@@ -123,7 +123,7 @@ public class PanelGestionTrabajoView extends JPanel {
 		panel_4.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		add(panel_4, BorderLayout.NORTH);
 
-		JLabel lblClienteDNI = new JLabel("Cliente DNI");
+		JLabel lblClienteDNI = new JLabel("DNI");
 		panel_4.add(lblClienteDNI);
 
 		txtDNI = new JTextField("");

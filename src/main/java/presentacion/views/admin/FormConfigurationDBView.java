@@ -31,7 +31,7 @@ public class FormConfigurationDBView extends JDialog {
 	}
 
 	private FormConfigurationDBView() {
-		setTitle("Parametros de configuración db");
+		setTitle("Parámetros de configuración de Base de Datos");
 		setResizable(false);
 		setBounds(100, 100, 362, 264);
 		getContentPane().setLayout(new BorderLayout());
@@ -40,7 +40,7 @@ public class FormConfigurationDBView extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-			chckbxIsLocalhost = new JCheckBox("Is localhost");
+			chckbxIsLocalhost = new JCheckBox("localhost");
 			buttonPane.add(chckbxIsLocalhost);
 			{
 				okButton = new JButton("OK");
@@ -49,7 +49,7 @@ public class FormConfigurationDBView extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				btnCancel = new JButton("Cancel");
+				btnCancel = new JButton("Cancelar");
 				buttonPane.add(btnCancel);
 			}
 		}

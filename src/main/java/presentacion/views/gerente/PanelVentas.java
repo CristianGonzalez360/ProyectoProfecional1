@@ -1,17 +1,15 @@
 package presentacion.views.gerente;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.util.List;
 
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicTreeUI.SelectionModelPropertyChangeHandler;
 import javax.swing.table.DefaultTableModel;
 
-import dto.VentaVehiculoDTO;
 import dto.temporal.VehiculoParaEntregar;
 
 public class PanelVentas extends JPanel {
@@ -19,8 +17,8 @@ public class PanelVentas extends JPanel {
 
 	private JTable tablaVentas;
 	private DefaultTableModel modelo;
-	private static final String[] columnas = { "Nro.", "Vehículo", "Fecha", "Precio", "Estado del pedido",
-			"Fecha del pedido" };
+	private static final String[] columnas = { "NRO", "VEHIUCLO", "FECHA", "PRECIO", "ESTADO DEL PEDIDO",
+			"FECHA DEL PEDIDO" };
 
 	public PanelVentas() {
 		setLayout(new BorderLayout(0, 0));

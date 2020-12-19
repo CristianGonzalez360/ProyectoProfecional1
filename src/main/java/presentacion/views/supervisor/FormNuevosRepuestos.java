@@ -24,8 +24,8 @@ public class FormNuevosRepuestos extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable tablaRepuestos;
 	private DefaultTableModel modelo;
-	private static final String[] nombreColumnas = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock", "Precio",
-			"quitar" };// columna checkbox editable
+	private static final String[] nombreColumnas = { "CODIGO", "DESCRIPCION", "MARCA", "FABRICANTE", "STOCK", "PRECIO",
+			"QUITAR" };// columna checkbox editable
 	private JButton okButton;
 	private JButton cancelButton;
 	private static FormNuevosRepuestos instance;
@@ -37,7 +37,7 @@ public class FormNuevosRepuestos extends JDialog {
 	}
 
 	public FormNuevosRepuestos() {
-		setTitle("Nuevos repuestos");
+		setTitle("Nuevos Repuestos");
 		setBounds(100, 100, 800, 551);
 		setModal(true);// para hacer que la ventana se tenga que cerrar si o si
 		getContentPane().setLayout(new BorderLayout());
@@ -76,7 +76,7 @@ public class FormNuevosRepuestos extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				cancelButton = new JButton("Cancelar carga");
+				cancelButton = new JButton("Cancelar");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

@@ -35,10 +35,10 @@ public class PlanificarRepuestosFormView extends JPanel {
 
 	private static final long serialVersionUID = -3149040258338164711L;
 
-	private static final String[] nombreColumnasSuperior = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock",
-			"Precio" };
-	private static final String[] nombreColumnasInferior = { "Codigo", "Descripcion", "Marca", "Fabricante",
-			"Cantidad" };
+	private static final String[] nombreColumnasSuperior = { "CODIGO", "DESCRIPCION", "MARCA", "FABRICANTE", "STOCK",
+			"PRECIO" };
+	private static final String[] nombreColumnasInferior = { "CODIGO", "DESCRIPCION", "MARCA", "FABRICANTE",
+			"CANTIDAD" };
 
 	private JPanel panelSuperior = new JPanel();
 	private JPanel panelInterior = new JPanel();
@@ -75,12 +75,14 @@ public class PlanificarRepuestosFormView extends JPanel {
 
 		panelSuperior = new JPanel();
 		panelSuperior.setForeground(SystemColor.menu);
-		panelSuperior.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Repuestos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelSuperior.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Repuestos Disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelSuperior.setBackground(SystemColor.menu);
 		add(panelSuperior);
 		panelSuperior.setLayout(new BorderLayout(0, 0));
 
 		modelRepuestos = new DefaultTableModel(null, nombreColumnasSuperior) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -139,7 +141,7 @@ public class PlanificarRepuestosFormView extends JPanel {
 		panel_2.add(btnAgregar);
 
 		panelInferior = new JPanel();
-		panelInferior.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Repuestos planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelInferior.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Repuestos Planificados", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelInferior.setBackground(SystemColor.menu);
 		add(panelInferior);
 		panelInferior.setLayout(new BorderLayout(0, 0));
@@ -148,6 +150,8 @@ public class PlanificarRepuestosFormView extends JPanel {
 		panelInferior.add(scrollPaneRepuestosInferior, BorderLayout.CENTER);
 
 		modelRepuestosInferior = new DefaultTableModel(null, nombreColumnasInferior) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;

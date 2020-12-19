@@ -14,9 +14,6 @@ import dto.taller.OrdenDeTrabajoDTO;
 
 public class OrdenDeTrabajoPanelView extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -388588065317237767L;
 	private JLabel lblNewLabel_15;
 	private JTextField textFechaAltaOt;
@@ -34,7 +31,7 @@ public class OrdenDeTrabajoPanelView extends JPanel {
 	 */
 	public OrdenDeTrabajoPanelView() {
 		setBorder(
-				new TitledBorder(null, "Orden de trabajo actual", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				new TitledBorder(null, "Orden de Trabajo Actual", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
 						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), FormSpecs.RELATED_GAP_COLSPEC,
@@ -60,7 +57,7 @@ public class OrdenDeTrabajoPanelView extends JPanel {
 		add(textFechaCierreOt, "4, 4, fill, default");
 		textFechaCierreOt.setColumns(10);
 
-		lblNewLabel_17 = new JLabel("Trabajo solicitado");
+		lblNewLabel_17 = new JLabel("Trabajo Solicitado");
 		add(lblNewLabel_17, "2, 6, left, default");
 
 		textTrabajoSolicitadoOt = new JTextField();
@@ -68,7 +65,7 @@ public class OrdenDeTrabajoPanelView extends JPanel {
 		add(textTrabajoSolicitadoOt, "4, 6, fill, default");
 		textTrabajoSolicitadoOt.setColumns(10);
 
-		lblNewLabel_18 = new JLabel("Trabajo sugerido");
+		lblNewLabel_18 = new JLabel("Trabajo Sugerido");
 		add(lblNewLabel_18, "2, 8");
 
 		textTrabajoSugeridoOt = new JTextField();
@@ -76,7 +73,7 @@ public class OrdenDeTrabajoPanelView extends JPanel {
 		add(textTrabajoSugeridoOt, "4, 8, fill, default");
 		textTrabajoSugeridoOt.setColumns(10);
 
-		lblTipoDeOrden = new JLabel("Tipo de orden de trabajo");
+		lblTipoDeOrden = new JLabel("Tipo de Orden de Trabajo");
 		add(lblTipoDeOrden, "2, 10, right, default");
 
 		textTipoDeOT = new JTextField();

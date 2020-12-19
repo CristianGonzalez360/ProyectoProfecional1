@@ -29,7 +29,7 @@ public class FormConfiguracionSmtpView extends JDialog {
 	}
 
 	private FormConfiguracionSmtpView() {
-		setTitle("Parametros de configuracion smtp");
+		setTitle("Parámetros de configuración SMTP");
 		setResizable(false);
 		setBounds(100, 100, 450, 248);
 		getContentPane().setLayout(new BorderLayout());
@@ -44,7 +44,7 @@ public class FormConfiguracionSmtpView extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				cancelButton = new JButton("Cancel");
+				cancelButton = new JButton("Cancelar");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

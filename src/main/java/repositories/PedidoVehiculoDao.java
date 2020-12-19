@@ -3,7 +3,6 @@ package repositories;
 import java.util.List;
 
 import dto.PedidoVehiculoDTO;
-import dto.temporal.PedidoDTO;
 
 public interface PedidoVehiculoDao extends GenericDao<PedidoVehiculoDTO, Integer> {
 

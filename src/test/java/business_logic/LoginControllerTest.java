@@ -17,6 +17,7 @@ class LoginControllerTest {
 	private UsuariosDao dao = Mockito.mock(UsuariosDao.class);
 	private LoginController controller = new LoginController(dao, service, null);
 
+	@SuppressWarnings("static-access")
 	UsuarioDTO target = new UsuarioDTO().makeTestDTO();
 	String nombreDeUsuario = target.getCuenta().getNombreUsuario();
 	String password = target.getCuenta().getPassword();

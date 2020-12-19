@@ -18,9 +18,9 @@ public class TurnosPresenter {
 
 	private static final String CONFIRMATION = "¿Está seguro que desea cancelar el turno?";
 
-	private static final String MENSAGE_NUEVO_TURNO = "Se registró Turno.";
+	private static final String MENSAGE_NUEVO_TURNO = "Se registró nuevo Turno.";
 
-	private static final String LIMITE_TURNOS = "No hay espacio disponible de Turnos para ese día";
+	private static final String LIMITE_TURNOS = "¡No hay Turno disponible para ese día!";
 
 	private PanelTurnos view;
 
@@ -83,7 +83,7 @@ public class TurnosPresenter {
 			if (idTurno != null) {
 				controller.cancelById(idTurno);
 				view.clear();
-				new MessageDialog().showMessages("Turno con Nro.: " + idTurno + " fué cancelado.");
+				new MessageDialog().showMessages("El Turno con Nro.: " + idTurno + " fué cancelado.");
 			}
 		}
 	}

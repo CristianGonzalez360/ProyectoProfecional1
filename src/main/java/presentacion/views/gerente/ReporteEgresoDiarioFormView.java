@@ -37,7 +37,7 @@ public class ReporteEgresoDiarioFormView extends JDialog {
 	private JDateChooser fechaHasta;
 
 	public ReporteEgresoDiarioFormView() {
-		setTitle("Reporte Ingresos");
+		setTitle("Reporte de Ingresos");
 		setBounds(100, 100, 400, 280);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

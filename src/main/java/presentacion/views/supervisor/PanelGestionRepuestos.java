@@ -35,8 +35,8 @@ public class PanelGestionRepuestos extends JPanel {
 
 	private static PanelGestionRepuestos instance;
 
-	private static final String[] nombreColumnas = { "Codigo", "Descripcion", "Marca", "Fabricante", "Stock", "Minimo",
-			"Precio Venta", "Precio Compra", "Garantia" };
+	private static final String[] nombreColumnas = { "CODIGO", "DESCRIPCION", "MARCA", "FABRICANTE", "STOCK", "MINIMO",
+			"PRECIO DE VENTA", "PRECIO DE COMPRA", "GARANTIA" };
 	private JComboBox<String> comboMarcas;
 	private JButton btnBuscar;
 	private JButton btnIngresarStock;
@@ -75,7 +75,7 @@ public class PanelGestionRepuestos extends JPanel {
 		btnBuscar = new JButton("Buscar");
 		panelBuscador.add(btnBuscar);
 
-		btnBajoStock = new JButton("Bajo Stock");
+		btnBajoStock = new JButton("Ver Stock Bajo");
 		panelBuscador.add(btnBajoStock);
 
 		modelo = new DefaultTableModel();

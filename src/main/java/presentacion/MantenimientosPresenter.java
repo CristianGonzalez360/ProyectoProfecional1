@@ -65,16 +65,16 @@ public class MantenimientosPresenter {
 		} else {
 			List<String> errors = new ArrayList<>();
 			if (comentario.isEmpty()) {
-				errors.add("Ingrece un comentario");
+				errors.add("¡Por favor, ingrece un comentario!");
 			}
 			if (nombre.isEmpty()) {
-				errors.add("Ingrece un nombre");
+				errors.add("¡Por favor, ingrece un nombre!");
 			}
 			if (seleccionado.getTrabajos().isEmpty()) {
-				errors.add("Agregue al menos un trabajo");
+				errors.add("¡Por favor, agregue al menos un trabajo!");
 			}
 			if (seleccionado.getRepuestos().isEmpty()) {
-				errors.add("Agregue al menos un repuesto");
+				errors.add("¡Por favor, agregue al menos un repuesto!");
 			}
 			new MessageDialog().showMessages(errors);
 		}

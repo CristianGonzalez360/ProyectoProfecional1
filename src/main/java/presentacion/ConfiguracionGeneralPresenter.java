@@ -30,12 +30,12 @@ public class ConfiguracionGeneralPresenter {
 		try {
 			view.setData(configDbController.read());
 		} catch (IOException e1) {
-			new MessageDialog().showMessages("Configure la conexion con el motor de la base de datos");
+			new MessageDialog().showMessages("¡Por favor, configure la conexión con el motor de la Base de Datos!");
 		}
 		try {
 			view.setData(configSmtpController.read());
 		} catch (IOException e) {
-			new MessageDialog().showMessages("Configure el servidor SMTP");
+			new MessageDialog().showMessages("¡Por favor, configure el servidor SMTP!");
 		}
 		view.setActionSeedDB((a)->onSeedDB(a));
 		FormConfigurationDBView.getInstance().setActionSave((a) -> onRegistrarConfiguracionDB(a));
@@ -69,7 +69,7 @@ public class ConfiguracionGeneralPresenter {
 			try {
 				configSmtpController.save(dto);
 			} catch (IOException e) {
-				new MessageDialog().showMessages("Configure el servidor SMTP");
+				new MessageDialog().showMessages("¡Por favor, configure el servidor SMTP!");
 			}
 			FormConfiguracionSmtpView.getInstance().close();
 			view.setData(dto);
@@ -85,7 +85,7 @@ public class ConfiguracionGeneralPresenter {
 			try {
 				configDbController.save(dto);
 			} catch (IOException e) {
-				new MessageDialog().showMessages("Configure la conexion con el motor de la base de datos");
+				new MessageDialog().showMessages("¡Por favor, configure la conexion con el motor de la Base de Datos!");
 			}
 			FormConfigurationDBView.getInstance().close();
 			view.setData(dto);

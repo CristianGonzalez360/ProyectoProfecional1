@@ -20,8 +20,6 @@ public class SQLDataSource extends DataSource {
 
 	private String database;
 
-	private boolean status = false;
-
 	public SQLDataSource dbName(String db) {
 		this.database = db;
 		return this;
@@ -60,7 +58,6 @@ public class SQLDataSource extends DataSource {
 			conn = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, user, password);
 			conn.setAutoCommit(false);
 			LogManager.getLogger(this.getClass().getName()).log(Level.INFO, "Database conexion status: OK");
-			status = true;
 		} catch (Exception e) {
 			LogManager.getLogger(this.getClass().getName()).log(Level.INFO, "Database conexion status: FAILS");
 		}

@@ -23,6 +23,7 @@ class UsuariosDaoImplTest {
 
 	@Test
 	void testInsert() {
+		@SuppressWarnings("static-access")
 		UsuarioDTO target = new UsuarioDTO().makeTestDTO();
 		cuentasDao.insert(target.getCuenta());
 		datosPersonalesDao.insert(target.getDatos());

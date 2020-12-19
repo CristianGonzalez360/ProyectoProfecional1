@@ -16,9 +16,6 @@ import java.awt.Color;
 
 public class PanelCliente extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8951435029326569045L;
 
 	private Integer idCliente;
@@ -48,7 +45,7 @@ public class PanelCliente extends JPanel {
 	private JTextField tfApellido;
 
 	public PanelCliente() {
-		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Datos del cliente",
+		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "Datos del Cliente",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setLayout(new FormLayout(
 				new ColumnSpec[] { FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("right:72px"),
@@ -78,7 +75,7 @@ public class PanelCliente extends JPanel {
 		add(tfApellido, "4, 4, fill, top");
 		tfApellido.setColumns(10);
 
-		JLabel lblNewLabel = new JLabel("Dni");
+		JLabel lblNewLabel = new JLabel("DNI");
 		add(lblNewLabel, "2, 6, right, center");
 
 		textDni = new JTextField();
@@ -86,7 +83,7 @@ public class PanelCliente extends JPanel {
 		add(textDni, "4, 6, fill, top");
 		textDni.setColumns(10);
 
-		JLabel lblNewLabel_2 = new JLabel("Telefono");
+		JLabel lblNewLabel_2 = new JLabel("Teléfono");
 		add(lblNewLabel_2, "2, 8, right, center");
 
 		textTelefono = new JTextField();
@@ -102,7 +99,7 @@ public class PanelCliente extends JPanel {
 		add(textEmail, "4, 10, fill, top");
 		textEmail.setColumns(10);
 
-		JLabel Calle = new JLabel("calle");
+		JLabel Calle = new JLabel("Calle");
 		add(Calle, "2, 12, right, center");
 
 		textCalle = new JTextField();
@@ -126,7 +123,7 @@ public class PanelCliente extends JPanel {
 		add(textPiso, "4, 16, fill, top");
 		textPiso.setColumns(10);
 
-		JLabel lblNewLabel_6 = new JLabel("Dpto");
+		JLabel lblNewLabel_6 = new JLabel("Departamento");
 		add(lblNewLabel_6, "2, 18, right, center");
 
 		textDpto = new JTextField();

@@ -43,7 +43,7 @@ public class FormAltaOrdenTrabajo extends JDialog {
 	}
 
 	private FormAltaOrdenTrabajo() {
-		setTitle("Form alta de orden de trabajo");
+		setTitle("Nueva Orden de Trabajo");
 		setResizable(false);
 		setModal(true);
 		setBounds(100, 100, 450, 300);
@@ -103,7 +103,7 @@ public class FormAltaOrdenTrabajo extends JDialog {
 		panelBotones.setLayout(fl_panelBotones);
 		getContentPane().add(panelBotones, BorderLayout.SOUTH);
 		
-		JLabel lblNewLabel = new JLabel("Kilometraje actual");
+		JLabel lblNewLabel = new JLabel("Kilometraje Actual");
 		panelBotones.add(lblNewLabel);
 		
 		kilometrajeActual = new JTextField();

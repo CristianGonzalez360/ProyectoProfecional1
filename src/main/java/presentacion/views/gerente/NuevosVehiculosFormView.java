@@ -25,7 +25,7 @@ public class NuevosVehiculosFormView extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable tablaVehiculos;
 	private DefaultTableModel modelo;
-	private static final String[] nombreColumnas = { "Marca", "Familia", "Linea", "Color", "Precio", "Quitar" };// columna
+	private static final String[] nombreColumnas = { "MARCA", "FAMILIA", "LINEA", "COLOR", "PRECIO", "QUITAR" };// columna
 																												// checkbox
 																												// editable
 	private JButton okButton;

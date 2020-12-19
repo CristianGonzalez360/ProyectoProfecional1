@@ -222,7 +222,7 @@ CREATE TABLE RepuestosComprados (
 
 CREATE TABLE Moneda (
   idMoneda INT NOT NULL AUTO_INCREMENT,
-  nombre VARCHAR(15) NOT NULL,
+  nombre VARCHAR(30) NOT NULL,
   simbolo VARCHAR(5) NOT NULL,
   cotizacionDolar DOUBLE NOT NULL,
   PRIMARY KEY (idMoneda)

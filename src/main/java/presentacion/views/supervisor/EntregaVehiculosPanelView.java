@@ -43,7 +43,7 @@ public class EntregaVehiculosPanelView extends JPanel {
 		flowLayout.setHgap(20);
 		add(panelSuperior, BorderLayout.NORTH);
 
-		lblDniCliente = new JLabel("Cliente DNI");
+		lblDniCliente = new JLabel("DNI");
 		panelSuperior.add(lblDniCliente);
 
 		textDniCliente = new JTextField();

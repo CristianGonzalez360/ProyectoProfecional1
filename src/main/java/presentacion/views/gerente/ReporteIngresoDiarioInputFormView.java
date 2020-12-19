@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
@@ -38,7 +37,7 @@ public class ReporteIngresoDiarioInputFormView extends JDialog {
 	private JDateChooser fechaHasta;
 
 	public ReporteIngresoDiarioInputFormView() {
-		setTitle("Reporte Ingresos");
+		setTitle("Reporte de Ingresos");
 		setBounds(100, 100, 400, 280);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
