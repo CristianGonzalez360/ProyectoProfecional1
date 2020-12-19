@@ -24,7 +24,7 @@ public class TecnicoControlView extends JInternalFrame {
 
 	private TecnicoControlView() {
 		setClosable(false);
-		setTitle("Tecnico control view");
+		setTitle("Tecnico Control View");
 		setMaximizable(true);
 		setIconifiable(true);
 		setBounds(100, 100, 800, 436);
@@ -34,10 +34,10 @@ public class TecnicoControlView extends JInternalFrame {
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
 		this.gestionPresupuestoPanel = PanelGestionPresupuestoView.getInstance();
-		tabbedPane.add("Gestión de presupuestos", this.gestionPresupuestoPanel);
+		tabbedPane.add("Gestión de Presupuestos", this.gestionPresupuestoPanel);
 
 		this.registrarTrabajoPanel = PanelGestionTrabajoView.getInstance();
-		tabbedPane.add("Gestión trabajos", this.registrarTrabajoPanel);
+		tabbedPane.add("Gestión de Trabajos", this.registrarTrabajoPanel);
 	}
 
 	public void display() {

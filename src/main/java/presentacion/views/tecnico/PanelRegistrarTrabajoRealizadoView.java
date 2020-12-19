@@ -22,8 +22,8 @@ public class PanelRegistrarTrabajoRealizadoView extends JPanel {
 	private static final long serialVersionUID = -5623725856065117794L;
 
 	private static PanelRegistrarTrabajoRealizadoView instance;
-	private final String[] columnasListadoDePresupuestos = new String[] { "NRO. Presupuesto", "FECHA ALTA",
-			"COMENTARIO ALTA", "ESTADO", };
+	private final String[] columnasListadoDePresupuestos = new String[] { "NRO. PRESUPUESTOS", "FECHA DE ALTA",
+			"COMENTARIO DE ALTA", "ESTADO", };
 	private DefaultTableModel listadoDePresupuestosModel;
 	private JPanel panel;
 	private JScrollPane scrollPaneRepuestos;

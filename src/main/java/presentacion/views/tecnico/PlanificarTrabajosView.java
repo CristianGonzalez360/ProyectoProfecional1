@@ -12,9 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class PlanificarTrabajosView extends JDialog {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -6987941905493603745L;
 	private JTable table;
 

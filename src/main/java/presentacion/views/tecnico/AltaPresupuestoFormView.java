@@ -47,7 +47,7 @@ public class AltaPresupuestoFormView extends JDialog {
 	private AltaPresupuestoFormView() {
 		setMinimumSize(new Dimension(1000, 600));
 		setBounds(100, 100, 800, 600);
-		setTitle("Formulario de Alta de Presupuesto");
+		setTitle("Nuevo Presupuesto");
 		setModal(true);
 
 		JPanel panelBotones = new JPanel();
