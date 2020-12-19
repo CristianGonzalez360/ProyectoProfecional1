@@ -19,6 +19,8 @@ import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
 
 import dto.temporal.VentaDTO;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class HistorialVentasGerenteView extends JPanel {
 	private static final long serialVersionUID = -3152338359660079392L;
@@ -53,8 +55,9 @@ public class HistorialVentasGerenteView extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Fecha de Ventas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		add(panel_3);
-		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
 
 		Label label = new Label("Ventas Desde:");
 		panel_3.add(label);
@@ -62,13 +65,13 @@ public class HistorialVentasGerenteView extends JPanel {
 		textVentasDesde = new JDateChooser();
 		panel_3.add(textVentasDesde);
 
-		lblNewLabel = new JLabel("Hasta:");
+		lblNewLabel = new JLabel("Ventas Hasta:");
 		panel_3.add(lblNewLabel);
 
 		textVentasHasta = new JDateChooser();
 		panel_3.add(textVentasHasta);
 
-		btnCargarVentas = new JButton("Cargar");
+		btnCargarVentas = new JButton("Ver Ventas");
 		panel_3.add(btnCargarVentas);
 
 		panel = new JPanel();
