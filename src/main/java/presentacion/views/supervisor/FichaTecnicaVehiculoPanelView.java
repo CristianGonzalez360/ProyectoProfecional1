@@ -14,9 +14,6 @@ import dto.taller.FichaTecnicaVehiculoDTO;
 
 public class FichaTecnicaVehiculoPanelView extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2115071730650608664L;
 	private JTextField textNroMotor;
 	private JTextField textNroDeChasis;
@@ -40,14 +37,14 @@ public class FichaTecnicaVehiculoPanelView extends JPanel {
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
 						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
 
-		JLabel lblNewLabel_8 = new JLabel("Nro de motor");
+		JLabel lblNewLabel_8 = new JLabel("Nro de Motor");
 		add(lblNewLabel_8, "2, 2");
 
 		textNroMotor = new JTextField();
 		add(textNroMotor, "4, 2, fill, default");
 		textNroMotor.setColumns(10);
 
-		JLabel lblNewLabel_9 = new JLabel("Nro de chasis");
+		JLabel lblNewLabel_9 = new JLabel("Nro de Chasis");
 		add(lblNewLabel_9, "2, 4");
 
 		textNroDeChasis = new JTextField();

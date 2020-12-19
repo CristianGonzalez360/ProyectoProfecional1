@@ -44,7 +44,7 @@ public class FormVehiculo extends JDialog {
 	private final JLabel lblNewLabel_10 = new JLabel("Garantia");
 	private final JTextField textGarantia = new JTextField();
 	private final JPanel panel = new JPanel();
-	private final JButton btnSalvar = new JButton("Salvar");
+	private final JButton btnSalvar = new JButton("OK");
 	private final JButton btnCancelar = new JButton("Cancelar");
 
 	private static FormVehiculo instance;
@@ -56,7 +56,7 @@ public class FormVehiculo extends JDialog {
 	}
 
 	private FormVehiculo() {
-		setTitle("Form alta de vehículo");
+		setTitle("Nuevo Vehículo");
 		setResizable(false);
 		setModal(true);
 		textGarantia.setColumns(10);
@@ -83,7 +83,7 @@ public class FormVehiculo extends JDialog {
 						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
 						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("default:grow"), }));
 
-		JLabel lblNewLabel = new JLabel("Nro. de chasis");
+		JLabel lblNewLabel = new JLabel("Nro. de Chasis");
 		contentPanel.add(lblNewLabel, "2, 2");
 
 		textNroChasis = new JTextField();

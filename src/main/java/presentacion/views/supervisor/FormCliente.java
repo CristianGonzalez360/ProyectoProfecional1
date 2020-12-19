@@ -73,7 +73,7 @@ public class FormCliente extends JDialog {
 		panel.add(textApellido, "8, 2, fill, default");
 		textApellido.setColumns(10);
 
-		JLabel label_2 = new JLabel("Dni");
+		JLabel label_2 = new JLabel("DNI");
 		panel.add(label_2, "2, 4, right, default");
 
 		textDni = new JTextField();

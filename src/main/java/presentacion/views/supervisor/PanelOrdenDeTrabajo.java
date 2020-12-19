@@ -36,7 +36,7 @@ public class PanelOrdenDeTrabajo extends JPanel {
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
 						FormSpecs.DEFAULT_ROWSPEC, }));
 
-		lblNewLabel_15 = new JLabel("Fecha de alta");
+		lblNewLabel_15 = new JLabel("Fecha de Alta");
 		add(lblNewLabel_15, "2, 2");
 
 		textFechaAltaOt = new JTextField();
@@ -44,7 +44,7 @@ public class PanelOrdenDeTrabajo extends JPanel {
 		add(textFechaAltaOt, "4, 2, fill, default");
 		textFechaAltaOt.setColumns(10);
 
-		lblNewLabel_16 = new JLabel("Fecha de cierre");
+		lblNewLabel_16 = new JLabel("Fecha de Cierre");
 		add(lblNewLabel_16, "2, 4");
 
 		textFechaCierreOt = new JTextField();
@@ -52,7 +52,7 @@ public class PanelOrdenDeTrabajo extends JPanel {
 		add(textFechaCierreOt, "4, 4, fill, default");
 		textFechaCierreOt.setColumns(10);
 
-		lblNewLabel_17 = new JLabel("Trabajo solicitado");
+		lblNewLabel_17 = new JLabel("Trabajo Solicitado");
 		add(lblNewLabel_17, "2, 6, left, default");
 
 		textTrabajoSolicitadoOt = new JTextField();
@@ -60,7 +60,7 @@ public class PanelOrdenDeTrabajo extends JPanel {
 		add(textTrabajoSolicitadoOt, "4, 6, fill, default");
 		textTrabajoSolicitadoOt.setColumns(10);
 
-		lblNewLabel_18 = new JLabel("Trabajo sugerido");
+		lblNewLabel_18 = new JLabel("Trabajo Sugerido");
 		add(lblNewLabel_18, "2, 8");
 
 		textTrabajoSugeridoOt = new JTextField();
@@ -68,7 +68,7 @@ public class PanelOrdenDeTrabajo extends JPanel {
 		add(textTrabajoSugeridoOt, "4, 8, fill, default");
 		textTrabajoSugeridoOt.setColumns(10);
 
-		lblTipoDeOrden = new JLabel("Tipo de orden de trabajo");
+		lblTipoDeOrden = new JLabel("Tipo de Orden de Trabajo");
 		add(lblTipoDeOrden, "2, 10, right, default");
 
 		textTipoDeOT = new JTextField();

@@ -43,35 +43,35 @@ public class PanelCaracteristicasDeLaGarantia extends JPanel {
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
 						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
 
-		JLabel lblNewLabel_1 = new JLabel("Años de garantía");
+		JLabel lblNewLabel_1 = new JLabel("Años de Garantía");
 		add(lblNewLabel_1, "2, 2");
 
 		textAniosDeGarantia = new JTextField();
 		add(textAniosDeGarantia, "4, 2, fill, default");
 		textAniosDeGarantia.setColumns(10);
 
-		JLabel lblNewLabel_5 = new JLabel("Kilometraje de inicial del vehiculo");
+		JLabel lblNewLabel_5 = new JLabel("Kilometraje Inicial del Vehiculo");
 		add(lblNewLabel_5, "2, 4, left, default");
 
 		textKilometrajeInicialDelVehiculo = new JTextField();
 		add(textKilometrajeInicialDelVehiculo, "4, 4, fill, default");
 		textKilometrajeInicialDelVehiculo.setColumns(10);
 
-		JLabel lblNewLabel = new JLabel("Kilometraje garantizado");
+		JLabel lblNewLabel = new JLabel("Kilometraje Garantizado");
 		add(lblNewLabel, "2, 6, left, default");
 
 		textKilometrajeGarantizado = new JTextField();
 		add(textKilometrajeGarantizado, "4, 6, fill, default");
 		textKilometrajeGarantizado.setColumns(10);
 
-		JLabel lblNewLabel_2 = new JLabel("Fecha de inicio de la garantía");
+		JLabel lblNewLabel_2 = new JLabel("Fecha de Inicio de Garantía");
 		add(lblNewLabel_2, "2, 8, left, default");
 
 		textFechaInicioDeLaGarantia = new JTextField();
 		add(textFechaInicioDeLaGarantia, "4, 8, fill, default");
 		textFechaInicioDeLaGarantia.setColumns(10);
 
-		JLabel lblNewLabel_3 = new JLabel("Fecha de caducidad de la garantía");
+		JLabel lblNewLabel_3 = new JLabel("Fecha de Caducidad de Garantía");
 		add(lblNewLabel_3, "2, 10, left, default");
 
 		textFechaDeCaducidadDeLaGarantia = new JTextField();

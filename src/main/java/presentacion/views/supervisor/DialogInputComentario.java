@@ -132,8 +132,8 @@ public class DialogInputComentario extends JDialog {
 					JOptionPane.QUESTION_MESSAGE);
 			ret = getData();
 
-			List<String> errors = new StringValidator(ret).notBlank("Debe ingresar un comentario")
-					.max(60, "El comentario debe tener menos de 60 caracteres").validate();
+			List<String> errors = new StringValidator(ret).notBlank("Debe ingresar un comentario.")
+					.max(60, "El comentario debe tener menos de 60 caracteres.").validate();
 
 			if (errors.isEmpty()) {
 				seguir = false;
