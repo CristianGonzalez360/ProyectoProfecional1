@@ -25,7 +25,7 @@ import presentacion.views.vendedor.VendedorControlView;
 
 public class VendedorControlPresenter {
 
-	private static final String VENTA_MSG = "Se efectuó la venta del vehículo.";
+	private static final String VENTA_MSG = "¡Se efectuó la venta del vehículo!";
 
 	private final VendedorControlView view = VendedorControlView.getInstance();
 

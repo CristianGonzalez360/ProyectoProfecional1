@@ -20,7 +20,7 @@ public class TurnosPresenter {
 
 	private static final String MENSAGE_NUEVO_TURNO = "Se registró nuevo Turno.";
 
-	private static final String LIMITE_TURNOS = "No hay Turno disponible para ese día.";
+	private static final String LIMITE_TURNOS = "¡No hay Turno disponible para ese día!";
 
 	private PanelTurnos view;
 

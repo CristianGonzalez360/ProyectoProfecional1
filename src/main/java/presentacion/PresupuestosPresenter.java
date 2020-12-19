@@ -213,13 +213,13 @@ public class PresupuestosPresenter {
 		} else {
 			List<String> errors = new ArrayList<>();
 			if (comentario.isEmpty()) {
-				errors.add("¡Por favor, ingrece un comentario!");
+				errors.add("¡Por favor, ingrese un comentario!");
 			}
 			if (nuevoPresupuesto.getTrabajos().isEmpty()) {
-				errors.add("¡Agregue al menos un trabajo!");
+				errors.add("¡Por favor, agregue al menos un trabajo!");
 			}
 			if (nuevoPresupuesto.getRepuestos().isEmpty()) {
-				errors.add("¡Agregue al menos un repuesto!");
+				errors.add("¡Por favor, agregue al menos un repuesto!");
 			}
 			new MessageDialog().showMessages(errors);
 		}

@@ -81,7 +81,7 @@ public class PedidosPresenter {
 						
 						formNuevaFicha.close();
 						onBuscar(a);
-						new MessageDialog().showMessages("¡Vehículo  ingresado con éxito!");
+						new MessageDialog().showMessages("Vehículo ingresado con éxito.");
 					} else
 						new MessageDialog().showMessages("ERROR: ¡No se puedo registrar el ingreso del vehículo!");
 
@@ -89,7 +89,7 @@ public class PedidosPresenter {
 					new MessageDialog().showMessages("ERROR: ¡El número de chasis ingresado no esta disponible!");
 				}
 			} else {
-				new MessageDialog().showMessages("ERROR: ¡El número de motor ingresado no esta disponibl!");
+				new MessageDialog().showMessages("ERROR: ¡El número de motor ingresado no esta disponible!");
 			}
 		} else {
 			new MessageDialog().showMessages(errors);
