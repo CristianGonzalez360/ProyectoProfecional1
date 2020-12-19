@@ -29,8 +29,8 @@ public class PanelCobroCajeroView extends JPanel {
 
 	private static PanelCobroCajeroView instance;
 
-	private final String[] columnasListadoDeFacturas = new String[] { "Nro. Factura", "DNI", "Fecha de pago", "Total",
-			"Estado" };
+	private final String[] columnasListadoDeFacturas = new String[] { "NRO. FACTURA", "DNI", "FECHA DE PAGO", "TOTAL",
+			"ESTADO" };
 
 	private DefaultTableModel listadoDeFacturasModel;
 
@@ -63,7 +63,7 @@ public class PanelCobroCajeroView extends JPanel {
 		add(panel_3);
 		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		Label label = new Label("ID Factura");
+		Label label = new Label("Nro. Factura");
 		panel_3.add(label);
 
 		textFactura = new JTextField();
