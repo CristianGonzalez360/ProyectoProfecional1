@@ -59,7 +59,7 @@ public class RepuestosPresenter {
 			DialogEditorRepuestos.getInstance().setData(repuesto);
 			DialogEditorRepuestos.getInstance().display();
 		} else {
-			new MessageDialog().showMessages("Seleccione un repuesto");
+			new MessageDialog().showMessages("¡Por favor, seleccione un repuesto!");
 		}
 	}
 
@@ -190,7 +190,7 @@ public class RepuestosPresenter {
 			DialogIngresoStock.getInstance().setData(repuesto);
 			DialogIngresoStock.getInstance().display();
 		} else {
-			new MessageDialog().showMessages("Seleccione un repuesto");
+			new MessageDialog().showMessages("¡Por favor, seleccione un repuesto!");
 		}
 	}
 

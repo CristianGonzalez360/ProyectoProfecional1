@@ -46,7 +46,7 @@ public class PanelSucursales extends JPanel {
 		panelBusqueda.add(btnRegistrarMoneda);
 
 		tablePanel = new TablePanel<SucursalDTO>(
-				new String[] { "Nro. de sucursal", "Pais", "Calle", "Altura", "Localidad" }) {
+				new String[] { "NRO. DE SUCURSAL", "PAIS", "CALLE", "ALTURA", "LOCALIDAD" }) {
 			private static final long serialVersionUID = -8335676016788818853L;
 
 			@Override
@@ -75,7 +75,7 @@ public class PanelSucursales extends JPanel {
 			}
 		};
 		tablePanel.setBorder(
-				new TitledBorder(null, "Listado de sucursales", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				new TitledBorder(null, "Listado de Sucursales", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 		JPanel panelCenter = new JPanel();
 		add(panelCenter, BorderLayout.CENTER);

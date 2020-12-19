@@ -53,7 +53,7 @@ public class WorkbenchView {
 		// frame.setResizable(false);
 		frame.setBounds(100, 100, 1132, 391);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Concesionario");
+		frame.setTitle("Concesionario Larusso");
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setIconImage(icon);
 

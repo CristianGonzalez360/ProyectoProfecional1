@@ -213,13 +213,13 @@ public class PresupuestosPresenter {
 		} else {
 			List<String> errors = new ArrayList<>();
 			if (comentario.isEmpty()) {
-				errors.add("Ingrece un comentario");
+				errors.add("¡Por favor, ingrece un comentario!");
 			}
 			if (nuevoPresupuesto.getTrabajos().isEmpty()) {
-				errors.add("Agregue al menos un trabajo");
+				errors.add("¡Agregue al menos un trabajo!");
 			}
 			if (nuevoPresupuesto.getRepuestos().isEmpty()) {
-				errors.add("Agregue al menos un repuesto");
+				errors.add("¡Agregue al menos un repuesto!");
 			}
 			new MessageDialog().showMessages(errors);
 		}
@@ -249,7 +249,7 @@ public class PresupuestosPresenter {
 				onBuscarRepuesto(a);
 				planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
 			} else {
-				new MessageDialog().showMessages("No hay stock suficiente.");
+				new MessageDialog().showMessages("¡No hay stock suficiente!");
 			}
 		} else {
 			new MessageDialog().showMessages(errors);
@@ -289,7 +289,7 @@ public class PresupuestosPresenter {
 			this.planRepuestosView.setDataRepuestosPlanificados(nuevoPresupuesto.getRepuestos());
 			this.planRepuestosView.display();
 		} else {
-			new MessageDialog().showMessages("Seleccione un presupuesto");
+			new MessageDialog().showMessages("¡Por favor, seleccione un presupuesto!");
 		}
 	}
 
@@ -300,7 +300,7 @@ public class PresupuestosPresenter {
 			this.planTrabajosView.setDataTrabajosPlanificados(nuevoPresupuesto.getTrabajos());
 			this.planTrabajosView.display();
 		} else {
-			new MessageDialog().showMessages("Seleccione un presupuesto");
+			new MessageDialog().showMessages("¡Por favor, seleccione un presupuesto!");
 		}
 	}
 

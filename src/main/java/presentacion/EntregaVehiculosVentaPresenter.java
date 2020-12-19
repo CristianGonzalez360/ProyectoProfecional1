@@ -53,10 +53,10 @@ public class EntregaVehiculosVentaPresenter {
 	private void onRegistrar(ActionEvent a) {
 		List<String> errors = new LinkedList<>();
 		if (ventaSeleccionada == -1) {
-			errors.add("Debe seleccionar una venta.");
+			errors.add("¡Por favor, debe seleccionar una venta!");
 		}
 		if (!view.papelesEnRegla(ventaSeleccionada)) {
-			errors.add("Para registrar la entrega, primero debe confirmar la recepcion de los papeles");
+			errors.add("¡Para registrar la entrega, primero debe confirmar la recepción de papeles requeridos!");
 		}
 
 		if (errors.isEmpty()) {
@@ -123,7 +123,7 @@ public class EntregaVehiculosVentaPresenter {
 					controllers.makeVehiculosConOrdenDeTrabajoController().updateVehiculoIngresado(ingresosRegistrados.get(i));
 					onRefrescar(a);
 					this.formRegistroAseguradora.close();
-					new MessageDialog().showMessages("Entrega de vehiculo Registrada");
+					new MessageDialog().showMessages("¡Se registró la entrega de vehiculo!");
 					flag=false;
 				}
 				i++;

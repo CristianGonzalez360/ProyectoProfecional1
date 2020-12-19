@@ -28,7 +28,7 @@ import presentacion.views.utils.ReporteViewImpl;
 
 public class ClientePresenter {
 
-	private static final String CLIENTE_NO_SELECCIONADO = "Debe seleccionar un cliente";
+	private static final String CLIENTE_NO_SELECCIONADO = "¡Por favor, debe seleccionar un cliente!";
 
 	private PanelClientesView view;
 

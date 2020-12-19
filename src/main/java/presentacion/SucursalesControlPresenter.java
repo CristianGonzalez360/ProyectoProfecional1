@@ -59,7 +59,7 @@ public class SucursalesControlPresenter {
 		SucursalDTO sucursal = view.getData();
 		if (sucursal != null) {
 			confController.establecerSucursalPredetermidada(sucursal);
-			new MessageDialog().showMessages("La sucursal fué escogida");
+			new MessageDialog().showMessages("Sucursal seleccionada con éxito.");
 		}
 	}
 

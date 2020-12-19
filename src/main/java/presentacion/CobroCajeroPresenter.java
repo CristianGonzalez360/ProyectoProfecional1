@@ -105,18 +105,18 @@ public class CobroCajeroPresenter {
 									+ " ?",
 							"Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 					if (resp == 0 && IdEstado.equals("PAGA")) {
-						JOptionPane.showMessageDialog(null, "La factura ya esta paga!", "Error",
+						JOptionPane.showMessageDialog(null, "ERROR: ¡La factura ya está paga!", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					} else if (resp == 0) {
 						facturasController.updatePorPago(idPresupuesto);
 						this.onCargar(a);
 						mostrarTicket(idPresupuesto, "Tarjeta de Crédito");
-						JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
+						JOptionPane.showMessageDialog(null, "¡Operación realizada con éxito!", "Exito",
 								JOptionPane.INFORMATION_MESSAGE);
 						this.viewCredito.setVisible(false);
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error",
+					JOptionPane.showMessageDialog(null, "¡Por favor, debe seleccionar una factura!", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
 
@@ -144,18 +144,18 @@ public class CobroCajeroPresenter {
 									+ " ?",
 							"Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 					if (resp == 0 && IdEstado.equals("PAGA")) {
-						JOptionPane.showMessageDialog(null, "La factura ya esta paga!", "Error",
+						JOptionPane.showMessageDialog(null, "ERROR: ¡La factura ya está paga!", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					} else if (resp == 0) {
 						facturasController.updatePorPago(idPresupuesto);
 						this.onCargar(a);
 						mostrarTicket(idPresupuesto, "Tarjeta de Debito");
-						JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
+						JOptionPane.showMessageDialog(null, "¡Operación realizada con éxito!", "Exito",
 								JOptionPane.INFORMATION_MESSAGE);
 						this.viewDebito.setVisible(false);
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error",
+					JOptionPane.showMessageDialog(null, "¡Por favor, debe seleccionar una factura!", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
 
@@ -177,17 +177,17 @@ public class CobroCajeroPresenter {
 					"¿Desea confirmar la recepcion a traves de Mercado Pago de: " + idTotal + " ?", "Confirmación",
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 			if (resp == 0 && IdEstado.equals("PAGA")) {
-				JOptionPane.showMessageDialog(null, "La factura ya esta paga!", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ERROR: ¡La factura ya está paga!", "Error", JOptionPane.ERROR_MESSAGE);
 			} else if (resp == 0) {
 				facturasController.updatePorPago(idPresupuesto);
 				this.onCargar(a);
 				mostrarTicket(idPresupuesto, "MercadoPago");
-				JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
+				JOptionPane.showMessageDialog(null, "¡Operación realizada con éxito!", "Exito",
 						JOptionPane.INFORMATION_MESSAGE);
 				this.viewMercadoPago.setVisible(false);
 			}
 		} else {
-			JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "¡Por favor, debe seleccionar una factura!", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -201,17 +201,17 @@ public class CobroCajeroPresenter {
 					"¿Desea confirmar la recepcion a traves de Bitcoins de: " + idTotal + " ?", "Confirmación",
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 			if (resp == 0 && IdEstado.equals("PAGA")) {
-				JOptionPane.showMessageDialog(null, "La factura ya esta paga!", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ERROR: ¡La factura ya está paga!", "Error", JOptionPane.ERROR_MESSAGE);
 			} else if (resp == 0) {
 				facturasController.updatePorPago(idPresupuesto);
 				this.onCargar(a);
 				mostrarTicket(idPresupuesto, "BitCoin");
-				JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
+				JOptionPane.showMessageDialog(null, "¡Operación realizada con éxito!", "Exito",
 						JOptionPane.INFORMATION_MESSAGE);
 				this.viewBitcoin.setVisible(false);
 			}
 		} else {
-			JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "¡Por favor, debe seleccionar una factura!", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -224,16 +224,16 @@ public class CobroCajeroPresenter {
 			int resp = JOptionPane.showOptionDialog(null, "¿Desea confirmar el pago de: " + idTotal + " ?",
 					"Pago en Efectivo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 			if (resp == 0 && IdEstado.equals("PAGA")) {
-				JOptionPane.showMessageDialog(null, "La factura ya esta paga!", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ERROR: ¡La factura ya está paga!", "Error", JOptionPane.ERROR_MESSAGE);
 			} else if (resp == 0) {
 				facturasController.updatePorPago(idPresupuesto);
 				this.onCargar(a);
 				mostrarTicket(idPresupuesto, "Efectivo");
-				JOptionPane.showMessageDialog(null, "Operación realizada correctamente", "Exito",
+				JOptionPane.showMessageDialog(null, "¡Operación realizada con éxito!", "Exito",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		} else {
-			JOptionPane.showMessageDialog(null, "Debe seleccionar una factura", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "¡Por favor, debe seleccionar una factura!", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

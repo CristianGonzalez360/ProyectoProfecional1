@@ -119,7 +119,7 @@ public class CarritoPresenter {
 				view.setDataRepuestosComprados(repuestos);
 				view.getTfTotalFactura().setText(precioTotal.toString());
 			} else {
-				new MessageDialog().showMessages("No hay stock suficiente.");
+				new MessageDialog().showMessages("¡No hay stock suficiente!");
 			}
 		} else {
 			new MessageDialog().showMessages(errors);
@@ -193,10 +193,10 @@ public class CarritoPresenter {
 	private void onCrearFactura(ActionEvent a) {
 		List<String> errors = new ArrayList<String>();
 		if (clienteFactura == null) {
-			errors.add("Debe seleccionar un cliente.");
+			errors.add("¡Por favor, debe seleccionar un cliente!");
 		}
 		if (repuestos.isEmpty()) {
-			errors.add("Debe seleccionar un repuesto.");
+			errors.add("¡Por favor, debe seleccionar un repuesto!");
 		}
 		if (clienteFactura != null && precioTotal > .00 && !repuestos.isEmpty()) {
 			FacturaDTO facturaCarrito = new FacturaDTO();
