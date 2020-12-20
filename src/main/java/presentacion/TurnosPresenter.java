@@ -115,6 +115,6 @@ public class TurnosPresenter {
 		int cantidadDeTurnos = controller.readCantidadDeTurnos(fechaProgramada).size();
 		int capacidadDeTurnos = configurador.readCapacidadDeTurnos();
 
-		return cantidadDeTurnos != capacidadDeTurnos;
+		return cantidadDeTurnos < capacidadDeTurnos || capacidadDeTurnos == 0;
 	}
 }
