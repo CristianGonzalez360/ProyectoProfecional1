@@ -184,7 +184,7 @@ turnos:
     emailCliente: "diego.llorente@hotmaill.com"
     
 
-fichaTecnicaVehiculos:
+fichaTecnicaVehiculos: //falta completar
   - nroChasis: 3125
     nroMotor: 22552
     kilometraje: 22122
@@ -214,14 +214,14 @@ clientes:
     fechaAltaCliente: 2020-11-10
  
  
-vehiculosConOrdenDeTrabajo:
+vehiculosConOrdenDeTrabajo: //falta completar
   - idFichaTecnica: 1
     idCliente: 9
     kilometrajeGarantia: 1000
     aseguradora: La Nueva
     nroPolizaSeguro: 1012152209
     patente: SGI206
-    idVehiculo: //falta
+    idVehiculo: 
  
  
 ordenesDeTrabajo:
@@ -497,7 +497,7 @@ sucursales:
 vehiculos:
 #CATALOGO DE VEHICULOS NUEVOS / 1 DE CATALOGO
   - precioVenta: 1.172.000
-    idFichaTecnica: 1
+    idFichaTecnica: 
     marca: Ford
     familia: KA
     linea: S
@@ -508,7 +508,7 @@ vehiculos:
     idCaracteristicas: 1
     idSucursal: 3
   - precioVenta: 1.177.000
-    idFichaTecnica: 2
+    idFichaTecnica: 
     marca: Ford
     familia: KA+
     linea: S
@@ -519,7 +519,7 @@ vehiculos:
     idCaracteristicas: 2
     idSucursal: 3
   - precioVenta: 4.427.900
-    idFichaTecnica: 3
+    idFichaTecnica: 
     marca: Ford
     familia: Mondeo
     linea: Titanium
@@ -530,7 +530,7 @@ vehiculos:
     idCaracteristicas: 3
     idSucursal: 3
   - precioVenta: 768.100
-    idFichaTecnica: 4
+    idFichaTecnica: 
     marca: Volkswagen
     familia: Gol
     linea: Trendline
@@ -541,7 +541,7 @@ vehiculos:
     idCaracteristicas: 4
     idSucursal: 3
   - precioVenta: 677.200
-    idFichaTecnica: 5
+    idFichaTecnica: 
     marca: Volkswagen
     familia: Polo
     linea: GTS
@@ -576,7 +576,7 @@ vehiculos:
     idCaracteristicas: 7
     idSucursal: 3
 
-garantias:
+garantias: //falta completar
   - idVehiculo: 6
     aniosDeGarantia: 1
     kilometrajeInicialDelVehiculo: 0
@@ -585,7 +585,7 @@ garantias:
     fechaDeCaducidadDeLaGarantia: 2022-10-11 
     costoFinalConIVA: 10000
   - idVehiculo: 7
-    aniosDeGarantia: 3
+    aniosDeGarantia: 1
     kilometrajeInicialDelVehiculo: 0
     kilometrajeGarantizado: 150000
     fechaInicioDeLaGarantia: 
