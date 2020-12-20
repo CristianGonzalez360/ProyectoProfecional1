@@ -166,11 +166,11 @@ public class VendedorControlPresenter {
 
 	private void onConsultarVehiculo(ActionEvent a) {
 		ConsultaVehiculoParaVentaDTO consulta = view.getDataConsultaVehiculo();
-		view.clearDataCliente();
 		view.clearDataFichaTecnica();
+		view.clearDataGarantia();
 		view.clearDataModalidadVenta();
 		view.clearDataVehiculos();
-		view.clearDataGarantia();
+		
 		if (consulta.validate().isEmpty()) {
 			List<OutputConsultaVehiculoEnVentaDTO> vehiculos = controllers.makeVentasVehiculosController().readDisponiblesByCriteria(consulta);
 			view.setData(vehiculos);
