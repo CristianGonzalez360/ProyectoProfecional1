@@ -67,8 +67,11 @@ public class ConfiguracionView extends JDialog {
 		JLabel lblCapacidad = new JLabel("Cantidad de Turnos");
 		panelForm.add(lblCapacidad, "4, 6");
 		spinner = new JSpinner();
-		spinner.setModel(modelSpinner);
+		spinner.setModel(new SpinnerNumberModel(0, 0, 1000, 1));
 		panelForm.add(spinner, "10, 6");
+		
+		JLabel lblSin = new JLabel("0 = sin límite.");
+		panelForm.add(lblSin, "10, 8");
 
 		{
 			JPanel panelButton = new JPanel();
@@ -124,5 +127,4 @@ public class ConfiguracionView extends JDialog {
 	public void cerrar() {
 		setVisible(false);
 	}
-
 }
