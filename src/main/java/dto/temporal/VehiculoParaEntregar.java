@@ -65,4 +65,10 @@ public class VehiculoParaEntregar {
 	public void setPedido(PedidoVehiculoDTO pedido) {
 		this.pedido = pedido;
 	}
+
+	@Override
+	public String toString() {
+		return "VehiculoParaEntregar [vehiculo=" + vehiculo + ", sucursal=" + sucursal + ", estaPedido=" + estaPedido
+				+ ", ingresado=" + ingresado + ", venta=" + venta + ", pedido=" + pedido + "]";
+	}
 }

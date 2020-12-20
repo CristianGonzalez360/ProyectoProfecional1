@@ -58,6 +58,10 @@ public class EntregaVehiculosVentaPresenter {
 		if (!view.papelesEnRegla(ventaSeleccionada)) {
 			errors.add("Para registrar la entrega, primero debe confirmar la recepción de papeles requeridos.");
 		}
+		
+		if(!(ventas.get(ventaSeleccionada).isIngresado()) && !(ventas.get(ventaSeleccionada).getVehiculo().isDisponible())) {
+			errors.add("El vehiculo no fue ingresado a la concesionaria.");
+		}
 
 		if (errors.isEmpty()) {
 			try {
@@ -105,21 +109,20 @@ public class EntregaVehiculosVentaPresenter {
 			List<IngresoOrdenDeTrabajoDTO> ingresosRegistrados = controllers.makeVehiculosConOrdenDeTrabajoController().readAllIngresoOrdenTrabajo();
 			int i=0;
 			boolean flag = true;
+						
 			while(i<ingresosRegistrados.size()&&flag){
 				
 				if(ingresosRegistrados.get(i).getIdCliente().intValue()==idCliente.intValue() && ingresosRegistrados.get(i).getIdVehiculo().intValue()==idVehiculo.intValue()) {			
 					ventasVehiculosController.registrarEntrega(ventas.get(ventaSeleccionada));
 					
-					
-					VehiculoDTO vehiculo = controllers.makePedidosController().readByVehiculoId(ventas.get(ventaSeleccionada).getVenta().getIdVentaVehiculo());
-//					System.out.println(vehiculo);
+					VehiculoDTO vehiculo = controllers.makePedidosController().readByVehiculoId(ventas.get(ventaSeleccionada).getVehiculo().getIdVehiculo());
 					FichaTecnicaVehiculoDTO ficha = controllers.makeVehiculosController().readByIdFichaTecnica(vehiculo.getIdFichaTecnica());
 					
-//					System.out.println(ficha);		
-					ingresosRegistrados.get(i).setKilometrajeGarantia(ficha.getKilometraje()+100000);//seteado CAMBIAR
+					ingresosRegistrados.get(i).setKilometrajeGarantia(ficha.getKilometraje()+100000);
 					ingresosRegistrados.get(i).setAseguradora(formRegistroAseguradora.getAseguradora());
+					ingresosRegistrados.get(i).setPatente(ficha.getPatente());
 					ingresosRegistrados.get(i).setNroPolizaSeguro(Integer.parseInt(formRegistroAseguradora.getNroPoliza()));
-					
+					ingresosRegistrados.get(i).setIdFichaTecnica(ficha.getId());
 					controllers.makeVehiculosConOrdenDeTrabajoController().updateVehiculoIngresado(ingresosRegistrados.get(i));
 					onRefrescar(a);
 					this.formRegistroAseguradora.close();
@@ -127,7 +130,7 @@ public class EntregaVehiculosVentaPresenter {
 					flag=false;
 				}
 				i++;
-			}
+			}		
 			
 		} else {
 			new MessageDialog().showMessages(errors);

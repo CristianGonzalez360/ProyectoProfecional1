@@ -21,7 +21,7 @@ public class IngresoOrdenDeTrabajoDaoImpl extends GenericJdbcDao<IngresoOrdenDeT
 
 	private static final String readAllId = "SELECT * FROM VehiculoConOrdenesDeTrabajo WHERE idVehiculoConOT = ?";
 	
-	private static final String updateById = "UPDATE VehiculoConOrdenesDeTrabajo SET aseguradora = ? , nroPolizaSeguro = ? , kilometrajeGarantia = ? WHERE idCliente = ? AND idVehiculo = ?";//"UPDATE TrabajosPresupuestados SET descripcionTrabajo = ?, precioTrabajo = ?, tiempoEstTrabajo = ? WHERE idTrabajoPresu = ?";
+	private static final String updateById = "UPDATE VehiculoConOrdenesDeTrabajo SET aseguradora = ? , nroPolizaSeguro = ? , kilometrajeGarantia = ? , patenteVehiculo = ? , idFichaTecnicaVehiculo = ? WHERE idCliente = ? AND idVehiculo = ?";//"UPDATE TrabajosPresupuestados SET descripcionTrabajo = ?, precioTrabajo = ?, tiempoEstTrabajo = ? WHERE idTrabajoPresu = ?";
 
 	public IngresoOrdenDeTrabajoDaoImpl(Connection connection) {
 		super(connection);
@@ -95,6 +95,6 @@ public class IngresoOrdenDeTrabajoDaoImpl extends GenericJdbcDao<IngresoOrdenDeT
 	@Override
 	public boolean updateById(IngresoOrdenDeTrabajoDTO entity) {
 		return getTemplate().query(updateById).param(entity.getAseguradora()).param(entity.getNroPolizaSeguro())
-				.param(entity.getKilometrajeGarantia()).param(entity.getIdCliente()).param(entity.getIdVehiculo()).excecute();
+				.param(entity.getKilometrajeGarantia()).param(entity.getPatente()).param(entity.getIdFichaTecnica()).param(entity.getIdCliente()).param(entity.getIdVehiculo()).excecute();
 	}
 }
