@@ -22,7 +22,7 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 
 	private static final String readByFactura = "SELECT * FROM Facturas where idFactura = ?";
 
-	private static final String updatePago = "UPDATE Facturas SET estado = 'PAGA' , fechaDeCierrePorPago = SYSDATE WHERE idFactura = ?";
+	private static final String updatePago = "UPDATE Facturas SET estado = 'PAGA' , fechaDeCierrePorPago = ? WHERE idFactura = ?";
 
 	private static final String insertFacturaCarrito = "INSERT INTO Facturas (estado, fechaDeAlta, total, dni, idCliente, descripcion) VALUES (?,?,?,?,?,?)";
 
@@ -44,7 +44,7 @@ public class FacturasDaoImpl extends GenericJdbcDao<FacturaDTO> implements Factu
 
 	@Override
 	public boolean updatePorPago(Integer id) {
-		return getTemplate().query(updatePago).param(id).excecute();
+		return getTemplate().query(updatePago).param(new Date()).param(id).excecute();
 	}
 
 	@Override

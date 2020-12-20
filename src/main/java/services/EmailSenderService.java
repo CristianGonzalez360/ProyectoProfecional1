@@ -45,7 +45,7 @@ public class EmailSenderService {
 		Calendar hoy = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String fechaHoy = sdf.format(hoy.getTime());
-
+		
 		if (!(fechaRecordatorio.equals(fechaHoy)) || fechaRecordatorio.length() == 0) {// fecha del archivo vacia
 
 			Session session = Session.getDefaultInstance(props);
@@ -121,6 +121,7 @@ public class EmailSenderService {
 		try {
 			correoRemitente = propertyService.readProperty("correo_remitente");
 			contraseñaRemitente = propertyService.readProperty("password_remitente");
+			fechaRecordatorio = propertyService.readProperty("fechaRecordatorio");
 		} catch (IOException e) {
 			return false;
 		}
@@ -133,9 +134,7 @@ public class EmailSenderService {
 
 		try {
 			map.put("correo_remitente", propertyService.readProperty("correo_remitente"));
-			map.put("host", propertyService.readProperty("host"));
 			map.put("password_remitente", propertyService.readProperty("password_remitente"));
-			map.put("port", propertyService.readProperty("port"));
 			map.put("fechaRecordatorio", fechaHoy);
 			propertyService.updateValues(map);
 		} catch (IOException e) {
