@@ -169,13 +169,13 @@ public class ClientePresenter {
 			List<String> errors = ordenDeTrabajo.validate();
 			if (errors.isEmpty()) {
 				try {
-					controllers.makeOrdenesDeTrabajoController().save(idVehiculo, ordenDeTrabajo);
-					OrdenDeTrabajoDTO dto = controllers.makeOrdenesDeTrabajoController().readByIdVehiculo(idVehiculo);
-					
 					FichaTecnicaVehiculoDTO ficha = view.getDataFichaTechica();
 					controllers.makeVehiculosController().updateKilometraje(ficha, ordenDeTrabajo);
 					view.setUpdateKilometrajeOnFichaTecnica(ordenDeTrabajo.getKilometrajeActual());
 					
+					controllers.makeOrdenesDeTrabajoController().save(idVehiculo, ordenDeTrabajo);
+					OrdenDeTrabajoDTO dto = controllers.makeOrdenesDeTrabajoController().readByIdVehiculo(idVehiculo);
+										
 					view.setData(dto);
 					FormAltaOrdenTrabajo.getInstance().close();
 				} catch (ForbiddenException | ConflictException | NotFoundException e1) {
