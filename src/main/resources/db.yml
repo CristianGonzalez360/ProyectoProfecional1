@@ -1,24 +1,24 @@
 #RECOMENDADO SOLO AGREGAR!!
 cuentas:
   - fechaDeAlta: 1990-08-07
-    nombreUsuario: u001
-    password: pu001
+    nombreUsuario: tec
+    password: tec
     role: tecnico
-  - fechaDeAlta: 2020-10-10
-    nombreUsuario: u002
-    password: pu002
+  - fechaDeAlta: 2018-10-10
+    nombreUsuario: sup
+    password: sup
     role: supervisor
   - fechaDeAlta: 2010-15-10
-    nombreUsuario: u003
-    password: pu003
+    nombreUsuario: caj
+    password: caj
     role: cajero
   - fechaDeAlta: 2016-15-10
-    nombreUsuario: u004
-    password: pu004
+    nombreUsuario: ger
+    password: ger
     role: gerente
   - fechaDeAlta: 2017-05-12
-    nombreUsuario: u005
-    password: pu005
+    nombreUsuario: ven
+    password: ven
     role: vendedor
   - fechaDeAlta: 2011-05-12
     nombreUsuario: u006
@@ -26,107 +26,67 @@ cuentas:
     role: admin
 
 datosPersonales:
-  - nombreCompleto: u001
-    apellido: ap001
-    dni: 33390341
-    telefono: 1111
-    email: u001@mail.com
-    calle: calle1
+  - nombreCompleto: Erica
+    apellido: Soto
+    dni: 40085048
+    telefono: 112255361
+    email: Erica@lsgroup.com
+    calle: Dorrego
+    altura: 111
+    piso: 5
+    dpto: A1
+    localidad: Los Polvorines
+  - nombreCompleto: Raimundo
+    apellido: Bello
+    dni: 40085050
+    telefono: 1122553682
+    email: Raimundo@lsgroup.com
+    calle: Protector del Perú
+    altura: 42
+    piso: 66
+    dpto: 6
+    localidad: San Miguel
+  - nombreCompleto: Fernando
+    apellido: Torres
+    dni: 40085070
+    telefono: 1122553683
+    email: Fernando@lsgroup.com
+    calle: Jose Leon Suarez
     altura: 1
     piso: 1
     dpto: A1
-    localidad: localidad1
-  - nombreCompleto: u002
-    apellido: ap002
-    dni: 33390342
-    telefono: 1112
-    email: u002@mail.com
-    calle: calle1
-    altura: 1
-    piso: 1
+    localidad: Los Polvorines
+  - nombreCompleto: Roberto
+    apellido: Casanova
+    dni: 40085689
+    telefono: 1122553684
+    email: Roberto@lsgroup.com
+    calle: Maria Gutiérrez
+    altura: 44
+    piso: 4
     dpto: A1
-    localidad: localidad1
-  - nombreCompleto: u004
-    apellido: ap004
-    dni: 12345
-    telefono: 1112
-    email: u004@mail.com
-    calle: calle1
-    altura: 1
-    piso: 1
-    dpto: A1
-    localidad: localidad1
-  - nombreCompleto: u003
-    apellido: ap003
-    dni: 33390388
-    telefono: 1113
-    email: u003@mail.com
-    calle: calle1
-    altura: 1
-    piso: 1
-    dpto: A1
-    localidad: localidad1
-  - nombreCompleto: c001
-    apellido: ap003
-    dni: 33390343
+    localidad: Gral. Pacheco
+  - nombreCompleto: Juan
+    apellido: Nogales
+    dni: 40385048
+    telefono: 1122553685
+    email: Juan@lsgroup.com
+    calle: Roca
+    altura: 125
+    piso: 4
+    dpto: 4
+    localidad: San Miguel
+  - nombreCompleto: admin
+    apellido: admin
+    dni: 99999999
     telefono: 321111
-    email: c001@mail.com
+    email: admin@mail.com
     calle: calle1
     altura: 11
-    piso: 12
-    dpto: A3
-    localidad: localidad3
-  - nombreCompleto: c004
-    apellido: ap004
-    dni: 123456
-    telefono: 321111
-    email: c004@mail.com
-    calle: calle1
-    altura: 11
-    piso: 12
-    dpto: A3
-    localidad: localidad4
-  - nombreCompleto: c005
-    apellido: ap005
-    dni: 111222
-    telefono: 3211323
-    email: c005@mail.com
-    calle: calle1
-    altura: 11
-    piso: 12
-    dpto: A3
-    localidad: localidad4
-  - nombreCompleto: c002
-    apellido: ap004
-    dni: 33390344
-    telefono: 611611
-    email: c002@mail.com
-    calle: calle111
-    altura: 166
     piso: 11
-    dpto: B1
-    localidad: localidad1
-  - nombreCompleto: cc002
-    apellido: ap3004
-    dni: 33311344
-    telefono: 614411
-    email: c0012@mail.com
-    calle: calle1221
-    altura: 1661
-    piso: 11
-    dpto: B11
-    localidad: localidad213 
-  - nombreCompleto: Marco
-    apellido: Yupanqui
-    dni: 999
-    telefono: 55555
-    email: marco.yu@gmail.com
-    calle: pepe
-    altura: 1995
-    piso: 11
-    dpto: B11
-    localidad: malvinas
-    
+    dpto: A3
+    localidad: Desconocido
+
 usuarios:
   - cuenta:
       idCuenta: 1
@@ -152,369 +112,39 @@ usuarios:
       idCuenta: 6
     datos:
       id: 6
-      
-turnos:
-  - idCliente: 1
-    dniCliente: 33333
-    fechaAlta: 2020-11-05
-    fechaProgramada: 2020-12-20
-    nombreCliente: c007
-    apellidoCliente: ap007
-    telefonoCliente: "1136635555"
-    emailCliente: "ejemplo0@dominio.com"
-  - idCliente: 12
-    dniCliente: 22222
-    fechaAlta: 2020-11-05
-    fechaProgramada: 2020-12-20
-    nombreCliente: c008
-    apellidoCliente: ap008
-    telefonoCliente: "1133335555"
-    emailCliente: "ejemplo1@dominio.com"
-  - idCliente: 3
-    dniCliente: 111111
-    fechaAlta: 2020-11-05
-    fechaProgramada: 2020-12-20
-    nombreCliente: c009
-    apellidoCliente: ap009
-    telefonoCliente: "1122335555"
-    emailCliente: "ejemplo2@dominio.com"
-  - idCliente: 5
-    dniCliente: 44444
-    fechaAlta: 2020-11-05
-    fechaProgramada: 2020-12-19
-    nombreCliente: c0010
-    apellidoCliente: ap0010
-    telefonoCliente: "1133335955"
-    emailCliente: "ejemplo3@dominio.com"
-    
-fichaTecnicaVehiculos:
-  - nroChasis: 3125
-    nroMotor: 22552
-    kilometraje: 22122
-    marca: ford
-    modelo: 1999
-    color: negro
-    combustion: nafta
-    descripcion: funciona ok
-    patente: 456def
-  - nroChasis: 31258
-    nroMotor: 225528
-    kilometraje: 221
-    marca: ford
-    modelo: 1979
-    color: negro
-    combustion: nafta
-    descripcion: funciona ok
-    patente: 789ghi
-
-clientes:
-  - idDatosPersonales: 1 
-    fechaAltaCliente: 2020-10-25
-  - idDatosPersonales: 2 
-    fechaAltaCliente: 2020-10-25
-  - idDatosPersonales: 3 
-    fechaAltaCliente: 2020-10-25
-  - idDatosPersonales: 10 
-    fechaAltaCliente: 2020-10-25
-vehiculosConOrdenDeTrabajo:
-  - idFichaTecnica: 1
-    idCliente: 1
-    kilometrajeGarantia: 123
-    aseguradora: la nueva
-    nroPolizaSeguro: 4234
-    patente: 6664
-    idVehiculo:
-  - idFichaTecnica: 1
-    idCliente: 2
-    kilometrajeGarantia: 123
-    aseguradora: la nueva
-    nroPolizaSeguro: 4234
-    patente: 6662
-    idVehiculo:
-  - idFichaTecnica: 2
-    idCliente: 2
-    kilometrajeGarantia: 123
-    aseguradora: la nueva
-    nroPolizaSeguro: 4234
-    patente: 6661
-    idVehiculo:
-  - idFichaTecnica: 2
-    idCliente: 3
-    kilometrajeGarantia: 123
-    aseguradora: la nueva
-    nroPolizaSeguro: 4234
-    patente: 66611
-    idVehiculo:
-
-ordenesDeTrabajo:
-  - tipoOrdeTrabajo: Garantia
-    idUsuarioAlta: 1
-    fechaDeAlta: 2020-05-10
-    fechaEntregado:
-    trabajoSolicitado: tren delantero y chapa
-    trabajoSujerido: cambio de neumaticos delanteros
-    idVehiculoOt: 1
-  - tipoOrdeTrabajo: taller
-    idUsuarioAlta: 1
-    fechaDeAlta:
-    fechaEntregado: 2020-06-10
-    trabajoSolicitado: electricidad
-    trabajoSujerido: cambio de caja de transmision
-    idVehiculoOt: 2
-  - tipoOrdeTrabajo: taller
-    idUsuarioAlta: 1
-    fechaDeAlta: 2020-02-10
-    fechaEntregado:
-    trabajoSolicitado: cambio de cremallera
-    trabajoSujerido: cambio el auto
-    idVehiculoOt: 3
-    descripcion: funciona ok
-    
-repuestos:
-  - codigoRepuesto: 22230
-    precioRepuesto: 126
-    marcaRepuesto: xx1
-    descripcionRepuesto: ruleman
-    stockRepuesto: 337
-    fabricante: fx
-    stockMinimo: 13
-    garantia: true
-    precioCompra: 90
-  - codigoRepuesto: 111430
-    precioRepuesto: 876
-    marcaRepuesto: dfv
-    descripcionRepuesto: csdc
-    stockRepuesto: 78
-    fabricante: sdfg
-    stockMinimo: 99
-    garantia: false
-    precioCompra: 90
-  - codigoRepuesto: 109986
-    precioRepuesto: 1523
-    marcaRepuesto: ghj
-    descripcionRepuesto: ruleman
-    stockRepuesto: 310
-    fabricante: ghj
-    stockMinimo: 8
-    garantia: false
-    precioCompra: 90
-  - codigoRepuesto: 14230
-    precioRepuesto: 102
-    marcaRepuesto: gdfg
-    descripcionRepuesto: rulemanxx
-    stockRepuesto: 355
-    fabricante: sgf
-    stockMinimo: 7
-    garantia: false
-    precioCompra: 90
-  - codigoRepuesto: 510230
-    precioRepuesto: 1300
-    marcaRepuesto: skf11
-    descripcionRepuesto: dgruleman
-    stockRepuesto: 303
-    fabricante: sgdfg
-    stockMinimo: 2123
-    garantia: false
-    precioCompra: 90
-
-presupuestos:
-  - idOT: 1
-    idUsuAltaPresu:  1
-    idUsuCierrePresu:
-    idUsuRegPago: 
-    idPago:
-    fechaAltaPresu: 2020-10-10
-    comentarioAltaPresu: El tren delantero esta destrozado
-    comentarioRechazo:
-    fechaAprobacion:
-    garantia: true
-  - idOT: 1
-    idUsuAltaPresu: 1
-    idUsuCierrePresu:
-    idUsuRegPago:
-    idPago:
-    fechaAltaPresu: 2020-10-11
-    comentarioAltaPresu: revisar bomba de nafta
-    comentarioRechazo:
-    fechaAprobacion:
-    garantia: false
-    
-trabajos: 
-  - idPresupuesto: 1
-    descripcionTrabajo: reparacion de la electricidad
-    precioTrabajo: 2033
-    tiempoEstTrabajo: 12
-  - idPresupuesto: 1
-    descripcionTrabajo: reparar rotula izquierda
-    precioTrabajo: 800
-    tiempoEstTrabajo: 7
- 
-repuestosPlanificados:
-  - idRepuesto: 1
-    idPresu: 1
-    cantRequerida: 24
-    precio: 126
-    garantia : true
-  - idRepuesto: 3
-    idPresu: 1
-    cantRequerida: 14
-    precio: 1523
-    garantia : false
-  - idRepuesto: 2
-    idPresu: 2
-    cantRequerida: 5
-    precio: 876
-    garantia : false
-
-facturas:
-  - idFactura: 1
-    idOrdenDeTrabajo: 1
-    fechaDeAlta: 2020-10-11
-    fechaDeCierrePorPago: 
-    total: 100
-    estado: IMPAGA
-    idCliente: 1
-    dni: 33390341
-    descripcion : Venta Repuestos
-  - idFactura: 2
-    idOrdenDeTrabajo: 2
-    fechaDeAlta: 2020-10-11
-    fechaDeCierrePorPago: 
-    total: 100
-    estado: IMPAGA
-    idCliente: 1
-    dni: 33390341
-    descripcion : Venta Repuestos
-  - idFactura: 3
-    idOrdenDeTrabajo: 2
-    fechaDeAlta: 2020-10-11
-    fechaDeCierrePorPago: 
-    total: 200
-    estado: IMPAGA
-    idCliente: 1
-    dni: 33390342
-    descripcion : Venta Repuestos
-  - idFactura: 4
-    idOrdenDeTrabajo: 2
-    fechaDeAlta: 2020-10-11
-    fechaDeCierrePorPago: 2020-10-11
-    total: 200
-    estado: PAGA
-    idCliente: 1
-    dni: 33390343
-    descripcion : Venta Repuestos
-
-caracteristicaVehiculo:
-  - cilindrada: 1.58
-    motor: 1.56 MSI nafta
-    transmision: Manual 5 velocidades
-    direccion: electrica asistida
-    potencia: 100 CV
-    frenosDelanteros: Discos ventilados
-    frenosTraseros: A tambor
-    torqueMaximo: 155/4000
-    volumenBaul: 300 cc
-    cantidadPuertas: 4
-    precio: 1000000
-  - cilindrada: 1.58
-    motor: 2.0 MSI nafta
-    transmision: Manual 5 velocidades
-    direccion: electrica asistida
-    potencia: 150 CV
-    frenosDelanteros: Discos ventilados
-    frenosTraseros: A tambor
-    torqueMaximo: 155/4000
-    volumenBaul: 350 cc
-    cantidadPuertas: 3
-    precio: 1500000
-  - cilindrada: 1.58
-    motor: 1.56 MSI nafta
-    transmision: Automatica 5 velocidades
-    direccion: electrica
-    potencia: 100 CV
-    frenosDelanteros: Discos ventilados
-    frenosTraseros: A tambor
-    torqueMaximo: 155/4000
-    volumenBaul: 300 cc
-    cantidadPuertas: 3
-    precio: 1000500
 
 monedas:
-  - nombre: peso arg
+  - nombre: Peso argentino
     simbolo: $
-    cotizacionDolar: 200
-  - nombre: guarani
+    cotizacionDolar: 82.76
+  - nombre: Guaraní paraguayo
+    simbolo: ₲
+    cotizacionDolar: 6983.65
+  - nombre: Peso uruguayo
     simbolo: $
-    cotizacionDolar: 1500
-  - nombre: peso uru
+    cotizacionDolar: 42.43
+  - nombre: Peso chileno
     simbolo: $
-    cotizacionDolar: 80
-  - nombre: peso chi
-    simbolo: $
-    cotizacionDolar: 50
+    cotizacionDolar: 725.30
 
 sucursales:
   - pais: Argentina
-    calle: Sucre
-    altura: 1233
-    localidad: Avellaneda
+    calle: Juan María Gutiérrez
+    altura: 1150
+    localidad: Los Polvorines
     idMoneda: 1
   - pais: Chile
-    calle: Gral. Pinochet
-    altura: 657
-    localidad: Recoleta
+    calle: Cárcel
+    altura: 471
+    localidad: Valparaiso
     idMoneda: 4
   - pais: Uruguay
-    calle: Susana Gimenez street
-    altura: 4329
-    localidad: Punta del Este
+    calle: Av. de las Leyes
+    altura: 11800
+    localidad: Montevideo
     idMoneda: 3
   - pais: Paraguay
-    calle: Rancho alto
-    altura: 1798
-    localidad: Asuncion
+    calle: Asunción
+    altura: 1767
+    localidad: Las Lomas
     idMoneda: 2
-
-vehiculos:
-#CATALOGO DE VEHICULOS USADOS
-  - precioVenta: 1300000
-    idFichaTecnica: 1
-    marca: Ford
-    familia: Focus
-    linea: vip
-    color: rojo
-    fechaIngreso: 2018-10-11
-    disponible: true
-    usado: true
-    idCaracteristicas: 1
-    idSucursal: 3 
- 
-#CATALOGO DE VEHICULOS NUEVOS SIN STOCK
-  - precioVenta: 2100000
-    idFichaTecnica: 1
-    marca: Peugeot
-    familia: 505
-    linea: full
-    color: Negro
-    fechaIngreso: 2017-10-11
-    disponible: true
-    usado: false
-    idCaracteristicas: 1
-    idSucursal:
-
-garantias:
-  - idVehiculo: 1
-    aniosDeGarantia: 1
-    kilometrajeInicialDelVehiculo: 0
-    kilometrajeGarantizado: 90000
-    fechaInicioDeLaGarantia: 
-    fechaDeCaducidadDeLaGarantia: 2022-10-11 
-    costoFinalConIVA: 10000
-  - idVehiculo: 2
-    aniosDeGarantia: 3
-    kilometrajeInicialDelVehiculo: 0
-    kilometrajeGarantizado: 150000
-    fechaInicioDeLaGarantia: 
-    fechaDeCaducidadDeLaGarantia: 2018-10-11
-    costoFinalConIVA: 32000
- 
