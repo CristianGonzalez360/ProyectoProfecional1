@@ -15,7 +15,7 @@ CREATE TABLE Cuentas (
 CREATE TABLE DatosPersonales (
     idDatosPersonales int NOT NULL AUTO_INCREMENT,
     nombreCompleto VARCHAR(60) NOT NULL,
-  apellido VARCHAR(60) NOT NULL,
+    apellido VARCHAR(60) NOT NULL,
     dni INT,
     telefono VARCHAR(15),
     email VARCHAR(25),
@@ -258,7 +258,7 @@ CREATE TABLE CaracteristicasVehiculo(
 CREATE TABLE Vehiculos (
   idVehiculo INT NOT NULL AUTO_INCREMENT,
   precioVenta DOUBLE NOT NULL,
-  idFichaTecnica INT,
+  idFichaTecnica INT NULL,
   marca VARCHAR(20) NOT NULL,
   familia VARCHAR(20) NOT NULL,
   linea VARCHAR(20) NOT NULL,
@@ -267,11 +267,9 @@ CREATE TABLE Vehiculos (
   fechaIngreso DATE,
   disponible BOOLEAN NOT NULL,
   usado BOOLEAN NOT NULL,
-  idSucursal INT,
+  idSucursal INT NULL,
   PRIMARY KEY (idVehiculo),
-  FOREIGN KEY (idFichaTecnica) REFERENCES FichaTecnicaVehiculo(idFichaTecnicaVehiculo),
-  FOREIGN KEY (idCaracteristica) REFERENCES CaracteristicasVehiculo(idCaracteristica),
-  FOREIGN KEY (idSucursal) REFERENCES Sucursal(idSucursal)
+  FOREIGN KEY (idCaracteristica) REFERENCES CaracteristicasVehiculo(idCaracteristica)
 );
 
 CREATE TABLE CompraVehiculo (

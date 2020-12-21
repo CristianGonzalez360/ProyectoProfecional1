@@ -34,8 +34,8 @@ public class RepuestosPlanificadosDaoImpl extends GenericJdbcDao<RepuestoPlanifi
 	@Override
 	public boolean insert(RepuestoPlanificadoDTO entity) {
 		return getTemplate().query(insert).param(entity.getIdPresu()).param(entity.getIdRepuesto())
-				.param(entity.getPrecio())
 				.param(entity.getCantRequerida())
+				.param(entity.getPrecio())
 				.param(entity.isGarantia()).excecute();
 	}
 

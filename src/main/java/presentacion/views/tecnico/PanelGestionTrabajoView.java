@@ -408,8 +408,8 @@ public class PanelGestionTrabajoView extends JPanel {
 	public void setData(List<IngresoOrdenDeTrabajoDTO> vehiculos) {
 		this.vehiculos = vehiculos;
 		for (IngresoOrdenDeTrabajoDTO dto : vehiculos) {
-			Object[] row = { dto.getId().toString(), dto.getKilometrajeGarantia().toString(), dto.getAseguradora(),
-					dto.getNroPolizaSeguro().toString(), dto.getPatente() };
+			Object[] row = { dto.getId(), dto.getKilometrajeGarantia(), dto.getAseguradora(),
+					dto.getNroPolizaSeguro(), dto.getPatente() };
 			this.tableModelVehiculos.addRow(row);
 		}
 	}
